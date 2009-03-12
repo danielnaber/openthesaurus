@@ -1,0 +1,1 @@
+<g:link action="edit" id="${id}">REJECTED</g:link>
