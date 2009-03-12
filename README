@@ -1,0 +1,37 @@
+vithesaurus - a web-based thesaurus management tool
+Copyright (C) 2009 vionto GmbH, www.vionto.com
+
+vithesaurus is a web-based tool for the development and
+maintenance of thesauri and ontologies. It requires
+Grails 1.0.4 and is typically used with a stand-alone
+database (some non-basic features use Oracle-specific
+SQL syntax).
+
+After configuring your database access in 
+grails-app/conf/datasource.properties
+and
+grails-app/conf/datasource-dev.properties,
+copy your JDBC database connector to the lib directory.
+
+Use "grails war" to build a web application which can be
+deployed to a Java servlet container like Tomcat
+(http://tomcat.apache.org/). Use "grails run-app" to
+directly start the web-application in development mode.
+
+More information about Grails is available at
+http://www.grails.org.
+
+License:
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
