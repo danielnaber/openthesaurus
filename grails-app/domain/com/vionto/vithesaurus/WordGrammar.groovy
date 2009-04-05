@@ -23,7 +23,7 @@ package com.vionto.vithesaurus;
 class WordGrammar {
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'word_grammar_seq']
+        //id generator:'sequence', params:[sequence:'word_grammar_seq']
     }
 
     String form

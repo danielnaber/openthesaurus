@@ -29,7 +29,7 @@ class TermLevel {
   }
 
   static mapping = {
-      id generator:'sequence', params:[sequence:'term_level_seq']
+      //id generator:'sequence', params:[sequence:'term_level_seq']
   }
 
   String toString() {

@@ -41,7 +41,7 @@ class ThesaurusUser {
     }
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'thesaurus_user_seq']
+        //id generator:'sequence', params:[sequence:'thesaurus_user_seq']
     }
 
     ThesaurusUser() {
