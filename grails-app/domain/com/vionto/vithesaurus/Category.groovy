@@ -40,7 +40,7 @@ class Category implements Comparable, Cloneable {
     }
     
     static mapping = {
-        id generator:'sequence', params:[sequence:'category_seq']
+        //id generator:'sequence', params:[sequence:'category_seq']
     }
    
     Category() {

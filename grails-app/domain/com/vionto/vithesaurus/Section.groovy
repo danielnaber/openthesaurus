@@ -36,7 +36,7 @@ class Section implements Comparable, Cloneable {
     }
    
     static mapping = {
-        id generator:'sequence', params:[sequence:'section_seq']
+        //id generator:'sequence', params:[sequence:'section_seq']
     }
 
     Section() {

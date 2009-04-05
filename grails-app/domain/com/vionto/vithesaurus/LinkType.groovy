@@ -23,7 +23,7 @@ package com.vionto.vithesaurus;
 class LinkType {
   
     static mapping = {
-        id generator:'sequence', params:[sequence:'link_type_seq']
+        //id generator:'sequence', params:[sequence:'link_type_seq']
     }
 
     // TODO: only for inter-synset relations?!

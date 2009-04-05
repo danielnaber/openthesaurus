@@ -31,7 +31,7 @@ class RejectedWord {
     Date rejectionDate
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'rejected_word_seq']
+        //id generator:'sequence', params:[sequence:'rejected_word_seq']
     }
 
 }

@@ -27,7 +27,7 @@ class SemType {
 	int categoryTypeID
 	
     static mapping = {
-        id generator:'sequence', params:[sequence:'sem_type_seq']
+        //id generator:'sequence', params:[sequence:'sem_type_seq']
     }
 
     static constraints = {

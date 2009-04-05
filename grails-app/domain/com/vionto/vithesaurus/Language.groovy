@@ -26,7 +26,7 @@ class Language {
   String shortForm
 
   static mapping = {
-      id generator:'sequence', params:[sequence:'language_seq']
+      //id generator:'sequence', params:[sequence:'language_seq']
   }
 
   Language() {

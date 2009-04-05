@@ -28,7 +28,7 @@ class PreferredTermLink implements Comparable {
     static belongsTo = [synset:Synset]
     
     static mapping = {
-        id generator:'sequence', params:[sequence:'preferred_term_link_seq']
+        //id generator:'sequence', params:[sequence:'preferred_term_link_seq']
     }
 
     /** Sort by language name. */
