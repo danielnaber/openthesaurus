@@ -40,6 +40,11 @@ abstract class BaseController {
             redirect(controller:'user', action:'login')
             return false
         }
+        if (session.user.blocked) {
+          flash.message = "Please login (#2)."
+          log.warn("Denying access to blocked user ($user)")
+          return false
+        }
      }
 
     /**
