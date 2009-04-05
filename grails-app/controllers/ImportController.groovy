@@ -21,6 +21,8 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.PreparedStatement
+import java.sql.SQLException
+import java.text.SimpleDateFormat
 
 class ImportController extends BaseController {
     
@@ -30,7 +32,6 @@ class ImportController extends BaseController {
    // def beforeInterceptor = [action: this.&adminAuth]
  
    // TODO:
-   // -import users (encrypt password)
    // -test: keep lang. level (old: uses -> new: TermLevel)
    // -keep original ID
    // -antonyme
@@ -52,73 +53,29 @@ class ImportController extends BaseController {
         Class.forName(params.dbClass)
         Connection conn = DriverManager.getConnection(dburl, dbuser, dbpassword)
 
-        // TODO!?
-        //cleanup(Category.findAll())
-        //new Category("other").save()
-        // TODO: needs to be cleaned up every time manually, why? 
-        cleanup(TermLevel.findAll())
-        
+        cleanup(Category.findAll())
         cleanup(CategoryLink.findAll())
+        new Category("other").save()
+        cleanup(TermLevel.findAll())
+        cleanup(ThesaurusUser.findAll())
+        
         cleanup(Term.findAll())
         cleanup(Synset.findAll())
+        
+        importUsers(conn)
+        importLinkTypes()
+        Map oldSubjectIdToCategory = importCategories(conn)
+        Map oldUseIdToTermLevel = importLevels(conn)
+
+        //testing:
         //return
-
-        LinkType superLinkType = LinkType.findByLinkName(SUPER_NAME)
-        if (!superLinkType) {
-          superLinkType = new LinkType(linkName: SUPER_NAME,
-              otherDirectionLinkName: SUPER_NAME_REVERSE, verbName: SUPER_VERB)
-          render "Creating link type: $superLinkType"
-          boolean saved = superLinkType.save()
-          if (!saved) {
-            throw new Exception("Could not create link type: $superLinkType")
-          }
-        }
-        assert(superLinkType)
-      	
-        //
-        // import categories
-        //
-        String sql = "SELECT id, subject FROM subjects"
-        PreparedStatement ps = conn.prepareStatement(sql)
-        ResultSet rs = ps.executeQuery()
-        Map oldSubjectIdToCategory = new HashMap()
-        while (rs.next()) {
-          String catName = convert(rs.getString("subject"))
-          Category cat = new Category(catName)
-          render "Adding category $cat<br>"
-          oldSubjectIdToCategory.put(rs.getInt("id"), cat)
-          boolean saved = cat.save()
-          if (!saved) {
-            throw new Exception("Could not save category: $cat - $cat.errors")
-          }
-        }
-
-        //
-        // import term levels ("colloquial" etc)
-        //
-        sql = "SELECT id, name, shortname FROM uses"
-        ps = conn.prepareStatement(sql)
-        rs = ps.executeQuery()
-        Map oldUseIdToTermLevel = new HashMap()
-        int savedCount = 0
-        while (rs.next()) {
-          String useName = convert(rs.getString("name"))
-          String shortUseName = convert(rs.getString("shortname"))	//FIXME: use this!
-          TermLevel termLevel = new TermLevel(levelName: useName)
-          render "Adding TermLevel $termLevel<br>"
-          oldUseIdToTermLevel.put(rs.getInt("id"), termLevel)
-          boolean saved = termLevel.save()
-          if (!saved) {
-            throw new Exception("Could not save termLevel: $termLevel - $termLevel.errors")
-          }
-        }
 
         //
         // import terms and synsets
         //
-        sql = "SELECT id, subject_id, super_id FROM meanings WHERE hidden = 0"
-        ps = conn.prepareStatement(sql)
-        rs = ps.executeQuery()
+        String sql = "SELECT id, subject_id, super_id FROM meanings WHERE hidden = 0"
+        PreparedStatement ps = conn.prepareStatement(sql)
+        ResultSet rs = ps.executeQuery()
         int count = 0
         
         Language german = Language.findByShortForm("de")
@@ -128,6 +85,7 @@ class ImportController extends BaseController {
         Section otherSection = Section.findBySectionName("other")
         assert(otherSection)
         
+        int savedCount = 0
         while (rs.next()) {
           sql = "SELECT word, use_id FROM words, word_meanings WHERE meaning_id = ? AND words.id = word_meanings.word_id"
           PreparedStatement ps2 = conn.prepareStatement(sql)
@@ -172,7 +130,7 @@ class ImportController extends BaseController {
           if (!saved) {
             // TODO: throw exception instead
             render "NOT SAVED! $synset: ${synset.errors}<br>"
-            log.warn("XXX $synset")
+            log.warn("NOT SAVED: $synset")
           } else {
             render "saved: $synset"
             savedCount++
@@ -187,6 +145,83 @@ class ImportController extends BaseController {
         conn.close()
         render "- done ($savedCount) -"
     }
+   
+    private importUsers(Connection conn) {
+      String sql = "SELECT username, password, visiblename, perms, subs_date, last_login, blocked FROM auth_user"
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ResultSet rs = ps.executeQuery()
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+      while (rs.next()) {
+          //render rs.getString("username") +"/" +  rs.getString("password") +  "<br>\n"
+          def perms = rs.getString("perms") == "admin" ? ThesaurusUser.ADMIN_PERM : ThesaurusUser.USER_PERM
+          String password = UserController.md5sum(rs.getString("password"))
+          ThesaurusUser user = new ThesaurusUser(rs.getString("username"), 
+              password, perms)
+          try {
+            user.creationDate = rs.getDate("subs_date")
+            user.lastLoginDate = rs.getDate("last_login")
+          } catch (SQLException e) {
+            render "Exception: $e<br>"
+          }
+          user.realName = rs.getString("visiblename")
+          user.blocked = rs.getInt("blocked") == 1 ? true : false
+          boolean saved = user.save()
+          if (!saved) {
+            throw new Exception("Could not save user: $user - $user.errors")
+          }
+      }
+    }
+
+    private void importLinkTypes() {
+      LinkType superLinkType = LinkType.findByLinkName(SUPER_NAME)
+      if (!superLinkType) {
+        superLinkType = new LinkType(linkName: SUPER_NAME,
+            otherDirectionLinkName: SUPER_NAME_REVERSE, verbName: SUPER_VERB)
+        render "Creating link type: $superLinkType"
+        boolean saved = superLinkType.save()
+        if (!saved) {
+          throw new Exception("Could not create link type: $superLinkType")
+        }
+      }
+      assert(superLinkType)
+    }
+
+    private Map importCategories(Connection conn) {
+      String sql = "SELECT id, subject FROM subjects"
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ResultSet rs = ps.executeQuery()
+      Map oldSubjectIdToCategory = new HashMap()
+      while (rs.next()) {
+        String catName = convert(rs.getString("subject"))
+        Category cat = new Category(catName)
+        render "Adding category $cat<br>"
+        oldSubjectIdToCategory.put(rs.getInt("id"), cat)
+        boolean saved = cat.save()
+        if (!saved) {
+          throw new Exception("Could not save category: $cat - $cat.errors")
+        }
+      }
+      return oldSubjectIdToCategory
+    }
+
+    private Map importLevels(Connection conn) {
+      String sql = "SELECT id, name, shortname FROM uses"
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ResultSet rs = ps.executeQuery()
+      Map oldUseIdToTermLevel = new HashMap()
+      while (rs.next()) {
+        String useName = convert(rs.getString("name"))
+        String shortUseName = convert(rs.getString("shortname"))	//FIXME: use this!
+        TermLevel termLevel = new TermLevel(levelName: useName)
+        render "Adding TermLevel $termLevel<br>"
+        oldUseIdToTermLevel.put(rs.getInt("id"), termLevel)
+        boolean saved = termLevel.save()
+        if (!saved) {
+          throw new Exception("Could not save termLevel: $termLevel - $termLevel.errors")
+        }
+      }
+      return oldUseIdToTermLevel
+    }
 
     /**
      * Fixes the broken MySQL encoding.
@@ -200,9 +235,16 @@ class ImportController extends BaseController {
     
  
     private void cleanup(List l) {
+      int i = 0
       for (item in l) {
         //render "delete $item<br>"
-        item.delete()
+        if (i == l.size() - 1) {
+          render "flushing delete at $i<br>"
+          item.delete(flush:true)
+        } else {
+          item.delete()
+        }
+        i++
       }
     }
 
