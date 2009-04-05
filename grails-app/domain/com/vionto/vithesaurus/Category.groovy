@@ -34,6 +34,7 @@ class Category implements Comparable, Cloneable {
     Category categoryType
     
     static constraints = {
+        categoryName(unique:true)
         uri(nullable:true,unique:true)
         isDisabled(nullable:true)   // required to make automatic DB update work
         categoryType(nullable:true)
