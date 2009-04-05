@@ -57,7 +57,7 @@ class Term implements Comparable, Cloneable {
     }
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'term_seq']
+        //id generator:'sequence', params:[sequence:'term_seq']
     }
 
     /*

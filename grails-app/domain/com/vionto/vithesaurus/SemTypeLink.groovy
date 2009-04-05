@@ -27,7 +27,7 @@ class SemTypeLink implements Comparable {
     static belongsTo = [synset:Synset]
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'sem_type_link_seq']
+        //id generator:'sequence', params:[sequence:'sem_type_link_seq']
     }
 
     SemTypeLink() {

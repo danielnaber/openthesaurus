@@ -35,7 +35,7 @@ class Source implements Cloneable, Comparable {
   }
 
   static mapping = {
-      id generator:'sequence', params:[sequence:'source_seq']
+      //id generator:'sequence', params:[sequence:'source_seq']
   }
 
   String toString() {

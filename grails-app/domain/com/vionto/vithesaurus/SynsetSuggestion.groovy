@@ -29,7 +29,7 @@ class SynsetSuggestion implements Comparable {
     int termCount
     
     static mapping = {
-        id generator:'sequence', params:[sequence:'synset_suggestion_seq']
+        //id generator:'sequence', params:[sequence:'synset_suggestion_seq']
     }
 
     SynsetSuggestion() {

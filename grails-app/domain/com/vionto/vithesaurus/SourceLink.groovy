@@ -27,7 +27,7 @@ class SourceLink implements Comparable {
     static belongsTo = [synset:Synset]
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'source_link_seq']
+        //id generator:'sequence', params:[sequence:'source_link_seq']
     }
 
     SourceLink() {

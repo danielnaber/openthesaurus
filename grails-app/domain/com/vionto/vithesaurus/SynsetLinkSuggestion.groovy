@@ -33,7 +33,7 @@ class SynsetLinkSuggestion implements Comparable {
     static belongsTo = [synset:Synset]
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'synset_link_suggestion_seq']
+        //id generator:'sequence', params:[sequence:'synset_link_suggestion_seq']
     }
 
     SynsetLinkSuggestion() {

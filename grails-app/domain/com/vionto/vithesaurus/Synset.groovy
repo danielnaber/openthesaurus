@@ -40,7 +40,7 @@ class Synset implements Cloneable {
     // NOTE: keep clone() in sync when adding properties!
 
     static mapping = {
-        id generator:'sequence', params:[sequence:'synset_seq']
+        //id generator:'sequence', params:[sequence:'synset_seq']
         userComment(type:'text')
     }
 
