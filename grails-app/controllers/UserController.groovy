@@ -53,6 +53,13 @@ class UserController extends BaseController {
           ThesaurusUser user = 
               ThesaurusUser.findByUserIdAndPassword(params.userId, md5sum(params.password))
           if (user) {
+            if (user.blocked) {
+              log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): user is blocked")
+              // deliberately show same message as otherwise... 
+              flash.message = "Invalid user id and/or password. " +
+                "Please also make sure cookies are enabled."
+              return
+            }
             log.info("login successful for user ${user}")
             flash.message = "Successfully logged in as '${user.userId.encodeAsHTML()}'"
             session.user = user

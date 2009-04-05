@@ -24,10 +24,11 @@ class ThesaurusUser {
 
     String userId
     String password
-    String realName
+    String realName		// or visible name, whatever we get from the user
     String permission
     Date creationDate
     Date lastLoginDate
+    boolean blocked		// used to completely block a user from logging in
     
     final static USER_PERM = "user"
     final static ADMIN_PERM = "admin"
@@ -46,6 +47,7 @@ class ThesaurusUser {
 
     ThesaurusUser() {
         this.creationDate = new Date()
+        blocked = false
     }
     
     ThesaurusUser(String userId, String password, String permission) {
