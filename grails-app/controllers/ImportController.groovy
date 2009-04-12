@@ -22,6 +22,8 @@ import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.PreparedStatement
 import java.sql.SQLException
+import java.util.regex.Pattern
+import java.util.regex.Matcher
 import java.text.SimpleDateFormat
 
 class ImportController extends BaseController {
@@ -32,8 +34,6 @@ class ImportController extends BaseController {
    // def beforeInterceptor = [action: this.&adminAuth]
  
    // TODO:
-   // -test: keep lang. level (old: uses -> new: TermLevel)
-   // -keep original ID
    // -antonyme
    // -oberbegriffe
    // -lookup-version des terms (nur wenn anders als term?)?
@@ -70,11 +70,16 @@ class ImportController extends BaseController {
         //testing:
         //return
 
+        String sql = "SET NAMES 'utf8'"
+        render "$sql<br>"
+        PreparedStatement ps = conn.prepareStatement(sql)
+        ps.execute()
+
         //
         // import terms and synsets
         //
-        String sql = "SELECT id, subject_id, super_id FROM meanings WHERE hidden = 0"
-        PreparedStatement ps = conn.prepareStatement(sql)
+        sql = "SELECT id, subject_id, super_id FROM meanings WHERE hidden = 0"
+        ps = conn.prepareStatement(sql)
         ResultSet rs = ps.executeQuery()
         int count = 0
         
@@ -89,10 +94,12 @@ class ImportController extends BaseController {
         while (rs.next()) {
           sql = "SELECT word, use_id FROM words, word_meanings WHERE meaning_id = ? AND words.id = word_meanings.word_id"
           PreparedStatement ps2 = conn.prepareStatement(sql)
-          ps2.setInt(1, rs.getInt("id"))
+          int oldSynsetId = rs.getInt("id")
+          ps2.setInt(1, oldSynsetId)
           // TODO: another query for uses...
           ResultSet rs2 = ps2.executeQuery()
           Synset synset = new Synset()
+          synset.originalId = oldSynsetId
           CategoryLink categoryLink
           if (rs.getInt("subject_id")) {
             Category cat = oldSubjectIdToCategory.get(rs.getInt("subject_id"))
@@ -138,9 +145,9 @@ class ImportController extends BaseController {
           render "<br>\n"
           count++
           //FIXME
-          /*if (count > 3000) {
+          if (count > 3000) {
             break
-          }*/
+          }
         }
         conn.close()
         render "- done ($savedCount) -"
@@ -161,7 +168,7 @@ class ImportController extends BaseController {
             user.creationDate = rs.getDate("subs_date")
             user.lastLoginDate = rs.getDate("last_login")
           } catch (SQLException e) {
-            render "Exception: $e<br>"
+            render "Ignoring exception: $e when parsing dates for user " + rs.getString("username") + "<br>"
           }
           user.realName = rs.getString("visiblename")
           user.blocked = rs.getInt("blocked") == 1 ? true : false
@@ -193,6 +200,7 @@ class ImportController extends BaseController {
       Map oldSubjectIdToCategory = new HashMap()
       while (rs.next()) {
         String catName = convert(rs.getString("subject"))
+        // no idea why it's needed, but we get "Data too long for column 'category_name'" otherwise...:
         Category cat = new Category(catName)
         render "Adding category $cat<br>"
         oldSubjectIdToCategory.put(rs.getInt("id"), cat)
@@ -229,8 +237,24 @@ class ImportController extends BaseController {
     private String convert(String s) {
       // oh my, the encoding returned by MySQL is totally broken (also
       // depends on the version of the MySQL driver used):
-      return new String(s.getBytes("latin1"), "utf-8").replaceAll("�\\?", "ß")
-      //return s
+      //FIXME
+      //s = new String(s.getBytes("latin1"), "utf-8")
+      s = s.replaceAll("Ã¤", "ä").replaceAll("Ã–", "Ö").replaceAll("Ã¼", "ü")
+        .replaceAll("Ã¶", "ö")
+        .replaceAll("Ãœ", "Ü")
+        .replaceAll("Ã„", "Ä")
+        .replaceAll("ÃŸ", "ß")
+        .replaceAll("Ã©", "é")
+        .replaceAll("Ãª", "ê")
+        .replaceAll("Ã¨", "è")
+        
+      Pattern p = Pattern.compile("[:,°%#}~\\+!/\\?@\\*\\[\\]\"\$&\\.\\(\\)=;êéèàa-zA-Z0-9öäüÖÄÜß -]*")
+      Matcher m = p.matcher(s)
+      if (!m.matches()) {
+        //throw new Exception("NO MATCH: '$s'")
+        render "NO MATCH: '$s'<br>"
+      }
+      return s
     }
     
  
