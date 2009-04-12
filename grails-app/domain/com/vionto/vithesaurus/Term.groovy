@@ -26,6 +26,7 @@ class Term implements Comparable, Cloneable {
 
     Synset synset           // synset to which this term belongs
     String word
+    String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses removed)
     boolean isShortForm     // is the word an abbreviation?
     boolean isAcronym       // is the word an acronym (e.g. AIDS)
     Language language
@@ -54,6 +55,7 @@ class Term implements Comparable, Cloneable {
         level(nullable:true)
         userComment(nullable:true)
         wordGrammar(nullable:true)
+        normalizedWord(nullable:true)
     }
 
     static mapping = {
@@ -74,13 +76,21 @@ class Term implements Comparable, Cloneable {
     }
 
     Term(String word, Language language, Synset synset) {
-        this.word = word
+        this.word = word.trim()
+        String normalizedWord = normalize(this.word)
+        if (this.word != normalizedWord) {
+          this.normalizedWord = normalizedWord
+        }
         this.language = language
         this.synset = synset
     }
 
     String toString() {
         return word
+    }
+    
+    public static String normalize(String word) {
+      word = word.replaceAll("\\(.*?\\)", "").trim()
     }
 
     /**

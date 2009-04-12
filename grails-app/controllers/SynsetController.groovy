@@ -180,7 +180,10 @@ class SynsetController extends BaseController {
         // see http://jira.codehaus.org/browse/GRAILS-2793
         // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
         def termList = Term.withCriteria {
-            ilike('word', query)
+            or {
+              ilike('word', query)
+              ilike('normalizedWord', Term.normalize(query))
+            }
             synset {
                 if (section) {
                     eq('section', section)
