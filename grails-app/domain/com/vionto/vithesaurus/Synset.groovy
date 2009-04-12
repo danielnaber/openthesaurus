@@ -37,6 +37,7 @@ class Synset implements Cloneable {
     Section section
     int evaluation
     Integer importStatus    // != null -> automatically imported
+    Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
     // NOTE: keep clone() in sync when adding properties!
 
     static mapping = {
@@ -60,6 +61,7 @@ class Synset implements Cloneable {
         section(nullable:true)
         synsetPreferredTerm(nullable:true)
         importStatus(nullable:true)
+        originalId(nullable:true)
     }
 
     // prepended to get a display "id":
