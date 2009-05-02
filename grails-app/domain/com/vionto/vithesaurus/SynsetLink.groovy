@@ -89,6 +89,10 @@ class SynsetLink implements Comparable {
      */
     int compareTo(Object other) {
         if (other.linkType.linkName == linkType.linkName) {
+            if (targetSynset.synsetPreferredTerm == null
+                || other.targetSynset.synsetPreferredTerm == null) {
+                return targetSynset.id - other.targetSynset.id		// any order, but stable
+            }
             return targetSynset.synsetPreferredTerm.
                 compareToIgnoreCase(other.targetSynset.synsetPreferredTerm)
         } else {
