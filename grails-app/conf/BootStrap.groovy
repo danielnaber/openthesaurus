@@ -34,7 +34,31 @@ class BootStrap {
            new WordGrammar(form:"base form").save()
        }
        if (!WordGrammar.findByForm("plural")) {
-           new WordGrammar(form:"plural").save()
+         new WordGrammar(form:"plural").save()
+       }
+       
+       //
+       // the following items have been added for OpenThesaurus: 
+       //
+       
+       if (!Category.findByCategoryName("other")) {
+         // add default category so there's at least one category available:
+         Category cat = new Category("other")
+         cat.isDisabled = false
+         cat.save()
+       }
+       if (!Section.findBySectionName("other")) {
+         // add default section so there's at least one section available:
+         new Section("other").save()
+       }
+       if (!TermLinkType.findByLinkName("Antonym")) {
+         // add default section so there's at least one section available:
+         TermLinkType termLinkType = new TermLinkType("Antonym")
+         termLinkType.otherDirectionLinkName = "Antonym"
+         termLinkType.verbName = "is das Antonym von"
+         boolean created = termLinkType.save()
+         assert(created)
+         log.info("Created " + termLinkType)
        }
      }
      
