@@ -298,17 +298,17 @@
                                 <%
                                 Set displayedSynsets = new HashSet()
                                 %>
-                                <g:render template="link" model="[title:'Hypernyms', linkTypeName:'hypernym',
+                                <g:render template="link" model="[title:'Hypernyms', linkTypeName:'Oberbegriff',
                                     synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
-                                <g:render template="suggestedLink" model="[title:'Suggested Hypernyms', linkTypeName:'hypernym',
+                                <g:render template="suggestedLink" model="[title:'Suggested Hypernyms', linkTypeName:'Oberbegriff',
                                     synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets]" />
 
-                                <g:render template="link" model="[title:'Hyponyms', linkTypeName:'hyponym',
+                                <g:render template="link" model="[title:'Hyponyms', linkTypeName:'Unterbegriff',
                                     synset:synset, synsetLinks:synsetLinks, showAddLink:false, displayedSynsets: displayedSynsets,
                                     reverseLink:true]" />
 
-                                <g:render template="suggestedLink" model="[title:'Suggested Hyponyms', linkTypeName:'hyponym',
+                                <g:render template="suggestedLink" model="[title:'Suggested Hyponyms', linkTypeName:'Unterbegriff',
                                     synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets,
                                     reverseLink:true]" />
 
