@@ -89,17 +89,19 @@ class ImportController extends BaseController {
         assert(otherCategory)
         Section otherSection = Section.findBySectionName("other")
         assert(otherSection)
+        TermLinkType antonymLink = TermLinkType.findByLinkName("Antonym")
+        assert(antonymLink)
         
         int savedCount = 0
         while (rs.next()) {
-          sql = "SELECT word, use_id FROM words, word_meanings WHERE meaning_id = ? AND words.id = word_meanings.word_id"
+          sql = "SELECT word_meanings.id, word, use_id FROM words, word_meanings WHERE meaning_id = ? AND words.id = word_meanings.word_id"
           PreparedStatement ps2 = conn.prepareStatement(sql)
           int oldSynsetId = rs.getInt("id")
           ps2.setInt(1, oldSynsetId)
           // TODO: another query for uses...
           ResultSet rs2 = ps2.executeQuery()
           Synset synset = new Synset()
-          synset.originalId = oldSynsetId
+          synset.originalId = oldSynsetId			// keep old id in case it's needed in the future
           CategoryLink categoryLink
           if (rs.getInt("subject_id")) {
             Category cat = oldSubjectIdToCategory.get(rs.getInt("subject_id"))
@@ -121,9 +123,9 @@ class ImportController extends BaseController {
           synset.section = otherSection
           int termCount = 0
           while (rs2.next()) {
-            //FIXME: how to keep existing synset id?
             String term = convert(rs2.getString("word"))
             Term t = new Term(term, german, synset)
+            t.originalId = rs2.getInt("id") 
             if (rs2.getInt("use_id")) {
               TermLevel termLevel = oldUseIdToTermLevel.get(rs2.getInt("use_id"))
               assert(termLevel)
@@ -145,12 +147,42 @@ class ImportController extends BaseController {
           render "<br>\n"
           count++
           //FIXME
-          if (count > 3000) {
-            break
-          }
+          //if (count > 3000) {
+          //  break
+          //}
         }
+        
         conn.close()
-        render "- done ($savedCount) -"
+        conn = DriverManager.getConnection(dburl, dbuser, dbpassword)
+        //
+        // now import antonyms
+        //
+        int antonymLinkCount = 0
+        int antonymLinkCountSkipped = 0
+        sql = "SELECT word_meaning_id1, word_meaning_id2 FROM antonyms"
+        ps = conn.prepareStatement(sql)
+        rs = ps.executeQuery()
+        while (rs.next()) {
+          Term importedTerm1 = Term.findByOriginalId(rs.getInt("word_meaning_id1"))
+          Term importedTerm2 = Term.findByOriginalId(rs.getInt("word_meaning_id2"))
+          if (importedTerm1 == null || importedTerm2 == null) {
+            render "Skipping antonym: $importedTerm1 / $importedTerm2 (${rs.getInt('word_meaning_id1')}/${rs.getInt('word_meaning_id2')})<br>"
+            antonymLinkCountSkipped++
+            continue
+          }
+          TermLink termLink = new TermLink(importedTerm1, importedTerm2, antonymLink)
+          boolean linkSaved = termLink.save()
+          if (!linkSaved) {
+            throw new Exception("Could not save antonym link: $termLink - $termLink.errors")
+          }
+          render "linked $importedTerm1 to $importedTerm2<br>"
+          antonymLinkCount++
+        }
+        
+        conn.close()
+        render "- done ($savedCount) -<br>"
+        render "antonymLinkCount: $antonymLinkCount<br>"
+        render "antonymLinkCountSkipped: $antonymLinkCountSkipped<br>"
     }
    
     private importUsers(Connection conn) {

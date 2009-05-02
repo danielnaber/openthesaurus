@@ -33,6 +33,7 @@ class Term implements Comparable, Cloneable {
     TermLevel level             // language level like "colloquial"
     WordGrammar wordGrammar     // base form, plural form, etc.
     String userComment
+    Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
 
     /** Allowed term expression. TODO: read from configuration */
     final static String TERM_REGEXP =

@@ -18,21 +18,19 @@
 package com.vionto.vithesaurus;
 
 /**
- * A type of Link between Synsets, e.g. "hypernym", "association", ...
+ * A type of Link between Terms, e.g. "antonym", ...
  * 
- * Also see TermLinkType for links between Terms.
+ * Also see LinkType for links between Synsets.
  */
-class LinkType {
+class TermLinkType {
   
     static mapping = {
         //id generator:'sequence', params:[sequence:'link_type_seq']
     }
 
-    // TODO: only for inter-synset relations?!
-
-    /** E.g. "synonym" */
+    /** E.g. "antonym" */
 	String linkName
-	/** E.g. "more specific synset" if linkName is "more generic synset" */
+	/** E.g. "antonym" */
 	String otherDirectionLinkName
 	/** The name when used in a sentence, e.g. "A is a B" */
 	String verbName
@@ -42,6 +40,13 @@ class LinkType {
         verbName(unique:true)
 	}
 
+    TermLinkType() {
+    }
+
+    TermLinkType(String linkName) {
+      this.linkName = linkName
+    }
+    
 	String toString() {
 		return linkName
 	}
