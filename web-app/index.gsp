@@ -31,7 +31,8 @@
         <g:link controller="language" action="list">Languages</g:link> |
         <g:link controller="source" action="list">Sources</g:link> |
         <g:link controller="category" action="list">Categories</g:link> |
-        <g:link controller="linkType" action="list">Link Types</g:link> |
+        <g:link controller="linkType" action="list">Synset Link Types</g:link> |
+        <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
         <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
         <!-- <g:link controller="semType" action="list">SemTypes</g:link> | -->
         <g:link controller="section" action="list">Thesauri</g:link> |
