@@ -28,16 +28,8 @@ import java.text.SimpleDateFormat
 
 class ImportController extends BaseController {
     
-   //
-   // FIXME: admin only
-   //
-   // def beforeInterceptor = [action: this.&adminAuth]
+    def beforeInterceptor = [action: this.&adminAuth]
  
-   // TODO:
-   // -antonyme
-   // -oberbegriffe
-   // -lookup-version des terms (nur wenn anders als term?)?
-
     private final String SUPER_NAME = "more generic synset"
     private final String SUPER_NAME_REVERSE = "more specific synset"
     private final String SUPER_VERB = "is a sub concept of"
@@ -58,7 +50,10 @@ class ImportController extends BaseController {
         new Category("other").save()
         cleanup(TermLevel.findAll())
         cleanup(ThesaurusUser.findAll())
-        
+
+        cleanup(SynsetLink.findAll())
+        cleanup(TermLink.findAll())
+
         cleanup(Term.findAll())
         cleanup(Synset.findAll())
         
@@ -66,9 +61,6 @@ class ImportController extends BaseController {
         importLinkTypes()
         Map oldSubjectIdToCategory = importCategories(conn)
         Map oldUseIdToTermLevel = importLevels(conn)
-
-        //testing:
-        //return
 
         String sql = "SET NAMES 'utf8'"
         render "$sql<br>"
@@ -89,8 +81,10 @@ class ImportController extends BaseController {
         assert(otherCategory)
         Section otherSection = Section.findBySectionName("other")
         assert(otherSection)
-        TermLinkType antonymLink = TermLinkType.findByLinkName("Antonym")
-        assert(antonymLink)
+        LinkType superLinkType = LinkType.findByLinkName("Oberbegriff")
+        assert(superLinkType)
+        TermLinkType antonymLinkType = TermLinkType.findByLinkName("Antonym")
+        assert(antonymLinkType)
         
         int savedCount = 0
         while (rs.next()) {
@@ -111,14 +105,6 @@ class ImportController extends BaseController {
             categoryLink = new CategoryLink(synset, otherCategory)
             synset.preferredCategory = otherCategory
           }
-          
-          /* FIXME: in a second run, add super links:
-          if (rs.getInt("super_id")) {
-            SynsetLink link = new SynsetLink(from, to, superLinkType)
-            synset.addSynsetLinks()
-          }
-          */
-          
           synset.addCategoryLink(categoryLink)
           synset.section = otherSection
           int termCount = 0
@@ -154,6 +140,31 @@ class ImportController extends BaseController {
         
         conn.close()
         conn = DriverManager.getConnection(dburl, dbuser, dbpassword)
+
+        //
+        // import hypernym relations
+        //
+        sql = "SELECT id, super_id FROM meanings WHERE hidden = 0 AND super_id IS NOT NULL"
+        ps = conn.prepareStatement(sql)
+        rs = ps.executeQuery()
+        int superConceptLinkCount = 0
+        while (rs.next()) {
+          Synset importedSynset = Synset.findByOriginalId(rs.getInt("id"))
+          Synset importedSuperSynset = Synset.findByOriginalId(rs.getInt("super_id"))
+          //FIXME: count and analyze problems
+          if (importedSynset == null || importedSuperSynset == null) {
+            render "SKIPPING $importedSynset -- $importedSuperSynset<br>"
+            continue
+          }
+          SynsetLink synLink = new SynsetLink(importedSynset, importedSuperSynset, superLinkType)
+          boolean linkSaved = synLink.save()
+          if (!linkSaved) {
+            throw new Exception("Could not save super concept link: $synLink - $synLink.errors")
+          }
+          render "linked $importedSynset to $importedSuperSynset<br>"
+          superConceptLinkCount++
+        }
+        
         //
         // now import antonyms
         //
@@ -170,7 +181,7 @@ class ImportController extends BaseController {
             antonymLinkCountSkipped++
             continue
           }
-          TermLink termLink = new TermLink(importedTerm1, importedTerm2, antonymLink)
+          TermLink termLink = new TermLink(importedTerm1, importedTerm2, antonymLinkType)
           boolean linkSaved = termLink.save()
           if (!linkSaved) {
             throw new Exception("Could not save antonym link: $termLink - $termLink.errors")
@@ -181,6 +192,7 @@ class ImportController extends BaseController {
         
         conn.close()
         render "- done ($savedCount) -<br>"
+        render "superConceptLinkCount: $superConceptLinkCount<br>"
         render "antonymLinkCount: $antonymLinkCount<br>"
         render "antonymLinkCountSkipped: $antonymLinkCountSkipped<br>"
     }
