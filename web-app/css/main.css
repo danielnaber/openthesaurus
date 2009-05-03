@@ -493,3 +493,8 @@ img {
 .success {
     background: #5affa8;
 }
+
+/* highlight of the matches term after a search */
+.match {
+	font-weight: bold;
+}
