@@ -26,7 +26,18 @@ class SynsetController extends BaseController {
     def beforeInterceptor = [action: this.&auth,
                              except: ['list', 'search', 'edit', 'statistics']]
 
-    def index = { redirect(action:list,params:params) }
+    def index = {
+        if (params.id) {
+          // this is an ID from the PHP version of OpenThesaurus, we keep it working:
+          Synset synset = Synset.findByOriginalId(params.id)
+          if (synset == null) {
+            throw new Exception("No synset found with the given id ${params.id}")
+          }
+          redirect(controller:'synset', action:'edit', id: synset.id)
+          return
+        }
+        redirect(action:list,params:params)
+    }
 
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
