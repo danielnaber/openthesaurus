@@ -30,9 +30,9 @@ class ImportController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
  
-    private final String SUPER_NAME = "more generic synset"
-    private final String SUPER_NAME_REVERSE = "more specific synset"
-    private final String SUPER_VERB = "is a sub concept of"
+    private final String SUPER_NAME = "Oberbegriff"
+    private final String SUPER_NAME_REVERSE = "Unterbegriff"
+    private final String SUPER_VERB = "ist ein Oberbegriff von"
 
     def index = {
         []
@@ -148,12 +148,14 @@ class ImportController extends BaseController {
         ps = conn.prepareStatement(sql)
         rs = ps.executeQuery()
         int superConceptLinkCount = 0
+        int superConceptLinkCountSkipped = 0
         while (rs.next()) {
           Synset importedSynset = Synset.findByOriginalId(rs.getInt("id"))
           Synset importedSuperSynset = Synset.findByOriginalId(rs.getInt("super_id"))
-          //FIXME: count and analyze problems
           if (importedSynset == null || importedSuperSynset == null) {
-            render "SKIPPING $importedSynset -- $importedSuperSynset<br>"
+            // can happen if a synset hasn't been imported because of e.g. special chars problems
+            render "SKIPPING $importedSynset (${rs.getInt('id')}) -- $importedSuperSynset (${rs.getInt('super_id')})<br>"
+            superConceptLinkCountSkipped++
             continue
           }
           SynsetLink synLink = new SynsetLink(importedSynset, importedSuperSynset, superLinkType)
@@ -193,6 +195,7 @@ class ImportController extends BaseController {
         conn.close()
         render "- done ($savedCount) -<br>"
         render "superConceptLinkCount: $superConceptLinkCount<br>"
+        render "superConceptLinkCountSkipped: $superConceptLinkCountSkipped<br>"
         render "antonymLinkCount: $antonymLinkCount<br>"
         render "antonymLinkCountSkipped: $antonymLinkCountSkipped<br>"
     }
