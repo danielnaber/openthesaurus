@@ -23,9 +23,11 @@ package com.vionto.vithesaurus;
 class TermLevel {
   
   String levelName
+  String shortLevelName
 
   static constraints = {
-      levelName(unique:true)
+    levelName(unique:true)
+    shortLevelName(unique:true)
   }
 
   static mapping = {
