@@ -15,9 +15,11 @@
                     <tbody>
                     
                         <g:each in="${Section.list().sort()}" var="section">
-                                <tr>
-                                    <td><h4>${section.encodeAsHTML()}</h4></td>
-                                </tr>
+                        	<g:if test="${Section.list().size > 1}">
+	                            <tr>
+	                                <td><h4>${section.encodeAsHTML()}</h4></td>
+	                            </tr>
+                            </g:if>
 	                        <tr class="prop">
 	                            <td valign="top" class="name">Concepts:</td>
 	                            <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisibleAndSection(true, section)}" /></td>
