@@ -92,7 +92,6 @@ class ImportController extends BaseController {
           PreparedStatement ps2 = conn.prepareStatement(sql)
           int oldSynsetId = rs.getInt("id")
           ps2.setInt(1, oldSynsetId)
-          // TODO: another query for uses...
           ResultSet rs2 = ps2.executeQuery()
           Synset synset = new Synset()
           synset.originalId = oldSynsetId			// keep old id in case it's needed in the future
@@ -123,7 +122,7 @@ class ImportController extends BaseController {
           synset.isVisible = 1
           boolean saved = synset.save()
           if (!saved) {
-            // TODO: throw exception instead
+            // TODO: throw exception instead?
             render "NOT SAVED! $synset: ${synset.errors}<br>"
             log.warn("NOT SAVED: $synset")
           } else {
@@ -266,9 +265,9 @@ class ImportController extends BaseController {
       Map oldUseIdToTermLevel = new HashMap()
       while (rs.next()) {
         String useName = convert(rs.getString("name"))
-        String shortUseName = convert(rs.getString("shortname"))	//FIXME: use this!
-        TermLevel termLevel = new TermLevel(levelName: useName)
-        render "Adding TermLevel $termLevel<br>"
+        String shortUseName = convert(rs.getString("shortname"))
+        TermLevel termLevel = new TermLevel(levelName: useName, shortLevelName: shortUseName)
+        render "Adding TermLevel $termLevel ($shortUseName)<br>"
         oldUseIdToTermLevel.put(rs.getInt("id"), termLevel)
         boolean saved = termLevel.save()
         if (!saved) {
