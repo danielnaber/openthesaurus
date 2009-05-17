@@ -21,7 +21,7 @@ import com.vionto.vithesaurus.*
 class TermController extends BaseController {
     
     def beforeInterceptor = [action: this.&auth,
-                             except: ['edit']]
+                             except: ['edit', 'list']]
 
     // the delete, save and update actions only accept POST requests
     def allowedMethods = [delete:'POST', save:'POST', update:'POST']
@@ -91,5 +91,20 @@ class TermController extends BaseController {
         }
     }
 
+    def list = {
+        if(!params.max) params.max = 10
+        else params.max = Integer.parseInt(params.max)
+        if(!params.offset) params.offset = 0
+        else params.offset = Integer.parseInt(params.offset)
+        def termList = Term.withCriteria {
+          synset {
+            eq('isVisible', true)
+          }
+          order("word", "asc")
+          maxResults(20)
+          firstResult(params.offset)
+        }
+        [ termList: termList ]
+    }
 
 }

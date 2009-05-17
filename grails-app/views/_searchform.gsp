@@ -39,7 +39,7 @@
     </g:if>
     --%>
     
-    <input class="submit" type="submit" value="Search" />
+    <input class="submit" type="submit" value="<g:message code="search.button"/>" />
     <%--
     &nbsp;&nbsp;
     <span class="hintText"><g:link controller="search" action="help">Help</g:link></span>

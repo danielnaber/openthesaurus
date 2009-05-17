@@ -1,16 +1,16 @@
 <%@ import page="com.vionto.vithesaurus.*" %>
 <html>
     <head>
-        <title>vithesaurus - powered by vionto</title>
+        <title><g:message code="homepage.title"/></title>
         <meta name="layout" content="homepage" />
     </head>
     <body>
 
-        <div class="logo" style="margin:20px"><img border="0"
+        <div class="logo"><img border="0"
             src="${createLinkTo(dir:'images',file:'openthesaurus-logo.png')}" 
             alt="Thesaurus Logo" /></div>
             
-        <h1 style="text-align:center">OpenThesaurus - Synonyme und Assoziationen</h1>
+        <h1 class="homepagehead"><g:message code="homepage.head"/></h1>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
@@ -21,9 +21,9 @@
         <br />
 
         <p class="mainpage"><br />
-            <g:link controller="synset" action="list">List all Concepts</g:link> |
-            <g:link controller="synset" action="statistics">Statistics</g:link> |
-            <g:link controller="userEvent" action="list">Log of Changes</g:link>
+            <g:link controller="term" action="list"><g:message code="a_to_z"/></g:link> |
+            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link> |
+            <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
         </p>
 
     </body>

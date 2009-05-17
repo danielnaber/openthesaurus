@@ -12,7 +12,8 @@ html * {
 }
 
 .logo {
-    margin-top: 10px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -497,4 +498,10 @@ img {
 /* highlight of the matches term after a search */
 .match {
 	font-weight: bold;
+}
+
+.homepagehead {
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 20px;
 }

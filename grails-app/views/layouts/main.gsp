@@ -18,9 +18,9 @@
             <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner" />
         </div>
         
-        <div class="logo" style="margin:20px"><a href="${createLinkTo(dir:'',file:'')}"><img border="0"
-        	src="${createLinkTo(dir:'images',file:'thesaurus.png')}" 
-        	alt="Thesaurus Logo" /></a></div>
+        <div class="logo"><a href="${createLinkTo(dir:'',file:'')}"><img
+        	src="${createLinkTo(dir:'images',file:'openthesaurus-logo.png')}" 
+        	alt="OpenThesaurus Logo" /></a></div>
         	
         <g:render template="/searchform"/>
 
