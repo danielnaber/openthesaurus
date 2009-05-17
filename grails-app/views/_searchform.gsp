@@ -13,7 +13,8 @@
     	<g:select name="source.id" from="${Source.list().sort()}" optionKey="id"
         	value="${params['source.id']}" noSelection="['null':'-source-']" style="width:120px" />
     </g:if>
-    
+
+	<%--    
     <g:if test="${Category.count() > 1}">
 	    <select name="category.id" style="width:120px" id="category.id" >
 	        <option value="null">-pref. category type-</option>
@@ -36,10 +37,13 @@
 	        </g:each>
 	    </select>
     </g:if>
+    --%>
     
     <input class="submit" type="submit" value="Search" />
+    <%--
     &nbsp;&nbsp;
     <span class="hintText"><g:link controller="search" action="help">Help</g:link></span>
+    --%>
     <br />
     <br/>
     <g:if test="${session.user}">
