@@ -1,5 +1,6 @@
 <a href="${createLinkTo(dir:'',file:'')}">Home</a> -
-
+ <g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
+-
 <g:if test="${session.user}">
     Logged in as ${session.user.userId.toString()?.encodeAsHTML()} -
     <g:link controller="user" action="logout">Logout</g:link>

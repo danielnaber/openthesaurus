@@ -24,8 +24,7 @@
         	<g:link controller="about"><g:message code="homepage.about"/></g:link> -
         	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> -
         	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> -
-        	<g:link controller="about" action="topusers"><g:message code="homepage.top_users"/></g:link> - 
-        	<g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
+        	<g:link controller="about" action="topusers"><g:message code="homepage.top_users"/></g:link> 
 		</p>
 
 		<!-- 
