@@ -17,6 +17,10 @@
  */ 
 
 import com.vionto.vithesaurus.*
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.ResultSet
+import java.sql.PreparedStatement
 
 class SynsetController extends BaseController {
 
@@ -24,7 +28,7 @@ class SynsetController extends BaseController {
     final int UPPER_BOUND = 1000
 
     def beforeInterceptor = [action: this.&auth,
-                             except: ['list', 'search', 'edit', 'statistics']]
+                             except: ['list', 'search', 'edit', 'statistics', 'createMemoryDatabase']]
 
     def index = {
         if (params.id) {
@@ -120,6 +124,8 @@ class SynsetController extends BaseController {
      */
     def search = {
         long startTime = System.currentTimeMillis()
+        List partialMatchResult = searchPartialResult(params.q)
+        String wikipediaResult = searchWikipedia(params.q)
         Section section = null
         Source source = null
         Category category = null
@@ -152,13 +158,74 @@ class SynsetController extends BaseController {
           flash.message = ""
         }
         long runTime = System.currentTimeMillis() - startTime
-        [ synsetList : searchResult.synsetList,
+        [ partialMatchResult : partialMatchResult,
+          wikipediaResult : wikipediaResult,
+          synsetList : searchResult.synsetList,
           totalMatches: searchResult.totalMatches,
           completeResult: searchResult.completeResult,
           upperBound: UPPER_BOUND,
           runTime : runTime ]
     }
 
+    def searchPartialResult(String term) {
+      //TODO: connect only once?!
+      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      String sql = "SELECT word FROM memwords WHERE word LIKE ? LIMIT 0, 10"
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ps.setString(1, "%" + term + "%")
+      ResultSet resultSet = ps.executeQuery()
+      def matches = []
+      while (resultSet.next()) {
+        matches.add(resultSet.getString("word"))
+      }
+      resultSet.close()
+      ps.close()
+      conn.close()
+      return matches
+   }
+
+    /**
+     * Create the in-memory database of all terms for fast substring search
+     */
+    // TODO: use quartz
+    def createMemoryDatabase= {
+      log.info("Creating in-memory database")
+      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY", conn)
+      
+      PreparedStatement ps = 
+        conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
+      ps.setString(1, new Date().toString())
+      ps.execute()
+
+      String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
+          FROM term, synset
+          WHERE 
+            term.synset_id = synset.id AND
+            synset.is_visible = 1 AND
+            synset.id NOT IN (?)
+          ORDER BY word"""
+      ps = conn.prepareStatement(sql)
+      ps.setString(1, "0")	//FIXME: hidden synsets
+      ps.execute()
+
+      executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
+      executeQuery("DROP TABLE memwordsBak", conn)
+      log.info("Finished creating in-memory database")
+      render "OK"
+    }
+      
+    private void executeQuery(String sql, Connection conn) {
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ps.execute()
+    }    
+
+    def searchWikipedia(String term) {
+       return "FIXME"
+    }
+    
     /**
      * Internal implementation of the search via fulltext (currently disabled)
      * or database search via Hibernate query.

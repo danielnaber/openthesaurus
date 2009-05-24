@@ -15,6 +15,7 @@
                 <div class="message">${flash.message}</div>
             </g:if>
 
+			<div style="width:60%;border:1px">
             <g:if test="${totalMatches > 0}">
 
                    <ul>
@@ -30,7 +31,7 @@
 			                        	<g:set var="displayTerm" value="${term.toString()},"/>
 		                        	</g:else>
 		                        	
-		                        	<g:if test="${params.q == term.toString()}">
+		                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
 	                                	<span class="match">${displayTerm.encodeAsHTML()}</span>
 		                        	</g:if>
 		                        	<g:else>
@@ -49,6 +50,23 @@
                    </ul>
 
             </g:if>
+			</div>
+
+			<br />
+			<br />
+			
+			<table width="100%">
+			<tr>
+				<td width="45%">
+					<ul>
+					<g:each in="${partialMatchResult}" var="term">
+						<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
+					</g:each>
+					</ul>
+				<td></td>
+				<td width="45%">${wikipediaResult}</td>
+			</tr>
+			</table>			
 
             <g:if test="${totalMatches == 0 && params.q && !(params.q.endsWith('%') || params.q.endsWith('_')) }">
                 <br />
