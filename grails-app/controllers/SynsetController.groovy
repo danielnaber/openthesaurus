@@ -200,15 +200,15 @@ class SynsetController extends BaseController {
       ps.setString(1, new Date().toString())
       ps.execute()
 
+      // setString() on a PreparedStatement won't work, so insert value of hidden synsets directly:
       String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
           FROM term, synset
           WHERE 
             term.synset_id = synset.id AND
             synset.is_visible = 1 AND
-            synset.id NOT IN (?)
+            synset.id NOT IN (${grailsApplication.config.thesaurus.hiddenSynsets})
           ORDER BY word"""
       ps = conn.prepareStatement(sql)
-      ps.setString(1, "0")	//FIXME: hidden synsets
       ps.execute()
 
       executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
