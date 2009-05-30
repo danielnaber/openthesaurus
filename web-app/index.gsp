@@ -1,7 +1,7 @@
 <%@ import page="com.vionto.vithesaurus.*" %>
 <html>
     <head>
-        <title><g:message code="news.archive.title"/></title>
+        <title><g:message code="homepage.title"/></title>
         <meta name="layout" content="homepage" />
     </head>
     <body>
