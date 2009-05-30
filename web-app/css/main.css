@@ -80,8 +80,9 @@ input:focus, select:focus, textarea:focus {
 }
 
 .body {
-    float: left;
-    margin: 0 15px 10px 15px;
+	width: 96%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* NAVIGATION MENU */
