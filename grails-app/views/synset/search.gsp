@@ -58,13 +58,23 @@
 			<table width="100%">
 			<tr>
 				<td width="45%">
+					<h2><g:message code="result.partialmatches.headline"/></h2>
+					TODO: highlighting!
 					<ul>
-					<g:each in="${partialMatchResult}" var="term">
-						<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
-					</g:each>
+						<g:each in="${partialMatchResult}" var="term">
+							<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
+						</g:each>
 					</ul>
 				<td></td>
-				<td width="45%">${wikipediaResult}</td>
+				<td width="45%">
+					<h2><g:message code="result.wikipedia.headline"/></h2>
+					<ul>
+						<g:each in="${wikipediaResult}" var="term">
+							<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
+						</g:each>
+					</ul>
+					<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+				</td>
 			</tr>
 			</table>			
 
