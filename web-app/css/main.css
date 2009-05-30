@@ -53,6 +53,7 @@ h1 {
 
 ul {
     padding-left: 15px;
+	list-style-image: url(../images/list-bullet.png);
 }
 
 input, select, textarea {
@@ -522,4 +523,22 @@ img {
 .simplePage {
 	margin-top: 15px;
 	margin-left: 25px;
+}
+
+/* ads */
+.homepagead_right {
+	position: absolute;
+	margin-top: 100px;
+	left: 80%;
+}
+.homepagead_bottom {
+	margin-top: 70px;
+	margin-left: 100px;
+	text-align: center;
+}
+.adstext a {
+	color: #5757ee;
+}
+.adstext {
+	color: #777;
 }
