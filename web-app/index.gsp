@@ -6,9 +6,9 @@
     </head>
     <body>
 
-        <div class="logo"><img border="0"
-            src="${createLinkTo(dir:'images',file:'openthesaurus-logo.png')}" 
-            alt="Thesaurus Logo" /></div>
+        <div class="logo"><a href="${createLinkTo(dir:'',file:'')}"><img
+        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}" 
+        	alt="<g:message code='logo.alt.text'/>" /></a></div>
             
         <h1 class="homepagehead"><g:message code="homepage.head"/></h1>
 
