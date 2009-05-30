@@ -124,8 +124,12 @@ class SynsetController extends BaseController {
      */
     def search = {
         long startTime = System.currentTimeMillis()
+        long partialMatchStartTime = System.currentTimeMillis()
         List partialMatchResult = searchPartialResult(params.q)
-        String wikipediaResult = searchWikipedia(params.q)
+        long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
+        long wikipediaStartTime = System.currentTimeMillis()
+        List wikipediaResult = searchWikipedia(params.q)
+        long wikipediatime = System.currentTimeMillis() - wikipediaStartTime
         Section section = null
         Source source = null
         Category category = null
@@ -157,14 +161,15 @@ class SynsetController extends BaseController {
         } else {
           flash.message = ""
         }
-        long runTime = System.currentTimeMillis() - startTime
+        long totalTime = System.currentTimeMillis() - startTime
+        log.info("Search time total: ${totalTime}ms partial match: ${partialMatchTime}ms, wikipedia: ${wikipediatime}ms")
         [ partialMatchResult : partialMatchResult,
           wikipediaResult : wikipediaResult,
           synsetList : searchResult.synsetList,
           totalMatches: searchResult.totalMatches,
           completeResult: searchResult.completeResult,
           upperBound: UPPER_BOUND,
-          runTime : runTime ]
+          runTime : totalTime ]
     }
 
     def searchPartialResult(String term) {
@@ -213,6 +218,9 @@ class SynsetController extends BaseController {
 
       executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
       executeQuery("DROP TABLE memwordsBak", conn)
+
+      ps.close()
+      conn.close()
       log.info("Finished creating in-memory database")
       render "OK"
     }
@@ -223,7 +231,20 @@ class SynsetController extends BaseController {
     }    
 
     def searchWikipedia(String term) {
-       return "FIXME"
+      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
+		WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ps.setString(1, term)
+      ResultSet resultSet = ps.executeQuery()
+      def matches = []
+      while (resultSet.next()) {
+        matches.add(resultSet.getString("link"))
+      }
+      resultSet.close()
+      ps.close()
+      conn.close()
+      return matches
     }
     
     /**
