@@ -12,7 +12,7 @@ html * {
 }
 
 .logo {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -505,4 +505,21 @@ img {
 	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 20px;
+}
+
+/* news archive */
+.newsdate {
+	font-weight: bold;
+	color:#666666;
+}
+.newsYearDelimiter {
+	background-color: #eee;
+	font-weight: bold;
+	text-align: right;
+}
+
+/* used on "about" page */
+.simplePage {
+	margin-top: 15px;
+	margin-left: 25px;
 }

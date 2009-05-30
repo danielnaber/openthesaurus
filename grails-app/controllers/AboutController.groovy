@@ -38,5 +38,9 @@ class AboutController extends BaseController {
     def imprint = {
         []
     }
+    
+    def news_archive = {
+        []
+    }
 
 }
