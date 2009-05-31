@@ -21,7 +21,6 @@
                    <ul>
 	                   <g:each in="${synsetList}" status="i" var="synset">
 	                        <li>
-	                        	<!-- TODO: highlight match -->
 			                    <g:set var="counter" value="${0}"/>
 	                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
 		                        	<g:if test="${counter == synset?.otherTerms()?.size() - 1}">
@@ -55,25 +54,35 @@
 			<br />
 			<br />
 			
-			<table width="100%">
+			<table class="invisibletable" width="100%">
 			<tr>
 				<td width="45%">
 					<h2><g:message code="result.partialmatches.headline"/></h2>
-					TODO: highlighting!
 					<ul>
 						<g:each in="${partialMatchResult}" var="term">
-							<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
+							<li><g:link action="search" params="${[q: term]}">${term}</g:link></li>
 						</g:each>
 					</ul>
 				<td></td>
 				<td width="45%">
 					<h2><g:message code="result.wikipedia.headline"/></h2>
 					<ul>
+						<li>
+						<% int i = 0; %>
 						<g:each in="${wikipediaResult}" var="term">
-							<li><g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link></li>
+							<g:if test="${i < wikipediaResult.size() - 1}">
+								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link> &middot;
+							</g:if>
+							<g:else>
+								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
+							</g:else>
+							<% i++; %>
 						</g:each>
+						</li>
 					</ul>
-					<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+					<div class="copyrightInfo">
+						<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+					</div>
 				</td>
 			</tr>
 			</table>			
@@ -112,7 +121,7 @@
                 </g:else>
             </p>
 
-            <p class="metaInfo"><br />Search time: ${runTime}ms</p>
+            <p class="metaInfo" style="display:none"><br />Search time: ${runTime}ms</p>
 
         </div>
     </body>

@@ -46,7 +46,12 @@ a:hover {
 
 h1 {
     color: #006dba;
-    /*font-weight: normal;*/
+    font-size: 14px;
+    margin: .8em 0 .3em 0;
+}
+
+h2 {
+    color: #006dba;
     font-size: 14px;
     margin: .8em 0 .3em 0;
 }
@@ -153,6 +158,10 @@ td.errors {
 
 /* TABLES */
 
+.invisibletable {
+    border: 0px solid #ccc;
+    width: 100%
+}
 table {
     border: 1px solid #ccc;
     width: 100%
@@ -161,8 +170,6 @@ tr {
     border: 0;
 }
 td, th {
-    font: 11px verdana, arial, helvetica, sans-serif;
-    line-height: 12px;
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
@@ -500,7 +507,20 @@ img {
 /* highlight of the matches term after a search */
 .match {
 	font-weight: bold;
+	color: #555;
 }
+
+.copyrightInfo {
+	margin-left: 15px;
+	margin-top: 4px;
+	color: #AAAAAA;
+	font-size:x-small;
+}
+.copyrightInfo a {
+	font-size: x-small;
+	color: #888888;
+}
+
 
 .homepagehead {
 	text-align: center;
