@@ -82,10 +82,15 @@
 							<% i++; %>
 						</g:each>
 						</li>
+						<g:if test="${wikipediaResult.size() == 0}">
+							<li><g:message code="result.no.wikipedia.matches"/></li>
+						</g:if>
 					</ul>
-					<div class="copyrightInfo">
-						<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
-					</div>
+					<g:if test="${wikipediaResult.size() > 0}">
+						<div class="copyrightInfo">
+							<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+						</div>
+					</g:if>
 				</td>
 			</tr>
 			</table>			
