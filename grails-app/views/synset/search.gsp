@@ -109,9 +109,9 @@
 						<%
 						clean =
 						  { str -> str
-						    .replaceAll(":\\[(\\d+)\\]", "__\$1__")
+						    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
 						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
-						    .replaceAll("__(\\d+)__", "<span class='wiktionary'>\$1.</span>")
+						    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
@@ -123,10 +123,19 @@
 							meanings = clean(meanings);
 							// TODO: make words links!
 							%>
-							<li><b><g:message code="result.wiktionary.meanings"/></b> ${meanings}</li>
+							<li><b><g:message code="result.wiktionary.meanings"/></b>
+								<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+									<span class="light"><g:message code="result.none"/></span>
+									<g:set var="emptyMeanings" value="${true}"/>
+								</g:if>
+								<g:else>
+									${meanings}
+								</g:else>
+							</li>
 							<li><b><g:message code="result.wiktionary.synonyms"/></b>
 								<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
 									<span class="light"><g:message code="result.none"/></span>
+									<g:set var="emptySynonyms" value="${true}"/>
 								</g:if>
 								<g:else>
 									<%
@@ -138,7 +147,7 @@
 								</g:else>
 						</g:else>
 					</ul>
-					<g:if test="${wiktionaryResult.size() > 0}">
+					<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
 						<div class="copyrightInfo">
 							<g:message code="result.wiktionary.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
 						</div>
