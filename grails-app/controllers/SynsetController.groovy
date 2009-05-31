@@ -175,7 +175,7 @@ class SynsetController extends BaseController {
     }
 
     /** Substring matches*/
-    def searchPartialResult(String term) {
+    private List searchPartialResult(String term) {
       //TODO: connect only once?!
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = "SELECT word FROM memwords WHERE word LIKE ? LIMIT 0, 10"
@@ -185,10 +185,14 @@ class SynsetController extends BaseController {
       def matches = []
       Pattern pattern = Pattern.compile(Pattern.quote(term), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
-        String result = resultSet.getString("word").encodeAsHTML()
+        String matchedTerm = resultSet.getString("word")
+        if (matchedTerm == term) {
+          continue
+        }
+        String result = matchedTerm.encodeAsHTML()
         Matcher m = pattern.matcher(result)
         result = m.replaceAll("<span class='match'>\$0</span>")
-        matches.add(result)
+        matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
       }
       resultSet.close()
       ps.close()
@@ -964,4 +968,10 @@ class SearchResult {
         this.synsetList = synsetList
         this.completeResult = completeResult
     }
+}
+
+/** Match of a substring search. */
+class PartialMatch {
+  String term
+  String highlightTerm
 }

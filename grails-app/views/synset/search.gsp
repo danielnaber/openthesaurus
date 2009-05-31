@@ -60,8 +60,11 @@
 					<h2><g:message code="result.partialmatches.headline"/></h2>
 					<ul>
 						<g:each in="${partialMatchResult}" var="term">
-							<li><g:link action="search" params="${[q: term]}">${term}</g:link></li>
+							<li><g:link action="search" params="${[q: term.term]}">${term.highlightTerm}</g:link></li>
 						</g:each>
+						<g:if test="${partialMatchResult.size() == 0}">
+							<li><g:message code="result.no.substring.matches"/></li>
+						</g:if>
 					</ul>
 				<td></td>
 				<td width="45%">
