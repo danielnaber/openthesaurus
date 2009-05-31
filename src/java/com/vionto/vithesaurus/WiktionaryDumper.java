@@ -1,0 +1,204 @@
+/**
+ * vithesaurus - web-based thesaurus management tool
+ * Copyright (C) 2009 vionto GmbH, www.vionto.com
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */ 
+package com.vionto.vithesaurus;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+
+/**
+ * Loads links from a Wiktionary XML dump and builds an SQL dump (for MySQL).
+ * Contains some filtering that's specific the German.
+ * 
+ * Get the XML dump from http://download.wikimedia.org/dewiktionary/latest/,
+ * the filename is something like "XXwiktionary-YYYYMMDD-pages-articles.xml.bz2",
+ * whereas XX is the language code (de, en, fr, etc).
+ * 
+ * @author Daniel Naber
+ */
+public class WiktionaryDumper {
+
+  /** Lines starting with this string indicate the "meanings" section in a Wiktionary page. */
+  private static final String MEANINGS_PREFIX = "{{Bedeutungen}}";
+
+  /** Lines starting with this string indicate the "synonyms" section in a Wiktionary page. */
+  private static final String SYNONYMS_PREFIX = "{{Synonyme}}";
+
+  /** String required in a document, other documents will be ignored. */
+  private static final String LANGUAGE_STRING = "{{Sprache|Deutsch}}";
+  
+  /** Lines starting with this string indicate a new section in a Wiktionary page. */
+  private static final String SECTION_PREFIX = "{{";
+
+  private WiktionaryDumper() {
+  }
+
+  private void run(final InputStream is) throws IOException, SAXException, ParserConfigurationException {
+    final WiktionaryPageHandler handler = new WiktionaryPageHandler();
+    final SAXParserFactory factory = SAXParserFactory.newInstance();
+    final SAXParser saxParser = factory.newSAXParser();
+    saxParser.getXMLReader().setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
+        false);  
+    System.out.println("SET NAMES utf8;");
+    System.out.println("DROP TABLE IF EXISTS wiktionary;");
+    System.out.println("CREATE TABLE `wiktionary` ( " + 
+        "`headword` varchar(255) NOT NULL default '', " + 
+        "`meanings` text, " + 
+        "`synonyms` text, " +
+        "KEY `headword` (`headword`)" +
+        ") ENGINE = MYISAM;");
+    saxParser.parse(is, handler);
+    System.err.println("Exported: " + handler.exported);
+    System.err.println("Skipped: " + handler.skipped);
+  }
+
+  /** Testing only.
+   */ 
+  public static void main(final String[] args) throws Exception {
+    if (args.length != 1) {
+      System.out.println("Usage: WiktionaryDumper <xmldump>");
+      System.exit(1);
+    }
+    WiktionaryDumper prg = new WiktionaryDumper();
+    prg.run(new FileInputStream(args[0]));
+  }
+
+  class WiktionaryPageHandler extends DefaultHandler {
+    
+    private final static int UNDEF = 0;
+    private final static int TITLE = 1;
+    private final static int TEXT = 2;
+    private int position = UNDEF;
+    
+    private int exported = 0;
+    private int skipped = 0;
+
+    private StringBuilder title = new StringBuilder();
+    private StringBuilder text = new StringBuilder();
+    
+    private int pageCount = 0;
+
+    public void warning (final SAXParseException e) throws SAXException {
+      throw e;
+    }
+    
+    public void error (final SAXParseException e) throws SAXException {
+      throw e;
+    }
+
+    @SuppressWarnings("unused")
+    public void startElement(String namespaceURI, String lName, 
+        String qName, Attributes attrs) {
+      if (qName.equals("title")) {
+        position = TITLE;
+      } else if (qName.equals("text")) {
+        position = TEXT;
+      } else {
+        position = UNDEF;
+      }
+    }
+     
+    @SuppressWarnings("unused")
+    public void endElement(String namespaceURI, String sName, String qName) {
+      if (qName.equals("title")) {
+        pageCount++;
+        if (title.indexOf(":") >= 0) {    // page in a namespace
+          title = new StringBuilder();
+        }
+        
+      } else if (qName.equals("text")) {
+        if (title.length() > 0) {
+          if (text.indexOf(LANGUAGE_STRING) == -1) {
+            skipped++;
+          } else {
+            List<String> meaningsList = getSection(text.toString(), MEANINGS_PREFIX);
+            String meanings = clean(join(meaningsList, " "));
+            List<String> synonymsList = getSection(text.toString(), SYNONYMS_PREFIX);
+            String synonyms = clean(join(synonymsList, " "));
+            System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
+                escape(title.toString()), escape(meanings), escape(synonyms));
+            exported++;
+          }
+        }
+        text = new StringBuilder();
+        title = new StringBuilder();
+      }
+      position = UNDEF;
+    }
+    
+    private String clean(String str) {
+      str = str.replaceAll("<!--.*?-->", "");
+      return str;
+    }
+
+    private List<String> getSection(final String text, final String prefix) {
+      List<String> synonyms = new ArrayList<String>();
+      Scanner scanner = new Scanner(text);
+      boolean inSynonymList = false;
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        if (line.trim().startsWith(prefix)) {
+          inSynonymList = true;
+        } else if (inSynonymList && line.trim().startsWith(SECTION_PREFIX)) {
+          // next section starts
+          break;
+        } else if (inSynonymList) {
+          synonyms.add(line);
+        }
+      }
+      scanner.close();
+      return synonyms;
+    }
+
+    private String escape(String str) {
+      return str.replace("'", "''");
+    }
+
+    public void characters(final char[] buf, final int offset, final int len) {
+      final String s = new String(buf, offset, len);
+      if (position == TITLE) {
+        title.append(s);
+      } else if (position == TEXT) {
+        text.append(s);
+      }
+    }
+
+    private String join(final List<String> list, final String delimiter) {
+      StringBuilder sb = new StringBuilder();
+      for (String element : list) {
+        sb.append(element);
+        sb.append(delimiter);
+      }
+      return sb.toString();
+    }
+
+  }
+
+}
