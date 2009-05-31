@@ -63,7 +63,7 @@ public class WikipediaLinkDumper {
   }
 
   private void run(final InputStream is) throws IOException, SAXException, ParserConfigurationException {
-    final PatternRuleHandler handler = new PatternRuleHandler();
+    final WikipediaPageHandler handler = new WikipediaPageHandler();
     final SAXParserFactory factory = SAXParserFactory.newInstance();
     final SAXParser saxParser = factory.newSAXParser();
     saxParser.getXMLReader().setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
@@ -97,7 +97,7 @@ public class WikipediaLinkDumper {
     prg.run(new FileInputStream(args[0]));
   }
 
-  class PatternRuleHandler extends DefaultHandler {
+  class WikipediaPageHandler extends DefaultHandler {
     
     private final static int UNDEF = 0;
     private final static int TITLE = 1;
