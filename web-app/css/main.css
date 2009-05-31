@@ -17,6 +17,11 @@ html * {
     text-align: center;
 }
 
+.logo a:hover {
+	background: none;
+    text-decoration: none;
+}
+
 .mainpage {
     text-align: center;
 }
@@ -27,20 +32,17 @@ html * {
 
 body {
     background: #fff;
-    color: #222;
     font: 11px verdana, arial, helvetica, sans-serif;
 }
 
 a:link, a:visited {
-    color: #444;
-    /*font-weight: bold;*/
+    /*color: #222;*/
     text-decoration: none;
 }
 
 a:hover {
-    color: #444;
-    background-color: #ddd;
-    /*font-weight: bold;*/
+    /*color: #222;*/
+    background-color: #eee;
     text-decoration: none;
 }
 
@@ -59,30 +61,6 @@ h2 {
 ul {
     padding-left: 15px;
 	list-style-image: url(../images/list-bullet.png);
-}
-
-input, select, textarea {
-    background-color: #fcfcfc;
-    border: 1px solid #ccc;
-    font: 11px verdana, arial, helvetica, sans-serif;
-    margin: 2px 0;
-    padding: 2px 4px;
-}
-input.submit {
-    background-color: #eee;
-    border: 1px solid #444;
-}
-select {
-   padding: 2px 2px 2px 0;
-}
-textarea {
-    width: 300px;
-    height: 120px;
-    vertical-align: top;
-}
-
-input:focus, select:focus, textarea:focus {
-    border: 1px solid #b2d1ff;
 }
 
 .body {
@@ -310,6 +288,11 @@ th.desc a {
 
 /* ---- */
 
+/* middot between words */
+.d {
+	color: #999999;
+}
+
 .preferredTerm {
     font-weight: bold;
 }
@@ -504,10 +487,13 @@ img {
     background: #5affa8;
 }
 
-/* highlight of the matches term after a search */
+/* highlight of the matched terms in a synset after a search */
+.match {
+}
+
+/* highlight of the matched term after a search */
 .match {
 	font-weight: bold;
-	color: #555;
 }
 
 .copyrightInfo {
