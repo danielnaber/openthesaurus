@@ -56,6 +56,7 @@
 			<table class="invisibletable" width="100%">
 			<tr>
 				<td width="45%">
+					
 					<h2><g:message code="result.partialmatches.headline"/></h2>
 					<ul>
 						<g:each in="${partialMatchResult}" var="term">
@@ -65,6 +66,17 @@
 							<li><g:message code="result.no.substring.matches"/></li>
 						</g:if>
 					</ul>
+
+					<h2><g:message code="result.similarmatches.headline"/></h2>
+					<ul>
+						<g:each in="${similarTerms}" var="term">
+							<li><g:link action="search" params="${[q: term]}">${term}</g:link></li>
+						</g:each>
+						<g:if test="${similarTerms.size() == 0}">
+							<li><g:message code="result.no.similar.matches"/></li>
+						</g:if>
+					</ul>
+					
 				<td></td>
 				<td width="45%">
 					

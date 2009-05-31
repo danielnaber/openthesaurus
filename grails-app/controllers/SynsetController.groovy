@@ -23,11 +23,15 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.PreparedStatement
+import org.apache.commons.lang.StringUtils
 
 class SynsetController extends BaseController {
 
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
+
+    // maximum distance for a term to be accepcted as similar term:
+    final int MAX_DIST = 3
 
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'edit', 'statistics', 'createMemoryDatabase']]
@@ -143,6 +147,11 @@ class SynsetController extends BaseController {
         long wiktionaryStartTime = System.currentTimeMillis()
         List wiktionaryResult = searchWiktionary(params.q)
         long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
+        
+        long similarStartTime = System.currentTimeMillis()
+        // TODO: use config option
+        List similarTerms = searchSimilarTerms(params.q, 5)
+        long similarTime = System.currentTimeMillis() - similarStartTime
 
         Section section = null
         Source source = null
@@ -176,10 +185,11 @@ class SynsetController extends BaseController {
           flash.message = ""
         }
         long totalTime = System.currentTimeMillis() - startTime
-        log.info("Search time total: ${totalTime}ms, partial match: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms")
+        log.info("Search time total: ${totalTime}ms, sim: ${similarTime}ms, substr: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms")
         [ partialMatchResult : partialMatchResult,
           wikipediaResult : wikipediaResult,
           wiktionaryResult : wiktionaryResult,
+          similarTerms : similarTerms,
           synsetList : searchResult.synsetList,
           totalMatches: searchResult.totalMatches,
           completeResult: searchResult.completeResult,
@@ -282,6 +292,52 @@ class SynsetController extends BaseController {
         matches.add(resultSet.getString("meanings"))
         matches.add(resultSet.getString("synonyms"))
         break; // we expect only one match
+      }
+      resultSet.close()
+      ps.close()
+      conn.close()
+      return matches
+    }
+    
+    def searchSimilarTerms(String term, int maxHits) {
+      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      String sql = """SELECT word, lookup FROM memwords 
+			WHERE ((
+				CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
+				OR
+				(
+				CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
+				ORDER BY word"""
+      PreparedStatement ps = conn.prepareStatement(sql)
+      int wordLength = term.length()
+      ps.setInt(1, wordLength-1)
+      ps.setInt(2, wordLength+1)
+      ps.setInt(3, wordLength-1)
+      ps.setInt(4, wordLength+1)
+      ResultSet resultSet = ps.executeQuery()
+      def matches = []
+      // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
+      while (resultSet.next()) {
+        String dbTerm = resultSet.getString("word").toLowerCase()
+        if (dbTerm.equalsIgnoreCase(term)) {
+          continue
+        }
+        int dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
+        if (dist <= MAX_DIST) {
+          matches.add(resultSet.getString("word"))
+        } else {
+          dbTerm = resultSet.getString("lookup")
+          if (dbTerm) {
+            dbTerm = dbTerm.toLowerCase()
+            dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
+            if (dist <= MAX_DIST) {
+              matches.add(resultSet.getString("word"))
+            }
+          }
+        }
+        if (matches.size() >= maxHits) {
+          break
+        }
       }
       resultSet.close()
       ps.close()
