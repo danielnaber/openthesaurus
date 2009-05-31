@@ -30,20 +30,7 @@ class SynsetController extends BaseController {
     final int UPPER_BOUND = 1000
 
     def beforeInterceptor = [action: this.&auth,
-                             except: ['list', 'search', 'edit', 'statistics', 'createMemoryDatabase']]
-
-    def index = {
-        if (params.id) {
-          // this is an ID from the PHP version of OpenThesaurus, we keep it working:
-          Synset synset = Synset.findByOriginalId(params.id)
-          if (synset == null) {
-            throw new Exception("No synset found with the given id ${params.id}")
-          }
-          redirect(controller:'synset', action:'edit', id: synset.id)
-          return
-        }
-        redirect(action:list,params:params)
-    }
+                             except: ['index', 'list', 'search', 'edit', 'statistics', 'createMemoryDatabase']]
 
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
@@ -51,6 +38,24 @@ class SynsetController extends BaseController {
     def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def dataSource       // will be injected
+
+    def index = {
+        if (params.id) {
+          // this is an ID from the PHP version of OpenThesaurus, we keep it working:
+          Synset synset = Synset.findByOriginalId(params.id)
+          if (synset == null) {
+            flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
+            response.sendError(404)
+            return
+          }
+          String url = g.createLink(controller:'synset', action:'edit', id: synset.id)
+          response.setHeader("Location", url)
+          // search engines expect 301 is a move is permanent:
+          response.sendError(301)
+          return
+        }
+        redirect(action:list,params:params)
+    }
 
     /**
      * Show page with statistics about the database, e.g. number of synsets.
