@@ -30,7 +30,7 @@
 	        	<g:link controller="about"><g:message code="homepage.about"/></g:link> &middot;
 	        	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> &middot;
 	        	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> &middot;
-	        	<g:link controller="about" action="news_archive"><g:message code="homepage.news_archive"/></g:link> &middot;
+	        	<g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link> &middot;
 	        	<g:link controller="about" action="topusers"><g:message code="homepage.top_users"/></g:link> 
 			</p>
 	
