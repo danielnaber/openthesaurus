@@ -131,12 +131,19 @@ class SynsetController extends BaseController {
      */
     def search = {
         long startTime = System.currentTimeMillis()
+        
         long partialMatchStartTime = System.currentTimeMillis()
         List partialMatchResult = searchPartialResult(params.q)
         long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
+        
         long wikipediaStartTime = System.currentTimeMillis()
         List wikipediaResult = searchWikipedia(params.q)
-        long wikipediatime = System.currentTimeMillis() - wikipediaStartTime
+        long wikipediaTime = System.currentTimeMillis() - wikipediaStartTime
+
+        long wiktionaryStartTime = System.currentTimeMillis()
+        List wiktionaryResult = searchWiktionary(params.q)
+        long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
+
         Section section = null
         Source source = null
         Category category = null
@@ -169,9 +176,10 @@ class SynsetController extends BaseController {
           flash.message = ""
         }
         long totalTime = System.currentTimeMillis() - startTime
-        log.info("Search time total: ${totalTime}ms partial match: ${partialMatchTime}ms, wikipedia: ${wikipediatime}ms")
+        log.info("Search time total: ${totalTime}ms, partial match: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms")
         [ partialMatchResult : partialMatchResult,
           wikipediaResult : wikipediaResult,
+          wiktionaryResult : wiktionaryResult,
           synsetList : searchResult.synsetList,
           totalMatches: searchResult.totalMatches,
           completeResult: searchResult.completeResult,
@@ -262,7 +270,25 @@ class SynsetController extends BaseController {
       conn.close()
       return matches
     }
-    
+
+    def searchWiktionary(String term) {
+      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
+      PreparedStatement ps = conn.prepareStatement(sql)
+      ps.setString(1, term)
+      ResultSet resultSet = ps.executeQuery()
+      def matches = []
+      while (resultSet.next()) {
+        matches.add(resultSet.getString("meanings"))
+        matches.add(resultSet.getString("synonyms"))
+        break; // we expect only one match
+      }
+      resultSet.close()
+      ps.close()
+      conn.close()
+      return matches
+    }
+
     /**
      * Internal implementation of the search via fulltext (currently disabled)
      * or database search via Hibernate query.
