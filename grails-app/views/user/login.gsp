@@ -7,9 +7,6 @@
     </head>
     <body>
 
-        <div class="logo"><a href="${createLinkTo(dir:'',file:'')}"><img border="0"
-            src="${createLinkTo(dir:'images',file:'thesaurus.png')}" alt="Thesaurus Logo" /></a></div>
-
         <div class="body">
             <h1>Login</h1>
             <g:if test="${flash.message}">
