@@ -39,7 +39,7 @@ class AboutController extends BaseController {
         []
     }
     
-    def news_archive = {
+    def newsarchive = {
         []
     }
 
