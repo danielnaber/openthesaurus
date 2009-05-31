@@ -1,4 +1,4 @@
-<a href="${createLinkTo(dir:'',file:'')}">Home</a> -
+<a href="${createLinkTo(dir:'',file:'')}"><g:message code="homepage.link"/></a> -
  <g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
 -
 <g:if test="${session.user}">
