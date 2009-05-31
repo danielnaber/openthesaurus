@@ -23,20 +23,20 @@
 	                        <li>
 			                    <g:set var="counter" value="${0}"/>
 	                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
+		                        	<g:set var="displayTerm" value="${term.toString()}"/>
 		                        	<g:if test="${counter == synset?.otherTerms()?.size() - 1}">
-			                        	<g:set var="displayTerm" value="${term.toString()}"/>
+			                        	<g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
 		                        	</g:if>
 		                        	<g:else>
-			                        	<g:set var="displayTerm" value="${term.toString()},"/>
+			                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
 		                        	</g:else>
 		                        	
 		                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
-	                                	<span class="match">${displayTerm.encodeAsHTML()}</span>
+	                                	<span class="synsetmatch">${displayTerm.encodeAsHTML()}</span>${delim}
 		                        	</g:if>
 		                        	<g:else>
-				                        <g:link action="search" params="${['q': term.toString()]}">
-		                                	${displayTerm.encodeAsHTML()}
-				                        </g:link>
+				                        <g:link action="search" params="${['q': term.toString()]}"
+				                        	>${displayTerm.encodeAsHTML()}</g:link>${delim}
 		                        	</g:else>
 		                        	
 			                        <g:set var="counter" value="${counter + 1}"/>
@@ -74,7 +74,7 @@
 						<% int i = 0; %>
 						<g:each in="${wikipediaResult}" var="term">
 							<g:if test="${i < wikipediaResult.size() - 1}">
-								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link> &middot;
+								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
 							</g:if>
 							<g:else>
 								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
@@ -95,6 +95,7 @@
 			</tr>
 			</table>			
 
+			<%--
             <g:if test="${totalMatches == 0 && params.q && !(params.q.endsWith('%') || params.q.endsWith('_')) }">
                 <br />
                 <g:set var="noJokerTerm" value="${params.q.trim().replaceAll('%$', '').replaceAll('_$', '')}" />
@@ -114,6 +115,7 @@
                     <b>Search for '${params.q.encodeAsHTML()}_'</b>
                 </g:link>
             </g:if>
+            --%>
 
             <br/>
             <p>
@@ -121,15 +123,13 @@
                     <g:set var="cleanTerm" value="${params.q.trim().replaceAll('[*%~]', '').replaceAll('[*_~]', '')}" />
                     <g:link action="create" params="[term : cleanTerm]">
                         <img src="../images/skin/database_add.png" alt="Add icon" />
-                        <b>Create a new concept with the term '${cleanTerm.encodeAsHTML()}'</b>
+                        <b><g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" /></b>
                     </g:link>
                 </g:if>
                 <g:else>
-                    <g:link action="create"><b>Create a new concept</b></g:link>
+                    <g:link action="create"><b><g:message code="result.create.new.synset"/></b></g:link>
                 </g:else>
             </p>
-
-            <p class="metaInfo" style="display:none"><br />Search time: ${runTime}ms</p>
 
         </div>
     </body>
