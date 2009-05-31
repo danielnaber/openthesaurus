@@ -34,9 +34,14 @@ class RedirectController extends BaseController {
     def worddetail = {
         Term term = Term.findByOriginalId(params.wmid)
         if (term == null) {
-          throw new Exception("No term found with the given id ${params.wmid}")
+          flash.message = message(code:'notfound.termid.not.found', args:[params.wmid.encodeAsHTML()])
+          response.sendError(404)
+          return
         }
-        response.sendRedirect(baseUrl + "term/edit/" + term.id)
+        String url = baseUrl + "term/edit/" + term.id
+        response.setHeader("Location", url)
+        // search engines expect 301 if a move is permanent:
+        response.sendError(301)
     }
 
 }

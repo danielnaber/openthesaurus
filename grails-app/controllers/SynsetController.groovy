@@ -50,7 +50,7 @@ class SynsetController extends BaseController {
           }
           String url = g.createLink(controller:'synset', action:'edit', id: synset.id)
           response.setHeader("Location", url)
-          // search engines expect 301 is a move is permanent:
+          // search engines expect 301 if a move is permanent:
           response.sendError(301)
           return
         }
