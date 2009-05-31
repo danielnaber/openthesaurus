@@ -3,13 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Matches for '${params.q.encodeAsHTML()}'</title>
+        <title><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></title>
     </head>
     <body>
 
         <div class="body">
 
-           <h1>Matches for '${params.q.encodeAsHTML()}'</h1>
+           <h1><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h1>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -52,7 +52,6 @@
 			</div>
 
 			<br />
-			<br />
 			
 			<table class="invisibletable" width="100%">
 			<tr>
@@ -68,6 +67,7 @@
 					</ul>
 				<td></td>
 				<td width="45%">
+					
 					<h2><g:message code="result.wikipedia.headline"/></h2>
 					<ul>
 						<li>
@@ -91,6 +91,47 @@
 							<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
 						</div>
 					</g:if>
+
+					<h2><g:message code="result.wiktionary.headline"/></h2>
+					<ul>
+						<%
+						clean =
+						  { str -> str
+						    .replaceAll(":\\[(\\d+)\\]", "__\$1__")
+						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+						    .replaceAll("__(\\d+)__", "<span class='wiktionary'>\$1.</span>")
+						  };
+						%>
+						<g:if test="${wiktionaryResult.size() == 0}">
+							<li><g:message code="result.no.wiktionary.matches"/></li>
+						</g:if>
+						<g:else>
+							<%
+							String meanings = wiktionaryResult.get(0).encodeAsHTML();
+							meanings = clean(meanings);
+							// TODO: make words links!
+							%>
+							<li><b><g:message code="result.wiktionary.meanings"/></b> ${meanings}</li>
+							<li><b><g:message code="result.wiktionary.synonyms"/></b>
+								<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+									<span class="light"><g:message code="result.none"/></span>
+								</g:if>
+								<g:else>
+									<%
+									String synonyms = wiktionaryResult.get(1).encodeAsHTML();
+									synonyms = clean(synonyms);
+									// TODO: make words links!
+									%>
+									${synonyms}</li>
+								</g:else>
+						</g:else>
+					</ul>
+					<g:if test="${wiktionaryResult.size() > 0}">
+						<div class="copyrightInfo">
+							<g:message code="result.wiktionary.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+						</div>
+					</g:if>
+					
 				</td>
 			</tr>
 			</table>			
@@ -123,11 +164,11 @@
                     <g:set var="cleanTerm" value="${params.q.trim().replaceAll('[*%~]', '').replaceAll('[*_~]', '')}" />
                     <g:link action="create" params="[term : cleanTerm]">
                         <img src="../images/skin/database_add.png" alt="Add icon" />
-                        <b><g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" /></b>
+                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
                     </g:link>
                 </g:if>
                 <g:else>
-                    <g:link action="create"><b><g:message code="result.create.new.synset"/></b></g:link>
+                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
                 </g:else>
             </p>
 
