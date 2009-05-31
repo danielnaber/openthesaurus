@@ -17,6 +17,8 @@
  */ 
 
 import com.vionto.vithesaurus.*
+import java.util.regex.Pattern
+import java.util.regex.Matcher
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -172,6 +174,7 @@ class SynsetController extends BaseController {
           runTime : totalTime ]
     }
 
+    /** Substring matches*/
     def searchPartialResult(String term) {
       //TODO: connect only once?!
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
@@ -180,8 +183,12 @@ class SynsetController extends BaseController {
       ps.setString(1, "%" + term + "%")
       ResultSet resultSet = ps.executeQuery()
       def matches = []
+      Pattern pattern = Pattern.compile(Pattern.quote(term), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
-        matches.add(resultSet.getString("word"))
+        String result = resultSet.getString("word").encodeAsHTML()
+        Matcher m = pattern.matcher(result)
+        result = m.replaceAll("<span class='match'>\$0</span>")
+        matches.add(result)
       }
       resultSet.close()
       ps.close()
