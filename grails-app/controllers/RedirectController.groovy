@@ -24,9 +24,13 @@ import java.net.URLEncoder
  */
 class RedirectController extends BaseController {
     
-    String baseUrl = "http://localhost:8080/vithesaurus/"
-
     def overview = {
+        String port = ""
+        if (request.getLocalPort() != 80) {
+          port = ":" + request.getLocalPort()
+        }
+        String baseUrl = 
+          request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
         String q = URLEncoder.encode(params.word, "UTF-8")
         response.sendRedirect(baseUrl + "synset/search?q=" + q)
     }
