@@ -8,8 +8,10 @@
     <body>
 
         <div class="body">
+        
+    	    <h1><g:message code="imprint.title" /></h1>
 
-		<g:message code="imprint.content"/>
+			<g:message code="imprint.content"/>
 		
 		</div>
 
