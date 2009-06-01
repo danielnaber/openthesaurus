@@ -35,7 +35,7 @@
 			</p>
 	
 			<!-- 
-			FIXME: A bis Z -  Zufallseinträge - Baumansicht - Österreichische Wörter - Schweizer Wörter
+			FIXME: Zufallseinträge - Baumansicht - Österreichische Wörter - Schweizer Wörter
 			 -->  
 			
 	        <p class="mainpage"><br />
@@ -43,6 +43,8 @@
 	            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link> &middot;
 	            <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
 	        </p>
+
+			<div class="homepagecredits"><g:message code="homepage.credits"/></div>
 
 			<div class="homepagead_bottom">
 	        	<g:render template="/ads/homepage_bottom"/>
