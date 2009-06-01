@@ -27,7 +27,13 @@
 	                        <li>
 			                    <g:set var="counter" value="${0}"/>
 	                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
-		                        	<g:set var="displayTerm" value="${term.toString()}"/>
+	                            	<g:if test="${term.level}">
+			                        	<g:set var="displayTerm" value="${term.toString() + ' (' + term.level?.shortLevelName + ')'}"/>
+	                            	</g:if>
+	                            	<g:else>
+			                        	<g:set var="displayTerm" value="${term.toString()}"/>
+	                            	</g:else>
+		                        	
 		                        	<g:if test="${counter == synset?.otherTerms()?.size() - 1}">
 			                        	<g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
 		                        	</g:if>
@@ -50,6 +56,8 @@
 	                   		</g:link>
 	                        </li>
 	                   </g:each>
+	                   
+	                   <g:render template="/ads/resultpage_results"/>
             </g:if>
             <g:else>
             		<li><span class="light"><g:message code="result.no.matches"/></span></li>
