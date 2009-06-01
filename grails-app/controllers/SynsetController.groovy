@@ -230,7 +230,7 @@ class SynsetController extends BaseController {
      */
     // TODO: use quartz
     def createMemoryDatabase= {
-      log.info("Creating in-memory database")
+      log.info("Creating in-memory database, request by " + request.getRemoteAddr())
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
       executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY", conn)
@@ -368,7 +368,6 @@ class SynsetController extends BaseController {
           }
           order('word', 'asc')
       }
-      log.info("##"+headline)
       [headline: headline, title: title, intro: intro,
        termList: termList]
     }
