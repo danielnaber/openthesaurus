@@ -34,7 +34,8 @@ class SynsetController extends BaseController {
     final int MAX_DIST = 3
 
     def beforeInterceptor = [action: this.&auth,
-                             except: ['index', 'list', 'search', 'edit', 'statistics', 'createMemoryDatabase']]
+                             except: ['index', 'list', 'search', 'edit', 'statistics',
+                                      'createMemoryDatabase', 'variation']]
 
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
@@ -175,12 +176,13 @@ class SynsetController extends BaseController {
         def searchResult = doSearch(params.q.trim(), section, source, category,
                 maxResults, offset)
         if (searchResult.totalMatches == 0) {
-          String msg = "No matches for '${params.q.encodeAsHTML()}'"
+          /*String msg = "No matches for '${params.q.encodeAsHTML()}'"
               msg += source ?
                       " in source '${source.encodeAsHTML()}'" : ""
               msg += category ?
                       " in category '${category.encodeAsHTML()}'" : ""
-          flash.message = msg
+          flash.message = msg*/
+          flash.message = ""
         } else {
           flash.message = ""
         }
@@ -343,6 +345,32 @@ class SynsetController extends BaseController {
       ps.close()
       conn.close()
       return matches
+    }
+    
+    def variation = {
+      String limit = ""
+      if (params.id == 'ch') {
+        limit = "schweiz."
+      } else if (params.id == 'at') {
+        limit = "österr."
+      } else {
+        throw new Exception("Unknown variation")
+      }
+      String headline = message(code:'variation.headline.' + params.id)
+      String title = message(code:'variation.title.' + params.id)
+      String intro = message(code:'variation.intro.' + params.id)
+      def termList = Term.withCriteria {
+          or {
+            ilike('word', "%" + limit + "%")
+          }
+          synset {
+              eq('isVisible', true)
+          }
+          order('word', 'asc')
+      }
+      log.info("##"+headline)
+      [headline: headline, title: title, intro: intro,
+       termList: termList]
     }
 
     /**

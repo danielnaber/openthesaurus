@@ -35,11 +35,13 @@
 			</p>
 	
 			<!-- 
-			FIXME: Zufallseinträge - Baumansicht - Österreichische Wörter - Schweizer Wörter
+			FIXME: Zufallseinträge - Baumansicht
 			 -->  
 			
 	        <p class="mainpage"><br />
 	            <g:link controller="term" action="list"><g:message code="a_to_z"/></g:link> &middot;
+	            <g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link> &middot;
+	            <g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link> &middot;
 	            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link> &middot;
 	            <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
 	        </p>
