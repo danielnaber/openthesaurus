@@ -9,16 +9,20 @@
 
         <div class="body">
 
-           <h1><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h1>
+			<div style="float:right">
+				<g:render template="/ads/resultpage"/>
+			</div>
+
+            <h1><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h1>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
             </g:if>
 
 			<div style="width:60%;border:1px">
+            <ul>
             <g:if test="${totalMatches > 0}">
 
-                   <ul>
 	                   <g:each in="${synsetList}" status="i" var="synset">
 	                        <li>
 			                    <g:set var="counter" value="${0}"/>
@@ -46,11 +50,13 @@
 	                   		</g:link>
 	                        </li>
 	                   </g:each>
-                   </ul>
-
             </g:if>
+            <g:else>
+            		<li><span class="light"><g:message code="result.no.matches"/></span></li>
+            </g:else>
+            </ul>
 			</div>
-
+			
 			<br />
 			
 			<table class="invisibletable" width="100%">
@@ -63,7 +69,7 @@
 							<li><g:link action="search" params="${[q: term.term]}">${term.highlightTerm}</g:link></li>
 						</g:each>
 						<g:if test="${partialMatchResult.size() == 0}">
-							<li><g:message code="result.no.substring.matches"/></li>
+							<li><span class="light"><g:message code="result.no.matches"/></span></li>
 						</g:if>
 					</ul>
 
@@ -73,7 +79,7 @@
 							<li><g:link action="search" params="${[q: term]}">${term}</g:link></li>
 						</g:each>
 						<g:if test="${similarTerms.size() == 0}">
-							<li><g:message code="result.no.similar.matches"/></li>
+							<li><span class="light"><g:message code="result.no.matches"/></span></li>
 						</g:if>
 					</ul>
 					
@@ -95,7 +101,7 @@
 						</g:each>
 						</li>
 						<g:if test="${wikipediaResult.size() == 0}">
-							<li><g:message code="result.no.wikipedia.matches"/></li>
+							<li><span class="light"><g:message code="result.no.wikipedia.matches"/></span></li>
 						</g:if>
 					</ul>
 					<g:if test="${wikipediaResult.size() > 0}">
@@ -115,7 +121,7 @@
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
-							<li><g:message code="result.no.wiktionary.matches"/></li>
+							<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
 						</g:if>
 						<g:else>
 							<%
