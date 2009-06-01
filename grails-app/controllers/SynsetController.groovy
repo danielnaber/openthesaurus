@@ -208,7 +208,7 @@ class SynsetController extends BaseController {
       ps.setString(1, "%" + term + "%")
       ResultSet resultSet = ps.executeQuery()
       def matches = []
-      Pattern pattern = Pattern.compile(Pattern.quote(term), Pattern.CASE_INSENSITIVE)
+      Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
         String matchedTerm = resultSet.getString("word")
         if (matchedTerm == term) {
