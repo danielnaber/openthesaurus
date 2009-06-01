@@ -11,7 +11,10 @@ class UrlMappings {
       
       // the search result page:
       "/overview"(controller:'redirect', action:'overview')
-      
+
+      // the "about" page:
+      "/background"(controller:'redirect', action:'gotoAbout')
+
       // the synset page:
       // name clash, must be handled in SynsetController
  

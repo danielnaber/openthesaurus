@@ -25,16 +25,18 @@ import java.net.URLEncoder
 class RedirectController extends BaseController {
     
     def overview = {
-        String port = ""
-        if (request.getLocalPort() != 80) {
-          port = ":" + request.getLocalPort()
-        }
-        String baseUrl = 
-          request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
+        String baseUrl = getBaseUrl()
         String q = URLEncoder.encode(params.word, "UTF-8")
         response.sendRedirect(baseUrl + "synset/search?q=" + q)
     }
 
+    def gotoAbout = {
+        String baseUrl = getBaseUrl()
+        response.setHeader("Location", baseUrl + "about/index")
+        // search engines expect 301 if a move is permanent:
+        response.sendError(301)
+    }
+    
     def worddetail = {
         Term term = Term.findByOriginalId(params.wmid)
         if (term == null) {
@@ -46,6 +48,16 @@ class RedirectController extends BaseController {
         response.setHeader("Location", url)
         // search engines expect 301 if a move is permanent:
         response.sendError(301)
+    }
+
+    private String getBaseUrl() {
+      String port = ""
+        if (request.getLocalPort() != 80) {
+          port = ":" + request.getLocalPort()
+        }
+        String baseUrl = 
+          request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
+        return baseUrl
     }
 
 }
