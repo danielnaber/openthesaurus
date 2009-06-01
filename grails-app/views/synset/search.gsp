@@ -21,49 +21,54 @@
 
 			<div style="width:60%;border:1px">
             <ul>
+            
             <g:if test="${totalMatches > 0}">
 
-	                   <g:each in="${synsetList}" status="i" var="synset">
-	                        <li>
-			                    <g:set var="counter" value="${0}"/>
-	                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
-	                            	<g:if test="${term.level}">
-			                        	<g:set var="displayTerm" value="${term.toString() + ' (' + term.level?.shortLevelName + ')'}"/>
-	                            	</g:if>
-	                            	<g:else>
-			                        	<g:set var="displayTerm" value="${term.toString()}"/>
-	                            	</g:else>
-		                        	
-		                        	<g:if test="${counter == synset?.otherTerms()?.size() - 1}">
-			                        	<g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
-		                        	</g:if>
-		                        	<g:else>
-			                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
-		                        	</g:else>
-		                        	
-		                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
-	                                	<span class="synsetmatch">${displayTerm.encodeAsHTML()}</span>${delim}
-		                        	</g:if>
-		                        	<g:else>
-				                        <g:link action="search" params="${['q': term.toString()]}"
-				                        	>${displayTerm.encodeAsHTML()}</g:link>${delim}
-		                        	</g:else>
-		                        	
-			                        <g:set var="counter" value="${counter + 1}"/>
-	                            </g:each>
+                   <g:each in="${synsetList}" status="i" var="synset">
+                        <li>
+		                    <g:set var="counter" value="${0}"/>
+                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
+                            	<g:if test="${term.level}">
+		                        	<g:set var="displayTerm" value="${term.toString() + ' (' + term.level?.shortLevelName + ')'}"/>
+                            	</g:if>
+                            	<g:else>
+		                        	<g:set var="displayTerm" value="${term.toString()}"/>
+                            	</g:else>
+	                        	
+	                        	<g:if test="${counter == synset?.otherTerms()?.size() - 1}">
+		                        	<g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
+	                        	</g:if>
+	                        	<g:else>
+		                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
+	                        	</g:else>
+	                        	
+	                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
+                                	<span class="synsetmatch">${displayTerm.encodeAsHTML()}</span>${delim}
+	                        	</g:if>
+	                        	<g:else>
+			                        <g:link action="search" params="${['q': term.toString()]}"
+			                        	>${displayTerm.encodeAsHTML()}</g:link>${delim}
+	                        	</g:else>
+	                        	
+		                        <g:set var="counter" value="${counter + 1}"/>
+                            </g:each>
 	                   		<g:link action="edit" id="${synset.id}">
 	                   			[edit]
-	                   		</g:link>
-	                        </li>
-	                   </g:each>
-	                   
-	                   <g:render template="/ads/resultpage_results"/>
+    	               		</g:link>
+                        </li>
+                   </g:each>
+                   
             </g:if>
             <g:else>
             		<li><span class="light"><g:message code="result.no.matches"/></span></li>
             </g:else>
+            
             </ul>
 			</div>
+
+            <g:if test="${totalMatches > 0}">
+             	<g:render template="/ads/resultpage_results"/>
+            </g:if>	
 			
 			<br />
 			
