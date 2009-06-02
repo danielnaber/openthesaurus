@@ -30,6 +30,17 @@ abstract class BaseController {
     }
 
     /**
+     * Allows access only for requests comming from 127.0.0.1
+     */
+    def localHostAuth() {
+        if (request.getRemoteAddr() == "127.0.0.1") {
+          return true
+        }
+        log.info("Access denied to no-access area for host " + request.getRemoteAddr() + ", " + request.getRequestURI())
+        return false
+    }
+
+    /**
      * Redirect and return false if user isn't authenticated. To be used
      * with beforeInterceptor action.
      */
