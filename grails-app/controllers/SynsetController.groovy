@@ -230,6 +230,10 @@ class SynsetController extends BaseController {
      */
     // TODO: use quartz
     def createMemoryDatabase= {
+      if (request.getRemoteAddr() != "127.0.0.1") {
+        throw new Exception("Access denied from " + request.getRemoteAddr())
+      }
+
       log.info("Creating in-memory database, request by " + request.getRemoteAddr())
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
