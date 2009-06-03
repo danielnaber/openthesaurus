@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Edit concept '${synset.toShortString()?.encodeAsHTML()}'</title>
+        <title><g:message code='edit.title' args="${[synset.toShortString()?.encodeAsHTML()]}"/>	</title>
         <script type="text/javascript">
         <!--
           var appletIsVisible = true;
@@ -68,7 +68,7 @@
 
         <div class="body">
 
-            <h1>Edit concept '${synset.toShortString()?.encodeAsHTML()}'</h1>
+			<h1><g:message code='edit.headline' args="${[synset.toShortString()?.encodeAsHTML()]}"/></h1>	
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -87,7 +87,7 @@
             </g:hasErrors>
 
             <g:if test="${!synset?.isVisible}">
-                <div class="warning">Note: this concept is not visible</div>
+                <div class="warning"><g:message code='edit.invisible'/></div>
             </g:if>
 
             <g:if test="${!session.user}">
@@ -102,7 +102,7 @@
                         <tbody class="${synset?.isVisible ? '' : 'deletedSynset'}">
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='terms'>Terms:</label>
+                                    <label for='terms'><g:message code='edit.terms'/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
@@ -137,10 +137,10 @@
 
                                             &nbsp;
                                             <g:if test="${t.isAcronym}">
-                                                <span class="termMetaInfo">[acronym]</span>
+                                                <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
                                             </g:if>
                                             <g:if test="${t.isShortForm}">
-                                                <span class="termMetaInfo">[abbreviation]</span>
+                                                <span class="termMetaInfo">[<g:message code='edit.shortform'/>]</span>
                                             </g:if>
                                             <g:if test="${t.level}">
                                                 <span class="termMetaInfo">[${t.level.toString()?.encodeAsHTML()}]</span>
@@ -179,7 +179,7 @@
 
                                   <g:if test="${session.user}">
                                     <div id="newTermLink">
-                                        <a href="#" onclick="javascript:showNewTerm();return false;">Add new terms</a>
+                                        <a href="#" onclick="javascript:showNewTerm();return false;"><g:message code='edit.add.terms'/></a>
                                     </div>
 
                                     <% int i = 0; %>
@@ -189,9 +189,9 @@
                                             <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                             <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                                             <br />
-                                            <label><g:radio id="wordFormCommon" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;common&nbsp;word</label>&nbsp;
-                                            <label><g:radio id="wordFormAcronym" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;acronym</label>&nbsp;
-                                            <label><g:radio id="wordFormAbbreviation" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;abbreviation</label>
+                                            <label><g:radio id="wordFormCommon" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAcronym" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAbbreviation" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.abbreviation'/></label>
                                             <br />
                                             <% i++ %>
                                             <br />
@@ -204,15 +204,15 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synsetLinks'>Categories:</label>
+                                    <label for='synsetLinks'><g:message code='edit.categories'/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
                                 <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
-                                    title="Select to delete category"/>
+                                    title="${message(code:'edit.category.delete')}"/>
                                 &nbsp;
                                 <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-                                    title="Select the preferred category" />
+                                    title="${message(code:'edit.category.prefer')}" />
                                 <ul>
                                 <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                     <li class="checkboxList">
@@ -230,7 +230,7 @@
                                 </g:each>
                                 </ul>
                                 <g:if test="${synset.categoryLinks == null || synset.categoryLinks.size() == 0}">
-                                (none)
+                                	<g:message code='edit.none'/>
                                 </g:if>
 
                                 </td>
@@ -245,12 +245,12 @@
                                      <%-- Change or add new category --%>
                                      <g:if test="${synset.preferredCategory.categoryName == 'Unknown'}">
                                          <div id="changeCategoryLink">
-                                            <a href="#" onclick="javascript:showChangeCategory();return false;">Change category</a>
+                                            <a href="#" onclick="javascript:showChangeCategory();return false;"><g:message code='edit.change.category'/></a>
                                          </div>
                                      </g:if>
                                      <g:else>
                                          <div id="newCategoryLink">
-                                             <a href="#" onclick="javascript:showNewCategory();return false;">Add categories</a>
+                                             <a href="#" onclick="javascript:showNewCategory();return false;"><g:message code='edit.add.categories'/></a>
                                          </div>
                                      </g:else>
 
@@ -285,12 +285,12 @@
                                     <tr class='prop'>
                                         <td valign='top' class='name'></td>
                                         <td valign='bottom' style="padding-bottom:0px">
-                                            <img src="${createLinkTo(dir:'images',file:'questionmark.png')}" alt="Question Mark"
-                                                title="Link of unknown status" />
-                                            <img src="${createLinkTo(dir:'images',file:'wrongway.png')}" alt="Wrong Way Sign"
-                                                title="Select to reject links" />
-                                            <img src="${createLinkTo(dir:'images',file:'smiley.png')}" alt="Smiley"
-                                                title="Select to approve links" />
+                                            <img src="${createLinkTo(dir:'images',file:'questionmark.png')}" alt="${message(code:'edit.question.mark')}"
+                                                title="${message(code:'edit.link.unknown.status')}" />
+                                            <img src="${createLinkTo(dir:'images',file:'wrongway.png')}" alt="${message(code:'edit.wrong.way.sign')}"
+                                                title="${message(code:'edit.select.reject.link')}" />
+                                            <img src="${createLinkTo(dir:'images',file:'smiley.png')}" alt="${message(code:'edit.smiley')}"
+                                                title="${message(code:'edit.select.approve.link')}" />
                                         </td>
                                     </tr>
                                 </g:if>
@@ -316,7 +316,7 @@
 
                             <tr class='prop'>
                                 <td class='name'>
-                                    <label for='section'>Thesaurus:</label>
+                                    <label for='section'><g:message code='edit.thesaurus'/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'section','errors')}'>
                                     <g:if test="${session.user}">
@@ -340,7 +340,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='userComment'>Comment:</label>
+                                    <label for='userComment'><g:message code='edit.comment'/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'userComment','errors')}'>
 
@@ -368,14 +368,16 @@
                                 </td>
                             </tr>
 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='source'>Source:</label>
-                                </td>
-                                <td valign='top' class='lessImportantValue'>
-                                    ${synset.source?.encodeAsHTML()}
-                                </td>
-                            </tr>
+                            <g:if test="${synset.source}">
+	                            <tr class='prop'>
+	                                <td valign='top' class='name'>
+	                                    <label for='source'><g:message code='edit.source'/></label>
+	                                </td>
+	                                <td valign='top' class='lessImportantValue'>
+	                                    ${synset.source?.encodeAsHTML()}
+	                                </td>
+	                            </tr>
+                            </g:if>
 
                             <g:if test="${showOrigSource}">
                                 <tr class='prop'>
@@ -391,6 +393,7 @@
                                 </tr>
                             </g:if>
 
+							<%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='source'>UMLS SemType:</label>
@@ -399,7 +402,9 @@
                                     ${synset.semTypeLinks?.join(', ').toString()?.encodeAsHTML()}
                                 </td>
                             </tr>
+                            --%>
 
+							<%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='source'>Evaluation:</label>
@@ -408,6 +413,7 @@
                                     ${synset.evaluation?.toString()?.encodeAsHTML()}
                                 </td>
                             </tr>
+                            --%>
                         </tbody>
 
                     </table>
@@ -417,7 +423,7 @@
 
                                 <tr class='prop'>
                                     <td valign='top' class='name'>
-                                        <label for='changeComment'>Change Comment:</label>
+                                        <label for='changeComment'><g:message code='edit.comment.for.change'/></label>
                                     </td>
                                     <td valign='top' class='value'>
                                         <input ${disabled} size="40" id="changeComment" type="text" name="changeComment" value="" />
@@ -431,7 +437,7 @@
 
                 <g:if test="${session.user}">
                     <div class="buttons" style="padding-right: 6px;">
-                        <span class="submitButton"><g:actionSubmit class="save" value="Update" /></span>
+                        <span class="submitButton"><g:actionSubmit class="save" value="${message(code:'edit.submit')}" /></span>
                     </div>
                 </g:if>
             </g:form>
@@ -439,14 +445,14 @@
             <g:if test="${eventList}">
                 <!-- is not always set, e.g. after error -->
                 <br />
-                <h1>Latest ${eventList.size()} changes in this concept</h1>
+                <h1><g:message code='edit.latest.changes' args='eventList.size()'/></h1>
 
                 <table>
                     <tr>
-                        <th>Date</th>
-                        <th>User</th>
-                        <th>Comment</th>
-                        <th>Change</th>
+                        <th><g:message code='edit.changelog.date'/></th>
+                        <th><g:message code='edit.changelog.user'/></th>
+                        <th><g:message code='edit.changelog.comment'/></th>
+                        <th><g:message code='edit.changelog.change'/></th>
                     </tr>
                     <g:each var='event' in='${eventList}' status='i'>
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
