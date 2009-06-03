@@ -421,7 +421,7 @@ class Synset implements Cloneable {
         if (terms.size() == 0) {
           return "[empty]"
         }
-        return sortedTerms().join(" | ")
+        return sortedTerms().join(" · ")
     }
 
     /**
@@ -495,8 +495,8 @@ class Synset implements Cloneable {
         if (terms.size() == 0) {
           return "[empty]"
         }
-        String termStr = terms[0..Math.min(terms.size()-1, maxSize-1)].join(" | ")
-        String suffix = terms.size() > maxSize ? " | ..." : ""
+        String termStr = terms[0..Math.min(terms.size()-1, maxSize-1)].join(" · ")
+        String suffix = terms.size() > maxSize ? " · ..." : ""
         return termStr + suffix
     }
 
