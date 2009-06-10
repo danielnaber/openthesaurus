@@ -13,6 +13,13 @@ and
 grails-app/conf/datasource-dev.properties,
 copy your JDBC database connector to the lib directory.
 
+A typical MySQL-based configuration for datasource.properties looks like this:
+dataSource.url=jdbc:mysql://127.0.0.1:3306/vithesaurus?useUnicode=true&characterEncoding=utf-8
+dataSource.driverClassName=com.mysql.jdbc.Driver
+dataSource.username=dbuser
+dataSource.password=xxx
+dataSource.dbCreate=update
+
 Use "grails war" to build a web application which can be
 deployed to a Java servlet container like Tomcat
 (http://tomcat.apache.org/). Use "grails run-app" to
