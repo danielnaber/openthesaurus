@@ -33,6 +33,7 @@ html * {
 body {
     background: #fff;
     font: 11px verdana, arial, helvetica, sans-serif;
+    margin-bottom: 30px;
 }
 
 a:link, a:visited {
@@ -293,13 +294,18 @@ th.desc a {
 	color: #999999;
 }
 
+/* when user input is displayed again */
+.inp {
+	color: #555555;
+}
+
 .preferredTerm {
     font-weight: bold;
 }
 
 li.checkboxList {
     list-style: none;
-    margin-left: -13px
+    margin-left: -13px;
 }
 
 input[type='text'] {
@@ -531,6 +537,10 @@ img {
 	margin-left: 25px;
 }
 
+.simplePage ul {
+	margin-bottom: 15px;
+}
+
 /* ads */
 .homepagead_right {
 	position: absolute;
@@ -547,4 +557,22 @@ img {
 }
 .adstext {
 	color: #777;
+}
+
+.wiktionary {
+	color: #999;
+	font-weight: bold;
+}
+
+.light {
+	color: #777;
+}
+
+.homepagecredits {
+	color: #999;
+	margin-top: 15px;
+	text-align: center;
+}
+.homepagecredits a {
+	color: #888888;
 }
