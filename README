@@ -1,11 +1,23 @@
 vithesaurus - a web-based thesaurus management tool
 Copyright (C) 2009 vionto GmbH, www.vionto.com
 
-vithesaurus is a web-based tool for the development and
-maintenance of thesauri and ontologies. It requires
-Grails 1.0.4 and is typically used with a stand-alone
-database (some non-basic features use Oracle-specific
+vithesaurus is a web-based tool for the development and maintenance of 
+thesauri and ontologies. It requires Grails 1.0.4 and is typically used
+with a stand-alone database (some non-basic features use Oracle-specific
 SQL syntax).
+
+
+BUILDING
+
+Use "grails war" to build a web application which can be deployed to a Java
+servlet container like Tomcat (http://tomcat.apache.org/). Use
+"grails run-app" to directly start the web-application in development mode.
+It is then available at http://localhost:8080/vithesaurus.
+
+More information about Grails can be found at http://www.grails.org.
+
+
+SETUP
 
 After configuring your database access in 
 grails-app/conf/datasource.properties
@@ -20,15 +32,19 @@ dataSource.username=dbuser
 dataSource.password=xxx
 dataSource.dbCreate=update
 
-Use "grails war" to build a web application which can be
-deployed to a Java servlet container like Tomcat
-(http://tomcat.apache.org/). Use "grails run-app" to
-directly start the web-application in development mode.
+The default administration account is "admin" with the password "admin" - make
+sure this is changed after your first login.
 
-More information about Grails is available at
-http://www.grails.org.
 
-License:
+DATA IMPORT
+
+Data from the old PHP version of OpenThesaurus can be imported by
+calling http://localhost:8080/vithesaurus/import/index. Please check
+the result carefully as it has only been tested with the German data
+so far.
+
+
+LICENSE
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
