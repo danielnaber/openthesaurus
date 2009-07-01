@@ -10,7 +10,7 @@ Oracle-specific SQL syntax).
 
 BUILDING
 
-You need Grails 1.0.4 (http://www.grails.org) when you want to build
+You need Grails 1.0.4 (http://www.grails.org) if you want to build
 vithesaurus on your own. 
 
 Use "grails war" to build a web application which can be deployed to a Java
