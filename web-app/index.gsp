@@ -1,4 +1,5 @@
 <%@ import page="com.vionto.vithesaurus.*" %>
+
 <html>
     <head>
         <title><g:message code="homepage.title"/></title>
@@ -25,8 +26,11 @@
 	        <g:render template="/searchform"/>
 	
 	        <br />
-	
+	        
 	        <p class="mainpage"><br />
+	            <g:if test="${session.user?.permission == 'admin'}">
+		    	    admin links: <g:link controller="user">user management</g:link><br /><br />
+	        	</g:if>
 	        	<g:link controller="about"><g:message code="homepage.about"/></g:link> &middot;
 	        	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> &middot;
 	        	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> &middot;
