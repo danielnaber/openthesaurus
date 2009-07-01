@@ -445,7 +445,7 @@
             <g:if test="${eventList}">
                 <!-- is not always set, e.g. after error -->
                 <br />
-                <h1><g:message code='edit.latest.changes' args='eventList.size()'/></h1>
+                <h1><g:message code='edit.latest.changes' args="${[eventList.size()]}"/></h1>
 
                 <table>
                     <tr>
