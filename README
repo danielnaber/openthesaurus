@@ -2,34 +2,36 @@ vithesaurus - a web-based thesaurus management tool
 Copyright (C) 2009 vionto GmbH, www.vionto.com
 
 vithesaurus is a web-based tool for the development and maintenance of 
-thesauri and ontologies. It requires Grails 1.0.4 and is typically used
-with a stand-alone database (some non-basic features use Oracle-specific
-SQL syntax).
+thesauri and ontologies. It requires a Java application server or
+servlet container (e.g. Apache Tomcat, http://tomcat.apache.org) and is
+typically used with a stand-alone database (some non-basic features use
+Oracle-specific SQL syntax).
 
 
 BUILDING
 
-Use "grails war" to build a web application which can be deployed to a Java
-servlet container like Tomcat (http://tomcat.apache.org/). Use
-"grails run-app" to directly start the web-application in development mode.
-It is then available at http://localhost:8080/vithesaurus.
+You need Grails 1.0.4 (http://www.grails.org) when you want to build
+vithesaurus on your own. 
 
-More information about Grails can be found at http://www.grails.org.
+Use "grails war" to build a web application which can be deployed to a Java
+servlet container like Tomcat. Use "grails run-app" to directly start the
+web-application in development mode. It is then available at
+http://localhost:8080/vithesaurus.
 
 
 SETUP
 
 After configuring your database access in 
-grails-app/conf/datasource.properties
-and
-grails-app/conf/datasource-dev.properties,
-copy your JDBC database connector to the lib directory.
+grails-app/conf/datasource.properties (production environment)
+and/or grails-app/conf/datasource-dev.properties (development environment),
+copy your JDBC database connector to the "lib" directory.
 
 A typical MySQL-based configuration for datasource.properties looks like this:
+
 dataSource.url=jdbc:mysql://127.0.0.1:3306/vithesaurus?useUnicode=true&characterEncoding=utf-8
 dataSource.driverClassName=com.mysql.jdbc.Driver
 dataSource.username=dbuser
-dataSource.password=xxx
+dataSource.password=xyz
 dataSource.dbCreate=update
 
 The default administration account is "admin" with the password "admin" - make
