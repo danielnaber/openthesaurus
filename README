@@ -22,7 +22,7 @@ http://localhost:8080/vithesaurus.
 SETUP
 
 After configuring your database access in 
-grails-app/conf/datasource.properties (production environment)
+WEB-INF/classes/datasource.properties (production environment)
 and/or grails-app/conf/datasource-dev.properties (development environment),
 copy your JDBC database connector to the "lib" directory.
 
