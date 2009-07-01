@@ -8,20 +8,38 @@
     <body>
 
         <div class="body">
-
+        
 <!-- NOTE: -->
 <!-- THIS CONTENT IS SPECIFIC TO WWW.OPENTHESAURUS.DE -->
 
-<p>OpenThesaurus ist ein deutscher Thesaurus (Synonymwörterbuch) und ein
-<a href="http://de.wikipedia.org/wiki/Wortnetz_(Computerlinguistik)">Wortnetz</a>. Es
-besteht ähnlich wie <a href="http://wordnet.princeton.edu/">WordNet</a> aus Synonymgruppen, also
-Wortgruppen mit Wörtern der gleichen Bedeutung, z.B. <span class="bsp">Samstag, Sonnabend</span>.
-Zwischen diesen Synonymgruppen bestehen Beziehungen wie "ist Oberbegriff von", wobei
-OpenThesaurus nicht alle von WordNet bekannten Beziehungen unterstützt.</p>
+<div class="aboutpage">
 
-<div class="simplePage">
+<p>OpenThesaurus ist eine interaktive Website zur Pflege eines deutschsprachigen Synonymwörterbuchs.
+Man kann damit Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert
+die <a href="../synset/search?q=falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
+verkehrt</span> als Synonyme.</p>
 
-<p><strong>Änderungen und News zu OpenThesaurus:</strong></p>
+<p>Jeder kann bei OpenThesaurus mitmachen und Fehler korrigieren 
+oder neue Synonyme einfügen. Die Suchfunktion zeigt alle Bedeutungen,
+in denen ein Wort vorkommt (z.B. <span class="bsp">roh</span> -&gt; <span class="bsp">roh, ungekocht</span> 
+und einen anderen Eintrag für <span class="bsp">roh, rau, grob, unsanft</span>). Bei 
+den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen 
+und neue hinzufügen. Findet die Suche keine Treffer, wird ein Link 
+angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
+
+<!-- 
+<p>Zur Mitarbeit ist eine <a
+href="register.php">Registrierung</a> erforderlich.
+Vorher sollte man diese FAQ zu Ende lesen, um die
+wichtigsten Regeln für das Ändern und Einfügen von
+Wörtern zu kennen. Man sollte auch verstehen, 
+wie die Thesaurusdaten hier
+strukturiert sind - nämlich nach Bedeutungen. Wenn es also
+von einem Wort wie <span class="bsp">Bank</span> mehrere
+Bedeutungen gibt, so muss <em>pro Bedeutung ein Eintrag</em> existieren.</p>
+ -->
+
+<h2>Änderungen und News zu OpenThesaurus</h2>
 
 <ul>
 	<li><a href="feed.xml">RSS-Feed aller Aktualisierungen an den Daten</a></li>
@@ -32,7 +50,7 @@ OpenThesaurus nicht alle von WordNet bekannten Beziehungen unterstützt.</p>
 	</li>			
 </ul>
 
-<p><strong>Papers über OpenThesaurus:</strong></p>
+<h2>Papers über OpenThesaurus</h2>
 
 <ul>
 	<li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
@@ -40,7 +58,7 @@ OpenThesaurus nicht alle von WordNet bekannten Beziehungen unterstützt.</p>
 	<li><a href="download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
 </ul>
 
-<p><strong>OpenThesaurus auf dem Mac:</strong></p>
+<h2>OpenThesaurus auf dem Mac</h2>
 
 <ul>
     <li><a href="http://www.tekl.de/deutsch/OpenThesaurus_Deutsch.html">Wörterbuch-Plugin (ab Mac OS X 10.5) von Wolfgang Reszel</a></li>
@@ -48,13 +66,7 @@ OpenThesaurus nicht alle von WordNet bekannten Beziehungen unterstützt.</p>
     <li><a href="http://www.mathematik.uni-marburg.de/~schmidtm/thesaurus/index.php">Dashboard-Widget von Matthias Schmidt</a></li>
 </ul>
 
-<p><strong>Sourcecode dieser Website:</strong></p>
-
-<ul>
-    <li><a href="http://sourceforge.net/projects/openthesaurus/">Projekt auf Sourceforge</a></li>
-</ul>
-
-<p><strong>OpenThesaurus in anderen Sprachen:</strong></p>
+<h2>OpenThesaurus in anderen Sprachen</h2>
 
 <ul>
 	<li><a href="http://www.opentaal.org/opentaalbank/thesaurus">Niederländisch</a></li>
@@ -66,12 +78,10 @@ OpenThesaurus nicht alle von WordNet bekannten Beziehungen unterstützt.</p>
           <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
 </ul>
 
-<p><strong>W&ouml;rterb&uuml;cher Deutsch/Englisch:</strong></p>
+<h2>Basis dieser Website</h2>
 
 <ul>
-	<li><a href="http://www.vokabelsalat.de/">vokabelsalat.de</a></li>
-	<li><a href="http://dict.tu-chemnitz.de/">dict.tu-chemnitz.de</a></li>
-	<li><a href="http://www.dict.cc/">dict.cc</a></li>
+    <li><a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus auf Sourceforge</a></li>
 </ul>
 
 </div>

@@ -576,3 +576,36 @@ img {
 .homepagecredits a {
 	color: #888888;
 }
+
+/* FAQ: */
+.faqpage {
+	margin-left: 25px;
+	width: 65%;
+}	
+.faqitem .question {
+	font-weight: bold;
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+.faqitem .answer {
+	margin-left: 10px;
+}
+.faqitem .answer ul {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+/* About: */
+.aboutpage {
+	margin-left: 25px;
+	width: 65%;
+}	
+
+/* global */
+p {
+	margin-bottom: 10px;
+}
+.bsp {
+	color: #888888;
+	font-weight: bold;
+}
