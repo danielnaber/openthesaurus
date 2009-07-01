@@ -99,77 +99,81 @@
 				<td></td>
 				<td width="45%">
 					
-					<h2><g:message code="result.wikipedia.headline"/></h2>
-					<ul>
-						<li>
-						<% int i = 0; %>
-						<g:each in="${wikipediaResult}" var="term">
-							<g:if test="${i < wikipediaResult.size() - 1}">
-								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
+					<g:if test="${wikipediaResult}">
+						<h2><g:message code="result.wikipedia.headline"/></h2>
+						<ul>
+							<li>
+							<% int i = 0; %>
+							<g:each in="${wikipediaResult}" var="term">
+								<g:if test="${i < wikipediaResult.size() - 1}">
+									<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
+								</g:if>
+								<g:else>
+									<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
+								</g:else>
+								<% i++; %>
+							</g:each>
+							</li>
+							<g:if test="${wikipediaResult.size() == 0}">
+								<li><span class="light"><g:message code="result.no.wikipedia.matches"/></span></li>
 							</g:if>
-							<g:else>
-								<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
-							</g:else>
-							<% i++; %>
-						</g:each>
-						</li>
-						<g:if test="${wikipediaResult.size() == 0}">
-							<li><span class="light"><g:message code="result.no.wikipedia.matches"/></span></li>
+						</ul>
+						<g:if test="${wikipediaResult.size() > 0}">
+							<div class="copyrightInfo">
+								<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+							</div>
 						</g:if>
-					</ul>
-					<g:if test="${wikipediaResult.size() > 0}">
-						<div class="copyrightInfo">
-							<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
-						</div>
 					</g:if>
 
-					<h2><g:message code="result.wiktionary.headline"/></h2>
-					<ul>
-						<%
-						clean =
-						  { str -> str
-						    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
-						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
-						    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
-						  };
-						%>
-						<g:if test="${wiktionaryResult.size() == 0}">
-							<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
-						</g:if>
-						<g:else>
+					<g:if test="${wiktionaryResult}">
+						<h2><g:message code="result.wiktionary.headline"/></h2>
+						<ul>
 							<%
-							String meanings = wiktionaryResult.get(0).encodeAsHTML();
-							meanings = clean(meanings);
-							// TODO: make words links!
+							clean =
+							  { str -> str
+							    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
+							    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+							    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
+							  };
 							%>
-							<li><b><g:message code="result.wiktionary.meanings"/></b>
-								<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
-									<span class="light"><g:message code="result.none"/></span>
-									<g:set var="emptyMeanings" value="${true}"/>
-								</g:if>
-								<g:else>
-									${meanings}
-								</g:else>
-							</li>
-							<li><b><g:message code="result.wiktionary.synonyms"/></b>
-								<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
-									<span class="light"><g:message code="result.none"/></span>
-									<g:set var="emptySynonyms" value="${true}"/>
-								</g:if>
-								<g:else>
-									<%
-									String synonyms = wiktionaryResult.get(1).encodeAsHTML();
-									synonyms = clean(synonyms);
-									// TODO: make words links!
-									%>
-									${synonyms}</li>
-								</g:else>
-						</g:else>
-					</ul>
-					<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
-						<div class="copyrightInfo">
-							<g:message code="result.wiktionary.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
-						</div>
+							<g:if test="${wiktionaryResult.size() == 0}">
+								<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
+							</g:if>
+							<g:else>
+								<%
+								String meanings = wiktionaryResult.get(0).encodeAsHTML();
+								meanings = clean(meanings);
+								// TODO: make words links!
+								%>
+								<li><b><g:message code="result.wiktionary.meanings"/></b>
+									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+										<span class="light"><g:message code="result.none"/></span>
+										<g:set var="emptyMeanings" value="${true}"/>
+									</g:if>
+									<g:else>
+										${meanings}
+									</g:else>
+								</li>
+								<li><b><g:message code="result.wiktionary.synonyms"/></b>
+									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+										<span class="light"><g:message code="result.none"/></span>
+										<g:set var="emptySynonyms" value="${true}"/>
+									</g:if>
+									<g:else>
+										<%
+										String synonyms = wiktionaryResult.get(1).encodeAsHTML();
+										synonyms = clean(synonyms);
+										// TODO: make words links!
+										%>
+										${synonyms}</li>
+									</g:else>
+							</g:else>
+						</ul>
+						<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
+							<div class="copyrightInfo">
+								<g:message code="result.wiktionary.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+							</div>
+						</g:if>
 					</g:if>
 					
 				</td>

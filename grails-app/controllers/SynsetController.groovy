@@ -271,6 +271,9 @@ class SynsetController extends BaseController {
     }    
 
     def searchWikipedia(String term) {
+      if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
+        return null
+      }
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
 		WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
@@ -288,6 +291,9 @@ class SynsetController extends BaseController {
     }
 
     def searchWiktionary(String term) {
+      if (grailsApplication.config.thesaurus.wiktionaryLinks != "true") {
+        return null
+      }
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
       PreparedStatement ps = conn.prepareStatement(sql)
