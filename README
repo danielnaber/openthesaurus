@@ -37,6 +37,11 @@ dataSource.dbCreate=update
 The default administration account is "admin" with the password "admin" - make
 sure this is changed after your first login.
 
+For now, an in-memory database needs to be set up and updated regularly by
+calling "synset/createMemoryDatabase" before vithesaurus can be used.
+This can be done by calling a command like this:
+curl -I http://localhost:8080/vithesaurus/synset/createMemoryDatabase
+
 
 DATA IMPORT
 
