@@ -57,6 +57,7 @@ class Term implements Comparable, Cloneable {
         userComment(nullable:true)
         wordGrammar(nullable:true)
         normalizedWord(nullable:true)
+        originalId(nullable:true)
     }
 
     static mapping = {
