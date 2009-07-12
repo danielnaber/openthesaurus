@@ -4,8 +4,8 @@ Copyright (C) 2009 vionto GmbH, www.vionto.com
 vithesaurus is a web-based tool for the development and maintenance of 
 thesauri and ontologies. It requires a Java application server or
 servlet container (e.g. Apache Tomcat, http://tomcat.apache.org) and is
-typically used with a stand-alone database (some non-basic features use
-Oracle-specific SQL syntax).
+typically used with MySQL as a stand-alone database (other databases may
+work but have not been tested).
 
 
 BUILDING
@@ -41,6 +41,12 @@ For now, an in-memory database needs to be set up and updated regularly by
 calling "synset/createMemoryDatabase" before vithesaurus can be used.
 This can be done by calling a command like this:
 curl -I http://localhost:8080/vithesaurus/synset/createMemoryDatabase
+
+For bigger data sets it might be necessary to created indexes manually in
+your database:
+ ALTER TABLE `term` ADD INDEX ( `word` ) 
+ ALTER TABLE `term` ADD INDEX ( `normalized_word` ) 
+ ALTER TABLE `synset` ADD INDEX ( `is_visible` ) 
 
 
 DATA IMPORT
