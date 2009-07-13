@@ -4,18 +4,18 @@
 environments {
     test {
         grails.config.locations = [ "classpath:datasource-test.properties",
-                "vithesaurus.properties" ]
+                "classpath:vithesaurus.properties" ]
     }
     development {
         grails.config.locations = [ "classpath:datasource-dev.properties",
-                "vithesaurus.properties" ]
+                "classpath:vithesaurus.properties" ]
     }
     production {
         grails.config.locations = [ "classpath:datasource.properties",
-                "vithesaurus.properties" ]
+                "classpath:vithesaurus.properties" ]
     }
 }
-                            
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
