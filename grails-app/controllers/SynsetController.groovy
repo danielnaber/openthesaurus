@@ -391,6 +391,8 @@ class SynsetController extends BaseController {
             int max = -1, int offset = 0) {
         // currently we always use DB search, not fulltext search
         // because it was too slow on indexing:
+        log.info("search for ${query} (section:${section}, source:${source}, " +
+                "category:${category})")
         return doDBSearch(query, section, source, category, max, offset)
     }
 
@@ -400,13 +402,13 @@ class SynsetController extends BaseController {
      */
     def doDBSearch(String query, Section section, Source source,
             Category category, int max = -1, int offset = 0) {
-        log.info("DB search for ${query} (section:${section}, source:${source}, " +
-                "category:${category})")
         String sortField = params.sort ? params.sort : "synsetPreferredTerm"
         String sortOrder = params.order ? params.order : "asc"
 
         boolean completeResult = false
 
+        //long t = System.currentTimeMillis()
+        
         // TODO: why don't we use Synset.withCriteria here, it would
         // free us from the need to remove duplicates manually
         // => there's a bug(?) so that the synsets are incomplete,
@@ -415,8 +417,9 @@ class SynsetController extends BaseController {
         // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
         def termList = Term.withCriteria {
             or {
-              ilike('word', query)
-              ilike('normalizedWord', Term.normalize(query))
+              // FIXME: this should be "ilike" but it slows down querying with MySQL:
+              like('word', query)
+              like('normalizedWord', Term.normalize(query))
             }
             synset {
                 if (section) {
@@ -442,6 +445,9 @@ class SynsetController extends BaseController {
         if (totalMatches < UPPER_BOUND) {
             completeResult = true
         }
+        
+        //log.info(">>"+(System.currentTimeMillis()-t) + "ms")
+        
         def synsetList = []
         Set ids = new HashSet()
         int i = 0
