@@ -27,8 +27,7 @@ class ExportOxtController extends BaseController {
   def beforeInterceptor = [action: this.&localHostAuth]
   String encoding = "UTF-8"
   def run = {
-
-      File tmpFile = File.createTempFile("openthesaurus.dat", "")
+      File tmpFile = File.createTempFile("openthesaurus.dat", "")
       log.info("Writing data export for OXT to " + tmpFile)
       FileWriter fw = new FileWriter(tmpFile)
       BufferedWriter bw = new BufferedWriter(fw);
@@ -44,13 +43,11 @@ class ExportOxtController extends BaseController {
         synset {
             eq('isVisible', true)
         }
-        order("word", "asc")
-      }      bwIdx.write(termList.size() + "\n")            List allWords = []      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        allWords.add(normTerm)      }      allWords = allWords.sort()                
+        order("word", "asc")      }      bwIdx.write(termList.size() + "\n")      Set allWordsSet = new HashSet()	// to avoid dupes      List allWords = []      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        // avoid duplicates here:        if (!allWordsSet.contains(normTerm)) {          allWords.add(normTerm)        }        allWordsSet.add(normTerm)      }      Collections.sort(allWords, String.CASE_INSENSITIVE_ORDER)                
       log.info("Exporting " + termList.size() + " terms")
       int count = 0
       SynsetController ctrl = new SynsetController()
-      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null);
-        log.info(count + ". res = " +result.totalMatches + " " + (System.currentTimeMillis()-t) + "ms")
+      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null);        if (count % 20 == 0) {          log.error(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
         bwIdx.write(word.toLowerCase() + "|" + indexPos + "\n")        indexPos = dataWrite(word.toLowerCase() + "|" + result.totalMatches + "\n", bw, indexPos)
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
@@ -59,8 +56,8 @@ class ExportOxtController extends BaseController {
             if (sortedTerm.word != word) {
               indexPos = dataWrite("|" + sortedTerm.word, bw, indexPos);            }
           }
-        }
-        indexPos = dataWrite("\n", bw, indexPos);        //if (count > 10) {
+          indexPos = dataWrite("\n", bw, indexPos);        }
+        //if (count > 1000) {
         //  break
         //}
         count++
@@ -71,7 +68,7 @@ class ExportOxtController extends BaseController {
       bwIdx.close()
       fwIdx.close()
       log.info("Export done")      
-      render "OK"
+      render "OK: " + grailsApplication.config.thesaurus.export.oxt.output
             createZip(tmpFile, tmpFileIdx)
       tmpFile.delete()      tmpFileIdx.delete()  }
   
