@@ -8,23 +8,13 @@ typically used with MySQL as a stand-alone database (other databases may
 work but have not been tested).
 
 
-BUILDING
+SETUP FOR USERS WHO INSTALL THE *.WAR FILE
 
-You need Grails 1.0.4 (http://www.grails.org) if you want to build
-vithesaurus on your own. 
+The vithesaurus.war file needs to be deployed to your servlet container.
+Please refer to the container's documentation on how to do that.
 
-Use "grails war" to build a web application which can be deployed to a Java
-servlet container like Tomcat. Use "grails run-app" to directly start the
-web-application in development mode. It is then available at
-http://localhost:8080/vithesaurus.
-
-
-SETUP
-
-After configuring your database access in 
-WEB-INF/classes/datasource.properties (production environment)
-and/or grails-app/conf/datasource-dev.properties (development environment),
-copy your JDBC database connector to the "lib" directory.
+Configure your database access in WEB-INF/classes/datasource.properties 
+and copy your JDBC database connector JAR file to the "WEB-INF/lib" directory.
 
 A typical MySQL-based configuration for datasource.properties looks like this:
 
@@ -34,8 +24,13 @@ dataSource.username=dbuser
 dataSource.password=xyz
 dataSource.dbCreate=update
 
+With the settings, the database "vithesaurus" needs to be created first manually
+using the database's tools. The tables will be automatically created by vithesaurus
+on its first startup.
+
 The default administration account is "admin" with the password "admin" - make
-sure this is changed after your first login.
+sure this is changed after your first login. If you are logged in as admin, the
+vithesaurus homepage will show a link to the administration page. 
 
 For now, an in-memory database needs to be set up and updated regularly by
 calling "synset/createMemoryDatabase" before vithesaurus can be used.
@@ -43,10 +38,24 @@ This can be done by calling a command like this:
 curl -I http://localhost:8080/vithesaurus/synset/createMemoryDatabase
 
 For bigger data sets it might be necessary to created indexes manually in
-your database:
+your database (later versions of vithesaurus might do this automatically):
  ALTER TABLE `term` ADD INDEX ( `word` ) 
  ALTER TABLE `term` ADD INDEX ( `normalized_word` ) 
  ALTER TABLE `synset` ADD INDEX ( `is_visible` ) 
+
+
+BUILDING
+
+If you want to build vithsaurus on your own you will need
+Grails 1.1.1 (http://www.grails.org) 
+
+For development, your database needs to be configured in
+grails-app/conf/datasource-dev.properties. Use "grails run-app"
+to directly start the web-application in development mode. It is
+then available at http://localhost:8080/vithesaurus.
+
+Use "grails war" to build a web application which can be deployed to a Java
+servlet container like Tomcat.
 
 
 DATA IMPORT
