@@ -29,7 +29,7 @@
 	        
 	        <p class="mainpage"><br />
 	            <g:if test="${session.user?.permission == 'admin'}">
-		    	    admin links: <g:link controller="user">user management</g:link><br /><br />
+		    	    <g:link controller="admin">special admin links</g:link><br /><br />
 	        	</g:if>
 	        	<g:link controller="about"><g:message code="homepage.about"/></g:link> &middot;
 	        	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> &middot;

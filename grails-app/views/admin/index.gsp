@@ -11,7 +11,6 @@
 		
         <p>
         Manage:
-        <g:link controller="csvImport" action="index">Import</g:link> |
         <g:link controller="user" action="list">Users</g:link> |
         <g:link controller="language" action="list">Languages</g:link> |
         <g:link controller="source" action="list">Sources</g:link> |
@@ -20,24 +19,18 @@
         <g:link controller="linkType" action="list">Synset Link Types</g:link> |
         <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
         <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
-        <!-- <g:link controller="semType" action="list">SemTypes</g:link> | -->
         <g:link controller="section" action="list">Thesauri</g:link> |
-        <g:link controller="export" action="run">Export</g:link> |
         <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link><br />
 
-        Concept Checks:
-        <g:link controller="synsetSuggestion" action="index">Suggestions</g:link> |
-        <g:link controller="check" action="listInvisibleSynsets">Invisible</g:link> |
-        <!-- <g:link controller="check" action="listHypernymSynsets">Hypernyms</g:link> | -->
-        <g:link controller="check" action="listEmptySynsets">No Terms</g:link> |
-        <g:link controller="check" action="listNoPreferredTermSynsets">No Preferred Terms</g:link> |
-        <g:link controller="check" action="listNoCategorySynsets">No Category</g:link>
-        <!-- comment out because it's too slow for the common user:
-        | <g:link controller="check" action="validateSynsets">Validate Synsets</g:link>
-         -->
+        Export:
+        <g:link controller="exportOxt" action="run">Export OXT (slow for large data sets)</g:link>
         <br />
+
+        Lists:
+        <g:link controller="check" action="listInvisibleSynsets">Invisible</g:link>
+        <br />
+
         Term Checks:
-        <g:link controller="check" action="listUppercaseTerms">Uppercase-Only</g:link> |
         <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
 
         </div>
