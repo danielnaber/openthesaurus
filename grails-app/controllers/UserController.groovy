@@ -28,7 +28,7 @@ class UserController extends BaseController {
     }
 
     // the delete, save and update actions only accept POST requests
-    def allowedMethods = [delete:'POST', save:'POST', update:'POST']
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     /**
      * Show login page for GET request, handle login (authenticate + redirect)

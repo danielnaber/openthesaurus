@@ -40,7 +40,7 @@ class SynsetController extends BaseController {
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
     // the delete, save and update actions only accept POST requests
-    def allowedMethods = [delete:'POST', save:'POST', update:'POST']
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def dataSource       // will be injected
 

@@ -26,4 +26,8 @@ class ThesaurusConfigurationEntry {
     String key
     String value
 
+    static mapping = {
+      key column:"keycol"
+    }
+
 }

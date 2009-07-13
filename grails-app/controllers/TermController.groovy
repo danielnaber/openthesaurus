@@ -24,7 +24,7 @@ class TermController extends BaseController {
                              except: ['edit', 'list']]
 
     // the delete, save and update actions only accept POST requests
-    def allowedMethods = [delete:'POST', save:'POST', update:'POST']
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def index = { redirect(action:list,params:params) }
 

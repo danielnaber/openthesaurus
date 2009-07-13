@@ -25,7 +25,7 @@ class RejectedWordController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     // some actions only accept POST requests:
-    def allowedMethods = [delete:'POST', save:'POST', update:'POST',
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST',
                           reject: 'POST', unreject: 'POST']
 
     /** Add a given word to the list of rejected terms (used from ajax calls). */
