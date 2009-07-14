@@ -151,15 +151,15 @@ class Term implements Comparable, Cloneable {
     /**
      * Save and log to both logging system and database. Returns
      * true on success, false otherwise.
-     * @param extendedValidate use false to deactivate strict validation
+     * @param extendedValidateVar use false to deactivate strict validation
      * @throws RuntimeException if logging to database didn't work
      */
-    boolean saveAndLog(LogInfo logInfo, boolean extendedValidate) {
+    boolean saveAndLog(LogInfo logInfo, boolean extendedValidateVar) {
         if (logInfo == null) {
             throw new NullPointerException("loginfo may not be null")
         }
         if (extendedValidate() &&
-                this.synset.extendedValidate(extendedValidate) && save()) {
+                this.synset.extendedValidate(extendedValidateVar) && save()) {
             // log to database:
             log(logInfo)
             return true

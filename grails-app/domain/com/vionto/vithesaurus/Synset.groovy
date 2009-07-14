@@ -511,13 +511,13 @@ class Synset implements Cloneable {
     /**
      * Save and log to both logging system and database. Returns true
      * true on success, false otherwise.
-     * @param extendedValidate use false to deactivate strict validation
+     * @param extendedValidateVar use false to deactivate strict validation
      */
-    boolean saveAndLog(LogInfo logInfo, boolean extendedValidate) {
+    boolean saveAndLog(LogInfo logInfo, boolean extendedValidateVar) {
         if (logInfo == null) {
             throw new NullPointerException("loginfo may not be null")
         }
-        if (extendedValidate(extendedValidate) && save(flush:true)) {
+        if (extendedValidate(extendedValidateVar) && save()) {
             // log to database:
             UserSynsetEvent event = new UserSynsetEvent(this, logInfo)
               if (!(event.validate() && event.save())) {
