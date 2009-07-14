@@ -191,7 +191,7 @@
                                             <br />
                                             <label><g:radio id="wordFormCommon" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
                                             <label><g:radio id="wordFormAcronym" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
-                                            <label><g:radio id="wordFormAbbreviation" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.abbreviation'/></label>
+                                            <label><g:radio id="wordFormAbbreviation" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
                                             <br />
                                             <% i++ %>
                                             <br />
