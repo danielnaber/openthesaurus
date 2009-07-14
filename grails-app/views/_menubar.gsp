@@ -3,7 +3,7 @@
  <g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
 &middot;
 <g:if test="${session.user}">
-    Logged in as ${session.user.userId.toString()?.encodeAsHTML()} -
+    Logged in as ${session.user.userId.toString()?.encodeAsHTML()} &middot;
     <g:link controller="user" action="logout">Logout</g:link>
 </g:if>
 <g:else>
