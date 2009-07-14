@@ -184,7 +184,7 @@
 
                                     <% int i = 0; %>
                                     <div id="newTerm" style="display:none">
-                                        <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
+                                        <g:while test="${i < grailsApplication.config.thesaurus.maxNewTerms}">
                                             <input class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
                                             <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                             <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
@@ -256,7 +256,7 @@
 
                                      <div id="newCategory" style="display:none">
                                          <% i = 0; %>
-                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
+                                         <g:while test="${i < grailsApplication.config.thesaurus.maxNewCategories}">
                                              <select name="category.id_${i}" id="category.id_${i}" >
                                                 <option value="null">[none]</option>
                                                 <g:each var="category" in="${Category.findAllByIsDisabled(false).sort()}">
