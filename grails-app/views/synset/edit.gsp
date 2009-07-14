@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()?.encodeAsHTML()]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
           var appletIsVisible = true;
