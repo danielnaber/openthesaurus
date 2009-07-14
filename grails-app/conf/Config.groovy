@@ -1,6 +1,11 @@
 
 // Load the properties from classpath so they are not
 // compiled to a *.class file by Grails:
+//
+// --WARNING--
+// Due to bug https://svn.cargo.codehaus.org/browse/GRAILS-4761 this
+// doesn't work after a "grails clean", so start "grails run-app" twice
+// after a clean:
 environments {
     test {
         grails.config.locations = [ "classpath:datasource-test.properties",
