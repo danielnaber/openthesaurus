@@ -190,9 +190,9 @@
                                             <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                             <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                                             <br />
-                                            <label><g:radio id="wordFormCommon" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
-                                            <label><g:radio id="wordFormAcronym" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
-                                            <label><g:radio id="wordFormAbbreviation" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
+                                            <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAcronym_${i}" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAbbreviation_${i}" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
                                             <br />
                                             <% i++ %>
                                             <br />
@@ -438,7 +438,7 @@
 
                 <g:if test="${session.user}">
                     <div class="buttons" style="padding-right: 6px;">
-                        <span class="submitButton"><g:actionSubmit class="save" value="${message(code:'edit.submit')}" /></span>
+                        <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
                     </div>
                 </g:if>
             </g:form>
