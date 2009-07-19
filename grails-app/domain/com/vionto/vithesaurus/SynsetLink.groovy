@@ -104,7 +104,7 @@ class SynsetLink implements Comparable {
         if (targetSynset.synsetPreferredTerm) {
             return "${linkType}@${targetSynset.synsetPreferredTerm}"
         } else {
-            return "${linkType}@${targetSynset.synset}"
+            return "${linkType}@${targetSynset.terms}"
         }
     }
 }
