@@ -1,9 +1,9 @@
 <a href="${createLinkTo(dir:'',file:'')}"><g:message code="homepage.link"/></a>
-&middot;
+<span class="d">&middot;</span>
  <g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
-&middot;
+<span class="d">&middot;</span>
 <g:if test="${session.user}">
-    Logged in as ${session.user.userId.toString()?.encodeAsHTML()} &middot;
+    Logged in as ${session.user.userId.toString()?.encodeAsHTML()} <span class="d">&middot;</span>
     <g:link controller="user" action="logout">Logout</g:link>
 </g:if>
 <g:else>
