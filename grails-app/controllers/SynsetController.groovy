@@ -513,7 +513,8 @@ class SynsetController extends BaseController {
             boolean showOrigSource =
                 grailsApplication.config.thesaurus.showOriginalSource == "true"
             long runTime = System.currentTimeMillis() - startTime
-            return [ synset : synset, eventList : eventList,
+            boolean prefTerms = grailsApplication.config.thesaurus.prefTerm != 'false'
+            return [ synset : synset, eventList : eventList, prefTerms: prefTerms,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
                      runTime : runTime ]
         }

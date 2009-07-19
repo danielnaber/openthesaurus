@@ -109,9 +109,11 @@
 
                                 <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
                                     title="Select to delete terms from concept"/>
-                                &nbsp;
-                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-                                    title="Select one preferred term per language" />
+                                <g:if test="${prefTerms}">
+	                                &nbsp;
+	                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
+	                                    title="Select one preferred term per language" />
+                                </g:if>
 
                                 <ul>
                                     <g:set var="previousLanguage" value=""/>
@@ -121,16 +123,20 @@
                                                 <br/>
                                             </g:if>
                                             <g:managedCheckBox checked="false" disabled="${!session.user}" name="delete" value="${t.id}" id="delete_${t.id}"/>
-                                            &nbsp;
-                                            <g:set var="isPreferred" value="${PreferredTermLink.countByTerm(t) > 0}"/>
-                                            <g:if test="${isPreferred}">
-                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                    checked="${isPreferred}" id="preferred_${t.language.shortForm}_${t.id}" />
+                                            
+                                            <g:if test="${prefTerms}">
+	                                            &nbsp;
+	                                            <g:set var="isPreferred" value="${PreferredTermLink.countByTerm(t) > 0}"/>
+	                                            <g:if test="${isPreferred}">
+	                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
+	                                                    checked="${isPreferred}" id="preferred_${t.language.shortForm}_${t.id}" />
+	                                            </g:if>
+	                                            <g:else>
+	                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
+	                                                    checked="${false}" />
+	                                            </g:else>
                                             </g:if>
-                                            <g:else>
-                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                    checked="${false}" />
-                                            </g:else>
+                                            
                                             <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
                                                 <g:set var="flagImg" value="flag_${t.language.shortForm}.png"/>
                                                 <img src="${createLinkTo(dir:'images',file:flagImg)}" alt="[${t.language.longForm}]" border="0" />
@@ -212,17 +218,21 @@
                                 <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
                                     title="${message(code:'edit.category.delete')}"/>
                                 &nbsp;
-                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-                                    title="${message(code:'edit.category.prefer')}" />
+                                <g:if test="${prefTerms}">
+	                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
+    	                                title="${message(code:'edit.category.prefer')}" />
+                                </g:if>
                                 <ul>
                                 <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                     <li class="checkboxList">
                                         <g:managedCheckBox checked="false" disabled="${!session.user}"
                                            name="delete_category" value="${catLink.id}" />
-                                        &nbsp;
-                                        <g:set var="isPreferred" value="${synset.preferredCategory.categoryName == catLink.category.categoryName}"/>
-                                        <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
-                                            checked="${isPreferred}" />
+                                        <g:if test="${prefTerms}">
+	                                        &nbsp;
+	                                        <g:set var="isPreferred" value="${synset.preferredCategory.categoryName == catLink.category.categoryName}"/>
+	                                        <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
+	                                            checked="${isPreferred}" />
+                                        </g:if>
                                         ${catLink.category}
                                         <g:if test="${catLink.category.categoryType}">
                                                <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
