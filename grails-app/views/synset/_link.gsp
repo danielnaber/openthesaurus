@@ -61,8 +61,15 @@
         <g:select name="linkType.id"
               optionKey="id" from="${LinkType.list().sort()}" />
 
-        <g:submitToRemote value="Lookup" action="ajaxSearch"
-              update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" />
+		<!-- we have to use this instead of g:remoteLink to inject the value of the search form, see below: -->
+        <a href="/vithesaurus/synset/ajaxSearch" 
+        	onclick="new Ajax.Updater('synsetLink','/vithesaurus/synset/ajaxSearch',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
+        	><g:message code="edit.link.lookup"/></a>
+              
+        <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
+        <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
+              update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
+        -->
 
         <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
             <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
