@@ -47,7 +47,7 @@ class ExportOxtController extends BaseController {
       log.info("Exporting " + termList.size() + " terms")
       int count = 0
       SynsetController ctrl = new SynsetController()
-      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null);        if (count % 20 == 0) {          log.error(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
+      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null);        if (count % 20 == 0) {          log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
         bwIdx.write(word.toLowerCase() + "|" + indexPos + "\n")        indexPos = dataWrite(word.toLowerCase() + "|" + result.totalMatches + "\n", bw, indexPos)
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
