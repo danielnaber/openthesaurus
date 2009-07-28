@@ -33,18 +33,20 @@ Please refer to the container's documentation on how to do that.
    This can be done by calling a command like this:
    curl -I http://localhost:8080/vithesaurus/synset/createMemoryDatabase
 
-4. For bigger data sets it might be necessary to created indexes manually in
+4. Set the values in WEB-INF/classes/vithesaurus.properties
+
+5. For bigger data sets it might be necessary to created indexes manually in
    your database (later versions of vithesaurus might do this automatically):
    ALTER TABLE `term` ADD INDEX ( `word` ) 
    ALTER TABLE `term` ADD INDEX ( `normalized_word` ) 
    ALTER TABLE `synset` ADD INDEX ( `is_visible` ) 
 
-5. In case you run into problems with searching for special characters, it might be
+6. In case you run into problems with searching for special characters, it might be
    required to modify all tables whose collation is "latin1_swedish_ci" to
    "utf8_general_ci", for example like this:
    ALTER TABLE `memwords` CHANGE `word` `word` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 
-6. The default administration account is "admin" with the password "admin" - make
+7. The default administration account is "admin" with the password "admin" - make
    sure this is changed after your first login. If you are logged in as admin, the
    vithesaurus homepage will show a link to the administration page. 
 
