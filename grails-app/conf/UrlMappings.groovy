@@ -20,6 +20,14 @@ class UrlMappings {
  
       // word detail page:
       "/word_detail"(controller:'redirect', action:'worddetail')
+      
+      "/faq.php"(controller:'redirect', action:'faq')
+      "/background.php"(controller:'redirect', action:'background')
+      "/news_archive.php"(controller:'redirect', action:'newsarchive')
+      "/statistics.php"(controller:'redirect', action:'statistics')
+      "/top_users.php"(controller:'redirect', action:'statistics')
+      "/a-z.php"(controller:'redirect', action:'az')
+      "/imprint.php"(controller:'redirect', action:'imprint')
   }
 
 }

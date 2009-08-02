@@ -24,7 +24,38 @@ import java.net.URLEncoder
  */
 class RedirectController extends BaseController {
     
-    def overview = {
+   def faq = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "about/faq")
+   }
+
+   def background = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "about/index")
+   }
+
+   def newsarchive = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "about/newsarchive")
+   }
+
+   def statistics = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "synset/statistics")
+   }
+
+   /* A to Z */
+   def az = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "term/list")
+   }
+
+   def imprint = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "about/imprint")
+   }
+
+   def overview = {
         String baseUrl = getBaseUrl()
         String q = URLEncoder.encode(params.word, "UTF-8")
         response.sendRedirect(baseUrl + "synset/search?q=" + q)
