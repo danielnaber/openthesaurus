@@ -3,6 +3,7 @@
     <head>
         <title><g:layoutTitle default="Grails" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
+        <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:'favicon.ico')}" />
         <g:layoutHead />
         <g:javascript library="application" />				
     </head>
