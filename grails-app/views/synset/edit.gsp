@@ -166,9 +166,12 @@
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                             <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
                                             <g:if test="${termCount > 1}">
+                                            	<g:link class="termMetaInfo" action="search" params="[q : t.word]">[${termCount}]</g:link>
+                                            	<%--
                                                <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
                                                params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
                                                 <g:link class="termMetaInfo" action="search" params="[q : t.word]">all: ${termCount}</g:link>]</span>
+                                                --%>
                                             </g:if>
 
                                             <g:set var="previousLanguage" value="${t.language}"/>
@@ -309,19 +312,23 @@
                                 <%
                                 Set displayedSynsets = new HashSet()
                                 %>
-                                <g:render template="link" model="[title:'Hypernyms', linkTypeName:'Oberbegriff',
+                                <g:render template="link" model="[title:'Oberbegriff', linkTypeName:'Oberbegriff',
                                     synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
+								<%--
                                 <g:render template="suggestedLink" model="[title:'Suggested Hypernyms', linkTypeName:'Oberbegriff',
                                     synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets]" />
+                                --%>
 
-                                <g:render template="link" model="[title:'Hyponyms', linkTypeName:'Unterbegriff',
+                                <g:render template="link" model="[title:'Unterbegriffe', linkTypeName:'Unterbegriff',
                                     synset:synset, synsetLinks:synsetLinks, showAddLink:false, displayedSynsets: displayedSynsets,
                                     reverseLink:true]" />
 
+								<%--
                                 <g:render template="suggestedLink" model="[title:'Suggested Hyponyms', linkTypeName:'Unterbegriff',
                                     synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets,
                                     reverseLink:true]" />
+                                --%>
 
                             </g:if>
 

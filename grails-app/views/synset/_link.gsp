@@ -27,6 +27,7 @@
             <g:link controller='synset' action='edit'
                 id='${link.targetSynset.id}'>${link.targetSynset.synsetPreferredTerm == null ?
 	                link.targetSynset : link.targetSynset.synsetPreferredTerm}</g:link></span>
+	        <%--
             <g:if test="${link.factCount >= 1}">
                <g:if test="${reverseLink}">
                   <input type="hidden" name="reverse_${link.id}" value="1"/>
@@ -41,6 +42,7 @@
             <g:else>
                <span class="metaInfo">[manually added]</span>
             </g:else>
+            --%>
             <%
             displayedSynsets.add(link.targetSynset.id)
             nymCount++
