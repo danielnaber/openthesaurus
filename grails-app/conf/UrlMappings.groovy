@@ -28,6 +28,8 @@ class UrlMappings {
       "/top_users.php"(controller:'redirect', action:'statistics')
       "/a-z.php"(controller:'redirect', action:'az')
       "/imprint.php"(controller:'redirect', action:'imprint')
+      "/variation.php"(controller:'redirect', action:'variation')
+      "/tree.php"(controller:'redirect', action:'tree')
   }
 
 }

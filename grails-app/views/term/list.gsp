@@ -8,7 +8,7 @@
     <body>
 
         <div class="body">
-            <h1><g:message code="a_to_z.title" /></h1>
+            <h1><g:message code="a_to_z.headline" /></h1>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>

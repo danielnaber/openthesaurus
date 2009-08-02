@@ -20,6 +20,10 @@
 	<td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2009-07-23</span></td>
+    <td valign="top">OpenThesaurus <a href="http://twitter.com/openthesaurus">schreibt jetzt auch auf Twitter</a></td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2009-02-20</span></td>
     <td valign="top">Auf der Ergebnisseite wurde ein Link zu
 		<a href="http://www.eyeplorer.com">eyeplorer.com</a> hinzugefügt</td>

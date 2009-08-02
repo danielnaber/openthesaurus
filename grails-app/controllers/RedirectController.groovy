@@ -54,6 +54,20 @@ class RedirectController extends BaseController {
        String baseUrl = getBaseUrl()
        response.sendRedirect(baseUrl + "about/imprint")
    }
+   
+   def tree = {
+       String baseUrl = getBaseUrl()
+       response.sendRedirect(baseUrl + "tree/index")
+   }
+
+   def variation = {
+       String baseUrl = getBaseUrl()
+       if (params.lang == 'at') {
+         response.sendRedirect(baseUrl + "synset/variation/at")
+       } else if (params.lang == 'ch') {
+         response.sendRedirect(baseUrl + "synset/variation/ch")
+       }
+   }
 
    def overview = {
         String baseUrl = getBaseUrl()
