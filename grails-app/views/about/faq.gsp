@@ -8,12 +8,29 @@
     <body>
 
         <div class="body">
+
+        <table style="border:0px;width:100%">
+        <tr>
+        	<td>
+        		<ul>
+        			<li><a href="#was">Was ist ein Synonym?</a></li>
+        			<li><a href="#textverarbeitungen">In welche Textverarbeitungen kann ich OpenThesaurus direkt integrieren? </a></li>
+        			<li><a href="#aenderungen">Was soll ich bei meinen Änderungen an OpenThesaurus beachten?</a></li>
+        			<li><a href="#english">I'm looking for an English thesaurus. </a></li>
+        		</ul>
+        	</td>
+        	<td>
+		        <g:render template="/ads/faq_right"/>
+        	</td>
+        </tr>
+        </table>
+        
         
         <div class="faqpage">
-
+        
 		<div class="faqitem">
 			<div class="question">
-				Was ist ein Synonym?
+				<a name="was">Was ist ein Synonym?</a>
 			</div>
 			<div class="answer">
 				<p>Wenn zwei oder mehr Wörter in einem bestimmten Kontext
@@ -53,7 +70,7 @@
 
 		<div class="faqitem">
 			<div class="question">
-			In welche Textverarbeitungen kann ich OpenThesaurus direkt integrieren?
+				<a name="textverarbeitungen">In welche Textverarbeitungen kann ich OpenThesaurus direkt integrieren?</a>
 			</div>
 			<div class="answer">
 			OpenThesaurus funktioniert mit <a rel="nofollow" href="http://www.openoffice.org">OpenOffice.org</a>,
@@ -65,7 +82,7 @@
 
 		<div class="faqitem">
 			<div class="question">
-			Was soll ich bei meinen Eingaben und Änderungen beachten?
+				<a name="aenderungen">Was soll ich bei meinen Änderungen an OpenThesaurus beachten?</a>
 			</div>
 			<div class="answer">
 				<ul>
@@ -101,7 +118,7 @@
 
 		<div class="faqitem">
 			<div class="question">
-			I'm looking for an English thesaurus.
+				<a name="english">I'm looking for an English thesaurus.</a>
 			</div>
 			<div class="answer">
 			<p>Please have a look at
@@ -133,7 +150,15 @@
 		 
 	</div>
 	
+	<g:render template="/ads/faq_bottom"/>
+
 	</div>
+	
+	
+	<!-- enable scrolling to anchors -->
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	
     </body>
 </html>
