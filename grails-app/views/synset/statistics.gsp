@@ -46,6 +46,8 @@
                     </tbody>
                 </table>
             
+        <g:render template="/ads/statistics_bottom"/>
+        
         </div>
     </body>
 </html>

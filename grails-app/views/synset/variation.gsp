@@ -11,8 +11,11 @@
             
             <h1>${headline}</h1>
             
+            <div style="float:right">
+	            <g:render template="/ads/variation_right"/>
+            </div>
+            
             <p>${intro}</p>
-            <br />
             
 			<ul>
 				<g:each in="${termList}" var="term">
