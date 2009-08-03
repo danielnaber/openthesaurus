@@ -336,27 +336,25 @@ class SynsetController extends BaseController {
         }
         int dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
         if (dist <= MAX_DIST) {
-          matches.add(resultSet.getString("word"))
+          matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
         } else {
           dbTerm = resultSet.getString("lookup")
           if (dbTerm) {
             dbTerm = dbTerm.toLowerCase()
             dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
             if (dist <= MAX_DIST) {
-              matches.add(resultSet.getString("word"))
+              matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
             }
           }
         }
-        if (matches.size() >= maxHits) {
-          break
-        }
       }
+      Collections.sort(matches)		// makes sure lowest distances come first
       resultSet.close()
       ps.close()
       conn.close()
       return matches
     }
-    
+
     def variation = {
       String limit = ""
       if (params.id == 'ch') {
