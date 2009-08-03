@@ -25,61 +25,49 @@ import java.net.URLEncoder
 class RedirectController extends BaseController {
     
    def faq = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "about/faq")
+       permanentRedirect("about/faq")
    }
 
    def background = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "about/index")
+       permanentRedirect("about/index")
    }
 
    def newsarchive = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "about/newsarchive")
+       permanentRedirect("about/newsarchive")
    }
 
    def statistics = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "synset/statistics")
+       permanentRedirect("synset/statistics")
    }
 
    /* A to Z */
    def az = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "term/list")
+       permanentRedirect("term/list")
    }
 
    def imprint = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "about/imprint")
+       permanentRedirect("about/imprint")
    }
    
    def tree = {
-       String baseUrl = getBaseUrl()
-       response.sendRedirect(baseUrl + "tree/index")
+       permanentRedirect("tree/index")
    }
 
    def variation = {
-       String baseUrl = getBaseUrl()
        if (params.lang == 'at') {
-         response.sendRedirect(baseUrl + "synset/variation/at")
+         permanentRedirect("synset/variation/at")
        } else if (params.lang == 'ch') {
-         response.sendRedirect(baseUrl + "synset/variation/ch")
+         permanentRedirect("synset/variation/ch")
        }
    }
 
    def overview = {
-        String baseUrl = getBaseUrl()
         String q = URLEncoder.encode(params.word, "UTF-8")
-        response.sendRedirect(baseUrl + "synset/search?q=" + q)
+        permanentRedirect("synset/search?q=" + q)
     }
 
     def gotoAbout = {
-        String baseUrl = getBaseUrl()
-        response.setHeader("Location", baseUrl + "about/index")
-        // search engines expect 301 if a move is permanent:
-        response.sendError(301)
+        permanentRedirect("about/index")
     }
     
     def worddetail = {
@@ -89,8 +77,12 @@ class RedirectController extends BaseController {
           response.sendError(404)
           return
         }
-        String url = baseUrl + "term/edit/" + term.id
-        response.setHeader("Location", url)
+        permanentRedirect("term/edit/" + term.id)
+   }
+   
+   private permanentRedirect(String url) {
+        String newUrl = getBaseUrl() + url
+        response.setHeader("Location", newUrl)
         // search engines expect 301 if a move is permanent:
         response.sendError(301)
     }
