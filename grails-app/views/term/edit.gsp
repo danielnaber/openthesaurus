@@ -24,6 +24,8 @@
                 <g:set var="disabled" value="disabled='true'"/>
             </g:if>
 
+            <div style="float:right"><g:render template="/ads/termedit_right"/></div>
+			 
             <g:form controller="term" method="post" >
                 <input type="hidden" name="id" value="${id}" />
                 <div class="dialog">
@@ -126,6 +128,7 @@
 	                </div>
 	            </g:if>
             </g:form>
+            
         </div>
     </body>
 </html>
