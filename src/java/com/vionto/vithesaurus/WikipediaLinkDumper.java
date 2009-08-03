@@ -44,14 +44,14 @@ import org.xml.sax.helpers.DefaultHandler;
  * 
  * How to use this (starting from the openthesaurus directory):
  * -Change to the "java" directory
- *  cd java
+ *  cd src/java
  * -unpack the Wikipedia XML dump here:
  *  bunzip XXwiki-YYYYMMDD-pages-meta-current.xml.bz2
  * -Only if you made changes to this source code: compile the link 
  *  extraction Java program (requires the Java Development Kit):
- *  javac de/openthesaurus/wikipedia/WikipediaLinkDumper.java
+ *  javac com/vionto/vithesaurus/WikipediaLinkDumper.java
  * -Call the program:
- *  java -cp . de.openthesaurus.wikipedia.WikipediaLinkDumper <wiki.xml> >result.sql
+ *  java -cp . com.vionto.vithesaurus.WikipediaLinkDumper <wiki.xml> >result.sql
  * -Import the result into the OpenThesaurus database:
  *  mysql thesaurus <result.sql 
  * 
