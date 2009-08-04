@@ -44,7 +44,7 @@
     </filter-mapping>
 
     <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+        <listener-class>org.codehaus.groovy.grails.web.util.Log4jConfigListener</listener-class>
     </listener>
 
     <listener>
