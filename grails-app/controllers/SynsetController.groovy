@@ -150,8 +150,7 @@ class SynsetController extends BaseController {
         long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
         
         long similarStartTime = System.currentTimeMillis()
-        // TODO: use config option
-        List similarTerms = searchSimilarTerms(params.q, 5)
+        List similarTerms = searchSimilarTerms(params.q)
         long similarTime = System.currentTimeMillis() - similarStartTime
 
         Section section = null
@@ -173,21 +172,13 @@ class SynsetController extends BaseController {
         }
         int offset = params.offset ? Integer.parseInt(params.offset) : 0
         int maxResults = params.max ? Integer.parseInt(params.max) : 10
+        long dbStartTime = System.currentTimeMillis()
         def searchResult = doSearch(params.q.trim(), section, source, category,
                 maxResults, offset)
-        if (searchResult.totalMatches == 0) {
-          /*String msg = "No matches for '${params.q.encodeAsHTML()}'"
-              msg += source ?
-                      " in source '${source.encodeAsHTML()}'" : ""
-              msg += category ?
-                      " in category '${category.encodeAsHTML()}'" : ""
-          flash.message = msg*/
-          flash.message = ""
-        } else {
-          flash.message = ""
-        }
+        long dbTime = System.currentTimeMillis() - dbStartTime
         long totalTime = System.currentTimeMillis() - startTime
-        log.info("Search time total: ${totalTime}ms, sim: ${similarTime}ms, substr: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms")
+        log.info("Search time total: ${totalTime}ms, db: ${dbTime}ms, sim: ${similarTime}ms, "
+             + "substr: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms, q: " + params.q)
         [ partialMatchResult : partialMatchResult,
           wikipediaResult : wikipediaResult,
           wiktionaryResult : wiktionaryResult,
@@ -311,7 +302,7 @@ class SynsetController extends BaseController {
       return matches
     }
     
-    def searchSimilarTerms(String term, int maxHits) {
+    def searchSimilarTerms(String term) {
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = """SELECT word, lookup FROM memwords 
 			WHERE ((
@@ -389,8 +380,8 @@ class SynsetController extends BaseController {
             int max = -1, int offset = 0) {
         // currently we always use DB search, not fulltext search
         // because it was too slow on indexing:
-        log.info("search for ${query} (section:${section}, source:${source}, " +
-                "category:${category})")
+        //log.info("search for ${query} (section:${section}, source:${source}, " +
+        //        "category:${category})")
         return doDBSearch(query, section, source, category, max, offset)
     }
 
