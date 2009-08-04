@@ -21,14 +21,6 @@ environments {
     }
 }
 
-// locations to search for config files that get merged into the main config
-// config files can either be Java properties files or ConfigSlurper scripts
-
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
-
 if(System.properties["${appName}.config.location"]) {
     grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 }
@@ -37,44 +29,28 @@ grails.enable.native2ascii = true
 
 // vithesaurus settings: see vithesaurus.properties
 
-// log4j configuration
-log4j {
-    appender.file = "org.apache.log4j.FileAppender"
-    appender.'file.file' = "vithesaurus.log"
-    appender.stdout = "org.apache.log4j.ConsoleAppender"
-	appender.'stdout.layout'="org.apache.log4j.PatternLayout"
- 	appender.'stdout.layout.ConversionPattern'='[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{2} %m%n'
-    appender.'file.layout'="org.apache.log4j.PatternLayout"
-    appender.'file.layout.ConversionPattern'='[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{2} %m%n'
-    rootLogger="error,stdout,file"
-    logger {
-        grails="info,stdout,file"
-        org {
-            codehaus.groovy.grails.web.servlet="error,stdout"  //  controllers
-            codehaus.groovy.grails.web.errors="error,stdout"  //  web layer errors            
-			codehaus.groovy.grails.web.pages="error,stdout" //  GSP
-        	codehaus.groovy.grails.web.sitemesh="error,stdout" //  layouts
-        	codehaus.groovy.grails."web.mapping.filter"="error,stdout" // URL mapping
-        	codehaus.groovy.grails."web.mapping"="error,stdout" // URL mapping
-            codehaus.groovy.grails.commons="info,stdout" // core / classloading
-            codehaus.groovy.grails.plugins="error,stdout" // plugins
-            codehaus.groovy.grails.orm.hibernate="error,stdout" // hibernate integration
-            springframework="off,stdout"
-            hibernate="off,stdout"
-            // SQL debugging:
-            //hibernate="debug,stdout,file"
-            //hibernate="trace,stdout,file"   // also show SQL parameters
-        }
+log4j = {
+    appenders {
+        console name:'stdout', layout:pattern(conversionPattern: '[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{2} - %m%n')
     }
-    additivity.'default' = false
-    additivity {
-		grails=false
-		org {
-           codehaus.groovy.grails=false
-           springframework=false
-		   hibernate=false
-		}
+    root {
+        error 'stdout'
+        additivity = true
     }
+    info   'grails.app'			// logging output from my classes
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+	       'org.codehaus.groovy.grails.web.pages', //  GSP
+	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+	       'org.codehaus.groovy.grails."web.mapping.filter', // URL mapping
+	       'org.codehaus.groovy.grails."web.mapping', // URL mapping
+	       'org.codehaus.groovy.grails.commons', // core / classloading
+	       'org.codehaus.groovy.grails.plugins', // plugins
+	       'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+	       'org.springframework',
+           'org.hibernate'
+    warn   'org.mortbay.log'
+    // Uncomment the following line to see hibernate's sql code
+    // debug  'org.hibernate'  
 }
 
 
