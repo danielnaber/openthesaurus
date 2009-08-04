@@ -64,13 +64,31 @@ class RedirectController extends BaseController {
    def overview = {
         String q = URLEncoder.encode(params.word, "UTF-8")
         permanentRedirect("synset/search?q=" + q)
-    }
+   }
 
-    def gotoAbout = {
-        permanentRedirect("about/index")
-    }
-    
-    def worddetail = {
+   def gotoAbout = {
+       permanentRedirect("about/index")
+   }
+
+   def synset = {
+       if (params.id) {
+         // this is an ID from the PHP version of OpenThesaurus, we keep it working:
+         Synset synset = Synset.findByOriginalId(params.id)
+         if (synset == null) {
+           flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
+           response.sendError(404)
+           return
+         }
+         String url = g.createLink(controller:'synset', action:'edit', id: synset.id)
+         response.setHeader("Location", url)
+         // search engines expect 301 if a move is permanent:
+         response.sendError(301)
+         return
+       }
+       redirect(action:list,params:params)
+   }
+   
+   def worddetail = {
         Term term = Term.findByOriginalId(params.wmid)
         if (term == null) {
           flash.message = message(code:'notfound.termid.not.found', args:[params.wmid.encodeAsHTML()])

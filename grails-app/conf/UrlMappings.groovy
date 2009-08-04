@@ -10,17 +10,16 @@ class UrlMappings {
       }
       
       // the search result page:
-      "/overview"(controller:'redirect', action:'overview')
-
-      // the "about" page:
-      "/background"(controller:'redirect', action:'gotoAbout')
+      "/overview.php"(controller:'redirect', action:'overview')
 
       // the synset page:
-      // name clash, must be handled in SynsetController
+      "/synset.php"(controller:'redirect', action:'synset')
  
       // word detail page:
-      "/word_detail"(controller:'redirect', action:'worddetail')
+      "/word_detail.php"(controller:'redirect', action:'worddetail')
       
+      // the other pages:
+      "/background.php"(controller:'redirect', action:'gotoAbout')
       "/faq.php"(controller:'redirect', action:'faq')
       "/background.php"(controller:'redirect', action:'background')
       "/news_archive.php"(controller:'redirect', action:'newsarchive')
