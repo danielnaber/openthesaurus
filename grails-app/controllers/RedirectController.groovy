@@ -73,6 +73,15 @@ class RedirectController extends BaseController {
    def synset = {
        if (params.id) {
          // this is an ID from the PHP version of OpenThesaurus, we keep it working:
+         try {
+           Integer.parseInt(params.id)
+         } catch (Exception e) {
+           // probably a spammer inserting a url into the parameter
+           log.info("crappy id parameter in redirect: " + params.id)
+           flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
+           response.sendError(404)
+           return
+         }
          Synset synset = Synset.findByOriginalId(params.id)
          if (synset == null) {
            flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
