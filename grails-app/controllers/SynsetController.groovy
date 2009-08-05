@@ -45,20 +45,6 @@ class SynsetController extends BaseController {
     def dataSource       // will be injected
 
     def index = {
-        if (params.id) {
-          // this is an ID from the PHP version of OpenThesaurus, we keep it working:
-          Synset synset = Synset.findByOriginalId(params.id)
-          if (synset == null) {
-            flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
-            response.sendError(404)
-            return
-          }
-          String url = g.createLink(controller:'synset', action:'edit', id: synset.id)
-          response.setHeader("Location", url)
-          // search engines expect 301 if a move is permanent:
-          response.sendError(301)
-          return
-        }
         redirect(action:list,params:params)
     }
 
