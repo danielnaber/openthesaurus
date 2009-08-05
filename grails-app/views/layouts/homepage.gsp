@@ -18,5 +18,7 @@
         </p>
         -->
 
+		<g:render template="/analytics"/>
+
     </body>	
 </html>

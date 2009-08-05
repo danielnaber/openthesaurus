@@ -27,5 +27,7 @@
 
        	<g:layoutBody />
 
+		<g:render template="/analytics"/>
+
     </body>	
 </html>

@@ -59,7 +59,5 @@
 
 		</div>
 		
-		<g:render template="analytics"/>
-
     </body>
 </html>
