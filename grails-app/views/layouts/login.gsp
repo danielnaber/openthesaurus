@@ -4,6 +4,7 @@
         <title><g:layoutTitle default="Grails" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
+        <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
         <g:layoutHead />
         <g:javascript library="application" />				
     </head>
