@@ -179,7 +179,7 @@ class Term implements Comparable, Cloneable {
      */
     List listHomonyms() {
         return Term.withCriteria {
-            ilike('word', word)
+            eq('word', word)
             synset {
                 eq('isVisible', true)
             }
@@ -192,7 +192,7 @@ class Term implements Comparable, Cloneable {
      */
     List listHomonymsInSection() {
         return Term.withCriteria {
-            ilike('word', word)
+            eq('word', word)
             synset {
                 eq('isVisible', true)
                 eq('section', synset.section)
