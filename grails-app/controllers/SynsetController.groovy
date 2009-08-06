@@ -392,9 +392,8 @@ class SynsetController extends BaseController {
         // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
         def termList = Term.withCriteria {
             or {
-              // FIXME: this should be "ilike" but it slows down querying with MySQL:
-              like('word', query)
-              like('normalizedWord', Term.normalize(query))
+              eq('word', query)
+              eq('normalizedWord', Term.normalize(query))
             }
             synset {
                 if (section) {
