@@ -163,8 +163,8 @@ class SynsetController extends BaseController {
                 maxResults, offset)
         long dbTime = System.currentTimeMillis() - dbStartTime
         long totalTime = System.currentTimeMillis() - startTime
-        log.info("Search time total: ${totalTime}ms, db: ${dbTime}ms, sim: ${similarTime}ms, "
-             + "substr: ${partialMatchTime}ms, wikipedia: ${wikipediaTime}ms, q: " + params.q)
+        log.info("Search time (ms):${totalTime} db:${dbTime} sim:${similarTime} "
+             + "substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} q:${params.q}")
         [ partialMatchResult : partialMatchResult,
           wikipediaResult : wikipediaResult,
           wiktionaryResult : wiktionaryResult,
