@@ -88,13 +88,10 @@ class RedirectController extends BaseController {
            response.sendError(404)
            return
          }
-         String url = g.createLink(controller:'synset', action:'edit', id: synset.id)
-         response.setHeader("Location", url)
-         // search engines expect 301 if a move is permanent:
-         response.sendError(301)
+         permanentRedirect("synset/edit/" + synset.id)
          return
        }
-       redirect(action:list,params:params)
+       response.sendError(404)
    }
    
    def worddetail = {
@@ -119,9 +116,10 @@ class RedirectController extends BaseController {
         if (request.getLocalPort() != 80) {
           port = ":" + request.getLocalPort()
         }
-        String baseUrl = 
-          request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
-        return baseUrl
+        //String baseUrl = 
+        //  request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
+        //FIXME: make this a config option?
+        return "http://www.openthesaurus.de/"
     }
 
 }
