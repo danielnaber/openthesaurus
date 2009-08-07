@@ -43,8 +43,15 @@ Please refer to the container's documentation on how to do that.
 
 6. In case you run into problems with searching for special characters, it might be
    required to modify all tables whose collation is "latin1_swedish_ci" to
-   "utf8_general_ci", for example like this:
-   ALTER TABLE `memwords` CHANGE `word` `word` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+   "utf8_general_ci", like this:
+   ALTER TABLE `term` CHANGE `word` `word` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+   ALTER TABLE `term` CHANGE `normalized_word` `normalized_word` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `term` CHANGE `user_comment` `user_comment` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `wikipedia_links` CHANGE `link` `link` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+   ALTER TABLE `wikipedia_pages` CHANGE `title` `title` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;  
+   ALTER TABLE `wiktionary` CHANGE `headword` `headword` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+     CHANGE `meanings` `meanings` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+     CHANGE `synonyms` `synonyms` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 
 7. The default administration account is "admin" with the password "admin" - make
    sure this is changed after your first login. If you are logged in as admin, the
