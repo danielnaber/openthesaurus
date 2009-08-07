@@ -214,8 +214,8 @@ class SynsetController extends BaseController {
       log.info("Creating in-memory database, request by " + request.getRemoteAddr())
       Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
       
       PreparedStatement ps = 
         conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
