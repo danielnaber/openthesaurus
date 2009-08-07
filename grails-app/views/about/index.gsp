@@ -45,7 +45,7 @@ Bedeutungen gibt, so muss <em>pro Bedeutung ein Eintrag</em> existieren.</p>
 	<li><a href="feed.xml">RSS-Feed aller Aktualisierungen an den Daten</a></li>
 	<li><a href="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">OpenThesaurus Mailingliste</a> (sehr wenig Traffic)
 		<ul>
-			<li><a href="https://lists.berlios.de/pipermail/openthesaurus-discuss/">Archiv</a></li>
+			<li><a href="http://lists.berlios.de/pipermail/openthesaurus-discuss/">Archiv</a></li>
 		</ul>
 	</li>			
 </ul>
