@@ -9,11 +9,11 @@
 environments {
     test {
         grails.config.locations = [ "classpath:datasource-test.properties",
-                "classpath:vithesaurus.properties" ]
+                "classpath:vithesaurus-dev.properties" ]
     }
     development {
         grails.config.locations = [ "classpath:datasource-dev.properties",
-                "classpath:vithesaurus.properties" ]
+                "classpath:vithesaurus-dev.properties" ]
     }
     production {
         grails.config.locations = [ "classpath:datasource.properties",
