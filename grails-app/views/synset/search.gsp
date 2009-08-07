@@ -101,8 +101,8 @@
 				<td></td>
 				<td width="45%">
 					
+					<h2><g:message code="result.wikipedia.headline"/></h2>
 					<g:if test="${wikipediaResult}">
-						<h2><g:message code="result.wikipedia.headline"/></h2>
 						<ul>
 							<li>
 							<% int i = 0; %>
@@ -126,9 +126,14 @@
 							</div>
 						</g:if>
 					</g:if>
+					<g:else>
+						<ul>
+							<li><span class="light"><g:message code="result.no.matches"/></span></li>
+						</ul>
+					</g:else>
 
+					<h2><g:message code="result.wiktionary.headline"/></h2>
 					<g:if test="${wiktionaryResult}">
-						<h2><g:message code="result.wiktionary.headline"/></h2>
 						<ul>
 							<%
 							clean =
@@ -177,6 +182,11 @@
 							</div>
 						</g:if>
 					</g:if>
+					<g:else>
+						<ul>
+							<li><span class="light"><g:message code="result.no.matches"/></span></li>
+						</ul>
+					</g:else>
 					
 				</td>
 			</tr>
@@ -204,6 +214,7 @@
             </g:if>
             --%>
 
+			<!--  FIXME: comment in again
             <br/>
             <p>
                 <g:if test="${params.q}">
@@ -217,6 +228,7 @@
                     <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
                 </g:else>
             </p>
+             -->
 
         </div>
     </body>
