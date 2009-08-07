@@ -130,10 +130,10 @@ class RedirectController extends BaseController {
         if (request.getLocalPort() != 80) {
           port = ":" + request.getLocalPort()
         }
-        //String baseUrl = 
-        //  request.getScheme() + "://" + request.getServerName() + port + request.getContextPath() + "/"
-        //FIXME: make this a config option?
-        return "http://www.openthesaurus.de/"
+        // This cannot be taken from the request as the installation might
+        // be shielded behind an Apache server and we don't see the outside URL
+        // in the request:
+        return grailsApplication.config.thesaurus.serverURL + "/"
     }
 
 }
