@@ -17,11 +17,13 @@
                     <div class="message">${flash.message}</div>
             </g:if>
             
-            <form method="get">
-                Filter by user or change description (use % as joker):
-                <input name="filter" value="${params?.filter?.encodeAsHTML()}" />
-                <input type="submit" value="Go" />
-            </form>
+            <g:if test="${session.user?.permission == 'admin'}">
+	            <form method="get">
+	                Filter by user or change description (use % as joker):
+	                <input name="filter" value="${params?.filter?.encodeAsHTML()}" />
+	                <input type="submit" value="Go" />
+	            </form>
+            </g:if>
             
             <div class="colspanlist">
                 <table>
@@ -41,9 +43,6 @@
                             <g:sortableColumn property="byUser" title="User"
                                 params="${filteredParams}"/>
                    	    
-                            <g:sortableColumn property="ipAddress" title="IP Address"
-                                params="${filteredParams}"/>
-                        
                             <g:sortableColumn property="changeDesc" title="Change Description"
                                 params="${filteredParams}"/>
                         
@@ -61,8 +60,6 @@
                                 id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()?.encodeAsHTML()}</g:link></td>
 
                             <td>${userEvent.byUser?.toString()?.encodeAsHTML()}</td>
-                        
-                            <td>${userEvent.ipAddress?.toString()?.encodeAsHTML()}</td>
                         
                             <td>${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
                             
