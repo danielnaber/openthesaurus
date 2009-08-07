@@ -95,13 +95,22 @@ class RedirectController extends BaseController {
    }
    
    def worddetail = {
-        Term term = Term.findByOriginalId(params.wmid)
-        if (term == null) {
-          flash.message = message(code:'notfound.termid.not.found', args:[params.wmid.encodeAsHTML()])
-          response.sendError(404)
-          return
-        }
-        permanentRedirect("term/edit/" + term.id)
+       try {
+         Integer.parseInt(params.wmid)
+       } catch (Exception e) {
+         // probably a spammer inserting a url into the parameter
+         log.info("crappy wmid parameter in redirect: " + params.id)
+         flash.message = message(code:'notfound.id.not.found', args:[params.wmid.encodeAsHTML()])
+         response.sendError(404)
+         return
+       }
+       Term term = Term.findByOriginalId(params.wmid)
+       if (term == null) {
+         flash.message = message(code:'notfound.termid.not.found', args:[params.wmid.encodeAsHTML()])
+         response.sendError(404)
+         return
+       }
+       permanentRedirect("term/edit/" + term.id)
    }
    
    private permanentRedirect(String url) {
