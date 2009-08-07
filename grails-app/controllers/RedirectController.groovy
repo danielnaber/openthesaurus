@@ -53,6 +53,11 @@ class RedirectController extends BaseController {
        permanentRedirect("tree/index")
    }
 
+   /* RSS feed */
+   def feed = {
+       permanentRedirect("feed")
+   }
+
    def variation = {
        if (params.lang == 'at') {
          permanentRedirect("synset/variation/at")

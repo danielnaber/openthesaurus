@@ -17,7 +17,10 @@ class UrlMappings {
  
       // word detail page:
       "/word_detail.php"(controller:'redirect', action:'worddetail')
-      
+
+      // the RSS feed page:
+      "/feed.xml"(controller:'redirect', action:'feed')
+
       // the other pages:
       "/background.php"(controller:'redirect', action:'gotoAbout')
       "/faq.php"(controller:'redirect', action:'faq')
