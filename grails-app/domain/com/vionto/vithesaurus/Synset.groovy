@@ -417,6 +417,7 @@ class Synset implements Cloneable {
         return URI_PREFIX + id
     }
 
+    // NOTE: you need to adapt Diff.java if you make changes here
     String toString() {
         if (terms.size() == 0) {
           return "[empty]"
