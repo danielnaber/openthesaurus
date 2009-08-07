@@ -34,7 +34,8 @@ public class Diff {
     // so that the comparison isn't just char-by-char:
     private static final String SPLIT_EXP = " =,";
 
-    private static final String NEW_SPLIT_EXP = "|=";
+    // this depends on the implementation of Synset.toString():
+    private static final String NEW_SPLIT_EXP = "·|=";
 
     /** to used to mark start of "added content" sections: */
     private static final String ADD_START = "<span class='add'>";
