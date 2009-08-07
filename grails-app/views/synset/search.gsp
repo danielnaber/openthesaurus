@@ -134,26 +134,29 @@
 
 					<h2><g:message code="result.wiktionary.headline"/></h2>
 					<g:if test="${wiktionaryResult}">
-						<ul>
-							<%
-							clean =
-							  { str -> str
-							    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
-							    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
-							    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
-							  };
-							%>
-							<g:if test="${wiktionaryResult.size() == 0}">
+						<%
+						clean =
+						  { str -> str
+						    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
+						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+						    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
+						  };
+						%>
+						<g:if test="${wiktionaryResult.size() == 0}">
+							<ul>
 								<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
-							</g:if>
-							<g:else>
-								<%
-								String meanings = wiktionaryResult.get(0).encodeAsHTML();
-								meanings = clean(meanings);
-								// TODO: make words links!
-								%>
+							</ul>
+						</g:if>
+						<g:else>
+							<%
+							String wiktionaryWord = wiktionaryResult.get(0).encodeAsHTML();
+							String meanings = wiktionaryResult.get(1).encodeAsHTML();
+							meanings = clean(meanings);
+							// TODO: make words links!
+							%>
+							<ul>
 								<li><b><g:message code="result.wiktionary.meanings"/></b>
-									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptyMeanings" value="${true}"/>
 									</g:if>
@@ -162,25 +165,25 @@
 									</g:else>
 								</li>
 								<li><b><g:message code="result.wiktionary.synonyms"/></b>
-									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptySynonyms" value="${true}"/>
 									</g:if>
 									<g:else>
 										<%
-										String synonyms = wiktionaryResult.get(1).encodeAsHTML();
+										String synonyms = wiktionaryResult.get(2).encodeAsHTML();
 										synonyms = clean(synonyms);
 										// TODO: make words links!
 										%>
 										${synonyms}</li>
 									</g:else>
-							</g:else>
-						</ul>
-						<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
-							<div class="copyrightInfo">
-								<g:message code="result.wiktionary.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
-							</div>
-						</g:if>
+							</ul>
+							<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
+								<div class="copyrightInfo">
+									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord.encodeAsHTML(),wiktionaryWord.encodeAsURL()]}"/>
+								</div>
+							</g:if>
+						</g:else>
 					</g:if>
 					<g:else>
 						<ul>

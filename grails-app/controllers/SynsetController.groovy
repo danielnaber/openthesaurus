@@ -278,6 +278,7 @@ class SynsetController extends BaseController {
       ResultSet resultSet = ps.executeQuery()
       def matches = []
       while (resultSet.next()) {
+        matches.add(resultSet.getString("headword"))
         matches.add(resultSet.getString("meanings"))
         matches.add(resultSet.getString("synonyms"))
         break; // we expect only one match
