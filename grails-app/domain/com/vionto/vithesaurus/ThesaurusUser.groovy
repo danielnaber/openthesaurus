@@ -28,6 +28,8 @@ class ThesaurusUser {
     String permission
     Date creationDate
     Date lastLoginDate
+    Date confirmationDate	// null until the account has been confirmed by following the email link
+    String confirmationCode	// random code generated and sent to user on registration
     boolean blocked		// used to completely block a user from logging in
     
     final static USER_PERM = "user"
@@ -39,6 +41,8 @@ class ThesaurusUser {
         permission(inList:[USER_PERM, ADMIN_PERM])
         realName(nullable:true)
         lastLoginDate(nullable:true)
+        confirmationDate(nullable:true)
+        confirmationCode(nullable:true)
     }
 
     static mapping = {
