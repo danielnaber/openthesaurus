@@ -65,13 +65,14 @@ class UserController extends BaseController {
             throw new Exception("Could not save user: ${user.errors}")
           }
         }
-        String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration"
-        sendMail {     
+        String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration?userId=${user.id}&code=${user.confirmationCode}"
+        sendMail {    
+          from message(code:'user.register.email.from')
           to params.userId
           subject message(code:'user.register.email.subject')     
           body message(code:'user.register.email.body', args:[activationLink]) 
         }
-        log.info("Sent registration mail to ${params.userId}")
+        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
       } else {
         //FIXME: show clean error, not exception; i18n 
         throw new Exception("User ${params.userId} already exists")
@@ -101,7 +102,8 @@ class UserController extends BaseController {
         user.confirmationDate = new Date()
         log.info("Confirming registration successful for ${params.userId}, ${params.code}")
         //FIXME: i18n
-        flash.message = "Your user account has been confirmed. You may now <a href='user/login'>log in</a>."
+        //flash.message = "Your user account has been confirmed. You may now <a href='login'>log in</a>."
+        flash.message = "Ihr Account wurde aktiviert - Sie können sich jetzt <a href='user/login'>einloggen</a>."
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
       }
     }
@@ -133,6 +135,11 @@ class UserController extends BaseController {
               log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): user is blocked")
               // deliberately show same message as otherwise... 
               flash.message = message(code:'user.invalid.login')
+              return
+            }
+            if (!user.confirmationDate) {
+              log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): account not confirmed")
+              flash.message = message(code:'user.unconfirmed.login')
               return
             }
             log.info("login successful for user ${user}")
