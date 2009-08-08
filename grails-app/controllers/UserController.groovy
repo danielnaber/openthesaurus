@@ -88,7 +88,7 @@ class UserController extends BaseController {
                             action: session.actionName)
                 }
             } else {
-                redirect(url:grailsApplication.config.thesaurus.serverURL)     // got to homepage
+                redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
           } else {
             log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()})")
@@ -106,7 +106,7 @@ class UserController extends BaseController {
         session.controllerName = null
         session.actionName = null
         flash.message = message(code:'user.logged.out')
-        redirect(uri:"")
+        redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
     }
     
     def list = {
