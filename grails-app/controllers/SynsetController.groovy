@@ -32,7 +32,7 @@ class SynsetController extends BaseController {
 
     // maximum distance for a term to be accepcted as similar term:
     final int MAX_DIST = 3
-
+    
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation']]
@@ -123,63 +123,72 @@ class SynsetController extends BaseController {
     def search = {
         long startTime = System.currentTimeMillis()
         
-        long partialMatchStartTime = System.currentTimeMillis()
-        List partialMatchResult = searchPartialResult(params.q)
-        long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
-        
-        long wikipediaStartTime = System.currentTimeMillis()
-        List wikipediaResult = searchWikipedia(params.q)
-        long wikipediaTime = System.currentTimeMillis() - wikipediaStartTime
+        Connection conn = null
+        try {
+          conn = dataSource.getConnection()
+          long partialMatchStartTime = System.currentTimeMillis()
+          List partialMatchResult = searchPartialResult(params.q, conn)
+          long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
+          
+          long wikipediaStartTime = System.currentTimeMillis()
+          List wikipediaResult = searchWikipedia(params.q, conn)
+          long wikipediaTime = System.currentTimeMillis() - wikipediaStartTime
 
-        long wiktionaryStartTime = System.currentTimeMillis()
-        List wiktionaryResult = searchWiktionary(params.q)
-        long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
-        
-        long similarStartTime = System.currentTimeMillis()
-        List similarTerms = searchSimilarTerms(params.q)
-        long similarTime = System.currentTimeMillis() - similarStartTime
+          long wiktionaryStartTime = System.currentTimeMillis()
+          List wiktionaryResult = searchWiktionary(params.q, conn)
+          long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
+          
+          long similarStartTime = System.currentTimeMillis()
+          List similarTerms = searchSimilarTerms(params.q, conn)
+          long similarTime = System.currentTimeMillis() - similarStartTime
 
-        Section section = null
-        Source source = null
-        Category category = null
-        if (!params['ajaxSearch']) {
-            if (params['section.id']) {
-                section = params['section.id'] == "null" ?
-                        null : Section.get(params['section.id'])
-            }
-            if (params['source.id']) {
-                source = params['source.id'] == "null" ?
-                        null : Source.get(params['source.id'])
-            }
-            if (params['category.id']) {
-                category = params['category.id'] == "null" ?
-                        null : Category.get(params['category.id'])
-            }
+          Section section = null
+          Source source = null
+          Category category = null
+          if (!params['ajaxSearch']) {
+              if (params['section.id']) {
+                  section = params['section.id'] == "null" ?
+                          null : Section.get(params['section.id'])
+              }
+              if (params['source.id']) {
+                  source = params['source.id'] == "null" ?
+                          null : Source.get(params['source.id'])
+              }
+              if (params['category.id']) {
+                  category = params['category.id'] == "null" ?
+                          null : Category.get(params['category.id'])
+              }
+          }
+          int offset = params.offset ? Integer.parseInt(params.offset) : 0
+          int maxResults = params.max ? Integer.parseInt(params.max) : 10
+          long dbStartTime = System.currentTimeMillis()
+          def searchResult = doSearch(params.q.trim(), section, source, category,
+                  maxResults, offset)
+          long dbTime = System.currentTimeMillis() - dbStartTime
+          long totalTime = System.currentTimeMillis() - startTime
+          log.info("Search time (ms):${totalTime} db:${dbTime} sim:${similarTime} "
+               + "substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} q:${params.q}")
+          [ partialMatchResult : partialMatchResult,
+            wikipediaResult : wikipediaResult,
+            wiktionaryResult : wiktionaryResult,
+            similarTerms : similarTerms,
+            synsetList : searchResult.synsetList,
+            totalMatches: searchResult.totalMatches,
+            completeResult: searchResult.completeResult,
+            upperBound: UPPER_BOUND,
+            runTime : totalTime ]
+
+        } finally {
+          if (conn != null) {
+            conn.close()
+          }
         }
-        int offset = params.offset ? Integer.parseInt(params.offset) : 0
-        int maxResults = params.max ? Integer.parseInt(params.max) : 10
-        long dbStartTime = System.currentTimeMillis()
-        def searchResult = doSearch(params.q.trim(), section, source, category,
-                maxResults, offset)
-        long dbTime = System.currentTimeMillis() - dbStartTime
-        long totalTime = System.currentTimeMillis() - startTime
-        log.info("Search time (ms):${totalTime} db:${dbTime} sim:${similarTime} "
-             + "substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} q:${params.q}")
-        [ partialMatchResult : partialMatchResult,
-          wikipediaResult : wikipediaResult,
-          wiktionaryResult : wiktionaryResult,
-          similarTerms : similarTerms,
-          synsetList : searchResult.synsetList,
-          totalMatches: searchResult.totalMatches,
-          completeResult: searchResult.completeResult,
-          upperBound: UPPER_BOUND,
-          runTime : totalTime ]
+              
     }
 
     /** Substring matches*/
-    private List searchPartialResult(String term) {
-      //TODO: connect only once?!
-      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+    private List searchPartialResult(String term, Connection conn) {
+      long t = System.currentTimeMillis()
       String sql = "SELECT word FROM memwords WHERE word LIKE ? LIMIT 0, 10"
       PreparedStatement ps = conn.prepareStatement(sql)
       ps.setString(1, "%" + term + "%")
@@ -198,7 +207,6 @@ class SynsetController extends BaseController {
       }
       resultSet.close()
       ps.close()
-      conn.close()
       return matches
    }
 
@@ -247,11 +255,10 @@ class SynsetController extends BaseController {
       ps.execute()
     }    
 
-    def searchWikipedia(String term) {
+    def searchWikipedia(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
         return null
       }
-      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
 		WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
       PreparedStatement ps = conn.prepareStatement(sql)
@@ -263,15 +270,13 @@ class SynsetController extends BaseController {
       }
       resultSet.close()
       ps.close()
-      conn.close()
       return matches
     }
 
-    def searchWiktionary(String term) {
+    def searchWiktionary(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wiktionaryLinks != "true") {
         return null
       }
-      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
       String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
       PreparedStatement ps = conn.prepareStatement(sql)
       ps.setString(1, term)
@@ -285,12 +290,10 @@ class SynsetController extends BaseController {
       }
       resultSet.close()
       ps.close()
-      conn.close()
       return matches
     }
     
-    def searchSimilarTerms(String term) {
-      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+    def searchSimilarTerms(String term, Connection conn) {
       String sql = """SELECT word, lookup FROM memwords 
 			WHERE ((
 				CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
@@ -329,7 +332,6 @@ class SynsetController extends BaseController {
       Collections.sort(matches)		// makes sure lowest distances come first
       resultSet.close()
       ps.close()
-      conn.close()
       return matches
     }
 
