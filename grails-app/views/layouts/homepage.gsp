@@ -2,6 +2,8 @@
 <html>
     <head>
         <title><g:layoutTitle default="Grails" /></title>
+        <meta name='keywords' content='Synonym, Synonyme, Synonymw&ouml;rterbuch, sinnverwandte W&ouml;rter' />
+        <meta name='description' content='OpenThesaurus ist ein freies deutsches Synonymw&ouml;rterbuch, bei dem jeder mitmachen kann.' />
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
