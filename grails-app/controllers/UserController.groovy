@@ -21,15 +21,91 @@ import java.security.MessageDigest
             
 class UserController extends BaseController {
     
-    def beforeInterceptor = [action: this.&auth, except: ['login']]
-  
+    def beforeInterceptor = [action: this.&auth, 
+                             except: ['login', 'register', 'doRegister', 'confirmRegistration']]
+
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST']
+
     def index = {
         redirect(action:list,params:params)
     }
 
-    // the delete, save and update actions only accept POST requests
-    static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
-
+    def register = {
+      []
+    }
+    
+    def doRegister = {
+      if (!params.userId) {
+        //FIXME: show clean error, not exception 
+        throw new Exception("Parameter email missing")
+      }
+      if (!ThesaurusUser.findByUserId(params.userId)) {
+        log.info("Creating user: " + params.userId)
+        if (params.password1 != params.password2) {
+          throw new Exception("Passwords don't match")
+        }
+        final int minPasswordLength = 4
+        if (params.password1.length() < minPasswordLength) {
+          throw new Exception("Password too short, must be ${minPasswordLength} or more")
+        }
+        def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
+            ThesaurusUser.USER_PERM)
+        user.confirmationDate = null
+        // generate a random code:
+        user.confirmationCode = ""
+        for (int i = 0; i < 1; i++) {
+          String partialCode = Math.random() + ""
+          user.confirmationCode += partialCode.replace(".", "")
+        }
+        if (!user.validate()) {
+          log.error("User validation failed: ${user.errors}")
+        } else {
+          boolean saved = user.save()
+          if (!saved) {
+            throw new Exception("Could not save user: ${user.errors}")
+          }
+        }
+        String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration"
+        sendMail {     
+          to params.userId
+          subject message(code:'user.register.email.subject')     
+          body message(code:'user.register.email.body', args:[activationLink]) 
+        }
+        log.info("Sent registration mail to ${params.userId}")
+      } else {
+        //FIXME: show clean error, not exception; i18n 
+        throw new Exception("User ${params.userId} already exists")
+      }
+      [email: params.userId]
+    }
+    
+    // called when clicking on the link in the email
+    def confirmRegistration = {
+      if (!params.userId || !params.code) {
+        throw new Exception("Parameters userId and/or code missing")
+      }
+      log.info("Confirming registration for ${params.userId}, ${params.code}")
+      def user = ThesaurusUser.get(params.userId)
+      if (!user) {
+        throw new Exception("User not found for id ${params.userId}")
+      }
+      if (user.confirmationDate) {
+        log.warn("Confirming registration had happened before for ${params.userId}, ${params.code}")
+        //FIXME: i18n
+        flash.message = "Your user account has already been confirmed before"
+        redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
+      } else {
+        if (user.confirmationCode != params.code) {
+          throw new Exception("Confirmation code invalid for ${params.userId}, ${params.code} != ${user.confirmationCode}")
+        }
+        user.confirmationDate = new Date()
+        log.info("Confirming registration successful for ${params.userId}, ${params.code}")
+        //FIXME: i18n
+        flash.message = "Your user account has been confirmed. You may now <a href='user/login'>log in</a>."
+        redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
+      }
+    }
+    
     /**
      * Show login page for GET request, handle login (authenticate + redirect)
      * otherwise.
