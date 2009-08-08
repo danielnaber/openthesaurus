@@ -316,6 +316,7 @@ class SynsetController extends BaseController {
         if (dbTerm.equals(lowerTerm)) {
           continue
         }
+        //TODO: use a fail-fast algorithm here (see Lucene's FuzzyTermQuery):
         int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
         if (dist <= MAX_DIST) {
           matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
