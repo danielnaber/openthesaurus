@@ -310,19 +310,20 @@ class SynsetController extends BaseController {
       ResultSet resultSet = ps.executeQuery()
       def matches = []
       // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
+      String lowerTerm = term.toLowerCase()
       while (resultSet.next()) {
         String dbTerm = resultSet.getString("word").toLowerCase()
-        if (dbTerm.equalsIgnoreCase(term)) {
+        if (dbTerm.equals(lowerTerm)) {
           continue
         }
-        int dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
+        int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
         if (dist <= MAX_DIST) {
           matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
         } else {
           dbTerm = resultSet.getString("lookup")
           if (dbTerm) {
             dbTerm = dbTerm.toLowerCase()
-            dist = StringUtils.getLevenshteinDistance(dbTerm, term.toLowerCase())
+            dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
             if (dist <= MAX_DIST) {
               matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
             }
