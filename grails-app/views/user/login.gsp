@@ -3,12 +3,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="login" />
-        <title>Login</title>         
+        <title><g:message code="user.login.title"/></title>         
     </head>
     <body>
 
         <div class="body">
-            <h1>Login</h1>
+        
+            <h1><g:message code="user.login.headline"/></h1>
+            
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
             </g:if>
@@ -24,7 +26,7 @@
                         
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='userId'>User:</label>
+                                    <label for='userId'><g:message code="user.login.form.username"/></label>
                                 </td>
                                 <td valign='top' class='value'>
                                     <input size="40" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
@@ -33,7 +35,7 @@
                         
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='password'>Password:</label>
+                                    <label for='password'><g:message code="user.login.form.password"/></label>
                                 </td>
                                 <td valign='top' class='value'>
                                     <input size="40" type="password" id='password' name='password' value=""/>
@@ -44,7 +46,7 @@
                     </table>
                 </div>
                 <div class="buttons">
-                    <span class="button"><input class="login" type="submit" value="Login"></input></span>
+                    <span class="button"><input class="login" type="submit" value="${message(code:'user.login.form.submit')}"></input></span>
                 </div>
             </g:form>
         </div>

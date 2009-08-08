@@ -56,12 +56,11 @@ class UserController extends BaseController {
             if (user.blocked) {
               log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): user is blocked")
               // deliberately show same message as otherwise... 
-              flash.message = "Invalid user id and/or password. " +
-                "Please also make sure cookies are enabled."
+              flash.message = message(code:'user.invalid.login')
               return
             }
             log.info("login successful for user ${user}")
-            flash.message = "Successfully logged in as '${user.userId.encodeAsHTML()}'"
+            flash.message = message(code:'user.logged.in')
             session.user = user
             user.lastLoginDate = new Date()
             def redirectParams = 
@@ -89,12 +88,11 @@ class UserController extends BaseController {
                             action: session.actionName)
                 }
             } else {
-                redirect(uri:"")        // got to homepage
+                redirect(url:grailsApplication.config.thesaurus.serverURL)     // got to homepage
             }
           } else {
             log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()})")
-            flash.message = "Invalid user id and/or password. " +
-              "Please also make sure cookies are enabled."
+            flash.message = message(code:'user.invalid.login')
           }
         }
     }
@@ -107,7 +105,7 @@ class UserController extends BaseController {
         session.user = null
         session.controllerName = null
         session.actionName = null
-        flash.message = "Successfully logged out"
+        flash.message = message(code:'user.logged.out')
         redirect(uri:"")
     }
     
