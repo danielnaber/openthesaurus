@@ -20,8 +20,6 @@ import com.vionto.vithesaurus.*
 
 class UserEventController extends BaseController {
     
-    def beforeInterceptor = [action: this.&auth ]
-
     def index = { redirect(action:list,params:params) }
 
     /**
@@ -34,9 +32,6 @@ class UserEventController extends BaseController {
         if (!params.order) params.order = "desc"
         params.max = params.max ? Integer.parseInt(params.max) : 10
         params.offset = params.offset ? Integer.parseInt(params.offset) : 0
-        
-        def myclosure = {
-        }
         
         def crit = UserEvent.createCriteria()
         int totalMatches = crit.count {
