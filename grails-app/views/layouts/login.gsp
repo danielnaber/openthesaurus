@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <div class="logo"><a href="${createLinkTo(dir:'',file:'')}"><img
+        <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
         	src="${createLinkTo(dir:'images',file:message(code:'logo'))}" 
         	alt="<g:message code='logo.alt.text'/>" /></a></div>
 
