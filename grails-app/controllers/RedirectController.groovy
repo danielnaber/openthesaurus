@@ -40,6 +40,14 @@ class RedirectController extends BaseController {
        permanentRedirect("synset/statistics")
    }
 
+   def login = {
+       permanentRedirect("user/login")
+   }
+
+   def register = {
+       permanentRedirect("user/register")
+   }
+
    /* A to Z */
    def az = {
        permanentRedirect("term/list")

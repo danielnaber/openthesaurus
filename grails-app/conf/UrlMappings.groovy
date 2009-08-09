@@ -32,6 +32,8 @@ class UrlMappings {
       "/imprint.php"(controller:'redirect', action:'imprint')
       "/variation.php"(controller:'redirect', action:'variation')
       "/tree.php"(controller:'redirect', action:'tree')
+      "/login.php"(controller:'redirect', action:'login')
+      "/register.php"(controller:'redirect', action:'register')
   }
 
 }
