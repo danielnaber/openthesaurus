@@ -12,7 +12,7 @@ html * {
 }
 
 .logo {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -354,6 +354,12 @@ img {
     padding: 5px;
     background: yellow;
     border: 2px solid red;
+}
+
+.lightwarning {
+    margin-top: 2px;
+    padding: 2px;
+    background: #fffaac;
 }
 
 .buildInfo {
