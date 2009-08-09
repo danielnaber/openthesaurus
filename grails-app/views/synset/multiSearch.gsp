@@ -49,6 +49,7 @@
             <table>
 
 
+			   <%--
                <tr class='prop'>
                    <td valign='top' class='name'>
                        <label for='section'>Thesaurus:</label>
@@ -57,7 +58,9 @@
                       <g:select name='section.id' optionKey="id" from="${Section.list().sort()}" value="${synset?.section?.id}" />
                    </td>
                </tr>
+               --%>
 
+			   <%--
                <tr class='prop'>
                    <td valign='top' class='name'>
                        <label for='source'>Source:</label>
@@ -72,6 +75,7 @@
                         value="${sourceValue}" />
                    </td>
                </tr>
+               --%>
 
                <tr class='prop'>
                    <td valign='top' class='name'>
@@ -79,7 +83,7 @@
                    </td>
                    <td valign='top' class='value ${hasErrors(bean:synset,field:'categoryLinks','errors')}'>
                        <select name="category.id" id="category.id" >
-                          <option value="null">[select one category]</option>
+                          <%--<option value="null">[select one category]</option> --%>
                           <g:each var="category" in="${Category.findAllByIsDisabled(false).sort()}">
                               <option value="${category.id}">${category.toString()?.encodeAsHTML()}
                                   <g:if test="${category.categoryType}">
@@ -95,14 +99,21 @@
                   <tr class='prop'>
                       <td valign='top' class='name'>
                           <g:if test="${i == 0}">
-                              <label for='synsetLinks'>Add Terms:</label>
+                              <label for='synsetLinks'>First Term:</label>
                           </g:if>
                       </td>
                       <td valign='top' class='value ${hasErrors(bean:newTerm,'errors')}'>
 
-                          <input class="termInput" name="word_${i}" value="${term}" />&nbsp;
+                          <input class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />&nbsp;
 
-                          <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+						  <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
+						  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+						  </g:if>
+						  <g:else>
+	                          <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+						  </g:else>
+                          
+                          <%--
                           <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                           <g:set var="wordForm" value="wordForm_${i}"/>
                           <g:if test="${params[wordForm] && params[wordForm] != 'common'}">
@@ -131,6 +142,7 @@
                           <g:if test="${i == 0}">
                             <br /><span class="hintText">This will be the preferred term</span>
                           </g:if>
+                          --%>
 
                       </td>
                   </tr>
