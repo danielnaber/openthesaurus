@@ -8,16 +8,6 @@
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
-          var appletIsVisible = true;
-          function toggleApplet() {
-            if (appletIsVisible) {
-              document.getElementById('ontologyApplet').style.display='none';
-              appletIsVisible = false;
-            } else {
-              document.getElementById('ontologyApplet').style.display='block';
-              appletIsVisible = true;
-            }
-          }
           function loadSearch() {
             document.getElementById('addSynsetProgress').style.position='relative';
             document.getElementById('addSynsetProgress').style.visibility='visible';
@@ -196,13 +186,19 @@
                                     <div id="newTerm" style="display:none">
                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
                                             <input class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
-                                            <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+                                 		    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
+											  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+						  					</g:if>
+						  					<g:else>
+	                          					<g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+						  					</g:else>
+                                            <%-- 
                                             <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                                             <br />
                                             <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
                                             <label><g:radio id="wordFormAcronym_${i}" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
                                             <label><g:radio id="wordFormAbbreviation_${i}" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
-                                            <br />
+                                            --%>
                                             <% i++ %>
                                             <br />
                                         </g:while>
@@ -475,7 +471,7 @@
                     <g:each var='event' in='${eventList}' status='i'>
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                             <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
-                            <td>${event.byUser.toString()?.encodeAsHTML()}</td>
+                            <td>${event.byUser.realName?.encodeAsHTML()}</td>
                             <td>${event.changeDesc?.encodeAsHTML()}</td>
                             <td>${diffs.get(event)}</td>
                         </tr>
