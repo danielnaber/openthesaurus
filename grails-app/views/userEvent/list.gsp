@@ -37,38 +37,35 @@
                         
                             <g:sortableColumn property="creationDate" title="Date" 
                                 params="${filteredParams}"/>
-                        
-                            <th>Concept</th>
 
                             <g:sortableColumn property="byUser" title="User"
                                 params="${filteredParams}"/>
-                   	    
+                        
+                            <th></th>
+
                             <g:sortableColumn property="changeDesc" title="Change Description"
                                 params="${filteredParams}"/>
                         
-                            <th>Type</th>
-
                         </tr>
                     </thead>
                     <tbody>
                     <g:each in="${userEventList}" status="i" var="userEvent">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${userEvent.creationDate}"/></td>
+                            <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${userEvent.creationDate}"/></td>
+
+                            <td>${userEvent.byUser?.realName?.encodeAsHTML()}</td>
 
                             <td><g:link controller="synset" action="edit" 
                                 id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()?.encodeAsHTML()}</g:link></td>
 
-                            <td>${userEvent.byUser?.toString()?.encodeAsHTML()}</td>
-                        
                             <td>${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
-                            
-                            <td>${typeNames.get(userEvent)}</td>
-                                
+
                         </tr>
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                             <td></td>
-                            <td colspan="6">${diffs.get(userEvent)}</td>
+                            <td></td>
+                            <td colspan="2">${diffs.get(userEvent)}</td>
                         </tr>
                     </g:each>
                     </tbody>
