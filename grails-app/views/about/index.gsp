@@ -27,22 +27,11 @@ den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen
 und neue hinzufügen. Findet die Suche keine Treffer, wird ein Link 
 angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 
-<!-- 
-<p>Zur Mitarbeit ist eine <a
-href="register.php">Registrierung</a> erforderlich.
-Vorher sollte man diese FAQ zu Ende lesen, um die
-wichtigsten Regeln für das Ändern und Einfügen von
-Wörtern zu kennen. Man sollte auch verstehen, 
-wie die Thesaurusdaten hier
-strukturiert sind - nämlich nach Bedeutungen. Wenn es also
-von einem Wort wie <span class="bsp">Bank</span> mehrere
-Bedeutungen gibt, so muss <em>pro Bedeutung ein Eintrag</em> existieren.</p>
- -->
 
 <h2>Änderungen und News zu OpenThesaurus</h2>
 
 <ul>
-	<li><a href="feed.xml">RSS-Feed aller Aktualisierungen an den Daten</a></li>
+	<li><a href="../feed">RSS-Feed aller Aktualisierungen an den Daten</a></li>
 	<li><a href="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">OpenThesaurus Mailingliste</a> (sehr wenig Traffic)
 		<ul>
 			<li><a href="http://lists.berlios.de/pipermail/openthesaurus-discuss/">Archiv</a></li>
@@ -52,10 +41,13 @@ Bedeutungen gibt, so muss <em>pro Bedeutung ein Eintrag</em> existieren.</p>
 
 <h2>Papers über OpenThesaurus</h2>
 
+<p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
+Dokumentation exisitiert bisher leider nicht.</p>
+
 <ul>
 	<li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
 	offenes deutsches Wortnetz (PDF, 536&nbsp;KB)</a></li>
-	<li><a href="download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
+	<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
 </ul>
 
 <h2>OpenThesaurus auf dem Mac</h2>
@@ -72,10 +64,10 @@ Bedeutungen gibt, so muss <em>pro Bedeutung ein Eintrag</em> existieren.</p>
 	<li><a href="http://www.opentaal.org/opentaalbank/thesaurus">Niederländisch</a></li>
 	<li><a href="http://synonimy.sourceforge.net/">Polnisch</a></li>
 	<li><a href="http://openthesaurus.caixamagica.pt/">Portugiesisch</a></li>
-	<!-- <li><a href="http://www.openthesaurus.tk">Slowakisch</a></li>  -->
+	<li><a href="http://www.openthesaurus.tk">Slowakisch</a></li>
 	<li><a href="http://www.tezaver.si/">Slowenisch</a></li>
 	<li><a href="http://openthes-es.berlios.de">Spanisch</a></li>
-          <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
+    <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
 </ul>
 
 <h2>Basis dieser Website</h2>
