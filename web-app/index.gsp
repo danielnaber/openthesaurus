@@ -34,21 +34,18 @@
 	        	<g:link controller="about"><g:message code="homepage.about"/></g:link> &middot;
 	        	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> &middot;
 	        	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> &middot;
-	        	<g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link> &middot;
-	        	<g:link controller="synset" action="statistics"><g:message code="homepage.top_users"/></g:link> 
+	        	<g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link>
 			</p>
 	
-	        <p class="mainpage"><br />
+	        <p class="mainpage">
 		        <!-- 
 	            <g:link controller="term" action="list"><g:message code="a_to_z"/></g:link> &middot;
 	             -->
 	            <g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link> &middot;
 	            <g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link> &middot;
 	            <g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link> &middot;
-	            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link>
-	            <%--FIXME 
-	            &middot; <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
-	            --%>
+	            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link> &middot;
+	            <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
 	        </p>
 
 			<div class="homepagecredits"><g:message code="homepage.credits"/></div>
