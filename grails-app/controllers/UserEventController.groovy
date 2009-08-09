@@ -67,8 +67,4 @@ class UserEventController extends BaseController {
           totalMatches: totalMatches ]
     }
 
-    def show = {
-        [ userEvent : UserEvent.get( params.id ) ]
-    }
-
 }
