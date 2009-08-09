@@ -61,5 +61,6 @@
 <script type="text/javascript">
 <!--
     document.searchform.q.focus();
+	document.searchform.q.select();
 // -->
 </script>
