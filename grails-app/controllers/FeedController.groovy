@@ -57,7 +57,11 @@ class FeedController extends BaseController {
            } else {
              desc += " ??? (${event.eventType})"
            } 
-           desc += " von Benutzer ${event.byUser.encodeAsHTML()}: "
+           String username = event.byUser.realName
+           if (!username) {
+             username = "[anonym]"
+           }
+           desc += " von Benutzer ${username.encodeAsHTML()}: "
            entry(event.synset.toShortString(5)) {
              publishedDate = event.creationDate
              //actually <guid> must be unique but I cannot set this it seems, so let's make
