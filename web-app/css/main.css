@@ -32,8 +32,9 @@ html * {
 
 body {
     background: #fff;
-    font: 11px verdana, arial, helvetica, sans-serif;
+    font-family: verdana, arial, helvetica, sans-serif;
     margin-bottom: 30px;
+	line-height: 1.5em;
 }
 
 a:link, a:visited {
