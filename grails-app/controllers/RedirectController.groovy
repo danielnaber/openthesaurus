@@ -84,6 +84,16 @@ class RedirectController extends BaseController {
        permanentRedirect("synset/search?q=" + q)
    }
 
+   def substringSearch = {
+       if (!params.word) {
+         log.info("missing 'word' parameter in redirect from overview")
+         response.sendError(500, "Parameter 'word' must be specified")
+         return
+       }
+       String q = URLEncoder.encode(params.word, "UTF-8")
+       permanentRedirect("synset/substring?q=" + q)
+   }
+
    def gotoAbout = {
        permanentRedirect("about/index")
    }

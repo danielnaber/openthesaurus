@@ -34,6 +34,7 @@ class UrlMappings {
       "/tree.php"(controller:'redirect', action:'tree')
       "/login.php"(controller:'redirect', action:'login')
       "/register.php"(controller:'redirect', action:'register')
+      "/substring_search.php"(controller:'redirect', action:'substringSearch')
   }
 
 }

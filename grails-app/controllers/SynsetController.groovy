@@ -35,7 +35,7 @@ class SynsetController extends BaseController {
     
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'edit', 'statistics',
-                                      'createMemoryDatabase', 'variation']]
+                                      'createMemoryDatabase', 'variation', 'substring']]
 
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
@@ -127,7 +127,9 @@ class SynsetController extends BaseController {
         try {
           conn = dataSource.getConnection()
           long partialMatchStartTime = System.currentTimeMillis()
-          List partialMatchResult = searchPartialResult(params.q, conn)
+          // we display 10 match in the page and use the next one (if any) to
+          // decide whether there are more matches:
+          List partialMatchResult = searchPartialResult(params.q, conn, 0, 11)
           long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
           
           long wikipediaStartTime = System.currentTimeMillis()
@@ -186,16 +188,43 @@ class SynsetController extends BaseController {
               
     }
 
-    /** Substring matches*/
-    private List searchPartialResult(String term, Connection conn) {
+    def substring = {
+      if(!params.offset) params.offset = "0"
+      if(!params.max) params.max = "20"
+      int offset = Integer.parseInt(params.offset)
+      int maxMatches = Integer.parseInt(params.max)
+      Connection conn = null
+      try {
+        conn = dataSource.getConnection()
+        List partialMatchResult = searchPartialResult(params.q, conn, offset, maxMatches)
+        // get total matches:
+        String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
+        PreparedStatement ps = conn.prepareStatement(sql)
+        ps.setString(1, "%" + params.q + "%")
+        ResultSet resultSet = ps.executeQuery()
+        resultSet.next()
+        int totalMatches = resultSet.getInt("totalMatches")
+        resultSet.close()
+        ps.close()
+        [matches: partialMatchResult, totalMatches: totalMatches]
+      } finally {
+        if (conn != null) {
+          conn.close()
+        }
+      }
+     }
+    
+    /** Substring matches */
+    private List searchPartialResult(String term, Connection conn, int fromPos, int maxNum) {
       long t = System.currentTimeMillis()
-      String sql = "SELECT word FROM memwords WHERE word LIKE ? LIMIT 0, 10"
+      String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
       PreparedStatement ps = conn.prepareStatement(sql)
       ps.setString(1, "%" + term + "%")
       ResultSet resultSet = ps.executeQuery()
       def matches = []
       Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
+        log.info("match")
         String matchedTerm = resultSet.getString("word")
         if (matchedTerm == term) {
           continue
