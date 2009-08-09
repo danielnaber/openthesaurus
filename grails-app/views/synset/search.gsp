@@ -66,9 +66,7 @@
             </ul>
 			</div>
 
-            <g:if test="${totalMatches > 0}">
-             	<g:render template="/ads/resultpage_results"/>
-            </g:if>	
+          	<g:render template="/ads/resultpage_results"/>
 			
 			<br />
 			
