@@ -97,6 +97,24 @@
 							<li><span class="light"><g:message code="result.no.matches"/></span></li>
 						</g:if>
 					</ul>
+
+					<h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
+					
+		            <g:render template="/external_links" model="${[q:params.q]}"/>
+		
+		            <br/>
+		            <p>
+		                <g:if test="${params.q}">
+		                    <g:set var="cleanTerm" value="${params.q.trim().replaceAll('[*%~]', '').replaceAll('[*_~]', '')}" />
+		                    <g:link action="create" params="[term : cleanTerm]">
+		                        <img src="../images/skin/database_add.png" alt="Add icon" />
+		                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+		                    </g:link>
+		                </g:if>
+		                <g:else>
+		                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
+		                </g:else>
+		            </p>
 					
 				<td></td>
 				<td width="45%">
@@ -216,22 +234,6 @@
                 </g:link>
             </g:if>
             --%>
-
-			<!--  FIXME: comment in again
-            <br/>
-            <p>
-                <g:if test="${params.q}">
-                    <g:set var="cleanTerm" value="${params.q.trim().replaceAll('[*%~]', '').replaceAll('[*_~]', '')}" />
-                    <g:link action="create" params="[term : cleanTerm]">
-                        <img src="../images/skin/database_add.png" alt="Add icon" />
-                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
-                    </g:link>
-                </g:if>
-                <g:else>
-                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
-                </g:else>
-            </p>
-             -->
 
         </div>
     </body>
