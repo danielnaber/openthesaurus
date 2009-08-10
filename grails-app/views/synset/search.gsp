@@ -13,7 +13,7 @@
 				<g:render template="/ads/resultpage"/>
 			</div>
 
-            <h1><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h1>
+            <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
