@@ -143,6 +143,13 @@ class SynsetController extends BaseController {
     def search = {
         long startTime = System.currentTimeMillis()
         
+        if (!params.q) {
+          log.warn("No query specified for search (${request.getRemoteAddr()})")
+          response.status = 500
+          render message(code:'result.no.query.specified')
+          return
+        }
+        
         Connection conn = null
         try {
           conn = dataSource.getConnection()
