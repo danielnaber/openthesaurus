@@ -52,6 +52,12 @@ Please refer to the container's documentation on how to do that.
    ALTER TABLE `wiktionary` CHANGE `headword` `headword` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
      CHANGE `meanings` `meanings` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
      CHANGE `synonyms` `synonyms` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `user_event` CHANGE `old_value` `old_value` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `user_event` CHANGE `new_value` `new_value` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `user_event` CHANGE `class` `class` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+   ALTER TABLE `user_event` CHANGE `change_desc` `change_desc` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `user_event` CHANGE `ip_address` `ip_address` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+   ALTER TABLE `user_event` CHANGE `word` `word` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;    
 
 7. The default administration account is "admin" with the password "admin" - make
    sure this is changed after your first login. If you are logged in as admin, the
