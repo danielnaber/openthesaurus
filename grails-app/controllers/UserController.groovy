@@ -152,7 +152,7 @@ class UserController extends BaseController {
                 redirectParams.id = redirectParams.origId
             }
             // TODO: there must be a better way for this "redirect after 
-            // login" problem:
+            // login" problem (maybe "originalRequestParameters"?)
             if (redirectParams?.controller && redirectParams?.action) {
                 redirect(controller:redirectParams?.controller,
                         action: redirectParams?.action, params:redirectParams)
