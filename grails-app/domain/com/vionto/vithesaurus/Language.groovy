@@ -24,6 +24,8 @@ class Language {
     
   String longForm
   String shortForm
+  /** If disabled == true, cannot be selected when creating new synsets or terms */
+  Boolean isDisabled
 
   static mapping = {
       //id generator:'sequence', params:[sequence:'language_seq']
@@ -40,6 +42,7 @@ class Language {
   static constraints = {
       shortForm(unique:true)
       longForm(unique:true)
+      isDisabled(nullable:true)
   }
   
   String toString() {
