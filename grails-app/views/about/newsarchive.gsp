@@ -329,7 +329,8 @@
 </tr>
 </table>
 
-<br />
+<g:render template="/ads/newsarchive_bottom"/>
+
 		</div>
 
     </body>
