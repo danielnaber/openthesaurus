@@ -22,7 +22,12 @@ class AdminController extends BaseController {
     def beforeInterceptor = [action: this.&adminAuth]
     
     def index = {
-        []
+        final int resultLimit = 10
+        def latestUsers = ThesaurusUser.withCriteria {
+          order("creationDate", "desc")
+          maxResults(resultLimit)
+        }
+        [latestUsers: latestUsers, resultLimit: resultLimit]
     }
 
 }
