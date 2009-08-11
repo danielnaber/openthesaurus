@@ -399,7 +399,7 @@ class SynsetController extends BaseController {
       } else if (params.id == 'at') {
         limit = "österr."
       } else {
-        throw new Exception("Unknown variation")
+        throw new Exception("Unknown variation '${params.id}'")
       }
       String headline = message(code:'variation.headline.' + params.id)
       String title = message(code:'variation.title.' + params.id)
