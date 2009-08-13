@@ -147,7 +147,7 @@
 						</ul>
 						<g:if test="${wikipediaResult.size() > 0}">
 							<div class="copyrightInfo">
-								<g:message code="result.wikipedia.license" args="${[params.q.encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
+								<g:message code="result.wikipedia.license" args="${[params.q.replaceAll(' ', '_').encodeAsURL(),params.q.encodeAsHTML(),params.q.encodeAsURL()]}"/>
 							</div>
 						</g:if>
 					</g:if>
