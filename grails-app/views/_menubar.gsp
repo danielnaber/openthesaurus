@@ -25,6 +25,3 @@
                   actionName:webRequest.getActionName()]">Login</g:link>
     </g:else>
 </g:else>
-
-<br />
-<span class="lightwarning">OpenThesaurus wird renoviert! Demn&auml;chst ist der Login wieder m&ouml;glich</span>
