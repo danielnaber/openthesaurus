@@ -328,22 +328,25 @@
 
                             </g:if>
 
-                            <tr class='prop'>
-                                <td class='name'>
-                                    <label for='section'><g:message code='edit.thesaurus'/></label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:synset,field:'section','errors')}'>
-                                    <g:if test="${session.user}">
-                                        <g:select name="section.id" from="${Section.list()}" optionKey="id"
-                                            value="${synset.section?.id}" />
-                                    </g:if>
-                                    <g:else>
-                                        ${synset.section}
-                                    </g:else>
-                                </td>
-                            </tr>
+                            <g:if test="${Section.count() > 1}">
+	                            <tr class='prop'>
+	                                <td class='name'>
+	                                    <label for='section'><g:message code='edit.thesaurus'/></label>
+	                                </td>
+	                                <td valign='top' class='value ${hasErrors(bean:synset,field:'section','errors')}'>
+	                                    <g:if test="${session.user}">
+	                                        <g:select name="section.id" from="${Section.list()}" optionKey="id"
+	                                            value="${synset.section?.id}" />
+	                                    </g:if>
+	                                    <g:else>
+	                                        ${synset.section}
+	                                    </g:else>
+	                                </td>
+	                            </tr>
+                            </g:if>
 
 
+							<%--
                             <tr class='prop'>
                                 <td class='name'></td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'isVisible','errors')}'>
@@ -351,6 +354,7 @@
                                         value="${synset?.isVisible}" checked="${synset?.isVisible}" />&nbsp;Concept is visible</label>
                                 </td>
                             </tr>
+                            --%>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
@@ -377,6 +381,9 @@
                                                 <g:textArea id='userComment' name='userComment' value="${synset.userComment}"/>
                                             </div>
                                         </g:if>
+                                        <g:else>
+                                        	<span class="metaInfo">[none]</span>
+                                        </g:else>
                                     </g:else>
 
                                 </td>
