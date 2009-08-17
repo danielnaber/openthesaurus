@@ -479,6 +479,8 @@
                 </table>
             </g:if>
 
+       		<g:render template="/ads/edit_bottom"/>
+
         </div>
     </body>
 </html>
