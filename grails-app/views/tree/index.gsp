@@ -49,31 +49,6 @@
             </tr>
             </table>
              
-
-            <div class="list">
-
-<!-- 
-		<ul class="tree">
-		<li>durchführen, handeln, machen, realisieren, ...			
-		<ul class="tree">
-	<li>agieren, handeln, walten, wirken
-	</li>
-	<li> (sich) ändern, (sich) verändern, (sich) verwandeln, (sich) wandeln, ...
-	</li>
-	<li> aufweisen, besitzen, bieten, haben, ...
-	</li>
-	<li> (sich) austauschen, (sich) verständigen, kommunizieren
-	</li>
-	<li> sonstige Verben
-	</li>
-	<li> (sinnlich oder geistig) wahrnehmen
-	</li>
-	<li> sich körperlich betätigen
- -->
-            
-            
-            </div>
-            
             <g:render template="/ads/tree_bottom"/>
 
         </div>
