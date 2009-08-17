@@ -616,3 +616,7 @@ p {
 	color: #888888;
 	font-weight: bold;
 }
+
+ul.tree {
+	list-style: none;
+}

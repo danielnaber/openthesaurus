@@ -16,7 +16,35 @@
             
             <table style="border:0px">
             <tr>
-            	<td><p><g:message code="tree.intro" /></p></td>
+            	<td><p><g:message code="tree.intro" /></p>
+
+					<h2><g:message code="tree.nouns" /></h2>
+					
+					<ul class="tree">
+						<li>
+							<%=topNounSynset%>
+						</li>
+						<li>
+							<ul class="tree">
+								<%=nounTree%>
+							</ul>
+						</li>
+					</ul>
+					
+					<h2><g:message code="tree.verbs" /></h2>
+
+					<ul class="tree">
+						<li>
+							<%=topVerbSynset%>
+						</li>
+						<li>
+							<ul class="tree">
+								<%=verbTree%>
+							</ul>
+						</li>
+					</ul>
+            	
+            	</td>
             	<td><g:render template="/ads/tree_right"/></td>
             </tr>
             </table>
@@ -24,22 +52,7 @@
 
             <div class="list">
 
-			<!-- TODO: make this list dynamic again -->
-            <ul class="tree">
-			<li>Irgendetwas		<ul class="tree">
-			<li> Aktion, Handlung, Operation, Tat</li>
-			<li> Befindlichkeit, Konstitution, Stand, Status, ...</li>
-			<li> Begebenheit, Ereignis, Geschehnis, Vorfall, ...</li>
-			<li> Bündelung, Clusterung, Gruppierung</li>
-			<li> Entität, Instanz</li>
-			<li> Abstraktion</li>
-			<li> Darbietung, Event, Fest, Veranstaltung, ...</li>
-			<li> Freizeitaktivität, Hobby, Steckenpferd
-			</li>
-			</ul>
-			</li>
-			</ul>
-
+<!-- 
 		<ul class="tree">
 		<li>durchführen, handeln, machen, realisieren, ...			
 		<ul class="tree">
@@ -56,11 +69,7 @@
 	<li> (sinnlich oder geistig) wahrnehmen
 	</li>
 	<li> sich körperlich betätigen
-
-	</li>
-	</ul>
-		</li>
-	</ul>
+ -->
             
             
             </div>
