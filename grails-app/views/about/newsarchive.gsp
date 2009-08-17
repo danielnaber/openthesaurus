@@ -156,8 +156,7 @@
 		die in Klammern Zusatzinformationen haben, z.B. <span class="bsp">Velo (schweiz.)</span>. Bisher 
 		wurde dieser Eintrag bei der Suche nach <span class="bsp">Velo</span> nicht gefunden, mit der 
 		aktuellen Version geht das jetzt. Insgesamt betrifft das ca. 1000 Wörter, 
-		ein Update (in OpenOffice.org über "Assistenten" -&gt; "Weitere Wörterbücher installieren") lohnt sich also.
-		Siehe auch <a href="faq.php#ooo">den Eintrag in der FAQ</a>.</td>
+		ein Update (in OpenOffice.org über "Assistenten" -&gt; "Weitere Wörterbücher installieren") lohnt sich also.</td>
 </tr>
 
 <tr><td>&nbsp;</td></tr>
@@ -214,7 +213,7 @@
 	<td valign="top" align="right" width="90"><span class="newsdate">2004-04-07</span></td>
 	<td valign="top">Aus Geschwindigkeitsgründen kann die Datenbank-Statistik
 		auf der Homepage nur noch alle 10 Minuten aktualisiert werden. Die
-		<a href="top_users.php">Benutzer-Top10</a> wird weiterhin
+		<a href="../top_users.php">Benutzer-Top10</a> wird weiterhin
 		 in Echtzeit aktualisiert.
 	</td>
 </tr>
@@ -227,7 +226,7 @@
 </tr>
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2004-03-31</span></td>
-	<td valign="top">Neues Feature: <a href="top_users.php">Benutzer-Top10</a>
+	<td valign="top">Neues Feature: <a href="../top_users.php">Benutzer-Top10</a>
 		-- listet die Top 15 der Benutzer, die in den letzten 7 bzw. 365 Tagen
 		die meisten Beiträge geleistet haben. Aus Datenschutzgründen
 		muss man als Benutzer erst auf der Seite <a href="prefs.php">Einstellungen</a>
@@ -249,9 +248,7 @@
 			Begriffe in den Daten, also Wörter ohne Synonyme. Das hat seine
 			Richtigkeit, denn es wird jetzt eine Begriffshierarchie aufgebaut.
 			Oberster Begriff, der alle anderen Nomen umfasst, ist
-			<a href="synset.php?id=<?php print TOP_SYNSET_ID?>"><?php
-				print TOP_SYNSET_NAME ?></a>.
-			Mehr dazu in der <a href="faq.php#hierarchie">FAQ</a>.</td>
+			<a href="${createLink(controller:'synset', action:'edit', id:11619)}">'Irgendetwas'</a>.</td>
 </tr>
 
 <tr><td>&nbsp;</td></tr>
