@@ -918,7 +918,7 @@ class SynsetController extends BaseController {
     /**
      * Used to create a synset from the list of concept suggestions (via Ajax).
      */
-    def createSynset = {
+    /*def createSynset = {
         if (!params.term) throw new Exception("parameter 'term' must be set")
         if (!params["language.id"]) throw new Exception("parameter 'language.id' must be set")
         if (!params["section.id"]) throw new Exception("parameter 'section.id' must be set")
@@ -965,7 +965,7 @@ class SynsetController extends BaseController {
         }
         render(template:"/synsetSuggestion/createdSynset", model:[id:synset.id,
             term: params.term])
-    }
+    }*/
     
     def save = {
         def synset = new Synset(params)
