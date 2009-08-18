@@ -57,7 +57,7 @@ class SynsetValidator {
             assert (synset.categoryLinks)
             //assert (synset.synsetPreferredTerm)
             assert (synset.terms)
-            assert (synset.section)
+            //assert (synset.section)
             assert (synset.terms.size() > 0)
             assert (synset.terms.size() >= synset.preferredTermLinks.size())
             // validate the synset components in detail
