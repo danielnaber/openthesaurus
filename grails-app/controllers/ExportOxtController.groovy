@@ -38,12 +38,12 @@ class ExportOxtController extends BaseController {
       BufferedWriter bwIdx = new BufferedWriter(fwIdx);
       
       int indexPos = 0      indexPos = dataWrite(encoding + "\n", bw, indexPos)
-      bwIdx.write(encoding + "\n")      
+      bwIdx.write(encoding + "\n")            log.info("Collecting terms")
       def termList = Term.withCriteria {
         synset {
             eq('isVisible', true)
         }
-        order("word", "asc")      }      bwIdx.write(termList.size() + "\n")      Set allWordsSet = new HashSet()	// to avoid dupes      List allWords = []      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        // avoid duplicates here:        if (!allWordsSet.contains(normTerm)) {          allWords.add(normTerm)        }        allWordsSet.add(normTerm)      }      Collections.sort(allWords, String.CASE_INSENSITIVE_ORDER)                
+        order("word", "asc")      }      bwIdx.write(termList.size() + "\n")      log.info("Removing duplicate terms (total terms: ${termList.size()})")      //Set allWordsSet = new HashSet()	// to avoid dupes -- faster but uses too much memory      List allWords = []      int i = 0      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        // avoid duplicates here:        if (!allWords.contains(normTerm)) {          allWords.add(normTerm)        }      }      log.info("Sorting terms")      Collections.sort(allWords, String.CASE_INSENSITIVE_ORDER)                
       log.info("Exporting " + termList.size() + " terms")
       int count = 0
       SynsetController ctrl = new SynsetController()
