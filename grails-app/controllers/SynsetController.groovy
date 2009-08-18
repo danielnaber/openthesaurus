@@ -252,7 +252,7 @@ class SynsetController extends BaseController {
       Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
         String matchedTerm = resultSet.getString("word")
-        if (matchedTerm == term) {
+        if (matchedTerm.toLowerCase() == term.toLowerCase()) {
           continue
         }
         String result = matchedTerm.encodeAsHTML()
