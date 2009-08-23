@@ -554,6 +554,45 @@ class SynsetController extends BaseController {
         }
     }
 
+    def hide = {
+        hideSynset(true, message(code:'edit.delete.missing.comment'),
+            message(code:'edit.delete.success'))
+    }
+    
+    def unhide = {
+        hideSynset(false, message(code:'edit.delete.missing.comment'),
+            message(code:'edit.undelete.success'))
+    }
+    
+    private hideSynset(boolean hide, String errorMsg, String successMsg) {
+        def synset = Synset.get(params.id)
+        def origSynset = synset.clone()
+        
+        if (!params.changeComment || params.changeComment.trim().equals("")) {
+            synset.errors.reject('thesaurus.error',
+                  [].toArray(), errorMsg)
+            render(view:'edit',model:[synset:synset],
+                  contentType:"text/html", encoding:"UTF-8")
+            return
+        }
+        
+        // "delete" the synset: 
+        synset.isVisible = !hide
+        
+        LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
+            origSynset, synset, params.changeComment)
+        if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
+            flash.message = successMsg
+            redirect(action:edit,id:synset.id)
+        }
+        else {
+            synset.errors.reject('thesaurus.error',
+                [].toArray(), 'Could not save and/or log changes')
+            render(view:'edit',model:[synset:synset],
+                    contentType:"text/html", encoding:"UTF-8")
+        }
+    }
+    
     def update = {
         def synset = Synset.get(params.id)
         def origSynset = synset.clone()

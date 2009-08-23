@@ -345,17 +345,24 @@
 	                            </tr>
                             </g:if>
 
-
-							<%--
-                            <tr class='prop'>
-                                <td class='name'></td>
-                                <td valign='top' class='value ${hasErrors(bean:synset,field:'isVisible','errors')}'>
-                                    <label for='isVisible'><g:managedCheckBox id="isVisible" disabled="${!session.user}" name='isVisible'
-                                        value="${synset?.isVisible}" checked="${synset?.isVisible}" />&nbsp;Concept is visible</label>
-                                </td>
-                            </tr>
-                            --%>
-
+			                <g:if test="${session.user}">
+	                            <tr class='prop'>
+	                                <td class='name'>
+	                                    <label for='section'><g:message code='edit.delete'/></label>
+	                                </td>
+	                                <td valign='top'>
+					                    <div class="buttons">
+					                    	<g:if test="${synset.isVisible}">
+						            			<span class="submitButton"><g:actionSubmit action="hide" class="save" value="${message(code:'edit.delete.button')}" /></span>
+					                    	</g:if>
+					                    	<g:else>
+						            			<span class="submitButton"><g:actionSubmit action="unhide" class="save" value="${message(code:'edit.undelete.button')}" /></span>
+					                    	</g:else>
+					                    </div>
+	                                </td>
+	                            </tr>
+			                </g:if>
+			                
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='userComment'><g:message code='edit.comment'/></label>
@@ -457,12 +464,12 @@
                 </div>
 
                 <g:if test="${session.user}">
-                    <div class="buttons" style="padding-right: 6px;">
+                    <div class="buttons">
                         <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
                     </div>
                 </g:if>
             </g:form>
-
+            
             <g:if test="${eventList}">
                 <!-- is not always set, e.g. after error -->
                 <br />
