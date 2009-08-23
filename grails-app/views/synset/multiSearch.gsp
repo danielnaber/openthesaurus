@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Matches for '${params.terms.toString()?.encodeAsHTML()}'</title>
+        <title><g:message code="create.search.title" args="${[params.terms.toString()?.encodeAsHTML()]}"/></title>
     </head>
     <body>
 
@@ -12,8 +12,10 @@
             <%
             def cleanTermList = []
             searchTerms.each{ cleanTermList.add(it.encodeAsHTML()) }
+            def delim = ' <span class="delim">&middot;</span> '
             %>
-            <h1>Matches for '${cleanTermList.join(' <span class="delim">|</span> ')}'
+            <h1><g:message code="create.search.headline"
+            	args="${[cleanTermList.join(delim)]}"/>
             </h1>
 
             <g:if test="${flash.message}">
@@ -21,8 +23,7 @@
             </g:if>
 
             <g:if test="${synsetList}">
-                <p class="warning">Note: there is already at least one match
-                    for your terms, please make sure you don't insert duplicates</p>
+                <p class="warning"><g:message code="create.search.duplicate.warning"/></p>
             </g:if>
 
             <table>
@@ -35,7 +36,7 @@
 
             <br/>
 
-            <h1>Create a new concept</h1>
+            <h1><g:message code="create.headline"/></h1>
 
             <g:hasErrors bean="${synset}">
             <div class="errors">
@@ -79,7 +80,7 @@
 
                <tr class='prop'>
                    <td valign='top' class='name'>
-                       <label for='source'>Category:</label>
+                       <label for='source'><g:message code="create.search.category"/></label>
                    </td>
                    <td valign='top' class='value ${hasErrors(bean:synset,field:'categoryLinks','errors')}'>
                        <select name="category.id" id="category.id" >
@@ -99,7 +100,7 @@
                   <tr class='prop'>
                       <td valign='top' class='name'>
                           <g:if test="${i == 0}">
-                              <label for='synsetLinks'>First Term:</label>
+                              <label for='synsetLinks'><g:message code="create.search.terms"/></label>
                           </g:if>
                       </td>
                       <td valign='top' class='value ${hasErrors(bean:newTerm,'errors')}'>
@@ -146,12 +147,19 @@
 
                       </td>
                   </tr>
+                  
                </g:each>
-            </table>
 
-            <div class="buttons">
-                <span class="button"><g:actionSubmit class="save" value="Create" action="save" /></span>
-            </div>
+               <tr>
+              	<td></td>
+              	<td>
+	    	        <div class="buttons">
+            	    <span class="button"><g:actionSubmit class="save" value="${message(code:'create.search.submit')}" action="save" /></span>
+    	        	</div>
+               	</td>
+               </tr>
+
+            </table>
 
             </g:form>
 
