@@ -51,12 +51,12 @@
        </g:if>
     </g:each>
     <g:if test="${nymCount == 0}">
-         <span class="metaInfo">[none]</span>
+         <span class="metaInfo"><g:message code="edit.no.super.synset"/></span>
     </g:if>
 
     <g:if test="${session.user && showAddLink}">
         <div id="addSynsetLink" style="margin-top:5px">
-            <a href="#" onclick="javascript:showNewSynsetLink();return false;">Add link</a>
+            <a href="#" onclick="javascript:showNewSynsetLink();return false;"><g:message code="edit.add.link"/></a>
         </div>
      <div id="addSynset" style="display:none;margin-top:5px">
         <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>

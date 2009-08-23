@@ -98,7 +98,7 @@
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
                                 <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
-                                    title="Select to delete terms from concept"/>
+                                    title="${message(code:'edit.select.to.delete')}"/>
                                 <g:if test="${prefTerms}">
 	                                &nbsp;
 	                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
@@ -382,14 +382,14 @@
                                     <g:else>
                                         <g:if test="${session.user}">
                                             <div id="addCommentLink">
-                                                <a href="#" onclick="javascript:showAddComment();return false;">Add comment</a>
+                                                <a href="#" onclick="javascript:showAddComment();return false;"><g:message code="edit.add.comment"/></a>
                                             </div>
                                             <div id="addComment" style="display:none">
                                                 <g:textArea id='userComment' name='userComment' value="${synset.userComment}"/>
                                             </div>
                                         </g:if>
                                         <g:else>
-                                        	<span class="metaInfo">[none]</span>
+                                        	<span class="metaInfo"><g:message code="edit.no.comment"/></span>
                                         </g:else>
                                     </g:else>
 

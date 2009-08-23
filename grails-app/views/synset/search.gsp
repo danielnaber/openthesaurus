@@ -53,7 +53,7 @@
 		                        <g:set var="counter" value="${counter + 1}"/>
                             </g:each>
 	                   		<g:link action="edit" id="${synset.id}">
-	                   			[edit]
+	                   			<g:message code="result.edit"/>
     	               		</g:link>
                         </li>
                    </g:each>
