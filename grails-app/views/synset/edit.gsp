@@ -355,10 +355,10 @@
 	                                <td valign='top'>
 					                    <div class="buttons">
 					                    	<g:if test="${synset.isVisible}">
-						            			<span class="submitButton"><g:actionSubmit action="hide" class="save" value="${message(code:'edit.delete.button')}" /></span>
+						            			<span class="submitButton"><g:actionSubmit action="hide" class="hide" value="${message(code:'edit.delete.button')}" /></span>
 					                    	</g:if>
 					                    	<g:else>
-						            			<span class="submitButton"><g:actionSubmit action="unhide" class="save" value="${message(code:'edit.undelete.button')}" /></span>
+						            			<span class="submitButton"><g:actionSubmit action="unhide" class="unhide" value="${message(code:'edit.undelete.button')}" /></span>
 					                    	</g:else>
 					                    </div>
 	                                </td>

@@ -279,6 +279,12 @@ th.desc a {
 .buttons input.login {
     background-color: #ffcf59;
 }
+.buttons input.hide {
+    background-color: #ffbdbd;
+}
+.buttons input.unhide {
+    background-color: #ffbdbd;
+}
 
 /* ---- */
 
