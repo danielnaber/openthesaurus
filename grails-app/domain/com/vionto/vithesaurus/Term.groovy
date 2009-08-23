@@ -99,9 +99,10 @@ class Term implements Comparable, Cloneable {
      * A String representation with all important properties.
      */
     String toDetailedString() {
-        return "${word} || abbrev=${isShortForm} | acronym=${isAcronym} | " +
-            "language=${language.shortForm} | form=${wordGrammar} | " +
-            "comment=${userComment}"
+        //return "${word} || abbrev=${isShortForm} | acronym=${isAcronym} | " +
+        //    "language=${language.shortForm} | form=${wordGrammar} | " +
+        //    "comment=${userComment}"
+        return "${word} || level=${level} | comment=${userComment}"
     }
 
     /**

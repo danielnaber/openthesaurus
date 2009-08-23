@@ -51,21 +51,27 @@
                                 </td>
                             </tr> 
 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='synset'><g:message code="edit.term.language"/></label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
-                                    <g:if test="${session.user}">
-                                        <g:select value="${term.language.id}" name="language.id"
-                                            optionKey="id" from="${Language.list()}" />
-                                    </g:if>
-                                    <g:else>
-                                        ${term.language.longForm.toString()?.encodeAsHTML()}
-                                    </g:else>
-                                </td>
-                            </tr> 
+						    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
+							  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+						    </g:if>
+						    <g:else>
+	                            <tr class='prop'>
+	                                <td valign='top' class='name'>
+	                                    <label for='synset'><g:message code="edit.term.language"/></label>
+	                                </td>
+	                                <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
+	                                    <g:if test="${session.user}">
+	                                        <g:select value="${term.language.id}" name="language.id"
+	                                            optionKey="id" from="${Language.list()}" />
+	                                    </g:if>
+	                                    <g:else>
+	                                        ${term.language.longForm.toString()?.encodeAsHTML()}
+	                                    </g:else>
+	                                </td>
+	                            </tr> 
+						    </g:else>
 
+							<%-- 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='wordGrammar'><g:message code="edit.term.word.form"/></label>
@@ -79,7 +85,18 @@
                                         ${term.wordGrammar?.toString()?.encodeAsHTML()}
                                     </g:else>
                                 </td>
-                            </tr> 
+                            </tr>
+                            --%>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <label for='synset'><g:message code="edit.term.level"/></label>
+                                </td>
+                                <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
+                                    <g:select value="${term.level?.id}" name="level.id" disabled="${!session.user}" 
+                                        optionKey="id" from="${TermLevel.list()}" noSelection="['null':message(code:'edit.term.level.none')]" />
+                                </td>
+                            </tr>
 
                             <%-- 
                             <tr class='prop'>
@@ -93,6 +110,7 @@
                             </tr>
                             --%>
 
+							<%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                 </td>
@@ -104,7 +122,8 @@
                                     <label><g:managedRadio disabled="${!session.user}" id="wordFormAbbreviation" name="wordForm"
                                         value="abbreviation" checked="${term.isShortForm}" /> abbreviation</label>
                                 </td>
-                            </tr> 
+                            </tr>
+                            --%> 
                                                 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
@@ -115,7 +134,12 @@
                                         <g:textArea rows="5" cols="40" id='userComment' name='userComment' value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
-                                        ${term.userComment?.toString()?.encodeAsHTML()}
+										<g:if test="${term.userComment}">
+	                                        ${term.userComment?.toString()?.encodeAsHTML()}
+										</g:if>
+										<g:else>
+											<span class="metaInfo"><g:message code="edit.no.comment"/></span>
+										</g:else>
                                     </g:else>
                                 </td>
                             </tr>
