@@ -62,6 +62,7 @@ class Synset implements Cloneable {
         synsetPreferredTerm(nullable:true)
         importStatus(nullable:true)
         originalId(nullable:true)
+        preferredCategory(nullable:true)
     }
 
     // prepended to get a display "id":
@@ -460,12 +461,14 @@ class Synset implements Cloneable {
         sb.append(" categories=")
 
         int categoryLinkCount = 0
-        for (categoryLink in categoryLinks.sort()) {
+        if (categoryLinks && categoryLinks.size() > 0) {
+          for (categoryLink in categoryLinks.sort()) {
             if (categoryLinkCount > 0) {
                 sb.append("|")
             }
             sb.append(categoryLink.category)
             categoryLinkCount++
+          }
         }
         return sb.toString()
     }

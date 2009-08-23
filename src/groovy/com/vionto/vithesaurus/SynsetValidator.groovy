@@ -53,8 +53,8 @@ class SynsetValidator {
         if (fullValidation) {
             // some simple assertions
             assert (synset)
-            assert (synset.preferredCategory)
-            assert (synset.categoryLinks)
+            //assert (synset.preferredCategory)
+            //assert (synset.categoryLinks)
             //assert (synset.synsetPreferredTerm)
             assert (synset.terms)
             //assert (synset.section)
@@ -151,7 +151,7 @@ class SynsetValidator {
     private void validateCategoryLinks() {
         List categoryLinkSet = []
         List categories = []
-        if (synset.preferredCategory.categoryName == CATEGORY_UNKNOWN
+        if (synset.preferredCategory?.categoryName == CATEGORY_UNKNOWN
                 && synset.categoryLinks.size() > 1) {
             throw new IllegalArgumentException("[${synset.id}] If Category " +
                     "is $CATEGORY_UNKNOWN there should be no other category")
@@ -171,10 +171,12 @@ class SynsetValidator {
                         "'${categoryLink.category}' listed twice or more")
             }
         }
-        if (!categories.contains(synset.preferredCategory)) {
+        /*if (synset.preferredCategory) {
+          if (!categories.contains(synset.preferredCategory)) {
             throw new IllegalArgumentException("[${synset.id}] Preferred " +
                     "Category '${synset.preferredCategory}' is not linked to synset")
-        }
+          }
+        }*/
     }
 
     /**

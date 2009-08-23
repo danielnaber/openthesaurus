@@ -214,13 +214,15 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
-                                <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
-                                    title="${message(code:'edit.category.delete')}"/>
-                                &nbsp;
-                                <g:if test="${prefTerms}">
-	                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-    	                                title="${message(code:'edit.category.prefer')}" />
-                                </g:if>
+								<g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
+	                                <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
+	                                    title="${message(code:'edit.category.delete')}"/>
+	                                &nbsp;
+	                                <g:if test="${prefTerms}">
+		                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
+	    	                                title="${message(code:'edit.category.prefer')}" />
+	                                </g:if>
+								</g:if>
                                 <ul>
                                 <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                     <li class="checkboxList">
@@ -228,7 +230,7 @@
                                            name="delete_category" value="${catLink.id}" />
                                         <g:if test="${prefTerms}">
 	                                        &nbsp;
-	                                        <g:set var="isPreferred" value="${synset.preferredCategory.categoryName == catLink.category.categoryName}"/>
+	                                        <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
 	                                        <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
 	                                            checked="${isPreferred}" />
                                         </g:if>
@@ -240,7 +242,7 @@
                                 </g:each>
                                 </ul>
                                 <g:if test="${synset.categoryLinks == null || synset.categoryLinks.size() == 0}">
-                                	<g:message code='edit.none'/>
+                                	<span class="metaInfo"><g:message code='edit.none'/></span>
                                 </g:if>
 
                                 </td>
@@ -253,7 +255,7 @@
 
                                  <g:if test="${session.user}">
                                      <%-- Change or add new category --%>
-                                     <g:if test="${synset.preferredCategory.categoryName == 'Unknown'}">
+                                     <g:if test="${synset.preferredCategory?.categoryName == 'Unknown'}">
                                          <div id="changeCategoryLink">
                                             <a href="#" onclick="javascript:showChangeCategory();return false;"><g:message code='edit.change.category'/></a>
                                          </div>

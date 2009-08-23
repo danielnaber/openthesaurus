@@ -78,13 +78,14 @@
                </tr>
                --%>
 
+			   <%-- 
                <tr class='prop'>
                    <td valign='top' class='name'>
                        <label for='source'><g:message code="create.search.category"/></label>
                    </td>
                    <td valign='top' class='value ${hasErrors(bean:synset,field:'categoryLinks','errors')}'>
                        <select name="category.id" id="category.id" >
-                          <%--<option value="null">[select one category]</option> --%>
+                          <option value="null">[select one category]</option>
                           <g:each var="category" in="${Category.findAllByIsDisabled(false).sort()}">
                               <option value="${category.id}">${category.toString()?.encodeAsHTML()}
                                   <g:if test="${category.categoryType}">
@@ -95,6 +96,7 @@
                        </select>
                    </td>
                </tr>
+               --%>
 
                <g:each in="${searchTerms}" status="i" var="term">
                   <tr class='prop'>
