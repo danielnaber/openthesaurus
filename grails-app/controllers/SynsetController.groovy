@@ -704,13 +704,14 @@ class SynsetController extends BaseController {
             // delete category links:
             if (params.delete_category) {
                 List deleteIDs = getCheckboxIDs(params.delete_category)
-                if (synset.categoryLinks.size()-deleteIDs.size() <= 0) {
+                // don't allow removing the last category: 
+                /*if (synset.categoryLinks.size()-deleteIDs.size() <= 0) {
                     synset.errors.reject('thesaurus.empty.category',
                             [].toArray(), 'concept must contain a category')
                     render(view:'edit',model:[synset:synset],
                             contentType:"text/html", encoding:"UTF-8")
                     return
-                }
+                }*/
                 for (deleteID in deleteIDs) {
                     CategoryLink catLink = CategoryLink.get(deleteID)
                     synset.removeLink(catLink)
@@ -723,7 +724,7 @@ class SynsetController extends BaseController {
                     newCategoryCount++
                     continue
                 }
-                if (synset.preferredCategory.categoryName == UNKNOWN_CATEGORY_NAME) {
+                if (synset.preferredCategory?.categoryName == UNKNOWN_CATEGORY_NAME) {
                     def catLinks = CategoryLink.findAllBySynset(synset)
                     if (catLinks.size() > 1) {
                         synset.errors.reject('thesaurus.error.category.change',
@@ -822,7 +823,7 @@ class SynsetController extends BaseController {
             LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
                     origSynset, synset, params.changeComment)
             if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
-                flash.message = "Concept updated"
+                flash.message = message(code:'edit.updated')
                 redirect(action:edit,id:synset.id)
             }
             else {
@@ -1049,7 +1050,7 @@ class SynsetController extends BaseController {
             }
         }
         // check that the category is set:
-        if (params.category.id == null || params.category.id == "null") {
+        /*if (params.category.id == null || params.category.id == "null") {
             synset.errors.rejectValue('categoryLinks', 'thesaurus.invalid.category')
             render(view:'multiSearch', model:[synset:synset,
                     searchTerms:getTermsFromTextArea(searchTerms)],
@@ -1058,6 +1059,7 @@ class SynsetController extends BaseController {
         }
         addCategory(synset, params.category.id)
         synset.preferredCategory = Category.get(params.category.id)
+        */
         LogInfo logInfo = getLogInfo(null, synset, params.changeComment)
         if (!synset.hasErrors() && synset.saveAndLog(logInfo, false)) {
             for (term in termsToCreate) {
