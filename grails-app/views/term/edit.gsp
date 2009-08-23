@@ -3,12 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Edit Term '${term.toString()?.encodeAsHTML()}'</title>
+        <title><g:message code="edit.term.title" args="${[term.toString()?.encodeAsHTML()]}"/></title>
     </head>
     <body>
 
         <div class="body">
-            <h1>Edit Term '${term.toString()?.encodeAsHTML()}'</h1>
+        
+            <h1><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h1>
     
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -34,7 +35,7 @@
                         
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='word'>Term:</label>
+                                    <label for='word'><g:message code="edit.term.term"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'word','errors')}'>
                                     <input ${disabled} type="text" id='word' name='word' value="${fieldValue(bean:term,field:'word')}"/>
@@ -43,7 +44,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synset'>Concept:</label>
+                                    <label for='synset'><g:message code="edit.term.synset"/></label>
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:link controller="synset" action="edit" id="${term.synset.id}">${term.synset.toString()?.encodeAsHTML()}</g:link>
@@ -52,7 +53,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synset'>Language:</label>
+                                    <label for='synset'><g:message code="edit.term.language"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
                                     <g:if test="${session.user}">
@@ -67,7 +68,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='wordGrammar'>Word form:</label>
+                                    <label for='wordGrammar'><g:message code="edit.term.word.form"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'wordGrammar','errors')}'>
                                     <g:if test="${session.user}">
@@ -80,7 +81,7 @@
                                 </td>
                             </tr> 
 
-                            <!-- 
+                            <%-- 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='synset'>Level:</label>
@@ -90,7 +91,7 @@
                                         optionKey="id" from="${TermLevel.list()}" noSelection="['null':'[none]']" />
                                 </td>
                             </tr>
-                             --> 
+                            --%>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
@@ -107,26 +108,33 @@
                                                 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='userComment'>Comment:</label>
+                                    <label for='userComment'><g:message code="edit.term.comment"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${session.user}">
-                                        <g:textArea id='userComment' name='userComment' value="${term.userComment}"/>
+                                        <g:textArea rows="5" cols="40" id='userComment' name='userComment' value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
                                         ${term.userComment?.toString()?.encodeAsHTML()}
                                     </g:else>
                                 </td>
-                            </tr> 
+                            </tr>
+                            
+                            <tr>
+                            	<td></td>
+                            	<td>
+					                <g:if test="${session.user}">
+						                <div class="buttons">
+						                    <span class="button"><g:actionSubmit class="save" 
+						                    	action="update" value="${message(code:'edit.term.submit')}" /></span>
+						                </div>
+						            </g:if>
+                            	</td>
+                            </tr>
 
                         </tbody>
                     </table>
                 </div>
-                <g:if test="${session.user}">
-	                <div class="buttons">
-	                    <span class="button"><g:actionSubmit class="save" value="Update" /></span>
-	                </div>
-	            </g:if>
             </g:form>
             
         </div>
