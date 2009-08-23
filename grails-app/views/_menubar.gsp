@@ -24,4 +24,10 @@
               params="[controllerName: webRequest.getControllerName(),
                   actionName:webRequest.getActionName()]">Login</g:link>
     </g:else>
+    
 </g:else>
+
+<span class="d">&middot;</span>
+<a href="http://twitter.com/openthesaurus"><img style="vertical-align:text-top"
+   	title="OpenThesaurus auf twitter" alt="twitter Logo" width="16" height="16"
+   	src="${createLinkTo(dir:'/images',file:'twitter_link16x16.png')}"/> twitter</a>
