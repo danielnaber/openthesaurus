@@ -459,17 +459,21 @@
                                         <input ${disabled} size="40" id="changeComment" type="text" name="changeComment" value="" />
                                     </td>
                                 </tr>
+                                
+                                <tr>
+                                	<td></td>
+                                	<td>
+					                    <div class="buttons">
+					                        <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
+					                    </div>
+                                	</td>
+                                </tr>
 
                         </table>
                     </g:if>
 
                 </div>
 
-                <g:if test="${session.user}">
-                    <div class="buttons">
-                        <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
-                    </div>
-                </g:if>
             </g:form>
             
             <g:if test="${eventList}">
