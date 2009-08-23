@@ -249,22 +249,17 @@ th.desc a {
 /* ACTION BUTTONS */
 
 .buttons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border-width: 1px;
-    border-style: solid solid solid solid;
     color: #666;
-    font-size: 100%;
     margin-top: 5px;
-    overflow: hidden;
     padding: 0;
 }
 
 .buttons input {
     background: #fff;
-    border: 0;
+    border-width: 1px;
     color: #333;
     cursor: pointer;
-    font-size: 100%;
     font-weight: bold;
     margin-left: 3px;
     overflow: visible;
@@ -280,12 +275,9 @@ th.desc a {
 }
 .buttons input.save {
     background-color: #ffb200;
-    padding-left: 28px;
-    width: 100%;
 }
 .buttons input.login {
-    background: transparent;
-    padding-left: 28px;
+    background-color: #ffb200;
 }
 
 /* ---- */
