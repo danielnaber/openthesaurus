@@ -51,6 +51,16 @@
                                 </td>
                             </tr> 
 
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+					                <div class="buttons">
+					                    <span class="button"><input class="login" type="submit" value="${message(code:'user.register.form.submit')}"></input></span>
+					                </div>
+                                </td>
+                            </tr> 
+
 							<%--
 							<g:if test="${message(code:'user.register.form.captcha.question')}">
 	                            <tr class='prop'>
@@ -66,9 +76,6 @@
                         
                         </tbody>
                     </table>
-                </div>
-                <div class="buttons">
-                    <span class="button"><input class="login" type="submit" value="${message(code:'user.register.form.submit')}"></input></span>
                 </div>
             </g:form>
         </div>

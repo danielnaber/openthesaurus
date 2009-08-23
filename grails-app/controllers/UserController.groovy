@@ -35,21 +35,29 @@ class UserController extends BaseController {
     }
     
     def doRegister = {
+      def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
+          ThesaurusUser.USER_PERM)
       if (!params.userId) {
-        //FIXME: show clean error, not exception 
-        throw new Exception("Parameter email missing")
+        user.errors.reject('thesaurus.error', [].toArray(), 
+            message(code:'user.register.missing.email'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
       }
       if (!ThesaurusUser.findByUserId(params.userId)) {
-        log.info("Creating user: " + params.userId)
         if (params.password1 != params.password2) {
-          throw new Exception("Passwords don't match")
+          user.errors.reject('thesaurus.error', [].toArray(), 
+              message(code:'user.register.different.passwords'))
         }
         final int minPasswordLength = 4
         if (params.password1.length() < minPasswordLength) {
-          throw new Exception("Password too short, must be ${minPasswordLength} or more")
+          user.errors.reject('thesaurus.error', [].toArray(), 
+              message(code:'user.register.short.password', args:[minPasswordLength]))
         }
-        def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
-            ThesaurusUser.USER_PERM)
+        if (user.errors.allErrors.size() > 0) {
+          render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+          return
+        }
+        log.info("Creating user: " + params.userId)
         user.confirmationDate = null
         // generate a random code:
         user.confirmationCode = ""
@@ -74,8 +82,10 @@ class UserController extends BaseController {
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
       } else {
-        //FIXME: show clean error, not exception; i18n 
-        throw new Exception("User ${params.userId} already exists")
+        user.errors.reject('thesaurus.error', [].toArray(), 
+            message(code:'user.register.user.exists'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
       }
       [email: params.userId]
     }
