@@ -77,7 +77,7 @@ class TermController extends BaseController {
             LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
                     termBackup, term, params.changeComment)
             if (!term.hasErrors() && term.saveAndLog(logInfo)) {
-                flash.message = "Term '${term.encodeAsHTML()}' updated"
+                flash.message =message(code:'edit.term.updated', args:[term.encodeAsHTML()])
                 redirect(controller:'synset',action:edit,id:term.synset.id)
             }
             else {
