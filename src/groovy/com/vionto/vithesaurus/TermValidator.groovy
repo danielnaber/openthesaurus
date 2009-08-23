@@ -75,8 +75,8 @@ class TermValidator {
         int parenthesis = word.count("(") - word.count(")")
         int square = word.count("[") - word.count("]")
         int braces = word.count("{") - word.count("}")
-        int arrowBrackets = word.count("<") - word.count(">")
-        if (parenthesis != 0 || square != 0 || braces != 0 || arrowBrackets != 0) {
+        //int arrowBrackets = word.count("<") - word.count(">")
+        if (parenthesis != 0 || square != 0 || braces != 0) {
             throw new IllegalArgumentException("[$word] Number of opening and " +
                     "closing brackets must be the same ")
         }
