@@ -30,6 +30,19 @@
                                 </td>
                                 <td valign='top' class='value'>
                                     <input size="40" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
+                                    <br />
+                                    <span class="metaInfo"><g:message code="user.register.email.description"/></span>
+                                </td>
+                            </tr> 
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <label for='userId'><g:message code="user.register.display.name"/></label>
+                                </td>
+                                <td valign='top' class='value'>
+                                    <input size="40" type="text" id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}"/>
+                                    <br />
+                                    <span class="metaInfo"><g:message code="user.register.display.name.description"/></span>
                                 </td>
                             </tr> 
                         
@@ -38,7 +51,7 @@
                                     <label for='password'><g:message code="user.login.form.password"/></label>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <input size="40" type="password" id='password1' name='password1' value=""/>
+                                    <input size="40" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}"/>
                                 </td>
                             </tr> 
 
@@ -47,7 +60,7 @@
                                     <label for='password'><g:message code="user.register.form.password.repeat"/></label>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <input size="40" type="password" id='password2' name='password2' value=""/>
+                                    <input size="40" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}"/>
                                 </td>
                             </tr> 
 

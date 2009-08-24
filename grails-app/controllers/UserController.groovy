@@ -37,9 +37,16 @@ class UserController extends BaseController {
     def doRegister = {
       def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
           ThesaurusUser.USER_PERM)
-      if (!params.userId) {
+      user.realName = params.visibleName
+      if (!params.userId || params.userId.trim().isEmpty()) {
         user.errors.reject('thesaurus.error', [].toArray(), 
             message(code:'user.register.missing.email'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
+      }
+      if (!params.visibleName || params.visibleName.trim().isEmpty()) {
+        user.errors.reject('thesaurus.error', [].toArray(), 
+            message(code:'user.register.missing.visible.name'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
