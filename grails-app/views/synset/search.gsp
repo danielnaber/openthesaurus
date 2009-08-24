@@ -13,11 +13,11 @@
 				<g:render template="/ads/resultpage"/>
 			</div>
 
-            <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
-
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
             </g:if>
+
+            <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
 			<div style="width:60%;border:1px">
             <ul>
@@ -68,11 +68,9 @@
 
           	<g:render template="/ads/resultpage_results"/>
 			
-			<br />
-			
 			<table class="invisibletable" width="100%">
 			<tr>
-				<td width="45%">
+				<td width="50%">
 					
 					<h2><g:message code="result.partialmatches.headline"/></h2>
 					<ul>
@@ -124,7 +122,7 @@
 		            </p>
 					
 				<td></td>
-				<td width="45%">
+				<td width="50%">
 					
 					<h2><g:message code="result.wikipedia.headline"/></h2>
 					<g:if test="${wikipediaResult}">
