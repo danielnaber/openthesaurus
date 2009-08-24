@@ -56,7 +56,14 @@
 					<table>
 					<g:each in="${topUsers}" var="topUser">
 					<tr>
-						<td>${topUser.displayName}</td>
+						<td>
+							<g:if test="${topUser.displayName}">
+								${topUser.displayName}
+							</g:if>
+							<g:else>
+								<span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
+							</g:else>
+						</td>
 						<td>${topUser.actions}</td>
 					</tr>
 					</g:each>
