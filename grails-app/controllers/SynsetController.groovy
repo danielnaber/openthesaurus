@@ -320,8 +320,13 @@ class SynsetController extends BaseController {
       ps.setString(1, term)
       ResultSet resultSet = ps.executeQuery()
       def matches = []
+      int i = 0
       while (resultSet.next()) {
+        if (i == 0) {
+          matches.add(resultSet.getString("title"))
+        }
         matches.add(resultSet.getString("link"))
+        i++
       }
       resultSet.close()
       ps.close()
