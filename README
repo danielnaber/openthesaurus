@@ -13,7 +13,9 @@ SETUP FOR USERS WHO INSTALL THE *.WAR FILE
 The vithesaurus.war file needs to be deployed to your servlet container.
 Please refer to the container's documentation on how to do that.
 
-1. Copy your JDBC database connector JAR file to the "WEB-INF/lib" directory.
+1. Copy your JDBC database connector *.jar file to the "WEB-INF/lib" directory.
+   If you use MySQL, you can get the database connector at
+   http://dev.mysql.com/downloads/connector/j/
 
 2. Configure your database access in WEB-INF/classes/datasource.properties.  
    A typical MySQL-based configuration for datasource.properties looks like this:
