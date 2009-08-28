@@ -58,7 +58,7 @@
 					<tr>
 						<td>
 							<g:if test="${topUser.displayName}">
-								${topUser.displayName}
+								${topUser.displayName.encodeAsHTML()}
 							</g:if>
 							<g:else>
 								<span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
