@@ -27,7 +27,8 @@ class DiffTool {
     final static IGNORE_PROPS = ["class", "metaClass", "all", "properties", "errors",
                                  "constraints", "log", "hasMany", "version", "sortedTerms",
                                  "userEvents", "sortedSynsetLinks", "mapping",
-                                 "tERM_REGEXP", "pREFERRED_TERM_LANGS", "uRI_PREFIX"]
+                                 "tERM_REGEXP", "pREFERRED_TERM_LANGS", "uRI_PREFIX",
+                                 "TERM_REGEXP", "PREFERRED_TERM_LANGS", "URI_PREFIX"]
 
     /**
      * Compares two objects by comparing their properties and returns
