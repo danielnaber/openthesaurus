@@ -452,12 +452,12 @@ class Synset implements Cloneable {
             }
         }
         sb.append(" ||")
-        sb.append(" preferredCategory=")
-        sb.append(preferredCategory)
-        sb.append(" ||")
-        sb.append(" section=")
-        sb.append(section)
-        sb.append(" ||")
+        //sb.append(" preferredCategory=")
+        //sb.append(preferredCategory)
+        //sb.append(" ||")
+        //sb.append(" section=")
+        //sb.append(section)
+        //sb.append(" ||")
         sb.append(" categories=")
 
         int categoryLinkCount = 0
