@@ -755,7 +755,8 @@ class SynsetController extends BaseController {
             }
             // change preferred term:
             Set languages = getLanguages(synset)
-            for (language in languages) {
+            if (grailsApplication.config.thesaurus.prefTerm == 'true') {
+              for (language in languages) {
                 def termID = params["preferred_"+language.shortForm]
                 if (termID == null) {
                     log.warn("No preferred term id for ${language.shortForm}")
@@ -767,6 +768,7 @@ class SynsetController extends BaseController {
                         synset.setPreferredTerm(language, term)
                     }
                 }
+              }
             }
             // add new term:
             int newTermCount = 0
@@ -813,7 +815,8 @@ class SynsetController extends BaseController {
                 }
 
                 synset.addTerm(newTerm)
-                if (!synset.hasPreferredTerm(newTerm.language)) {
+                if (!synset.hasPreferredTerm(newTerm.language) 
+                      && grailsApplication.config.thesaurus.prefTerm == 'true') {
                     synset.setPreferredTerm(newTerm.language, newTerm)
                 }
                 def saved = newTerm.saveAndLog(logInfo)
@@ -1089,8 +1092,10 @@ class SynsetController extends BaseController {
             }
             // we need to set the preferred terms here because the
             // terms have to be saved first to get their id:
-            for (lang in preferredTerms.keySet()) {
+            if (grailsApplication.config.thesaurus.prefTerm == 'true') {
+              for (lang in preferredTerms.keySet()) {
                 synset.setPreferredTerm(lang, preferredTerms.get(lang))
+              }
             }
             flash.message = "Concept created"
             redirect(action:edit,id:synset.id)
