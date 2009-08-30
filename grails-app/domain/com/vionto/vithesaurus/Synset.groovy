@@ -435,10 +435,15 @@ class Synset implements Cloneable {
         StringBuilder sb = new StringBuilder()
         // the "|" at the beginning works around a bug in the diff
         // algorithm with additions at the start of the string:
-        sb.append("| ${toString()} || isVisible=${isVisible} || comment=${userComment} ||")
-        sb.append(" preferredTerms=")
+        sb.append("| ${toString()} || isVisible=${isVisible} || ")
+        if (!userComment) {
+          sb.append("comment= ||")
+        } else {
+          sb.append("comment=${userComment} ||")
+        }
 
-        if (preferredTermLinks) {
+        /*if (preferredTermLinks) {
+            sb.append(" preferredTerms=")
             int prefLinkCount = 0
             for (link in preferredTermLinks.sort()) {
                 if (prefLinkCount > 0) {
@@ -450,8 +455,8 @@ class Synset implements Cloneable {
                 sb.append(link.term)
                 prefLinkCount++
             }
-        }
-        sb.append(" ||")
+            sb.append(" ||")
+        }*/
         //sb.append(" preferredCategory=")
         //sb.append(preferredCategory)
         //sb.append(" ||")
