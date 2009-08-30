@@ -634,9 +634,9 @@ class SynsetController extends BaseController {
                 synsetLink.evaluationStatus = SynsetLink.EVAL_REJECTED
                 if (oldStatus != synsetLink.evaluationStatus) {
                     String logText =
-                        "rejecting: ${synsetLink.synset.synsetPreferredTerm} " +
+                        "rejecting: ${synsetLink.synset.toShortString()} " +
                         "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.targetSynset.synsetPreferredTerm}"
+                        "${synsetLink.targetSynset.toShortString()}"
                     logSynsetLink(logText, synset, synsetLink)
                 }
             }
@@ -648,9 +648,9 @@ class SynsetController extends BaseController {
                 synsetLink.evaluationStatus = SynsetLink.EVAL_APPROVED
                 if (oldStatus != synsetLink.evaluationStatus) {
                     String logText =
-                        "approving: ${synsetLink.synset.synsetPreferredTerm} " +
+                        "approving: ${synsetLink.synset.toShortString()} " +
                         "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.targetSynset.synsetPreferredTerm}"
+                        "${synsetLink.targetSynset.toShortString()}"
                     logSynsetLink(logText, synset, synsetLink)
                 }
             }
@@ -659,9 +659,9 @@ class SynsetController extends BaseController {
             for (neutralID in neutralIDs) {
                 SynsetLink synsetLink = SynsetLink.get(neutralID)
                 String logText =
-                    "neutralizing: ${synsetLink.synset.synsetPreferredTerm} " +
+                    "neutralizing: ${synsetLink.synset.toShortString()} " +
                     "${synsetLink.linkType.verbName} " +
-                    "${synsetLink.targetSynset.synsetPreferredTerm}"
+                    "${synsetLink.targetSynset.toShortString()}"
                 logSynsetLink(logText, synset, synsetLink)
                 synset.removeFromSynsetLinks(synsetLink)
                 synsetLink.delete()
@@ -880,9 +880,9 @@ class SynsetController extends BaseController {
             throw new Exception("Unknown eval status: $evalStatus")
         }
         String logText =
-            "$actionName: ${synsetLink.synset.synsetPreferredTerm} " +
+            "$actionName: ${synsetLink.synset.toShortString()} " +
             "${synsetLink.linkType.verbName} " +
-            "${synsetLink.targetSynset.synsetPreferredTerm}"
+            "${synsetLink.targetSynset.toShortString()}"
         logSynsetLink(logText, synset, synsetLink)
     }
 
@@ -1157,9 +1157,9 @@ class SynsetController extends BaseController {
             return
         }
         String logText =
-            "adding link: ${synsetLink.synset.synsetPreferredTerm} " +
+            "adding link: ${synsetLink.synset.toShortString()} " +
             "${synsetLink.linkType.verbName} " +
-            "${synsetLink.targetSynset.synsetPreferredTerm}"
+            "${synsetLink.targetSynset.toShortString()}"
         logSynsetLink(logText, fromSynset, synsetLink)
     }
 
