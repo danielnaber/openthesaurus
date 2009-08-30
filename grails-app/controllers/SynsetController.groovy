@@ -197,6 +197,14 @@ class SynsetController extends BaseController {
           long totalTime = System.currentTimeMillis() - startTime
           log.info("Search time (ms):${totalTime} db:${dbTime} sim:${similarTime} "
                + "substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} q:${params.q}")
+            
+          // TODO: fix json output
+          //if (params.format == "text/xml" || params.format == "text/json") {
+          if (params.format == "text/xml") {
+            renderApiResponse(searchResult)
+            return
+          }
+          
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
             wiktionaryResult : wiktionaryResult,
@@ -215,6 +223,34 @@ class SynsetController extends BaseController {
               
     }
 
+    private void renderApiResponse(def searchResult) {
+      // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
+      // workaround with feed plugin 1.4 and Grails 1.1
+      render(contentType:params.format) {
+        matches {
+          metaData {
+            //FIXME: make this configurable
+            warning(content:"WARNING -- this API is in beta -- the format might change without warning!")
+            copyright(content:"Copyright (C) 2009 Daniel Naber (www.danielnaber.de)")
+            license(content:"GNU LESSER GENERAL PUBLIC LICENSE Version 2.1")
+            source(content:"http://www.openthesaurus.de")
+            date(content:new Date().toString())
+          }
+          for (s in searchResult.synsetList) {
+            synset(id:s.id) {
+              for (t in s.terms) {
+                if (t.level) {
+                  term(term:t, level:t.level.levelName)
+                } else {
+                  term(term:t)
+                }
+              }                    
+            }
+          }
+        }
+      }
+    }
+    
     def substring = {
       if(!params.offset) params.offset = "0"
       if(!params.max) params.max = "20"
