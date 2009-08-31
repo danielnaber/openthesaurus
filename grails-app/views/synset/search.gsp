@@ -27,7 +27,7 @@
                    <g:each in="${synsetList}" status="i" var="synset">
                         <li>
 		                    <g:set var="counter" value="${0}"/>
-                            <g:each in="${synset?.sortedTerms()?.sort()}" var="term">
+                            <g:each in="${synset?.sortedTerms()}" var="term">
                             	<g:if test="${term.level}">
 		                        	<g:set var="displayTerm" value="${term.toString() + ' (' + term.level?.shortLevelName + ')'}"/>
                             	</g:if>
