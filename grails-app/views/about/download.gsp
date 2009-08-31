@@ -11,10 +11,8 @@
         <div class="body">
 
 		<div class="faqitem">
-			<div class="question">
-			Download der OpenThesaurus-Daten
-			</div>
-			<div class="answer">
+			
+			<h1>Download der OpenThesaurus-Daten</h1>
 
 			<p>Wegen der Umstellung von openthesaurus.de auf eine neue Software sind manche Daten
 			derzeit nicht
@@ -33,8 +31,6 @@
 				exportiert ${sdf.format(new Date(dbDump.lastModified()))},
 				${String.format("%.2f", dbDump.length()/1000/1000)}MB</a>
 			</div>
-		</div>
-
 
 		</div>
 
