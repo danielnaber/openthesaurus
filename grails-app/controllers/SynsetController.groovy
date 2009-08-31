@@ -229,6 +229,7 @@ class SynsetController extends BaseController {
       render(contentType:params.format, encoding:"utf-8") {
         matches {
           metaData {
+            apiVersion(content:"0.1.1")
             if (grailsApplication.config.thesaurus.apiWarning) {
               warning(content:grailsApplication.config.thesaurus.apiWarning)
             }
@@ -239,6 +240,13 @@ class SynsetController extends BaseController {
           }
           for (s in searchResult.synsetList) {
             synset(id:s.id) {
+              if (s.categoryLinks != null) {
+                categories {
+                  for (catLink in s.categoryLinks) {
+                    category(name:catLink.category.categoryName)
+                  }
+                }
+              }
               for (t in s.sortedTerms()) {
                 if (t.level) {
                   term(term:t, level:t.level.levelName)
