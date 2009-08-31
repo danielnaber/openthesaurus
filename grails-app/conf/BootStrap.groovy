@@ -10,6 +10,8 @@ class BootStrap {
        if (!ThesaurusUser.findByUserId(ADMIN_USERID)) {
          log.info("Creating initial user: " + ADMIN_USERID)
          def user = new ThesaurusUser(ADMIN_USERID, ADMIN_PASSWORD, ADMIN_PERM)
+         // fake a confirmation (usually done by email):
+         user.confirmationDate = new Date()
          if (!user.validate()) {
            log.error("User validation failed: ${user.errors}")
          }
