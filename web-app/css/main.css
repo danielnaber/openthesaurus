@@ -618,3 +618,10 @@ p {
 ul.tree {
 	list-style: none;
 }
+
+/* API page */
+pre {
+	padding: 4px;
+	background-color: #ddd;
+	border: 1px solid #aaa;
+}

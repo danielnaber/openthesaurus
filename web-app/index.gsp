@@ -33,6 +33,7 @@
 	        	</g:if>
 	        	<g:link controller="about"><g:message code="homepage.about"/></g:link> <span class="d">&middot;</span>
 	        	<g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link> <span class="d">&middot;</span>
+	        	<g:link controller="about" action="api"><g:message code="homepage.api"/></g:link> <span class="d">&middot;</span>
 	        	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> <span class="d">&middot;</span>
 	        	<g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link>
 			</p>

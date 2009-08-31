@@ -27,6 +27,10 @@ class AboutController extends BaseController {
         []
     }
 
+    def api = {
+        []
+    }
+
     def download = {
         File dbDump = new File(new String(grailsApplication.config.thesaurus.dbDump))
         [dbDump: dbDump]
