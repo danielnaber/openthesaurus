@@ -96,7 +96,7 @@
 </tr>
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2007-09-29</span></td>
-	<td valign="top">Ab sofort steht ein <a href="feed.xml">RSS-Feed</a> zur Verfügung,
+	<td valign="top">Ab sofort steht ein <a href="../feed/">RSS-Feed</a> zur Verfügung,
 		der alle Änderungen in den Thesaurus-Daten auflistet.
 	</td>
 </tr>
@@ -107,8 +107,8 @@
         sondern um Wörter, die im Wikipedia-Artikel zum aktuellen Suchbegriff verlinkt
         sind. Damit eignet sich OpenThesaurus jetzt noch besser zum Auffinden von
         Assoziationen. Beispiele zum Ausprobieren:
-        <a href="overview.php?word=Demokratie">Demokratie</a>,
-        <a href="overview.php?word=Welt">Welt</a>, <a href="overview.php?word=Wald">Wald</a>
+        <a href="../synset/search?q=Demokratie">Demokratie</a>,
+        <a href="../synset/search?q=Welt">Welt</a>, <a href="../synset/search?q=Wald">Wald</a>
     </td>
 </tr>
 <tr>
@@ -168,13 +168,13 @@
 	<td valign="top" align="right" width="90"><span class="newsdate">2005-04-18</span></td>
 	<td valign="top">Der Thesaurus für OpenOffice.org 2.0 beinhaltet ab jetzt auch Oberbegriffe.
 		Außerdem sei noch auf die Seite <a
-		href="background.php">Hintergrundinformationen</a> hingewiesen, auf der sich
+		href="../about/index">Hintergrundinformationen</a> hingewiesen, auf der sich
 		zwei Papers über OpenThesaurus befinden.</td>
 </tr>
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2005-03-04</span></td>
-	<td valign="top">Passend zur <a href="http://download.openoffice.org/680/index.html">OpenOffice.org&nbsp;2.0
-		beta</a> gibt es jetzt hier auch den Thesaurus für OOo&nbsp;2.0 -- der alte Thesaurus
+	<td valign="top">Passend zur OpenOffice.org&nbsp;2.0
+		beta gibt es jetzt hier auch den Thesaurus für OOo&nbsp;2.0 -- der alte Thesaurus
 		funktioniert nämlich nicht mehr (und genauso läuft der neue nicht mit OpenOffice&nbsp;1.x).
 		Hauptvorteil des neuen Thesaurus ist die Unterstützung mehrerer Bedeutungen pro Wort,
 		z.&nbsp;B. findet <span class="bsp">Auflösung</span> jetzt die verschiedenen 
@@ -190,22 +190,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td valign="top" align="right" width="90"><span class="newsdate">2004-09-27</span></td>
-	<td valign="top">Es stehen jetzt einige shortcuts ("access keys") zur Verfügung, so dass
-		man Teile dieser Website über Tastaturkürzel bedienen kann:
-		<a href="keys.php#korr">Liste der Tastaturkürzel</a>. Außerdem kann man jetzt
-		auch auf den Text neben einer Checkbox klicken, um diese zu aktivieren
-		(bisher musste man die Checkbox selber anklicken).
-	</td>
-</tr>
-<tr>
-	<td valign="top" align="right" width="90"><span class="newsdate">2004-06-21</span></td>
-	<td valign="top">An die aktiven Teilnehmer: beachtet bitte die zwei kleinen
-		Ergänzungen zum Thema regionale und veraltete Wörter
-		in der <a href="faq.php#korr">FAQ</a>.
-	</td>
-</tr>
-<tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2004-06-16</span></td>
 	<td valign="top">Umzug auf den neuen Server abgeschlossen.</td>
 </tr>
@@ -213,7 +197,7 @@
 	<td valign="top" align="right" width="90"><span class="newsdate">2004-04-07</span></td>
 	<td valign="top">Aus Geschwindigkeitsgründen kann die Datenbank-Statistik
 		auf der Homepage nur noch alle 10 Minuten aktualisiert werden. Die
-		<a href="../top_users.php">Benutzer-Top10</a> wird weiterhin
+		<a href="../synset/statistics">Benutzer-Top10</a> wird weiterhin
 		 in Echtzeit aktualisiert.
 	</td>
 </tr>
@@ -226,10 +210,10 @@
 </tr>
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2004-03-31</span></td>
-	<td valign="top">Neues Feature: <a href="../top_users.php">Benutzer-Top10</a>
+	<td valign="top">Neues Feature: <a href="../synset/statistics">Benutzer-Top10</a>
 		-- listet die Top 15 der Benutzer, die in den letzten 7 bzw. 365 Tagen
 		die meisten Beiträge geleistet haben. Aus Datenschutzgründen
-		muss man als Benutzer erst auf der Seite <a href="prefs.php">Einstellungen</a>
+		muss man als Benutzer erst auf der Seite Einstellungen
 		seinen Namen (oder ein Pseudonym) angeben, sonst erscheint
 		der eigene Eintrag nur als "anonym".
 	</td>
@@ -313,7 +297,7 @@
 		Es ist jetzt kein Login als
 		"guest" mehr nötig, wenn man nur nach Begriffen suchen will. Wie
 		bisher muss man sich einloggen, um Begriffe einzufügen oder
-		zu löschen. Übrigens: unter <a href="prefs.php">Einstellungen</a> kann
+		zu löschen. Übrigens: unter Einstellungen kann
 		man dann auch sein Passwort ändern und eine persönliche Statistik
 		der hinzugefügten/gelöschten Einträge abrufen.
 	</td>
