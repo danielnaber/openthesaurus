@@ -9,6 +9,8 @@
 
         <div class="body">
 
+		<h1><g:message code="faq.title" /></h1>
+
         <table style="border:0px;width:100%">
         <tr>
         	<td>
