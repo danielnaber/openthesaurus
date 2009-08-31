@@ -239,6 +239,8 @@ class SynsetController extends BaseController {
             date(content:new Date().toString())
           }
           for (s in searchResult.synsetList) {
+            //FIXME: the attribute used here flattens and thus destroys the JSON
+            // while it works fine for XML:
             synset(id:s.id) {
               if (s.categoryLinks != null) {
                 categories {
