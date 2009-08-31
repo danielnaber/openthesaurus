@@ -226,19 +226,20 @@ class SynsetController extends BaseController {
     private void renderApiResponse(def searchResult) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
-      render(contentType:params.format) {
+      render(contentType:params.format, encoding:"utf-8") {
         matches {
           metaData {
-            //FIXME: make this configurable
-            warning(content:"WARNING -- this API is in beta -- the format might change without warning!")
-            copyright(content:"Copyright (C) 2009 Daniel Naber (www.danielnaber.de)")
-            license(content:"GNU LESSER GENERAL PUBLIC LICENSE Version 2.1")
-            source(content:"http://www.openthesaurus.de")
+            if (grailsApplication.config.thesaurus.apiWarning) {
+              warning(content:grailsApplication.config.thesaurus.apiWarning)
+            }
+            copyright(content:grailsApplication.config.thesaurus.apiCopyright)
+            license(content:grailsApplication.config.thesaurus.apiLicense)
+            source(content:grailsApplication.config.thesaurus.apiSource)
             date(content:new Date().toString())
           }
           for (s in searchResult.synsetList) {
             synset(id:s.id) {
-              for (t in s.terms) {
+              for (t in s.sortedTerms()) {
                 if (t.level) {
                   term(term:t, level:t.level.levelName)
                 } else {
@@ -479,6 +480,9 @@ class SynsetController extends BaseController {
     def doDBSearch(String query, Section section, Source source,
             Category category, int max = -1, int offset = 0) {
         String sortField = params.sort ? params.sort : "synsetPreferredTerm"
+        if (grailsApplication.config.thesaurus.prefTerm == 'false') {
+          sortField = params.sort ? params.sort : "id"
+        }
         String sortOrder = params.order ? params.order : "asc"
 
         boolean completeResult = false
