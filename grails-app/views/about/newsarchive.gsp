@@ -240,6 +240,7 @@
 	<td>2003</td>
 	<td></td>
 </tr>
+<!-- 
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2003-11-06</span></td>
 	<td valign="top"><a href="download/openthesaurus.pdf">An
@@ -247,6 +248,7 @@
 			<br />Update 2004-06-13: the paper has been slightly updated.
 	</td>
 </tr>
+ -->
 <tr>
 	<td valign="top" align="right" width="90"><span class="newsdate">2003-10-18</span></td>
 	<td valign="top">
