@@ -195,8 +195,10 @@ class SynsetController extends BaseController {
                   maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
-          log.info("Search time (ms):${totalTime} db:${dbTime} sim:${similarTime} "
-               + "substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} q:${params.q}")
+          //boolean wirelessBrowser= BrowserDetection.isWirelessDevice(getServletContext(), request)          //String wirelessInfo = wirelessBrowser ? "m=y" : "m=n"
+          log.info("Search(ms):${totalTime} db:${dbTime} sim:${similarTime}"
+               + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
+               + " q:${params.q}")           //    + " ${wirelessInfo} q:${params.q}")
             
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
@@ -212,7 +214,7 @@ class SynsetController extends BaseController {
             synsetList : searchResult.synsetList,
             totalMatches: searchResult.totalMatches,
             completeResult: searchResult.completeResult,
-            upperBound: UPPER_BOUND,
+            upperBound: UPPER_BOUND,            //wirelessBrowser: wirelessBrowser,
             runTime : totalTime ]
 
         } finally {
