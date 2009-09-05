@@ -196,7 +196,8 @@ class SynsetController extends BaseController {
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           //boolean wirelessBrowser= BrowserDetection.isWirelessDevice(getServletContext(), request)          //String wirelessInfo = wirelessBrowser ? "m=y" : "m=n"
-          log.info("Search(ms):${totalTime} db:${dbTime} sim:${similarTime}"
+          String qType = params.format == "text/xml" ? "xml" : "htm"
+          log.info("Search(ms):${qType} ${totalTime} db:${dbTime} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")           //    + " ${wirelessInfo} q:${params.q}")
             
