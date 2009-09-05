@@ -153,22 +153,37 @@ class SynsetController extends BaseController {
         Connection conn = null
         try {
           conn = dataSource.getConnection()
+          
+          boolean apiRequest = params.format == "text/xml"
+          
+          List partialMatchResult = []
           long partialMatchStartTime = System.currentTimeMillis()
-          // we display 10 match in the page and use the next one (if any) to
-          // decide whether there are more matches:
-          List partialMatchResult = searchPartialResult(params.q, conn, 0, 11)
+          if (!apiRequest) {
+            // we display 10 matches in the page and use the next one (if any) to
+            // decide whether there are more matches:
+            partialMatchResult = searchPartialResult(params.q, conn, 0, 11)
+          }
           long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
           
+          List wikipediaResult = []
           long wikipediaStartTime = System.currentTimeMillis()
-          List wikipediaResult = searchWikipedia(params.q, conn)
+          if (!apiRequest) {
+            wikipediaResult = searchWikipedia(params.q, conn)
+          }
           long wikipediaTime = System.currentTimeMillis() - wikipediaStartTime
 
+          List wiktionaryResult = []
           long wiktionaryStartTime = System.currentTimeMillis()
-          List wiktionaryResult = searchWiktionary(params.q, conn)
+          if (!apiRequest) {
+            wiktionaryResult = searchWiktionary(params.q, conn)
+          }
           long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
           
+          List similarTerms = []
           long similarStartTime = System.currentTimeMillis()
-          List similarTerms = searchSimilarTerms(params.q, conn)
+          if (!apiRequest) {
+            similarTerms = searchSimilarTerms(params.q, conn)
+          }
           long similarTime = System.currentTimeMillis() - similarStartTime
 
           Section section = null
@@ -203,7 +218,7 @@ class SynsetController extends BaseController {
             
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
-          if (params.format == "text/xml") {
+          if (apiRequest) {
             renderApiResponse(searchResult)
             return
           }
