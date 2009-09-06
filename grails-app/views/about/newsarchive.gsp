@@ -20,6 +20,11 @@
 	<td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2009-08-31</span></td>
+    <td valign="top">OpenThesaurus-Daten können jetzt auch <a href="../about/api">über
+    	diese REST-API</a> angefragt werden</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2009-08-06</span></td>
     <td valign="top">Relaunch - OpenThesaurus basiert jetzt auf dem Projekt
 	    <a href="http://sourceforge.net/projects/vithesaurus">vithesaurus</a>, was uns
