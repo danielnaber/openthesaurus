@@ -6,9 +6,7 @@
         <title>UserEvent List</title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-        </div>
+
         <div class="body">
             
             <h1>UserEvent List (${totalMatches} matches)</h1>
