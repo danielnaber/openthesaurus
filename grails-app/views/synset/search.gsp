@@ -166,9 +166,10 @@
 						<%
 						clean =
 						  { str -> str
-						    .replaceAll(":\\[(\\d+\\.?\\d*)\\]", "__\$1__")
+						    .replaceAll(":\\[(\\d+[a-z]?\\.?\\d*)\\]", "__\$1__")
+						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
 						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
-						    .replaceAll("__(\\d+\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
+						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
