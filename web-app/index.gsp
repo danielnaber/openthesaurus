@@ -6,20 +6,9 @@
     </head>
     <body>
     
-    <%
-     boolean mobileBrowser = false;
-     try {
-         mobileBrowser = BrowserDetection.isMobileDevice(request);
-     } catch (Exception e) {
-       // ignore, assume non-mobile
-     }
-    %>
-    
-		<g:if test="${!mobileBrowser}">
-			<div class="homepagead_right">
-	        	<g:render template="/ads/homepage"/>
-	        </div>
-		</g:if>
+		<div class="homepagead_right">
+        	<g:render template="/ads/homepage"/>
+        </div>
 
 		<div class="homepagecontent">
 
