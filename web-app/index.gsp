@@ -1,15 +1,25 @@
-<%@ import page="com.vionto.vithesaurus.*" %>
-
+<%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
         <title><g:message code="homepage.title"/></title>
         <meta name="layout" content="homepage" />
     </head>
     <body>
-
-		<div class="homepagead_right">
-        	<g:render template="/ads/homepage"/>
-        </div>
+    
+    <%
+     boolean mobileBrowser = false;
+     try {
+         mobileBrowser = BrowserDetection.isMobileDevice(request);
+     } catch (Exception e) {
+       // ignore, assume non-mobile
+     }
+    %>
+    
+		<g:if test="${!mobileBrowser}">
+			<div class="homepagead_right">
+	        	<g:render template="/ads/homepage"/>
+	        </div>
+		</g:if>
 
 		<div class="homepagecontent">
 

@@ -9,9 +9,11 @@
 
         <div class="body">
 
-			<div style="float:right">
-				<g:render template="/ads/resultpage"/>
-			</div>
+			<g:if test="${!mobileBrowser}">
+				<div style="float:right">
+					<g:render template="/ads/resultpage"/>
+				</div>
+			</g:if>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>

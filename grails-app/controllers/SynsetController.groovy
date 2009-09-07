@@ -210,11 +210,20 @@ class SynsetController extends BaseController {
                   maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
-          //boolean wirelessBrowser= BrowserDetection.isWirelessDevice(getServletContext(), request)          //String wirelessInfo = wirelessBrowser ? "m=y" : "m=n"
+          
+          boolean mobileBrowser = false
+          try {
+            mobileBrowser = BrowserDetection.isMobileDevice(request)
+          } catch (Exception e) {
+            log.warn("mobile browser detection failed: " + e + " for UserAgent: "
+                + request.getHeader("User-Agent"))
+          }
+          String mobileInfo = mobileBrowser ? "m=y" : "m=n"
+          
           String qType = params.format == "text/xml" ? "xml" : "htm"
-          log.info("Search(ms):${qType} ${totalTime} db:${dbTime} sim:${similarTime}"
+          log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
-               + " q:${params.q}")           //    + " ${wirelessInfo} q:${params.q}")
+               + " q:${params.q}")
             
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
@@ -230,7 +239,7 @@ class SynsetController extends BaseController {
             synsetList : searchResult.synsetList,
             totalMatches: searchResult.totalMatches,
             completeResult: searchResult.completeResult,
-            upperBound: UPPER_BOUND,            //wirelessBrowser: wirelessBrowser,
+            upperBound: UPPER_BOUND,            mobileBrowser: mobileBrowser,
             runTime : totalTime ]
 
         } finally {
