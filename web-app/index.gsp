@@ -14,8 +14,8 @@
 		<div class="homepagecontent">
 
 	        <div class="logo"><img
-	        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}" 
-	        	alt="<g:message code='logo.alt.text'/>" /></div>
+	        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v1" 
+	        	alt="<g:message code='logo.alt.text'/>" width="292" height="80"/></div>
 	            
 	        <h1 class="homepagehead"><g:message code="homepage.head"/></h1>
 	        
@@ -39,9 +39,9 @@
 			</p>
 	
 	        <p class="mainpage">
-		        <!-- 
+		        <%--
 	            <g:link controller="term" action="list"><g:message code="a_to_z"/></g:link> &middot;
-	             -->
+	            --%>
 	            <g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link> <span class="d">&middot;</span>
 	            <g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link> <span class="d">&middot;</span>
 	            <g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link> <span class="d">&middot;</span>

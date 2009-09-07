@@ -15,13 +15,6 @@
     
        	<g:layoutBody />	
 
-        <!--
-        <p class="buildInfo">Version:
-            ${grailsApplication.getMetadata().get('app.version')}<br />
-            Application: ${grailsApplication.getMetadata().get('app.name')}
-        </p>
-        -->
-
 		<g:render template="/analytics"/>
 
     </body>	

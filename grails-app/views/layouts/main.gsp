@@ -16,13 +16,9 @@
 	        </div>
         </noscript>
         
-        <div id="spinner" class="spinner" style="display:none;">
-            <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner" />
-        </div>
-        
         <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
-        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}" 
-        	alt="<g:message code='logo.alt.text'/>" /></a></div>
+        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v1" 
+        	alt="<g:message code='logo.alt.text'/>" width="292" height="80" /></a></div>
         	
         <g:render template="/searchform"/>
 
