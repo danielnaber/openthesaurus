@@ -21,53 +21,72 @@ import com.vionto.vithesaurus.tools.StringTools
 import java.text.SimpleDateFormat
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import java.sql.Connection
+import java.sql.ResultSet
+import java.sql.Statement
 
 /**
- * Exports concepts to a plain text file.
+ * Exports concepts to a plain text file, packed as a ZIP.
  */
 class ExportTextController extends BaseController {
 
   def beforeInterceptor = [action: this.&localHostAuth]
     
+  def dataSource       // will be injected
+  def sessionFactory   // will be injected
+  
   def run = {
 
       File tmpFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp")
       log.info("Writing plain text export to " + tmpFile)
       FileWriter fw = new FileWriter(tmpFile)
+      BufferedWriter bw = new BufferedWriter(fw)
       
       String licenseText = message(code:'text.export.license')
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm")
       String date = sdf.format(new Date())
-      fw.write(licenseText.replaceAll("__DATE__", date))
-      fw.write("\n")
+      bw.write(licenseText.replaceAll("__DATE__", date))
+      bw.write("\n")
+  
+      Connection conn = dataSource.getConnection()
+      Statement st = conn.createStatement()
+
+      // simple but requires too much memory:
+      //List synsets = Synset.findAllByIsVisible(true)
+
+      ResultSet rs = st.executeQuery("""SELECT id FROM synset WHERE synset.is_visible = 1""")
+      def hibSession = sessionFactory.getCurrentSession()
       
-      List synsets = Synset.findAllByIsVisible(true)
-      log.info("Exporting " + synsets.size() + " synsets")
       int count = 0
-      for (synset in synsets) {
-        int i = 0
+      while (rs.next()) {
+        Synset synset = Synset.get(rs.getLong("id"))
+        count++
         if (synset.terms.size() <= 1) {
           // not interesting, as these offer no synonyms
           continue
         }
+        int i = 0
         for (term in synset.terms) {
           if (term.level) {
-            fw.write(term.word + " (" + term.level + ")")
+            bw.write(term.word + " (" + term.level + ")")
           } else {
-            fw.write(term.word)
+            bw.write(term.word)
           }
           if (i < synset.terms.size() - 1) {
-            fw.write(";")
+            bw.write(";")
           }
           i++
         }
-        fw.write("\n")
-        if (count % 5000 == 0) {
+        bw.write("\n")
+        if (count % 1000 == 0) {
           log.info("Text exporting synset #${count}")
+          hibSession.clear()	// required to avoid OOM
         }
-        count++
       }
       
+      rs.close()
+      st.close()
+      bw.close()
       fw.close()
       
       File tmpZipFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp.zip")
