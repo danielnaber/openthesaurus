@@ -16,7 +16,7 @@ import java.io.BufferedWriter/**
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-import com.vionto.vithesaurus.*
+import com.vionto.vithesaurus.*import com.vionto.vithesaurus.tools.StringTools
 import java.text.SimpleDateFormat
 import java.util.zip.ZipEntryimport java.util.zip.ZipOutputStream
 /**
@@ -30,12 +30,12 @@ class ExportOxtController extends BaseController {
       File tmpFile = File.createTempFile("openthesaurus.dat", "")
       log.info("Writing data export for OXT to " + tmpFile)
       FileWriter fw = new FileWriter(tmpFile)
-      BufferedWriter bw = new BufferedWriter(fw);
+      BufferedWriter bw = new BufferedWriter(fw)
 
       File tmpFileIdx = File.createTempFile("openthesaurus.idx", "")
       log.info("Writing index export for OXT to " + tmpFileIdx)
       FileWriter fwIdx = new FileWriter(tmpFileIdx)
-      BufferedWriter bwIdx = new BufferedWriter(fwIdx);
+      BufferedWriter bwIdx = new BufferedWriter(fwIdx)
       
       int indexPos = 0      indexPos = dataWrite(encoding + "\n", bw, indexPos)
       bwIdx.write(encoding + "\n")            log.info("Collecting terms")
@@ -44,19 +44,19 @@ class ExportOxtController extends BaseController {
             eq('isVisible', true)
         }
         order("word", "asc")      }      bwIdx.write(termList.size() + "\n")      log.info("Removing duplicate terms (total terms: ${termList.size()})")      //Set allWordsSet = new HashSet()	// to avoid dupes -- faster but uses too much memory      List allWords = []      int i = 0      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        // avoid duplicates here:        if (!allWords.contains(normTerm)) {          allWords.add(normTerm)        }      }      log.info("Sorting terms")      Collections.sort(allWords, String.CASE_INSENSITIVE_ORDER)                
-      log.info("Exporting " + termList.size() + " terms")
+      log.info("Exporting " + allWords.size() + " terms")
       int count = 0
       SynsetController ctrl = new SynsetController()
-      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null);        if (count % 100 == 0) {          log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
+      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null)        if (count % 100 == 0) {          log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
         bwIdx.write(word.toLowerCase() + "|" + indexPos + "\n")        indexPos = dataWrite(word.toLowerCase() + "|" + result.totalMatches + "\n", bw, indexPos)
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
-          indexPos = dataWrite("-", bw, indexPos);
+          indexPos = dataWrite("-", bw, indexPos)
           for (sortedTerm in sortedTerms) {
             if (sortedTerm.word != word) {
-              indexPos = dataWrite("|" + sortedTerm.word, bw, indexPos);            }
+              indexPos = dataWrite("|" + sortedTerm.word, bw, indexPos)            }
           }
-          indexPos = dataWrite("\n", bw, indexPos);        }
+          indexPos = dataWrite("\n", bw, indexPos)        }
         //if (count > 1000) {
         //  break
         //}
@@ -75,5 +75,4 @@ class ExportOxtController extends BaseController {
   private dataWrite(String str, BufferedWriter bw, int indexPos) {    bw.write(str)
     return indexPos + str.getBytes(encoding).length
   }
-  private createZip(File data, File index) throws IOException {    String finalName = grailsApplication.config.thesaurus.export.oxt.output    File zipFile = new File(finalName + ".tmp")    FileOutputStream fos = new FileOutputStream(zipFile)    ZipOutputStream zos = new ZipOutputStream(fos)    zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.idxFile))    writeToStream(index, zos)    zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.datFile))    writeToStream(data, zos)    zos.putNextEntry(new ZipEntry("description.xml"))    writeToStream(new File(grailsApplication.config.thesaurus.export.descFile), zos)    zos.putNextEntry(new ZipEntry("Dictionaries.xcu"))    writeToStream(new File(grailsApplication.config.thesaurus.export.dictFile), zos)    zos.putNextEntry(new ZipEntry("META-INF/manifest.xml"))    writeToStream(new File(grailsApplication.config.thesaurus.export.manifestFile), zos)    zos.close()    fos.close()    // this is a publically visible file so make the new version visible atomically:    zipFile.renameTo(new File(finalName))  }  private void writeToStream(File file, OutputStream out) throws IOException {    log.info("Writing " + file.getAbsolutePath() + " to stream")    FileInputStream fis = new FileInputStream(file);    BufferedInputStream bis = new BufferedInputStream(fis);    final byte[] chars = new byte[4096];    int readbytes = 0;    while (readbytes >= 0) {      readbytes = bis.read(chars, 0, 4096);      if (readbytes <= 0) {        break;      }      out.write(chars, 0, readbytes);    }    bis.close();    fis.close();  }
-}
+  private createZip(File data, File index) throws IOException {    String finalName = grailsApplication.config.thesaurus.export.oxt.output    File zipFile = new File(finalName + ".tmp")    FileOutputStream fos = new FileOutputStream(zipFile)    ZipOutputStream zos = new ZipOutputStream(fos)    zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.idxFile))    StringTools.writeToStream(index, zos)    zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.datFile))    StringTools.writeToStream(data, zos)    zos.putNextEntry(new ZipEntry("description.xml"))    StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.descFile), zos)    zos.putNextEntry(new ZipEntry("Dictionaries.xcu"))    StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.dictFile), zos)    zos.putNextEntry(new ZipEntry("META-INF/manifest.xml"))    StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.manifestFile), zos)    zos.close()    fos.close()    // this is a publically visible file so make the new version visible atomically:    zipFile.renameTo(new File(finalName))  }}

@@ -17,6 +17,12 @@
  */ 
 package com.vionto.vithesaurus.tools;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * Offers some useful tools for dealing with Strings.
  */
@@ -134,4 +140,21 @@ public class StringTools {
     	}
     	return returner;
     }
+    
+    public static void writeToStream(final File file, final OutputStream out) throws IOException {
+      FileInputStream fis = new FileInputStream(file);
+      BufferedInputStream bis = new BufferedInputStream(fis);
+      final byte[] chars = new byte[4096];
+      int readbytes = 0;
+      while (readbytes >= 0) {
+        readbytes = bis.read(chars, 0, 4096);
+        if (readbytes <= 0) {
+          break;
+        }
+        out.write(chars, 0, readbytes);
+      }
+      bis.close();
+      fis.close();
+    }
+
 }

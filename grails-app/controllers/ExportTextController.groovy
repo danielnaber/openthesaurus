@@ -17,7 +17,10 @@
  */ 
 
 import com.vionto.vithesaurus.*
+import com.vionto.vithesaurus.tools.StringTools
 import java.text.SimpleDateFormat
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 /**
  * Exports concepts to a plain text file.
@@ -28,14 +31,13 @@ class ExportTextController extends BaseController {
     
   def run = {
 
-      File tmpFile = File.createTempFile("openthesaurus.txt", "")
+      File tmpFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp")
       log.info("Writing plain text export to " + tmpFile)
       FileWriter fw = new FileWriter(tmpFile)
       
       String licenseText = message(code:'text.export.license')
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm")
       String date = sdf.format(new Date())
-      log.info("DATE " + date)
       fw.write(licenseText.replaceAll("__DATE__", date))
       fw.write("\n")
       
@@ -44,9 +46,13 @@ class ExportTextController extends BaseController {
       int count = 0
       for (synset in synsets) {
         int i = 0
+        if (synset.terms.size() <= 1) {
+          // not interesting, as these offer no synonyms
+          continue
+        }
         for (term in synset.terms) {
           if (term.level) {
-            fw.write(term.word + "(" + term.level + ")")
+            fw.write(term.word + " (" + term.level + ")")
           } else {
             fw.write(term.word)
           }
@@ -56,16 +62,43 @@ class ExportTextController extends BaseController {
           i++
         }
         fw.write("\n")
-        if (count > 1000) {
-          break	//FIXME
+        if (count % 5000 == 0) {
+          log.info("Text exporting synset #${count}")
         }
         count++
       }
       
       fw.close()
-      log.info("Export done")
       
-      // TODO: ZIP
+      File tmpZipFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp.zip")
+      createZip(tmpFile, tmpZipFile)
+      
+      File finalFile = new File(grailsApplication.config.thesaurus.export.text.output)
+      if (finalFile.exists()) {
+        boolean deleted = finalFile.delete()
+        if (!deleted) {
+          throw new Exception("Could not delete: " + finalFile)
+        }
+      }
+      tmpZipFile.renameTo(finalFile)
+      
+      String msg = "Text export finished (count: ${count})"
+      render msg
+      log.info(msg)
   }
     
+  private createZip(File data, File targetZip) throws IOException {
+    FileOutputStream fos = new FileOutputStream(targetZip)
+    ZipOutputStream zos = new ZipOutputStream(fos)
+    
+    zos.putNextEntry(new ZipEntry("openthesaurus.txt"))
+    StringTools.writeToStream(data, zos)
+    
+    zos.putNextEntry(new ZipEntry("LICENSE.txt"))
+    StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.license), zos)
+    
+    zos.close()
+    fos.close()
+  }
+  
 }
