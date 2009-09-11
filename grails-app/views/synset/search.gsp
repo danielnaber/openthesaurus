@@ -62,7 +62,21 @@
                    
             </g:if>
             <g:else>
-            		<li><span class="light"><g:message code="result.no.matches"/></span></li>
+            		<g:if test="${similarTerms.size > 0}">
+            			<li><span class="light"><g:message code="result.no.matches.similar.words"/></span>
+							<g:each in="${similarTerms}" var="term" status="counter">
+								<g:if test="${counter < 3}">
+									<g:link action="search" params="${[q: term.term]}">${term.term}</g:link>
+									<g:if test="${counter < Math.min(2, similarTerms.size()-1)}">
+										<span class="d">&middot;</span>
+									</g:if>
+								</g:if>
+							</g:each>
+            			</li>
+            		</g:if>
+            		<g:else>
+	            		<li><span class="light"><g:message code="result.no.matches"/></span></li>
+            		</g:else>
             </g:else>
             
             </ul>
