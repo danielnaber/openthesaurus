@@ -33,7 +33,8 @@ class AboutController extends BaseController {
 
     def download = {
         File dbDump = new File(new String(grailsApplication.config.thesaurus.dbDump))
-        [dbDump: dbDump]
+        File textDump = new File(new String(grailsApplication.config.thesaurus.export.text.output))
+        [dbDump: dbDump, textDump: textDump]
     }
 
     def topusers = {
