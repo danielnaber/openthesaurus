@@ -23,7 +23,8 @@
         <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link><br />
 
         Export:
-        <g:link controller="exportOxt" action="run">Export OXT (slow for large data sets)</g:link>
+        <g:link controller="exportOxt" action="run">Export OXT (slow for large data sets)</g:link> |
+        <g:link controller="exportText" action="run">Export text</g:link> 
         <br />
 
         Lists:
