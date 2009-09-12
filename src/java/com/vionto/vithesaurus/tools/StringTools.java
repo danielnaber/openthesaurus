@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Offers some useful tools for dealing with Strings.
+ * Some useful tools for dealing with Strings.
  */
 public class StringTools {
 
@@ -42,7 +42,7 @@ public class StringTools {
    *          The input string
    * @return The modified String, with replacements.
    */
-  public static String replaceHtmlMarkupChars(String string) {
+  public static String replaceHtmlMarkupChars(final String string) {
     return string.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   }
 
@@ -50,8 +50,8 @@ public class StringTools {
    * like "replaceAtPosition", but only replaces the numbers of characters that are given by
    * "length"
    */
-  public static String replaceCertainPartAtPosition(int position, int length, String replacement,
-      String string) {
+  public static String replaceCertainPartAtPosition(final int position, final int length, 
+      final String replacement, final String string) {
 
     if (replacement == null)
       return string;
@@ -64,7 +64,8 @@ public class StringTools {
   /**
    * replaces a substring in "string" at a given "position" by "replacement"
    */
-  public static String replaceAtPosition(int position, String replacement, String string) {
+  public static String replaceAtPosition(final int position, final String replacement,
+      final String string) {
     if (replacement == null) {
       return string;
     }
@@ -78,7 +79,7 @@ public class StringTools {
   /**
    * returns all indices of all occurences of "substring" in "string"
    */
-  public static int[] allIndexOf(String substring, String string) {
+  public static int[] allIndexOf(final String substring, final String string) {
 
     if (!string.contains(substring)) {
       return null;
@@ -96,7 +97,7 @@ public class StringTools {
   /**
    * counts the occurence of all "substrings" in "string"
    */
-  public static int countSubstrings(String[] substring, String string) {
+  public static int countSubstrings(final String[] substring, final String string) {
 
     int counter = substring.length;
     for (int i = 0; i < substring.length; i++) {
@@ -134,7 +135,8 @@ public class StringTools {
     return returner;
   }
 
-  private static int findNextPosition(int beginIndex, String[] substring, String string) {
+  private static int findNextPosition(final int beginIndex, final String[] substring,
+      final String string) {
 
     int returner = 4711;    //FIXME
 
@@ -145,7 +147,7 @@ public class StringTools {
     return returner;
   }
 
-  private static int findLastPosition(String[] substring, String string) {
+  private static int findLastPosition(final String[] substring, final String string) {
 
     int returner = -1;
 
@@ -156,9 +158,15 @@ public class StringTools {
     return returner;
   }
 
+  /**
+   * Write the contents if {@code file} to {@code out}.
+   * @param file input file
+   * @param out stream to be written to
+   * @throws IOException
+   */
   public static void writeToStream(final File file, final OutputStream out) throws IOException {
-    FileInputStream fis = new FileInputStream(file);
-    BufferedInputStream bis = new BufferedInputStream(fis);
+    final FileInputStream fis = new FileInputStream(file);
+    final BufferedInputStream bis = new BufferedInputStream(fis);
     final byte[] chars = new byte[4096];
     int readbytes = 0;
     while (readbytes >= 0) {
