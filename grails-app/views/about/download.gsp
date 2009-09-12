@@ -31,7 +31,9 @@
 			<li>Für Entwickler:
 				<a href="../export/${dbDump.getName()}">MySQL-Dump, 
 					exportiert ${sdf.format(new Date(dbDump.lastModified()))},
-					${String.format("%.2f", dbDump.length()/1000/1000)}MB</a></li>
+					${String.format("%.2f", dbDump.length()/1000/1000)}MB</a>
+					- siehe auch <a href="api">API-Zugriff</a>
+					</li>
 			</ul>
 
 		</div>
