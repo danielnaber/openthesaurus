@@ -19,11 +19,6 @@ package com.vionto.vithesaurus;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sourceforge.wurfl.wall.TagUtil;
-import net.sourceforge.wurfl.wurflapi.CapabilityMatrix;
-import net.sourceforge.wurfl.wurflapi.ObjectsManager;
-import net.sourceforge.wurfl.wurflapi.UAManager;
-
 public class BrowserDetection {
   
   private BrowserDetection() {
@@ -34,16 +29,15 @@ public class BrowserDetection {
    * Guess if user is probably using a mobile device (mobile phone) with a small display.
    */
   public static boolean isMobileDevice(final HttpServletRequest request) {
-      final String userAgent = TagUtil.getUA(request);
-      final UAManager uaManager = ObjectsManager.getUAManagerInstance();
-      final String deviceIDFromUA = uaManager.getDeviceIDFromUA(userAgent);
-      final CapabilityMatrix capabilities = ObjectsManager.getCapabilityMatrixInstance();
-      final String width = capabilities.getCapabilityForDevice(deviceIDFromUA, "resolution_width");
-      int widthInt = 0;
-      if (width != null) {
-        widthInt = Integer.parseInt(width);
+      final String userAgent = request.getHeader("User-Agent");
+      if (userAgent == null) {
+        return false;
       }
-      if (widthInt != 0 && widthInt < 800 && !"generic".equals(deviceIDFromUA)) {
+      // due to Problems with WURFL (license and technical) we're back at manually
+      // checking the User-Agent:
+      if (userAgent.contains("iPhone") || userAgent.contains("iPod")) {
+        return true;
+      } else if (userAgent.contains("Android ")) {
         return true;
       }
       return false;

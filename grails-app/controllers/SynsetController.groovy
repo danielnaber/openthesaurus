@@ -211,16 +211,8 @@ class SynsetController extends BaseController {
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
-          boolean mobileBrowser = false
-          /*try {
-            mobileBrowser = BrowserDetection.isMobileDevice(request)
-          } catch (Exception e) {
-            log.warn("mobile browser detection failed: " + e + " for UserAgent: "
-                + request.getHeader("User-Agent"))
-          }
+          boolean mobileBrowser = BrowserDetection.isMobileDevice(request)
           String mobileInfo = mobileBrowser ? "m=y" : "m=n"
-          */
-          String mobileInfo = "m=?"
           
           String qType = params.format == "text/xml" ? "xml" : "htm"
           log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime} sim:${similarTime}"

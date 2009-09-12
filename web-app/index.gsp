@@ -1,14 +1,17 @@
 <%@page import="com.vionto.vithesaurus.*" %>
+
 <html>
     <head>
         <title><g:message code="homepage.title"/></title>
         <meta name="layout" content="homepage" />
     </head>
     <body>
-    
-		<div class="homepagead_right">
-        	<g:render template="/ads/homepage"/>
-        </div>
+
+		<g:if test="${!BrowserDetection.isMobileDevice(request)}">
+			<div class="homepagead_right">
+	        	<g:render template="/ads/homepage"/>
+	        </div>
+		</g:if>    
 
 		<div class="homepagecontent">
 
