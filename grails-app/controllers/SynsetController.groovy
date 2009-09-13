@@ -129,7 +129,7 @@ class SynsetController extends BaseController {
               }
         }
         if (allMatches.size() == 0) {
-            flash.message = "No matches"
+            flash.message = message(code:'create.no.matches')
         } else {
             flash.message = ""
         }
