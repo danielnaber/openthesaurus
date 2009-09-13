@@ -1168,7 +1168,7 @@ class SynsetController extends BaseController {
                 synset.setPreferredTerm(lang, preferredTerms.get(lang))
               }
             }
-            flash.message = "Concept created"
+            flash.message = message(code:'create.created')
             redirect(action:edit,id:synset.id)
         }
         else {
