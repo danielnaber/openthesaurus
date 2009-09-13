@@ -41,9 +41,9 @@
             <h1><g:message code="create.headline"/></h1>
 
             <g:hasErrors bean="${synset}">
-            <div class="errors">
-                <g:renderErrors bean="${synset}" as="list" />
-            </div>
+	            <div class="errors">
+	                <g:renderErrors bean="${synset}" as="list" />
+	            </div>
             </g:hasErrors>
 
             <g:form controller="synset" method="post" >
@@ -108,8 +108,13 @@
                       </td>
                       <td valign='top' class='value ${hasErrors(bean:newTerm,'errors')}'>
 
-                          <strong>${term.encodeAsHTML()}</strong><br />
-                          <input type="hidden" class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />
+						  <g:if test="${synset && synset.hasErrors()}">
+	                          <input type="text" class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />
+						  </g:if>
+						  <g:else>
+	                          <strong>${term.encodeAsHTML()}</strong><br />
+	                          <input type="hidden" class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />
+						  </g:else>
 
 						  <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
 						  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>

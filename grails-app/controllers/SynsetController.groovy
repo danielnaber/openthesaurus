@@ -1117,6 +1117,15 @@ class SynsetController extends BaseController {
         // validate the terms before storing the synset
         for (term in termsToCreate) {
             TermValidator validator = new TermValidator(term)
+            boolean validated = term.validate()
+            if (!validated) {
+              String[] wordError = [term.word, term.errors.toString()].toArray()
+              synset.errors.rejectValue(null, 'thesaurus.invalid.term', wordError, "")
+              render(view:'multiSearch', model:[synset:synset,
+                   searchTerms:getTermsFromTextArea(searchTerms)],
+                   contentType:"text/html", encoding:"UTF-8")
+              return
+            }
             try {
                 validator.extendedValidate()
             } catch(IllegalArgumentException e) {
