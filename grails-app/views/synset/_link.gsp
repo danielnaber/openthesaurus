@@ -62,7 +62,8 @@
         <g:select name="linkType.id"
               optionKey="id" from="${LinkType.list().sort()}" />
 
-		<!-- we have to use this instead of g:remoteLink to inject the value of the search form, see below: -->
+		<%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
+		<%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
         <a href="${createLinkTo(dir:'synset/ajaxSearch')}" 
         	onclick="new Ajax.Updater('synsetLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
         	><g:message code="edit.link.lookup"/></a>

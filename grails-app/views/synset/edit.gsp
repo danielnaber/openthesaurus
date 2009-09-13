@@ -15,9 +15,17 @@
           function loadedSearch() {
             document.getElementById('addSynsetProgress').style.visibility='hidden';
           }
+          // We have to submit buttons in the page and we cannot guarantee that
+          // the correct one is used to disable submit-by-return:
+          function avoidSubmitOnReturn(event) {
+        	  if (event.keyCode == 13) {
+            	  return false;
+        	  }
+          }
           function doSearchOnReturn(event) {
               if (event.keyCode == 13) {
-                  // TODO: make a search on return click
+                  // start a search on return (copied from the generated code):
+                  new Ajax.Updater('synsetLink','/vithesaurus/synset/ajaxSearch',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;
                   // don't send the outer form:
                   return false;
               }
@@ -185,7 +193,7 @@
                                     <% int i = 0; %>
                                     <div id="newTerm" style="display:none">
                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                            <input class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                            <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
                                  		    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
 											  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
 						  					</g:if>
@@ -451,7 +459,7 @@
 	                                      <label for='changeComment'><g:message code='edit.comment.for.change'/></label>
 	                                  </td>
 	                                  <td valign='top' class='value'>
-	                                      <input ${disabled} size="40" id="changeComment" type="text" name="changeComment" value="" />
+	                                      <input ${disabled} onkeypress="return avoidSubmitOnReturn(event);" size="40" id="changeComment" type="text" name="changeComment" value="" />
 	                                  </td>
 	                              </tr>
 	                              
