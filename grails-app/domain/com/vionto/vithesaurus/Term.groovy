@@ -41,6 +41,8 @@ class Term implements Comparable, Cloneable {
             "\\!\\[\\]&#αΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσΣτΤυΥφΦχΧψΨωΩ]+"
 
     static belongsTo = [synset:Synset]
+    
+    static hasMany = [termLinks:TermLink]
 
     static constraints = {
         word(matches:TERM_REGEXP,minSize:1,

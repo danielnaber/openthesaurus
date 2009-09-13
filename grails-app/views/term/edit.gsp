@@ -4,6 +4,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="edit.term.title" args="${[term.toString()?.encodeAsHTML()]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
+        <script type="text/javascript">
+        <!--
+	        function showNewTermLink() {
+    	        document.getElementById('addTermLinkLink').style.display='none';
+        	    document.getElementById('addTermLink').style.display='block';
+            	document.editForm.q.focus();
+            	return false;
+            }
+	        function doSearchOnReturn(event) {
+	            if (event.keyCode == 13) {
+	                // start a search on return (copied from the generated code):
+	                new Ajax.Updater('termLink','${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;
+	                // don't send the outer form:
+	                return false;
+	            }
+	        }
+        // -->
+        </script>
     </head>
     <body>
 
@@ -27,10 +46,10 @@
 
             <div style="float:right"><g:render template="/ads/termedit_right"/></div>
 			 
-            <g:form controller="term" method="post" >
+            <g:form controller="term" method="post" name="editForm">
                 <input type="hidden" name="id" value="${id}" />
                 <div class="dialog">
-                    <table>
+                    <table style="width:85%">
                         <tbody>
                         
                             <tr class='prop'>
@@ -52,7 +71,13 @@
                             </tr> 
 
 						    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
-							  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+						    	<tr style="display:none">
+						    		<td></td>
+						    		<td>
+						    			<%-- the HTML around the hidden field is for syntax correctness only --%>
+									  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+						    		</td>
+						    	</tr>
 						    </g:if>
 						    <g:else>
 	                            <tr class='prop'>
@@ -124,7 +149,61 @@
                                 </td>
                             </tr>
                             --%> 
-                                                
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                	<g:message code="edit.term.links"/>
+                                </td>
+                                <td valign='top' class='value'>
+								    <g:if test="${session.user && false}"><%-- FIXME %>
+	                                
+								        <div id="addTermLinkLink" style="margin-top:5px">
+								            <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.link"/></a>
+								        </div>
+								        <div id="addTermLink" style="display:none;margin-top:5px">
+									        <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>
+									        <g:select name="linkType.id"
+									              optionKey="id" from="${TermLinkType.list().sort()}" />
+									
+											<%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
+											<%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
+									        <a href="${createLinkTo(dir:'synset/ajaxSearch')}" 
+									        	onclick="new Ajax.Updater('termLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
+									        	><g:message code="edit.link.lookup"/></a>
+									              
+									        <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
+									        <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
+									              update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
+									        -->
+									        <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
+									            <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
+									               title="Searching..."/>
+									        </span>
+									        <div id="termLink">
+									        </div>
+								     	</div>
+								    
+								    </g:if> 
+								    <g:else>
+						    			<g:if test="${term.termLinks && term.termLinks.size() > 0}">
+						    				<ul>
+							    				<g:each var="termLink" in="${term.termLinks}">
+							    					<li>${termLink.linkType.linkName.encodeAsHTML()}:
+							    						<g:link controller="term" action="edit" 
+							    						  id="${termLink.targetTerm.id}">${termLink.targetTerm}</g:link>
+							    						(<g:link controller="synset" action="edit"
+							    						  id="${termLink.targetTerm.synset.id}">${termLink.targetTerm.synset.toShortString(3).encodeAsHTML()}</g:link>)</li>
+							    				</g:each>
+						    				</ul>
+						    			</g:if>
+						    			<g:else>
+						    				<span class="metaInfo"><g:message code='edit.none'/></span>
+						    			</g:else>
+								    </g:else>
+								     
+							     </td>
+							</tr>
+
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <label for='userComment'><g:message code="edit.term.comment"/></label>
