@@ -75,26 +75,35 @@ class SynsetController extends BaseController {
             latestChangesMap.put(section, latestChanges)
         }
         // per-user statistics (i.e. top users):
-        Connection conn = dataSource.getConnection()
-        String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
-		FROM user_event, thesaurus_user
-		WHERE
-			thesaurus_user.id = user_event.by_user_id AND
-			user_event.creation_date >= DATE_SUB(NOW(), INTERVAL ? DAY)
-			GROUP BY by_user_id
-		    ORDER BY ct DESC
-		    LIMIT ?"""
-	    PreparedStatement ps = conn.prepareStatement(sql)
-	    ps.setInt(1, 365)	// days
-	    ps.setInt(2, 10)	// max matches
-	    ResultSet resultSet = ps.executeQuery()
-	    List topUsers = []
-	    while (resultSet.next()) {
-          topUsers.add(new TopUser(displayName:resultSet.getString("real_name"),
-              actions:resultSet.getInt("ct")))
-	    }
-        [ termCount : termCountMap,
-          latestChanges : latestChangesMap, topUsers: topUsers ]
+        Connection conn = null
+        try {
+          conn = dataSource.getConnection()
+          String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
+            FROM user_event, thesaurus_user
+            WHERE
+  			thesaurus_user.id = user_event.by_user_id AND
+  			user_event.creation_date >= DATE_SUB(NOW(), INTERVAL ? DAY)
+  			GROUP BY by_user_id
+  		    ORDER BY ct DESC
+  		    LIMIT ?"""
+  	      PreparedStatement ps = conn.prepareStatement(sql)
+  	      ps.setInt(1, 365)	// days
+  	      ps.setInt(2, 10)	// max matches
+  	      ResultSet resultSet = ps.executeQuery()
+  	      List topUsers = []
+  	      while (resultSet.next()) {
+            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"),
+                actions:resultSet.getInt("ct")))
+  	      }
+  	      resultSet.close()
+  	      ps.close()
+          [ termCount : termCountMap,
+            latestChanges : latestChangesMap, topUsers: topUsers ]
+        } finally {
+          if (conn != null) {
+            conn.close()
+          }
+        }
     }
 
     def list = {
