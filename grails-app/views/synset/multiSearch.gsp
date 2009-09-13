@@ -26,7 +26,7 @@
                 <p class="warning"><g:message code="create.search.duplicate.warning"/></p>
             </g:if>
 
-			<g:if test="${synsetList.size() > 0}">
+			<g:if test="${synsetList && synsetList.size() > 0}">
 	            <table>
 	               <g:each in="${synsetList}" status="i" var="synset">
 	                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
