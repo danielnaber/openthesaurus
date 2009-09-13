@@ -22,8 +22,19 @@ html * {
     text-decoration: none;
 }
 
+.logo_mobile {
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
 .mainpage {
     text-align: center;
+}
+
+.mainpage_mobile {
+    margin-left: 15px;
 }
 
 .content {

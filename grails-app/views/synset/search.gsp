@@ -2,7 +2,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
+        <g:if test="${mobileBrowser}">
+        	<meta name="layout" content="main_mobile" />
+       	</g:if>
+       	<g:else>
+       		<meta name="layout" content="main" />
+       	</g:else>
         <title><g:message code='result.matches.for.title' args="${[params.q.encodeAsHTML()]}"/></title>
     </head>
     <body>
@@ -21,112 +26,37 @@
 
             <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
-			<div style="width:60%;border:1px">
-            <ul>
-            
-            <g:if test="${totalMatches > 0}">
+			<g:if test="${mobileBrowser}">
+				<div style="width:100%">
+	            <ul>
+		           <g:render template="mainmatches"/>
+	            </ul>
+				</div>
+          	</g:if>
+          	<g:else>
+				<div style="width:60%">
+	            <ul>
+		            <g:render template="mainmatches"/>
+	            </ul>
+				</div>
+          		<g:render template="/ads/resultpage_results"/>
+          	</g:else>
 
-                   <g:each in="${synsetList}" status="i" var="synset">
-                        <li>
-		                    <g:set var="counter" value="${0}"/>
-                            <g:each in="${synset?.sortedTerms()}" var="term">
-                            	<g:if test="${term.level}">
-		                        	<g:set var="displayTerm" value="${term.toString() + ' (' + term.level?.shortLevelName + ')'}"/>
-                            	</g:if>
-                            	<g:else>
-		                        	<g:set var="displayTerm" value="${term.toString()}"/>
-                            	</g:else>
-	                        	
-	                        	<g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
-		                        	<g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
-	                        	</g:if>
-	                        	<g:else>
-		                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
-	                        	</g:else>
-	                        	
-	                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
-                                	<span class="synsetmatch">${displayTerm.encodeAsHTML()}</span>${delim}
-	                        	</g:if>
-	                        	<g:else>
-			                        <g:link action="search" params="${['q': term.toString()]}"
-			                        	>${displayTerm.encodeAsHTML()}</g:link>${delim}
-	                        	</g:else>
-	                        	
-		                        <g:set var="counter" value="${counter + 1}"/>
-                            </g:each>
-	                   		<g:link action="edit" id="${synset.id}">
-	                   			<g:message code="result.edit"/>
-    	               		</g:link>
-                        </li>
-                   </g:each>
-                   
-            </g:if>
-            <g:else>
-            		<g:if test="${similarTerms.size > 0}">
-            			<li><span class="light"><g:message code="result.no.matches.similar.words"/></span>
-							<g:each in="${similarTerms}" var="term" status="counter">
-								<g:if test="${counter < 3}">
-									<g:link action="search" params="${[q: term.term]}">${term.term}</g:link>
-									<g:if test="${counter < Math.min(2, similarTerms.size()-1)}">
-										<span class="d">&middot;</span>
-									</g:if>
-								</g:if>
-							</g:each>
-            			</li>
-            		</g:if>
-            		<g:else>
-	            		<li><span class="light"><g:message code="result.no.matches"/></span></li>
-            		</g:else>
-            </g:else>
-            
-            </ul>
-			</div>
-
-          	<g:render template="/ads/resultpage_results"/>
+			<g:if test="${mobileBrowser}">
 			
-			<table class="invisibletable" width="100%">
-			<tr>
-				<td width="50%">
-					
-					<h2><g:message code="result.partialmatches.headline"/></h2>
-					<ul>
-						<g:set var="moreSubstringTerms" value="${false}" />
-						<g:each in="${partialMatchResult}" var="term" status="counter">
-							<g:if test="${counter < 10}">
-								<li><g:link action="search" params="${[q: term.term]}">${term.highlightTerm}</g:link></li>
-							</g:if>
-							<g:else>
-								<g:set var="moreSubstringTerms" value="${true}" />
-							</g:else>
-						</g:each>
-						<g:if test="${partialMatchResult.size() == 0}">
-							<li><span class="light"><g:message code="result.no.matches"/></span></li>
-						</g:if>
-						<g:if test="${partialMatchResult.size() > 10}">
-							<li><g:link action="substring" params="${[q: params.q]}"><g:message code="result.substring.more"/></g:link></li>
-						</g:if>
-					</ul>
+					<g:render template="partialmatches"/>
+					<g:render template="similarmatches"/>
 
-					<h2><g:message code="result.similarmatches.headline"/></h2>
-					<ul>
-						<g:each in="${similarTerms}" var="term" status="counter">
-							<g:if test="${counter < 5}">
-								<li><g:link action="search" params="${[q: term.term]}">${term.term}</g:link></li>
-							</g:if>
-						</g:each>
-						<g:if test="${similarTerms.size() == 0}">
-							<li><span class="light"><g:message code="result.no.matches"/></span></li>
-						</g:if>
-					</ul>
+					<g:render template="wikipedia"/>
+					<g:render template="wiktionary"/>
 
 					<h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
-					
 		            <g:render template="/external_links" model="${[q:params.q]}"/>
-		
 		            <br/>
+
 		            <p>
 		                <g:if test="${params.q}">
-		                    <g:set var="cleanTerm" value="${params.q.trim().replaceAll('[*%~]', '').replaceAll('[*_~]', '')}" />
+		                    <g:set var="cleanTerm" value="${params.q.trim()}" />
 		                    <g:link action="create" params="[term : cleanTerm]">
 		                        <img src="../images/skin/database_add.png" alt="Add icon" />
 		                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
@@ -136,131 +66,43 @@
 		                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
 		                </g:else>
 		            </p>
-					
-				<td></td>
-				<td width="50%">
-					
-					<h2><g:message code="result.wikipedia.headline"/></h2>
-					<g:if test="${wikipediaResult}">
-						<ul>
-							<li>
-							<% int i = 0; %>
-							<g:each in="${wikipediaResult}" var="term">
-								<g:if test="${i == 0}">	<%-- skipping title --%>
-									<g:set var="wikipediaTitle" value="${term}"/>
-								</g:if>
-								<g:elseif test="${i > 0 && i < wikipediaResult.size() - 1}">
-									<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
-								</g:elseif>
-								<g:else>
-									<g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
-								</g:else>
-								<% i++; %>
-							</g:each>
-							</li>
-							<g:if test="${wikipediaResult.size() == 0}">
-								<li><span class="light"><g:message code="result.no.wikipedia.matches"/></span></li>
-							</g:if>
-						</ul>
-						<g:if test="${wikipediaResult.size() > 0}">
-							<div class="copyrightInfo">
-								<g:message code="result.wikipedia.license" 
-									args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle.encodeAsHTML(),wikipediaTitle.encodeAsURL()]}"/>
-							</div>
-						</g:if>
-					</g:if>
-					<g:else>
-						<ul>
-							<li><span class="light"><g:message code="result.no.matches"/></span></li>
-						</ul>
-					</g:else>
+						
+			</g:if>
+			<g:else>
 
-					<h2><g:message code="result.wiktionary.headline"/></h2>
-					<g:if test="${wiktionaryResult}">
-						<%
-						clean =
-						  { str -> str
-						    .replaceAll(":\\[(\\d+[a-z]?\\.?\\d*)\\]", "__\$1__")
-						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
-						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
-						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
-						  };
-						%>
-						<g:if test="${wiktionaryResult.size() == 0}">
-							<ul>
-								<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
-							</ul>
-						</g:if>
-						<g:else>
-							<%
-							String wiktionaryWord = wiktionaryResult.get(0).encodeAsHTML();
-							String meanings = wiktionaryResult.get(1).encodeAsHTML();
-							meanings = clean(meanings);
-							// TODO: make words links!
-							%>
-							<ul>
-								<li><b><g:message code="result.wiktionary.meanings"/></b>
-									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
-										<span class="light"><g:message code="result.none"/></span>
-										<g:set var="emptyMeanings" value="${true}"/>
-									</g:if>
-									<g:else>
-										${meanings}
-									</g:else>
-								</li>
-								<li><b><g:message code="result.wiktionary.synonyms"/></b>
-									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
-										<span class="light"><g:message code="result.none"/></span>
-										<g:set var="emptySynonyms" value="${true}"/>
-									</g:if>
-									<g:else>
-										<%
-										String synonyms = wiktionaryResult.get(2).encodeAsHTML();
-										synonyms = clean(synonyms);
-										// TODO: make words links!
-										%>
-										${synonyms}</li>
-									</g:else>
-							</ul>
-							<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
-								<div class="copyrightInfo">
-									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord.encodeAsHTML(),wiktionaryWord.encodeAsURL()]}"/>
-								</div>
-							</g:if>
-						</g:else>
-					</g:if>
-					<g:else>
-						<ul>
-							<li><span class="light"><g:message code="result.no.matches"/></span></li>
-						</ul>
-					</g:else>
-					
-				</td>
-			</tr>
-			</table>			
+				<table class="invisibletable" width="100%">
+				<tr>
+					<td width="50%">
+						<g:render template="partialmatches"/>
+						<g:render template="similarmatches"/>
+	
+						<h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
+			            <g:render template="/external_links" model="${[q:params.q]}"/>
+			            <br/>
+	
+			            <p>
+			                <g:if test="${params.q}">
+			                    <g:set var="cleanTerm" value="${params.q.trim()}" />
+			                    <g:link action="create" params="[term : cleanTerm]">
+			                        <img src="../images/skin/database_add.png" alt="Add icon" />
+			                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+			                    </g:link>
+			                </g:if>
+			                <g:else>
+			                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
+			                </g:else>
+			            </p>
+						
+					<td></td>
+					<td width="50%">
+						<g:render template="wikipedia"/>
+						<g:render template="wiktionary"/>
+					</td>
+				</tr>
+				</table>
 
-			<%--
-            <g:if test="${totalMatches == 0 && params.q && !(params.q.endsWith('%') || params.q.endsWith('_')) }">
-                <br />
-                <g:set var="noJokerTerm" value="${params.q.trim().replaceAll('%$', '').replaceAll('_$', '')}" />
-                <g:link action="search" params="[q : noJokerTerm + '%',
-                        'section.id': params['section.id'],
-                        'category.id': params['category.id'],
-                        'source.id': params['source.id']]">
-                    <img src="../images/skin/information.png" alt="Add icon" />
-                    <b>Search for '${params.q.encodeAsHTML()}%'</b>
-                </g:link>
-                <br />
-                <g:link action="search" params="[q : noJokerTerm + '_',
-                        'section.id': params['section.id'],
-                        'category.id': params['category.id'],
-                        'source.id': params['source.id']]">
-                    <img src="../images/skin/information.png" alt="Add icon" />
-                    <b>Search for '${params.q.encodeAsHTML()}_'</b>
-                </g:link>
-            </g:if>
-            --%>
-
+			</g:else>
+			
         </div>
     </body>
 </html>
