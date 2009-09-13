@@ -32,7 +32,7 @@
                                     <label for='terms'><g:message code="create.terms"/></label>
                                 </td>
                                 <td valign='top' class='value'>
-                                	<g:textArea rows="5" cols="30" id='terms' name='terms' value="${params.term}"/>
+                                	<g:textArea rows="5" cols="30" id='terms' name='terms' value="${params.term}\n"/>
                                 </td>
                             </tr>
                             
