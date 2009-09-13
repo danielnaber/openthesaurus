@@ -3,20 +3,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="create.search.title" args="${[params.terms.toString()?.encodeAsHTML()]}"/></title>
+        <%
+        def cleanTermList = []
+        searchTerms.each{ cleanTermList.add(it.encodeAsHTML()) }
+        def delim = ' <span class="delim">&middot;</span> '
+        def simpleDelim = ' &middot; '
+        %>
+        <title><g:message code="create.search.title" args="${[cleanTermList.join(simpleDelim)]}"/></title>
     </head>
     <body>
 
         <div class="body">
 
-            <%
-            def cleanTermList = []
-            searchTerms.each{ cleanTermList.add(it.encodeAsHTML()) }
-            def delim = ' <span class="delim">&middot;</span> '
-            %>
-            <h1><g:message code="create.search.headline"
-            	args="${[cleanTermList.join(delim)]}"/>
-            </h1>
+            <h1><g:message code="create.search.headline" args="${[cleanTermList.join(delim)]}"/></h1>
 
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
