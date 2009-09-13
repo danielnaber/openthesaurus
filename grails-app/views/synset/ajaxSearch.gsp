@@ -1,6 +1,6 @@
 
     <g:if test="${synsetList.size() == 0}">
-         No matches for "${params.q.toString()?.encodeAsHTML()}"
+    	<g:message code="result.no.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
     </g:if>
     <g:else>
 	    <table>
