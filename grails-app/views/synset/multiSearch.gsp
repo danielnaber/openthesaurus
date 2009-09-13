@@ -26,13 +26,15 @@
                 <p class="warning"><g:message code="create.search.duplicate.warning"/></p>
             </g:if>
 
-            <table>
-               <g:each in="${synsetList}" status="i" var="synset">
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td><g:link action="edit" id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link></td>
-                    </tr>
-               </g:each>
-            </table>
+			<g:if test="${synsetList.size() > 0}">
+	            <table>
+	               <g:each in="${synsetList}" status="i" var="synset">
+	                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+	                        <td><g:link action="edit" id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link></td>
+	                    </tr>
+	               </g:each>
+	            </table>
+			</g:if>
 
             <br/>
 
@@ -48,7 +50,6 @@
 
             <input type="hidden" name="numTerms" value="${searchTerms.size()}"/>
             <table>
-
 
 			   <%--
                <tr class='prop'>
@@ -107,7 +108,8 @@
                       </td>
                       <td valign='top' class='value ${hasErrors(bean:newTerm,'errors')}'>
 
-                          <input class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />&nbsp;
+                          <strong>${term.encodeAsHTML()}</strong><br />
+                          <input type="hidden" class="termInput" name="word_${i}" value="${term.encodeAsHTML()}" />
 
 						  <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
 						  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
