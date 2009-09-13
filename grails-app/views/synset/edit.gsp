@@ -444,33 +444,29 @@
                                 </td>
                             </tr>
                             --%>
-                        </tbody>
 
-                    </table>
-
-                    <g:if test="${session.user}">
-                        <table style="margin-top:5px">
-
-                                <tr class='prop'>
-                                    <td valign='top' class='name'>
-                                        <label for='changeComment'><g:message code='edit.comment.for.change'/></label>
-                                    </td>
-                                    <td valign='top' class='value'>
-                                        <input ${disabled} size="40" id="changeComment" type="text" name="changeComment" value="" />
-                                    </td>
-                                </tr>
-                                
-                                <tr>
-                                	<td></td>
-                                	<td>
+		                    <g:if test="${session.user}">
+	                              <tr class='prop'>
+	                                  <td valign='top' class='name'>
+	                                      <label for='changeComment'><g:message code='edit.comment.for.change'/></label>
+	                                  </td>
+	                                  <td valign='top' class='value'>
+	                                      <input ${disabled} size="40" id="changeComment" type="text" name="changeComment" value="" />
+	                                  </td>
+	                              </tr>
+	                              
+	                              <tr>
+	                              	<td></td>
+	                              	<td>
 					                    <div class="buttons">
 					                        <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
 					                    </div>
-                                	</td>
-                                </tr>
+	                              	</td>
+	                              </tr>
+		                    </g:if>
 
-                        </table>
-                    </g:if>
+                        </tbody>
+                    </table>
 
                 </div>
 
