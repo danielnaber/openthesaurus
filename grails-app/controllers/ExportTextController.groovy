@@ -88,6 +88,7 @@ class ExportTextController extends BaseController {
       st.close()
       bw.close()
       fw.close()
+      conn.close()
       
       File tmpZipFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp.zip")
       createZip(tmpFile, tmpZipFile)
