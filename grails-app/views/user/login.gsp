@@ -14,11 +14,13 @@
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
             </g:if>
+            
             <g:hasErrors bean="${user}">
-            <div class="errors">
-                <g:renderErrors bean="${user}" as="list" />
-            </div>
+	            <div class="errors">
+	                <g:renderErrors bean="${user}" as="list" />
+	            </div>
             </g:hasErrors>
+            
             <g:form action="login" method="post" name="loginform">
                 <div class="dialog">
                     <table>
