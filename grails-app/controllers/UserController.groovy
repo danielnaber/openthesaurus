@@ -26,7 +26,8 @@ class UserController extends BaseController {
                                       'lostPassword', 'requestPasswordReset', 'confirmPasswordReset',
                                       'resetPassword']]
 
-    static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST']
+    static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST',
+                                 confirmPasswordReset: 'POST', requestPasswordReset:'POST']
     
     static final int MIN_PASSWORD_LENGTH = 4
 
