@@ -22,9 +22,13 @@ import java.security.MessageDigest
 class UserController extends BaseController {
     
     def beforeInterceptor = [action: this.&auth, 
-                             except: ['login', 'register', 'doRegister', 'confirmRegistration']]
+                             except: ['login', 'register', 'doRegister', 'confirmRegistration',
+                                      'lostPassword', 'requestPasswordReset', 'confirmPasswordReset',
+                                      'resetPassword']]
 
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST']
+    
+    static final int MIN_PASSWORD_LENGTH = 4
 
     def index = {
         redirect(action:list,params:params)
@@ -51,15 +55,7 @@ class UserController extends BaseController {
         return
       }
       if (!ThesaurusUser.findByUserId(params.userId)) {
-        if (params.password1 != params.password2) {
-          user.errors.reject('thesaurus.error', [].toArray(), 
-              message(code:'user.register.different.passwords'))
-        }
-        final int minPasswordLength = 4
-        if (params.password1.length() < minPasswordLength) {
-          user.errors.reject('thesaurus.error', [].toArray(), 
-              message(code:'user.register.short.password', args:[minPasswordLength]))
-        }
+        checkPasswords(user)
         if (user.errors.allErrors.size() > 0) {
           render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
           return
@@ -67,11 +63,7 @@ class UserController extends BaseController {
         log.info("Creating user: " + params.userId)
         user.confirmationDate = null
         // generate a random code:
-        user.confirmationCode = ""
-        for (int i = 0; i < 1; i++) {
-          String partialCode = Math.random() + ""
-          user.confirmationCode += partialCode.replace(".", "")
-        }
+        user.confirmationCode = getRandomCode()
         if (!user.validate()) {
           log.error("User validation failed: ${user.errors}")
         } else {
@@ -95,6 +87,26 @@ class UserController extends BaseController {
         return
       }
       [email: params.userId]
+    }
+
+    private checkPasswords(ThesaurusUser user) {
+      if (params.password1 != params.password2) {
+        user.errors.reject('thesaurus.error', [].toArray(), 
+            message(code:'user.register.different.passwords'))
+      }
+      if (params.password1.length() < MIN_PASSWORD_LENGTH) {
+        user.errors.reject('thesaurus.error', [].toArray(), 
+            message(code:'user.register.short.password', args:[MIN_PASSWORD_LENGTH]))
+      }
+    }
+    
+    private String getRandomCode() {
+      StringBuilder code = new StringBuilder()
+      for (int i = 0; i < 1; i++) {
+        String partialCode = Math.random() + ""
+        code.append(partialCode.replace(".", ""))
+      }
+      return code.toString()
     }
     
     // called when clicking on the link in the email
@@ -207,6 +219,79 @@ class UserController extends BaseController {
         session.actionName = null
         flash.message = message(code:'user.logged.out')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
+    }
+    
+    def lostPassword = {
+        []
+    }
+    
+    def requestPasswordReset = {
+        ThesaurusUser user = ThesaurusUser.findByUserId(params.userId)
+        if (!user) {
+          flash.message = message(code:'user.lost.password.invalid.user')
+          render(view:'lostPassword', model:[userId:params.userId], contentType:"text/html", encoding:"UTF-8")
+          log.warn("Requesting password reset for unknown user '${params.userId}'")
+          return
+        }
+        String code = getRandomCode()
+        user.confirmationCode = code
+        boolean saved = user.save()
+        if (!saved) {
+          throw new Exception("Could not save user: " + user.errors)
+        }
+        String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmPasswordReset?userId=${user.id}&code=${user.confirmationCode}"
+        sendMail {    
+          from message(code:'user.register.email.from')
+          to params.userId
+          subject message(code:'user.lost.password.email.subject')     
+          body message(code:'user.lost.password.email.body', args:[params.userId, activationLink]) 
+        }
+        log.info("Sent password reset mail to ${params.userId}, code ${user.confirmationCode}")
+        [email: params.userId]
+    }
+    
+    def confirmPasswordReset = {
+        ThesaurusUser user = ThesaurusUser.get(params.userId)
+        if (!user) {
+          throw new Exception("No user found: '${params.userId}'")
+        }
+        checkPasswordResetConfirmation(user)
+        [user: user]
+    }
+    
+    def resetPassword = {
+        if (!params.userId) {
+          throw new Exception("Missing parameter 'userId'")
+        }
+        ThesaurusUser user = ThesaurusUser.get(Long.parseLong(params.userId))
+        if (!user) {
+          throw new Exception("No user found: '${params.userId}'")
+        }
+        checkPasswordResetConfirmation(user)
+        checkPasswords(user)
+        if (user.errors.allErrors.size() > 0) {
+          render(view:'confirmPasswordReset', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+          return
+        }
+        log.info("Setting user password for '${user.userId}'")
+        user.password = md5sum(params.password1)
+        user.confirmationCode = ""
+        boolean saved = user.validate() && user.save()
+        if (!saved) {
+          throw new Exception("Could not save new password: ${user.errors}")
+        }
+        [user: user]
+    }
+    
+    private checkPasswordResetConfirmation(ThesaurusUser user) {
+        if (!user.confirmationCode || user.confirmationCode == "") {
+          log.warn("Empty/null confirmation code in database for user '${params.userId}' doesn't allow password reset")
+          throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
+        }
+        if (user.confirmationCode != params.code) {
+          log.warn("Invalid code '${params.code}' for user '${params.userId}', expected ${user.confirmationCode}")
+          throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
+        }
     }
     
     def list = {
