@@ -17,7 +17,7 @@ import java.io.BufferedWriter/**
  */ 
 
 import com.vionto.vithesaurus.*import com.vionto.vithesaurus.tools.StringTools
-import java.text.SimpleDateFormat
+import java.sql.Connectionimport java.sql.ResultSetimport java.sql.Statementimport java.text.SimpleDateFormat
 import java.util.zip.ZipEntryimport java.util.zip.ZipOutputStream
 /**
  * Exports concepts to an OpenOffice.org OXT file.
@@ -25,7 +25,7 @@ import java.util.zip.ZipEntryimport java.util.zip.ZipOutputStream
 class ExportOxtController extends BaseController {
 
   def beforeInterceptor = [action: this.&localHostAuth]
-  String encoding = "UTF-8"
+  def dataSource       // will be injected  def sessionFactory   // will be injected  String encoding = "UTF-8"  
   def run = {
       File tmpFile = File.createTempFile("openthesaurus.dat", "")
       log.info("Writing data export for OXT to " + tmpFile)
@@ -38,16 +38,9 @@ class ExportOxtController extends BaseController {
       BufferedWriter bwIdx = new BufferedWriter(fwIdx)
       
       int indexPos = 0      indexPos = dataWrite(encoding + "\n", bw, indexPos)
-      bwIdx.write(encoding + "\n")            log.info("Collecting terms")
-      def termList = Term.withCriteria {
-        synset {
-            eq('isVisible', true)
-        }
-        order("word", "asc")      }      bwIdx.write(termList.size() + "\n")      log.info("Removing duplicate terms (total terms: ${termList.size()})")      //Set allWordsSet = new HashSet()	// to avoid dupes -- faster but uses too much memory      List allWords = []      int i = 0      for (term in termList) {        String normTerm = term.word        if (term.normalizedWord) {          normTerm = term.normalizedWord        }        // avoid duplicates here:        if (!allWords.contains(normTerm)) {          allWords.add(normTerm)        }      }      log.info("Sorting terms")      Collections.sort(allWords, String.CASE_INSENSITIVE_ORDER)                
-      log.info("Exporting " + allWords.size() + " terms")
-      int count = 0
-      SynsetController ctrl = new SynsetController()
-      for (word in allWords) {        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null)        if (count % 100 == 0) {          log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
+      bwIdx.write(encoding + "\n")            Connection conn = dataSource.getConnection()      Statement st = conn.createStatement()      def hibSession = sessionFactory.getCurrentSession()            log.info("Counting terms...")      ResultSet rs = st.executeQuery("""SELECT count(DISTINCT word) AS count FROM synset, term WHERE           synset.id = term.synset_id AND synset.is_visible = 1 ORDER BY word""")      rs.next()      int termCount = rs.getInt("count")      bwIdx.write(termCount + "\n")      log.info("Found ${termCount} terms...")      rs.close()      log.info("Collecting terms...")      rs = st.executeQuery("""SELECT DISTINCT word FROM synset, term WHERE           synset.id = term.synset_id AND synset.is_visible = 1 ORDER BY word""")      int count = 0
+      SynsetController ctrl = new SynsetController()      while (rs.next()) {        String word = rs.getString("word")
+        long t = System.currentTimeMillis()        def result = ctrl.doDBSearch(word, null, null, null)        if (count % 100 == 0) {          log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")        }
         bwIdx.write(word.toLowerCase() + "|" + indexPos + "\n")        indexPos = dataWrite(word.toLowerCase() + "|" + result.totalMatches + "\n", bw, indexPos)
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
@@ -56,17 +49,12 @@ class ExportOxtController extends BaseController {
             if (sortedTerm.word != word) {
               indexPos = dataWrite("|" + sortedTerm.word, bw, indexPos)            }
           }
-          indexPos = dataWrite("\n", bw, indexPos)        }
-        //if (count > 1000) {
-        //  break
-        //}
-        count++
-      }
-      
-      bw.close()
+          indexPos = dataWrite("\n", bw, indexPos)        }        count++
+        if (count % 500 == 0) {          log.info("Calling clear() at ${count}")          hibSession.clear()	// required to avoid OOM        }      }
+      bw.close()
       fw.close()
       bwIdx.close()
-      fwIdx.close()
+      fwIdx.close()      rs.close()      st.close()      conn.close()
       log.info("Export done")      
       render "OK: " + grailsApplication.config.thesaurus.export.oxt.output
             createZip(tmpFile, tmpFileIdx)
