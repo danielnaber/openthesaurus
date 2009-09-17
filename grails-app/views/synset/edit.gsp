@@ -163,7 +163,7 @@
 
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                             <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                            <g:if test="${termCount > 1}">
+                                            <g:if test="${synset?.isVisible ? termCount > 1 : termCount > 0}">
                                             	<g:link class="termMetaInfo" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                             	<%--
                                                <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
