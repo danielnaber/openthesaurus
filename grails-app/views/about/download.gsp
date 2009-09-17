@@ -19,10 +19,13 @@
 			<g:set var="sdf" value="${new SimpleDateFormat('yyyy-MM-dd HH:mm')}"/>
 
 			<ul>
-			<li><a href="../old/Deutscher-Thesaurus.oxt">Deutscher Thesaurus for OpenOffice.org 3.x, 2009-08-02</a></li>
+			<li><a href="../export/${oooDump.getName()}">Deutscher Thesaurus for OpenOffice.org 3.x 
+				exportiert ${sdf.format(new Date(oooDump.lastModified()))},
+				${String.format("%.2f", oooDump.length()/1000/1000)}MB</a></li>
+			
 			<li><a href="../old/thes_de_DE_v2.zip">Deutscher Thesaurus for OpenOffice.org 2.x, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 			
-			<li><a href="../export/${textDump.getName()}">Thesaurus im Text-Format, gezippt 
+			<li><a href="../export/${textDump.getName()}">Thesaurus im Text-Format, gezippt,
 				exportiert ${sdf.format(new Date(textDump.lastModified()))},
 				${String.format("%.2f", textDump.length()/1000/1000)}MB</a></li>
 			
