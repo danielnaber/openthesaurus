@@ -20,6 +20,11 @@
 	<td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2009-09-18</span></td>
+    <td valign="top">Die <a href="download">Downloads</a> im OpenOffice.org- und
+    	Textformat werden wieder täglich aktualisiert.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2009-08-31</span></td>
     <td valign="top">OpenThesaurus-Daten können jetzt auch <a href="../about/api">über
     	diese REST-API</a> angefragt werden</td>
