@@ -16,7 +16,7 @@
 						</g:if>
 						<g:else>
 							<%
-							String wiktionaryWord = wiktionaryResult.get(0).encodeAsHTML();
+							String wiktionaryWord = wiktionaryResult.get(0);
 							String meanings = wiktionaryResult.get(1).encodeAsHTML();
 							meanings = clean(meanings);
 							// TODO: make words links!
