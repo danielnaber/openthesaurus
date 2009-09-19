@@ -74,6 +74,10 @@ class SynsetController extends BaseController {
             }
             latestChangesMap.put(section, latestChanges)
         }
+        def criteria = UserEvent.createCriteria()
+        int latestChangesAllSections = criteria.count {
+          gt('creationDate', new Date() - 7)
+        }
         // per-user statistics (i.e. top users):
         Connection conn = null
         try {
@@ -98,7 +102,9 @@ class SynsetController extends BaseController {
   	      resultSet.close()
   	      ps.close()
           [ termCount : termCountMap,
-            latestChanges : latestChangesMap, topUsers: topUsers ]
+            latestChanges : latestChangesMap,
+            latestChangesAllSections: latestChangesAllSections,
+            topUsers: topUsers ]
         } finally {
           if (conn != null) {
             conn.close()

@@ -16,36 +16,22 @@
 		            <h1><g:message code="statistics.headline" /></h1>
 
 					<table>
-                       <g:each in="${Section.list().sort()}" var="section">
-
-                       	<g:if test="${Section.list().size > 1}">
-                            <tr>
-                                <td><h4>${section.encodeAsHTML()}</h4></td>
-                            </tr>
-                        </g:if>
 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="statistics.synsets" /></td>
-                            <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisibleAndSection(true, section)}" /></td>
+                            <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisible(true)}" /></td>
                         </tr>
 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="statistics.terms" /></td>
-                            <td valign="top" class="value"><g:decimal number="${termCount.get(section)}" /></td>
+                            <td valign="top" class="value"><g:decimal number="${Term.count()}" /></td>
                         </tr>
-
-						<!-- 	
-                           <tr class="prop">
-                               <td valign="top" class="name"><g:message code="statistics.invisible_synsets" /></td>
-                               <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisibleAndSection(false, section)}" /></td>
-                           </tr>
-                           -->
 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="statistics.changes_last_7_days" /></td>
-                            <td valign="top" class="value"><g:decimal number="${latestChanges.get(section)}" /></td>
+                            <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                         </tr>
-                       </g:each>
+
 	                </table>
 				</td>
 				
