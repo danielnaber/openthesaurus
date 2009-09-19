@@ -72,7 +72,7 @@
 
 				<table class="invisibletable" width="100%">
 				<tr>
-					<td width="50%">
+					<td width="40%">
 						<g:render template="partialmatches"/>
 						<g:render template="similarmatches"/>
 	
@@ -94,7 +94,7 @@
 			            </p>
 						
 					<td></td>
-					<td width="50%">
+					<td width="60%">
 						<g:render template="wikipedia"/>
 						<g:render template="wiktionary"/>
 					</td>
