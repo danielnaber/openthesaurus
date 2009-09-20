@@ -2,11 +2,11 @@
 <html>
     <head>
         <title><g:layoutTitle default="Grails" /></title>
-        <meta name='keywords' content='Synonym, Synonyme, Synonymw&ouml;rterbuch, sinnverwandte W&ouml;rter' />
-        <meta name='description' content='OpenThesaurus ist ein freies deutsches Synonymw&ouml;rterbuch, bei dem jeder mitmachen kann.' />
+        <meta name='keywords' content='${message(code:"homepage.meta.keywords")}' />
+        <meta name='description' content='${message(code:"homepage.meta.description")}' />
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
-        <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
+        <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
         <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
         <g:layoutHead />
         <g:javascript library="application" />				
