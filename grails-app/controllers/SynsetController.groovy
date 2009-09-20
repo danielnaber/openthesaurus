@@ -1252,9 +1252,9 @@ class SynsetController extends BaseController {
             return
         }
         String logText =
-            "adding link: ${synsetLink.synset.toShortString()} " +
+            "adding link: ${synsetLink.targetSynset.toShortString()} " +
             "${synsetLink.linkType.verbName} " +
-            "${synsetLink.targetSynset.toShortString()}"
+            "${synsetLink.synset.toShortString()}"
         logSynsetLink(logText, fromSynset, synsetLink)
     }
 
