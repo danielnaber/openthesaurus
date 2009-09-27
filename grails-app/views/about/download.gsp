@@ -37,6 +37,11 @@
 			<li><a href="../old/kword_thesaurus.txt.gz">Thesaurus für KWord, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 
 			</ul>
+			
+			<p style="margin-top:20px">Die Daten stehen zur Verfügung unter der
+			<a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser
+			General Public License</a>.
+			</p>
 
 		</div>
 
