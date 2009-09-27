@@ -27,9 +27,7 @@
 	
 	        <g:render template="/searchform"/>
 	
-	        <br />
-	        
-	        <p class="mainpage"><br />
+	        <p class="mainpage">
 	            <g:if test="${session.user?.permission == 'admin'}">
 		    	    <g:link controller="admin">special admin links</g:link><br /><br />
 	        	</g:if>
@@ -38,9 +36,7 @@
 	        	<g:link controller="about" action="api"><g:message code="homepage.api"/></g:link> <span class="d">&middot;</span>
 	        	<g:link controller="about" action="download"><g:message code="homepage.download"/></g:link> <span class="d">&middot;</span>
 	        	<g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link>
-			</p>
-	
-	        <p class="mainpage">
+	        	<br />
 		        <%--
 	            <g:link controller="term" action="list"><g:message code="a_to_z"/></g:link> &middot;
 	            --%>
@@ -49,6 +45,10 @@
 	            <g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link> <span class="d">&middot;</span>
 	            <g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link> <span class="d">&middot;</span>
 	            <g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link>
+	        </p>
+	        
+	        <p class="mainpage intro">
+	        	<g:message code="homepage.intro"/>
 	        </p>
 
 			<div class="homepagecredits"><g:message code="homepage.credits"/></div>

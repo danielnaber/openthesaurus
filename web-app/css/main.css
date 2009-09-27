@@ -33,6 +33,10 @@ html * {
     text-align: center;
 }
 
+.mainpage.intro {
+    color: #666666;
+}
+
 .mainpage_mobile {
     margin-left: 15px;
 }
@@ -585,8 +589,8 @@ img {
 }
 
 .homepagecredits {
-	color: #999;
-	margin-top: 15px;
+	color: #bbb;
+	margin-top: 30px;
 	text-align: center;
 }
 .homepagecredits a {
