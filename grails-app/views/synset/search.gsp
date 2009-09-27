@@ -26,6 +26,8 @@
 
             <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
+            <g:set var="cleanTerm" value="${params.q.trim()}" />
+            
 			<g:if test="${mobileBrowser}">
 				<div style="width:100%">
 	            <ul>
@@ -39,6 +41,14 @@
 		            <g:render template="mainmatches"/>
 	            </ul>
 				</div>
+
+				<g:if test="${totalMatches == 0}">
+	                <g:link action="create" params="[term : cleanTerm]">
+	                     <img src="../images/skin/database_add.png" alt="Add icon" />
+	                     <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+	                </g:link>
+				</g:if>				
+				
           		<g:render template="/ads/resultpage_results"/>
           	</g:else>
 
@@ -82,7 +92,6 @@
 	
 			            <p>
 			                <g:if test="${params.q}">
-			                    <g:set var="cleanTerm" value="${params.q.trim()}" />
 			                    <g:link action="create" params="[term : cleanTerm]">
 			                        <img src="../images/skin/database_add.png" alt="Add icon" />
 			                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
