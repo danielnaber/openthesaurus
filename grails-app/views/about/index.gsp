@@ -14,8 +14,8 @@
 
 <div class="aboutpage">
 
-<p>OpenThesaurus ist eine interaktive Website zur Pflege eines deutschsprachigen Synonymwörterbuchs.
-Man kann damit Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert
+<p>OpenThesaurus ist eine interaktive Website zur Entwicklung eines deutschsprachigen Wörterbuchs für Synonyme.
+Man kann damit also Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert
 die <a href="../synset/search?q=falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
 verkehrt</span> als Synonyme.</p>
 
