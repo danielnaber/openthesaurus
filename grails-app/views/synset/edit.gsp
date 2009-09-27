@@ -136,8 +136,10 @@
                                             </g:if>
                                             
                                             <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
+                                            	<%-- 
                                                 <g:set var="flagImg" value="flag_${t.language.shortForm}.png"/>
                                                 <img src="${createLinkTo(dir:'images',file:flagImg)}" alt="[${t.language.longForm}]" border="0" />
+                                                --%>
                                                 ${t.toString()?.encodeAsHTML()}</g:link>
 
                                             &nbsp;
