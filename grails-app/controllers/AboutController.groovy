@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 import com.vionto.vithesaurus.*
+import java.util.regex.Pattern
             
 class AboutController extends BaseController {
     
@@ -48,6 +49,19 @@ class AboutController extends BaseController {
     
     def newsarchive = {
         []
+    }
+    
+    /** Livewatch.de server monitoring */
+    def livecheck = {
+      	Pattern p = Pattern.compile("[a-f0-9]{32}")
+      	String key = request.getParameter("key")
+      	if (key == null) {
+      		render "Alles OK"
+      	} else if (p.matcher(key).matches()) {
+      	    render key
+      	} else {
+      	    render ""
+      	}
     }
 
 }
