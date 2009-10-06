@@ -112,6 +112,8 @@
 
 			</g:else>
 			
+			<g:render template="/ads/resultpage_bottom"/>
+			
         </div>
     </body>
 </html>
