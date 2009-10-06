@@ -34,21 +34,21 @@
         Term Checks:
         <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
 
-		<h2>Latest ${resultLimit} User subscription</h2>
+		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription</h2>
 		
 		<table>
 		<thead>
 			<tr>
-				<td>email</td>
-				<td>display name</td>
-				<td>registration</td>
-				<td>last login</td>
+				<th>email</th>
+				<th>display name</th>
+				<th>registration</th>
+				<th>last login</th>
 			</tr>
 		</thead>
 		<g:each in="${latestUsers}" status="i" var="latestUser">
 			<tr>
-				<td>${latestUser.userId}</td>
-				<td>${latestUser.realName}</td>
+				<td>${latestUser.userId.encodeAsHTML()}</td>
+				<td>${latestUser.realName?.encodeAsHTML()}</td>
 				<td>${latestUser.creationDate}</td>
 				<td>${latestUser.lastLoginDate}</td>
 			</tr>
