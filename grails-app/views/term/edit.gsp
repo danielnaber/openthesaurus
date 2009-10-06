@@ -155,7 +155,7 @@
                                 	<g:message code="edit.term.links"/>
                                 </td>
                                 <td valign='top' class='value'>
-								    <g:if test="${session.user && false}"><%-- FIXME %>
+								    <g:if test="${session.user && false}"><%-- FIXME
 	                                
 								        <div id="addTermLinkLink" style="margin-top:5px">
 								            <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.link"/></a>
@@ -185,7 +185,7 @@
 								    
 								    </g:if> 
 								    <g:else>
-						    			<g:if test="${term.termLinks && term.termLinks.size() > 0}">
+						    			<g:if test="${term.termLinks && term.termLinks.size() > 0 || reverseLinks && reverseLinks.size() > 0}">
 						    				<ul>
 							    				<g:each var="termLink" in="${term.termLinks}">
 							    					<li>${termLink.linkType.linkName.encodeAsHTML()}:
@@ -193,6 +193,14 @@
 							    						  id="${termLink.targetTerm.id}">${termLink.targetTerm}</g:link>
 							    						(<g:link controller="synset" action="edit"
 							    						  id="${termLink.targetTerm.synset.id}">${termLink.targetTerm.synset.toShortString(3).encodeAsHTML()}</g:link>)</li>
+							    				</g:each>
+							    				<%-- show links pointing *to* this term from another term: --%>
+							    				<g:each var="termLink" in="${reverseLinks}">
+							    					<li>${termLink.linkType.otherDirectionLinkName.encodeAsHTML()}:
+							    						<g:link controller="term" action="edit" 
+							    						  id="${termLink.term.id}">${termLink.term}</g:link>
+							    						(<g:link controller="synset" action="edit"
+							    						  id="${termLink.term.synset.id}">${termLink.term.synset.toShortString(3).encodeAsHTML()}</g:link>)</li>
 							    				</g:each>
 						    				</ul>
 						    			</g:if>
