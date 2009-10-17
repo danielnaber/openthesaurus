@@ -41,7 +41,8 @@ class TreeController extends BaseController {
         getSubordinateSynsetsHtml(topVerbSynset, synsetIdsToOpen, verbTree)
 
         [topNounSynset: topNounSynset, nounTree: nounTree,
-         topVerbSynset: topVerbSynset, verbTree: verbTree]
+         topVerbSynset: topVerbSynset, verbTree: verbTree,
+         synsetToOpen: synsetToOpen]
     }
 
  	private void getSuperordinateSynsetIds(Synset synset, List topSynsetIds) {
