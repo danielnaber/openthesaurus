@@ -15,8 +15,8 @@
           function loadedSearch() {
             document.getElementById('addSynsetProgress').style.visibility='hidden';
           }
-          // We have to submit buttons in the page and we cannot guarantee that
-          // the correct one is used to disable submit-by-return:
+          // We have two submit buttons in the page and we cannot guarantee that
+          // the correct one is used, so disable submit-by-return:
           function avoidSubmitOnReturn(event) {
         	  if (event.keyCode == 13) {
             	  return false;
