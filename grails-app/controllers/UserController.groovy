@@ -296,6 +296,10 @@ class UserController extends BaseController {
     }
     
     def list = {
+        if (!isAdmin()) {
+            render "Access denied"
+            return
+        }
         if(!params.max) params.max = 10
         [ userList: ThesaurusUser.list( params ) ]
     }
