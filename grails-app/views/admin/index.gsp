@@ -39,18 +39,22 @@
 		<table>
 		<thead>
 			<tr>
-				<th>email</th>
-				<th>display name</th>
-				<th>registration</th>
-				<th>last login</th>
+				<th>Email</th>
+				<th>DisplayName</th>
+				<th>Permission</th>
+				<th>Registration</th>
+				<th>Last Login</th>
+				<th>Blocked</th>
 			</tr>
 		</thead>
 		<g:each in="${latestUsers}" status="i" var="latestUser">
 			<tr>
 				<td>${latestUser.userId.encodeAsHTML()}</td>
 				<td>${latestUser.realName?.encodeAsHTML()}</td>
+				<td>${latestUser.permission?.encodeAsHTML()}</td>
 				<td>${latestUser.creationDate}</td>
 				<td>${latestUser.lastLoginDate}</td>
+				<td>${latestUser.blocked ? "yes" : ""}</td>
 			</tr>
 		</g:each>
 		</table>
