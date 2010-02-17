@@ -62,7 +62,7 @@ class FeedController extends BaseController {
              username = "[anonym]"
            }
            desc += " von Benutzer ${username.encodeAsHTML()}: "
-           entry(event.synset.toShortString(5)) {
+           entry(username.encodeAsHTML() + ": " + event.synset.toShortString(5)) {
              publishedDate = event.creationDate
              //actually <guid> must be unique but I cannot set this it seems, so let's make
              //the link unique, as this is used as guid:
