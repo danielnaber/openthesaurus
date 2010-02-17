@@ -248,7 +248,8 @@ class SynsetController extends BaseController {
             synsetList : searchResult.synsetList,
             totalMatches: searchResult.totalMatches,
             completeResult: searchResult.completeResult,
-            upperBound: UPPER_BOUND,            mobileBrowser: mobileBrowser,
+            upperBound: UPPER_BOUND,
+            mobileBrowser: mobileBrowser,
             runTime : totalTime ]
 
         } finally {
@@ -720,9 +721,9 @@ class SynsetController extends BaseController {
                 synsetLink.evaluationStatus = SynsetLink.EVAL_REJECTED
                 if (oldStatus != synsetLink.evaluationStatus) {
                     String logText =
-                        "rejecting: ${synsetLink.synset.toShortString()} " +
+                        "rejecting: ${synsetLink.targetSynset.toShortString()} " +
                         "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.targetSynset.toShortString()}"
+                        "${synsetLink.synset.toShortString()}"
                     logSynsetLink(logText, synset, synsetLink)
                 }
             }
@@ -734,9 +735,9 @@ class SynsetController extends BaseController {
                 synsetLink.evaluationStatus = SynsetLink.EVAL_APPROVED
                 if (oldStatus != synsetLink.evaluationStatus) {
                     String logText =
-                        "approving: ${synsetLink.synset.toShortString()} " +
+                        "approving: ${synsetLink.targetSynset.toShortString()} " +
                         "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.targetSynset.toShortString()}"
+                        "${synsetLink.synset.toShortString()}"
                     logSynsetLink(logText, synset, synsetLink)
                 }
             }
@@ -745,9 +746,9 @@ class SynsetController extends BaseController {
             for (neutralID in neutralIDs) {
                 SynsetLink synsetLink = SynsetLink.get(neutralID)
                 String logText =
-                    "neutralizing: ${synsetLink.synset.toShortString()} " +
+                    "neutralizing: ${synsetLink.targetSynset.toShortString()} " +
                     "${synsetLink.linkType.verbName} " +
-                    "${synsetLink.targetSynset.toShortString()}"
+                    "${synsetLink.synset.toShortString()}"
                 logSynsetLink(logText, synset, synsetLink)
                 synset.removeFromSynsetLinks(synsetLink)
                 synsetLink.delete()
