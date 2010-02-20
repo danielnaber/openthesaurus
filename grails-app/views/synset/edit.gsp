@@ -281,7 +281,7 @@
                                          <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
                                              <select name="category.id_${i}" id="category.id_${i}" >
                                                 <option value="null">[none]</option>
-                                                <g:each var="category" in="${Category.findAllByIsDisabled(false).sort()}">
+                                                <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
                                                     <option value="${category.id}">${category.toString()?.encodeAsHTML()}
                                                         <g:if test="${category.categoryType}">
                                                             [${category.categoryType}]
