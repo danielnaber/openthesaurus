@@ -124,7 +124,7 @@
 			</div>
 			<div class="answer">
 			<p>Please have a look at
-			<a href="http://wordnet.princeton.edu/perl/webwn/">WordNet</a> or
+			<a href="http://wordnetweb.princeton.edu/perl/webwn">WordNet</a> or
 			<a href="http://www.thesaurus.com/">thesaurus.com</a>.</p>
 			</div>
 		</div>
