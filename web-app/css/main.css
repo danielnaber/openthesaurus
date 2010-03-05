@@ -564,14 +564,14 @@ img {
 /* ads */
 .homepagead_right {
 	position: absolute;
-	margin-top: 100px;
+	margin-top: 70px;
 	left: 80%;
 }
 .homepagead_bottom {
-	margin-top: 70px;
-	margin-left: 100px;
+	margin-top: 20px;
 	text-align: center;
 }
+
 .adstext a {
 	color: #5757ee;
 }
