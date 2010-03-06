@@ -53,10 +53,12 @@
           	</g:else>
 
 			<g:if test="${mobileBrowser}">
-			
+
+                    <div>&nbsp;</div>
 					<g:render template="partialmatches"/>
 					<g:render template="similarmatches"/>
 
+                    <div>&nbsp;</div>
 					<g:render template="wikipedia"/>
 					<g:render template="wiktionary"/>
 
@@ -77,6 +79,10 @@
 		                </g:else>
 		            </p>
 						
+                    <div style="float:right">
+                        <g:render template="/ads/resultpage"/>
+                    </div>
+
 			</g:if>
 			<g:else>
 
