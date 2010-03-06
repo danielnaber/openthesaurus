@@ -170,7 +170,9 @@ class SynsetController extends BaseController {
           conn = dataSource.getConnection()
           
           boolean apiRequest = params.format == "text/xml"
-          
+          boolean spellApiRequest = params.similar == "true"
+          boolean allApiRequest = params.mode == "all"
+
           List partialMatchResult = []
           long partialMatchStartTime = System.currentTimeMillis()
           if (!apiRequest) {
@@ -196,7 +198,13 @@ class SynsetController extends BaseController {
           
           List similarTerms = []
           long similarStartTime = System.currentTimeMillis()
-          if (!apiRequest) {
+          if (apiRequest) {
+            if (spellApiRequest || allApiRequest) {
+              similarTerms = searchSimilarTerms(params.q, conn)
+            } else {
+              similarTerms = null
+            }
+          } else {
             similarTerms = searchSimilarTerms(params.q, conn)
           }
           long similarTime = System.currentTimeMillis() - similarStartTime
@@ -237,7 +245,7 @@ class SynsetController extends BaseController {
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
-            renderApiResponse(searchResult)
+            renderApiResponse(searchResult, similarTerms)
             return
           }
           
@@ -260,13 +268,13 @@ class SynsetController extends BaseController {
               
     }
 
-    private void renderApiResponse(def searchResult) {
+    private void renderApiResponse(def searchResult, List similarTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
       render(contentType:params.format, encoding:"utf-8") {
         matches {
           metaData {
-            apiVersion(content:"0.1.1")
+            apiVersion(content:"0.1.2")
             if (grailsApplication.config.thesaurus.apiWarning) {
               warning(content:grailsApplication.config.thesaurus.apiWarning)
             }
@@ -293,6 +301,17 @@ class SynsetController extends BaseController {
                   term(term:t)
                 }
               }                    
+            }
+          }
+          if (similarTerms) {
+            similarterms {
+              int i = 0
+              for (simTerm in similarTerms) {
+                term(term:simTerm.term, distance:simTerm.dist)
+                if (++i >= 5) {
+                  break
+                }
+              }
             }
           }
         }

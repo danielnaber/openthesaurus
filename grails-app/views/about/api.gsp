@@ -16,7 +16,7 @@
 		unterstützt. Noch nicht unterstützt werden Ähnlichkeitssuche, Suche
 		nach Teilworten und Wikipedia/Wiktionary-Suche.</p>
 		
-		<p><strong>Achtung, das Ausgabe-Format kann sich unter Umständen noch ändern!</strong></p>
+		<p><strong>Hinweis: das Ausgabe-Format kann sich unter Umständen noch ändern!</strong></p>
 		
 		<h2>Suchanfrage</h2>
 		
@@ -32,12 +32,12 @@
 <pre>
 &lt;matches>
   &lt;metaData>
-    &lt;apiVersion content="0.1.1"/>
+    &lt;apiVersion content="0.1.2"/>
     &lt;warning content="WARNING -- this API is in beta -- the format may change without warning!"/>
     &lt;copyright content="Copyright (C) 2009 Daniel Naber (www.danielnaber.de)"/>
     &lt;license content="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"/>
     &lt;source content="http://www.openthesaurus.de"/>
-    &lt;date content="Mon Aug 31 22:55:18 CEST 2009"/>
+    &lt;date content="Sat Mar 06 22:47:25 CET 2010"/>
   &lt;/metaData>
   &lt;synset id="1234">
     &lt;categories>
@@ -52,6 +52,37 @@
   &lt;/synset>
 &lt;/matches>
 </pre>
+
+
+        <h2>Optionen</h2>
+
+        <ul>
+          <li><span class="apioption">similar=true</span>: hiermit werden bei jeder Antwort auch bis zu fünf
+          ähnliche Terme zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
+          Tippfehlers machen zu können. Eine Beispielantwort für die Suchanfrage "Umstant":
+<pre>
+&lt;similarterms>
+  &lt;term term="Umstand" distance="1"/>
+  &lt;term term="(zeitlicher) Abstand" distance="3"/>
+  &lt;term term="Abstand" distance="3"/>
+  &lt;term term="amüsant" distance="3"/>
+  &lt;term term="Anstalt" distance="3"/>
+&lt;/similarterms>
+</pre>
+          <tt>distance</tt> gibt den Levenshtein-Abstand zum Suchwort an (Wörter in Klammern werden dabei ignoriert).
+            Die Wörter sind bereits nach diesem Abstand sortiert.
+          </li>
+          <li><span class="apioption">mode=all</span>: aktiviert alle zusätzlichen Abfragen. Bisher ist das nur <tt>similar=true</tt>.</li>
+        </ul>
+
+
+        <h2>Bekannte Probleme</h2>
+
+        <ul>
+          <li>Umlaute werden bei der Suche wie ihre nicht-Umlaute behandelt, so findet <span class="bsp">tur</span>
+            auch den eintrag zu <span class="bsp">Tür</span> und umgekehrt.</li>
+        </ul>
+
 
 		<h2>Download</h2>
 		

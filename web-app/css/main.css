@@ -640,3 +640,8 @@ pre {
 	background-color: #ddd;
 	border: 1px solid #aaa;
 }
+
+.apioption {
+    font-family: monospace;
+    font-weight: bold;
+}
