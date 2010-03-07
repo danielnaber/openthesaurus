@@ -77,11 +77,21 @@ class ExportOxtController extends BaseController {
         variation = 'ch'
         log.info("Using variation ${variation}")
       }
+
+      int limit = 0
+      if (params.limit) {
+        limit = Integer.parseInt(params.limit)
+      }
+
       SynsetController ctrl = new SynsetController()
       while (rs.next()) {
         String word = rs.getString("word")
         long t = System.currentTimeMillis()
         def result = ctrl.doDBSearch(word, null, null, null)
+        if (limit > 0 && count > limit) {
+          //useful for testing
+          break
+        }
         if (count % 100 == 0) {
           log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")
         }
@@ -115,7 +125,7 @@ class ExportOxtController extends BaseController {
       
       render "OK: " + grailsApplication.config.thesaurus.export.oxt.output
       
-      createZip(tmpFile, tmpFileIdx)
+      createZip(tmpFile, tmpFileIdx, variation)
       tmpFile.delete()
       tmpFileIdx.delete()
   }
@@ -133,8 +143,15 @@ class ExportOxtController extends BaseController {
     return indexPos + str.getBytes(encoding).length
   }
 
-  private createZip(File data, File index) throws IOException {
-    String finalName = grailsApplication.config.thesaurus.export.oxt.output
+  private createZip(File data, File index, String variation) throws IOException {
+    String finalName
+    if (variation == 'ch') {
+      finalName = grailsApplication.config.thesaurus.export.oxt.outputCH
+    } else if (variation == null) {
+      finalName = grailsApplication.config.thesaurus.export.oxt.output
+    } else {
+      throw new Exception("Unknown variation '${variation}'")
+    }
     File zipFile = new File(finalName + ".tmp")
     FileOutputStream fos = new FileOutputStream(zipFile)
     ZipOutputStream zos = new ZipOutputStream(fos)
