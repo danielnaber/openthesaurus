@@ -16,6 +16,16 @@
 
 <table border="0" cellpadding="5" cellspacing="0">
 <tr class="newsYearDelimiter">
+    <td>2010</td>
+    <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-03-07</span></td>
+    <td valign="top">Die <a href="api">API</a> wurde um eine Suche nach ähnlich geschriebenen Wörtern erweitert.</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr class="newsYearDelimiter">
 	<td>2009</td>
 	<td></td>
 </tr>
