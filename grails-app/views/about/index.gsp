@@ -39,6 +39,7 @@ angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 	</li>			
 </ul>
 
+
 <h2>Papers über OpenThesaurus</h2>
 
 <p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
@@ -50,6 +51,14 @@ Dokumentation exisitiert bisher leider nicht.</p>
 	<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
 </ul>
 
+<h2>OpenThesaurus auf Android</h2>
+
+<ul>
+    <li><a href="http://www.cyrket.com/p/android/com.fc.ot/">OpenThesaurus für Android</a>
+      (vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a>)</li>
+</ul>
+
+
 <h2>OpenThesaurus auf dem Mac</h2>
 
 <ul>
@@ -58,10 +67,11 @@ Dokumentation exisitiert bisher leider nicht.</p>
     <li><a href="http://www.mathematik.uni-marburg.de/~schmidtm/thesaurus/index.php">Dashboard-Widget von Matthias Schmidt</a></li>
 </ul>
 
+
 <h2>OpenThesaurus in anderen Sprachen</h2>
 
 <ul>
-	<li><a href="http://www.opentaal.org/opentaalbank/thesaurus">Niederländisch</a></li>
+	<!-- <li><a href="http://www.opentaal.org/opentaalbank/thesaurus">Niederländisch</a></li> -->
 	<li><a href="http://synonimy.sourceforge.net/">Polnisch</a></li>
 	<li><a href="http://openthesaurus.caixamagica.pt/">Portugiesisch</a></li>
 	<li><a href="http://www.openthesaurus.tk">Slowakisch</a></li>
@@ -69,6 +79,7 @@ Dokumentation exisitiert bisher leider nicht.</p>
 	<li><a href="http://openthes-es.berlios.de">Spanisch</a></li>
     <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
 </ul>
+
 
 <h2>Basis dieser Website</h2>
 

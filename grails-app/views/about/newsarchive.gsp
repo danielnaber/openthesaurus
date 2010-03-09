@@ -19,6 +19,11 @@
     <td>2010</td>
     <td></td>
 </tr>
+  <tr>
+      <td valign="top" align="right" width="90"><span class="newsdate">2010-03-09</span></td>
+      <td valign="top">Mit "OpenThesaurus für Android" wurde die Beta-Version einer Android-App veröffentlicht.
+        Kostenlos erhältlich im Market.</td>
+  </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-03-07</span></td>
     <td valign="top">Die <a href="api">API</a> wurde um eine Suche nach ähnlich geschriebenen Wörtern erweitert.</td>
@@ -43,18 +48,11 @@
     <td valign="top" align="right" width="90"><span class="newsdate">2009-08-06</span></td>
     <td valign="top">Relaunch - OpenThesaurus basiert jetzt auf dem Projekt
 	    <a href="http://sourceforge.net/projects/vithesaurus">vithesaurus</a>, was uns
-	    die zukünftige Pflege und Weiterentwicklung deutlich erleichtert. Im Laufe
-	    der nächsten Tage und Wochen werden noch bestehende kleine Probleme nach und
-	    nach beseitigt. Feedback dazu bitte an feedback <span class="foo">at</span> openthesaurus.de</td>
+	    die zukünftige Pflege und Weiterentwicklung deutlich erleichtert.</td>
 </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2009-07-23</span></td>
     <td valign="top">OpenThesaurus <a href="http://twitter.com/openthesaurus">schreibt jetzt auch auf Twitter</a></td>
-</tr>
-<tr>
-    <td valign="top" align="right" width="90"><span class="newsdate">2009-02-20</span></td>
-    <td valign="top">Auf der Ergebnisseite wurde ein Link zu
-		<a href="http://www.eyeplorer.com">eyeplorer.com</a> hinzugefügt</td>
 </tr>
 
 <tr><td>&nbsp;</td></tr>
