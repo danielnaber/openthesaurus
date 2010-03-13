@@ -122,13 +122,11 @@ class ExportOxtController extends BaseController {
           List sortedTerms = synset.terms.sort()
           indexPos = dataWrite("-", bw, indexPos)
           for (sortedTerm in sortedTerms) {
-            if (makeVariation(sortedTerm.word, variation) != makeVariation(word, variation)) {
-              String wordWithLevel = makeVariation(sortedTerm.word, variation)
-              if (sortedTerm.level) {
-                wordWithLevel = "${wordWithLevel} (${sortedTerm.level.shortLevelName})"
-              }
-              indexPos = dataWrite("|" + wordWithLevel, bw, indexPos)
+            String wordWithLevel = makeVariation(sortedTerm.word, variation)
+            if (sortedTerm.level) {
+              wordWithLevel = "${wordWithLevel} (${sortedTerm.level.shortLevelName})"
             }
+            indexPos = dataWrite("|" + wordWithLevel, bw, indexPos)
           }
           indexPos = dataWrite("\n", bw, indexPos)
         }
