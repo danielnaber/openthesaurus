@@ -31,6 +31,12 @@
 								i++
 								%>
 							</g:if>
+                            <g:elseif test="${i == 3}">
+                                <span class="d">&middot;</span> ...
+                                <%
+                                i++
+                                %>
+                            </g:elseif>
 						</g:each>
 					</li>
 				</g:each>
