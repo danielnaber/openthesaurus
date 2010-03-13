@@ -118,8 +118,20 @@
                                     <label for='synset'><g:message code="edit.term.level"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
-                                    <g:select value="${term.level?.id}" name="level.id" disabled="${!session.user}" 
-                                        optionKey="id" from="${TermLevel.list()}" noSelection="['null':message(code:'edit.term.level.none')]" />
+                                    <g:if test="${term.level == null}">
+                                      <label><input type="radio" name="level.id" value="null" checked="checked" /> <g:message code="edit.term.level.none"/></label><br />
+                                    </g:if>
+                                    <g:else>
+                                      <label><input type="radio" name="level.id" value="null" /> <g:message code="edit.term.level.none"/></label><br />
+                                    </g:else>
+                                    <g:each in="${TermLevel.list()}" var="level">
+                                      <g:if test="${term.level?.id == level.id}">
+                                        <label><input type="radio" name="level.id" value="${level.id}" checked="checked" /> ${level.levelName}</label><br />
+                                      </g:if>
+                                      <g:else>
+                                        <label><input type="radio" name="level.id" value="${level.id}" /> ${level.levelName}</label><br />
+                                      </g:else>
+                                    </g:each>
                                 </td>
                             </tr>
 
