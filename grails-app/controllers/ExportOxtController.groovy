@@ -25,6 +25,7 @@ import java.sql.Statement
 import java.text.SimpleDateFormat
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+
 /**
  * Exports concepts to an OpenOffice.org OXT file.
  */
@@ -68,7 +69,7 @@ class ExportOxtController extends BaseController {
       rs.close()
 
       log.info("Collecting terms...")
-      rs = st.executeQuery("""SELECT DISTINCT word FROM synset, term WHERE 
+      rs = st.executeQuery("""SELECT DISTINCT word FROM synset, term WHERE
           synset.id = term.synset_id AND synset.is_visible = 1 ORDER BY word""")
 
       int count = 0
@@ -83,26 +84,50 @@ class ExportOxtController extends BaseController {
         limit = Integer.parseInt(params.limit)
       }
 
+      List sortedWords = []
+      Map wordToOrigWord = new HashMap()
       SynsetController ctrl = new SynsetController()
+
       while (rs.next()) {
         String word = rs.getString("word")
+        word = word.replaceAll("\\(.*?\\)", "").trim()
+        sortedWords.add(word)
+        wordToOrigWord.put(word, rs.getString("word"))
+      }
+
+      Collections.sort(sortedWords, [
+              compare: {String o1, String o2 -> o1.compareToIgnoreCase(o2)}
+      ] as Comparator)   // sorts like Unix "sort" with LC_ALL=C
+
+      for (word in sortedWords) {
         long t = System.currentTimeMillis()
-        def result = ctrl.doDBSearch(word, null, null, null)
+        String origWord = wordToOrigWord.get(word)
+        if (!origWord) {
+          throw new Exception("'${word}' not found in map")
+        }
+        def result = ctrl.doDBSearch(origWord, null, null, null)
         if (limit > 0 && count > limit) {
           //useful for testing
           break
         }
+        if (result.totalMatches == 0) {
+          log.warn("No result for '${origWord}'")
+        }
         if (count % 100 == 0) {
           log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")
         }
-        bwIdx.write(makeVariation(word.toLowerCase(), variation) + "|" + indexPos + "\n")
-        indexPos = dataWrite(makeVariation(word.toLowerCase(), variation) + "|" + result.totalMatches + "\n", bw, indexPos)
+        bwIdx.write(makeVariation(word.toLowerCase(), variation, true) + "|" + indexPos + "\n")
+        indexPos = dataWrite(makeVariation(word.toLowerCase(), variation, true) + "|" + result.totalMatches + "\n", bw, indexPos)
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
           indexPos = dataWrite("-", bw, indexPos)
           for (sortedTerm in sortedTerms) {
             if (makeVariation(sortedTerm.word, variation) != makeVariation(word, variation)) {
-              indexPos = dataWrite("|" + makeVariation(sortedTerm.word, variation), bw, indexPos)
+              String wordWithLevel = makeVariation(sortedTerm.word, variation)
+              if (sortedTerm.level) {
+                wordWithLevel = "${wordWithLevel} (${sortedTerm.level.shortLevelName})"
+              }
+              indexPos = dataWrite("|" + wordWithLevel, bw, indexPos)
             }
           }
           indexPos = dataWrite("\n", bw, indexPos)
@@ -130,12 +155,14 @@ class ExportOxtController extends BaseController {
       tmpFileIdx.delete()
   }
 
-  private String makeVariation(String str, String variation) {
+  private String makeVariation(String str, String variation, boolean normalize = false) {
     if (variation == 'ch') {
-      return str.replaceAll("ß", "ss")
-    } else {
-      return str
+      str = str.replaceAll("ß", "ss")
     }
+    if (normalize) {
+      str = str.replaceAll("\\(.*?\\)", "").trim()
+    }
+    return str
   }
 
   private dataWrite(String str, BufferedWriter bw, int indexPos) {
