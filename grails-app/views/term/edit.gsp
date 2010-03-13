@@ -63,7 +63,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synset'><g:message code="edit.term.synset"/></label>
+                                    <label for='${term.synset.id}'><g:message code="edit.term.synset"/></label>
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:link controller="synset" action="edit" id="${term.synset.id}">${term.synset.toString()?.encodeAsHTML()}</g:link>
@@ -82,7 +82,7 @@
 						    <g:else>
 	                            <tr class='prop'>
 	                                <td valign='top' class='name'>
-	                                    <label for='synset'><g:message code="edit.term.language"/></label>
+	                                    <label><g:message code="edit.term.language"/></label>
 	                                </td>
 	                                <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
 	                                    <g:if test="${session.user}">
@@ -115,7 +115,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synset'><g:message code="edit.term.level"/></label>
+                                    <label><g:message code="edit.term.level"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
@@ -226,7 +226,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='userComment'><g:message code="edit.term.comment"/></label>
+                                    <label><g:message code="edit.term.comment"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${session.user}">
