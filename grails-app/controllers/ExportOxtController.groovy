@@ -25,6 +25,7 @@ import java.sql.Statement
 import java.text.SimpleDateFormat
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import org.apache.commons.io.FileUtils
 
 /**
  * Exports concepts to an OpenOffice.org OXT file.
@@ -37,6 +38,8 @@ class ExportOxtController extends BaseController {
   def sessionFactory   // will be injected
 
   String encoding = "UTF-8"
+
+  private static final String SUPER_TERM = "Oberbegriff"
   
   def run = {
 
@@ -121,12 +124,28 @@ class ExportOxtController extends BaseController {
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
           indexPos = dataWrite("-", bw, indexPos)
+          // synonyms:
           for (sortedTerm in sortedTerms) {
             String wordWithLevel = makeVariation(sortedTerm.word, variation)
             if (sortedTerm.level) {
               wordWithLevel = "${wordWithLevel} (${sortedTerm.level.shortLevelName})"
             }
             indexPos = dataWrite("|" + wordWithLevel, bw, indexPos)
+          }
+          // super terms:
+          for (link in synset.synsetLinks) {
+            if (link.linkType.toString() == SUPER_TERM) {
+              Synset superSynset = link.targetSynset
+              List superSortedTerms = superSynset.terms.sort()
+              for (superTerm in superSortedTerms) {
+                String superWordWithLevel = makeVariation(superTerm.word, variation)
+                if (superTerm.level) {
+                  superWordWithLevel = "${superWordWithLevel} (${superTerm.level.shortLevelName})"
+                }
+                superWordWithLevel = "${superWordWithLevel} (${SUPER_TERM})"
+                indexPos = dataWrite("|" + superWordWithLevel, bw, indexPos)
+              }
+            }
           }
           indexPos = dataWrite("\n", bw, indexPos)
         }
@@ -184,8 +203,19 @@ class ExportOxtController extends BaseController {
     StringTools.writeToStream(index, zos)
     zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.datFile))
     StringTools.writeToStream(data, zos)
+
+    // set today's date in description.xml:
     zos.putNextEntry(new ZipEntry("description.xml"))
-    StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.descFile), zos)
+    File tempDescFile = File.createTempFile("openthesaurus-ooo-description", ".xml")
+    String descXml = FileUtils.readFileToString(new File(grailsApplication.config.thesaurus.export.descFile))
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd")
+    descXml = descXml.replaceAll("__DATE__", sdf.format(new Date()))
+    FileWriter fw = new FileWriter(tempDescFile)
+    fw.write(descXml)
+    fw.close()
+    StringTools.writeToStream(tempDescFile, zos)
+    tempDescFile.delete()
+
     zos.putNextEntry(new ZipEntry("Dictionaries.xcu"))
     StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.dictFile), zos)
     zos.putNextEntry(new ZipEntry("META-INF/manifest.xml"))

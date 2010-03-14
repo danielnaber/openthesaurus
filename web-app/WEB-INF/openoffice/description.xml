@@ -5,7 +5,7 @@
         It will also be used to automatically check if there are updates for this
         extension available. Newer versions should have higher values.
     -->
-    <version value="2008.09.28" />
+    <version value="__DATE__" />
 
     <!--A unique identifier for your extension.
         In order to avoid name clashes with other extensions it should probably hold
