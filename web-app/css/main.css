@@ -645,3 +645,11 @@ pre {
     font-family: monospace;
     font-weight: bold;
 }
+
+.resultlinkhover:hover {
+    background-color: #eee;
+}
+
+.nohover:hover {
+    background-color: #eee;
+}
