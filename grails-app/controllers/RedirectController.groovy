@@ -35,11 +35,20 @@ class RedirectController extends BaseController {
     }
 
    def synseteditredirect = {
-     permanentRedirect("synonyme/edit?q=" + params.id)
+     permanentRedirect("synonyme/edit/" + params.id)
    }
 
    def synsetsearchredirect = {
        String q = URLEncoder.encode(params.q, "UTF-8")
+       if (params.format) {
+         q += "&format=" + params.format
+       }
+       if (params.similar) {
+         q += "&similar=" + params.similar
+       }
+       if (params.mode) {
+         q += "&mode=" + params.mode
+       }
        permanentRedirect("synonyme/search?q=" + q)
    }
 

@@ -11,8 +11,10 @@ class UrlMappings {
 
       // better (= more readable) URLs:
       "/synonyme/search"(controller:'synset', action:'search')
+      "/synonyme/edit/$id"(controller:'synset', action:'edit')
       "/synonyme/edit"(controller:'synset', action:'edit')
       "/synset/search"(controller:'redirect', action:'synsetsearchredirect')
+      "/synset/edit/$id"(controller:'redirect', action:'synseteditredirect')
       "/synset/edit"(controller:'redirect', action:'synseteditredirect')
 
 
