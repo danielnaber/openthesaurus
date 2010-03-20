@@ -9,8 +9,8 @@
 	<li><a href="http://de.search.yahoo.com/search?p=${q.encodeAsURL()}">Yahoo</a>
 		<span class="d">&middot;</span> <a href="http://www.google.de/search?q=${q.encodeAsURL()}&amp;lr=lang_de">Google</a></li>
 	<li>Deutsch/Englisch:<br />
+        <a href="http://www.linguee.de/search?query=${q.encodeAsURL()}">Linguee</a> <span class="d">&middot;</span>
 		<a href="http://dict.leo.org/ende?lang=de&amp;search=${q.encodeAsURL()}">LEO</a> <span class="d">&middot;</span>
-		<a href="http://www.vokabelsalat.de/search/index?word=${q.encodeAsURL()}">vokabelsalat.de</a> <span class="d">&middot;</span>
 		<a href="http://dict.tu-chemnitz.de/dings.cgi?lang=de&amp;noframes=1&amp;service=&amp;query=${latin1Query}&amp;optword=1&amp;optcase=1&amp;opterrors=0&amp;optpro=0&amp;style=&amp;dlink=self"
 			>Beolingus</a> <span class="d">&middot;</span>
 		<a href="http://www.dict.cc/?s=${q.encodeAsURL()}">dict.cc</a></li>
