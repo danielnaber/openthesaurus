@@ -23,7 +23,26 @@ import java.net.URLEncoder
  * OpenThesaurus working.
  */
 class RedirectController extends BaseController {
-    
+
+    // TODO: temporary statistics, remove later
+    def gotoUrl = {
+        if (!params.url.contains('eyeplorer') && !params.url.contains('45info.com')) {
+            throw new Exception("Illegal redirect url url")
+        }
+        log.info("redirecting to " + params.url + ", UA: " + request.getHeader("User-Agent"))
+        response.setHeader("Location", params.url)
+        response.sendError(302)
+    }
+
+   def synseteditredirect = {
+     permanentRedirect("synonyme/edit?q=" + params.id)
+   }
+
+   def synsetsearchredirect = {
+       String q = URLEncoder.encode(params.q, "UTF-8")
+       permanentRedirect("synonyme/search?q=" + q)
+   }
+
    def faq = {
        permanentRedirect("about/faq")
    }

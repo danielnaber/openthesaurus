@@ -8,7 +8,14 @@ class UrlMappings {
             // apply constraints here
         }
       }
-      
+
+      // better (= more readable) URLs:
+      "/synonyme/search"(controller:'synset', action:'search')
+      "/synonyme/edit"(controller:'synset', action:'edit')
+      "/synset/search"(controller:'redirect', action:'synsetsearchredirect')
+      "/synset/edit"(controller:'redirect', action:'synseteditredirect')
+
+
       // the search result page:
       "/overview.php"(controller:'redirect', action:'overview')
 
