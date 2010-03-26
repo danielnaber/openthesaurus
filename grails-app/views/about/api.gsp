@@ -22,7 +22,7 @@
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
 		die das Wort <span class="bsp">query</span> beinhalten, abgefragt werden.</p>
 		
-		<pre>http://www.openthesaurus.de/synset/search?q=<strong>query</strong>&amp;format=text/xml</pre>
+		<pre>http://www.openthesaurus.de/synonyme/search?q=<strong>query</strong>&amp;format=text/xml</pre>
 		
 		<h2>Ergebnis</h2>
 		
