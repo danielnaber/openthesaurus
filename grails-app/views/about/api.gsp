@@ -62,7 +62,7 @@
           ähnliche Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
 
-          <pre>http://www.openthesaurus.de/synset/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
+          <pre>http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
 
           Antwort (Ausschnitt):
 
