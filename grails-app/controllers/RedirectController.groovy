@@ -24,15 +24,15 @@ import java.net.URLEncoder
  */
 class RedirectController extends BaseController {
 
-    // TODO: temporary statistics, remove later
-    def gotoUrl = {
+    // temporary statistics
+    /*def gotoUrl = {
         if (!params.url.contains('eyeplorer') && !params.url.contains('45info.com')) {
-            throw new Exception("Illegal redirect url url")
+            throw new Exception("Illegal redirect url")
         }
         log.info("redirecting to " + params.url + ", UA: " + request.getHeader("User-Agent"))
         response.setHeader("Location", params.url)
         response.sendError(302)
-    }
+    }*/
 
    def synseteditredirect = {
      permanentRedirect("synonyme/edit/" + params.id)
