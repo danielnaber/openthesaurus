@@ -112,12 +112,12 @@ class SynsetController extends BaseController {
         }
     }
 
-    def list = {
+    /*def list = {
         if(!params.max) params.max = 10
         [ synsetList: Synset.findAllByIsVisible(true,
             [sort:params.sort, order:params.order,
              offset:params.offset, max:10]) ]
-    }
+    }*/
 
     /**
      * Return a simplified search result snippet to be embedded
@@ -248,6 +248,16 @@ class SynsetController extends BaseController {
             renderApiResponse(searchResult, similarTerms)
             return
           }
+
+          // for temporary stats:
+          /*if (wikipediaResult != null && wikipediaResult.size() > 0) {
+            if (Title45info.findByTitle(params.q)) {
+              log.info("45info cliplink" + ", UA: " + request.getHeader("User-Agent"))
+            } else {
+              log.info("45info searchlink" + ", UA: " + request.getHeader("User-Agent"))
+            }
+            log.info("eyeplorer pagelink" + ", UA: " + request.getHeader("User-Agent"))
+          }*/
           
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
