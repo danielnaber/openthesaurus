@@ -29,7 +29,7 @@
 		                        <g:set var="counter" value="${counter + 1}"/>
                             </g:each>
 	                   		<g:link action="edit" id="${synset.id}">
-	                   			<g:message code="result.edit"/>
+	                   			<span style="color:#888"><g:message code="result.edit"/></span>
     	               		</g:link>
                         </li>
                    </g:each>

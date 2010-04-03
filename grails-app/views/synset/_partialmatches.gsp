@@ -1,4 +1,4 @@
-					<h2 style="margin:0px"><g:message code="result.partialmatches.headline"/></h2>
+					<h2 style="margin-top:0px"><g:message code="result.partialmatches.headline"/></h2>
 					<ul>
 						<g:set var="moreSubstringTerms" value="${false}" />
 						<g:each in="${partialMatchResult}" var="term" status="counter">

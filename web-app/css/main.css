@@ -50,29 +50,30 @@ body {
     font-family: verdana, arial, helvetica, sans-serif;
     margin-bottom: 30px;
 	line-height: 1.5em;
+    max-width: 1000px;
 }
 
 a:link, a:visited {
-    /*color: #222;*/
     text-decoration: none;
+    color: #0000d6;
 }
 
 a:hover {
-    /*color: #222;*/
+    color: #0000d6;
     background-color: #eee;
     text-decoration: none;
 }
 
 h1 {
-    color: #006dba;
+    color: #555;
     font-size: 140%;
     margin: .8em 0 .3em 0;
 }
 
 h2 {
-    color: #006dba;
-    font-size: 120%;
-    margin: .8em 0 .3em 0;
+    color: #555;
+    font-size: 140%;
+    margin: 18px 0 3px 0;
 }
 
 ul {
@@ -526,10 +527,10 @@ img {
 	margin-left: 15px;
 	margin-top: 4px;
 	color: #AAAAAA;
-	font-size:x-small;
+	font-size: small;
 }
 .copyrightInfo a {
-	font-size: x-small;
+	font-size: small;
 	color: #888888;
 }
 
@@ -653,3 +654,28 @@ pre {
 .nohover:hover {
     background-color: #eee;
 }
+
+.maxwidth {
+    max-width: 550px;
+}
+
+/* 45info link on search result page */
+.playicon {
+        margin-top: 20px;
+        margin-left: 47px;
+        background-image: url(../images/45info_play.png);
+        background-repeat: no-repeat;
+}
+.playicon:hover {
+        margin-top: 20px;
+        margin-left: 47px;
+        background-image: url(../images/45info_play_high.png);
+        background-repeat: no-repeat;
+}
+a:hover .playicon {
+        margin-top: 20px;
+        margin-left: 47px;
+        background-image: url(../images/45info_play_high.png);
+        background-repeat: no-repeat;
+}
+/* end 45info link */

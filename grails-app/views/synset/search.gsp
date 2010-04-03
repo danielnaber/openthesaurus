@@ -24,7 +24,7 @@
                 <div class="message">${flash.message}</div>
             </g:if>
 
-            <h2><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
+            <h2 style="margin-top:5px"><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
             <g:set var="cleanTerm" value="${params.q.trim()}" />
             
@@ -36,7 +36,7 @@
 				</div>
           	</g:if>
           	<g:else>
-				<div style="width:60%">
+				<div class="maxwidth">
 	            <ul>
 		            <g:render template="mainmatches"/>
 	            </ul>
@@ -67,16 +67,11 @@
 		            <br/>
 
 		            <p>
-		                <g:if test="${params.q}">
-		                    <g:set var="cleanTerm" value="${params.q.trim()}" />
-		                    <g:link action="create" params="[term : cleanTerm]">
-		                        <img src="../images/skin/database_add.png" alt="Add icon" />
-		                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
-		                    </g:link>
-		                </g:if>
-		                <g:else>
-		                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
-		                </g:else>
+                        <g:set var="cleanTerm" value="${params.q.trim()}" />
+                        <g:link action="create" params="[term : cleanTerm]">
+                            <img src="../images/skin/database_add.png" alt="Add icon" />
+                            <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+                        </g:link>
 		            </p>
 						
                     <div style="float:right">
@@ -96,22 +91,27 @@
 			            <g:render template="/external_links" model="${[q:params.q]}"/>
 			            <br/>
 	
-			            <p>
-			                <g:if test="${params.q}">
-			                    <g:link action="create" params="[term : cleanTerm]">
-			                        <img src="../images/skin/database_add.png" alt="Add icon" />
-			                        <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
-			                    </g:link>
-			                </g:if>
-			                <g:else>
-			                    <g:link action="create"><g:message code="result.create.new.synset"/></g:link>
-			                </g:else>
-			            </p>
+			            <table style="margin:0;padding: 0">
+                          <tr>
+                            <td style="margin:0;padding: 0">
+                              <g:link action="create" params="[term : cleanTerm]">
+                                  <img src="../images/skin/database_add.png" alt="Add icon" />
+                              </g:link>
+                            </td>
+                            <td style="margin:0;padding: 0 0 0 6px">
+                              <g:link action="create" params="[term : cleanTerm]">
+                                  <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+                              </g:link>
+                            </td>
+                          </tr>
+			            </table>
 						
 					<td></td>
 					<td width="60%">
-						<g:render template="wikipedia"/>
-						<g:render template="wiktionary"/>
+                        <div class="maxwidth">
+						  <g:render template="wikipedia"/>
+  						  <g:render template="wiktionary"/>
+                        </div>
 					</td>
 				</tr>
 				</table>

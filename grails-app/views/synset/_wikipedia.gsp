@@ -1,4 +1,4 @@
-					<h2 style="margin:0px"><g:message code="result.wikipedia.headline"/></h2>
+					<h2 style="margin-top:0px"><g:message code="result.wikipedia.headline"/></h2>
 					<g:if test="${wikipediaResult}">
 						<ul>
 							<li>
