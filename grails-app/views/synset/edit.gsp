@@ -195,14 +195,15 @@
                                     <% int i = 0; %>
                                     <div id="newTerm" style="display:none">
                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                            <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                            <g:message code="edit.term.term"/> <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
                                  		    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
 											  	<g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
 						  					</g:if>
 						  					<g:else>
 	                          					<g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
 						  					</g:else>
-                                            <%-- 
+                                            <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                            <%--
                                             <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                                             <br />
                                             <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;

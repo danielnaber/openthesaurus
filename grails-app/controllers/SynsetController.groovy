@@ -898,7 +898,7 @@ class SynsetController extends BaseController {
                 newTerm.isShortForm = params['wordForm_'+newTermCount] == "abbreviation" ? true : false
                 newTerm.isAcronym = params['wordForm_'+newTermCount] == "acronym" ? true : false
                 if (params['level.id_'+newTermCount] && params['level.id_'+newTermCount] != "null") {
-                    newTerm.level = Level.get(params['level.id_'+newTermCount])
+                    newTerm.level = TermLevel.get(params['level.id_'+newTermCount])
                 }
                 if (params['wordGrammar.id_'+newTermCount] && params['wordGrammar.id_'+newTermCount] != "null") {
                     newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_'+newTermCount])
