@@ -27,10 +27,6 @@
 	
 	        <g:render template="/searchform"/>
 
-            <div style="text-align: center;margin-bottom:10px; padding:0px;">
-              <p style="margin:0px auto;background:#f7fdce;width:300px;padding:3px"><strong>Empfehlung: </strong> <a href="http://45info.com">Wikipedia-Artikel als Slideshow</a> ansehen auf 45info.com</p>
-            </div>
-	
 	        <p class="mainpage">
 	            <g:if test="${session.user?.permission == 'admin'}">
 		    	    <g:link controller="admin">special admin links</g:link><br /><br />
