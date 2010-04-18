@@ -499,13 +499,16 @@ class Synset implements Cloneable {
     /**
      * A string representation limited by the number of terms (default: 3)
      */
-    String toShortString(int maxSize = 3) {
+    String toShortString(int maxSize = 3, boolean addElipses = true) {
         def terms = sortedTerms()
         if (terms.size() == 0) {
           return "[empty]"
         }
         String termStr = terms[0..Math.min(terms.size()-1, maxSize-1)].join(" · ")
-        String suffix = terms.size() > maxSize ? " · ..." : ""
+        String suffix = ""
+        if (addElipses) {
+          suffix = terms.size() > maxSize ? " · ..." : ""
+        }
         return termStr + suffix
     }
 

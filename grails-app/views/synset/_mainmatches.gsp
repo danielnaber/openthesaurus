@@ -31,6 +31,40 @@
 	                   		<g:link action="edit" id="${synset.id}">
 	                   			<span style="color:#888"><g:message code="result.edit"/></span>
     	               		</g:link>
+
+                            <g:set var="superSynsetStrings" value="${[]}"/>
+                            <g:each in="${synset.synsetLinks}" var="synsetLink">
+                              <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
+                                <%
+                                superSynsetStrings.add(synsetLink.targetSynset.toShortString(3, false))
+                                %>
+                              </g:if>
+                            </g:each>
+                            <g:if test="${superSynsetStrings}">
+                              <br />
+                              <span class="termMetaInfo">
+                              Oberbegriffe:
+                              ${superSynsetStrings.join(' | ')}</span>
+                            </g:if>
+
+                            <g:set var="categoryStrings" value="${[]}"/>
+                            <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
+                              <span class="termMetaInfo">
+                              <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                                <%
+                                categoryStrings.add(catLink.category)
+                                %>
+                              </g:each>
+                              </span>
+                            </g:if>
+                            <g:if test="${categoryStrings}">
+                              <br />
+                              <span class="termMetaInfo">
+                              <g:message code='edit.categories'/>
+                              ${categoryStrings.join(' | ')}</span>
+                            </g:if>
+
+
                         </li>
                    </g:each>
                    
