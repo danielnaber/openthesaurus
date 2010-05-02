@@ -165,14 +165,12 @@
 
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                             <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                            <g:if test="${synset?.isVisible ? termCount > 1 : termCount > 0}">
-                                            	<g:link class="termMetaInfo" action="search" params="[q : t.word]">[${termCount}]</g:link>
-                                            	<%--
-                                               <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
-                                               params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
-                                                <g:link class="termMetaInfo" action="search" params="[q : t.word]">all: ${termCount}</g:link>]</span>
-                                                --%>
-                                            </g:if>
+                                            <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo" action="search" params="[q : t.word]">[${termCount}]</g:link>
+                                            <%--
+                                            <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
+                                            params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
+                                            <g:link class="termMetaInfo" action="search" params="[q : t.word]">all: ${termCount}</g:link>]</span>
+                                            --%>
 
                                             <g:set var="previousLanguage" value="${t.language}"/>
                                         </li>
