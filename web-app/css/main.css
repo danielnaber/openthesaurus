@@ -91,7 +91,7 @@ ul {
 
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
+    border: 1px;
     border-style: solid none solid none;
     margin-top: 5px;
     padding: 7px 12px;
@@ -218,8 +218,6 @@ th.desc a {
 /* PAGINATION */
 
 .paginateButtons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
     border-top: 0;
     color: #666;
     font-size: 100%;
@@ -227,8 +225,8 @@ th.desc a {
     padding: 10px 3px;
 }
 .paginateButtons a {
-    background: #fff;
-    border: 1px solid #ccc;
+    background: #eee;
+    border: 1px;
     border-color: #ccc #aaa #aaa #ccc;
     color: #666;
     margin: 0 3px;
@@ -502,7 +500,7 @@ img {
 }
 
 .strongCurrentStep {
-    border: 1px solid #ccc;
+    border: 1px;
     border-color: #ccc #aaa #aaa #ccc;
     color: #666;
     margin: 0 3px;
@@ -544,7 +542,7 @@ img {
 /* news archive */
 .newsdate {
 	font-weight: bold;
-	color:#666666;
+	color: #666666;
 }
 .newsYearDelimiter {
 	background-color: #eee;
@@ -661,21 +659,21 @@ pre {
 
 /* 45info link on search result page */
 .playicon {
-        margin-top: 20px;
-        margin-left: 47px;
-        background-image: url(../images/45info_play.png);
-        background-repeat: no-repeat;
+    margin-top: 20px;
+    margin-left: 47px;
+    background-image: url(../images/45info_play.png);
+    background-repeat: no-repeat;
 }
 .playicon:hover {
-        margin-top: 20px;
-        margin-left: 47px;
-        background-image: url(../images/45info_play_high.png);
-        background-repeat: no-repeat;
+    margin-top: 20px;
+    margin-left: 47px;
+    background-image: url(../images/45info_play_high.png);
+    background-repeat: no-repeat;
 }
 a:hover .playicon {
-        margin-top: 20px;
-        margin-left: 47px;
-        background-image: url(../images/45info_play_high.png);
-        background-repeat: no-repeat;
+    margin-top: 20px;
+    margin-left: 47px;
+    background-image: url(../images/45info_play_high.png);
+    background-repeat: no-repeat;
 }
 /* end 45info link */
