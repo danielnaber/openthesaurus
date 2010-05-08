@@ -7,13 +7,11 @@
     </head>
     <body>
 
-		<g:if test="${!BrowserDetection.isMobileDevice(request)}">
-			<div class="homepagead_right">
-	        	<g:render template="/ads/homepage"/>
-	        </div>
-		</g:if>    
-
 		<div class="homepagecontent">
+
+            <g:if test="${!BrowserDetection.isMobileDevice(request)}">
+                <g:render template="/ads/homepage"/>
+            </g:if>
 
 	        <div class="logo"><img
 	        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v1" 
