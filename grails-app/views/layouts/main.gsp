@@ -9,13 +9,15 @@
         <g:javascript library="application" />				
     </head>
     <body>
-    
-        <noscript>
-	        <div class="nojs">
-	           Note: You need to enable Javascript in order to be able to edit the thesaurus
-	        </div>
-        </noscript>
-        
+
+        <g:if test="${session.user}">
+          <noscript>
+              <div class="nojs">
+                 <g:message code='no.javascript.warning'/>
+              </div>
+          </noscript>
+        </g:if>
+
         <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
         	src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v1" 
         	alt="<g:message code='logo.alt.text'/>" width="292" height="80" /></a></div>
