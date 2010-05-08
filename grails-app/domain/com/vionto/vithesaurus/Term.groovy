@@ -104,7 +104,17 @@ class Term implements Comparable, Cloneable {
         //return "${word} || abbrev=${isShortForm} | acronym=${isAcronym} | " +
         //    "language=${language.shortForm} | form=${wordGrammar} | " +
         //    "comment=${userComment}"
-        return "${word} || level=${level} | comment=${userComment}"
+        StringBuilder sb = new StringBuilder()
+        sb.append(word)
+        if (level) {
+          sb.append(" || level=")
+          sb.append(level)
+        }
+        if (userComment) {
+          sb.append(" || comment=")
+          sb.append(userComment)
+        }
+        return sb.toString()
     }
 
     /**

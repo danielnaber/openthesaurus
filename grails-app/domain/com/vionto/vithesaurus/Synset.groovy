@@ -432,14 +432,33 @@ class Synset implements Cloneable {
      * be modified like "source" etc.
      */
     String toDetailedString() {
-        StringBuilder sb = new StringBuilder()
         // the "|" at the beginning works around a bug in the diff
         // algorithm with additions at the start of the string:
-        sb.append("| ${toString()} || isVisible=${isVisible} || ")
-        if (!userComment) {
-          sb.append("comment= ||")
+        StringBuilder sb = new StringBuilder("| ")
+        if (terms.size() == 0) {
+          sb.append("[empty]")
         } else {
-          sb.append("comment=${userComment} ||")
+          int pos = 0
+          for (term in terms.sort()) {
+            sb.append(term)
+            if (term.level) {
+              sb.append(" (")
+              sb.append(term.level.shortLevelName)
+              sb.append(")")
+            }
+            if (pos < terms.size() - 1) {
+              sb.append(" · ")
+            }
+            pos++
+          }
+        }
+        if (isVisible) {
+          sb.append(" || visible")
+        } else {
+          sb.append(" || INVISIBLE")
+        }
+        if (userComment) {
+          sb.append(" || comment=${userComment}")
         }
 
         /*if (preferredTermLinks) {
@@ -463,10 +482,10 @@ class Synset implements Cloneable {
         //sb.append(" section=")
         //sb.append(section)
         //sb.append(" ||")
-        sb.append(" categories=")
 
         int categoryLinkCount = 0
         if (categoryLinks && categoryLinks.size() > 0) {
+          sb.append(" || categories=")
           for (categoryLink in categoryLinks.sort()) {
             if (categoryLinkCount > 0) {
                 sb.append("|")

@@ -41,6 +41,7 @@ class FeedController extends BaseController {
          description = "Letzte Änderungen in OpenThesaurus"
          eventList.each() { event ->
            String desc
+           String title = ""
            if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent) {
              desc = "Eintrag"
            } else if (event.getClass() == com.vionto.vithesaurus.UserTermEvent) {
@@ -56,22 +57,35 @@ class FeedController extends BaseController {
              desc += " verknüpft"
            } else {
              desc += " ??? (${event.eventType})"
-           } 
+           }
+           title = desc
            String username = event.byUser.realName
            if (!username) {
              username = "[anonym]"
            }
            desc += " von Benutzer ${username.encodeAsHTML()}: "
-           entry(username.encodeAsHTML() + ": " + event.synset.toShortString(5)) {
-             publishedDate = event.creationDate
-             //actually <guid> must be unique but I cannot set this it seems, so let's make
-             //the link unique, as this is used as guid:
-             link = "${grailsApplication.config.thesaurus.serverURL}/synset/edit/${event.synset.id}#${event.id}"
-             content {
-               type = "text/html"
-               desc + diffs.get(event)
-                 .replaceAll("class='add'>", "style='font-weight:bold;color:green'> ")
-                 .replaceAll("class='del'>", "style='font-weight:bold;color:red;text-decoration: line-through'> ")
+           String moreInfo = ""
+           if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent && event.eventType == LogInfo.CREATION) {
+             // we only get a mostly useless 'empty', so add the synset itself:
+             moreInfo += "<br /><br />Eintrag: " + event.synset.toShortString()
+           }
+           if (event.changeDesc) {
+             moreInfo += "<br /><br />Kommentar zur Änderung: " + event.changeDesc.encodeAsHTML()
+           }
+           if (event.getClass() == com.vionto.vithesaurus.UserTermEvent && event.eventType == LogInfo.CREATION) {
+             // this is part of the synset change info already
+           } else {
+             entry(username.encodeAsHTML() + ": " + title + ": " + event.synset.toShortString(5)) {
+               publishedDate = event.creationDate
+               //actually <guid> must be unique but I cannot set this it seems, so let's make
+               //the link unique, as this is used as guid:
+               link = "${grailsApplication.config.thesaurus.serverURL}/synset/edit/${event.synset.id}#${event.id}"
+               content {
+                 type = "text/html"
+                 desc + diffs.get(event)
+                   .replaceAll("class='add'>", "style='font-weight:bold;color:green'> ")
+                   .replaceAll("class='del'>", "style='font-weight:bold;color:red;text-decoration: line-through'> ") + moreInfo
+               }
              }
            }
          }
