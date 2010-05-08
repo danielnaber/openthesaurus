@@ -360,8 +360,8 @@ img {
 /* no javascript warning */
 .nojs {
     padding: 5px;
-    background: yellow;
-    border: 2px solid red;
+    background: #ffff9d;
+    border: 2px solid #ff8900;
 }
 
 .warning {
@@ -384,7 +384,7 @@ img {
     padding-top: 40px;
 }
 
-.deletedSynset{
+.deletedSynset {
     background:#ff9;
 }
 
