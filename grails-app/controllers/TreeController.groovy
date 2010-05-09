@@ -70,6 +70,9 @@ class TreeController extends BaseController {
     private void getSubordinateSynsetsHtml(Synset synset, List synsetIdsToOpen, StringBuilder sb) {
       List subSynsets = getSubordinateSynsetIds(synset)
       for (subSynset in subSynsets) {
+        if (!subSynset.isVisible) {
+          continue
+        }
         if (synsetIdsToOpen.contains(subSynset.id) || subSynset.id + "" == params.id) {
           StringBuilder subContent = new StringBuilder()
           subContent.append("<li>\n")
