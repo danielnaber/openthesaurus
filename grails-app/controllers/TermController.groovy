@@ -73,7 +73,10 @@ class TermController extends BaseController {
 
             // validation okay, now change the real term:
             term.properties = params
-            term.normalizedWord = Term.normalize(params.word)
+            String normalizedWord = Term.normalize(params.word)
+            if (normalizedWord != params.word) {
+                term.normalizedWord = normalizedWord
+            }
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
             term.synset.updatePreferredTerm()
