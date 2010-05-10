@@ -45,7 +45,6 @@ class TermController extends BaseController {
     def update = {
         Term term = Term.get( params.id )
         Term termBackup = term.clone()
-        String oldTerm = term.word
         if (term) {
             boolean wordWasChanged = params.word != term.word
             if (wordWasChanged && term.synset.containsWord(params.word)) {
@@ -60,7 +59,7 @@ class TermController extends BaseController {
             }
             
             // create a term just for validation (we cannot assign the new 
-            // properties to variable 'term' as it will then ba saved even
+            // properties to variable 'term' as it will then be saved even
             // if it's invalid -- see http://jira.codehaus.org/browse/GRAILS-2480):
             Term updatedTerm = new Term(term.word, term.language, term.synset)
             updatedTerm.properties = params
@@ -74,6 +73,7 @@ class TermController extends BaseController {
 
             // validation okay, now change the real term:
             term.properties = params
+            term.normalizedWord = Term.normalize(params.word)
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
             term.synset.updatePreferredTerm()
