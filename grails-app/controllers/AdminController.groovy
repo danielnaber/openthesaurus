@@ -30,4 +30,15 @@ class AdminController extends BaseController {
         [latestUsers: latestUsers, resultLimit: resultLimit]
     }
 
+    def checkNormalizedTermIntegrity = {
+        List terms = Term.list()
+        for (term in terms) {
+            String normalizedWord = Term.normalize(term.word)
+            if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
+              render "<a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+            }
+        }
+        render ""
+    }
+
 }
