@@ -281,11 +281,7 @@ class SynsetController extends BaseController {
     private void renderApiResponse(def searchResult, List similarTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
-      def xml = new groovy.xml.StreamingMarkupBuilder()
-      xml.encoding = "UTF-8"
-      response.setContentType("text/xml; charset=utf-8") 
-      render xml.bind {
-        mkp.xmlDeclaration()
+      render(contentType:params.format, encoding:"utf-8") {
         matches {
           metaData {
             apiVersion(content:"0.1.2")
@@ -314,7 +310,7 @@ class SynsetController extends BaseController {
                 } else {
                   term(term:t)
                 }
-              }
+              }                    
             }
           }
           if (similarTerms) {
@@ -329,7 +325,7 @@ class SynsetController extends BaseController {
             }
           }
         }
-      }.toString()
+      }
     }
     
     def substring = {
