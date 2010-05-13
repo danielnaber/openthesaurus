@@ -36,7 +36,7 @@
                             <g:each in="${synset.synsetLinks}" var="synsetLink">
                               <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
                                 <%
-                                superSynsetStrings.add(synsetLink.targetSynset.toShortString(3, false))
+                                superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false))
                                 %>
                               </g:if>
                             </g:each>

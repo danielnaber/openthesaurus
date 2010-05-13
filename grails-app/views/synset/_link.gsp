@@ -25,7 +25,7 @@
                 <span>
             </g:else>
             <g:link controller='synset' action='edit'
-                id='${link.targetSynset.id}'>${link.targetSynset.toShortString(3).encodeAsHTML()}</g:link></span>
+                id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true).encodeAsHTML()}</g:link></span>
 	        <%--
             <g:if test="${link.factCount >= 1}">
                <g:if test="${reverseLink}">
