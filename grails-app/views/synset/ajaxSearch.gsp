@@ -21,9 +21,12 @@
 	                     	 <g:set var="firstVal" value="${true}"/>
 	                         <g:each in="${synset?.otherTerms()?.sort()}" var="term">
 	                             <g:if test="${!firstVal}">
-	                             	<span class="d">&nbsp;&middot;</span>
+	                             	<span class="d">&middot;</span>
 	                             </g:if>
 	                             ${term.toString()?.encodeAsHTML()}
+                                 <g:if test="${term.level}">
+                                   (${term.level.shortLevelName})
+                                 </g:if>
 	                             <g:set var="firstVal" value="${false}"/>
 	                         </g:each>
 	                     </g:link>
