@@ -28,6 +28,12 @@ und neue hinzufügen. Findet die Suche keine Treffer, wird ein Link
 angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 
 
+<h2>Lizenz</h2>
+
+<p>Die Daten von OpenThesaurus stehen unter der
+  <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License</a> zur Verfügung.</p>
+
+
 <h2>Änderungen und News zu OpenThesaurus</h2>
 
 <ul>
@@ -39,17 +45,6 @@ angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 	</li>			
 </ul>
 
-
-<h2>Papers über OpenThesaurus</h2>
-
-<p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
-Dokumentation exisitiert bisher leider nicht.</p>
-
-<ul>
-	<li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
-	offenes deutsches Wortnetz (PDF, 536&nbsp;KB)</a></li>
-	<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
-</ul>
 
 <h2>OpenThesaurus auf Android</h2>
 
@@ -78,6 +73,18 @@ Dokumentation exisitiert bisher leider nicht.</p>
 	<li><a href="http://www.tezaver.si/">Slowenisch</a></li>
 	<li><a href="http://openthes-es.berlios.de">Spanisch</a></li>
     <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
+</ul>
+
+
+<h2>Papers über OpenThesaurus</h2>
+
+<p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
+Dokumentation exisitiert bisher leider nicht.</p>
+
+<ul>
+	<li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
+	offenes deutsches Wortnetz (PDF, 536&nbsp;KB)</a></li>
+	<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
 </ul>
 
 
