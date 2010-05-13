@@ -14,16 +14,28 @@
 
 <br />
 
+
 <table border="0" cellpadding="5" cellspacing="0">
 <tr class="newsYearDelimiter">
     <td>2010</td>
     <td></td>
 </tr>
-  <tr>
-      <td valign="top" align="right" width="90"><span class="newsdate">2010-03-09</span></td>
-      <td valign="top">Mit "OpenThesaurus für Android" wurde die Beta-Version einer Android-App veröffentlicht.
-        Kostenlos erhältlich im Market.</td>
-  </tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-04-26</span></td>
+    <td valign="top">Oberbegriffe werden jetzt auf der Trefferseite direkt angezeigt, sofern vorhanden.</td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-03-14</span></td>
+    <td valign="top">Der Thesaurus zum Download für OpenOffice.org war einige Monate fehlerhaft,
+      so dass nicht alle Wörter gefunden werden konnten. Die aktuelle Version ist jetzt korrigiert
+      (siehe <a href="download">Download</a>).</td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-03-09</span></td>
+    <td valign="top">Mit <a href="http://www.cyrket.com/p/android/com.fc.ot/">OpenThesaurus für Android</a> wurde
+      die Beta-Version einer Android-App veröffentlicht.
+      Kostenlos erhältlich im Market.</td>
+</tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-03-07</span></td>
     <td valign="top">Die <a href="api">API</a> wurde um eine Suche nach ähnlich geschriebenen Wörtern erweitert.</td>
