@@ -101,7 +101,7 @@
                         <tbody class="${synset?.isVisible ? '' : 'deletedSynset'}">
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='terms'><g:message code='edit.terms'/></label>
+                                    <g:message code='edit.terms'/>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
@@ -115,7 +115,7 @@
 
                                 <ul>
                                     <g:set var="previousLanguage" value=""/>
-                                    <g:each var='t' in='${synset?.sortedTerms()?}'>
+                                    <g:each var='t' in='${synset?.sortedTerms()}'>
                                         <li class="checkboxList">
                                             <g:if test="${previousLanguage != '' && t.language != previousLanguage}">
                                                 <br/>
@@ -219,7 +219,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synsetLinks'><g:message code='edit.categories'/></label>
+                                    <g:message code='edit.categories'/>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
@@ -342,7 +342,7 @@
                             <g:if test="${Section.count() > 1}">
 	                            <tr class='prop'>
 	                                <td class='name'>
-	                                    <label for='section'><g:message code='edit.thesaurus'/></label>
+	                                    <g:message code='edit.thesaurus'/>
 	                                </td>
 	                                <td valign='top' class='value ${hasErrors(bean:synset,field:'section','errors')}'>
 	                                    <g:if test="${session.user}">
@@ -359,7 +359,7 @@
 			                <g:if test="${session.user}">
 	                            <tr class='prop'>
 	                                <td class='name'>
-	                                    <label for='section'><g:message code='edit.delete'/></label>
+	                                    <g:message code='edit.delete'/>
 	                                </td>
 	                                <td valign='top'>
 					                    <div class="buttons">
@@ -376,7 +376,7 @@
 			                
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='userComment'><g:message code='edit.comment'/></label>
+                                    <g:message code='edit.comment'/>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:synset,field:'userComment','errors')}'>
 
@@ -410,7 +410,7 @@
                             <g:if test="${synset.source}">
 	                            <tr class='prop'>
 	                                <td valign='top' class='name'>
-	                                    <label for='source'><g:message code='edit.source'/></label>
+	                                    <g:message code='edit.source'/>
 	                                </td>
 	                                <td valign='top' class='lessImportantValue'>
 	                                    ${synset.source?.encodeAsHTML()}
@@ -421,7 +421,7 @@
                             <g:if test="${showOrigSource}">
                                 <tr class='prop'>
                                     <td valign='top' class='name'>
-                                        <label for='source'>Orig. Source:</label>
+                                        Orig. Source:
                                     </td>
                                     <td valign='top' class='lessImportantValue'>
                                         ${synset.originalURI?.toString()?.encodeAsHTML()}

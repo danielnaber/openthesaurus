@@ -2,7 +2,7 @@
 
 <tr class='prop'>
     <td valign='top' class='name'>
-        <label for='synsetLinks'>${title}:</label>
+        ${title}:
     </td>
     <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
