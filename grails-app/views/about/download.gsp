@@ -18,7 +18,7 @@
 			<g:set var="sdf" value="${new SimpleDateFormat('yyyy-MM-dd HH:mm')}"/>
 
 			<ul>
-			<li><a href="../export/${oooDump.getName()}">Deutscher Thesaurus for OpenOffice.org 3.x, 
+			<li><a href="../export/${oooDump.getName()}">Deutscher Thesaurus für OpenOffice.org 3.x, 
 				${sdf.format(new Date(oooDump.lastModified()))},
 				${String.format("%.2f", oooDump.length()/1000/1000)}MB</a></li>
 			
