@@ -153,6 +153,10 @@ class ExportOxtController extends BaseController {
         if (count % 500 == 0) {
           log.info("Calling clear() at ${count}")
           hibSession.clear()	// required to avoid OOM
+          //fast and incomplete export for testing:
+          //if (count > 0) {
+          //  break
+          //}
         }
       }
 
@@ -199,20 +203,36 @@ class ExportOxtController extends BaseController {
     File zipFile = new File(finalName + ".tmp")
     FileOutputStream fos = new FileOutputStream(zipFile)
     ZipOutputStream zos = new ZipOutputStream(fos)
+
     zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.idxFile))
     StringTools.writeToStream(index, zos)
+
     zos.putNextEntry(new ZipEntry(grailsApplication.config.thesaurus.export.datFile))
     StringTools.writeToStream(data, zos)
+
+    Date now = new Date()
+
+    File readmeFile = new File(grailsApplication.config.thesaurus.export.readmeFile)
+    zos.putNextEntry(new ZipEntry(readmeFile.getName()))
+    File tempReadmeFile = File.createTempFile("openthesaurus-ooo-readme", ".txt")
+    String readme = FileUtils.readFileToString(readmeFile)
+    SimpleDateFormat sdfReadme = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+    readme = readme.replaceAll("__DATE__", sdfReadme.format(now))
+    FileWriter fwReadme = new FileWriter(tempReadmeFile)
+    fwReadme.write(readme)
+    fwReadme.close()
+    StringTools.writeToStream(tempReadmeFile, zos)
+    tempReadmeFile.delete()
 
     // set today's date in description.xml:
     zos.putNextEntry(new ZipEntry("description.xml"))
     File tempDescFile = File.createTempFile("openthesaurus-ooo-description", ".xml")
     String descXml = FileUtils.readFileToString(new File(grailsApplication.config.thesaurus.export.descFile))
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd")
-    descXml = descXml.replaceAll("__DATE__", sdf.format(new Date()))
-    FileWriter fw = new FileWriter(tempDescFile)
-    fw.write(descXml)
-    fw.close()
+    SimpleDateFormat sdfDesc = new SimpleDateFormat("yyyy.MM.dd")
+    descXml = descXml.replaceAll("__DATE__", sdfDesc.format(now))
+    FileWriter fwDesc = new FileWriter(tempDescFile)
+    fwDesc.write(descXml)
+    fwDesc.close()
     StringTools.writeToStream(tempDescFile, zos)
     tempDescFile.delete()
 
