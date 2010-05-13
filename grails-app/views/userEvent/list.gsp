@@ -3,17 +3,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>UserEvent List</title>
+        <title><g:message code="changelist.title"/></title>
         <meta name="robots" content="noindex, nofollow" />
     </head>
     <body>
 
         <div class="body">
             
-            <h1>UserEvent List (${totalMatches} matches)</h1>
+            <h1><g:message code="changelist.headline"/></h1>
             
             <g:if test="${flash.message}">
-                    <div class="message">${flash.message}</div>
+                <div class="message">${flash.message}</div>
             </g:if>
             
             <g:if test="${session.user?.permission == 'admin'}">
@@ -34,15 +34,15 @@
                             filteredParams = params.findAll { entry, val -> entry != 'sort'}
                             %>
                         
-                            <g:sortableColumn property="creationDate" title="Date" 
+                            <g:sortableColumn property="creationDate" title="${message(code:'changelist.column.date')}" 
                                 params="${filteredParams}"/>
 
-                            <g:sortableColumn property="byUser" title="User"
+                            <g:sortableColumn property="byUser" title="${message(code:'changelist.column.user')}"
                                 params="${filteredParams}"/>
                         
                             <th></th>
 
-                            <g:sortableColumn property="changeDesc" title="Change Description"
+                            <g:sortableColumn property="changeDesc" title="${message(code:'changelist.column.comment')}"
                                 params="${filteredParams}"/>
                         
                         </tr>
