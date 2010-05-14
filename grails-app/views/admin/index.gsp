@@ -22,6 +22,9 @@
         <g:link controller="section" action="list">Thesauri</g:link> |
         <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link><br />
 
+        Import:
+        <g:link controller="suggest" action="index">Find words without synonyms</g:link> |
+
         Export:
         <g:link controller="exportOxt" action="run">Export OXT (slow for large data sets)</g:link> |
         <g:link controller="exportText" action="run">Export text</g:link> 
