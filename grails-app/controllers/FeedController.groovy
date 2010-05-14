@@ -67,7 +67,7 @@ class FeedController extends BaseController {
            String moreInfo = ""
            if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent && event.eventType == LogInfo.CREATION) {
              // we only get a mostly useless 'empty', so add the synset itself:
-             moreInfo += "<br /><br />Eintrag: " + event.synset.toShortString()
+             moreInfo += "<br /><br />Eintrag: " + event.synset.toShortStringWithShortLevel(20, true)
            }
            if (event.changeDesc) {
              moreInfo += "<br /><br />Kommentar zur Änderung: " + event.changeDesc.encodeAsHTML()
