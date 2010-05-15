@@ -23,7 +23,7 @@
 			    <br/>
 			    <br/>
 			    
-				<a href="${createLinkTo(dir:'',file:'')}"><g:message code="notfound.homepage.link"/></a>
+				<a href="${createLinkTo(dir:'/',file:'')}"><g:message code="notfound.homepage.link"/></a>
 			
 			</g:form>   
 
