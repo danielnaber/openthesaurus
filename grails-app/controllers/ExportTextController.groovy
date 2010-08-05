@@ -39,14 +39,16 @@ class ExportTextController extends BaseController {
 
       File tmpFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp")
       log.info("Writing plain text export to " + tmpFile)
-      FileWriter fw = new FileWriter(tmpFile)
-      BufferedWriter bw = new BufferedWriter(fw)
-      
+
+      OutputStream fout= new FileOutputStream(tmpFile);
+      OutputStream bout= new BufferedOutputStream(fout);
+      OutputStreamWriter out = new OutputStreamWriter(bout, "utf-8");
+
       String licenseText = message(code:'text.export.license')
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm")
       String date = sdf.format(new Date())
-      bw.write(licenseText.replaceAll("__DATE__", date))
-      bw.write("\n")
+      out.write(licenseText.replaceAll("__DATE__", date))
+      out.write("\n")
   
       Connection conn = dataSource.getConnection()
       Statement st = conn.createStatement()
@@ -68,16 +70,16 @@ class ExportTextController extends BaseController {
         int i = 0
         for (term in synset.terms) {
           if (term.level) {
-            bw.write(term.word + " (" + term.level + ")")
+            out.write(term.word + " (" + term.level + ")")
           } else {
-            bw.write(term.word)
+            out.write(term.word)
           }
           if (i < synset.terms.size() - 1) {
-            bw.write(";")
+            out.write(";")
           }
           i++
         }
-        bw.write("\n")
+        out.write("\n")
         if (count % 1000 == 0) {
           log.info("Text exporting synset #${count}")
           hibSession.clear()	// required to avoid OOM
@@ -86,8 +88,9 @@ class ExportTextController extends BaseController {
       
       rs.close()
       st.close()
-      bw.close()
-      fw.close()
+      out.close();
+      bout.close()
+      fout.close();
       conn.close()
       
       File tmpZipFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp.zip")
