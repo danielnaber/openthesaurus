@@ -26,6 +26,9 @@ import java.util.regex.Pattern
 import java.util.regex.Matcher
 import java.text.SimpleDateFormat
 
+/**
+ * Import data from the old PHP version of OpenThesaurus
+ */
 class ImportController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
