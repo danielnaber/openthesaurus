@@ -120,7 +120,8 @@ class ExportOxtController extends BaseController {
           log.info(count + ". results = " + result.totalMatches + ", " + (System.currentTimeMillis()-t) + "ms")
         }
         bwIdx.write(makeVariation(word.toLowerCase(), variation, true) + "|" + indexPos + "\n")
-        indexPos = dataWrite(makeVariation(word.toLowerCase(), variation, true) + "|" + result.totalMatches + "\n", bw, indexPos)
+        indexPos = dataWrite(makeVariation(word.toLowerCase(), variation, true) + "|" + result.synsetList.size() + "\n", bw, indexPos)
+        int lineCount = 0
         for (synset in result.synsetList) {
           List sortedTerms = synset.terms.sort()
           indexPos = dataWrite("-", bw, indexPos)
@@ -148,6 +149,10 @@ class ExportOxtController extends BaseController {
             }
           }
           indexPos = dataWrite("\n", bw, indexPos)
+          lineCount++
+        }
+        if (lineCount != result.synsetList.size()) {
+          throw new RuntimeException("Problem exporting '${word}': ${lineCount} != ${result.totalMatches}")
         }
         count++
         if (count % 500 == 0) {
