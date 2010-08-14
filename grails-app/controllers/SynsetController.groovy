@@ -172,10 +172,28 @@ class SynsetController extends BaseController {
           boolean apiRequest = params.format == "text/xml"
           boolean spellApiRequest = params.similar == "true"
           boolean allApiRequest = params.mode == "all"
+          int partialApiFromResultRequest = 0
+          boolean partialApiRequest = params.substring == "true"
 
           List partialMatchResult = []
           long partialMatchStartTime = System.currentTimeMillis()
-          if (!apiRequest) {
+          if (apiRequest) {
+            if (partialApiRequest || allApiRequest) {
+              if (params.substringFromResults) {
+                partialApiFromResultRequest = Integer.parseInt(params.substringFromResults)
+              }
+              int partialApiMaxResultsRequest = 10
+              if (params.substringMaxResults) {
+                partialApiMaxResultsRequest = Integer.parseInt(params.substringMaxResults)
+                if (partialApiMaxResultsRequest > 250) {
+                  partialApiMaxResultsRequest = 250
+                }
+              }
+              partialMatchResult = searchPartialResult(params.q, conn, partialApiFromResultRequest, partialApiMaxResultsRequest)
+            } else {
+              partialMatchResult = null
+            }
+          } else {
             // we display 10 matches in the page and use the next one (if any) to
             // decide whether there are more matches:
             partialMatchResult = searchPartialResult(params.q, conn, 0, 11)
@@ -245,7 +263,7 @@ class SynsetController extends BaseController {
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
-            renderApiResponse(searchResult, similarTerms)
+            renderApiResponse(searchResult, similarTerms, partialMatchResult)
             return
           }
 
@@ -278,13 +296,13 @@ class SynsetController extends BaseController {
               
     }
 
-    private void renderApiResponse(def searchResult, List similarTerms) {
+    private void renderApiResponse(def searchResult, List similarTerms, List substringTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
       render(contentType:params.format, encoding:"utf-8") {
         matches {
           metaData {
-            apiVersion(content:"0.1.2")
+            apiVersion(content:"0.1.3")
             if (grailsApplication.config.thesaurus.apiWarning) {
               warning(content:grailsApplication.config.thesaurus.apiWarning)
             }
@@ -321,6 +339,13 @@ class SynsetController extends BaseController {
                 if (++i >= 5) {
                   break
                 }
+              }
+            }
+          }
+          if (substringTerms) {
+            substringterms {
+              for (substringTerm in substringTerms) {
+                term(term:substringTerm.term)
               }
             }
           }
@@ -383,7 +408,7 @@ class SynsetController extends BaseController {
      */
     // TODO: use quartz
     def createMemoryDatabase= {
-      if (request.getRemoteAddr() != "127.0.0.1") {
+      if (request.getRemoteAddr() != "127.0.0.1" && request.getRemoteAddr() != "0:0:0:0:0:0:0:1") {  // TODO: simplify
         throw new Exception("Access denied from " + request.getRemoteAddr())
       }
 

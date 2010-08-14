@@ -657,6 +657,10 @@ pre {
     max-width: 550px;
 }
 
+.apioptions li {
+    margin-top: 10px;
+
+}
 /* 45info link on search result page */
 .playicon {
     margin-top: 20px;

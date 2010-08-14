@@ -12,15 +12,16 @@
 		<h1>API-Zugriff</h1>
 		
 		<p>Viele Daten dieser Website können direkt über eine HTTP-Schnittstelle
-		abgefragt werden. Bisher wird nur die direkte Suche nach Synonymen und nach ähnlich geschriebenen Wörtern
-		unterstützt. Noch nicht unterstützt wird die Suche nach Teilwörtern und die Wikipedia/Wiktionary-Suche.</p>
+		abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
+		unterstützt. Noch nicht unterstützt wird die Wikipedia/Wiktionary-Suche.</p>
 		
-		<p><strong>Hinweis: das Ausgabe-Format kann sich unter Umständen noch ändern!</strong></p>
+		<p><strong>Hinweis: das Ausgabe-Format kann sich ändern. Es wird jedoch nur erweitert,
+        bestehende Teile werden nicht ohne Ankündigung geändert.</strong></p>
 		
 		<h2>Suchanfrage</h2>
 		
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
-		die das Wort <span class="bsp">query</span> beinhalten, abgefragt werden.</p>
+		die das Wort <span class="bsp">query</span> beinhalten, abgefragt werden:</p>
 		
 		<pre>http://www.openthesaurus.de/synonyme/search?q=<strong>query</strong>&amp;format=text/xml</pre>
 		
@@ -31,7 +32,7 @@
 <pre>
 &lt;matches>
   &lt;metaData>
-    &lt;apiVersion content="0.1.2"/>
+    &lt;apiVersion content="0.1.3"/>
     &lt;warning content="WARNING -- this API is in beta -- the format may change without warning!"/>
     &lt;copyright content="Copyright (C) 2009 Daniel Naber (www.danielnaber.de)"/>
     &lt;license content="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"/>
@@ -55,9 +56,9 @@
 
         <h2>Optionen</h2>
 
-        <ul>
-          <li><span class="apioption">format=text/xml</span>: Hiermit wird die Anwort als XML zurückgeliefert. Andere
-            einfach auswertbare Formate werden derzeit nicht unterstützt, diese Option ist also  </li>
+        <ul class="apioptions">
+          <li><span class="apioption">format=text/xml</span>: Hiermit wird die Antwort als XML zurückgeliefert. Andere
+            einfach auswertbare Formate werden derzeit nicht unterstützt.</li>
           <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
           ähnliche Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
@@ -80,7 +81,31 @@
             in OpenThesaurus vorhanden sind. Dieses Feature eignet sich also nicht dazu, die Vorschläge einer
             Rechtschreibprüfung zu generieren.
           </li>
-          <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher ist das nur <tt>similar=true</tt>.</li>
+          <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
+          zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
+
+            <pre>http://www.openthesaurus.de/synonyme/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</pre>
+
+            Antwort (Ausschnitt):
+
+<pre>
+&lt;substringterms>
+  &lt;term term="(etwas) behandeln"/>
+  &lt;term term="abhandeln"/>
+&lt;/substringterms>
+</pre>
+          </li>
+
+          <li><span class="apioption">substringFromResults</span>: Gibt an, ab welchem Eintrag die Teilwort-Treffer
+          zurückgegeben werden sollen. Funktioniert nur zusammen mit <span class="apioption">substring=true</span>.
+          Standardwert ist 0, also ab der ersten Position.</li>
+
+          <li><span class="apioption">substringMaxResults</span>: Gibt an, wie viele Teilwort-Treffer insgesamt
+          zurückgegeben werden sollen. Funktioniert nur zusammen mit <span class="apioption">substring=true</span>.
+          Der Standardwert ist 10, Maximalwert ist 250.</li>
+          
+          <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>
+            und <tt>substring=true</tt>.</li>
         </ul>
 
 
