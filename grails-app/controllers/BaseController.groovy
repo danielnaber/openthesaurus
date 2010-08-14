@@ -1,3 +1,5 @@
+import javax.servlet.http.HttpServletRequest
+
 /**
  * vithesaurus - web-based thesaurus management tool
  * Copyright (C) 2009 vionto GmbH, www.vionto.com
@@ -30,14 +32,18 @@ abstract class BaseController {
     }
 
     /**
-     * Allows access only for requests comming from 127.0.0.1
+     * Allows access only for requests coming from 127.0.0.1
      */
     def localHostAuth() {
-        if (request.getRemoteAddr() == "127.0.0.1") {
+        if (isLocalHost(request)) {
           return true
         }
         log.info("Access denied to no-access area for host " + request.getRemoteAddr() + ", " + request.getRequestURI())
         return false
+    }
+
+    public boolean isLocalHost(HttpServletRequest request) {
+        return request.getRemoteAddr() == "127.0.0.1" || request.getRemoteAddr() == "0:0:0:0:0:0:0:1" || request.getRemoteAddr() == "::1"
     }
 
     /**
@@ -88,8 +94,8 @@ abstract class BaseController {
     }
 
     /**
-     * Remeber request params in the session for useful redirect
-     * if login suceeds.
+     * Remember request params in the session for useful redirect
+     * if login succeeds.
      */
     private void storeParams() {
         def origParams = [controller:controllerName,
