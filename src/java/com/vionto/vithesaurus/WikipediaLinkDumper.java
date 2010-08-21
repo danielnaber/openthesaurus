@@ -36,7 +36,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Loads links from a Wikipedia XML dump and builds an SQL dump (for MySQL).
- * Contains some filtering that's specific the German.
+ * Contains some filtering that is specific to German.
  * 
  * Get the Wikipedia XML dump from http://download.wikimedia.org/backup-index.html,
  * the filename is something like "XXwiki-YYYYMMDD-pages-articles.xml.bz2",
@@ -93,7 +93,7 @@ public class WikipediaLinkDumper {
       System.out.println("Usage: WikipediaLinkDumper <xmldump>");
       System.exit(1);
     }
-    WikipediaLinkDumper prg = new WikipediaLinkDumper();
+    final WikipediaLinkDumper prg = new WikipediaLinkDumper();
     prg.run(new FileInputStream(args[0]));
   }
 
@@ -144,7 +144,7 @@ public class WikipediaLinkDumper {
             escape(title.toString().trim())+ "');");
         title = new StringBuilder();
       } else if (qName.equals("text")) {
-        List<String> links = extractLinks(text.toString());
+        final List<String> links = extractLinks(text.toString());
         for (String link : links) {
           System.out.println("INSERT INTO wikipedia_links (page_id, link) VALUES (" +pageCount+ ", '" 
               +escape(link)+ "');");
@@ -170,13 +170,13 @@ public class WikipediaLinkDumper {
 
     private List<String> extractLinks(String wikiText) {
       int pos = 0;
-      List<String> links = new ArrayList<String>();
+      final List<String> links = new ArrayList<String>();
       while (true) {
         pos = wikiText.indexOf("[[", pos);
         if (pos == -1) {
           break;
         }
-        int endPos = wikiText.indexOf("]]", pos+1);
+        final int endPos = wikiText.indexOf("]]", pos+1);
         if (endPos == -1) {
           break;
         }
@@ -186,7 +186,7 @@ public class WikipediaLinkDumper {
         if (parts.length == 2) {
           linkText = parts[0];
         }
-        Matcher numMatcher = NUM_PATTERN.matcher(linkText);
+        final Matcher numMatcher = NUM_PATTERN.matcher(linkText);
         if (numMatcher.matches()) {   // filter numbers (e.g. years like "1972")
           continue;
         }
