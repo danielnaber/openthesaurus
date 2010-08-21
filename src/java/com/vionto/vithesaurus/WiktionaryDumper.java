@@ -86,7 +86,7 @@ public class WiktionaryDumper {
       System.out.println("Usage: WiktionaryDumper <xmldump>");
       System.exit(1);
     }
-    WiktionaryDumper prg = new WiktionaryDumper();
+    final WiktionaryDumper prg = new WiktionaryDumper();
     prg.run(new FileInputStream(args[0]));
   }
 
@@ -138,10 +138,10 @@ public class WiktionaryDumper {
           if (text.indexOf(LANGUAGE_STRING) == -1) {
             skipped++;
           } else {
-            List<String> meaningsList = getSection(text.toString(), MEANINGS_PREFIX);
-            String meanings = clean(join(meaningsList, " "));
-            List<String> synonymsList = getSection(text.toString(), SYNONYMS_PREFIX);
-            String synonyms = clean(join(synonymsList, " "));
+            final List<String> meaningsList = getSection(text.toString(), MEANINGS_PREFIX);
+            final String meanings = clean(join(meaningsList, " "));
+            final List<String> synonymsList = getSection(text.toString(), SYNONYMS_PREFIX);
+            final String synonyms = clean(join(synonymsList, " "));
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
             exported++;
@@ -159,26 +159,27 @@ public class WiktionaryDumper {
     }
 
     private List<String> getSection(final String text, final String prefix) {
-      List<String> synonyms = new ArrayList<String>();
-      Scanner scanner = new Scanner(text);
+      final List<String> terms = new ArrayList<String>();
+      final Scanner scanner = new Scanner(text);
       boolean inSynonymList = false;
       while (scanner.hasNextLine()) {
-        String line = scanner.nextLine();
+        final String line = scanner.nextLine();
         if (line.trim().startsWith(prefix)) {
           inSynonymList = true;
         } else if (inSynonymList && line.trim().startsWith(SECTION_PREFIX)) {
           // next section starts
           break;
         } else if (inSynonymList) {
-          synonyms.add(line);
+          terms.add(line);
         }
       }
       scanner.close();
-      return synonyms;
+      return terms;
     }
 
     private String escape(String str) {
-      return str.replace("'", "''");
+        // >'''< means bold, >''< means italics in MediaWiki - remove those, then escape >'< for MySQL: 
+      return str.replace("'''", "").replace("''", "").replace("'", "''");
     }
 
     public void characters(final char[] buf, final int offset, final int len) {
@@ -191,7 +192,7 @@ public class WiktionaryDumper {
     }
 
     private String join(final List<String> list, final String delimiter) {
-      StringBuilder sb = new StringBuilder();
+      final StringBuilder sb = new StringBuilder();
       for (String element : list) {
         sb.append(element);
         sb.append(delimiter);
