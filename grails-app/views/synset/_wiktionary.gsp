@@ -5,7 +5,8 @@
 						  { str -> str
 						    .replaceAll(":\\[(\\d+[a-z]?\\.?\\d*)\\]", "__\$1__")
 						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
-						    .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+                            .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+                            .replaceAll("&lt;/?small&gt;", "")
 						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
 						  };
 						%>
