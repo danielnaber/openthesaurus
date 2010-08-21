@@ -85,8 +85,6 @@ public class WikipediaLinkDumper {
     System.out.println("ALTER TABLE `wikipedia_links` ADD INDEX ( `page_id` );");
   }
 
-  /** Testing only.
-   */ 
   public static void main(final String[] args) throws Exception {
     if (args.length != 1) {
       System.out.println("Usage: WikipediaLinkDumper <xmldump>");
@@ -208,7 +206,6 @@ public class WikipediaLinkDumper {
         if (links.size() >= MAX_LINKS_PER_PAGE) {
           break;
         }
-        //System.err.println(pos + " " + endPos + ": '" + linkText + "'");
       }
       return links;
     }
