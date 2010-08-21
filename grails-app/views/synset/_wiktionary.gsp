@@ -24,7 +24,7 @@
 							%>
 							<ul>
 								<li><b><g:message code="result.wiktionary.meanings"/></b>
-									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
+									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptyMeanings" value="${true}"/>
 									</g:if>
