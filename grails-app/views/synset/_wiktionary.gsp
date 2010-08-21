@@ -6,6 +6,7 @@
 						    .replaceAll(":\\[(\\d+[a-z]?\\.?\\d*)\\]", "__\$1__")
 						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
                             .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+                            .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
 						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
 						  };
@@ -20,7 +21,6 @@
 							String wiktionaryWord = wiktionaryResult.get(0);
 							String meanings = wiktionaryResult.get(1).encodeAsHTML();
 							meanings = clean(meanings);
-							// TODO: make words links!
 							%>
 							<ul>
 								<li><b><g:message code="result.wiktionary.meanings"/></b>
