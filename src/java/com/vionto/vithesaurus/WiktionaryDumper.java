@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -57,6 +59,8 @@ public class WiktionaryDumper {
   /** Lines starting with this string indicate a new section in a Wiktionary page. */
   private static final String SECTION_PREFIX = "{{";
 
+  private final Pattern XML_COMMENT_PATTERN = Pattern.compile("<!--.*?-->", Pattern.DOTALL);
+
   private WiktionaryDumper() {
   }
 
@@ -79,8 +83,6 @@ public class WiktionaryDumper {
     System.err.println("Skipped: " + handler.skipped);
   }
 
-  /** Testing only.
-   */ 
   public static void main(final String[] args) throws Exception {
     if (args.length != 1) {
       System.out.println("Usage: WiktionaryDumper <xmldump>");
@@ -138,10 +140,11 @@ public class WiktionaryDumper {
           if (text.indexOf(LANGUAGE_STRING) == -1) {
             skipped++;
           } else {
-            final List<String> meaningsList = getSection(text.toString(), MEANINGS_PREFIX);
-            final String meanings = clean(join(meaningsList, " "));
-            final List<String> synonymsList = getSection(text.toString(), SYNONYMS_PREFIX);
-            final String synonyms = clean(join(synonymsList, " "));
+            final String cleanedText = clean(text.toString());
+            final List<String> meaningsList = getSection(cleanedText, MEANINGS_PREFIX);
+            final String meanings = join(meaningsList, " ");
+            final List<String> synonymsList = getSection(cleanedText, SYNONYMS_PREFIX);
+            final String synonyms = join(synonymsList, " ");
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
             exported++;
@@ -154,8 +157,8 @@ public class WiktionaryDumper {
     }
     
     private String clean(String str) {
-      str = str.replaceAll("<!--.*?-->", "");
-      return str;
+      final Matcher matcher = XML_COMMENT_PATTERN.matcher(str);
+      return matcher.replaceAll("");
     }
 
     private List<String> getSection(final String text, final String prefix) {
