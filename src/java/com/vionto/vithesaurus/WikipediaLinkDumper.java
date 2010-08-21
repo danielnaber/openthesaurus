@@ -76,7 +76,6 @@ public class WikipediaLinkDumper {
         ") ENGINE = MYISAM;");
     System.out.println("DROP TABLE IF EXISTS wikipedia_links;");
     System.out.println("CREATE TABLE `wikipedia_links` ( " + 
-        " `link_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY , " + 
         " `page_id` INT NOT NULL , " + 
         " `link` VARCHAR( 100 ) NOT NULL " + 
         ") ENGINE = MYISAM;");
@@ -146,7 +145,7 @@ public class WikipediaLinkDumper {
       } else if (qName.equals("text")) {
         final List<String> links = extractLinks(text.toString());
         for (String link : links) {
-          System.out.println("INSERT INTO wikipedia_links (page_id, link) VALUES (" +pageCount+ ", '" 
+          System.out.println("INSERT INTO wikipedia_links VALUES (" +pageCount+ ", '"
               +escape(link)+ "');");
         }
         text = new StringBuilder();
