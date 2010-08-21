@@ -105,8 +105,6 @@ public class WiktionaryDumper {
     private StringBuilder title = new StringBuilder();
     private StringBuilder text = new StringBuilder();
     
-    private int pageCount = 0;
-
     public void warning (final SAXParseException e) throws SAXException {
       throw e;
     }
@@ -130,7 +128,6 @@ public class WiktionaryDumper {
     @SuppressWarnings("unused")
     public void endElement(String namespaceURI, String sName, String qName) {
       if (qName.equals("title")) {
-        pageCount++;
         if (title.indexOf(":") >= 0) {    // page in a namespace
           title = new StringBuilder();
         }
