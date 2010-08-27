@@ -174,8 +174,11 @@ class SynsetController extends BaseController {
           boolean allApiRequest = params.mode == "all"
           int partialApiFromResultRequest = 0
           boolean partialApiRequest = params.substring == "true"
+          int startsWithApiFromResultRequest = 0
+          boolean startsWithApiRequest = params.startswith == "true"
 
           List partialMatchResult = []
+          List startsWithResult = []
           long partialMatchStartTime = System.currentTimeMillis()
           if (apiRequest) {
             if (partialApiRequest || allApiRequest) {
@@ -190,8 +193,19 @@ class SynsetController extends BaseController {
                 }
               }
               partialMatchResult = searchPartialResult(params.q, conn, partialApiFromResultRequest, partialApiMaxResultsRequest)
-            } else {
-              partialMatchResult = null
+            }
+            if (startsWithApiRequest || allApiRequest) {
+              if (params.startsWithFromResults) {
+                startsWithApiFromResultRequest = Integer.parseInt(params.startsWithFromResults)
+              }
+              int startsWithApiMaxResultsRequest = 10
+              if (params.startsWithMaxResults) {
+                startsWithApiMaxResultsRequest = Integer.parseInt(params.startsWithMaxResults)
+                if (startsWithApiMaxResultsRequest > 250) {
+                  startsWithApiMaxResultsRequest = 250
+                }
+              }
+              startsWithResult = searchStartsWithResult(params.q, conn, startsWithApiFromResultRequest, startsWithApiMaxResultsRequest)
             }
           } else {
             // we display 10 matches in the page and use the next one (if any) to
@@ -263,7 +277,7 @@ class SynsetController extends BaseController {
           // TODO: fix json output
           //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
-            renderApiResponse(searchResult, similarTerms, partialMatchResult)
+            renderApiResponse(searchResult, similarTerms, partialMatchResult, startsWithResult)
             return
           }
 
@@ -296,7 +310,7 @@ class SynsetController extends BaseController {
               
     }
 
-    private void renderApiResponse(def searchResult, List similarTerms, List substringTerms) {
+    private void renderApiResponse(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
       render(contentType:params.format, encoding:"utf-8") {
@@ -342,10 +356,17 @@ class SynsetController extends BaseController {
               }
             }
           }
-          if (substringTerms) {
+          if (substringTerms && substringTerms.size() > 0) {
             substringterms {
               for (substringTerm in substringTerms) {
                 term(term:substringTerm.term)
+              }
+            }
+          }
+          if (startsWithTerms && startsWithTerms.size() > 0) {
+            startswithterms {
+              for (startsWithTerm in startsWithTerms) {
+                term(term:startsWithTerm.term)
               }
             }
           }
@@ -378,19 +399,28 @@ class SynsetController extends BaseController {
         }
       }
      }
-    
+
     /** Substring matches */
     private List searchPartialResult(String term, Connection conn, int fromPos, int maxNum) {
-      long t = System.currentTimeMillis()
+      return searchPartialResultInternal(term, "%" + term + "%", true, conn, fromPos, maxNum)
+    }
+
+    /** Words that start with a given term */
+    private List searchStartsWithResult(String term, Connection conn, int fromPos, int maxNum) {
+      return searchPartialResultInternal(term, term + "%", false, conn, fromPos, maxNum)
+    }
+
+    /** Substring matches */
+    private List searchPartialResultInternal(String term, String sqlTerm, boolean filterExactMatch, Connection conn, int fromPos, int maxNum) {
       String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
       PreparedStatement ps = conn.prepareStatement(sql)
-      ps.setString(1, "%" + term + "%")
+      ps.setString(1, sqlTerm)
       ResultSet resultSet = ps.executeQuery()
       def matches = []
       Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
       while (resultSet.next()) {
         String matchedTerm = resultSet.getString("word")
-        if (matchedTerm.toLowerCase() == term.toLowerCase()) {
+        if (filterExactMatch && matchedTerm.toLowerCase() == term.toLowerCase()) {
           continue
         }
         String result = matchedTerm.encodeAsHTML()
