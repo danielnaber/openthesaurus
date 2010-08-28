@@ -32,6 +32,11 @@
    	title="OpenThesaurus auf twitter" alt="twitter Logo" width="16" height="16"
    	src="${createLinkTo(dir:'/images',file:'twitter_link16x16.png')}"/> twitter</a>
 
+<span class="d">&middot;</span>
+<a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img style="vertical-align:text-top"
+   	title="OpenThesaurus für Android" alt="Android-Logo" width="16" height="16"
+   	src="${createLinkTo(dir:'/images',file:'android.png')}"/> für Android</a>
+
 <script type="text/javascript">
 <!--
 var firstPart = "feedback";
@@ -39,10 +44,3 @@ var lastPart = "openthesaurus.de";
 document.write(" <span class='d'>&middot;</span> " + "<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>Feedback</a>");
 // -->
 </script>
-
-<%--
-<span class="d">&middot;</span>
-<a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img style="vertical-align:text-top"
-   	title="OpenThesaurus für Android" alt="Android-Logo" width="16" height="16"
-   	src="${createLinkTo(dir:'/images',file:'android.png')}"/> für Android</a>
-   	--%>
