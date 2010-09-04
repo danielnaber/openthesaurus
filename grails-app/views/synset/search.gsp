@@ -9,6 +9,20 @@
        		<meta name="layout" content="main" />
        	</g:else>
         <title><g:message code='result.matches.for.title' args="${[params.q.encodeAsHTML()]}"/></title>
+        <g:if test="${totalMatches > 0}">
+          <% StringBuilder synonymsForDescription = new StringBuilder() %>
+          <g:each in="${synsetList}" status="synsetCount" var="synset">
+               <g:each in="${synset?.sortedTerms()}" var="term" status="termCount">
+                   <g:if test="${termCount < 10 && synsetCount < 4}">
+                     <%
+                     synonymsForDescription.append(term.toString().encodeAsHTML());
+                     synonymsForDescription.append(", ");
+                     %>
+                   </g:if>
+               </g:each>
+          </g:each>
+          <meta name="description" content="Gefundene Synonyme: ${synonymsForDescription} ..."/>
+        </g:if>
     </head>
     <body>
 
