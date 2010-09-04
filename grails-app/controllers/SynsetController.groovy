@@ -290,7 +290,23 @@ class SynsetController extends BaseController {
             }
             log.info("eyeplorer pagelink" + ", UA: " + request.getHeader("User-Agent"))
           }*/
-          
+
+          String descriptionText = null
+          if (searchResult.totalMatches > 0) {
+            int wordCount = 0
+            StringBuilder synonymsForDescription = new StringBuilder()
+            for (Synset synset in searchResult.synsetList) {
+              for (Term term in synset?.sortedTerms()) {
+                if (wordCount < 15) {
+                  synonymsForDescription.append(term.toString())
+                  synonymsForDescription.append(", ")
+                  wordCount++
+                }
+              }
+            }
+            descriptionText = synonymsForDescription.toString()
+          }
+
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
             wiktionaryResult : wiktionaryResult,
@@ -300,6 +316,7 @@ class SynsetController extends BaseController {
             completeResult: searchResult.completeResult,
             upperBound: UPPER_BOUND,
             mobileBrowser: mobileBrowser,
+            descriptionText : descriptionText,
             runTime : totalTime ]
 
         } finally {
