@@ -7,10 +7,11 @@
     </head>
     <body>
 
-        <div class="body">
+        <hr />
 
-		<h1><g:message code="faq.title" /></h1>
+		<h2><g:message code="faq.title" /></h2>
 
+        <%--
         <table style="border:0px;width:100%">
         <tr>
         	<td>
@@ -26,9 +27,7 @@
         	</td>
         </tr>
         </table>
-        
-        
-        <div class="faqpage">
+        --%>
         
 		<div class="faqitem">
 			<div class="question">
@@ -129,7 +128,7 @@
 			</div>
 		</div>
 
-		<!-- 
+		<%--
 		<div class="faqitem">
 			<div class="question">
 			I want to start a thesaurus project like OpenThesaurus, but for a new language. What should I do?
@@ -139,28 +138,20 @@
 			and <a href="imprint.php">contact me</a> if you have any questions.
 			</div>
 		</div>
-		 -->
+		--%>
 
-		<!-- 
+		<%--
 		<div class="faqitem">
 			<div class="question">
 			</div>
 			<div class="answer">
 			</div>
 		</div>
-		 -->
+		 --%>
 		 
 	</div>
 	
 	<g:render template="/ads/faq_bottom"/>
 
-	</div>
-	
-	
-	<!-- enable scrolling to anchors -->
-	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	
     </body>
 </html>

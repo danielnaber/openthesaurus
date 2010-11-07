@@ -8,13 +8,11 @@
                             .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
                             .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
-						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionary'>\$1.</span>")
+						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionaryItem'>\$1.</span>")
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
-							<ul>
-								<li><span class="light"><g:message code="result.no.wiktionary.matches"/></span></li>
-							</ul>
+    						<span class="light"><g:message code="result.no.wiktionary.matches"/></span>
 						</g:if>
 						<g:else>
 							<%
@@ -22,8 +20,7 @@
 							String meanings = wiktionaryResult.get(1).encodeAsHTML();
 							meanings = clean(meanings);
 							%>
-							<ul>
-								<li><b><g:message code="result.wiktionary.meanings"/></b>
+								<p><b><g:message code="result.wiktionary.meanings"/></b><br/>
 									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptyMeanings" value="${true}"/>
@@ -31,8 +28,9 @@
 									<g:else>
 										${meanings}
 									</g:else>
-								</li>
-								<li><b><g:message code="result.wiktionary.synonyms"/></b>
+                                </p>
+
+								<p style="margin-top:10px"><b><g:message code="result.wiktionary.synonyms"/></b><br/>
 									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptySynonyms" value="${true}"/>
@@ -43,9 +41,9 @@
 										synonyms = clean(synonyms);
 										// TODO: make words links!
 										%>
-										${synonyms}</li>
+										${synonyms}
 									</g:else>
-							</ul>
+                                </p>
 							<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
 								<div class="copyrightInfo">
 									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord.encodeAsHTML(),wiktionaryWord.encodeAsURL()]}"/>

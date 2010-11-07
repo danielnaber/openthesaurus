@@ -7,9 +7,9 @@
     </head>
     <body>
 
-        <div class="body">
-        
-            <h1><g:message code="create.headline"/></h1>
+            <hr />
+
+            <h2><g:message code="create.headline"/></h2>
             
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -50,6 +50,6 @@
                     </table>
                 </div>
             </g:form>
-        </div>
+
     </body>
 </html>

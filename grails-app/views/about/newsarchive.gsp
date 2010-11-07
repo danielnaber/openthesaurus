@@ -7,15 +7,13 @@
     </head>
     <body>
 
-        <div class="body">
-
 <!-- NOTE: -->
 <!-- THIS CONTENT IS SPECIFIC TO WWW.OPENTHESAURUS.DE -->
 
-<br />
+<hr />
 
 
-<table border="0" cellpadding="5" cellspacing="0">
+<table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
 <tr class="newsYearDelimiter">
     <td>2010</td>
     <td></td>
@@ -347,8 +345,6 @@
 </table>
 
 <g:render template="/ads/newsarchive_bottom"/>
-
-		</div>
 
     </body>
 </html>

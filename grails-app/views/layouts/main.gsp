@@ -1,14 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<!doctype html>
 <html>
     <head>
         <title><g:layoutTitle default="Grails" /></title>
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
         <g:layoutHead />
-        <g:javascript library="application" />				
+        <g:javascript library="application" />
     </head>
     <body>
+
+    <div id="body">
+
+      <div id="content">
+
+        <g:render template="/searchform"/>
 
         <g:if test="${session.user}">
           <noscript>
@@ -16,17 +23,24 @@
                  <g:message code='no.javascript.warning'/>
               </div>
           </noscript>
-        </g:if>
 
-        <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
-        	src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v1" 
-        	alt="<g:message code='logo.alt.text'/>" width="292" height="80" /></a></div>
-        	
-        <g:render template="/searchform"/>
+          <g:if test="${session.user}">
+              <g:message code="user.successful.login" args="${[session.user.userId.toString()?.encodeAsHTML()]}"/>
+              <span class="d">&middot;</span>
+              <g:link controller="user" action="logout">Logout</g:link>
+          </g:if>
+
+        </g:if>
 
        	<g:layoutBody />
 
-		<g:render template="/analytics"/>
+      </div>
 
-    </body>	
+    </div>
+
+    <g:render template="/footer" model="${[homepage:false]}"/>
+
+    <g:render template="/analytics"/>
+
+    </body>
 </html>

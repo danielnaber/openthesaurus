@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <g:if test="${mobileBrowser}">
+        <g:if test="${mobileBrowser && false}">  <%-- TODO --%>
         	<meta name="layout" content="main_mobile" />
        	</g:if>
        	<g:else>
@@ -17,6 +17,89 @@
     </head>
     <body>
 
+        <table width="980">
+        <tr>
+          <td colspan="3">
+            <hr/>
+          </td>
+        </tr>
+        <tr>
+          <td width="380">
+            <h1>Ergebnisse</h1>
+          </td>
+          <td width="40"></td>
+          <td width="380"></td>
+          <td width="20"></td>
+          <td width="160" rowspan="2" valign="top">
+            <g:render template="/ads/resultpage"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td valign="top">
+            <table>
+              <tr>
+                <td>
+                  <g:render template="mainmatches"/>
+
+                  <g:set var="cleanTerm" value="${params.q.trim()}" />
+                  <g:if test="${totalMatches == 0}">
+                      <div style="margin-top: 10px">
+                        <g:link action="create" params="[term : cleanTerm]">
+                             <img src="../images/icon-add.png" alt="Add icon" />
+                             <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+                        </g:link>
+                      </div>
+                  </g:if>
+
+                  <hr />
+                  
+                  <g:render template="partialmatches"/>
+
+                  <hr style="margin-top:15px" />
+
+                  <h2>Nicht das Richtige dabei?</h2>
+
+                  <p class="addNewTerm">
+                    <g:link action="create" params="[term : cleanTerm]">
+                         <img src="../images/icon-add.png" alt="Add icon" />
+                         <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
+                    </g:link>
+                  </p>
+                  
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td></td>
+          <td valign="top">
+            <table>
+              <tr>
+                <td>
+                  <g:render template="wiktionary"/>
+
+                  <hr style="margin-top:15px" />
+
+                  <g:render template="wikipedia"/>
+
+                  <g:render template="/ads/resultpage_results"/>
+
+                  <hr style="margin-top:15px" />
+
+                  <h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
+
+                  <g:render template="/external_links" model="${[q:params.q]}"/>
+                  
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </table>
+
+
+<%--
+    
         <div class="body">
 
 			<g:if test="${!mobileBrowser}">
@@ -32,7 +115,7 @@
             <h2 style="margin-top:5px"><g:message code='result.matches.for' args="${[params.q.encodeAsHTML()]}"/></h2>
 
             <g:set var="cleanTerm" value="${params.q.trim()}" />
-            
+
 			<g:if test="${mobileBrowser}">
 				<div style="width:100%">
 	            <ul>
@@ -52,8 +135,8 @@
 	                     <img src="../images/skin/database_add.png" alt="Add icon" />
 	                     <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
 	                </g:link>
-				</g:if>				
-				
+				</g:if>
+
           		<g:render template="/ads/resultpage_results"/>
           	</g:else>
 
@@ -78,7 +161,7 @@
                             <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
                         </g:link>
 		            </p>
-						
+
                     <div style="float:right">
                         <g:render template="/ads/resultpage"/>
                     </div>
@@ -91,11 +174,11 @@
 					<td width="40%">
 						<g:render template="partialmatches"/>
 						<g:render template="similarmatches"/>
-	
+
 						<h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
 			            <g:render template="/external_links" model="${[q:params.q]}"/>
 			            <br/>
-	
+
 			            <table style="margin:0;padding: 0">
                           <tr>
                             <td style="margin:0;padding: 0">
@@ -110,7 +193,7 @@
                             </td>
                           </tr>
 			            </table>
-						
+
 					<td></td>
 					<td width="60%">
                         <div class="maxwidth">
@@ -122,9 +205,12 @@
 				</table>
 
 			</g:else>
-			
+
 			<g:render template="/ads/resultpage_bottom"/>
-			
+
         </div>
+
+        --%>
+    
     </body>
 </html>

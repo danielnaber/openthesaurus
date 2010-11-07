@@ -7,9 +7,9 @@
     </head>
     <body>
 
-        <div class="body">
+        <hr />
 
-		<h1>API-Zugriff</h1>
+		<h2>API-Zugriff</h2>
 		
 		<p>Viele Daten dieser Website können direkt über eine HTTP-Schnittstelle
 		abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
@@ -52,7 +52,6 @@
   &lt;/synset>
 &lt;/matches>
 </pre>
-
 
         <h2>Optionen</h2>
 
@@ -122,7 +121,5 @@
 		<p>Zusätzlich zur direkten Abfrage stehen weiterhin
 		<g:link action="download">Downloads</g:link> der gesamten Datenbank zur Verfügung.</p>
 		
-		</div>
-
     </body>
 </html>
