@@ -19,20 +19,23 @@
 
         <table width="980">
         <tr>
-          <td colspan="3">
-            <hr/>
+          <td colspan="3" valign="top">
+            <hr style="margin-top:30px"/>
+          </td>
+          <td width="20"></td>
+          <td width="200" rowspan="3" valign="top">
+            <div style="margin-top:30px">
+              <g:render template="/ads/resultpage"/>
+            </div>
           </td>
         </tr>
         <tr>
-          <td width="380">
+          <td width="365">
             <h1>Ergebnisse</h1>
           </td>
-          <td width="40"></td>
-          <td width="380"></td>
+          <td width="30"></td>
+          <td width="365"></td>
           <td width="20"></td>
-          <td width="160" rowspan="2" valign="top">
-            <g:render template="/ads/resultpage"/>
-          </td>
         </tr>
 
         <tr>
