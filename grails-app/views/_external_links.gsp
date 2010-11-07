@@ -16,7 +16,7 @@
 <a href="http://www.google.de/search?q=${q.encodeAsURL()}&amp;lr=lang_de">Google</a></li>
 
 <span class="d">&middot;</span>
-<a href="http://www.linguee.de/search?query=${q.encodeAsURL()}">Linguee</a>
+<a href="http://www.linguee.de/search?query=${latin1Query}">Linguee</a>
 
 <span class="d">&middot;</span>
 <a href="http://dict.leo.org/ende?lang=de&amp;search=${q.encodeAsURL()}">LEO</a>
