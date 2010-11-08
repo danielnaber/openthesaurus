@@ -28,8 +28,7 @@
                     <tbody>
 
                         <tr class='prop'>
-                            <td></td>
-                            <td valign='top' class='name'>
+                            <td valign='top' class='name' colspan="2">
                                 <g:message code="user.lost.password.intro"/>
                             </td>
                         </tr>

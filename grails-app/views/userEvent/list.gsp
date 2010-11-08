@@ -17,8 +17,9 @@
           </g:if>
 
           <g:if test="${session.user?.permission == 'admin'}">
-              <form method="get">
-                  Filter by user or change description (use % as joker):
+              <form method="get" style="margin-bottom: 10px">
+                <%-- TODO: i18n: Filter by user or change description (use % as joker): --%>
+                  Nach Benutzer oder Kommentar suchen (<span class="bsp">%</span> als Platzhalter benutzen):
                   <input name="filter" value="${params?.filter?.encodeAsHTML()}" />
                   <input type="submit" value="Go" />
               </form>

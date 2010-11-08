@@ -20,11 +20,11 @@
         <table width="980">
         <tr>
           <td colspan="3" valign="top">
-            <hr style="margin-top:30px"/>
+            <hr style="margin-top:20px;margin-bottom:10px"/>
           </td>
           <td width="20"></td>
           <td width="200" rowspan="3" valign="top">
-            <div style="margin-top:30px">
+            <div style="margin-top:20px">
               <g:render template="/ads/resultpage"/>
             </div>
           </td>

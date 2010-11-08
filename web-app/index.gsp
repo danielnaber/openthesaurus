@@ -13,6 +13,10 @@
 
       <g:render template="/searchform" model="${[homepage: true]}"/>
 
+      <g:if test="${flash.message}">
+          <div class="message">${flash.message}</div>
+      </g:if>
+
     </div>
 
   </div>

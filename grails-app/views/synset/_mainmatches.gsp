@@ -23,6 +23,20 @@
                               <div class="superordinate" />
                             </g:else>
 
+                            <g:set var="categoryStrings" value="${[]}"/>
+                            <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
+                              <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                                <%
+                                categoryStrings.add(catLink.category)
+                                %>
+                              </g:each>
+                            </g:if>
+                            <g:if test="${categoryStrings}">
+                              <span class="categoryHead"><g:message code='edit.categories'/></span>
+                              <span class="categoryTerm">${categoryStrings.join(' | ')}</span>
+                              <br />
+                            </g:if>
+
                             <span class="result">
 		                    <g:set var="counter" value="${0}"/>
                             <g:each in="${synset?.sortedTerms()}" var="term">
@@ -64,21 +78,6 @@
                               </g:link>
                             </g:if>
                             </span>
-
-                            <g:set var="categoryStrings" value="${[]}"/>
-                            <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
-                              <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
-                                <%
-                                categoryStrings.add(catLink.category)
-                                %>
-                              </g:each>
-                            </g:if>
-                            <g:if test="${categoryStrings}">
-                              <br />
-                              <span class="categoryHead"><g:message code='edit.categories'/></span>
-                              <span class="categoryTerm">${categoryStrings.join(' | ')}</span>
-                            </g:if>
-
 
                         </div>
                    </g:each>
