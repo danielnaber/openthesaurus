@@ -17,7 +17,7 @@
         </g:if>
 
         <g:hasErrors bean="${user}">
-            <div class="errors">
+            <div class="error">
                 <g:renderErrors bean="${user}" as="list" />
             </div>
         </g:hasErrors>
