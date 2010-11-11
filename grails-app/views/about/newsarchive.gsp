@@ -18,10 +18,14 @@
     <td>2010</td>
     <td></td>
 </tr>
-  <tr>
-      <td valign="top" align="right" width="90"><span class="newsdate">2010-08-14</span></td>
-      <td valign="top">Die <a href="api">API</a> wurde um eine Suche nach Teilwörtern erweitert.</td>
-  </tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-11-11</span></td>
+    <td valign="top">OpenThesaurus hat ein neues Design!</td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-08-14</span></td>
+    <td valign="top">Die <a href="api">API</a> wurde um eine Suche nach Teilwörtern erweitert.</td>
+</tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-04-26</span></td>
     <td valign="top">Oberbegriffe werden jetzt auf der Trefferseite direkt angezeigt, sofern vorhanden.</td>
