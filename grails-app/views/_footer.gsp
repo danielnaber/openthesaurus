@@ -34,6 +34,7 @@
           <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
           <li><g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link></li>
           <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
+          <li style="margin-top:15px"><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
         </ul>
       </td>
       <td width="130">

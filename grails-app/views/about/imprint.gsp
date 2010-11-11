@@ -7,13 +7,11 @@
     </head>
     <body>
 
-        <div class="body">
-        
-    	    <h1><g:message code="imprint.title" /></h1>
+            <hr />
+    
+    	    <h2><g:message code="imprint.title" /></h2>
 
 			<g:message code="imprint.content"/>
 		
-		</div>
-
     </body>
 </html>
