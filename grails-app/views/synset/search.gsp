@@ -69,6 +69,8 @@
                          <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
                     </g:link>
                   </p>
+
+                  <g:render template="/ads/resultpage_bottom"/>
                   
                 </td>
               </tr>

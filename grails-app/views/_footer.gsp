@@ -125,19 +125,7 @@
       </td>
       <td>
         <g:if test="${homepage}">
-            <%--
-            <h2 style="margin-top:0">Anzeigen</h2>
-            --%>
-            <img src="${createLinkTo(dir:'images',file:'anz.png')}" />
-
-            <%-- scharfe: --%>
-            <div class="textAd"><a href='http://www.linguland.com'>Sprachreisen und Sprachschulen</a> zum Originalpreis mit Linguland Sprachreisen</div>
-            <div class="textAd">Mit einem <a href="http://www.check24.de">Vergleich</a> setzen wir viele Finanzprodukte in Relation zueinander, um die günstigsten Angebote zu finden.</div>
-            <%-- eigene: --%>
-            <div class="textAd">Texte <a href="http://www.expresskorrektur.de">korrekturlesen</a> und korrigieren lassen zu Tiefpreisen mit <a href="http://www.expresskorrektur.de">expressKorrektur.de</a></div>
-            <%-- scharfe: --%>
-            <div class="textAd">Deutsch, Spanisch und <a href="http://www.sgd.de/sprachen/englisch-anfaenger.php">Englisch lernen</a> im Fernstudium - f&uuml;r Anf&auml;nger und Fortgeschrittene.</div>
-
+            <g:render template="/ads/homepage_bottom"/>
         </g:if>
       </td>
     </tr>
