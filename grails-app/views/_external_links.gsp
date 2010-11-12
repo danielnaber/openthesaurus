@@ -13,7 +13,7 @@
 <a href="http://de.search.yahoo.com/search?p=${q.encodeAsURL()}">Yahoo</a>
 
 <span class="d">&middot;</span>
-<a href="http://www.google.de/search?q=${q.encodeAsURL()}&amp;lr=lang_de">Google</a></li>
+<a href="http://www.google.de/search?q=${q.encodeAsURL()}&amp;lr=lang_de">Google</a>
 
 <span class="d">&middot;</span>
 <a href="http://www.linguee.de/search?query=${latin1Query}">Linguee</a>
@@ -26,4 +26,4 @@
  >Beolingus</a>
 
 <span class="d">&middot;</span>
-<a href="http://www.dict.cc/?s=${q.encodeAsURL()}">dict.cc</a></li>
+<a href="http://www.dict.cc/?s=${q.encodeAsURL()}">dict.cc</a>
