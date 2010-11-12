@@ -350,7 +350,9 @@ li.checkboxList {
 }
 
 /* API page */
-pre {
+pre.api {
+    margin-top: 5px;
+    margin-bottom: 5px;
 	padding: 4px;
 	background-color: #eee;
 	border: 1px solid #ddd;

@@ -13,7 +13,7 @@
           <tr>
               <td valign="top">
 
-                  <h1><g:message code="statistics.headline" /></h1>
+                  <h2><g:message code="statistics.headline" /></h2>
 
                   <table>
 
@@ -39,7 +39,7 @@
 
               <td>
 
-                  <h1><g:message code="statistics.top.users" /></h1>
+                  <h2><g:message code="statistics.top.users" /></h2>
 
                   <table>
                   <g:each in="${topUsers}" var="topUser">

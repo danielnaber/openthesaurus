@@ -29,7 +29,7 @@
 		
 		<p>Das Ergebnis der Anfrage ist eine XML-Datei mit folgendem Format:</p>
 		
-<pre>
+<pre class="api">
 &lt;matches>
   &lt;metaData>
     &lt;apiVersion content="0.1.3"/>
@@ -62,11 +62,11 @@
           ähnliche Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
 
-          <pre>http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
+          <pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
 
           Antwort (Ausschnitt):
 
-<pre>
+<pre class="api">
 &lt;similarterms>
   &lt;term term="Umstand" distance="1"/>
   &lt;term term="(zeitlicher) Abstand" distance="3"/>
@@ -83,11 +83,11 @@
           <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
           zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
 
-            <pre>http://www.openthesaurus.de/synonyme/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</pre>
+            <pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</pre>
 
             Antwort (Ausschnitt):
 
-<pre>
+<pre class="api">
 &lt;substringterms>
   &lt;term term="(etwas) behandeln"/>
   &lt;term term="abhandeln"/>
