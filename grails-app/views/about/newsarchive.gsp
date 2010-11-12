@@ -12,6 +12,7 @@
 
 <hr />
 
+<h2><g:message code="news.archive.headline" /></h2>
 
 <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
 <tr class="newsYearDelimiter">
