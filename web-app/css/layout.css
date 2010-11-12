@@ -431,3 +431,10 @@ pre.api {
     padding: 2px 6px;
     border: 1px solid #ddd;
 }
+
+/* */
+
+.sprachdirekt td {
+    border: 0px solid #00aeeb;
+    padding: 2px;
+}

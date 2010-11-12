@@ -23,7 +23,7 @@
 
 <span class="d">&middot;</span>
 <a href="http://dict.tu-chemnitz.de/dings.cgi?lang=de&amp;noframes=1&amp;service=&amp;query=${latin1Query}&amp;optword=1&amp;optcase=1&amp;opterrors=0&amp;optpro=0&amp;style=&amp;dlink=self"
- >Beolingus</a> <span class="d">&middot;</span>
+ >Beolingus</a>
 
 <span class="d">&middot;</span>
 <a href="http://www.dict.cc/?s=${q.encodeAsURL()}">dict.cc</a></li>
