@@ -94,7 +94,7 @@
                 <!--
                 var firstPart = "feedback";
                 var lastPart = "openthesaurus.de";
-                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" alt=\"Kontakt-Icon\"/></a>");
+                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" alt=\"Kontakt-Icon\"/><" + "/a>");
                 // -->
                 </script>
               </td>
@@ -104,7 +104,7 @@
                 <!--
                 var firstPart = "feedback";
                 var lastPart = "openthesaurus.de";
-                document.write(" Schreibe uns eine " + "<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>E-Mail</a>");
+                document.write(" Schreibe uns eine " + "<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>E-Mail<" + "/a>");
                 // -->
                 </script>
               </td>
