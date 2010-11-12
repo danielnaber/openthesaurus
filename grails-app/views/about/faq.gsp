@@ -150,8 +150,6 @@
 		</div>
 		 --%>
 		 
-	</div>
-	
 	<g:render template="/ads/faq_bottom"/>
 
     </body>
