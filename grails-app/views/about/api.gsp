@@ -23,7 +23,9 @@
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
 		die das Wort <span class="bsp">query</span> beinhalten, abgefragt werden:</p>
 		
-		<pre>http://www.openthesaurus.de/synonyme/search?q=<strong>query</strong>&amp;format=text/xml</pre>
+		<pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>query</strong>&amp;format=text/xml</pre>
+
+        <p>Kommt im Suchwort ein Sonderzeichen vor, muss es mit UTF-8 URL-kodiert werden (z.B. wird <tt>hören</tt> zu <tt>h%C3%B6ren</tt>).</p>
 		
 		<h2>Ergebnis</h2>
 		
