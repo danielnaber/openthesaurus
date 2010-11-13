@@ -49,7 +49,7 @@
         <h2>OpenThesaurus auf Android</h2>
 
         <ul>
-            <li><a href="http://www.cyrket.com/p/android/com.fc.ot/">OpenThesaurus für Android</a>
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a>
               (vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a>)</li>
         </ul>
 
