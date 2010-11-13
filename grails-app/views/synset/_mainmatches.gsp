@@ -32,9 +32,10 @@
                               </g:each>
                             </g:if>
                             <g:if test="${categoryStrings}">
-                              <span class="categoryHead"><g:message code='edit.categories'/></span>
-                              <span class="categoryTerm">${categoryStrings.join(' | ')}</span>
-                              <br />
+                              <div class="category">
+                                <span class="categoryHead"><g:message code='edit.categories'/></span>
+                                <span class="categoryTerm">${categoryStrings.join(' | ')}</span>
+                              </div>
                             </g:if>
 
                             <span class="result">

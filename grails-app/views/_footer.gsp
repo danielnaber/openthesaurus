@@ -47,8 +47,7 @@
                 </td>
                 <td>&nbsp;</td>
                 <td>
-                  ${session.user.userId.toString()?.encodeAsHTML()}
-                  <g:link controller="user" action="logout">Logout</g:link>
+                  <g:link controller="user" action="logout">Logout ${session.user.userId.toString()?.encodeAsHTML()}</g:link>
                 </td>
             </g:if>
             <g:else>
@@ -70,8 +69,8 @@
                 </td>
                 <td>&nbsp;</td>
                 <td>
-                    <g:link controller="user" action="login"
-                       params="${linkParams}">Anmelden</g:link> und mitmachen
+                    <g:link controller="user" action="login" class="lightlink"
+                       params="${linkParams}"><strong>Anmelden</strong> und mitmachen</g:link>
                 </td>
             </g:else>
             </tr>
@@ -82,7 +81,7 @@
             <tr>
               <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" alt="Twitter-Icon"/></a></td>
               <td>&nbsp;</td>
-              <td>Folge uns auf <a href="http://twitter.com/openthesaurus">twitter</a></td>
+              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a></td>
             </tr>
           </table>
         </div>
@@ -104,7 +103,7 @@
                 <!--
                 var firstPart = "feedback";
                 var lastPart = "openthesaurus.de";
-                document.write(" Schreibe uns eine " + "<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>E-Mail<" + "/a>");
+                document.write("<a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'>Schreibe uns eine <strong>E-Mail<" + "/strong><" + "/a>");
                 // -->
                 </script>
               </td>
@@ -116,7 +115,7 @@
             <tr>
               <td><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img src="${createLinkTo(dir:'images',file:'icon-android.png')}" alt="Android-Icon"/></a></td>
               <td>&nbsp;</td>
-              <td>OpenThesaurus für <a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">Android</a></td>
+              <td><a class="lightlink" href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für <strong>Android</strong></a></td>
             </tr>
           </table>
         </div>

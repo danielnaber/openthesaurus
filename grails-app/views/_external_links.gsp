@@ -7,7 +7,7 @@
 --%>
 
 <a href="http://www.canoo.net/services/Controller?input=${latin1Query}&amp;service=inflection"
-		>Flexion auf Canoo.net</a>
+		>Canoo.net</a>
 
 <span class="d">&middot;</span>
 <a href="http://de.search.yahoo.com/search?p=${q.encodeAsURL()}">Yahoo</a>

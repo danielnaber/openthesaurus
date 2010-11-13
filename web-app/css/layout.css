@@ -61,7 +61,7 @@ h1 {
 
 .superordinate {
   margin-top: 18px;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 .superordinateHead {
@@ -77,6 +77,9 @@ h1 {
   font-size: 12px;
 }
 
+.category {
+}
+
 .categoryHead {
   text-transform: uppercase;
   font-weight: bold;
@@ -86,6 +89,7 @@ h1 {
 
 .categoryTerm {
   color: #707070;
+  font-size: 12px;
 }
 
 /* middot between words */
@@ -446,4 +450,13 @@ pre.api {
     padding: 8px;
     background: #ffff9d;
     border: 2px solid #ff8900;
+}
+
+/* used to avoid bold font in links */
+.lightlink {
+    font-weight: normal !important;
+}
+
+strong {
+    font-weight: bold;
 }
