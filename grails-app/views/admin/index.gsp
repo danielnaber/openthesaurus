@@ -5,9 +5,9 @@
     </head>
     <body>
 
-		<div class="body">
-
-		<h1>Admin Page</h1>
+        <hr/>
+          
+		<h2>Admin Page</h2>
 		
         <p>
         Manage:
@@ -38,31 +38,34 @@
         <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
 
 		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription</h2>
-		
-		<table>
-		<thead>
-			<tr>
-				<th>Email</th>
-				<th>DisplayName</th>
-				<th>Permission</th>
-				<th>Registration</th>
-				<th>Last Login</th>
-				<th>Blocked</th>
-			</tr>
-		</thead>
-		<g:each in="${latestUsers}" status="i" var="latestUser">
-			<tr>
-				<td>${latestUser.userId.encodeAsHTML()}</td>
-				<td>${latestUser.realName?.encodeAsHTML()}</td>
-				<td>${latestUser.permission?.encodeAsHTML()}</td>
-				<td>${latestUser.creationDate}</td>
-				<td>${latestUser.lastLoginDate}</td>
-				<td>${latestUser.blocked ? "yes" : ""}</td>
-			</tr>
-		</g:each>
-		</table>
-		
-        </div>
 
+        <div class="colspanlist">
+          <table>
+          <thead>
+              <tr>
+                  <th>Email</th>
+                  <th>DisplayName</th>
+                  <th>Permission</th>
+                  <th>Registration</th>
+                  <th>Last Login</th>
+                  <th>Blocked</th>
+              </tr>
+          </thead>
+          <g:each in="${latestUsers}" status="i" var="latestUser">
+              <tr>
+                  <td>${latestUser.userId.encodeAsHTML()}</td>
+                  <td>${latestUser.realName?.encodeAsHTML()}</td>
+                  <td>${latestUser.permission?.encodeAsHTML()}</td>
+                  <td>${latestUser.creationDate}</td>
+                  <td>${latestUser.lastLoginDate}</td>
+                  <td>${latestUser.blocked ? "yes" : ""}</td>
+              </tr>
+          </g:each>
+          <tr>
+            <td colspan="5"><g:link controller="user" action="list" params="${[sort: 'creationDate', order: 'desc']}">Show more</g:link></td>
+          </tr>
+          </table>
+        </div>
+		
     </body>
 </html>

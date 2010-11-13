@@ -11,11 +11,16 @@
             <span class="menuButton"><g:link class="create" action="create">New LinkType</g:link></span>
         </div>
         <div class="body">
-            <h1>LinkType List</h1>
+
+            <hr/>
+
+            <h2>LinkType List</h2>
+
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+              <div class="message">${flash.message}</div>
             </g:if>
-            <div class="list">
+          
+            <div class="colspanlist">
                 <table>
                     <thead>
                         <tr>

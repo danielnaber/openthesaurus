@@ -12,10 +12,15 @@
             <span class="menuButton"><g:link class="create" action="create">New ThesaurusConfigurationEntry</g:link></span>
         </div>
         <div class="body">
-            <h1>ThesaurusConfigurationEntry List</h1>
+
+            <hr/>
+
+            <h2>ThesaurusConfigurationEntry List</h2>
+
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+              <div class="message">${flash.message}</div>
             </g:if>
+          
             <div class="list">
                 <table>
                     <thead>

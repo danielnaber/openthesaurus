@@ -11,11 +11,16 @@
             <span class="menuButton"><g:link class="create" action="create">New Category</g:link></span>
         </div>
         <div class="body">
-            <h1>Category List</h1>
+
+            <hr/>
+
+            <h2>Category List</h2>
+
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+              <div class="message">${flash.message}</div>
             </g:if>
-            <div class="list">
+
+            <div class="colspanlist">
                 <table>
                     <thead>
                         <tr>

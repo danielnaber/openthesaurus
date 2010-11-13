@@ -12,11 +12,16 @@
             <span class="menuButton"><g:link class="create" action="create">New TermLinkType</g:link></span>
         </div>
         <div class="body">
-            <h1>TermLinkType List</h1>
+
+            <hr/>
+
+            <h2>TermLinkType List</h2>
+
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+              <div class="message">${flash.message}</div>
             </g:if>
-            <div class="list">
+
+            <div class="colspanlist">
                 <table>
                     <thead>
                         <tr>
