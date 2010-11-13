@@ -47,12 +47,7 @@
 
                   <g:set var="cleanTerm" value="${params.q.trim()}" />
                   <g:if test="${totalMatches == 0}">
-                      <div style="margin-top: 10px">
-                        <g:link action="create" params="[term : cleanTerm]">
-                             <img src="../images/icon-add.png" alt="Add icon" />
-                             <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
-                        </g:link>
-                      </div>
+                      <g:render template="addterm" model="${[term:cleanTerm]}" />
                   </g:if>
 
                   <hr />
@@ -63,12 +58,7 @@
 
                   <h2>Nicht das Richtige dabei?</h2>
 
-                  <p class="addNewTerm">
-                    <g:link action="create" params="[term : cleanTerm]">
-                         <img src="../images/icon-add.png" alt="Add icon" />
-                         <g:message code="result.create.synset" args="${[cleanTerm.encodeAsHTML()]}" />
-                    </g:link>
-                  </p>
+                  <g:render template="addterm" model="${[term:cleanTerm]}" />
 
                   <g:render template="/ads/resultpage_bottom"/>
                   

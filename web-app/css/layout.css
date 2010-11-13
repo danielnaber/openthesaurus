@@ -438,3 +438,12 @@ pre.api {
     border: 0px solid #00aeeb;
     padding: 2px;
 }
+
+/* no javascript warning */
+.nojs {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 8px;
+    background: #ffff9d;
+    border: 2px solid #ff8900;
+}
