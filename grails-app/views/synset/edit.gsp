@@ -485,28 +485,29 @@
 
         <g:if test="${eventList}">
             <!-- is not always set, e.g. after error -->
-<div class="colspanlist">
+            <div class="colspanlist">
 
-            <br />
-            <h2><g:message code='edit.latest.changes' args="${[eventList.size()]}"/></h2>
+              <br />
+              <h2><g:message code='edit.latest.changes' args="${[eventList.size()]}"/></h2>
 
-            <table>
-                <tr>
-                    <th><g:message code='edit.changelog.date'/></th>
-                    <th><g:message code='edit.changelog.user'/></th>
-                    <th><g:message code='edit.changelog.comment'/></th>
-                    <th><g:message code='edit.changelog.change'/></th>
-                </tr>
-                <g:each var='event' in='${eventList}' status='i'>
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
-                        <td>${event.byUser.realName?.encodeAsHTML()}</td>
-                        <td>${event.changeDesc?.encodeAsHTML()}</td>
-                        <td>${diffs.get(event)}</td>
-                    </tr>
-                </g:each>
-            </table>
-          </div>
+              <table>
+                  <tr>
+                      <th><g:message code='edit.changelog.date'/></th>
+                      <th><g:message code='edit.changelog.user'/></th>
+                      <th><g:message code='edit.changelog.comment'/></th>
+                      <th><g:message code='edit.changelog.change'/></th>
+                  </tr>
+                  <g:each var='event' in='${eventList}' status='i'>
+                      <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                          <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
+                          <td>${event.byUser.realName?.encodeAsHTML()}</td>
+                          <td>${event.changeDesc?.encodeAsHTML()}</td>
+                          <td>${diffs.get(event)}</td>
+                      </tr>
+                  </g:each>
+              </table>
+              
+            </div>
         </g:if>
 
         <g:render template="/ads/edit_bottom"/>
