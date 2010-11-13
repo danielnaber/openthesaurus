@@ -71,7 +71,7 @@
                             </td>
                             <td>
                                 <div class="buttons">
-                                    <span class="button"><input class="login" type="submit" value="${message(code:'user.register.form.submit')}"></input></span>
+                                    <span class="button"><input class="login" type="submit" value="${message(code:'user.register.form.submit')}"/></span>
                                 </div>
                             </td>
                         </tr>

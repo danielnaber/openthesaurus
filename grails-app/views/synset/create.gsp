@@ -41,7 +41,7 @@
                             	<td>
 					                <div class="buttons">
 					                    <span class="button"><input
-					                    	class="save" type="submit" value="${message(code:'create.continue')}"></input></span>
+					                    	class="save" type="submit" value="${message(code:'create.continue')}"/></span>
 					                </div>
                             	</td>
                             </tr> 

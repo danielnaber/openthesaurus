@@ -165,7 +165,7 @@
 
                                         <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                         <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                        <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo" action="search" params="[q : t.word]">[${termCount}]</g:link>
+                                        <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo lightlink" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                         <%--
                                         <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
                                         params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
@@ -232,24 +232,26 @@
                                         title="${message(code:'edit.category.prefer')}" />
                                 </g:if>
                             </g:if>
-                            <ul>
-                            <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
-                                <li class="checkboxList">
-                                    <g:managedCheckBox checked="false" disabled="${!session.user}"
-                                       name="delete_category" value="${catLink.id}" />
-                                    <g:if test="${prefTerms}">
-                                        &nbsp;
-                                        <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
-                                        <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
-                                            checked="${isPreferred}" />
-                                    </g:if>
-                                    ${catLink.category}
-                                    <g:if test="${catLink.category.categoryType}">
-                                           <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
-                                    </g:if>
-                                </li>
-                            </g:each>
-                            </ul>
+                            <g:if test="${synset.categoryLinks.size() > 0}">
+                              <ul>
+                              <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                                  <li class="checkboxList">
+                                      <g:managedCheckBox checked="false" disabled="${!session.user}"
+                                         name="delete_category" value="${catLink.id}" />
+                                      <g:if test="${prefTerms}">
+                                          &nbsp;
+                                          <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
+                                          <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
+                                              checked="${isPreferred}" />
+                                      </g:if>
+                                      ${catLink.category}
+                                      <g:if test="${catLink.category.categoryType}">
+                                             <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
+                                      </g:if>
+                                  </li>
+                              </g:each>
+                              </ul>
+                            </g:if>
                             <g:if test="${synset.categoryLinks == null || synset.categoryLinks.size() == 0}">
                                 <span class="metaInfo"><g:message code='edit.none'/></span>
                             </g:if>
