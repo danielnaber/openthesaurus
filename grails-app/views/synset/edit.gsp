@@ -485,6 +485,8 @@
 
         <g:if test="${eventList}">
             <!-- is not always set, e.g. after error -->
+<div class="colspanlist">
+
             <br />
             <h2><g:message code='edit.latest.changes' args="${[eventList.size()]}"/></h2>
 
@@ -504,6 +506,7 @@
                     </tr>
                 </g:each>
             </table>
+          </div>
         </g:if>
 
         <g:render template="/ads/edit_bottom"/>
