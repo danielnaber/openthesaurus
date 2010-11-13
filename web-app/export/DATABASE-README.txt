@@ -1,5 +1,5 @@
 OpenThesaurus database structure
-Daniel Naber, 2010-06-13
+Daniel Naber, 2010-11-13
 
 This is a short description of the OpenThesaurus database structure. The most
 important thing to understand is that the data is organized as concepts. Like
@@ -7,8 +7,8 @@ WordNet, a concept is a set of words and it's called 'synset' (synonym set).
 
 Example query to find all synonyms for "Bank":
 
-SELECT * FROM term, synset WHERE synset.is_visible = 1 AND synset.id =
-  term.synset_id AND synset_id IN (SELECT synset_id FROM term WHERE word = 'Bank')
+SELECT * FROM term, synset, term term2 WHERE synset.is_visible = 1 AND synset.id
+   = term.synset_id AND term.synset_id AND term2.synset_id = synset.id AND term2.word = 'Bank'
 
 Those terms that share the same value in synset_id belong to the same synset.
 
