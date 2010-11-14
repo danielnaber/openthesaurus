@@ -18,10 +18,10 @@
   <p class="claim">Synonyme und Assoziationen</p>
   <form action="${createLinkTo(dir:'synonyme',file:'search')}" onsubmit="window.location='${createLinkTo(dir:'synonyme',file:'search')}?q=' + encodeURIComponent(document.searchform.q.value);return false;" name="searchform">
     <g:if test="${params && params.q}">
-      <input type="text" id="search-field" name="q" value="${params.q.encodeAsHTML()}" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input accesskey="s" type="text" id="search-field" name="q" value="${params.q.encodeAsHTML()}" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:if>
     <g:else>
-      <input type="text" id="search-field" name="q" value="Suchwort" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
   </form>
 </div>
