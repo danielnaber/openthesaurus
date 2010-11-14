@@ -22,8 +22,8 @@
           <td colspan="3" valign="top">
             <hr style="margin-top:20px;margin-bottom:10px"/>
           </td>
-          <td width="20"></td>
-          <td width="200" rowspan="3" valign="top">
+          <td width="10"></td>
+          <td width="180" rowspan="3" valign="top">
             <div style="margin-top:20px">
               <g:render template="/ads/resultpage"/>
             </div>
@@ -35,7 +35,7 @@
           </td>
           <td width="30"></td>
           <td width="365"></td>
-          <td width="20"></td>
+          <td width="10"></td>
         </tr>
 
         <tr>
