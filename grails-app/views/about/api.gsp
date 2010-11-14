@@ -58,8 +58,8 @@
         <h2>Optionen</h2>
 
         <ul class="apioptions">
-          <li><span class="apioption">format=text/xml</span>: Hiermit wird die Antwort als XML zurückgeliefert. Andere
-            einfach auswertbare Formate werden derzeit nicht unterstützt.</li>
+          <li><span class="apioption">format=text/xml</span>: Aktiviert den API-Modus, so dass die Antwort als XML zurückgeliefert wird. Andere
+            Formate werden derzeit nicht unterstützt.</li>
           <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
           ähnliche Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
@@ -121,7 +121,7 @@
 		<h2>Download</h2>
 		
 		<p>Zusätzlich zur direkten Abfrage stehen weiterhin
-		<g:link action="download">Downloads</g:link> der gesamten Datenbank zur Verfügung.</p>
+		<g:link action="download">Downloads</g:link> der Datenbank zur Verfügung.</p>
 		
     </body>
 </html>
