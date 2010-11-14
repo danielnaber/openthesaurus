@@ -21,7 +21,7 @@
               <div class="message">${flash.message}</div>
             </g:if>
           
-            <div class="list">
+            <div class="colspanlist">
                 <table>
                     <thead>
                         <tr>
