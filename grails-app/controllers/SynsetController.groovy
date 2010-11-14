@@ -24,6 +24,7 @@ import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.PreparedStatement
 import org.apache.commons.lang.StringUtils
+import com.vionto.vithesaurus.tools.IpTools
 
 class SynsetController extends BaseController {
 
@@ -32,7 +33,14 @@ class SynsetController extends BaseController {
 
     // maximum distance for a term to be accepcted as similar term:
     final int MAX_DIST = 3
-    
+
+    private static final String REQUEST_LIMIT_MAX_AGE_SECONDS = "requestLimitMaxAgeSeconds"
+    private static final String REQUEST_LIMIT_MAX_REQUESTS = "requestLimitMaxRequests"
+    private static final String REQUEST_LIMIT_SLEEP_TIME_MILLIS = "requestLimitSleepTimeMillis"
+
+    private static apiRequestEvents = []
+    private static final int API_REQUEST_QUEUE_SIZE = 100
+
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
@@ -180,7 +188,11 @@ class SynsetController extends BaseController {
           List partialMatchResult = []
           List startsWithResult = []
           long partialMatchStartTime = System.currentTimeMillis()
+          String sleepTimeInfo = ""
           if (apiRequest) {
+
+            sleepTimeInfo = preventRequestFlooding()
+
             if (partialApiRequest || allApiRequest) {
               if (params.substringFromResults) {
                 partialApiFromResultRequest = Integer.parseInt(params.substringFromResults)
@@ -270,7 +282,7 @@ class SynsetController extends BaseController {
           String mobileInfo = mobileBrowser ? "m=y" : "m=n"
           
           String qType = params.format == "text/xml" ? "xml" : "htm"
-          log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime} sim:${similarTime}"
+          log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
             
@@ -327,7 +339,41 @@ class SynsetController extends BaseController {
               
     }
 
-    private void renderApiResponse(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
+  // artificially slow down response if users make too many requests
+  private String preventRequestFlooding() {
+    while (apiRequestEvents.size() > API_REQUEST_QUEUE_SIZE) {
+      apiRequestEvents.remove(0)
+    }
+    String ip = IpTools.getRealIpAddress(request)
+    apiRequestEvents.add(new ApiRequestEvent(ip, new Date()))
+
+    int maxAgeSeconds = 60
+    ThesaurusConfigurationEntry maxAgeSecondsObj = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_MAX_AGE_SECONDS)
+    if (maxAgeSecondsObj != null) {
+      maxAgeSeconds = Integer.parseInt(maxAgeSecondsObj.value)
+    }
+
+    int maxRequests = 5
+    ThesaurusConfigurationEntry maxRequestsObj = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_MAX_REQUESTS)
+    if (maxRequestsObj != null) {
+      maxRequests = Integer.parseInt(maxRequestsObj.value)
+    }
+
+    long sleepTime = 5000
+    ThesaurusConfigurationEntry sleepTimeObj = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_SLEEP_TIME_MILLIS)
+    if (sleepTimeObj != null) {
+      sleepTime = Long.parseLong(sleepTimeObj.value)
+    }
+
+    String sleepTimeInfo = ""
+    if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
+      Thread.sleep(sleepTime)
+      sleepTimeInfo = "+" + sleepTime + "ms"
+    }
+    return sleepTimeInfo
+  }
+
+  private void renderApiResponse(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
       render(contentType:params.format, encoding:"utf-8") {
