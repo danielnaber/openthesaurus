@@ -13,6 +13,8 @@
 
       <g:render template="/searchform" model="${[homepage: true]}"/>
 
+      <g:render template="/loggedin"/>
+
       <g:if test="${flash.message}">
           <div class="message">${flash.message}</div>
       </g:if>
