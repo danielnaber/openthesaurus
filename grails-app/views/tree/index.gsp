@@ -8,6 +8,7 @@
         </g:if>
         <g:else>
 	        <title><g:message code="tree.title" /></title>
+            <meta name="description" content="Diese Seite zeigt die Begriffs-Hierarchie, in die viele der Wörter von OpenThesaurus einsortiert sind."/>
         </g:else>
     </head>
     <body>

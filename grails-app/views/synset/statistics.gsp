@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="statistics.title" /></title>
+        <meta name="description" content="Statistik über die Größe der OpenThesaurus-Datenbank und Beiträge der Community."/>
     </head>
     <body>
 
