@@ -7,8 +7,10 @@
         </div>
       </td>
       <td width="60"></td>
-      <td width="370">
-        <g:render template="/ads/newhomepage"/>
+      <td width="370" class="visualads">
+        <g:if test="${homepage}">
+          <g:render template="/ads/newhomepage"/>
+        </g:if>
       </td>
     </tr>
     <tr>
