@@ -23,9 +23,10 @@ body
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(-1.5deg);
   -webkit-transform-origin: 0 0;
+  /* commented out because of fuzzy rendering in Opera
   -o-transform: skewY(-1.5deg);
   -o-transform-origin: 0 0;
-
+  */
 }
 
 
@@ -35,8 +36,10 @@ body
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(1.5deg);
   -webkit-transform-origin: 0 0;
+  /* see above
   -o-transform: skewY(1.5deg);
   -o-transform-origin: 0 0;
+  */
 }
 
 /* --- */
