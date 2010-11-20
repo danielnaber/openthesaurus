@@ -42,6 +42,10 @@ body
   */
 }
 
+p {
+    margin-bottom: 10px;
+}
+
 /* --- */
 
 a:link, a:visited {
