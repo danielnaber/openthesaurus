@@ -118,6 +118,11 @@
             auch den Eintrag zu <span class="bsp">Tür</span> und umgekehrt.</li>
         </ul>
 
+        <h2>Anfrage-Limitierung</h2>
+
+        <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse werden die Antworten verzögert.
+        Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
+        Erhöhung des Limits bitten.</p>
 
 		<h2>Download</h2>
 		

@@ -20,6 +20,10 @@
     <td>2010</td>
     <td></td>
 </tr>
+  <tr>
+      <td valign="top" align="right" width="90"><span class="newsdate">2010-11-14</span></td>
+      <td valign="top">Die API hat jetzt eine Limitierung, siehe <a href="api">API-Seite</a></td>
+  </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-11-11</span></td>
     <td valign="top">OpenThesaurus hat ein neues Design!</td>
