@@ -34,11 +34,16 @@
         <p>Die Daten von OpenThesaurus stehen unter der
           <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License</a> zur Verfügung.</p>
 
+    
+        <h2>Design</h2>
+
+        <p>Das Design dieser Website stammt von <a href="http://www.sabinesieg.de">Sabine Sieg</a>.</p>
 
         <h2>Änderungen und News zu OpenThesaurus</h2>
 
         <ul>
             <li><a href="../feed">RSS-Feed aller Aktualisierungen an den Daten</a></li>
+            <li><a href="newsarchive">News-Archiv</a></li>
             <li><a href="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">OpenThesaurus Mailingliste</a> (sehr wenig Traffic)
                 <ul>
                     <li><a href="http://lists.berlios.de/pipermail/openthesaurus-discuss/">Archiv</a></li>
