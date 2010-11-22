@@ -39,7 +39,7 @@ class SynsetController extends BaseController {
     private static final String REQUEST_LIMIT_SLEEP_TIME_MILLIS = "requestLimitSleepTimeMillis"
 
     private static apiRequestEvents = []
-    private static final int API_REQUEST_QUEUE_SIZE = 100
+    private static final int API_REQUEST_QUEUE_SIZE = 500
 
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'edit', 'statistics',
