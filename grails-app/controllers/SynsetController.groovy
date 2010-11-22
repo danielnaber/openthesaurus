@@ -37,6 +37,7 @@ class SynsetController extends BaseController {
     private static final String REQUEST_LIMIT_MAX_AGE_SECONDS = "requestLimitMaxAgeSeconds"
     private static final String REQUEST_LIMIT_MAX_REQUESTS = "requestLimitMaxRequests"
     private static final String REQUEST_LIMIT_SLEEP_TIME_MILLIS = "requestLimitSleepTimeMillis"
+    private static final String REQUEST_LIMIT_IPS = "requestLimitIps"
 
     private static apiRequestEvents = []
     private static final int API_REQUEST_QUEUE_SIZE = 500
@@ -365,8 +366,14 @@ class SynsetController extends BaseController {
       sleepTime = Long.parseLong(sleepTimeObj.value)
     }
 
+    List slowDownIps = [] 
+    ThesaurusConfigurationEntry slowDownIpsObj = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_IPS)
+    if (slowDownIpsObj != null) {
+      slowDownIps = slowDownIpsObj.value.split(",")
+    }
+
     String sleepTimeInfo = ""
-    if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
+    if (slowDownIps.contains(ip) || ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
       Thread.sleep(sleepTime)
       sleepTimeInfo = "+" + sleepTime + "ms"
     }
