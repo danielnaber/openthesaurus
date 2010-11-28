@@ -45,11 +45,11 @@
                       <g:render template="addterm" model="${[term:cleanTerm]}" />
                   </g:if>
 
-                  <hr />
+                  <hr style="margin-top:20px" />
                   
                   <g:render template="partialmatches"/>
 
-                  <hr style="margin-top:15px" />
+                  <hr style="margin-top:20px" />
 
                   <h2>Nicht das Richtige dabei?</h2>
 
@@ -68,13 +68,13 @@
                 <td>
                   <g:render template="wiktionary"/>
 
-                  <hr style="margin-top:15px" />
+                  <hr style="margin-top:20px" />
 
                   <g:render template="wikipedia"/>
 
                   <g:render template="/ads/resultpage_results"/>
 
-                  <hr style="margin-top:15px" />
+                  <hr style="margin-top:20px" />
 
                   <h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
 

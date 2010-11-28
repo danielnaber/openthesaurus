@@ -68,20 +68,20 @@ h1 {
 
 .superordinate {
   margin-top: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 2px;
 }
 
 .superordinateHead {
   text-transform: uppercase;
   font-weight: bold;
   color: #707070;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .superordinateTerms
 {
   color: #707070;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .category {
@@ -91,12 +91,12 @@ h1 {
   text-transform: uppercase;
   font-weight: bold;
   color: #707070;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .categoryTerm {
   color: #707070;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* middot between words */
@@ -193,7 +193,7 @@ h2 {
     font-size: 18px;
     font-weight: normal;
     margin-top: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 /* dnaber body ************/
@@ -261,8 +261,17 @@ h2 {
 }
 
 #foot .iconLink {
-    font-weight: normal;
+    line-height:110%;
     margin-bottom: 15px;
+}
+
+#foot .iconLink td {
+  vertical-align: middle;
+}
+
+#foot .iconLink img {
+  vertical-align: middle;
+  margin-right: 5px;
 }
 
 #foot .textAd {
@@ -336,13 +345,12 @@ h2 {
 }
 
 .copyrightInfo {
-	margin-top: 2px;
-	color: #AAAAAA;
-	font-size: small;
+    font-size: 12px;
+    color: #707070;
+    margin-top: 10px;
 }
 .copyrightInfo a {
-	font-size: small;
-	color: #888888;
+    color: #707070;
     font-weight: normal;
 }
 

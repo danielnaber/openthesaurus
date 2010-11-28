@@ -1,7 +1,7 @@
 <div id="foot">
   <table width="800">
     <tr>
-      <td width="370" height="145" colspan="2" class="claim">
+      <td height="120" width="370" class="claim" colspan="2">
         <div style="margin-bottom: 20px">
           OpenThesaurus ist ein freies deutsches Synonymwörterbuch, bei dem jeder mitmachen kann.
         </div>
