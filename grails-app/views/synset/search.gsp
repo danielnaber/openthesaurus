@@ -2,12 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <g:if test="${mobileBrowser && false}">  <%-- TODO --%>
-        	<meta name="layout" content="main_mobile" />
-       	</g:if>
-       	<g:else>
-       		<meta name="layout" content="main" />
-       	</g:else>
+   		<meta name="layout" content="main" />
         <title><g:message code='result.matches.for.title' args="${[params.q.encodeAsHTML()]}"/></title>
 
         <g:if test="${descriptionText}">
