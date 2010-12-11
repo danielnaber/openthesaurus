@@ -1,21 +1,17 @@
-html, body
-{
+html, body {
   background-color: #0362B9;
   background-image: url(../images/foot-bg.jpg);
   background-repeat: repeat-x;
   background-position: 0 330px;
 }
 
-
-body
-{
+body {
   font-family: Arial, Helvetica, Verdana, sans-serif;
   font-size: 13px;
   color: #333344;
 }
 
-#body
-{
+#body {
   padding:80px 0 20px 0;
   background-color:#F7F7F7;
   margin-bottom:30px;
@@ -30,8 +26,7 @@ body
 }
 
 
-#body > #content
-{
+#body > #content {
   -moz-transform: skewY(1.5deg);
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(1.5deg);
@@ -46,20 +41,13 @@ p {
     margin-bottom: 10px;
 }
 
-/* --- */
+/* */
 
 a:link, a:visited {
     text-decoration: none;
     color: #0071bd;
     font-weight: bold;
 }
-
-/* TODO: breaks images
-a:hover {
-    color: #0071bd;
-    background-color: #eee;
-    text-decoration: none;
-}*/
 
 h1 {
   font-weight: bold;
@@ -78,8 +66,7 @@ h1 {
   font-size: 11px;
 }
 
-.superordinateTerms
-{
+.superordinateTerms {
   color: #707070;
   font-size: 11px;
 }
@@ -101,38 +88,33 @@ h1 {
 
 /* middot between words */
 .d {
-	color: #999999;
+  color: #999999;
 }
 
 .changeLink {
-    color: #AAAAAA;
+  color: #AAAAAA;
 }
 
-.result
-{
+.result {
   font-weight: bold;
   font-size: 16px;
 }
 
-.source
-{
+.source {
   color: #707070;
   font-size: 12px;
 }
 
-#search
-{
+#search {
   width:400px;
   margin:0 auto;
 }
 
-#search img
-{
+#search img {
   display: block;
 }
 
-#search .claim
-{
+#search .claim {
   text-align: right;
   text-transform: uppercase;
   padding-right: 60px;
@@ -141,22 +123,19 @@ h1 {
   margin-bottom: 8px;
 }
 
-#search input
-{
+#search input {
   vertical-align: middle;
 }
 
-#search form
-{
+#search form {
   text-align: right;
 }
 
-#search input[type='text']
-{
-  text-align:left;
-  background:none;
+#search input[type='text'] {
+  text-align: left;
+  background: none;
   background-image: url(../images/search.png);
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   width: 239px;
 
   font-size: 20px;
@@ -170,99 +149,91 @@ h1 {
   color: #333333;
 }
 
-#search input[type='image']
-{
+#search input[type='image'] {
   margin-left:-44px;
   margin-bottom: 4px;
 }
 
-/*************/
+/* */
 
 #content,
-#foot
-{
+#foot {
   margin: 0 auto;
   margin-bottom: 50px;
   text-align:left;
   width:780px;
 }
 
-/* dnaber ************/
-
 h2 {
-    font-size: 18px;
-    font-weight: normal;
-    margin-top: 15px;
-    margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 15px;
+  margin-bottom: 8px;
 }
 
-/* dnaber body ************/
-
 #body ul {
-    margin-left: 19px;
-    margin-top: 10px;
-    list-style-image:url(../images/arrow-blue.png)
+  margin-left: 19px;
+  margin-top: 10px;
+  list-style-image: url(../images/arrow-blue.png)
 }
 
 #body ul li {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 #body hr {
-    color: #ffffff;
-    background-color: #ffffff;
-    border-top: solid 1px #cccccc;
-    border-bottom: solid 1px #ffffff;
-    margin-bottom: 20px;
+  color: #ffffff;
+  background-color: #ffffff;
+  border-top: solid 1px #cccccc;
+  border-bottom: solid 1px #ffffff;
+  margin-bottom: 20px;
 }
 
-/* dnaber footer ************/
-
 #foot {
-    color: white;
-    font-weight: bold;
+  color: white;
+  font-weight: bold;
 }
 
 #foot .claim {
-    font-size: 16px;
-    vertical-align: bottom;
-    margin-bottom: 30px;
+  font-size: 16px;
+  vertical-align: bottom;
+  margin-bottom: 30px;
 }
 
 #foot .visualads {
-    font-size: 16px;
-    vertical-align: bottom;
-    margin-bottom: 30px;
+  font-size: 16px;
+  vertical-align: bottom;
+  margin-bottom: 30px;
 }
 
 #foot hr {
-    border-top: solid 1px #0457a3;
-    border-bottom: solid 1px #3688d2;
-    margin-bottom: 20px;
+  border-top: solid 1px #0457a3;
+  border-bottom: solid 1px #3688d2;
+  margin-bottom: 20px;
 }
 
 #foot a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 #foot li {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 #foot ul {
-    margin-left: 19px;
-    list-style-image:url(../images/arrow.png)
+  margin-left: 19px;
+  list-style-image: url(../images/arrow.png);
 }
 
 #foot td {
-    vertical-align:top;
+  vertical-align:top;
 }
 
 #foot .iconLink {
-    line-height:110%;
-    margin-bottom: 15px;
+  line-height:110%;
+  margin-bottom: 15px;
 }
 
 #foot .iconLink td {
@@ -275,112 +246,109 @@ h2 {
 }
 
 #foot .textAd {
-    font-weight: normal;
-    margin-top: 15px;
+  font-weight: normal;
+  margin-top: 15px;
 }
 
 .synsetmatch {
-    color: #0071bd;
+  color: #0071bd;
 }
 
 .wordLevel {
-    color: #57a4d8;
+  color: #57a4d8;
 }
 
 .message {
-    background: url(../images/skin/information.png) 10px 11px no-repeat;
-    padding: 10px 10px 10px 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #96b7d6;
-    background-color: #a7ccee;
+  background: #a7ccee url(../images/skin/information.png) no-repeat 10px 11px;
+  padding: 10px 10px 10px 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #96b7d6;
 }
 
 .error {
-    background: url(../images/skin/exclamation.png) 10px 11px no-repeat;
-    padding: 10px 10px 10px 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #999999;
-    background-color: #ff9696;
+  background: #ff9696 url(../images/skin/exclamation.png) no-repeat 10px 11px;
+  padding: 10px 10px 10px 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #999999;
 }
 
 .error li {
-    list-style: none;
+  list-style: none;
 }
 
 .warning {
-    background: url(../images/skin/exclamation.png) 10px 11px no-repeat;
-    padding: 10px 10px 10px 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #e0a437;
-    background-color: #ffba3f;
+  background: #ffba3f url(../images/skin/exclamation.png) no-repeat 10px 11px;
+  padding: 10px 10px 10px 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0a437;
 }
 
 .dialog td {
-    padding: 5px 5px 5px 0px;
+  padding: 5px 5px 5px 0px;
 }
 
 .bsp {
-	color: #666;
-	font-weight: bold;
+  color: #666;
+  font-weight: bold;
 }
 
 .similarMatches {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .partialMatches {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .addNewTerm {
-    font-weight: bold;    
+  font-weight: bold;
 }
 
 .wiktionaryItem {
-	color: #999999;
-	font-weight: bold;
+  color: #999999;
+  font-weight: bold;
 }
 
 .copyrightInfo {
-    font-size: 12px;
-    color: #707070;
-    margin-top: 10px;
+  font-size: 12px;
+  color: #707070;
+  margin-top: 10px;
 }
 .copyrightInfo a {
-    color: #707070;
-    font-weight: normal;
+  color: #707070;
+  font-weight: normal;
 }
 
 li.checkboxList {
-    list-style: none;
-    margin-left: -17px;
+  list-style: none;
+  margin-left: -17px;
 }
 
-/* FAQ: */
+/* FAQ */
 .faqitem .question {
-    font-size: 14px;
-	font-weight: bold;
-	margin-top: 25px;
-	margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 5px;
 }
 .faqitem .answer {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 .faqitem .answer ul {
-	margin-top: 5px;
-	margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 /* API page */
 pre.api {
-    margin-top: 5px;
-    margin-bottom: 5px;
-	padding: 4px;
-	background-color: #eeeeee;
-	border: 1px solid #dddddd;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
 }
 
 .apioption {
@@ -388,96 +356,85 @@ pre.api {
     font-weight: bold;
 }
 .apioptions li {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 /* news archive */
 .newsdate {
-	font-weight: bold;
-	color: #666666;
+  font-weight: bold;
+  color: #666666;
 }
 .newsYearDelimiter {
-	background-color: #eeeeee;
-	font-weight: bold;
-	text-align: right;
+  background-color: #eeeeee;
+  font-weight: bold;
+  text-align: right;
 }
 
 .newArchiveTable td {
-    padding: 5px;
+  padding: 5px;
 }
 
 .statistics td {
-    padding: 5px;
+  padding: 5px;
 }
 
 /* Diffs in UserEvent view: */
 .del {
-    text-decoration: line-through;
-    background: #ff9292;
+  text-decoration: line-through;
+  background: #ff9292;
 }
 .add {
-    background: #2df1aa;
+  background: #2df1aa;
 }
 
 /* list of changes */
 .colspanlist table td,th {
-    padding: 3px 10px 3px 2px;
+  padding: 3px 10px 3px 2px;
 }
 .colspanlist th {
-    background: #dddddd;
+  background: #dddddd;
 }
 .del {
-    text-decoration: line-through;
-    background: #ff9292;
+  text-decoration: line-through;
+  background: #ff9292;
 }
 .add {
-    background: #2df1aa;
+  background: #2df1aa;
 }
-
-/* PAGINATION */
 
 .paginateButtons {
-    margin-top: 10px;
-    border-top: 0;
-    color: #666;
-    font-size: 100%;
-    overflow: hidden;
-    padding: 10px 3px;
+  margin-top: 10px;
+  border-top: 0;
+  color: #666;
+  font-size: 100%;
+  overflow: hidden;
+  padding: 10px 3px;
 }
 .paginateButtons a {
-    background: #eee;
-    color: #666;
-    margin: 0 3px;
-    padding: 2px 6px;
-    border: 1px solid #dddddd;
+  background: #eee;
+  color: #666;
+  margin: 0 3px;
+  padding: 2px 6px;
+  border: 1px solid #dddddd;
 }
 .paginateButtons span {
-    margin-right: 3px;
-    padding: 2px 6px;
-    border: 1px solid #dddddd;
+  margin-right: 3px;
+  padding: 2px 6px;
+  border: 1px solid #dddddd;
 }
 
-/* */
-
-.sprachdirekt td {
-    border: 0px solid #00aeeb;
-    padding: 2px;
-}
-
-/* no javascript warning */
 .nojs {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 8px;
-    background: #ffff9d;
-    border: 2px solid #ff8900;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 8px;
+  background: #ffff9d;
+  border: 2px solid #ff8900;
 }
 
-/* used to avoid bold font in links */
 .lightlink {
-    font-weight: normal !important;
+  font-weight: normal !important;
 }
 
 strong {
-    font-weight: bold;
+  font-weight: bold;
 }
