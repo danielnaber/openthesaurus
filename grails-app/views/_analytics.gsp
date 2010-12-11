@@ -1,1 +1,1 @@
-<!-- add your analytics code here -->
+<%-- add your analytics code here --%>
