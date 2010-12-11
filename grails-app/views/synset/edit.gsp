@@ -74,13 +74,13 @@
         </g:if>
 
         <g:hasErrors bean="${synset}">
-        <div class="errors">
+        <div class="error">
             <g:renderErrors bean="${synset}" as="list" />
         </div>
         </g:hasErrors>
 
         <g:hasErrors bean="${newTerm}">
-        <div class="errors">
+        <div class="error">
             <g:renderErrors bean="${newTerm}" as="list" />
         </div>
         </g:hasErrors>
