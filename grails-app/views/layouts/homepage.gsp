@@ -10,7 +10,6 @@
   <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
   <g:layoutHead />
-  <g:javascript library="application" />
 </head>
 <body>
 
