@@ -31,7 +31,7 @@ class SynsetController extends BaseController {
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
 
-    // maximum distance for a term to be accepcted as similar term:
+    // maximum distance for a term to be accepted as similar term:
     final int MAX_DIST = 3
 
     private static final String REQUEST_LIMIT_MAX_AGE_SECONDS = "requestLimitMaxAgeSeconds"
