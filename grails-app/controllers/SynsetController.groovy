@@ -43,7 +43,7 @@ class SynsetController extends BaseController {
     private static final int API_REQUEST_QUEUE_SIZE = 500
 
     def beforeInterceptor = [action: this.&auth,
-                             except: ['index', 'list', 'search', 'edit', 'statistics',
+                             except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
 
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
@@ -161,12 +161,26 @@ class SynsetController extends BaseController {
     }
 
     /**
+     * Handle the old URLs like "http://www.openthesaurus.de/synonyme/search?q=haus" but without redirecting API requests
+     */
+    def oldSearch = {
+      if (params.format == 'text/xml') {
+        // we don't redirect API requests to avoid the redirect overhead for mobile devices
+        search()
+      } else {
+        String q = URLEncoder.encode(params.q, "UTF-8")
+        RedirectController redirectController = new RedirectController()
+        redirectController.permanentRedirect("synonyme/" + q, response)
+      }
+    }
+
+    /**
      * Search for term and return a page with all synsets that contain
      * the term.
      */
     def search = {
         long startTime = System.currentTimeMillis()
-        
+
         if (!params.q) {
           log.warn("No query specified for search (${request.getRemoteAddr()})")
           response.status = 500

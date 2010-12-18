@@ -17,7 +17,8 @@
  */ 
 import com.vionto.vithesaurus.*
 import java.net.URLEncoder
-            
+import javax.servlet.http.HttpServletResponse
+
 /**
  * Controller that keeps old IDs from the PHP version of
  * OpenThesaurus working.
@@ -34,8 +35,13 @@ class RedirectController extends BaseController {
         response.sendError(302)
     }*/
 
+   def searchwithoutjavascript = {
+     // remove the useless "x" and "y" coordinates caused by the graphical submit button
+     redirect(controller:'synset', action:'search', params:[q: params.q])
+   }
+
    def synseteditredirect = {
-     permanentRedirect("synonyme/edit/" + params.id)
+     permanentRedirect("synonyme/edit/" + params.id, response)
    }
 
    def synsetsearchredirect = {
@@ -49,56 +55,56 @@ class RedirectController extends BaseController {
        if (params.mode) {
          q += "&mode=" + params.mode
        }
-       permanentRedirect("synonyme/search?q=" + q)
+       permanentRedirect("synonyme/" + q, response)
    }
 
    def faq = {
-       permanentRedirect("about/faq")
+       permanentRedirect("about/faq", response)
    }
 
    def background = {
-       permanentRedirect("about/index")
+       permanentRedirect("about/index", response)
    }
 
    def newsarchive = {
-       permanentRedirect("about/newsarchive")
+       permanentRedirect("about/newsarchive", response)
    }
 
    def statistics = {
-       permanentRedirect("synset/statistics")
+       permanentRedirect("synset/statistics", response)
    }
 
    def login = {
-       permanentRedirect("user/login")
+       permanentRedirect("user/login", response)
    }
 
    def register = {
-       permanentRedirect("user/register")
+       permanentRedirect("user/register", response)
    }
 
    /* A to Z */
    def az = {
-       permanentRedirect("term/list")
+       permanentRedirect("term/list", response)
    }
 
    def imprint = {
-       permanentRedirect("about/imprint")
+       permanentRedirect("about/imprint", response)
    }
    
    def tree = {
-       permanentRedirect("tree/index")
+       permanentRedirect("tree/index", response)
    }
 
    /* RSS feed */
    def feed = {
-       permanentRedirect("feed")
+       permanentRedirect("feed", response)
    }
 
    def variation = {
        if (params.lang == 'at') {
-         permanentRedirect("synset/variation/at")
+         permanentRedirect("synset/variation/at", response)
        } else if (params.lang == 'ch') {
-         permanentRedirect("synset/variation/ch")
+         permanentRedirect("synset/variation/ch", response)
        }
    }
 
@@ -109,7 +115,7 @@ class RedirectController extends BaseController {
          return
        }
        String q = URLEncoder.encode(params.word, "UTF-8")
-       permanentRedirect("synset/search?q=" + q)
+       permanentRedirect("synonyme/" + q, response)
    }
 
    def substringSearch = {
@@ -119,11 +125,11 @@ class RedirectController extends BaseController {
          return
        }
        String q = URLEncoder.encode(params.word, "UTF-8")
-       permanentRedirect("synset/substring?q=" + q)
+       permanentRedirect("synset/substring?q=" + q, response)
    }
 
    def gotoAbout = {
-       permanentRedirect("about/index")
+       permanentRedirect("about/index", response)
    }
 
    def synset = {
@@ -144,7 +150,7 @@ class RedirectController extends BaseController {
            response.sendError(404)
            return
          }
-         permanentRedirect("synset/edit/" + synset.id)
+         permanentRedirect("synonyme/edit/" + synset.id, response)
          return
        }
        response.sendError(404)
@@ -166,10 +172,10 @@ class RedirectController extends BaseController {
          response.sendError(404)
          return
        }
-       permanentRedirect("term/edit/" + term.id)
+       permanentRedirect("term/edit/" + term.id, response)
    }
    
-   private permanentRedirect(String url) {
+   void permanentRedirect(String url, HttpServletResponse response) {
         String newUrl = getBaseUrl() + url
         response.setHeader("Location", newUrl)
         // search engines expect 301 if a move is permanent:
@@ -177,10 +183,6 @@ class RedirectController extends BaseController {
     }
 
     private String getBaseUrl() {
-      String port = ""
-        if (request.getLocalPort() != 80) {
-          port = ":" + request.getLocalPort()
-        }
         // This cannot be taken from the request as the installation might
         // be shielded behind an Apache server and we don't see the outside URL
         // in the request:

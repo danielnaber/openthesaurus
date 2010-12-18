@@ -10,9 +10,14 @@ class UrlMappings {
       }
 
       // better (= more readable) URLs:
-      "/synonyme/search"(controller:'synset', action:'search')
       "/synonyme/edit/$id"(controller:'synset', action:'edit')
       "/synonyme/edit"(controller:'synset', action:'edit')
+      "/synonyme/search"(controller:'synset', action:'oldSearch')
+      "/synonyme/$q"(controller:'synset', action:'search')
+      // URLs like http://localhost:8080/vithesaurus/synonyme?q=Blechb%C3%BCchse&x=16&y=16 caused by
+      // clicking the submit button with Javascript disabled:
+      "/synonyme"(controller:'redirect', action:'searchwithoutjavascript')
+
       "/synset/search"(controller:'redirect', action:'synsetsearchredirect')
       "/synset/edit/$id"(controller:'redirect', action:'synseteditredirect')
       "/synset/edit"(controller:'redirect', action:'synseteditredirect')
