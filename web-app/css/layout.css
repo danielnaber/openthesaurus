@@ -266,7 +266,7 @@ h2 {
   border: 1px solid #96b7d6;
 }
 
-.error {
+.error, .errors {
   background: #ff9696 url(../images/skin/exclamation.png) no-repeat 10px 11px;
   padding: 10px 10px 10px 30px;
   margin-top: 10px;
@@ -275,6 +275,10 @@ h2 {
 }
 
 .error li {
+  list-style: none;
+}
+
+.errors li {
   list-style: none;
 }
 
