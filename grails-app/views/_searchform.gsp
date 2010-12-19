@@ -4,16 +4,14 @@
 
   <g:if test="${homepage}">
     <div class="logo"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v2"
+        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
         alt="<g:message code='logo.alt.text'/>" width="341" height="93" /></div>
   </g:if>
   <g:else>
     <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}?v2"
+        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
         alt="<g:message code='logo.alt.text'/>" width="341" height="93" /></a></div>
   </g:else>
-
-
 
   <p class="claim">Synonyme und Assoziationen</p>
   <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value);return false;" name="searchform">
