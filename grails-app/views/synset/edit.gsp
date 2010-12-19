@@ -5,6 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()?.encodeAsHTML()]}"/></title>
+        <g:if test="${synset?.isVisible == false}">
+          <meta name="robots" content="noindex" />
+        </g:if>
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
