@@ -37,7 +37,7 @@ class Term implements Comparable, Cloneable {
 
     /** Allowed term expression. TODO: read from configuration */
     final static String TERM_REGEXP =
-        "[ 0-9a-zA-ZöäüÖÄÜßëçèéáàóòãñíş\\{\\}\\\"\\?\\*=()\\-\\+/.,'_:<>;%" +
+        "[ 0-9a-zA-ZöäüÖÄÜßëçèéáàóòãñíş\\{\\}\\\"\\?\\*=()\\-\\+/.,'_:<>;%°" +
             "\\!\\[\\]&#αΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσΣτΤυΥφΦχΧψΨωΩ]+"
 
     static belongsTo = [synset:Synset]
