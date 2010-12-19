@@ -21,7 +21,11 @@
         <ul>
         <li><a href="../export/${oooDump.getName()}">Deutscher Thesaurus für OpenOffice.org 3.x / LibreOffice,
             ${sdf.format(new Date(oooDump.lastModified()))},
-            ${String.format("%.2f", oooDump.length()/1000/1000)}MB</a></li>
+            ${String.format("%.2f", oooDump.length()/1000/1000)}MB</a>
+            <ul style="margin-top:0px">
+              <li><a href="../export/${oooDumpCh.getName()}">Schweizer Version</a> (wie oben, nur alle <span class="bsp">ß</span> durch <span class="bsp">ss</span> ersetzt)</li>
+            </ul>
+        </li>
 
         <li><a href="../export/${textDump.getName()}">Thesaurus im Text-Format, gezippt,
             ${sdf.format(new Date(textDump.lastModified()))},
@@ -37,7 +41,7 @@
         <li style="margin-top:20px"><a href="../old/thes_de_DE_v2.zip">Deutscher Thesaurus for OpenOffice.org 2.x, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
         <li><a href="../old/kword_thesaurus.txt.gz">Thesaurus für KWord, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 
-        <li style="margin-top:20px">OpenThesaurus als Software für Mac oder Android <a href="./">auf dieser Seite</a></li>
+        <li style="margin-top:20px">OpenThesaurus als Software für Mac und Android <a href="./">auf dieser Seite</a></li>
 
         </ul>
 
