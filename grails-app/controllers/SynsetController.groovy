@@ -508,8 +508,9 @@ class SynsetController extends BaseController {
           continue
         }
         String result = matchedTerm.encodeAsHTML()
-        Matcher m = pattern.matcher(result)
-        result = m.replaceAll("<span class='match'>\$0</span>")
+        // currently not useful:
+        //Matcher m = pattern.matcher(result)
+        //result = m.replaceAll("<span class='match'>\$0</span>")
         matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
       }
       resultSet.close()
