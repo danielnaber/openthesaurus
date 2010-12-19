@@ -1,14 +1,26 @@
 					<h2><g:message code="result.wiktionary.headline"/></h2>
 					<g:if test="${wiktionaryResult}">
 						<%
+						final String myMarker = "__ot__";
 						clean =
 						  { str -> str
-						    .replaceAll(":\\[(\\d+[a-z]?\\.?\\d*)\\]", "__\$1__")
+						    .replaceAll(":*\\s*\\[(\\d*[a-z]?\\.?\\d*)\\]", myMarker + " \$1" + myMarker)
 						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
                             .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
+
+                            .replaceAll("\\{\\{(ugs|trans)\\.\\|[:,]\\}\\}", myMarker + "\$1" + myMarker)
+
+                            .replaceAll("\\{\\{(f|m|n)\\}\\}", myMarker + "{\$1}" + myMarker)
+
+                            .replaceAll("&lt;sup&gt;", "<sup>")
+                            .replaceAll("&lt;/sup&gt;", "</sup>")
+
+                            .replaceAll("&lt;sub&gt;", "<sub>")
+                            .replaceAll("&lt;/sub&gt;", "</sub>")
+
                             .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
-						    .replaceAll("__(\\d+[a-z]?\\.?\\d*)__", "<span class='wiktionaryItem'>\$1.</span>")
+						    .replaceAll(myMarker + "(.*?)" + myMarker, "<span class='wiktionaryItem'>\$1.</span>")
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
