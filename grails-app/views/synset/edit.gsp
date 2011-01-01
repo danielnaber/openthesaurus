@@ -28,7 +28,7 @@
           function doSearchOnReturn(event) {
               if (event.keyCode == 13) {
                   // start a search on return (copied from the generated code):
-                  new Ajax.Updater('synsetLink','${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;
+                  new Ajax.Updater('synsetLink','${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});
                   // don't send the outer form:
                   return false;
               }
