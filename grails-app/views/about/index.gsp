@@ -55,8 +55,12 @@
         <h2>OpenThesaurus auf Android</h2>
 
         <ul>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a>
-              (vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a>)</li>
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a> von Felix Christl.
+              Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
+              Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurusforandroid/">Sourcecode</a>)</li>
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.ad.openthesaurus/OpenThesaurus-de">OpenThesaurus.de</a> von André Diermann.
+              Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
+              Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurus-de/">Sourcecode</a>)</li>
         </ul>
 
 
