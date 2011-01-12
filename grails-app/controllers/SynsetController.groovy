@@ -38,6 +38,7 @@ class SynsetController extends BaseController {
     private static final String REQUEST_LIMIT_MAX_REQUESTS = "requestLimitMaxRequests"
     private static final String REQUEST_LIMIT_SLEEP_TIME_MILLIS = "requestLimitSleepTimeMillis"
     private static final String REQUEST_LIMIT_IPS = "requestLimitIps"
+    private static final String REQUEST_LIMIT_SPECIAL_IPS_PREFIX = "requestLimitForIp"
 
     private static apiRequestEvents = []
     private static final int API_REQUEST_QUEUE_SIZE = 500
@@ -384,6 +385,14 @@ class SynsetController extends BaseController {
     ThesaurusConfigurationEntry slowDownIpsObj = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_IPS)
     if (slowDownIpsObj != null) {
       slowDownIps = slowDownIpsObj.value.split(",")
+    }
+
+    ThesaurusConfigurationEntry specialIpConfig = ThesaurusConfigurationEntry.findByKey(REQUEST_LIMIT_SPECIAL_IPS_PREFIX + "-" + ip)
+    if (specialIpConfig != null) {
+      String[] specialIpConfigValues = specialIpConfig.value.split(";")
+      maxAgeSeconds = specialIpConfigValues[0] == "-" ? maxAgeSeconds : Integer.parseInt(specialIpConfigValues[0])
+      maxRequests = specialIpConfigValues[1] == "-" ? maxRequests : Integer.parseInt(specialIpConfigValues[1])
+      sleepTime = specialIpConfigValues[2] == "-" ? sleepTime : Integer.parseInt(specialIpConfigValues[2])
     }
 
     String sleepTimeInfo = ""
