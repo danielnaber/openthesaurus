@@ -37,7 +37,11 @@ class RedirectController extends BaseController {
 
    def searchwithoutjavascript = {
      // remove the useless "x" and "y" coordinates caused by the graphical submit button
-     redirect(controller:'synset', action:'search', params:[q: params.q])
+     String query = params.q
+     if (!query) {
+       query = "Suchwort"
+     }
+     redirect(controller:'synset', action:'search', params:[q: query])
    }
 
    def synseteditredirect = {
