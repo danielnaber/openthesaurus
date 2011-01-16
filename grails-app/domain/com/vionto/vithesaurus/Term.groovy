@@ -17,8 +17,6 @@
  */ 
 package com.vionto.vithesaurus;
 
-import com.vionto.vithesaurus.TermValidator
-
 /**
  * A term - terms are what synsets are made of.
  */
@@ -48,7 +46,7 @@ class Term implements Comparable, Cloneable {
         word(matches:TERM_REGEXP,minSize:1,
             validator: {
                 if(it.matches("\\s.*") || it.matches(".*\\s") || // should not start or end with whitespace
-                        it.matches(".*-\\s[A-Z].*") || // no hyphen followed by space followed by uppercaseletter
+                        it.matches(".*-\\s[A-Z].*") || // no hyphen followed by space followed by uppercase letter
                         it.matches(".*-\\s[1-9].*") || // or a hyphen followed by digit
                         it.matches(".*\\s{2}.*")) { // and no double-white-space
                     return ['invalid.term', it, it]
@@ -118,7 +116,7 @@ class Term implements Comparable, Cloneable {
     }
 
     /**
-     * Used to first sort by language, then by term as a second criterium.
+     * Used to first sort by language, then by term as a second criterion.
      */
     int compareTo(Object other) {
         if (other.language == language) {
