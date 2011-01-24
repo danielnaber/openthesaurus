@@ -32,6 +32,9 @@ class UserEventController extends BaseController {
         if (!params.order) params.order = "desc"
         params.max = params.max ? Integer.parseInt(params.max) : 10
         params.offset = params.offset ? Integer.parseInt(params.offset) : 0
+        if (params.jumpToPage) {
+            params.offset = (Integer.parseInt(params.jumpToPage) - 1) * params.max
+        }
         
         def crit = UserEvent.createCriteria()
         int totalMatches = crit.count {

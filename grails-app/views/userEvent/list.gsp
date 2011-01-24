@@ -26,6 +26,8 @@
               </form>
           </g:if>
 
+          <g:render template="navigation"/>
+
           <div class="colspanlist">
               <table>
                   <thead>
@@ -51,7 +53,7 @@
                   </thead>
                   <tbody>
                   <g:each in="${userEventList}" status="i" var="userEvent">
-                      <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                      <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" style="border-top-width: 1px; border-top-style: solid; border-top-color: #aaa;">
 
                           <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${userEvent.creationDate}"/></td>
 
@@ -66,15 +68,21 @@
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                           <td></td>
                           <td></td>
-                          <td colspan="2">${diffs.get(userEvent)}</td>
+                          <td>${diffs.get(userEvent)}</td>
                       </tr>
                   </g:each>
                   </tbody>
               </table>
           </div>
-          <div class="paginateButtons">
-              <g:paginate total="${totalMatches}" params="${params}" />
-          </div>
+
+          <g:render template="navigation"/>
+
+          <g:form style="margin-top:15px">
+            <g:hiddenField name="offset" value="${params.offset}"/>
+            Einträge pro Seite: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>
+            Springen zu Seite: <g:textField name="jumpToPage" size="3"/>
+            <g:submitButton name="name" value="Ändern"/>
+          </g:form>
 
     </body>
 </html>
