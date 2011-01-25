@@ -24,8 +24,12 @@ class FeedController extends BaseController {
 
    def index = {
 
+       int max = params.max ? Integer.parseInt(params.max) : 50
+       if (max > 250) {
+         max = 250
+       }
        def eventList = UserEvent.withCriteria {
-         maxResults(250)
+         maxResults(max)
          order("creationDate", "desc")
        }
        
