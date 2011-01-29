@@ -28,7 +28,7 @@
 
         <div class="body">
         
-            <h1><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h1>
+            <h2><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h2>
     
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -119,18 +119,19 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
-                                      <label><input type="radio" name="level.id" value="null" checked="checked" /> <g:message code="edit.term.level.none"/></label><br />
+                                      <label><input type="radio" name="level.id" value="null" checked="checked" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
                                     </g:if>
                                     <g:else>
-                                      <label><input type="radio" name="level.id" value="null" /> <g:message code="edit.term.level.none"/></label><br />
+                                      <label><input type="radio" name="level.id" value="null" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
                                     </g:else>
                                     <g:each in="${TermLevel.list()}" var="level">
                                       <g:if test="${term.level?.id == level.id}">
-                                        <label><input type="radio" name="level.id" value="${level.id}" checked="checked" /> ${level.levelName}</label><br />
+                                        <g:set var="checked" value="checked='checked'"/>
                                       </g:if>
                                       <g:else>
-                                        <label><input type="radio" name="level.id" value="${level.id}" /> ${level.levelName}</label><br />
+                                        <g:set var="checked" value=""/>
                                       </g:else>
+                                      <label><input type="radio" name="level.id" value="${level.id}" ${checked} /> ${level.levelName}</label><br />
                                     </g:each>
                                 </td>
                             </tr>
@@ -162,67 +163,64 @@
                             </tr>
                             --%> 
 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                	<g:message code="edit.term.links"/>
-                                </td>
-                                <td valign='top' class='value'>
-								    <g:if test="${session.user && false}"><%-- FIXME
-	                                
-								        <div id="addTermLinkLink" style="margin-top:5px">
-								            <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.link"/></a>
-								        </div>
-								        <div id="addTermLink" style="display:none;margin-top:5px">
-									        <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>
-									        <g:select name="linkType.id"
-									              optionKey="id" from="${TermLinkType.list().sort()}" />
-									
-											<%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
-											<%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
-									        <a href="${createLinkTo(dir:'synset/ajaxSearch')}" 
-									        	onclick="new Ajax.Updater('termLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
-									        	><g:message code="edit.link.lookup"/></a>
-									              
-									        <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
-									        <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
-									              update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
-									        -->
-									        <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
-									            <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
-									               title="Searching..."/>
-									        </span>
-									        <div id="termLink">
-									        </div>
-								     	</div>
-								    
-								    </g:if> 
-								    <g:else>
-						    			<g:if test="${term.termLinks && term.termLinks.size() > 0 || reverseLinks && reverseLinks.size() > 0}">
-						    				<ul>
-							    				<g:each var="termLink" in="${term.termLinks}">
-							    					<li>${termLink.linkType.linkName.encodeAsHTML()}:
-							    						<g:link controller="term" action="edit" 
-							    						  id="${termLink.targetTerm.id}">${termLink.targetTerm}</g:link>
-							    						(<g:link controller="synset" action="edit"
-							    						  id="${termLink.targetTerm.synset.id}">${termLink.targetTerm.synset.toShortString(3).encodeAsHTML()}</g:link>)</li>
-							    				</g:each>
-							    				<%-- show links pointing *to* this term from another term: --%>
-							    				<g:each var="termLink" in="${reverseLinks}">
-							    					<li>${termLink.linkType.otherDirectionLinkName.encodeAsHTML()}:
-							    						<g:link controller="term" action="edit" 
-							    						  id="${termLink.term.id}">${termLink.term}</g:link>
-							    						(<g:link controller="synset" action="edit"
-							    						  id="${termLink.term.synset.id}">${termLink.term.synset.toShortString(3).encodeAsHTML()}</g:link>)</li>
-							    				</g:each>
-						    				</ul>
-						    			</g:if>
-						    			<g:else>
-						    				<span class="metaInfo"><g:message code='edit.none'/></span>
-						    			</g:else>
-								    </g:else>
-								     
-							     </td>
-							</tr>
+                            <g:if test="${session.user && false}"><%-- FIXME
+
+                                <div id="addTermLinkLink" style="margin-top:5px">
+                                    <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.link"/></a>
+                                </div>
+                                <div id="addTermLink" style="display:none;margin-top:5px">
+                                    <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>
+                                    <g:select name="linkType.id"
+                                          optionKey="id" from="${TermLinkType.list().sort()}" />
+
+                                    <%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
+                                    <%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
+                                    <a href="${createLinkTo(dir:'synset/ajaxSearch')}"
+                                        onclick="new Ajax.Updater('termLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
+                                        ><g:message code="edit.link.lookup"/></a>
+
+                                    <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
+                                    <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
+                                          update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
+                                    -->
+                                    <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
+                                        <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
+                                           title="Searching..."/>
+                                    </span>
+                                    <div id="termLink">
+                                    </div>
+                                </div>
+
+                            </g:if>
+                            <g:else>
+                                <g:if test="${term.termLinks && term.termLinks.size() > 0 || reverseLinks && reverseLinks.size() > 0}">
+                                        <g:each var="termLink" in="${term.termLinks}">
+                                          <tr>
+                                            <td>${termLink.linkType.linkName.encodeAsHTML()}:</td>
+                                            <td><g:link controller="term" action="edit"
+                                                  id="${termLink.targetTerm.id}">${termLink.targetTerm}</g:link>
+                                                (<g:link controller="synset" action="edit"
+                                                  id="${termLink.targetTerm.synset.id}">${termLink.targetTerm.synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
+                                          </tr>
+                                        </g:each>
+                                        <%-- show links pointing *to* this term from another term: --%>
+                                        <g:each var="termLink" in="${reverseLinks}">
+                                          <tr>
+                                            <td>${termLink.linkType.otherDirectionLinkName.encodeAsHTML()}:</td>
+                                            <td><g:link controller="term" action="edit"
+                                                  id="${termLink.term.id}">${termLink.term}</g:link>
+                                                (<g:link controller="synset" action="edit"
+                                                  id="${termLink.term.synset.id}">${termLink.term.synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
+                                          </tr>
+                                        </g:each>
+                                </g:if>
+                                <g:else>
+                                    <tr>
+                                      <td>Antonym:</td>
+                                      <td><span class="noMatches"><g:message code='edit.term.antonyms.none'/></span></td>
+                                    </tr>
+                                </g:else>
+                            </g:else>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>

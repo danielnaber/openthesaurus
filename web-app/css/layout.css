@@ -307,6 +307,11 @@ h2 {
   font-weight: bold;
 }
 
+.noMatches {
+  color: #777777;
+  font-weight:normal;
+}
+
 .addNewTerm {
   font-weight: bold;
 }

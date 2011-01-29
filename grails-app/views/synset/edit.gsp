@@ -256,7 +256,7 @@
                               </ul>
                             </g:if>
                             <g:if test="${synset.categoryLinks == null || synset.categoryLinks.size() == 0}">
-                                <span class="metaInfo"><g:message code='edit.none'/></span>
+                                <span class="noMatches"><g:message code='edit.none'/></span>
                             </g:if>
 
                             </td>

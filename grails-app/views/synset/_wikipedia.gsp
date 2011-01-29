@@ -26,6 +26,6 @@
 					</g:if>
 					<g:else>
 						<ul>
-							<li><span class="light"><g:message code="result.no.matches"/></span></li>
+							<li><span class="noMatches"><g:message code="result.no.matches"/></span></li>
 						</ul>
 					</g:else>

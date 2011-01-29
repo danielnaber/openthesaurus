@@ -50,7 +50,7 @@
        </g:if>
     </g:each>
     <g:if test="${nymCount == 0}">
-         <span class="metaInfo"><g:message code="edit.no.super.synset"/></span>
+         <span class="noMatches"><g:message code="edit.no.super.synset"/></span>
     </g:if>
 
     <g:if test="${session.user && showAddLink}">

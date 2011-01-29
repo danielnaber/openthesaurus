@@ -14,7 +14,7 @@
                         </g:else>
                     </g:each>
                     <g:if test="${partialMatchResult.size() == 0}">
-                        <span class="light">Kein Teilwort-Treffer</span>
+                        <span class="noMatches">Kein Teilwort-Treffer</span>
                     </g:if>
                     <g:if test="${partialMatchResult.size() > 8}">
                         &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="../images/arrow-blue.png" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
@@ -31,6 +31,6 @@
                         </g:if>
                     </g:each>
                     <g:if test="${similarTerms.size() == 0}">
-                        <span class="light">Keine ähnlichen Treffer</span>
+                        <span class="noMatches">Keine ähnlichen Treffer</span>
                     </g:if>
                     </p>
