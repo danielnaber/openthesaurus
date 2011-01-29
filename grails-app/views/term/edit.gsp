@@ -119,10 +119,10 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
-                                      <label><input type="radio" name="level.id" value="null" checked="checked" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
+                                      <label><input ${disabled} type="radio" name="level.id" value="null" checked="checked" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
                                     </g:if>
                                     <g:else>
-                                      <label><input type="radio" name="level.id" value="null" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
+                                      <label><input ${disabled} type="radio" name="level.id" value="null" /> <span class="noMatches"><g:message code="edit.term.level.none"/></span></label><br />
                                     </g:else>
                                     <g:each in="${TermLevel.list()}" var="level">
                                       <g:if test="${term.level?.id == level.id}">
@@ -131,7 +131,7 @@
                                       <g:else>
                                         <g:set var="checked" value=""/>
                                       </g:else>
-                                      <label><input type="radio" name="level.id" value="${level.id}" ${checked} /> ${level.levelName}</label><br />
+                                      <label><input ${disabled} type="radio" name="level.id" value="${level.id}" ${checked} /> ${level.levelName}</label><br />
                                     </g:each>
                                 </td>
                             </tr>
