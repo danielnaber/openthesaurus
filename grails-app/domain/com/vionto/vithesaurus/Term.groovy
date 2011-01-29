@@ -95,6 +95,20 @@ class Term implements Comparable, Cloneable {
         return word.replaceAll("\\(.*?\\)", "").trim()
     }
 
+    List getTermLinkInfos() {
+        // a link always goes into one direction, but we also need
+        // the other direction (eg. hot->cold, cold->hot):
+        List termLinkInfos = []
+        for (TermLink link : termLinks) {
+            termLinkInfos.add(new TermLinkInfo(this, link.targetTerm, link.linkType.linkName, true))
+        }
+        List reverseLinks = TermLink.findAllByTargetTerm(this)
+        for (TermLink link : reverseLinks) {
+            termLinkInfos.add(new TermLinkInfo(this, link.term, link.linkType.otherDirectionLinkName, false))
+        }
+        return termLinkInfos
+    }
+
     /**
      * A String representation with all important properties.
      */

@@ -35,17 +35,7 @@ class TermController extends BaseController {
             redirect(action:list)
         }
         else {
-            // a link always goes into one direction, but we also need
-            // the other direction (eg. hot->cold, cold->hot):
-            List termLinkInfos = []
-            Set links = term.termLinks
-            for (TermLink link : links) {
-                termLinkInfos.add(new TermLinkInfo(term, link.targetTerm, link.linkType.linkName, true))
-            }
-            List reverseLinks = TermLink.findAllByTargetTerm(term)
-            for (TermLink link : reverseLinks) {
-                termLinkInfos.add(new TermLinkInfo(term, link.term, link.linkType.otherDirectionLinkName, false))
-            }
+            List termLinkInfos = term.getTermLinkInfos()
             return [ term : term, id: term.id, termLinkInfos: termLinkInfos ]
         }
     }
