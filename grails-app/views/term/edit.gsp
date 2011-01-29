@@ -193,26 +193,16 @@
 
                             </g:if>
                             <g:else>
-                                <g:if test="${term.termLinks && term.termLinks.size() > 0 || reverseLinks && reverseLinks.size() > 0}">
-                                        <g:each var="termLink" in="${term.termLinks}">
-                                          <tr>
-                                            <td>${termLink.linkType.linkName.encodeAsHTML()}:</td>
-                                            <td><g:link controller="term" action="edit"
-                                                  id="${termLink.targetTerm.id}">${termLink.targetTerm}</g:link>
-                                                (<g:link controller="synset" action="edit"
-                                                  id="${termLink.targetTerm.synset.id}">${termLink.targetTerm.synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
-                                          </tr>
-                                        </g:each>
-                                        <%-- show links pointing *to* this term from another term: --%>
-                                        <g:each var="termLink" in="${reverseLinks}">
-                                          <tr>
-                                            <td>${termLink.linkType.otherDirectionLinkName.encodeAsHTML()}:</td>
-                                            <td><g:link controller="term" action="edit"
-                                                  id="${termLink.term.id}">${termLink.term}</g:link>
-                                                (<g:link controller="synset" action="edit"
-                                                  id="${termLink.term.synset.id}">${termLink.term.synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
-                                          </tr>
-                                        </g:each>
+                                <g:if test="${termLinkInfos.size() > 0}">
+                                    <g:each var="termLinkInfo" in="${termLinkInfos}">
+                                      <tr>
+                                        <td>${termLinkInfo.getLinkName().encodeAsHTML()}:</td>
+                                        <td><g:link controller="term" action="edit"
+                                              id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
+                                            (<g:link controller="synset" action="edit"
+                                              id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
+                                      </tr>
+                                    </g:each>
                                 </g:if>
                                 <g:else>
                                     <tr>
