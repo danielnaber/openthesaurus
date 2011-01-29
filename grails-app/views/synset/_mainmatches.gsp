@@ -73,11 +73,14 @@
 
 		                        <g:set var="counter" value="${counter + 1}"/>
                             </g:each>
-                            <g:if test="${session.user}">
                               <g:link action="edit" id="${synset.id}">
+                                <g:if test="${session.user}">
                                   <span class="changeLink"><g:message code="result.edit"/></span>
+                                </g:if>
+                                <g:else>
+                                  <span class="changeLink"><g:message code="result.details"/></span>
+                                </g:else>
                               </g:link>
-                            </g:if>
                             </span>
 
                         </div>
