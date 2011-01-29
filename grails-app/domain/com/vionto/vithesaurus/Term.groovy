@@ -92,7 +92,7 @@ class Term implements Comparable, Cloneable {
     }
     
     public static String normalize(String word) {
-      word = word.replaceAll("\\(.*?\\)", "").trim()
+      return word.replaceAll("\\(.*?\\)", "").trim()
     }
 
     /**
