@@ -176,6 +176,15 @@
                                         --%>
 
                                         <g:set var="previousLanguage" value="${t.language}"/>
+
+                                        <g:set var="termLinkInfos" value="${t.getTermLinkInfos()}"/>
+                                        <g:if test="${termLinkInfos.size() > 0}">
+                                          &nbsp;&nbsp;
+                                          <g:each var='termLinkInfo' in='${termLinkInfos}'>
+                                            ${termLinkInfo.getLinkName().encodeAsHTML()}: <g:link controller="synset" action="edit" id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().encodeAsHTML()}</g:link>
+                                          </g:each>
+                                        </g:if>
+
                                     </li>
                                 </g:each>
                             </ul>
@@ -405,7 +414,7 @@
                                         </div>
                                     </g:if>
                                     <g:else>
-                                        <span class="metaInfo"><g:message code="edit.no.comment"/></span>
+                                        <span class="noMatches"><g:message code="edit.no.comment"/></span>
                                     </g:else>
                                 </g:else>
 
