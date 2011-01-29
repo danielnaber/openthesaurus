@@ -32,13 +32,15 @@ class AdminController extends BaseController {
 
     def checkNormalizedTermIntegrity = {
         List terms = Term.list()
+        int count = 0
         for (term in terms) {
             String normalizedWord = Term.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
-              render "<a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+              render "Error: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }
+            count++
         }
-        render ""
+        render "<br>Checked ${count} terms."
     }
 
 }

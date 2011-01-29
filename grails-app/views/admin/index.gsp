@@ -20,22 +20,25 @@
         <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
         <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
         <g:link controller="section" action="list">Thesauri</g:link> |
-        <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link><br />
+        <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link></p>
 
-        Import:
+        <p>Import:
         <g:link controller="suggest" action="index">Find words without synonyms</g:link> |
-
         Export:
         <g:link controller="exportOxt" action="run">Export OXT (slow for large data sets)</g:link> |
         <g:link controller="exportText" action="run">Export text</g:link> 
-        <br />
+        </p>
 
-        Lists:
-        <g:link controller="check" action="listInvisibleSynsets">Invisible</g:link>
-        <br />
+        <p>Lists:
+        <g:link controller="check" action="listInvisibleSynsets">Invisible synsets</g:link>
+        </p>
 
-        Term Checks:
-        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
+        <p>Term Checks:
+        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link></p>
+
+        <p>Sanity checks:
+        <g:link controller="admin" action="checkNormalizedTermIntegrity">Normalized term integrity</g:link>
+        </p>
 
 		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription</h2>
 
