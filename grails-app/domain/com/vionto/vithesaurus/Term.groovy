@@ -225,4 +225,14 @@ class Term implements Comparable, Cloneable {
         }
     }
 
+    static int countVisibleTerms() {
+        def c = Term.createCriteria()
+        int count = c.count {
+            synset {
+                eq('isVisible', true)
+            }
+        }
+        return count
+    }
+
 }

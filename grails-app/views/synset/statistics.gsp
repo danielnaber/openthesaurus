@@ -25,7 +25,7 @@
 
                       <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.terms" /></td>
-                          <td valign="top" class="value"><g:decimal number="${Term.count()}" /></td>
+                          <td valign="top" class="value"><g:decimal number="${Term.countVisibleTerms()}" /></td>
                       </tr>
 
                       <tr class="prop">
