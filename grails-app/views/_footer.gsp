@@ -27,16 +27,19 @@
         <ul>
           <li><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
           <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
-          <li><g:link controller="about" action="api"><g:message code="homepage.api"/></g:link></li>
-          <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
+          <li><g:link url="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss"><g:message code="homepage.mailing_list"/></g:link></li>
           <li><g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link></li>
+          <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
+          <li><g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link></li>
 
-          <li><g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link></li>
+          <li style="margin-top:16px"><g:link controller="about" action="api"><g:message code="homepage.api"/></g:link></li>
+          <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
+
+          <li style="margin-top:16px"><g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link></li>
           <li><g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link></li>
           <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
-          <li><g:link controller="synset" action="statistics"><g:message code="statistics"/></g:link></li>
-          <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
-          <li style="margin-top:15px"><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
+
+          <li style="margin-top:16px"><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
         </ul>
       </td>
       <td width="130">
