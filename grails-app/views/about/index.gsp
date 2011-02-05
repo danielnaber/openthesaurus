@@ -29,10 +29,23 @@
         angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 
 
+        <h2>Werbung</h2>
+
+        <p>Um auf openthesaurus.de zu werben, wenden Sie sich <a href="imprint">direkt an uns</a> oder an unsere Agentur:<br/>
+        scharfe//media, Tharandter Straße 31-33, 01159 Dresden, Telefon: 0351-4568 0118, <a href="http://www.scharfe-media.de">www.scharfe-media.de</a></p>
+
+    
         <h2>Lizenz</h2>
 
-        <p>Die Daten von OpenThesaurus stehen unter der
-          <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License</a> zur Verfügung.</p>
+        <p>Die Daten von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
+          <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
+          Das bedeutet vereinfacht gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
+          können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
+          und openthesaurus.de als die ursprüngliche Quelle angegeben wird.</p>
+
+        <p>Der Sourcecode der Website befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
+          bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.
+        </p>
 
     
         <h2>Design</h2>
@@ -97,12 +110,5 @@
             <li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
         </ul>
 
-
-        <h2>Basis dieser Website</h2>
-
-        <ul>
-            <li><a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus auf Sourceforge</a></li>
-        </ul>
-        
     </body>
 </html>
