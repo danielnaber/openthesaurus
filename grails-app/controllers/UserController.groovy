@@ -18,7 +18,8 @@
 
 import com.vionto.vithesaurus.*
 import java.security.MessageDigest
-            
+import com.vionto.vithesaurus.tools.IpTools
+
 class UserController extends BaseController {
     
     def beforeInterceptor = [action: this.&auth, 
@@ -88,7 +89,8 @@ class UserController extends BaseController {
             subject message(code:'user.register.email.mailinglist.subject')
             body ''
           }
-          log.info("Sent mailing list registration request mail to " + message(code:'user.register.email.mailinglist.to') + " with From: " + params.userId)
+          String ip = IpTools.getRealIpAddress(request)
+          log.info("Sent mailing list registration request mail to " + message(code:'user.register.email.mailinglist.to') + " with From: " + params.userId + ", User IP: " + ip)
         }
       } else {
         user.errors.reject('thesaurus.error', [].toArray(), 
