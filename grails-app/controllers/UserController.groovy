@@ -74,13 +74,22 @@ class UserController extends BaseController {
           }
         }
         String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration?userId=${user.id}&code=${user.confirmationCode}"
-        sendMail {    
+        sendMail {
           from message(code:'user.register.email.from')
           to params.userId
           subject message(code:'user.register.email.subject')     
           body message(code:'user.register.email.body', args:[activationLink]) 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
+        if (params.subscribeToMailingList) {
+          sendMail {
+            from params.userId
+            to message(code:'user.register.email.mailinglist.to')
+            subject message(code:'user.register.email.mailinglist.subject')
+            body ''
+          }
+          log.info("Sent mailing list registration request mail to " + message(code:'user.register.email.mailinglist.to') + " with From: " + params.userId)
+        }
       } else {
         user.errors.reject('thesaurus.error', [].toArray(), 
             message(code:'user.register.user.exists'))

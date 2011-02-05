@@ -50,7 +50,7 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <label for='password'><g:message code="user.login.form.password"/></label>
+                                <label for='password1'><g:message code="user.login.form.password"/></label>
                             </td>
                             <td valign='top' class='value'>
                                 <input size="40" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}"/>
@@ -59,10 +59,18 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <label for='password'><g:message code="user.register.form.password.repeat"/></label>
+                                <label for='password2'><g:message code="user.register.form.password.repeat"/></label>
                             </td>
                             <td valign='top' class='value'>
                                 <input size="40" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}"/>
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                            </td>
+                            <td valign='top' class='value'>
+                                <label><g:checkBox name="subscribeToMailingList"/> <g:message code="user.register.form.mailinglist"/></label>
                             </td>
                         </tr>
 
