@@ -22,9 +22,9 @@ package com.vionto.vithesaurus;
  */
 class ThesaurusUser {
 
-    String userId
+    String userId       // currently this is the email address
     String password
-    String realName		// or visible name, whatever we get from the user
+    String realName		// currently this is the visible name (might of course be a real name)
     String permission
     Date creationDate
     Date lastLoginDate

@@ -56,6 +56,12 @@ class UserController extends BaseController {
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
+      if (ThesaurusUser.findByRealName(params.visibleName)) {
+        user.errors.reject('thesaurus.error', [].toArray(),
+            message(code:'user.register.user.visible.name.exists'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
+      }
       if (!ThesaurusUser.findByUserId(params.userId)) {
         checkPasswords(user)
         if (user.errors.allErrors.size() > 0) {
