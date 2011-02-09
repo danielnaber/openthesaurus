@@ -177,7 +177,7 @@
 
                                         <g:set var="previousLanguage" value="${t.language}"/>
 
-                                        <g:set var="termLinkInfos" value="${t.getTermLinkInfos()}"/>
+                                        <g:set var="termLinkInfos" value="${t.termLinkInfos()}"/>
                                         <g:if test="${termLinkInfos.size() > 0}">
                                           &nbsp;&nbsp;
                                           <g:each var='termLinkInfo' in='${termLinkInfos}'>

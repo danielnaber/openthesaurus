@@ -35,7 +35,7 @@ class TermController extends BaseController {
             redirect(action:list)
         }
         else {
-            List termLinkInfos = term.getTermLinkInfos()
+            List termLinkInfos = term.termLinkInfos()
             return [ term : term, id: term.id, termLinkInfos: termLinkInfos ]
         }
     }

@@ -95,7 +95,7 @@ class Term implements Comparable, Cloneable {
         return word.replaceAll("\\(.*?\\)", "").trim()
     }
 
-    List getTermLinkInfos() {
+    List termLinkInfos() {
         // a link always goes into one direction, but we also need
         // the other direction (eg. hot->cold, cold->hot):
         List termLinkInfos = []
