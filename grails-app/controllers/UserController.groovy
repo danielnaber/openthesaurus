@@ -340,37 +340,20 @@ class UserController extends BaseController {
     }
 
     def edit = {
-        ThesaurusUser user = ThesaurusUser.get( params.id )
-        if (!isAdmin() && user.id != session?.user?.id) {
-            render "Access denied"
-            return
-        }
-
-        if(!user) {
-            flash.message = "User not found with id ${params.id}"
-            redirect(action:list)
-        }
-        else {
-            return [ user : user ]
+        if(session.user) {
+          ThesaurusUser user = session.user
+          return [ user : user ]
+        } else {
+          flash.message = "User not found with id ${params.id}"
+          redirect(action:list)
         }
     }
 
     def update = {
-        ThesaurusUser user = ThesaurusUser.get( params.id )
-        if (!isAdmin() && user.id != session?.user?.id) {
-            // a user may only edit his own account
-            render "Access denied"
-            return
-        }
-        if (user) {
-            // only the admin may change a user's permission level:
-            if (!isAdmin() && user.permission == ThesaurusUser.USER_PERM && 
-                    params.permission != ThesaurusUser.USER_PERM) {
-                flash.message = "Permission may not be changed"
-                redirect(action:edit,id:params.id)
-                return
-            }
-            String passwordBackup = user.password
+        if (session.user) {
+            ThesaurusUser user = session.user
+            //TODO: make this work again
+            /*String passwordBackup = user.password
             user.properties = params
             if (params.password != "") {
                 user.password = md5sum(params.password)
@@ -384,7 +367,7 @@ class UserController extends BaseController {
             }
             else {
                 render(view:'edit',model:[user:user])
-            }
+            }*/
         }
         else {
             flash.message = "User not found with id ${params.id}"

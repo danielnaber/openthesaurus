@@ -17,11 +17,15 @@
               <div class="message">${flash.message}</div>
           </g:if>
 
+          <g:if test="${params.userId}">
+            <p>Gefiltert: nur Benutzer ${params.userId.encodeAsHTML()}</p>
+          </g:if>
+
           <g:if test="${session.user?.permission == 'admin'}">
               <form action="list" method="get" style="margin-bottom: 10px">
                 <%-- TODO: i18n: Filter by user or change description (use % as joker): --%>
-                  Nach Benutzer oder Kommentar suchen (<span class="bsp">%</span> als Platzhalter benutzen):
-                  <input name="filter" value="${params?.filter?.encodeAsHTML()}" />
+                  Nach Benutzer-ID suchen:
+                  <input name="userId" value="${params?.userId?.encodeAsHTML()}" />
                   <input type="submit" value="Suchen" />
               </form>
           </g:if>

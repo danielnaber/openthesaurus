@@ -38,23 +38,21 @@ class UserEventController extends BaseController {
         
         def crit = UserEvent.createCriteria()
         int totalMatches = crit.count {
-            if (params.filter) {
+            if (params.userId) {
                 or {
                     byUser {
-                        ilike('userId', params.filter)
+                        ilike('userId', params.userId)
                     }
-                    ilike('changeDesc', params.filter)
                 }
             }
         }
         
         def eventList = UserEvent.withCriteria {
-            if (params.filter) {
+            if (params.userId) {
                 or {
                     byUser {
-                        ilike('userId', params.filter)
+                        ilike('userId', params.userId)
                     }
-                    ilike('changeDesc', params.filter)
                 }
             }
             maxResults(params.max)
