@@ -82,6 +82,9 @@
           <g:render template="navigation"/>
 
           <g:form style="margin-top:15px">
+            <g:if test="${params.userId}">
+              <g:hiddenField name="userId" value="${params.userId.encodeAsHTML()}"/>
+            </g:if>
             <g:hiddenField name="offset" value="${params.offset}"/>
             Einträge pro Seite: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>
             Springen zu Seite: <g:textField name="jumpToPage" size="3"/>
