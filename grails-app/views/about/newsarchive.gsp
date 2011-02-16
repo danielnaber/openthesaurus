@@ -16,14 +16,26 @@
 <h2><g:message code="news.archive.headline" /></h2>
 
 <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
+
+<tr class="newsYearDelimiter">
+    <td>2011</td>
+    <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-02-16</span></td>
+    <td valign="top">Wenn man <g:link controller="user" action="login">eingeloggt</g:link> ist,
+      sieht man jetzt unter dem "Logbuch"-Link eine Liste seiner eigenen bisherigen Beiträge.</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
 <tr class="newsYearDelimiter">
     <td>2010</td>
     <td></td>
 </tr>
-  <tr>
-      <td valign="top" align="right" width="90"><span class="newsdate">2010-11-14</span></td>
-      <td valign="top">Die API hat jetzt eine Limitierung, siehe <a href="api">API-Seite</a></td>
-  </tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2010-11-14</span></td>
+    <td valign="top">Die API hat jetzt eine Limitierung, siehe <a href="api">API-Seite</a></td>
+</tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-11-11</span></td>
     <td valign="top">OpenThesaurus hat ein neues Design!</td>
