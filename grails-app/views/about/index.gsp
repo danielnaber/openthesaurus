@@ -110,5 +110,7 @@
             <li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
         </ul>
 
+    <g:render template="/ads/about_bottom"/>
+
     </body>
 </html>
