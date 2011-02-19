@@ -11,7 +11,7 @@
     
           <h2>${headline}</h2>
 
-          <div style="float:right">
+          <div style="float:right;margin-left:20px">
               <g:render template="/ads/variation_right"/>
           </div>
 
