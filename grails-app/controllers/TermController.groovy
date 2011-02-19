@@ -100,13 +100,36 @@ class TermController extends BaseController {
         else params.max = Integer.parseInt(params.max)
         if(!params.offset) params.offset = 0
         else params.offset = Integer.parseInt(params.offset)
-        def termList = Term.withCriteria {
+
+        def criteria = Term.createCriteria()
+        def matchCount = criteria.count {
           synset {
             eq('isVisible', true)
+          }
+          if (params.levelId) {
+            level {
+              eq("id", Long.parseLong(params.levelId))
+            }
+          }
+        }
+        def termList = Term.withCriteria {
+          // TODO: avoid the duplication for count and match
+          synset {
+            eq('isVisible', true)
+          }
+          if (params.levelId) {
+            level {
+              eq("id", Long.parseLong(params.levelId))
+            }
           }
           order("word", "asc")
           maxResults(20)
           firstResult(params.offset)
+        }
+        if (params.levelId) {
+          TermLevel termLevel = TermLevel.get(params.levelId)
+          render(view:'levelList',model:[termList: termList, termLevel: termLevel, matchCount: matchCount], contentType:"text/html", encoding:"UTF-8")
+          return
         }
         [ termList: termList ]
     }
