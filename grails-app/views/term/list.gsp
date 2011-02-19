@@ -7,29 +7,31 @@
     </head>
     <body>
 
-        <div class="body">
-            <h1><g:message code="a_to_z.headline" /></h1>
+        <hr/>
 
-            <g:if test="${flash.message}">
-                <div class="message">${flash.message}</div>
-            </g:if>
+        <h2><g:message code="a_to_z.headline" /></h2>
 
-            <div class="list">
-                <table>
-                    <tbody>
-                    <g:each in="${termList}" status="i" var="term">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+        <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+        </g:if>
 
-                            <td><g:link controller="synset" action="search" params="${['q': term]}">${term.toString().encodeAsHTML()}</g:link></td>
+        <div class="list">
+            <table>
+                <tbody>
+                <g:each in="${termList}" status="i" var="term">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
-            <div class="paginateButtons">
-                <g:paginate total="${Synset.countByIsVisible(true)}" />
-            </div>
+                        <td><g:link controller="synset" action="search" params="${['q': term]}">${term.toString().encodeAsHTML()}</g:link></td>
+
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
         </div>
+        <div class="paginateButtons">
+          <%-- FIXME: count terms! --%>
+            <g:paginate total="${Synset.countByIsVisible(true)}" />
+        </div>
+
     </body>
 </html>
