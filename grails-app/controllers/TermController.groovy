@@ -110,9 +110,17 @@ class TermController extends BaseController {
             level {
               eq("id", Long.parseLong(params.levelId))
             }
+          } else if (params.categoryId) {
+            synset {
+              categoryLinks {
+                category {
+                  eq("id", Long.parseLong(params.categoryId))
+                }
+              }
+            }
           }
         }
-        def termList = Term.withCriteria {
+        def matches = Term.withCriteria {
           // TODO: avoid the duplication for count and match
           synset {
             eq('isVisible', true)
@@ -121,6 +129,14 @@ class TermController extends BaseController {
             level {
               eq("id", Long.parseLong(params.levelId))
             }
+          } else if (params.categoryId) {
+            synset {
+              categoryLinks {
+                category {
+                  eq("id", Long.parseLong(params.categoryId))
+                }
+              }
+            }
           }
           order("word", "asc")
           maxResults(20)
@@ -128,10 +144,14 @@ class TermController extends BaseController {
         }
         if (params.levelId) {
           TermLevel termLevel = TermLevel.get(params.levelId)
-          render(view:'levelList',model:[termList: termList, termLevel: termLevel, matchCount: matchCount], contentType:"text/html", encoding:"UTF-8")
+          render(view:'levelList',model:[matches: matches, termLevel: termLevel, matchCount: matchCount], contentType:"text/html", encoding:"UTF-8")
+          return
+        } else if (params.categoryId) {
+          Category category = Category.get(params.categoryId)
+          render(view:'categoryList',model:[matches: matches, category: category, matchCount: matchCount], contentType:"text/html", encoding:"UTF-8")
           return
         }
-        [ termList: termList ]
+        [ termList: matches ]
     }
 
 }

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <title><g:message code="levellist.title" args="${[termLevel.levelName.encodeAsHTML()]}" /></title>
+        <title><g:message code="categorylist.title" args="${[category.categoryName.encodeAsHTML()]}" /></title>
         <meta name="robots" content="noindex, nofollow" />
     </head>
     <body>
@@ -11,7 +11,7 @@
 
         <p><g:link controller="woerter">Zurück zur Wortlisten-Übersicht</g:link></p>
 
-        <h2><g:message code="levellist.headline" args="${[termLevel.levelName.encodeAsHTML()]}"/></h2>
+        <h2><g:message code="categorylist.headline" args="${[category.categoryName.encodeAsHTML()]}"/></h2>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
@@ -31,7 +31,7 @@
             </table>
         </div>
         <div class="paginateButtons">
-            <g:paginate total="${matchCount}" params="${[max: params.max, offset:params.offset, levelId:params.levelId]}"/>
+            <g:paginate total="${matchCount}" params="${[max: params.max, offset:params.offset, categoryId:params.categoryId]}"/>
         </div>
 
     </body>

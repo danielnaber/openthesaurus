@@ -24,7 +24,7 @@ class WoerterController extends BaseController {
 
     def listen = {
         if(!params.max) params.max = 10
-        [ categoryList: Category.list( params ) ]
+        []
     }
 
 }
