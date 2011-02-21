@@ -62,7 +62,7 @@
           <li><span class="apioption">format=text/xml</span>: Aktiviert den API-Modus, so dass die Antwort als XML zurückgeliefert wird. Andere
             Formate werden derzeit nicht unterstützt.</li>
           <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
-          ähnliche Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
+          ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
 
           <pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
@@ -80,8 +80,7 @@
 </pre>
           <tt>distance</tt> gibt den Levenshtein-Abstand zum Suchwort an (Wörter in Klammern werden dabei ignoriert).
             Die Wörter sind bereits nach diesem Abstand sortiert. Es werden nur Wörter vorgeschlagen, die auch
-            in OpenThesaurus vorhanden sind. Dieses Feature eignet sich also nicht dazu, die Vorschläge einer
-            Rechtschreibprüfung zu generieren.
+            in OpenThesaurus vorhanden sind.
           </li>
           <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
           zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
