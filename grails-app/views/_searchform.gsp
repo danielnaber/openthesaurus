@@ -19,7 +19,7 @@
       <input accesskey="s" type="text" id="search-field" name="q" value="${params.q.encodeAsHTML()}" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:if>
     <g:else>
-      <input accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input onclick="document.searchform.q.select()" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
   </form>
 </div>
