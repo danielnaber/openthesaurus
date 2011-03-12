@@ -29,12 +29,10 @@
 
                   <ul class="tree">
                       <li>
-                          <%=topNounSynset%>
-                      </li>
-                      <li>
-                          <ul class="tree">
-                              <%=nounTree%>
-                          </ul>
+                        <%=topNounSynset%>
+                        <ul class="tree">
+                            <%=nounTree%>
+                        </ul>
                       </li>
                   </ul>
 
@@ -42,12 +40,10 @@
 
                   <ul class="tree">
                       <li>
-                          <%=topVerbSynset%>
-                      </li>
-                      <li>
-                          <ul class="tree">
-                              <%=verbTree%>
-                          </ul>
+                        <%=topVerbSynset%>
+                        <ul class="tree">
+                            <%=verbTree%>
+                        </ul>
                       </li>
                   </ul>
 

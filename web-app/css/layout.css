@@ -86,6 +86,11 @@ h1 {
   font-size: 11px;
 }
 
+.tree {
+  list-style: none;
+  list-style-image: none !important;
+}
+
 /* middot between words */
 .d {
   color: #999999;
