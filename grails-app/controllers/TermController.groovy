@@ -96,7 +96,7 @@ class TermController extends BaseController {
     }
 
     def list = {
-        if(!params.max) params.max = 10
+        if(!params.max) params.max = 20
         else params.max = Integer.parseInt(params.max)
         if(!params.offset) params.offset = 0
         else params.offset = Integer.parseInt(params.offset)
@@ -139,7 +139,7 @@ class TermController extends BaseController {
             }
           }
           order("word", "asc")
-          maxResults(20)
+          maxResults(params.max)
           firstResult(params.offset)
         }
         if (params.levelId) {
