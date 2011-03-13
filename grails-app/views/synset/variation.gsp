@@ -9,6 +9,8 @@
 
           <hr />
     
+          <p><g:link controller="woerter"><g:message code="word.list.backlink" /></g:link></p>
+
           <h2>${headline}</h2>
 
           <div style="float:right;margin-left:20px">
