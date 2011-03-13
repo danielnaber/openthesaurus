@@ -11,7 +11,7 @@
 
         <p><g:link controller="woerter">Zurück zur Wortlisten-Übersicht</g:link></p>
 
-        <h2><g:message code="categorylist.headline" args="${[category.categoryName.encodeAsHTML()]}"/></h2>
+        <h2><g:message code="categorylist.headline" args="${[category.categoryName.encodeAsHTML()]}"/> (${matchCount})</h2>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
