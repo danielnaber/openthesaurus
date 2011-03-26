@@ -28,6 +28,8 @@ import java.io.OutputStream;
  */
 public class StringTools {
 
+  private static final int BUFFER_SIZE = 4096;
+
   private StringTools() {
     // static methods only, no public constructor
   }
@@ -54,18 +56,24 @@ public class StringTools {
    */
   public static void writeToStream(final File file, final OutputStream out) throws IOException {
     final FileInputStream fis = new FileInputStream(file);
-    final BufferedInputStream bis = new BufferedInputStream(fis);
-    final byte[] chars = new byte[4096];
-    int readBytes = 0;
-    while (readBytes >= 0) {
-      readBytes = bis.read(chars, 0, 4096);
-      if (readBytes <= 0) {
-        break;
+    try {
+      final BufferedInputStream bis = new BufferedInputStream(fis);
+      try {
+        final byte[] chars = new byte[BUFFER_SIZE];
+        int readBytes = 0;
+        while (readBytes >= 0) {
+          readBytes = bis.read(chars, 0, BUFFER_SIZE);
+          if (readBytes <= 0) {
+            break;
+          }
+          out.write(chars, 0, readBytes);
+        }
+      } finally {
+        bis.close();
       }
-      out.write(chars, 0, readBytes);
+    } finally {
+      fis.close();
     }
-    bis.close();
-    fis.close();
   }
 
 }
