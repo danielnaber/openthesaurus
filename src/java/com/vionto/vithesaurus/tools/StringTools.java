@@ -47,118 +47,6 @@ public class StringTools {
   }
 
   /**
-   * like "replaceAtPosition", but only replaces the numbers of characters that are given by
-   * "length"
-   */
-  public static String replaceCertainPartAtPosition(final int position, final int length, 
-      final String replacement, final String string) {
-
-    if (replacement == null)
-      return string;
-    if (position < 0 || position > (string.length() - 1) || string == null)
-      return null;
-    return string.substring(0, position) + replacement
-        + string.substring(position + length, string.length());
-  }
-
-  /**
-   * replaces a substring in "string" at a given "position" by "replacement"
-   */
-  public static String replaceAtPosition(final int position, final String replacement,
-      final String string) {
-    if (replacement == null) {
-      return string;
-    }
-    if (position < 0 || position > (string.length() - 1) || string == null) {
-      return null;
-    }
-    return string.substring(0, position) + replacement
-        + string.substring(position + replacement.length(), string.length());
-  }
-
-  /**
-   * returns all indices of all occurences of "substring" in "string"
-   */
-  public static int[] allIndexOf(final String substring, final String string) {
-
-    if (!string.contains(substring)) {
-      return null;
-    }
-
-    int[] returner = new int[countSubstrings(new String[] { substring }, string)];
-    returner[0] = string.indexOf(substring, 0);
-
-    for (int i = 1; i < returner.length; i++) {
-      returner[i] = string.indexOf(substring, returner[i - 1] + 1);
-    }
-    return returner;
-  }
-
-  /**
-   * counts the occurence of all "substrings" in "string"
-   */
-  public static int countSubstrings(final String[] substring, final String string) {
-
-    int counter = substring.length;
-    for (int i = 0; i < substring.length; i++) {
-      if (substring[i] == null || !string.contains(substring[i])) {
-        substring[i] = null;
-        counter--;
-      }
-    }
-    if (counter == 0) {
-      return 0;
-    }
-    String[] realSubstring = new String[counter];
-
-    int helper = 0;
-    for (int i = 0; i < substring.length; i++) {
-      if (substring[i] == null) {
-        continue;
-      }
-      realSubstring[helper] = substring[i];
-      helper++;
-
-    }
-
-    int lastIndex = findLastPosition(realSubstring, string);
-    int aktuellePosition = findNextPosition(0, realSubstring, string);
-
-    int returner = 1;
-
-    while (aktuellePosition != lastIndex) {
-
-      aktuellePosition = findNextPosition(aktuellePosition + 1, realSubstring, string);
-      returner++;
-    }
-
-    return returner;
-  }
-
-  private static int findNextPosition(final int beginIndex, final String[] substring,
-      final String string) {
-
-    int returner = 4711;    //FIXME
-
-    for (String temp : substring) {
-      if (string.indexOf(temp, beginIndex) < returner && string.indexOf(temp, beginIndex) != -1)
-        returner = string.indexOf(temp, beginIndex);
-    }
-    return returner;
-  }
-
-  private static int findLastPosition(final String[] substring, final String string) {
-
-    int returner = -1;
-
-    for (String temp : substring) {
-      if (string.lastIndexOf(temp) > returner)
-        returner = string.lastIndexOf(temp);
-    }
-    return returner;
-  }
-
-  /**
    * Write the contents if {@code file} to {@code out}.
    * @param file input file
    * @param out stream to be written to
@@ -168,13 +56,13 @@ public class StringTools {
     final FileInputStream fis = new FileInputStream(file);
     final BufferedInputStream bis = new BufferedInputStream(fis);
     final byte[] chars = new byte[4096];
-    int readbytes = 0;
-    while (readbytes >= 0) {
-      readbytes = bis.read(chars, 0, 4096);
-      if (readbytes <= 0) {
+    int readBytes = 0;
+    while (readBytes >= 0) {
+      readBytes = bis.read(chars, 0, 4096);
+      if (readBytes <= 0) {
         break;
       }
-      out.write(chars, 0, readbytes);
+      out.write(chars, 0, readBytes);
     }
     bis.close();
     fis.close();
