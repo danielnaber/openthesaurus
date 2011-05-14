@@ -134,7 +134,9 @@ class Term implements Comparable, Cloneable {
      */
     int compareTo(Object other) {
         if (other.language == language) {
-            int compare = word.compareToIgnoreCase(other.word)
+            String normalizedWord = normalizeUmlauts(word)
+            String otherNormalizedWord = normalizeUmlauts(other.word)
+            int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
             if (compare == 0) {
               // force stable order on words that only differ in case
               return word.compareTo(other.word)
@@ -144,6 +146,10 @@ class Term implements Comparable, Cloneable {
         } else {
             return language.id - other.language.id
         }
+    }
+    
+    String normalizeUmlauts(String s) {
+        return s.toLowerCase().replace('ä', 'a').replace('ü', 'u').replace('ö', 'o').replace('ß', 'ss')
     }
 
     Object clone() {
