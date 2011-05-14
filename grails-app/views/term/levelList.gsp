@@ -11,7 +11,7 @@
 
         <p><g:link controller="woerter"><g:message code="word.list.backlink" /></g:link></p>
 
-        <h2><g:message code="levellist.headline" args="${[termLevel.levelName.encodeAsHTML()]}"/></h2>
+        <h2><g:message code="levellist.headline" args="${[termLevel.levelName.encodeAsHTML()]}"/> (${matchCount})</h2>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
