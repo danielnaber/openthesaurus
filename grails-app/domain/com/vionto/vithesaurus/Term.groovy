@@ -15,7 +15,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import com.vionto.vithesaurus.tools.StringTools;
 
 /**
  * A term - terms are what synsets are made of.
@@ -79,7 +81,7 @@ class Term implements Comparable, Cloneable {
 
     Term(String word, Language language, Synset synset) {
         this.word = word.trim()
-        String normalizedWord = normalize(this.word)
+        String normalizedWord = StringTools.normalize(this.word)
         if (this.word != normalizedWord) {
           this.normalizedWord = normalizedWord
         }
@@ -91,10 +93,6 @@ class Term implements Comparable, Cloneable {
         return word
     }
     
-    public static String normalize(String word) {
-        return word.replaceAll("\\(.*?\\)", "").trim()
-    }
-
     List termLinkInfos() {
         // a link always goes into one direction, but we also need
         // the other direction (eg. hot->cold, cold->hot):
@@ -134,8 +132,8 @@ class Term implements Comparable, Cloneable {
      */
     int compareTo(Object other) {
         if (other.language == language) {
-            String normalizedWord = normalizeForSort(word)
-            String otherNormalizedWord = normalizeForSort(other.word)
+            String normalizedWord = StringTools.normalizeForSort(word)
+            String otherNormalizedWord = StringTools.normalizeForSort(other.word)
             int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
             if (compare == 0) {
               // force stable order on words that only differ in case
@@ -148,10 +146,6 @@ class Term implements Comparable, Cloneable {
         }
     }
     
-    String normalizeForSort(String s) {
-        return normalize(s.toLowerCase().replace('ä', 'a').replace('ü', 'u').replace('ö', 'o').replace('ß', 'ss'))
-    }
-
     Object clone() {
         return super.clone()
     }

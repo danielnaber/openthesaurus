@@ -16,7 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 import com.vionto.vithesaurus.*
-            
+import com.vionto.vithesaurus.tools.StringTools
+
 class AdminController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
@@ -34,7 +35,7 @@ class AdminController extends BaseController {
         List terms = Term.list()
         int count = 0
         for (term in terms) {
-            String normalizedWord = Term.normalize(term.word)
+            String normalizedWord = StringTools.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
               render "Error: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }

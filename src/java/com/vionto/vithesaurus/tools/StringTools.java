@@ -34,6 +34,14 @@ public class StringTools {
     // static methods only, no public constructor
   }
 
+  public static String normalize(String word) {
+    return word.replaceAll("\\(.*?\\)", "").trim();
+  }
+  
+  public static String normalizeForSort(String s) {
+    return normalize(s.toLowerCase().replace('ä', 'a').replace('ü', 'u').replace('ö', 'o').replace("ß", "ss"));
+  }
+
   /**
    * Replaces all occurrences of<br>
    * <code>&lt;, &gt;, &amp;</code> <br>

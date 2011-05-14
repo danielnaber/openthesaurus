@@ -25,6 +25,7 @@ import java.sql.ResultSet
 import java.sql.PreparedStatement
 import org.apache.commons.lang.StringUtils
 import com.vionto.vithesaurus.tools.IpTools
+import com.vionto.vithesaurus.tools.StringTools
 
 class SynsetController extends BaseController {
 
@@ -723,7 +724,7 @@ class SynsetController extends BaseController {
         def termList = Term.withCriteria {
             or {
               eq('word', query)
-              eq('normalizedWord', Term.normalize(query))
+              eq('normalizedWord', StringTools.normalize(query))
             }
             synset {
                 if (section) {

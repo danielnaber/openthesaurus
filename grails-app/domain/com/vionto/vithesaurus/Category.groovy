@@ -15,7 +15,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import com.vionto.vithesaurus.tools.StringTools;
 
 /**
  * The category that synsets are associated with.
@@ -56,7 +58,9 @@ class Category implements Comparable, Cloneable {
     }
  
     int compareTo(Object other) {
-        return categoryName.compareToIgnoreCase(other.categoryName)
+        String name = StringTools.normalizeForSort(categoryName)
+        String otherName = StringTools.normalizeForSort(other.categoryName)
+        return name.compareToIgnoreCase(otherName)
     }
     
     Object clone() {

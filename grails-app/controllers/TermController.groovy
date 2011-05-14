@@ -17,7 +17,8 @@
  */ 
 
 import com.vionto.vithesaurus.*
-            
+import com.vionto.vithesaurus.tools.StringTools
+
 class TermController extends BaseController {
     
     def beforeInterceptor = [action: this.&auth,
@@ -71,7 +72,7 @@ class TermController extends BaseController {
 
             // validation okay, now change the real term:
             term.properties = params
-            String normalizedWord = Term.normalize(params.word)
+            String normalizedWord = StringTools.normalize(params.word)
             if (normalizedWord != params.word) {
                 term.normalizedWord = normalizedWord
             }
