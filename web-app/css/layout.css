@@ -452,3 +452,8 @@ pre.api {
 strong {
   font-weight: bold;
 }
+
+.languageLevelHelp {
+  font-weight: bold;
+  color: #333333;
+}

@@ -63,6 +63,14 @@
             document.editForm.userComment.focus();
             return false;
           }
+          function toggleLanguageLevelHelp() {
+            if (document.getElementById('languageLevelHelp').style.display == 'block') {
+                document.getElementById('languageLevelHelp').style.display='none';
+            } else {
+                document.getElementById('languageLevelHelp').style.display='block';
+            }
+            return false;
+          }
         // -->
         </script>
     </head>
@@ -213,6 +221,12 @@
                                             <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                         </g:else>
                                         <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                        <g:if test="${i == 0}">
+                                            <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a>
+                                            <div id="languageLevelHelp" style="display: none">
+                                                <g:render template="languageLevelHelp" />
+                                            </div>
+                                        </g:if>
                                         <%--
                                         <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
                                         <br />

@@ -21,6 +21,14 @@
 	                return false;
 	            }
 	        }
+            function toggleLanguageLevelHelp() {
+              if (document.getElementById('languageLevelHelp').style.display == 'block') {
+                  document.getElementById('languageLevelHelp').style.display='none';
+              } else {
+                  document.getElementById('languageLevelHelp').style.display='block';
+              }
+              return false;
+            }
         // -->
         </script>
     </head>
@@ -115,7 +123,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label><g:message code="edit.term.level"/></label>
+                                    <label><g:message code="edit.term.level"/> <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
@@ -133,6 +141,9 @@
                                       </g:else>
                                       <label><input ${disabled} type="radio" name="level.id" value="${level.id}" ${checked} /> ${level.levelName}</label><br />
                                     </g:each>
+                                    <div id="languageLevelHelp" style="display: none">
+                                        <g:render template="/synset/languageLevelHelp" />
+                                    </div>
                                 </td>
                             </tr>
 
