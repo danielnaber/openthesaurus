@@ -53,6 +53,7 @@ class SynsetController extends BaseController {
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
 
+    def dataSource       // will be injected
     def dataSourceUnproxied       // will be injected
 
     def index = {
@@ -71,7 +72,7 @@ class SynsetController extends BaseController {
         // per-user statistics (i.e. top users):
         Connection conn = null
         try {
-          conn = dataSourceUnproxied.getConnection()
+          conn = dataSource.getConnection()
           String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
             FROM user_event, thesaurus_user
             WHERE
@@ -169,7 +170,7 @@ class SynsetController extends BaseController {
         
         Connection conn = null
         try {
-          conn = dataSourceUnproxied.getConnection()
+          conn = dataSource.getConnection()
           
           boolean apiRequest = params.format == "text/xml"
           boolean spellApiRequest = params.similar == "true"
@@ -452,7 +453,7 @@ class SynsetController extends BaseController {
       int maxMatches = Integer.parseInt(params.max)
       Connection conn = null
       try {
-        conn = dataSourceUnproxied.getConnection()
+        conn = dataSource.getConnection()
         List partialMatchResult = searchPartialResult(params.q, conn, offset, maxMatches)
         // get total matches:
         String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
