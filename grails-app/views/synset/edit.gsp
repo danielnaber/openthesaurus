@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()?.encodeAsHTML()]}"/></title>
-        <g:if test="${synset?.isVisible == false}">
+        <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
         </g:if>
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
@@ -514,24 +514,28 @@
             <div class="colspanlist">
 
               <br />
-              <h2><g:message code='edit.latest.changes' args="${[eventList.size()]}"/></h2>
+              <h2><g:message code='edit.latest.changes' args="${[eventListCount]}"/></h2>
 
               <table>
                   <tr>
                       <th><g:message code='edit.changelog.date'/></th>
                       <th><g:message code='edit.changelog.user'/></th>
-                      <th><g:message code='edit.changelog.comment'/></th>
                       <th><g:message code='edit.changelog.change'/></th>
+                      <th><g:message code='edit.changelog.comment'/></th>
                   </tr>
                   <g:each var='event' in='${eventList}' status='i'>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                           <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
                           <td>${event.byUser.realName?.encodeAsHTML()}</td>
-                          <td>${event.changeDesc?.encodeAsHTML()}</td>
                           <td>${diffs.get(event)}</td>
+                          <td>${event.changeDesc?.encodeAsHTML()}</td>
                       </tr>
                   </g:each>
               </table>
+              
+              <div class="paginateButtons">
+                  <g:paginate total="${eventListCount}" id="${params.id}" />
+              </div>
               
             </div>
         </g:if>

@@ -809,8 +809,9 @@ class SynsetController extends BaseController {
             if (!params.max) params.max = 10
             if (!params.sort) params.sort = "creationDate"
             if (!params.order) params.order = "desc"
+            def eventListCount = UserEvent.countBySynset(synset)
             def eventList = UserEvent.findAllBySynset(synset,
-                    [order:'desc', sort:'creationDate', max: 10])
+                    [order:'desc', sort:'creationDate', offset: params.offset])
             def diffs = [:]
             def typeNames = [:]
             UserEventTools tools = new UserEventTools()
@@ -819,7 +820,7 @@ class SynsetController extends BaseController {
                 grailsApplication.config.thesaurus.showOriginalSource == "true"
             long runTime = System.currentTimeMillis() - startTime
             boolean prefTerms = grailsApplication.config.thesaurus.prefTerm != 'false'
-            return [ synset : synset, eventList : eventList, prefTerms: prefTerms,
+            return [ synset : synset, eventListCount : eventListCount, eventList : eventList, prefTerms: prefTerms,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
                      runTime : runTime ]
         }
