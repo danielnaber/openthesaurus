@@ -525,10 +525,10 @@
                   </tr>
                   <g:each var='event' in='${eventList}' status='i'>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                          <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
-                          <td>${event.byUser.realName?.encodeAsHTML()}</td>
-                          <td>${diffs.get(event)}</td>
-                          <td>${event.changeDesc?.encodeAsHTML()}</td>
+                          <td valign="top"><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
+                          <td valign="top">${event.byUser.realName?.encodeAsHTML()}</td>
+                          <td valign="top">${diffs.get(event)}</td>
+                          <td valign="top">${event.changeDesc?.encodeAsHTML()}</td>
                       </tr>
                   </g:each>
               </table>
