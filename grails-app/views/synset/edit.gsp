@@ -514,7 +514,7 @@
             <div class="colspanlist">
 
               <br />
-              <h2><g:message code='edit.latest.changes' args="${[eventListCount]}"/></h2>
+              <h2><a name="history"><g:message code='edit.latest.changes' args="${[eventListCount]}"/></a></h2>
 
               <table>
                   <tr>
@@ -534,7 +534,7 @@
               </table>
               
               <div class="paginateButtons">
-                  <g:paginate total="${eventListCount}" id="${params.id}" />
+                  <g:paginate fragment="history" total="${eventListCount}" id="${params.id}" />
               </div>
               
             </div>
