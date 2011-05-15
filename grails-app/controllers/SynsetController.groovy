@@ -53,7 +53,7 @@ class SynsetController extends BaseController {
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
 
-    def dataSource       // will be injected
+    def dataSourceUnproxied       // will be injected
 
     def index = {
         redirect(action:list,params:params)
@@ -92,7 +92,7 @@ class SynsetController extends BaseController {
         // per-user statistics (i.e. top users):
         Connection conn = null
         try {
-          conn = dataSource.getConnection()
+          conn = dataSourceUnproxied.getConnection()
           String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
             FROM user_event, thesaurus_user
             WHERE
@@ -192,7 +192,7 @@ class SynsetController extends BaseController {
         
         Connection conn = null
         try {
-          conn = dataSource.getConnection()
+          conn = dataSourceUnproxied.getConnection()
           
           boolean apiRequest = params.format == "text/xml"
           boolean spellApiRequest = params.similar == "true"
@@ -475,7 +475,7 @@ class SynsetController extends BaseController {
       int maxMatches = Integer.parseInt(params.max)
       Connection conn = null
       try {
-        conn = dataSource.getConnection()
+        conn = dataSourceUnproxied.getConnection()
         List partialMatchResult = searchPartialResult(params.q, conn, offset, maxMatches)
         // get total matches:
         String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
@@ -538,7 +538,7 @@ class SynsetController extends BaseController {
       }
 
       log.info("Creating in-memory database, request by " + request.getRemoteAddr())
-      Connection conn = DriverManager.getConnection(dataSource.url, dataSource.username, dataSource.password)
+      Connection conn = DriverManager.getConnection(dataSourceUnproxied.url, dataSourceUnproxied.username, dataSourceUnproxied.password)
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
       executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
       executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)

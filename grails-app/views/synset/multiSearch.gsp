@@ -3,19 +3,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
+        <g:set var="cleanTermList" value="${[]}"/>
         <%
-        def cleanTermList = []
         searchTerms.each{ cleanTermList.add(it.encodeAsHTML()) }
-        def delim = ' <span class="delim">&middot;</span> '
-        def simpleDelim = ' &middot; '
         %>
+        <g:set var="simpleDelim" value=" &middot; "/>
         <title><g:message code="create.search.title" args="${[cleanTermList.join(simpleDelim)]}"/></title>
     </head>
     <body>
 
         <hr />
 
-        <h2><g:message code="create.search.headline" args="${[cleanTermList.join(delim)]}"/></h2>
+        <h2><g:message code="create.search.headline" args="${[cleanTermList.join(simpleDelim)]}"/></h2>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
