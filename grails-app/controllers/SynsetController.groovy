@@ -811,7 +811,7 @@ class SynsetController extends BaseController {
             if (!params.order) params.order = "desc"
             def eventListCount = UserEvent.countBySynset(synset)
             def eventList = UserEvent.findAllBySynset(synset,
-                    [order:'desc', sort:'creationDate', offset: params.offset])
+                    [order:'desc', sort:'creationDate', offset: params.offset, max: params.max])
             def diffs = [:]
             def typeNames = [:]
             UserEventTools tools = new UserEventTools()
