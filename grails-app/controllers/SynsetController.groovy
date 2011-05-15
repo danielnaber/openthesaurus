@@ -64,27 +64,6 @@ class SynsetController extends BaseController {
      */
     def statistics = {
         // global statistics:
-        Map termCountMap = new HashMap()
-        Map latestChangesMap = new HashMap()
-        List sections = Section.list()
-        for (section in sections) {
-            def criteria = Term.createCriteria()
-            int termCount = criteria.count {
-                synset {
-                    eq('isVisible', true)
-                    eq('section', section)
-                }
-            }
-            termCountMap.put(section, termCount)
-            criteria = UserEvent.createCriteria()
-            int latestChanges = criteria.count {
-                gt('creationDate', new Date() - 7)
-                synset {
-                    eq('section', section)
-                }
-            }
-            latestChangesMap.put(section, latestChanges)
-        }
         def criteria = UserEvent.createCriteria()
         int latestChangesAllSections = criteria.count {
           gt('creationDate', new Date() - 7)
@@ -112,9 +91,7 @@ class SynsetController extends BaseController {
   	      }
   	      resultSet.close()
   	      ps.close()
-          [ termCount : termCountMap,
-            latestChanges : latestChangesMap,
-            latestChangesAllSections: latestChangesAllSections,
+          [ latestChangesAllSections: latestChangesAllSections,
             topUsers: topUsers ]
         } finally {
           if (conn != null) {
