@@ -20,22 +20,22 @@
 
                       <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.synsets" /></td>
-                          <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisible(true)}" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${Synset.countByIsVisible(true)}" /></td>
                       </tr>
 
                       <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.terms" /></td>
-                          <td valign="top" class="value"><g:decimal number="${Term.countVisibleTerms()}" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${Term.countVisibleTerms()}" /></td>
                       </tr>
 
                       <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.terms.unique" /></td>
-                          <td valign="top" class="value"><g:decimal number="${Term.countVisibleUniqueTerms()}" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${Term.countVisibleUniqueTerms()}" /></td>
                       </tr>
 
                       <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.changes_last_7_days" /></td>
-                          <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                       </tr>
 
                   </table>
@@ -58,7 +58,7 @@
                               <span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
                           </g:else>
                       </td>
-                      <td>${topUser.actions}</td>
+                      <td align="right">${topUser.actions}</td>
                   </tr>
                   </g:each>
                   </table>
