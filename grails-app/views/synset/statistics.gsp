@@ -29,6 +29,11 @@
                       </tr>
 
                       <tr class="prop">
+                          <td valign="top" class="name"><g:message code="statistics.terms.unique" /></td>
+                          <td valign="top" class="value"><g:decimal number="${Term.countVisibleUniqueTerms()}" /></td>
+                      </tr>
+
+                      <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.changes_last_7_days" /></td>
                           <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                       </tr>
