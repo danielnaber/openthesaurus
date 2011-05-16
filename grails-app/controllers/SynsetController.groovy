@@ -54,7 +54,6 @@ class SynsetController extends BaseController {
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
 
     def dataSource       // will be injected
-    def dataSourceUnproxied       // will be injected
 
     def index = {
         redirect(action:list,params:params)
@@ -70,7 +69,9 @@ class SynsetController extends BaseController {
           gt('creationDate', new Date() - 7)
         }
         // per-user statistics (i.e. top users):
-        Connection conn = null
+        Connection conn
+        PreparedStatement ps
+        ResultSet resultSet
         try {
           conn = dataSource.getConnection()
           String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
@@ -81,20 +82,23 @@ class SynsetController extends BaseController {
   			GROUP BY by_user_id
   		    ORDER BY ct DESC
   		    LIMIT ?"""
-  	      PreparedStatement ps = conn.prepareStatement(sql)
-  	      ps.setInt(1, 365)	// days
-  	      ps.setInt(2, 10)	// max matches
-  	      ResultSet resultSet = ps.executeQuery()
-  	      List topUsers = []
-  	      while (resultSet.next()) {
-            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"),
-                actions:resultSet.getInt("ct")))
-  	      }
-  	      resultSet.close()
-  	      ps.close()
+          List topUsers = []
+          ps = conn.prepareStatement(sql)
+          ps.setInt(1, 365)	// days
+          ps.setInt(2, 10)	// max matches
+          resultSet = ps.executeQuery()
+          while (resultSet.next()) {
+            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct")))
+          }
           [ latestChangesAllSections: latestChangesAllSections,
             topUsers: topUsers ]
         } finally {
+          if (resultSet != null) {
+            resultSet.close()
+          }
+          if (ps != null) {
+            ps.close()
+          }
           if (conn != null) {
             conn.close()
           }
@@ -168,7 +172,7 @@ class SynsetController extends BaseController {
           return
         }
         
-        Connection conn = null
+        Connection conn
         try {
           conn = dataSource.getConnection()
           
@@ -451,21 +455,27 @@ class SynsetController extends BaseController {
       if(!params.max) params.max = "20"
       int offset = Integer.parseInt(params.offset)
       int maxMatches = Integer.parseInt(params.max)
-      Connection conn = null
+      Connection conn
+      PreparedStatement ps
+      ResultSet resultSet
       try {
         conn = dataSource.getConnection()
         List partialMatchResult = searchPartialResult(params.q, conn, offset, maxMatches)
         // get total matches:
         String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
-        PreparedStatement ps = conn.prepareStatement(sql)
+        ps = conn.prepareStatement(sql)
         ps.setString(1, "%" + params.q + "%")
-        ResultSet resultSet = ps.executeQuery()
+        resultSet = ps.executeQuery()
         resultSet.next()
         int totalMatches = resultSet.getInt("totalMatches")
-        resultSet.close()
-        ps.close()
         [matches: partialMatchResult, totalMatches: totalMatches]
       } finally {
+        if (resultSet != null) {
+          resultSet.close()
+        }
+        if (ps != null) {
+          ps.close()
+        }
         if (conn != null) {
           conn.close()
         }
@@ -485,24 +495,33 @@ class SynsetController extends BaseController {
     /** Substring matches */
     private List searchPartialResultInternal(String term, String sqlTerm, boolean filterExactMatch, Connection conn, int fromPos, int maxNum) {
       String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
-      PreparedStatement ps = conn.prepareStatement(sql)
-      ps.setString(1, sqlTerm)
-      ResultSet resultSet = ps.executeQuery()
+      PreparedStatement ps
+      ResultSet resultSet
       def matches = []
-      Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
-      while (resultSet.next()) {
-        String matchedTerm = resultSet.getString("word")
-        if (filterExactMatch && matchedTerm.toLowerCase() == term.toLowerCase()) {
-          continue
-        }
-        String result = matchedTerm.encodeAsHTML()
-        // currently not useful:
-        //Matcher m = pattern.matcher(result)
-        //result = m.replaceAll("<span class='match'>\$0</span>")
-        matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
+      try {
+          ps = conn.prepareStatement(sql)
+          ps.setString(1, sqlTerm)
+          resultSet = ps.executeQuery()
+          //Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
+          while (resultSet.next()) {
+            String matchedTerm = resultSet.getString("word")
+            if (filterExactMatch && matchedTerm.toLowerCase() == term.toLowerCase()) {
+              continue
+            }
+            String result = matchedTerm.encodeAsHTML()
+            // currently not useful:
+            //Matcher m = pattern.matcher(result)
+            //result = m.replaceAll("<span class='match'>\$0</span>")
+            matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
+          }
+      } finally {
+          if (resultSet != null) {
+            resultSet.close()
+          }
+          if (ps != null) {
+            ps.close()
+          }
       }
-      resultSet.close()
-      ps.close()
       return matches
    }
 
@@ -516,39 +535,54 @@ class SynsetController extends BaseController {
       }
 
       log.info("Creating in-memory database, request by " + request.getRemoteAddr())
-      Connection conn = DriverManager.getConnection(dataSourceUnproxied.url, dataSourceUnproxied.username, dataSourceUnproxied.password)
-      executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      Connection conn
+      PreparedStatement ps
+      try {
+        conn = dataSource.getConnection()
+        executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
+        executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+        executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
       
-      PreparedStatement ps = 
-        conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
-      ps.setString(1, new Date().toString())
-      ps.execute()
+        ps = conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
+        ps.setString(1, new Date().toString())
+        ps.execute()
 
-      // setString() on a PreparedStatement won't work, so insert value of hidden synsets directly:
-      String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
-          FROM term, synset
-          WHERE 
-            term.synset_id = synset.id AND
-            synset.is_visible = 1 AND
-            synset.id NOT IN (${grailsApplication.config.thesaurus.hiddenSynsets})
-          ORDER BY word"""
-      ps = conn.prepareStatement(sql)
-      ps.execute()
+        // setString() on a PreparedStatement won't work, so insert value of hidden synsets directly:
+        String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
+            FROM term, synset
+            WHERE 
+              term.synset_id = synset.id AND
+              synset.is_visible = 1 AND
+              synset.id NOT IN (${grailsApplication.config.thesaurus.hiddenSynsets})
+            ORDER BY word"""
+        ps = conn.prepareStatement(sql)
+        ps.execute()
 
-      executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
-      executeQuery("DROP TABLE memwordsBak", conn)
+        executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
+        executeQuery("DROP TABLE memwordsBak", conn)
 
-      ps.close()
-      conn.close()
-      log.info("Finished creating in-memory database")
-      render "OK"
+        log.info("Finished creating in-memory database")
+        render "OK"
+      } finally {
+          if (ps != null) {
+            ps.close()
+          }
+          if (conn != null) {
+            conn.close()
+          }
+      }
     }
-      
+    
     private void executeQuery(String sql, Connection conn) {
-      PreparedStatement ps = conn.prepareStatement(sql)
-      ps.execute()
+      PreparedStatement ps
+      try {
+        ps = conn.prepareStatement(sql)
+        ps.execute()
+      } finally {
+        if (ps != null) {
+          ps.close()
+        }
+      }
     }    
 
     def searchWikipedia(String term, Connection conn) {
@@ -556,21 +590,30 @@ class SynsetController extends BaseController {
         return null
       }
       String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
-		WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
-      PreparedStatement ps = conn.prepareStatement(sql)
-      ps.setString(1, term)
-      ResultSet resultSet = ps.executeQuery()
+            WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
+      PreparedStatement ps
+      ResultSet resultSet
       def matches = []
-      int i = 0
-      while (resultSet.next()) {
-        if (i == 0) {
-          matches.add(resultSet.getString("title"))
+      try {
+          ps = conn.prepareStatement(sql)
+          ps.setString(1, term)
+          resultSet = ps.executeQuery()
+          int i = 0
+          while (resultSet.next()) {
+            if (i == 0) {
+              matches.add(resultSet.getString("title"))
+            }
+            matches.add(resultSet.getString("link"))
+            i++
+          }
+      } finally {
+        if (resultSet != null) {
+          resultSet.close()
         }
-        matches.add(resultSet.getString("link"))
-        i++
+        if (ps != null) {
+          ps.close()
+        }
       }
-      resultSet.close()
-      ps.close()
       return matches
     }
 
@@ -579,18 +622,26 @@ class SynsetController extends BaseController {
         return null
       }
       String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
-      PreparedStatement ps = conn.prepareStatement(sql)
-      ps.setString(1, term)
-      ResultSet resultSet = ps.executeQuery()
+      PreparedStatement ps 
+      ResultSet resultSet
       def matches = []
-      while (resultSet.next()) {
-        matches.add(resultSet.getString("headword"))
-        matches.add(resultSet.getString("meanings"))
-        matches.add(resultSet.getString("synonyms"))
-        break; // we expect only one match
+      try {
+        ps = conn.prepareStatement(sql)
+        ps.setString(1, term)
+        resultSet = ps.executeQuery()
+        if (resultSet.next()) {
+          matches.add(resultSet.getString("headword"))
+          matches.add(resultSet.getString("meanings"))
+          matches.add(resultSet.getString("synonyms"))
+        }
+      } finally {
+        if (resultSet != null) {
+          resultSet.close()
+        }
+        if (ps != null) {
+          ps.close()
+        }
       }
-      resultSet.close()
-      ps.close()
       return matches
     }
     
@@ -602,39 +653,48 @@ class SynsetController extends BaseController {
 				(
 				CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
 				ORDER BY word"""
-      PreparedStatement ps = conn.prepareStatement(sql)
-      int wordLength = term.length()
-      ps.setInt(1, wordLength-1)
-      ps.setInt(2, wordLength+1)
-      ps.setInt(3, wordLength-1)
-      ps.setInt(4, wordLength+1)
-      ResultSet resultSet = ps.executeQuery()
+      PreparedStatement ps
+      ResultSet resultSet
       def matches = []
-      // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
-      String lowerTerm = term.toLowerCase()
-      while (resultSet.next()) {
-        String dbTerm = resultSet.getString("word").toLowerCase()
-        if (dbTerm.equals(lowerTerm)) {
-          continue
-        }
-        //TODO: use a fail-fast algorithm here (see Lucene's FuzzyTermQuery):
-        int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
-        if (dist <= MAX_DIST) {
-          matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
-        } else {
-          dbTerm = resultSet.getString("lookup")
-          if (dbTerm) {
-            dbTerm = dbTerm.toLowerCase()
-            dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
+      try {
+          ps = conn.prepareStatement(sql)
+          int wordLength = term.length()
+          ps.setInt(1, wordLength-1)
+          ps.setInt(2, wordLength+1)
+          ps.setInt(3, wordLength-1)
+          ps.setInt(4, wordLength+1)
+          resultSet = ps.executeQuery()
+          // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
+          String lowerTerm = term.toLowerCase()
+          while (resultSet.next()) {
+            String dbTerm = resultSet.getString("word").toLowerCase()
+            if (dbTerm.equals(lowerTerm)) {
+              continue
+            }
+            //TODO: use a fail-fast algorithm here (see Lucene's FuzzyTermQuery):
+            int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
             if (dist <= MAX_DIST) {
               matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
+            } else {
+              dbTerm = resultSet.getString("lookup")
+              if (dbTerm) {
+                dbTerm = dbTerm.toLowerCase()
+                dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
+                if (dist <= MAX_DIST) {
+                  matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
+                }
+              }
             }
           }
-        }
+          Collections.sort(matches)		// makes sure lowest distances come first
+      } finally {
+          if (resultSet != null) {
+            resultSet.close()
+          }
+          if (ps != null) {
+            ps.close()            
+          }
       }
-      Collections.sort(matches)		// makes sure lowest distances come first
-      resultSet.close()
-      ps.close()
       return matches
     }
 
