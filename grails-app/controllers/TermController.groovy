@@ -18,6 +18,7 @@
 
 import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.StringTools
+import com.vionto.vithesaurus.tools.IpTools
 
 class TermController extends BaseController {
     
