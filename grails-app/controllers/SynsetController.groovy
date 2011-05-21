@@ -1528,7 +1528,6 @@ class WordLevelComparator implements Comparator {
     boolean hasLevelForQuery(def terms) {
         for (Term term : terms) {
             if (term.word.equalsIgnoreCase(query) && term.level) {
-                System.out.println("### level set for ${query} in " + terms)
                 return true
             }
         }
