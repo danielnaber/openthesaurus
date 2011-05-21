@@ -79,7 +79,7 @@ class TermController extends BaseController {
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
             term.synset.updatePreferredTerm()
-            LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
+            LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                     termBackup, term, params.changeComment)
             if (!term.hasErrors() && term.saveAndLog(logInfo)) {
                 flash.message =message(code:'edit.term.updated', args:[term.encodeAsHTML()])

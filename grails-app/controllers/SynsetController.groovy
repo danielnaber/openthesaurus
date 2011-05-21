@@ -166,7 +166,7 @@ class SynsetController extends BaseController {
         long startTime = System.currentTimeMillis()
 
         if (!params.q) {
-          log.warn("No query specified for search (${request.getRemoteAddr()})")
+          log.warn("No query specified for search (${IpTools.getRealIpAddress(request)})")
           response.status = 500
           render message(code:'result.no.query.specified')
           return
@@ -530,11 +530,11 @@ class SynsetController extends BaseController {
      */
     // TODO: use quartz
     def createMemoryDatabase= {
-      if (request.getRemoteAddr() != "127.0.0.1" && request.getRemoteAddr() != "0:0:0:0:0:0:0:1") {  // TODO: simplify
-        throw new Exception("Access denied from " + request.getRemoteAddr())
+      if (!isLocalHost(request)) {
+        throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
 
-      log.info("Creating in-memory database, request by " + request.getRemoteAddr())
+      log.info("Creating in-memory database, request by " + IpTools.getRealIpAddress(request))
       Connection conn
       PreparedStatement ps
       try {
@@ -889,7 +889,7 @@ class SynsetController extends BaseController {
         // "delete" the synset: 
         synset.isVisible = !hide
         
-        LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
+        LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
             origSynset, synset, params.changeComment)
         if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
             flash.message = successMsg
@@ -1092,7 +1092,7 @@ class SynsetController extends BaseController {
                 if (params['wordGrammar.id_'+newTermCount] && params['wordGrammar.id_'+newTermCount] != "null") {
                     newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_'+newTermCount])
                 }
-                LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
+                LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                       null, newTerm, params.changeComment)
                 if (synset.containsWord(params['word_'+newTermCount])) {
                     newTerm.errors.reject('thesaurus.duplicate.term',
@@ -1133,7 +1133,7 @@ class SynsetController extends BaseController {
                 newTermCount++
             }
 
-            LogInfo logInfo = new LogInfo(session, request.getRemoteAddr(),
+            LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                     origSynset, synset, params.changeComment)
             if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
                 flash.message = message(code:'edit.updated')
@@ -1192,7 +1192,7 @@ class SynsetController extends BaseController {
     }
 
     private void logSynsetLink(String logText, Synset synset, SynsetLink synsetLink) {
-        LogInfo linkLogInfo = new LogInfo(session, request.getRemoteAddr(), synsetLink,
+        LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), synsetLink,
                 logText, params.changeComment)
         boolean saved = synset.saveAndLog(linkLogInfo)
         if (!saved) {
@@ -1386,7 +1386,7 @@ class SynsetController extends BaseController {
         if (!synset.hasErrors() && synset.saveAndLog(logInfo, false)) {
             for (term in termsToCreate) {
                 synset.addToTerms(term)
-                logInfo = new LogInfo(session, request.getRemoteAddr(),
+                logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                         null, synset, params.changeComment)
                 if (!term.validate()) {
                     synset.errors = term.errors
@@ -1481,7 +1481,7 @@ class SynsetController extends BaseController {
      * Create a LogInfo object with the current session and IP address.
      */
     LogInfo getLogInfo(Object oldObj, Object newObj, String changeDesc) {
-        return new LogInfo(session, request.getRemoteAddr(), oldObj,
+        return new LogInfo(session, IpTools.getRealIpAddress(request), oldObj,
                 newObj, changeDesc)
     }
 }

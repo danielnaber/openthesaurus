@@ -1,4 +1,5 @@
 import javax.servlet.http.HttpServletRequest
+import com.vionto.vithesaurus.tools.IpTools
 
 /**
  * vithesaurus - web-based thesaurus management tool
@@ -38,12 +39,13 @@ abstract class BaseController {
         if (isLocalHost(request)) {
           return true
         }
-        log.info("Access denied to no-access area for host " + request.getRemoteAddr() + ", " + request.getRequestURI())
+        log.info("Access denied to no-access area for host " + IpTools.getRealIpAddress(request) + ", " + request.getRequestURI())
         return false
     }
 
     public boolean isLocalHost(HttpServletRequest request) {
-        return request.getRemoteAddr() == "127.0.0.1" || request.getRemoteAddr() == "0:0:0:0:0:0:0:1" || request.getRemoteAddr() == "::1"
+        String ip = IpTools.getRealIpAddress(request)
+        return ip == "127.0.0.1" || ip == "0:0:0:0:0:0:0:1" || ip == "::1"
     }
 
     /**

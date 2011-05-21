@@ -179,17 +179,17 @@ class UserController extends BaseController {
               ThesaurusUser.findByUserIdAndPassword(params.userId, md5sum(params.password))
           if (user) {
             if (user.blocked) {
-              log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): user is blocked")
+              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): user is blocked")
               // deliberately show same message as otherwise... 
               flash.message = message(code:'user.invalid.login')
               return
             }
             if (!user.confirmationDate) {
-              log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()}): account not confirmed")
+              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): account not confirmed")
               flash.message = message(code:'user.unconfirmed.login')
               return
             }
-            log.info("login successful for user ${user}")
+            log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
             flash.message = message(code:'user.logged.in')
             session.user = user
             user.lastLoginDate = new Date()
@@ -221,7 +221,7 @@ class UserController extends BaseController {
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
           } else {
-            log.warn("login failed for user ${params.userId} (${request.getRemoteAddr()})")
+            log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)})")
             flash.message = message(code:'user.invalid.login')
           }
         }
