@@ -816,6 +816,7 @@ class SynsetController extends BaseController {
         if (synsetList.size() < max && offset == 0) {
             totalMatches = synsetList.size()
         }
+        Collections.sort(synsetList, new WordLevelComparator(query))
         return new SearchResult(totalMatches, synsetList, completeResult)
     }
 
@@ -1504,4 +1505,34 @@ class SearchResult {
 class PartialMatch {
   String term
   String highlightTerm
+}
+
+/** Compare so that synsets whose relevant term has no language level set is preferred. */
+class WordLevelComparator implements Comparator {
+
+    String query
+    
+    WordLevelComparator(String query) {
+        this.query = query
+    }
+
+    @Override
+    int compare(Object o1, Object o2) {
+        Synset syn1 = (Synset) o1
+        Synset syn2 = (Synset) o2
+        int syn1prio = hasLevelForQuery(syn1.terms) ? 1 : 0
+        int syn2prio = hasLevelForQuery(syn2.terms) ? 1 : 0
+        return syn1prio - syn2prio
+    }
+    
+    boolean hasLevelForQuery(def terms) {
+        for (Term term : terms) {
+            if (term.word.equalsIgnoreCase(query) && term.level) {
+                System.out.println("### level set for ${query} in " + terms)
+                return true
+            }
+        }
+        return false
+    }
+
 }
