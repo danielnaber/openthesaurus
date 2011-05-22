@@ -25,10 +25,10 @@
             	  return false;
         	  }
           }
-          function doSearchOnReturn(event) {
+          function doSearchOnReturn(event, linkType) {
               if (event.keyCode == 13) {
                   // start a search on return (copied from the generated code):
-                  new Ajax.Updater('synsetLink','${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});
+                  new Ajax.Updater('synsetLink' + linkType,'${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q=' + document.editForm["q" + linkType].value + '&linkTypeName=' + linkType});
                   // don't send the outer form:
                   return false;
               }
@@ -51,10 +51,10 @@
             document.getElementById('newCategory').style.display='block';
             return false;
           }
-          function showNewSynsetLink() {
-            document.getElementById('addSynsetLink').style.display='none';
-            document.getElementById('addSynset').style.display='block';
-            document.editForm.q.focus();
+          function showNewSynsetLink(linkType) {
+            document.getElementById('addSynsetLink-' + linkType).style.display='none';
+            document.getElementById('addSynset-' + linkType).style.display='block';
+            document.editForm["q" + linkType].focus();
             return false;
           }
           function showAddComment() {
@@ -347,7 +347,10 @@
                             <%
                             Set displayedSynsets = new HashSet()
                             %>
-                            <g:render template="link" model="[title:'Oberbegriff', linkTypeName:'Oberbegriff',
+                            <g:render template="link" model="[title:'Assoziationen', linkTypeName:'Assoziation',
+                                synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
+
+                            <g:render template="link" model="[title:'Oberbegriffe', linkTypeName:'Oberbegriff',
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
                             <%--

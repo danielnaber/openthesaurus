@@ -54,18 +54,17 @@
     </g:if>
 
     <g:if test="${session.user && showAddLink}">
-        <div id="addSynsetLink" style="margin-top:5px">
-            <a href="#" onclick="javascript:showNewSynsetLink();return false;"><g:message code="edit.add.link"/></a>
+        <div id="addSynsetLink-${linkTypeName}" style="margin-top:5px">
+            <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><g:message code="edit.add.link"/></a>
         </div>
-     <div id="addSynset" style="display:none;margin-top:5px">
-        <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>
-        <g:select name="linkType.id"
-              optionKey="id" from="${LinkType.list().sort()}" />
-
+     <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
+        <g:textField name="q${linkTypeName}" value="" onkeypress="return doSearchOnReturn(event, '${linkTypeName}');"/>
+        <input type="hidden" name="linkType${linkTypeName}.id" value="${LinkType.findByLinkName(linkTypeName).id}">
+        
 		<%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
 		<%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
         <a href="${createLinkTo(dir:'synset/ajaxSearch')}" 
-        	onclick="new Ajax.Updater('synsetLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
+        	onclick="new Ajax.Updater('synsetLink${linkTypeName}','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q${linkTypeName}.value + '&linkTypeName=${linkTypeName}'});return false;"
         	><g:message code="edit.link.lookup"/></a>
               
         <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
@@ -77,7 +76,7 @@
             <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
                title="Searching..."/>
         </span>
-        <div id="synsetLink">
+        <div id="synsetLink${linkTypeName}">
         </div>
      </div>
     </g:if>

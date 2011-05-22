@@ -911,17 +911,26 @@ class SynsetController extends BaseController {
         if (synset) {
             synset.properties = params
             // add links to other synsets:
-            if (params.targetSynset?.id) {
-                Synset targetSynset = Synset.get(params.targetSynset.id)
-                LinkType linkType = LinkType.get(params.linkType.id)
-                if (synset.id == targetSynset.id) { // not to itself
-                    synset.errors.reject('thesaurus.error.synset.selfreference',
-                            [].toArray(), 'Error saving changes')
-                    render(view:'edit',model:[synset:synset],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                } else {
-                    addSynsetLink(synset, targetSynset, linkType)
+            List linkTypes = LinkType.getAll()
+            for (linkType in linkTypes) {
+                String synsetParamId = params["targetSynset" + linkType.linkName + ".id"]
+                if (synsetParamId) {
+                    Synset targetSynset = Synset.get(synsetParamId)
+                    if (targetSynset == null) {
+                        throw new Exception("Synset not found for link type: " + linkType.linkName)
+                    }
+                    String linkTypeToUseParam = "linkType" + linkType.linkName + ".id"
+                    LinkType linkTypeToUse = LinkType.get(params[linkTypeToUseParam])
+                    if (linkTypeToUse == null) {
+                        throw new Exception("Link type not found: " + linkTypeToUseParam)
+                    }
+                    if (synset.id == targetSynset.id) { // don't link a synset to itself
+                        synset.errors.reject('thesaurus.error.synset.selfreference', [].toArray(), 'Error saving changes')
+                        render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
+                        return
+                    } else {
+                        addSynsetLink(synset, targetSynset, linkTypeToUse)
+                    }
                 }
             }
             // delete synset hypernym links:

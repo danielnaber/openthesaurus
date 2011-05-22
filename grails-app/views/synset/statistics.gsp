@@ -34,6 +34,11 @@
                       </tr>
 
                       <tr class="prop">
+                          <td valign="top" class="name"><g:message code="statistics.associations" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${SynsetLink.countByLinkType(LinkType.findByLinkName('Assoziation'))}" /></td>
+                      </tr>
+
+                      <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.changes_last_7_days" /></td>
                           <td valign="top" align="right" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                       </tr>
