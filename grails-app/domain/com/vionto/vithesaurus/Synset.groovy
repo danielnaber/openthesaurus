@@ -515,7 +515,7 @@ class Synset implements Cloneable {
         return sb.toString()
     }
 
-    private String toShortStringInternal(int maxSize = 3, boolean addElipses, boolean addLevel) {
+    private String toShortStringInternal(int maxSize = 3, boolean addEllipses, boolean addLevel) {
         def terms = sortedTerms()
         if (terms.size() == 0) {
           return "[empty]"
@@ -533,7 +533,7 @@ class Synset implements Cloneable {
         }
         String termStr = enhancedTerms.join(" · ")
         String suffix = ""
-        if (addElipses) {
+        if (addEllipses) {
           suffix = terms.size() > maxSize ? " · ..." : ""
         }
         return termStr + suffix
@@ -542,15 +542,15 @@ class Synset implements Cloneable {
     /**
      * A string representation that includes the short term level (if any), limited by the number of terms (default: 3)
      */
-    String toShortStringWithShortLevel(int maxSize = 3, boolean addElipses) {
-        return toShortStringInternal(maxSize, addElipses, true)
+    String toShortStringWithShortLevel(int maxSize = 3, boolean addEllipses) {
+        return toShortStringInternal(maxSize, addEllipses, true)
     }
 
     /**
      * A string representation limited by the number of terms (default: 3)
      */
-    String toShortString(int maxSize = 3, boolean addElipses = true) {
-        return toShortStringInternal(maxSize, addElipses, false)
+    String toShortString(int maxSize = 3, boolean addEllipses = true) {
+        return toShortStringInternal(maxSize, addEllipses, false)
     }
 
     /**
