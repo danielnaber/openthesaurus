@@ -22,9 +22,9 @@
 		<h2>Suchanfrage</h2>
 		
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
-		die das Wort <span class="bsp">query</span> beinhalten, abgefragt werden:</p>
+		die das Wort <span class="bsp">test</span> beinhalten, abgefragt werden:</p>
 		
-		<pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>query</strong>&amp;format=text/xml</pre>
+		<pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=text/xml">http://www.openthesaurus.de/synonyme/search?q=<strong>test</strong>&amp;format=text/xml</a></pre>
 
         <p>Kommt im Suchwort ein Sonderzeichen vor, muss es mit UTF-8 URL-kodiert werden (z.B. wird <tt>hören</tt> zu <tt>h%C3%B6ren</tt>).</p>
 		
@@ -65,7 +65,7 @@
           ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
 
-          <pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</pre>
+          <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Umstant&amp;format=text/xml&amp;similar=true">http://www.openthesaurus.de/synonyme/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</a></pre>
 
           Antwort (Ausschnitt):
 
@@ -85,7 +85,7 @@
           <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
           zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
 
-            <pre class="api">http://www.openthesaurus.de/synonyme/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</pre>
+            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Hand&amp;format=text/xml&amp;substring=true">http://www.openthesaurus.de/synonyme/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</a></pre>
 
             Antwort (Ausschnitt):
 
