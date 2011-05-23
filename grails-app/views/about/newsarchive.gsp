@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="news.archive.title" /></title>
-        <meta name="description" content="Das Archiv mit den Neuigkeiten bei OpenThesaurus seit dem Projektstart 2003."/>
+        <meta name="description" content="Das Archiv mit den wichtigsten Neuigkeiten bei OpenThesaurus seit dem Projektstart in 2003."/>
     </head>
     <body>
 
@@ -21,10 +21,19 @@
     <td>2011</td>
     <td></td>
 </tr>
-  <tr>
-      <td valign="top" align="right" width="90"><span class="newsdate">2011-02-21</span></td>
-      <td valign="top">Neue Seite: <g:link controller="woerter" action="listen">Wörter nach Kategorien und Sprachniveau</g:link></td>
-  </tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-05-23</span></td>
+    <td valign="top">Neue Seiten:
+        <ul>
+            <li><g:link controller="random" action="synsets"><g:message code="random.headline"/></g:link></li>
+            <li><g:link controller="association" action="list"><g:message code="association.headline"/></g:link></li>
+        </ul>
+    </td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-02-21</span></td>
+    <td valign="top">Neue Seite: <g:link controller="woerter" action="listen">Wortlisten</g:link></td>
+</tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-02-16</span></td>
     <td valign="top">Wenn man <g:link controller="user" action="login">eingeloggt</g:link> ist,
