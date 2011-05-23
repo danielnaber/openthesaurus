@@ -21,7 +21,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import com.vionto.vithesaurus.Synset
 
-class RandomController {
+class RandomController extends BaseController {
     
     def dataSource
     
