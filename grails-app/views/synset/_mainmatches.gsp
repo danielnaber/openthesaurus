@@ -63,7 +63,7 @@
 		                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
 	                        	</g:else>
 
-	                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase()}">
+	                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase() || params.q.toLowerCase() == term.normalizedWord?.toLowerCase()}">
                                 	<span class="synsetmatch">${displayTerm}</span>${delim}
 	                        	</g:if>
 	                        	<g:else>
