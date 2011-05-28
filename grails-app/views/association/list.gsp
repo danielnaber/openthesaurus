@@ -20,10 +20,10 @@
 
         <div class="list">
             <ul>
-                <g:each in="${associations}" var="association">
-                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${association.synset.id}">${association.synset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</g:link>
+                <g:each in="${synsets}" var="synset">
+                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</g:link>
                         <ul style="margin-bottom: 12px;margin-top: 1px">
-                            <g:each in="${association.synset.synsetLinks}" var="synsetLink">
+                            <g:each in="${synset.synsetLinks}" var="synsetLink">
                                 <g:if test="${synsetLink.linkType == desiredLinkType}">
                                     <li style="margin-top: 1px">${synsetLink.targetSynset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</li>
                                 </g:if>
@@ -35,7 +35,7 @@
         </div>
         
         <div class="paginateButtons">
-            <g:paginate total="${associationCount}" />
+            <g:paginate total="${synsetCount}" />
         </div>
 
     </body>

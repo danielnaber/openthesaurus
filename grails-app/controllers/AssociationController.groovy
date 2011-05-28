@@ -24,13 +24,22 @@ class AssociationController extends BaseController {
         if(!params.offset) params.offset = 0
         else params.offset = Integer.parseInt(params.offset)
         LinkType associationType = LinkType.findByLinkName("Assoziation")
-        def associationCount = SynsetLink.countByLinkType(associationType)
-        def associations = SynsetLink.withCriteria {
+        def synsetCountResult = SynsetLink.withCriteria {
+            eq('linkType', associationType)
+            projections {
+                countDistinct('synset')
+            }
+        }
+        def synsetCount = synsetCountResult.get(0)
+        def synsets = SynsetLink.withCriteria {
             eq('linkType', associationType)
             firstResult(params.offset)
             maxResults(10)
+            projections {
+                distinct('synset')
+            }
         }
-        [associationCount: associationCount, associations: associations, desiredLinkType: associationType]
+        [synsetCount: synsetCount, synsets: synsets, desiredLinkType: associationType]
     }
     
 }
