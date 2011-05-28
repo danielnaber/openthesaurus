@@ -1,3 +1,4 @@
+					<%@page import="com.vionto.vithesaurus.tools.StringTools" %>
 					<h2 style="margin-top:0px"><g:message code="result.wikipedia.headline"/></h2>
 					<g:if test="${wikipediaResult}">
                         <% int i = 0; %>
@@ -6,10 +7,10 @@
                                 <g:set var="wikipediaTitle" value="${term}"/>
                             </g:if>
                             <g:elseif test="${i > 0 && i < wikipediaResult.size() - 1}">
-                                <g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
+                                <g:link action="search" params="${[q: StringTools.normalize(term)]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
                             </g:elseif>
                             <g:else>
-                                <g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
+                                <g:link action="search" params="${[q: StringTools.normalize(term)]}">${term.encodeAsHTML()}</g:link>
                             </g:else>
                             <% i++; %>
                         </g:each>
