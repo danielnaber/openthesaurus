@@ -94,9 +94,10 @@ public class WiktionaryDumper {
 
   class WiktionaryPageHandler extends DefaultHandler {
     
-    private final static int UNDEF = 0;
-    private final static int TITLE = 1;
-    private final static int TEXT = 2;
+    private static final int UNDEF = 0;
+    private static final int TITLE = 1;
+    private static final int TEXT = 2;
+    
     private int position = UNDEF;
     
     private int exported = 0;
@@ -105,14 +106,17 @@ public class WiktionaryDumper {
     private StringBuilder title = new StringBuilder();
     private StringBuilder text = new StringBuilder();
     
+    @Override
     public void warning (final SAXParseException e) throws SAXException {
       throw e;
     }
     
+    @Override
     public void error (final SAXParseException e) throws SAXException {
       throw e;
     }
 
+    @Override
     @SuppressWarnings("unused")
     public void startElement(String namespaceURI, String lName, 
         String qName, Attributes attrs) {
@@ -125,6 +129,7 @@ public class WiktionaryDumper {
       }
     }
      
+    @Override
     @SuppressWarnings("unused")
     public void endElement(String namespaceURI, String sName, String qName) {
       if (qName.equals("title")) {
@@ -182,6 +187,7 @@ public class WiktionaryDumper {
       return str.replace("'''", "").replace("''", "").replace("'", "''");
     }
 
+    @Override
     public void characters(final char[] buf, final int offset, final int len) {
       final String s = new String(buf, offset, len);
       if (position == TITLE) {
