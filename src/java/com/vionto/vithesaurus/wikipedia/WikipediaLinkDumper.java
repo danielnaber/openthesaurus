@@ -96,13 +96,14 @@ public class WikipediaLinkDumper {
 
   class WikipediaPageHandler extends DefaultHandler {
     
-    private final static int UNDEF = 0;
-    private final static int TITLE = 1;
-    private final static int TEXT = 2;
+    private static final int UNDEF = 0;
+    private static final int TITLE = 1;
+    private static final int TEXT = 2;
+
+    private static final int MAX_LINKS_PER_PAGE = 15;
+
     private int position = UNDEF;
-
-    private final static int MAX_LINKS_PER_PAGE = 15;
-
+      
     private StringBuilder title = new StringBuilder();
     private StringBuilder text = new StringBuilder();
     
@@ -110,14 +111,17 @@ public class WikipediaLinkDumper {
 
     private final Pattern NUM_PATTERN = Pattern.compile("\\d+");
 
+    @Override
     public void warning (final SAXParseException e) throws SAXException {
       throw e;
     }
     
+    @Override
     public void error (final SAXParseException e) throws SAXException {
       throw e;
     }
 
+    @Override
     @SuppressWarnings("unused")
     public void startElement(String namespaceURI, String lName, 
         String qName, Attributes attrs) {
@@ -130,6 +134,7 @@ public class WikipediaLinkDumper {
       }
     }
      
+    @Override
     @SuppressWarnings("unused")
     public void endElement(String namespaceURI, String sName, String qName) {
       if (qName.equals("title")) {
@@ -156,6 +161,7 @@ public class WikipediaLinkDumper {
       return str.replace("'", "''").replace("\\", "");
     }
 
+    @Override
     public void characters(final char[] buf, final int offset, final int len) {
       final String s = new String(buf, offset, len);
       if (position == TITLE) {
