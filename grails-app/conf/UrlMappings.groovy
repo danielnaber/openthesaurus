@@ -3,6 +3,8 @@ class UrlMappings {
   static mappings = {
       "404"(view:"/errors/notFound")
       
+      "/"(controller:'home', action:'index') 
+      
       "/$controller/$action?/$id?" {
         constraints {
             // apply constraints here

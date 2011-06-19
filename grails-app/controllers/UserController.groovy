@@ -19,8 +19,13 @@
 import com.vionto.vithesaurus.*
 import java.security.MessageDigest
 import com.vionto.vithesaurus.tools.IpTools
+import javax.servlet.http.Cookie
 
 class UserController extends BaseController {
+    
+    public static final String LOGIN_COOKIE_NAME = "loginCookie"
+    
+    private static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
     
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
@@ -192,6 +197,8 @@ class UserController extends BaseController {
             log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
             flash.message = message(code:'user.logged.in')
             session.user = user
+            // TODO: make this optional:
+            addDurationSession(session, response, user)
             user.lastLoginDate = new Date()
             def redirectParams = 
               session.origParams ? session.origParams : [uri:"/"]
@@ -235,6 +242,7 @@ class UserController extends BaseController {
         session.user = null
         session.controllerName = null
         session.actionName = null
+        cleanDurationSession(response)
         flash.message = message(code:'user.logged.out')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
     }
@@ -413,5 +421,28 @@ class UserController extends BaseController {
         return bigInt.toString(16)
     }
 
+    private void cleanDurationSession(def response) {
+      Cookie[] cookies = request.getCookies()
+      for (cookie in cookies) {
+        if (cookie.getName() == LOGIN_COOKIE_NAME) {
+          cookie.setMaxAge(0)		// effectively deletes the cookie
+          cookie.setPath("/")
+          response.addCookie(cookie)
+          break
+        }
+      }
+    }
+    
+    private void addDurationSession(def session, def response, ThesaurusUser user) {
+      Cookie loginCookie = new Cookie(LOGIN_COOKIE_NAME, session.id)
+      loginCookie.setMaxAge(LOGIN_COOKIE_AGE)
+      loginCookie.setPath("/")
+      response.addCookie(loginCookie)
+      DurationSession dSession = new DurationSession(sessionId:session.id, user:user, insertDate:new Date())
+      if (!dSession.save()) {
+        throw new Exception("could not save duration session: ${dSession.errors}")
+      }
+    }
+    
 }
  
