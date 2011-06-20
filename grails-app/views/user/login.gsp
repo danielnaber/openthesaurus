@@ -50,6 +50,14 @@
                             </td>
                         </tr>
 
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                            </td>
+                            <td valign='top' class='value'>
+                                <input type="checkbox" name='logincookie' id='logincookie' />&nbsp;<label for='logincookie'><g:message code="user.login.form.logincookie"/></label>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                             </td>

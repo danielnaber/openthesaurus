@@ -197,8 +197,9 @@ class UserController extends BaseController {
             log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
             flash.message = message(code:'user.logged.in')
             session.user = user
-            // TODO: make this optional:
-            addDurationSession(session, response, user)
+            if (params.logincookie) {
+                addDurationSession(session, response, user)
+            }
             user.lastLoginDate = new Date()
             def redirectParams = 
               session.origParams ? session.origParams : [uri:"/"]
