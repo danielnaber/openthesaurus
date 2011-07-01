@@ -166,17 +166,19 @@
                                         <g:if test="${t.wordGrammar && t.wordGrammar.form != 'undefined'}">
                                             <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
                                         </g:if>
-                                        <g:if test="${t.userComment}">
-                                            <g:set var="maxCommentSize" value="${10}"/>
-                                            <span class="termMetaInfo">[${t.userComment.substring(0,
-                                                Math.min(t.userComment.size(), maxCommentSize)).toString()?.encodeAsHTML() +
-                                                (t.userComment.size() > maxCommentSize ? "..." : "")}]
-                                            </span>
-                                        </g:if>
-
                                         <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                         <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
                                         <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo lightlink" action="search" params="[q : t.word]">[${termCount}]</g:link>
+
+                                        <g:if test="${t.userComment}">
+                                            <g:if test="${t.userComment}">
+                                                <div style="margin-left: 17px">
+                                                    <g:message code="edit.term.comment"/>
+                                                    <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
+                                                </div>
+                                            </g:if>
+                                        </g:if>
+
                                         <%--
                                         <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
                                         params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
