@@ -204,7 +204,7 @@
 
                             </g:if>
                             <g:else>
-                                <g:if test="${termLinkInfos.size() > 0}">
+                                <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
                                     <g:each var="termLinkInfo" in="${termLinkInfos}">
                                       <tr>
                                         <td>${termLinkInfo.getLinkName().encodeAsHTML()}:</td>
@@ -225,7 +225,8 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label><g:message code="edit.term.comment"/></label>
+                                    <label><g:message code="edit.term.comment"/><br />
+                                    <g:message code="edit.term.comment2"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${session.user}">
