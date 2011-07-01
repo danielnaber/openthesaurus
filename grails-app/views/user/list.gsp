@@ -43,7 +43,7 @@
                     <g:each in="${userList}" status="i" var="user">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="edit" id="${user.id}">${user.userId?.toString()?.encodeAsHTML()}</g:link></td>
+                            <td><g:link controller="userEvent" action="list" params="${[userId:user.userId]}">${user.userId?.toString()?.encodeAsHTML()}</g:link></td>
                         
                             <td>${user.realName?.encodeAsHTML()}</td>
 
