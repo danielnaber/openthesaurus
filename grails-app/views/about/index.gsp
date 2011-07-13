@@ -68,12 +68,15 @@
         <h2>OpenThesaurus auf Android</h2>
 
         <ul>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a> von Felix Christl.
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a>.
               Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
               Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurusforandroid/">Sourcecode</a>)</li>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.ad.openthesaurus/OpenThesaurus-de">OpenThesaurus.de</a> von André Diermann.
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.ad.openthesaurus/OpenThesaurus-de">OpenThesaurus.de</a>.
               Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
               Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurus-de/">Sourcecode</a>)</li>
+            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.offlinethesaurus/Offline-Thesaurus-Synonyme">Offline Thesaurus (Synonyme)</a>.
+              Vom Android-Handy aus: <a href="market://search?q=Offline+Thesaurus">im Market suchen</a><br/>
+              Lizenz: GPLv3 (<a href="http://code.google.com/p/offline-openthesaurus-de/">Sourcecode</a>)</li>
         </ul>
 
 
