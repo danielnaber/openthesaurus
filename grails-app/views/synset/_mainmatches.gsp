@@ -88,8 +88,22 @@
                    
             </g:if>
             <g:else>
+            		<div style="margin-top:15px;margin-bottom:5px;font-weight:bold"><g:message code="result.no.matches"/></div>
+            		<g:if test="${baseforms.size() > 0}">
+            			<div><strong><g:message code="result.no.matches.baseforms"/></strong><br/>
+            			    <span class="result">
+                                <g:each in="${baseforms}" var="term" status="counter">
+                                    <g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
+                                    <g:if test="${counter < baseforms.size()-1}">
+                                        <span class="d">&middot;</span>
+                                    </g:if>
+                                </g:each>
+							</span>
+                        </div>
+            		    <br />
+            		</g:if>
             		<g:if test="${similarTerms.size > 0}">
-            			<div style="margin-bottom:20px"><strong><g:message code="result.no.matches.similar.words"/></strong><br/>
+            			<div><strong><g:message code="result.no.matches.similar.words"/></strong><br/>
             			    <span class="result">
                                 <g:each in="${similarTerms}" var="term" status="counter">
                                     <g:if test="${counter < 3}">
@@ -101,8 +115,6 @@
                                 </g:each>
 							</span>
                         </div>
+                        <br />
             		</g:if>
-            		<g:else>
-	            		<div style="margin-bottom:20px;font-weight:bold"><g:message code="result.no.matches"/></div>
-            		</g:else>
             </g:else>

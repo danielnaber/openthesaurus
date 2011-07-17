@@ -21,6 +21,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseformFinder {
 
@@ -30,22 +32,24 @@ public class BaseformFinder {
         this.connection = connection;
     }
 
-    public String getBaseForm(final String term) throws SQLException {
-        String baseform = null;
-        final String sql = "SELECT word FROM word_forms WHERE id = (SELECT word_mapping.base_id" +
-                "   FROM word_forms, word_mapping" +
-                "   WHERE" +
-                "       word_forms.word = ? AND" +
-                "       word_mapping.derived_id = word_forms.id LIMIT 1)";
+    public List<String> getBaseForms(final String term) throws SQLException {
+        final List<String> baseforms = new ArrayList<String>();
+        final String sql = "SELECT baseform FROM word_mapping WHERE fullform = ?";
         final PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, term);
-        final ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            baseform = resultSet.getString("word");
+        try {
+            statement.setString(1, term);
+            final ResultSet resultSet = statement.executeQuery();
+            try {
+                while (resultSet.next()) {
+                    baseforms.add(resultSet.getString("baseform"));
+                }
+            } finally {
+                resultSet.close();
+            }
+        } finally {
+            statement.close();
         }
-        resultSet.close();
-        statement.close();
-        return baseform;
+        return baseforms;
     }
 
 }

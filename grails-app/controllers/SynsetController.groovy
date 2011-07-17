@@ -303,6 +303,7 @@ class SynsetController extends BaseController {
           }*/
 
           String descriptionText = null
+          def baseforms = []
           if (searchResult.totalMatches > 0) {
             int wordCount = 0
             StringBuilder synonymsForDescription = new StringBuilder()
@@ -316,6 +317,10 @@ class SynsetController extends BaseController {
               }
             }
             descriptionText = synonymsForDescription.toString()
+          } else {
+            BaseformFinder baseformFinder = new BaseformFinder(conn)
+            baseforms = baseformFinder.getBaseForms(params.q.trim())
+              log.info("###" + baseforms)
           }
 
           [ partialMatchResult : partialMatchResult,
@@ -325,6 +330,7 @@ class SynsetController extends BaseController {
             synsetList : searchResult.synsetList,
             totalMatches: searchResult.totalMatches,
             completeResult: searchResult.completeResult,
+            baseforms: baseforms,
             upperBound: UPPER_BOUND,
             mobileBrowser: mobileBrowser,
             descriptionText : descriptionText,
