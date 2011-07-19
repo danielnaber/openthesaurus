@@ -17,10 +17,7 @@
  */ 
 
 import com.vionto.vithesaurus.*
-import java.util.regex.Pattern
-import java.util.regex.Matcher
 import java.sql.Connection
-import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.PreparedStatement
 import org.apache.commons.lang.StringUtils
@@ -44,6 +41,8 @@ class SynsetController extends BaseController {
     private static apiRequestEvents = []
     private static final int API_REQUEST_QUEUE_SIZE = 500
 
+    private static BaseformFinder baseformFinder = new BaseformFinder()
+    
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
@@ -52,9 +51,9 @@ class SynsetController extends BaseController {
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
-
+    
     def dataSource       // will be injected
-
+    
     def index = {
         redirect(action:list,params:params)
     }
@@ -318,8 +317,7 @@ class SynsetController extends BaseController {
             }
             descriptionText = synonymsForDescription.toString()
           } else {
-            BaseformFinder baseformFinder = new BaseformFinder(conn)
-            baseforms = baseformFinder.getBaseForms(params.q.trim())
+            baseforms = baseformFinder.getBaseForms(conn, params.q.trim())
           }
 
           [ partialMatchResult : partialMatchResult,
