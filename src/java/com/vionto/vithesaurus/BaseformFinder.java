@@ -27,7 +27,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Finds a German word's baseform. Also supports compounds words. 
@@ -41,7 +43,7 @@ public class BaseformFinder {
         this.splitter.setStrictMode(true);
     }
 
-    public List<String> getBaseForms(Connection connection, String term) throws SQLException {
+    public Set<String> getBaseForms(Connection connection, String term) throws SQLException {
         final List<String> parts = new ArrayList<String>(splitter.splitWord(term));
         final String searchTerm;
         if (parts.size() > 0) {
@@ -49,7 +51,7 @@ public class BaseformFinder {
         } else {
             searchTerm = term;
         }
-        final List<String> baseforms = new ArrayList<String>();
+        final Set<String> baseforms = new HashSet<String>();
         final String sql = "SELECT baseform FROM word_mapping WHERE fullform = ?";
         final PreparedStatement statement = connection.prepareStatement(sql);
         try {
