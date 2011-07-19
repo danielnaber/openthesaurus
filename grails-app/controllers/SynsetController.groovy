@@ -320,7 +320,6 @@ class SynsetController extends BaseController {
           } else {
             BaseformFinder baseformFinder = new BaseformFinder(conn)
             baseforms = baseformFinder.getBaseForms(params.q.trim())
-              log.info("###" + baseforms)
           }
 
           [ partialMatchResult : partialMatchResult,
