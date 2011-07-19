@@ -17,6 +17,11 @@
  */
 package com.vionto.vithesaurus;
 
+import de.abelssoft.wordtools.jWordSplitter.AbstractWordSplitter;
+import de.abelssoft.wordtools.jWordSplitter.impl.GermanWordSplitter;
+import org.apache.commons.lang.StringUtils;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,24 +29,41 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Finds a German word's baseform. Also supports compounds words. 
+ */
 public class BaseformFinder {
 
-    private final Connection connection;
+    private final AbstractWordSplitter splitter;
 
-    public BaseformFinder(Connection connection) {
-        this.connection = connection;
+    public BaseformFinder() throws IOException {
+        this.splitter = new GermanWordSplitter(false);
+        this.splitter.setStrictMode(true);
     }
 
-    public List<String> getBaseForms(final String term) throws SQLException {
+    public List<String> getBaseForms(Connection connection, String term) throws SQLException {
+        final List<String> parts = new ArrayList<String>(splitter.splitWord(term));
+        final String searchTerm;
+        if (parts.size() > 0) {
+            searchTerm = parts.get(parts.size() - 1);
+        } else {
+            searchTerm = term;
+        }
         final List<String> baseforms = new ArrayList<String>();
         final String sql = "SELECT baseform FROM word_mapping WHERE fullform = ?";
         final PreparedStatement statement = connection.prepareStatement(sql);
         try {
-            statement.setString(1, term);
+            statement.setString(1, searchTerm);
             final ResultSet resultSet = statement.executeQuery();
             try {
                 while (resultSet.next()) {
-                    baseforms.add(resultSet.getString("baseform"));
+                    final String baseform;
+                    if (parts.size() > 1) {
+                        baseform = joinAllButLast(parts, resultSet.getString("baseform"));
+                    } else {
+                        baseform = resultSet.getString("baseform");
+                    }
+                    baseforms.add(baseform);
                 }
             } finally {
                 resultSet.close();
@@ -50,6 +72,20 @@ public class BaseformFinder {
             statement.close();
         }
         return baseforms;
+    }
+
+    private String joinAllButLast(List<String> parts, String lastPartBaseForm) {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < parts.size() - 1; i++) {
+            final String part = parts.get(i);
+            if (i == 0) {
+                sb.append(StringUtils.capitalize(part));
+            } else {
+                sb.append(part);
+            }
+        }
+        sb.append(lastPartBaseForm.toLowerCase());
+        return sb.toString();
     }
 
 }
