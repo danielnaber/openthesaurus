@@ -20,7 +20,9 @@
         <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
         <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
         <g:link controller="section" action="list">Thesauri</g:link> |
-        <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link></p>
+        <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link> |
+        <g:link controller="synset" action="createMemoryDatabase">createMemoryDatabase</g:link>
+        </p>
 
         <p>Import:
         <g:link controller="suggest" action="index">Find words without synonyms</g:link> |
