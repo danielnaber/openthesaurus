@@ -1,3 +1,4 @@
+<%@page import="com.vionto.vithesaurus.tools.*" %>
 <table>
   <tr>
     <td valign="top">
@@ -8,7 +9,7 @@
     <td>&nbsp;</td>
     <td>
       <g:link action="create" params="[term : term]">
-           <g:message code="result.create.synset" args="${[term.encodeAsHTML()]}" />
+           <g:message code="result.create.synset" args="${[StringTools.slashUnescape(term.encodeAsHTML())]}" />
       </g:link>
     </td>
   </tr>

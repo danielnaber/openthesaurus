@@ -1,3 +1,4 @@
+<%@page import="com.vionto.vithesaurus.tools.*" %>
 					<h2 style="margin-top:0px">Teilwort-Treffer und ähnliche Wörter</h2>
 
                     <p class="partialMatches">
@@ -7,7 +8,7 @@
                           <span class="d">&middot;</span>
                         </g:if>
                         <g:if test="${counter < 8}">
-                            <g:link action="search" params="${[q: term.term]}">${term.highlightTerm}</g:link>
+                            <g:link action="search" params="${[q: StringTools.slashEscape(term.term)]}">${term.highlightTerm}</g:link>
                         </g:if>
                         <g:else>
                             <g:set var="moreSubstringTerms" value="${true}" />
@@ -27,7 +28,7 @@
                             <g:if test="${counter > 0}">
                               <span class="d">&middot;</span>
                             </g:if>
-                            <g:link action="search" params="${[q: term.term]}">${term.term}</g:link>
+                            <g:link action="search" params="${[q: StringTools.slashEscape(term.term)]}">${term.term.encodeAsHTML()}</g:link>
                         </g:if>
                     </g:each>
                     <g:if test="${similarTerms.size() == 0}">

@@ -17,11 +17,7 @@
  */
 package com.vionto.vithesaurus.tools;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Some useful tools for dealing with Strings.
@@ -34,6 +30,14 @@ public class StringTools {
     // static methods only, no public constructor
   }
 
+  public static String slashEscape(String str) {
+    return str.replace("/", "___");
+  }
+
+  public static String slashUnescape(String str) {
+    return str.replace("___", "/");
+  }
+    
   public static String normalize(String word) {
     return word.replaceAll("\\(.*?\\)", "").trim();
   }

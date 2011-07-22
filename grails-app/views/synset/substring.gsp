@@ -1,4 +1,5 @@
 <%@page import="com.vionto.vithesaurus.*" %>
+<%@page import="com.vionto.vithesaurus.tools.*" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -17,7 +18,7 @@
 
           <ul>
               <g:each in="${matches}" status="i" var="term">
-                  <li><g:link action="search" params="${[q:term.term]}">${term.highlightTerm}</g:link></li>
+                  <li><g:link action="search" params="${[q:StringTools.slashEscape(term.term)]}">${term.highlightTerm}</g:link></li>
               </g:each>
               <g:if test="${totalMatches == 0}">
                   <li><g:message code="result.no.matches"/></li>

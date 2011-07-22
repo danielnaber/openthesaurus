@@ -1,4 +1,4 @@
-  
+<%@page import="com.vionto.vithesaurus.tools.*" %>  
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -32,7 +32,7 @@
                                     <label for='terms'><g:message code="create.terms"/></label>
                                 </td>
                                 <td valign='top' class='value'>
-                                	<g:textArea rows="5" cols="30" id='terms' name='terms' value="${params.term}\n"/>
+                                	<g:textArea rows="5" cols="30" id='terms' name='terms' value="${StringTools.slashUnescape(params.term)}\n"/>
                                 </td>
                             </tr>
                             

@@ -171,6 +171,8 @@ class SynsetController extends BaseController {
           return
         }
         
+        params.q = StringTools.slashUnescape(params.q)
+        
         Connection conn
         try {
           conn = dataSource.getConnection()

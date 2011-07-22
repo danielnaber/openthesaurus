@@ -1,3 +1,4 @@
+<%@page import="com.vionto.vithesaurus.tools.*" %>
             <g:if test="${totalMatches > 0}">
 
                    <g:each in="${synsetList}" status="i" var="synset">
@@ -67,7 +68,7 @@
                                 	<span class="synsetmatch">${displayTerm}</span>${delim}
 	                        	</g:if>
 	                        	<g:else>
-			                        <g:link action="search" params="${['q': term.toString()]}"
+			                        <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
 			                        	>${displayTerm}</g:link>${delim}
 	                        	</g:else>
 
@@ -93,7 +94,7 @@
             			<div><strong><g:message code="result.no.matches.baseforms"/></strong><br/>
             			    <span class="result">
                                 <g:each in="${baseforms}" var="term" status="counter">
-                                    <g:link action="search" params="${[q: term]}">${term.encodeAsHTML()}</g:link>
+                                    <g:link action="search" params="${[q: StringTools.slashEscape(term)]}">${term.encodeAsHTML()}</g:link>
                                     <g:if test="${counter < baseforms.size()-1}">
                                         <span class="d">&middot;</span>
                                     </g:if>
@@ -107,7 +108,7 @@
             			    <span class="result">
                                 <g:each in="${similarTerms}" var="term" status="counter">
                                     <g:if test="${counter < 3}">
-                                        <g:link action="search" params="${[q: term.term]}">${term.term}</g:link>
+                                        <g:link action="search" params="${[q: StringTools.slashEscape(term.term)]}">${term.term.encodeAsHTML()}</g:link>
                                         <g:if test="${counter < Math.min(2, similarTerms.size()-1)}">
                                             <span class="d">&middot;</span>
                                         </g:if>
