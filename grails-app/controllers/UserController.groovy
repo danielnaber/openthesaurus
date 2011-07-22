@@ -229,8 +229,15 @@ class UserController extends BaseController {
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
           } else {
-            log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)})")
-            flash.message = message(code:'user.invalid.login')
+            ThesaurusUser userById = ThesaurusUser.findByUserId(params.userId)
+            if (userById.password == '__expired__') {
+              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): account has expired")
+              flash.message = message(code:'user.invalid.login.expired')
+              return
+            } else {
+              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)})")
+              flash.message = message(code:'user.invalid.login')
+            }
           }
         }
     }
