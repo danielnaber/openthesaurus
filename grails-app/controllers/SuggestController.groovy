@@ -33,7 +33,7 @@ class SuggestController extends BaseController {
         Connection conn = dataSource.getConnection()
         String[] terms = text.split("[\\s+\\.,;\"':]")
         SynsetController controller = new SynsetController()
-        BaseformFinder baseformFinder = new BaseformFinder(conn)
+        BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
         for (term in terms) {
             if (term.isEmpty() || term.matches("\\d+")) {
@@ -43,7 +43,7 @@ class SuggestController extends BaseController {
             SearchResult result = controller.doSearch(term, null, null, null)
             matches = result.totalMatches
             if (matches == 0) {
-                String baseform = baseformFinder.getBaseForm(term)
+                String baseform = baseformFinder.getBaseForms(conn, term)
                 if (baseform != null) {
                     result = controller.doSearch(baseform, null, null, null)
                     matches = result.totalMatches
