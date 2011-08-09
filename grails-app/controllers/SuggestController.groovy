@@ -31,7 +31,7 @@ class SuggestController extends BaseController {
     def findPotentiallyMissingSynonyms = {
         String text = params.text
         Connection conn = dataSource.getConnection()
-        String[] terms = text.split("[\\s+\\.,;\"':]")
+        String[] terms = text.split("[\\s+\\.,;\"':„“?()]")
         SynsetController controller = new SynsetController()
         BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
