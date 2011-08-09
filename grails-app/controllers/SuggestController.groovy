@@ -39,19 +39,24 @@ class SuggestController extends BaseController {
             if (term.isEmpty() || term.matches("\\d+")) {
                 continue
             }
-            int matches = 0
             SearchResult result = controller.doSearch(term, null, null, null)
-            matches = result.totalMatches
+            int matches = result.totalMatches
+            Set<String> baseforms = null
             if (matches == 0) {
-                String baseform = baseformFinder.getBaseForms(conn, term)
-                if (baseform != null) {
-                    result = controller.doSearch(baseform, null, null, null)
+                baseforms = baseformFinder.getBaseForms(conn, term)
+                if (baseforms != null && baseforms.size() > 0) {
+                    // TODO: only getting the first item does not make that much sense?
+                    result = controller.doSearch(baseforms.iterator().next(), null, null, null)
                     matches = result.totalMatches
                 }
             }
             if (matches == 0) {
                 if (!unknownTerms.contains(term)) {
-                    unknownTerms.add(term)
+                    if (baseforms != null && baseforms.size() > 0) {
+                        unknownTerms.addAll(baseforms)
+                    } else {
+                        unknownTerms.add(term)
+                    }
                 }
             }
         }
