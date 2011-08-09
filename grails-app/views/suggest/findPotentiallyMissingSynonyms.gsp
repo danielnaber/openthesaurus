@@ -11,7 +11,10 @@
 
         <ul>
           <g:each in="${unknownTerms}" var="term">
-            <li><g:link controller="synset" action="create" params="${[term:term]}">${term}</g:link></li>
+            <li>
+                <g:link controller="synset" action="search" params="${[q:term]}">${term}</g:link> -
+                <g:link controller="synset" action="create" params="${[term:term]}">(add)</g:link>
+            </li>
           </g:each>
         </ul>
           
