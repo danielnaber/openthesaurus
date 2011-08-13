@@ -1,13 +1,13 @@
 <html>
     <head>
-        <title>Potentially Missing Synonyms - vithesaurus</title>
+        <title>Unbekannte Wörter - OpenThesaurus</title>
         <meta name="layout" content="main" />
     </head>
     <body>
 
-		<div class="body">
+        <hr />
 
-		<h1>Potentially missing synonyms</h1>
+        <h2>Unbekannte Wörter</h2>
 
         <ul>
           <g:each in="${unknownTerms}" var="term">
