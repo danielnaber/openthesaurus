@@ -35,33 +35,33 @@ class SuggestController extends BaseController {
         SynsetController controller = new SynsetController()
         BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
+        List unknownTermsBaseforms = []
         for (term in terms) {
             if (term.isEmpty() || term.matches("\\d+")) {
                 continue
             }
             SearchResult result = controller.doSearch(term, null, null, null)
             int matches = result.totalMatches
-            Set<String> baseforms = null
             if (matches == 0) {
-                baseforms = baseformFinder.getBaseForms(conn, term)
-                if (baseforms != null && baseforms.size() > 0) {
-                    // TODO: only getting the first item does not make that much sense?
-                    result = controller.doSearch(baseforms.iterator().next(), null, null, null)
-                    matches = result.totalMatches
-                }
-            }
-            if (matches == 0) {
-                if (!unknownTerms.contains(term)) {
-                    if (baseforms != null && baseforms.size() > 0) {
-                        unknownTerms.addAll(baseforms)
-                    } else {
+                Set baseforms = baseformFinder.getBaseForms(conn, term)
+                if (baseforms.size() == 0) {
+                    if (!unknownTerms.contains(term)) {
                         unknownTerms.add(term)
+                        unknownTermsBaseforms.add(null)
+                    }
+                } else {
+                    for (baseform in baseforms) {
+                        result = controller.doSearch(baseform, null, null, null)
+                        if (result.totalMatches == 0 && !unknownTermsBaseforms.contains(baseform)) {
+                            unknownTermsBaseforms.add(baseform)
+                            unknownTerms.add(term)
+                        }
                     }
                 }
             }
         }
         conn.close()
-        [unknownTerms: unknownTerms]
+        [unknownTerms: unknownTerms, unknownTermsBaseforms: unknownTermsBaseforms]
     }
 
 }
