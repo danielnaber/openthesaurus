@@ -5,16 +5,17 @@
     </head>
     <body>
 
-		<div class="body">
+		<hr />
 
-		<h1>Find potentially missing synonyms</h1>
+		<h2>Fehlender Wörter finden</h2>
 
-        <p>Paste text here and the words which are not known by the thesaurus will be listed.</p>
+        <p>Hier Text reinkopieren um darin Wörter zu finden, die OpenThesaurus noch nicht kennt:</p>
 
         <g:form action="findPotentiallyMissingSynonyms">
   		  <textarea rows="20" cols="80" name="text"></textarea>
           <br />
-          <g:submitButton name="Go" value="Go" />
+          <br />
+          <g:submitButton name="Go" value="Suchen" />
         </g:form>
           
         </div>
