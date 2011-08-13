@@ -93,6 +93,7 @@ class UserController extends BaseController {
           body message(code:'user.register.email.body', args:[activationLink]) 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
+        log.info("Registration reason: fix=${params.fix}, add=${params.add}, other=${params.reason}")
         if (params.subscribeToMailingList) {
           sendMail {
             from params.userId

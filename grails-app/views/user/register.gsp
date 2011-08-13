@@ -70,7 +70,21 @@
                             <td valign='top' class='name'>
                             </td>
                             <td valign='top' class='value'>
-                                <label><g:checkBox name="subscribeToMailingList"/> <g:message code="user.register.form.mailinglist"/></label>
+                                <label for="subscribeToMailingList"><g:checkBox name="subscribeToMailingList"/> <g:message code="user.register.form.mailinglist"/></label>
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name' colspan="2">
+                                <label for='userId'>Grund für die Anmeldung:</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td valign='top' class='value'>
+                                <label><input type="checkbox" name="fix"/> ich will bestehende Einträge korrigieren</label><br/>
+                                <label><input type="checkbox" name="add"/> ich will neue Einträge hinzufügen</label><br/>
+                                <label><input type="checkbox" name="other"/> sonstiges, nämlich:</label> <input type="text" name="reason"/><br/>
                             </td>
                         </tr>
 
