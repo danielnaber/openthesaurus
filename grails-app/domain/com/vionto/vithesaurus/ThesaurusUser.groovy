@@ -30,6 +30,7 @@ class ThesaurusUser {
     Date lastLoginDate
     Date confirmationDate	// null until the account has been confirmed by following the email link
     String confirmationCode	// random code generated and sent to user on registration
+    String salt
     boolean blocked		// used to completely block a user from logging in
     
     final static USER_PERM = "user"
@@ -43,6 +44,7 @@ class ThesaurusUser {
         lastLoginDate(nullable:true)
         confirmationDate(nullable:true)
         confirmationCode(nullable:true)
+        salt(nullable:true)  // null for old users
     }
 
     static mapping = {
@@ -54,9 +56,10 @@ class ThesaurusUser {
         blocked = false
     }
     
-    ThesaurusUser(String userId, String password, String permission) {
+    ThesaurusUser(String userId, String hashedPassword, String salt, String permission) {
         this.userId = userId
-        this.password = password
+        this.password = hashedPassword
+        this.salt = salt
         this.permission = permission
         this.creationDate = new Date()
     }

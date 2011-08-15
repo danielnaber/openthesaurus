@@ -4,12 +4,12 @@ class BootStrap {
 
      def init = { servletContext ->
        final String ADMIN_USERID = "admin"
-       final String ADMIN_PASSWORD = UserController.md5sum("admin")
+       final String ADMIN_PASSWORD = UserController.md5sum("admin", UserController.DEFAULT_SALT)
        final String ADMIN_PERM = "admin"
        // create a default user:
        if (!ThesaurusUser.findByUserId(ADMIN_USERID)) {
          log.info("Creating initial user: " + ADMIN_USERID)
-         def user = new ThesaurusUser(ADMIN_USERID, ADMIN_PASSWORD, ADMIN_PERM)
+         def user = new ThesaurusUser(ADMIN_USERID, ADMIN_PASSWORD, UserController.DEFAULT_SALT, ADMIN_PERM)
          // fake a confirmation (usually done by email):
          user.confirmationDate = new Date()
          if (!user.validate()) {

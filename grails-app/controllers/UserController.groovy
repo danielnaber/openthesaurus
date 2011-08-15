@@ -24,6 +24,8 @@ import javax.servlet.http.Cookie
 class UserController extends BaseController {
     
     public static final String LOGIN_COOKIE_NAME = "loginCookie"
+
+    public static final  String DEFAULT_SALT = "hi234z2ejgrr97otw4ujzt4wt7jtsr4975FERedefef"  // only for old users before per-user-salt was introduced
     
     private static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
     
@@ -46,8 +48,9 @@ class UserController extends BaseController {
     }
     
     def doRegister = {
-      def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
-          ThesaurusUser.USER_PERM)
+      String salt = getRandomSalt()
+      String hashedPassword = md5sum(params.password1, salt)
+      def user = new ThesaurusUser(params.userId, hashedPassword, salt, ThesaurusUser.USER_PERM)
       user.realName = params.visibleName
       if (!params.userId || params.userId.trim().isEmpty()) {
         user.errors.reject('thesaurus.error', [].toArray(), 
@@ -113,6 +116,10 @@ class UserController extends BaseController {
       [email: params.userId]
     }
 
+    private String getRandomSalt() {
+      return Math.random() + Math.random()*0.33 + ""
+    }
+    
     private checkPasswords(ThesaurusUser user) {
       if (params.password1 != params.password2) {
         user.errors.reject('thesaurus.error', [].toArray(), 
@@ -181,8 +188,15 @@ class UserController extends BaseController {
           }
           ThesaurusUser user = new ThesaurusUser()
         } else {
-          ThesaurusUser user = 
-              ThesaurusUser.findByUserIdAndPassword(params.userId, md5sum(params.password))
+          ThesaurusUser user = ThesaurusUser.findByUserId(params.userId)
+          String salt = user?.salt
+          if (salt == null) {
+            // user created before per-user salts where introduced
+            salt = DEFAULT_SALT
+          }
+          if (user && user.password != md5sum(params.password, salt)) {
+            user = null
+          }
           if (user) {
             if (user.blocked) {
               log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): user is blocked")
@@ -231,7 +245,7 @@ class UserController extends BaseController {
             }
           } else {
             ThesaurusUser userById = ThesaurusUser.findByUserId(params.userId)
-            if (userById.password == '__expired__') {
+            if (userById && userById.password == '__expired__') {
               log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): account has expired")
               flash.message = message(code:'user.invalid.login.expired')
               return
@@ -309,8 +323,9 @@ class UserController extends BaseController {
           return
         }
         log.info("Setting user password for '${user.userId}'")
-        user.password = md5sum(params.password1)
-        user.confirmationCode = ""
+        String salt = getRandomSalt()
+        user.password = md5sum(params.password1, salt)
+        user.salt = salt
         boolean saved = user.validate() && user.save()
         if (!saved) {
           throw new Exception("Could not save new password: ${user.errors}")
@@ -407,7 +422,8 @@ class UserController extends BaseController {
             render "Access denied"
             return
         }
-        ThesaurusUser user = new ThesaurusUser(params)
+        //TODO: make this work again
+        /*ThesaurusUser user = new ThesaurusUser(params)
         user.password = md5sum(params.password)
         if(!user.hasErrors() && user.save()) {
             flash.message = "User ${user.id} created"
@@ -416,12 +432,14 @@ class UserController extends BaseController {
         }
         else {
             render(view:'create',model:[user:user])
-        }
+        }*/
     }
 
-    public static String md5sum(String str) {
-        // a pseudo-random salt:
-        final String salt = "hi234z2ejgrr97otw4ujzt4wt7jtsr4975FERedefef"
+    public static String md5sum(String str, String salt) {
+        if (salt == null) {
+          // a pseudo-random salt:
+          salt = DEFAULT_SALT
+        }
         str = str + "/" + salt
         MessageDigest md = MessageDigest.getInstance("MD5")
         md.update(str.getBytes(), 0, str.length())
