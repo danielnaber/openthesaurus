@@ -64,7 +64,7 @@
                                     Angezeigter Name:
                                 </td>
                                 <td valign='top' class='value'>
-                                    ${user.realName.encodeAsHTML()}
+                                    ${user.realName ? user.realName.encodeAsHTML() : "-"}
                                 </td>
                             </tr>
 
