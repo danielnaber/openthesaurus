@@ -21,15 +21,15 @@ environments {
     }
 }
 
-/* comment in to locally test mail sending:*/
+/* comment in to locally test mail sending:
 grails {
    mail {
      host = "smtprelaypool.ispgateway.de"
-     username = "695637"
-     password = "hiinZ4r"
+     username = "fixme"
+     password = "fixme"
   }
 }
-/**/
+*/
 
 
 if(System.properties["${appName}.config.location"]) {
