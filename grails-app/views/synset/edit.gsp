@@ -63,6 +63,13 @@
             document.editForm.userComment.focus();
             return false;
           }
+          function toggleId(divId) {
+            if (document.getElementById(divId).style.display == 'block') {
+                document.getElementById(divId).style.display='none';
+             } else {
+                document.getElementById(divId).style.display='block';
+             }
+          }
           function toggleLanguageLevelHelp() {
             if (document.getElementById('languageLevelHelp').style.display == 'block') {
                 document.getElementById('languageLevelHelp').style.display='none';
@@ -389,24 +396,6 @@
                             </tr>
                         </g:if>
 
-                        <g:if test="${session.user}">
-                            <tr class='prop'>
-                                <td class='name'>
-                                    <g:message code='edit.delete'/>
-                                </td>
-                                <td valign='top'>
-                                    <div class="buttons">
-                                        <g:if test="${synset.isVisible}">
-                                            <span class="submitButton"><g:actionSubmit action="hide" class="hide" value="${message(code:'edit.delete.button')}" /></span>
-                                        </g:if>
-                                        <g:else>
-                                            <span class="submitButton"><g:actionSubmit action="unhide" class="unhide" value="${message(code:'edit.undelete.button')}" /></span>
-                                        </g:else>
-                                    </div>
-                                </td>
-                            </tr>
-                        </g:if>
-
                         <tr class='prop'>
                             <td valign='top' class='name'>
                                 <g:message code='edit.comment'/>
@@ -439,6 +428,26 @@
 
                             </td>
                         </tr>
+
+                        <g:if test="${session.user}">
+                            <tr class='prop'>
+                                <td class='name' valign="top">
+                                </td>
+                                <td valign='top'>
+                                    <div class="buttons">
+                                        <g:if test="${synset.isVisible}">
+                                            <a href="javascript:toggleId('deleteButton')">${message(code:'edit.delete.button')}</a>
+                                            <div id="deleteButton" style="display:none;margin-top:12px">
+                                                <span class="submitButton"><g:actionSubmit action="hide" class="hide" value="${message(code:'edit.delete.now.button')}" /></span>
+                                            </div>
+                                        </g:if>
+                                        <g:else>
+                                            <span class="submitButton"><g:actionSubmit action="unhide" class="unhide" value="${message(code:'edit.undelete.button')}" /></span>
+                                        </g:else>
+                                    </div>
+                                </td>
+                            </tr>
+                        </g:if>
 
                         <g:if test="${synset.source}">
                             <tr class='prop'>
