@@ -1028,21 +1028,16 @@ class SynsetController extends BaseController {
             }
 
             // delete category links:
-            if (params.delete_category) {
-                List deleteIDs = getCheckboxIDs(params.delete_category)
-                // don't allow removing the last category: 
-                /*if (synset.categoryLinks.size()-deleteIDs.size() <= 0) {
-                    synset.errors.reject('thesaurus.empty.category',
-                            [].toArray(), 'concept must contain a category')
-                    render(view:'edit',model:[synset:synset],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                }*/
-                for (deleteID in deleteIDs) {
-                    CategoryLink catLink = CategoryLink.get(deleteID)
-                    synset.removeLink(catLink)
+            List catLinksToDelete = []
+            for (catLink in synset.categoryLinks) {
+                if (params['delete_catLinkId_' + catLink.id] == 'delete') {
+                    catLinksToDelete.add(catLink)
                 }
             }
+            for (catLink in catLinksToDelete) {
+                synset.removeLink(catLink)
+            }
+
             // change or add a category link:
             int newCategoryCount = 0
             while (newCategoryCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)) {

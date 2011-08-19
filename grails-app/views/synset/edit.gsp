@@ -289,18 +289,29 @@
                               <ul>
                               <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                   <li class="checkboxList">
-                                      <g:managedCheckBox checked="false" disabled="${!session.user}"
-                                         name="delete_category" value="${catLink.id}" />
-                                      <g:if test="${prefTerms}">
-                                          &nbsp;
-                                          <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
-                                          <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
-                                              checked="${isPreferred}" />
-                                      </g:if>
-                                      ${catLink.category}
-                                      <g:if test="${catLink.category.categoryType}">
-                                             <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
-                                      </g:if>
+
+                                    <input type="hidden" id="delete_catLinkId_${catLink.id}" name="delete_catLinkId_${catLink.id}" value=""/>
+                                    <div id="catLinkId_${catLink.id}">
+
+                                        <g:if test="${session.user}">
+                                          <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
+                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
+                                        </g:if>
+                                        <g:else>
+                                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                        </g:else>
+
+                                        <g:if test="${prefTerms}">
+                                            &nbsp;
+                                            <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
+                                            <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
+                                                checked="${isPreferred}" />
+                                        </g:if>
+                                        ${catLink.category}
+                                        <g:if test="${catLink.category.categoryType}">
+                                               <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
+                                        </g:if>
+                                    </div>
                                   </li>
                               </g:each>
                               </ul>
