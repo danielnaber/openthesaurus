@@ -286,7 +286,7 @@
                                 </g:if>
                             </g:if>
                             <g:if test="${synset.categoryLinks.size() > 0}">
-                              <ul>
+                              <ul style="margin-top:0px">
                               <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                   <li class="checkboxList">
 

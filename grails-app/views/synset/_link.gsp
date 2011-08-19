@@ -8,7 +8,7 @@
 
     <g:set var="nymCount" value="${0}"/>
     
-    <ul>
+    <ul style="margin-top:0px">
     
         <g:each var='link' in='${synsetLinks}'>
            <g:if test="${link.linkType.toString() == linkTypeName}">
