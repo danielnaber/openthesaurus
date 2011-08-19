@@ -18,14 +18,16 @@
           function loadedSearch() {
             document.getElementById('addSynsetProgress').style.visibility='hidden';
           }
-          function deleteTerm(termId) {
-            var deleted = document.getElementById('delete_' + termId).value == 'delete';
+          function deleteItem(id, termId) {
+            var deleted = document.getElementById('delete_' + id + '_' + termId).value == 'delete';
+            var hiddenFieldName = 'delete_' + id + '_' + termId;
+            var divName = id + '_' + termId;
             if (deleted) {
-              document.getElementById('delete_' + termId).value = '';
-              document.getElementById('termId_' + termId).style.textDecoration = '';
+              document.getElementById(hiddenFieldName).value = '';
+              document.getElementById(divName).style.textDecoration = '';
             } else {
-              document.getElementById('delete_' + termId).value = 'delete';
-              document.getElementById('termId_' + termId).style.textDecoration = 'line-through';
+              document.getElementById(hiddenFieldName).value = 'delete';
+              document.getElementById(divName).style.textDecoration = 'line-through';
             }
             return false;
           }
@@ -147,12 +149,12 @@
                                         <g:if test="${previousLanguage != '' && t.language != previousLanguage}">
                                             <br/>
                                         </g:if>
-                                        <input type="hidden" id="delete_${t.id}" name="delete_${t.id}" value=""/>
+                                        <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
 
                                         <div id="termId_${t.id}">
 
                                             <g:if test="${session.user}">
-                                              <a href="#" onclick="deleteTerm('${t.id}');return false;"><img 
+                                              <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img 
                                                 align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                                             </g:if>
                                             <g:else>
