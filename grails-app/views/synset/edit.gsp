@@ -199,12 +199,10 @@
                                         </div>
 
                                         <g:if test="${t.userComment}">
-                                            <g:if test="${t.userComment}">
-                                                <div style="margin-left: 22px">
-                                                    <g:message code="edit.term.comment"/>
-                                                    <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
-                                                </div>
-                                            </g:if>
+                                            <div style="margin-left: 22px">
+                                                <g:message code="edit.term.comment"/>
+                                                <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
+                                            </div>
                                         </g:if>
 
                                         <%--
