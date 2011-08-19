@@ -1001,31 +1001,32 @@ class SynsetController extends BaseController {
                 saveSynsetLink(approveID, SynsetLink.EVAL_APPROVED, synset)
             }
 
-            // delete terms:
-            if (params.delete) {
-                // we get a string or an array, depending on whether
-                // one ore more checkboxes were selected:
-                List deleteIDs = getCheckboxIDs(params.delete)
-                if (synset.terms.size()-deleteIDs.size() <= 0) {
-                    synset.errors.reject('thesaurus.empty.synset',
-                            [].toArray(), 'Error saving changes')
+            List deleteTermIds = []
+            for (term in synset.terms) {
+                if (params['delete_' + term.id] == 'delete') {
+                    deleteTermIds.add(term.id)
+                }
+            }
+            if (synset.terms.size() - deleteTermIds.size() <= 0) {
+                synset.errors.reject('thesaurus.empty.synset',
+                        [].toArray(), 'Error saving changes')
+                render(view:'edit',model:[synset:synset],
+                        contentType:"text/html", encoding:"UTF-8")
+                return
+            }
+            for (deleteID in deleteTermIds) {
+                Term delTerm = Term.get(deleteID)
+                try {
+                    synset.removeTerm(delTerm)
+                } catch(IllegalArgumentException e) {
+                    synset.errors.reject(e.getMessage(),
+                            [].toArray(), e.getMessage())
                     render(view:'edit',model:[synset:synset],
                             contentType:"text/html", encoding:"UTF-8")
                     return
                 }
-                for (deleteID in deleteIDs) {
-                    Term delTerm = Term.get(deleteID)
-                    try {
-                        synset.removeTerm(delTerm)
-                    } catch(IllegalArgumentException e) {
-                        synset.errors.reject(e.getMessage(),
-                                [].toArray(), e.getMessage())
-                        render(view:'edit',model:[synset:synset],
-                                contentType:"text/html", encoding:"UTF-8")
-                        return
-                    }
-                }
             }
+
             // delete category links:
             if (params.delete_category) {
                 List deleteIDs = getCheckboxIDs(params.delete_category)

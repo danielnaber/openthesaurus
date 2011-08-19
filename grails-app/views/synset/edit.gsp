@@ -18,6 +18,17 @@
           function loadedSearch() {
             document.getElementById('addSynsetProgress').style.visibility='hidden';
           }
+          function deleteTerm(termId) {
+            var deleted = document.getElementById('delete_' + termId).value == 'delete';
+            if (deleted) {
+              document.getElementById('delete_' + termId).value = '';
+              document.getElementById('termId_' + termId).style.textDecoration = '';
+            } else {
+              document.getElementById('delete_' + termId).value = 'delete';
+              document.getElementById('termId_' + termId).style.textDecoration = 'line-through';
+            }
+            return false;
+          }
           // We have two submit buttons in the page and we cannot guarantee that
           // the correct one is used, so disable submit-by-return:
           function avoidSubmitOnReturn(event) {
@@ -123,63 +134,73 @@
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
-                            <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
-                                title="${message(code:'edit.select.to.delete')}"/>
                             <g:if test="${prefTerms}">
                                 &nbsp;
                                 <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
                                     title="Select one preferred term per language" />
                             </g:if>
 
-                            <ul>
+                            <ul style="margin-top:0px">
                                 <g:set var="previousLanguage" value=""/>
                                 <g:each var='t' in='${synset?.sortedTerms()}'>
                                     <li class="checkboxList">
                                         <g:if test="${previousLanguage != '' && t.language != previousLanguage}">
                                             <br/>
                                         </g:if>
-                                        <g:managedCheckBox checked="false" disabled="${!session.user}" name="delete" value="${t.id}" id="delete_${t.id}"/>
+                                        <input type="hidden" id="delete_${t.id}" name="delete_${t.id}" value=""/>
 
-                                        <g:if test="${prefTerms}">
-                                            &nbsp;
-                                            <g:set var="isPreferred" value="${PreferredTermLink.countByTerm(t) > 0}"/>
-                                            <g:if test="${isPreferred}">
-                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                    checked="${isPreferred}" id="preferred_${t.language.shortForm}_${t.id}" />
+                                        <div id="termId_${t.id}">
+
+                                            <g:if test="${session.user}">
+                                              <a href="#" onclick="deleteTerm('${t.id}');return false;"><img 
+                                                align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                                             </g:if>
                                             <g:else>
-                                                <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                    checked="${false}" />
+                                              X
                                             </g:else>
-                                        </g:if>
-
-                                        <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
-                                            <%--
-                                            <g:set var="flagImg" value="flag_${t.language.shortForm}.png"/>
-                                            <img src="${createLinkTo(dir:'images',file:flagImg)}" alt="[${t.language.longForm}]" border="0" />
-                                            --%>
-                                            ${t.toString()?.encodeAsHTML()}</g:link>
-
-                                        &nbsp;
-                                        <g:if test="${t.isAcronym}">
-                                            <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
-                                        </g:if>
-                                        <g:if test="${t.isShortForm}">
-                                            <span class="termMetaInfo">[<g:message code='edit.shortform'/>]</span>
-                                        </g:if>
-                                        <g:if test="${t.level}">
-                                            <span class="termMetaInfo">[${t.level.toString()?.encodeAsHTML()}]</span>
-                                        </g:if>
-                                        <g:if test="${t.wordGrammar && t.wordGrammar.form != 'undefined'}">
-                                            <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
-                                        </g:if>
-                                        <g:set var="termCount" value="${t.listHomonyms().size()}"/>
-                                        <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                        <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo lightlink" action="search" params="[q : t.word]">[${termCount}]</g:link>
+    
+                                            <g:if test="${prefTerms}">
+                                                &nbsp;
+                                                <g:set var="isPreferred" value="${PreferredTermLink.countByTerm(t) > 0}"/>
+                                                <g:if test="${isPreferred}">
+                                                    <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
+                                                        checked="${isPreferred}" id="preferred_${t.language.shortForm}_${t.id}" />
+                                                </g:if>
+                                                <g:else>
+                                                    <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
+                                                        checked="${false}" />
+                                                </g:else>
+                                            </g:if>
+    
+                                            <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
+                                                <%--
+                                                <g:set var="flagImg" value="flag_${t.language.shortForm}.png"/>
+                                                <img src="${createLinkTo(dir:'images',file:flagImg)}" alt="[${t.language.longForm}]" border="0" />
+                                                --%>
+                                                ${t.toString()?.encodeAsHTML()}</g:link>
+    
+                                            &nbsp;
+                                            <g:if test="${t.isAcronym}">
+                                                <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
+                                            </g:if>
+                                            <g:if test="${t.isShortForm}">
+                                                <span class="termMetaInfo">[<g:message code='edit.shortform'/>]</span>
+                                            </g:if>
+                                            <g:if test="${t.level}">
+                                                <span class="termMetaInfo">[${t.level.toString()?.encodeAsHTML()}]</span>
+                                            </g:if>
+                                            <g:if test="${t.wordGrammar && t.wordGrammar.form != 'undefined'}">
+                                                <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
+                                            </g:if>
+                                            <g:set var="termCount" value="${t.listHomonyms().size()}"/>
+                                            <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
+                                            <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo lightlink" action="search" params="[q : t.word]">[${termCount}]</g:link>
+                                        
+                                        </div>
 
                                         <g:if test="${t.userComment}">
                                             <g:if test="${t.userComment}">
-                                                <div style="margin-left: 17px">
+                                                <div style="margin-left: 22px">
                                                     <g:message code="edit.term.comment"/>
                                                     <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
                                                 </div>
