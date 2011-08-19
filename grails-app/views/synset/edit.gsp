@@ -415,6 +415,7 @@
                             </tr>
                         </g:if>
 
+                        <%--
                         <tr class='prop'>
                             <td valign='top' class='name'>
                                 <g:message code='edit.comment'/>
@@ -447,6 +448,7 @@
 
                             </td>
                         </tr>
+                        --%>
 
                         <g:if test="${session.user}">
                             <tr class='prop'>
