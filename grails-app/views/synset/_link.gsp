@@ -7,48 +7,39 @@
     <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
     <g:set var="nymCount" value="${0}"/>
-    <g:each var='link' in='${synsetLinks}'>
-       <g:if test="${link.linkType.toString() == linkTypeName}">
-            <span class="neutralLinkRadioButton"><g:managedRadio disabled="${!session.user}" 
-                name="evaluate_link_${link.id}" value="neutral" checked="${link.evaluationStatus == null}"/></span>
-            <span class="rejectLinkRadioButton"><g:managedRadio disabled="${!session.user}" 
-                name="evaluate_link_${link.id}" value="reject" checked="${link.evaluationStatus == SynsetLink.EVAL_REJECTED}"/></span>
-            <span class="approveLinkRadioButton"><g:managedRadio disabled="${!session.user}" 
-                name="evaluate_link_${link.id}" value="approve" checked="${link.evaluationStatus == SynsetLink.EVAL_APPROVED}"/></span>
-            <g:if test="${link.evaluationStatus == SynsetLink.EVAL_APPROVED}">
-                <span class="linkApproved">
-            </g:if>
-            <g:elseif test="${link.evaluationStatus == SynsetLink.EVAL_REJECTED}">
-                <span class="linkRejected">
-            </g:elseif>
-            <g:else>
-                <span>
-            </g:else>
-            <g:link controller='synset' action='edit'
-                id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true).encodeAsHTML()}</g:link></span>
-	        <%--
-            <g:if test="${link.factCount >= 1}">
-               <g:if test="${reverseLink}">
-                  <input type="hidden" name="reverse_${link.id}" value="1"/>
-                  <g:set var="subjectId" value="${link.targetSynset.id}"/>
-                  <g:set var="objectId" value="${link.synset.id}"/>
-               </g:if>
-               <g:else>
-                  <g:set var="subjectId" value="${link.synset.id}"/>
-                  <g:set var="objectId" value="${link.targetSynset.id}"/>
-               </g:else>
-            </g:if>
-            <g:else>
-               <span class="metaInfo">[manually added]</span>
-            </g:else>
-            --%>
-            <%
-            displayedSynsets.add(link.targetSynset.id)
-            nymCount++
-            %>
-            <br />
-       </g:if>
-    </g:each>
+    
+    <ul>
+    
+        <g:each var='link' in='${synsetLinks}'>
+           <g:if test="${link.linkType.toString() == linkTypeName}">
+           
+                <li class="checkboxList">
+                    <input type="hidden" id="delete_${linkTypeName}_${link.id}" name="delete_${linkTypeName}_${link.id}" value=""/>
+                    <div id="${linkTypeName}_${link.id}">
+        
+                        <g:if test="${session.user}">
+                          <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img 
+                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                        </g:if>
+                        <g:else>
+                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                        </g:else>
+        
+                        <g:link controller='synset' action='edit'
+                            id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true).encodeAsHTML()}</g:link>
+                            
+                    </div>
+                </li>
+    
+                <%
+                displayedSynsets.add(link.targetSynset.id)
+                nymCount++
+                %>
+           </g:if>
+        </g:each>
+    
+    </ul>
+    
     <g:if test="${nymCount == 0}">
          <span class="noMatches"><g:message code="edit.not.set"/></span>
     </g:if>

@@ -368,20 +368,6 @@
                             <g:set var="synsetLinks" value="${synset?.sortedSynsetLinks()}"/>
                             <g:set var="suggestedSynsetLinks" value="${synset?.sortedSynsetLinkSuggestions()}"/>
 
-                            <g:if test="${synsetLinks.size() > 0 || suggestedSynsetLinks.size() > 0}">
-                                <tr class='prop'>
-                                    <td valign='top' class='name'></td>
-                                    <td valign='bottom' style="padding-bottom:0px">
-                                        <img src="${createLinkTo(dir:'images',file:'questionmark.png')}" alt="${message(code:'edit.question.mark')}"
-                                            title="${message(code:'edit.link.unknown.status')}" />
-                                        <img src="${createLinkTo(dir:'images',file:'wrongway.png')}" alt="${message(code:'edit.wrong.way.sign')}"
-                                            title="${message(code:'edit.select.reject.link')}" />
-                                        <img src="${createLinkTo(dir:'images',file:'smiley.png')}" alt="${message(code:'edit.smiley')}"
-                                            title="${message(code:'edit.select.approve.link')}" />
-                                    </td>
-                                </tr>
-                            </g:if>
-
                             <%
                             Set displayedSynsets = new HashSet()
                             %>

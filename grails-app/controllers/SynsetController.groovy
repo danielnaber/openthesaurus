@@ -938,69 +938,8 @@ class SynsetController extends BaseController {
                     }
                 }
             }
-            // delete synset hypernym links:
-            /*if (params.delete_link) {
-                List deleteIDs = getCheckboxIDs(params.delete_link)
-                for (deleteID in deleteIDs) {
-                    SynsetLink synsetLink = SynsetLink.get(deleteID)
-                    synset.removeLink(synsetLink)
-                }
-            }*/
-            // reject hypernym/hyponym links:
-            List rejectedIDs = getEvaluationRadioButtonIDs(log, "evaluate_link_", "reject")
-            for (rejectedID in rejectedIDs) {
-                SynsetLink synsetLink = SynsetLink.get(rejectedID)
-                int oldStatus = synsetLink.evaluationStatus
-                synsetLink.evaluationStatus = SynsetLink.EVAL_REJECTED
-                if (oldStatus != synsetLink.evaluationStatus) {
-                    String logText =
-                        "rejecting: ${synsetLink.targetSynset.toShortString()} " +
-                        "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.synset.toShortString()}"
-                    logSynsetLink(logText, synset, synsetLink)
-                }
-            }
-            // approve hypernym/hyponym links:
-            List approvedIDs = getEvaluationRadioButtonIDs(log, "evaluate_link_", "approve")
-            for (approveID in approvedIDs) {
-                SynsetLink synsetLink = SynsetLink.get(approveID)
-                int oldStatus = synsetLink.evaluationStatus
-                synsetLink.evaluationStatus = SynsetLink.EVAL_APPROVED
-                if (oldStatus != synsetLink.evaluationStatus) {
-                    String logText =
-                        "approving: ${synsetLink.targetSynset.toShortString()} " +
-                        "${synsetLink.linkType.verbName} " +
-                        "${synsetLink.synset.toShortString()}"
-                    logSynsetLink(logText, synset, synsetLink)
-                }
-            }
-            // set all other links to neither approved nor rejected, i.e. delete them:
-            List neutralIDs = getEvaluationRadioButtonIDs(log, "evaluate_link_", "neutral")
-            for (neutralID in neutralIDs) {
-                SynsetLink synsetLink = SynsetLink.get(neutralID)
-                String logText =
-                    "neutralizing: ${synsetLink.targetSynset.toShortString()} " +
-                    "${synsetLink.linkType.verbName} " +
-                    "${synsetLink.synset.toShortString()}"
-                logSynsetLink(logText, synset, synsetLink)
-                synset.removeFromSynsetLinks(synsetLink)
-                synsetLink.delete()
-            }
 
-            // reject hypernym/hyponym links that have been automatically suggested:
-            List rejectedSuggestionIDs = getEvaluationRadioButtonIDs(log,
-                    "evaluate_suggestion_link_", "reject")
-            for (rejectID in rejectedSuggestionIDs) {
-                saveSynsetLink(rejectID, SynsetLink.EVAL_REJECTED, synset)
-            }
-
-            // approve hypernym/hyponym links that have been automatically suggested:
-            List approvedSuggestionIDs = getEvaluationRadioButtonIDs(log,
-                    "evaluate_suggestion_link_", "approve")
-            for (approveID in approvedSuggestionIDs) {
-                saveSynsetLink(approveID, SynsetLink.EVAL_APPROVED, synset)
-            }
-
+            // delete terms:
             List deleteTermIds = []
             for (term in synset.terms) {
                 if (params['delete_' + term.id] == 'delete') {
@@ -1008,21 +947,17 @@ class SynsetController extends BaseController {
                 }
             }
             if (synset.terms.size() - deleteTermIds.size() <= 0) {
-                synset.errors.reject('thesaurus.empty.synset',
-                        [].toArray(), 'Error saving changes')
-                render(view:'edit',model:[synset:synset],
-                        contentType:"text/html", encoding:"UTF-8")
+                synset.errors.reject('thesaurus.empty.synset', [].toArray(), 'Error saving changes')
+                render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
                 return
             }
             for (deleteID in deleteTermIds) {
                 Term delTerm = Term.get(deleteID)
                 try {
                     synset.removeTerm(delTerm)
-                } catch(IllegalArgumentException e) {
-                    synset.errors.reject(e.getMessage(),
-                            [].toArray(), e.getMessage())
-                    render(view:'edit',model:[synset:synset],
-                            contentType:"text/html", encoding:"UTF-8")
+                } catch (IllegalArgumentException e) {
+                    synset.errors.reject(e.getMessage(), [].toArray(), e.getMessage())
+                    render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
                     return
                 }
             }
@@ -1038,6 +973,25 @@ class SynsetController extends BaseController {
                 synset.removeLink(catLink)
             }
 
+            // delete synset links:
+            List synsetLinkIdsToDelete = []
+            for (synsetLink in synset.sortedSynsetLinks()) {
+                String linkName = params['delete_' + synsetLink.linkType.linkName + '_' + synsetLink.id]
+                if (linkName == 'delete') {
+                    synsetLinkIdsToDelete.add(synsetLink.id)
+                }
+            }
+            for (synsetLinkId in synsetLinkIdsToDelete) {
+                SynsetLink synsetLink = SynsetLink.get(synsetLinkId)
+                String logText =
+                    "removing link: ${synsetLink.targetSynset.toShortString()} " +
+                    "${synsetLink.linkType.verbName} " +
+                    "${synsetLink.synset.toShortString()}"
+                logSynsetLink(logText, synset, synsetLink)
+                synset.removeFromSynsetLinks(synsetLink)
+                synsetLink.delete()
+            }
+            
             // change or add a category link:
             int newCategoryCount = 0
             while (newCategoryCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)) {
@@ -1373,7 +1327,7 @@ class SynsetController extends BaseController {
             }
             try {
                 validator.extendedValidate()
-            } catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 String[] wordError = [term.word, e.toString()].toArray()
                 synset.errors.rejectValue(null, 'thesaurus.invalid.term', wordError, "")
                 render(view:'multiSearch', model:[synset:synset,
