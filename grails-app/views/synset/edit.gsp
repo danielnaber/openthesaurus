@@ -156,7 +156,7 @@
                                                 align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                                             </g:if>
                                             <g:else>
-                                              X
+                                              <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
                                             </g:else>
     
                                             <g:if test="${prefTerms}">
@@ -278,9 +278,6 @@
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
                             <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
-                                <img src="${createLinkTo(dir:'images',file:'delete.png')}" alt="Trashcan"
-                                    title="${message(code:'edit.category.delete')}"/>
-                                &nbsp;
                                 <g:if test="${prefTerms}">
                                     <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
                                         title="${message(code:'edit.category.prefer')}" />
