@@ -46,7 +46,7 @@
 
     <g:if test="${session.user && showAddLink}">
         <div id="addSynsetLink-${linkTypeName}" style="margin-top:5px">
-            <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><g:message code="edit.add.link"/></a>
+            <img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><g:message code="edit.add.link"/></a>
         </div>
      <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
         <g:textField name="q${linkTypeName}" value="" onkeypress="return doSearchOnReturn(event, '${linkTypeName}');"/>

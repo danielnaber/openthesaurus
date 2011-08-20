@@ -237,7 +237,7 @@
 
                               <g:if test="${session.user}">
                                 <div id="newTermLink">
-                                    <a href="#" onclick="javascript:showNewTerm();return false;"><g:message code='edit.add.terms'/></a>
+                                    <a href="#" onclick="javascript:showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
                                 </div>
 
                                 <% int i = 0; %>
@@ -337,7 +337,7 @@
                                  </g:if>
                                  <g:else>
                                      <div id="newCategoryLink">
-                                         <a href="#" onclick="javascript:showNewCategory();return false;"><g:message code='edit.add.categories'/></a>
+                                         <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
                                      </div>
                                  </g:else>
 
