@@ -129,7 +129,7 @@
             <input type="hidden" name="synset.id" value="${synset?.id}" />
             <div class="dialog">
                 <table>
-                    <tbody class="${synset?.isVisible ? '' : 'deletedSynset'}">
+                    <tbody>
                         <tr class='prop'>
                             <td valign='top' class='name'>
                                 <g:message code='edit.terms'/>
@@ -175,10 +175,6 @@
                                             </g:if>
     
                                             <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
-                                                <%--
-                                                <g:set var="flagImg" value="flag_${t.language.shortForm}.png"/>
-                                                <img src="${createLinkTo(dir:'images',file:flagImg)}" alt="[${t.language.longForm}]" border="0" />
-                                                --%>
                                                 ${t.toString()?.encodeAsHTML()}</g:link>
     
                                             &nbsp;
@@ -206,12 +202,6 @@
                                                 <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
                                             </div>
                                         </g:if>
-
-                                        <%--
-                                        <span class="termMetaInfo">[<g:link class="termMetaInfo" action="search"
-                                        params="[q : t.word, 'section.id': t.synset.section.id]">${t.synset.section.sectionName}: ${termCountThisSection}</g:link>,
-                                        <g:link class="termMetaInfo" action="search" params="[q : t.word]">all: ${termCount}</g:link>]</span>
-                                        --%>
 
                                         <g:set var="previousLanguage" value="${t.language}"/>
 
@@ -248,13 +238,6 @@
                                                     <g:render template="languageLevelHelp" />
                                                 </div>
                                             </g:if>
-                                            <%--
-                                            <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
-                                            <br />
-                                            <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
-                                            <label><g:radio id="wordFormAcronym_${i}" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
-                                            <label><g:radio id="wordFormAbbreviation_${i}" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
-                                            --%>
                                             <% i++ %>
                                             <br />
                                         </g:while>
@@ -363,20 +346,9 @@
                             <g:render template="link" model="[title:'Oberbegriffe', linkTypeName:'Oberbegriff',
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
-                            <%--
-                            <g:render template="suggestedLink" model="[title:'Suggested Hypernyms', linkTypeName:'Oberbegriff',
-                                synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets]" />
-                            --%>
-
                             <g:render template="link" model="[title:'Unterbegriffe', linkTypeName:'Unterbegriff',
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:false, displayedSynsets: displayedSynsets,
                                 reverseLink:true]" />
-
-                            <%--
-                            <g:render template="suggestedLink" model="[title:'Suggested Hyponyms', linkTypeName:'Unterbegriff',
-                                synset:synset, synsetLinks:suggestedSynsetLinks, displayedSynsets: displayedSynsets,
-                                reverseLink:true]" />
-                            --%>
 
                         </g:if>
 
@@ -435,6 +407,7 @@
                         <g:if test="${session.user}">
                             <tr class='prop'>
                                 <td class='name' valign="top">
+                                    <g:message code='edit.delete'/>
                                 </td>
                                 <td valign='top'>
                                     <div class="buttons">
@@ -476,28 +449,6 @@
                                 </td>
                             </tr>
                         </g:if>
-
-                        <%--
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='source'>UMLS SemType:</label>
-                            </td>
-                            <td valign='top' class='lessImportantValue'>
-                                ${synset.semTypeLinks?.join(', ').toString()?.encodeAsHTML()}
-                            </td>
-                        </tr>
-                        --%>
-
-                        <%--
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='source'>Evaluation:</label>
-                            </td>
-                            <td valign='top' class='lessImportantValue'>
-                                ${synset.evaluation?.toString()?.encodeAsHTML()}
-                            </td>
-                        </tr>
-                        --%>
 
                         <g:if test="${session.user}">
                               <tr class='prop'>

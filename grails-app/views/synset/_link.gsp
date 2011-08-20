@@ -37,6 +37,10 @@
                 %>
            </g:if>
         </g:each>
+        
+        <g:if test="${nymCount == 0 && linkTypeName == 'Unterbegriff'}">
+             <li class="checkboxList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
+        </g:if>        
 
         <g:if test="${session.user && showAddLink}">
         <li class="checkboxList">
