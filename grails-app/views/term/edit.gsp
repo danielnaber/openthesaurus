@@ -36,6 +36,8 @@
 
         <div class="body">
         
+            <hr />
+        
             <h2><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h2>
     
             <g:if test="${flash.message}">

@@ -15,7 +15,7 @@
         <table width="980">
         <tr>
           <td colspan="3" valign="top">
-            <hr style="margin-top:20px;margin-bottom:10px"/>
+            <hr style="margin-top:7px;margin-bottom:10px"/>
           </td>
           <td width="10"></td>
           <td width="180" rowspan="3" valign="top">
