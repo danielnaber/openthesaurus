@@ -440,7 +440,7 @@
                                     <div class="buttons">
                                         <g:if test="${synset.isVisible}">
                                             <a href="javascript:toggleId('deleteButton')">${message(code:'edit.delete.button')}</a>
-                                            <div id="deleteButton" style="display:none;margin-top:12px">
+                                            <div id="deleteButton" style="display:${showOnlyDeleteButton ? 'block' : 'none'};margin-top:12px">
                                                 <span class="submitButton"><g:actionSubmit action="hide" class="hide" value="${message(code:'edit.delete.now.button')}" /></span>
                                             </div>
                                         </g:if>
@@ -512,9 +512,11 @@
                               <tr>
                                 <td></td>
                                 <td>
-                                    <div class="buttons">
-                                        <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
-                                    </div>
+                                    <g:if test="${!showOnlyDeleteButton && synset?.isVisible}">
+                                        <div class="buttons">
+                                            <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
+                                        </div>
+                                    </g:if>
                                 </td>
                               </tr>
                         </g:if>

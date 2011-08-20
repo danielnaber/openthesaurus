@@ -887,7 +887,7 @@ class SynsetController extends BaseController {
         if (!params.changeComment || params.changeComment.trim().equals("")) {
             synset.errors.reject('thesaurus.error',
                   [].toArray(), errorMsg)
-            render(view:'edit',model:[synset:synset],
+            render(view:'edit',model:[synset:synset, showOnlyDeleteButton:true],
                   contentType:"text/html", encoding:"UTF-8")
             return
         }
