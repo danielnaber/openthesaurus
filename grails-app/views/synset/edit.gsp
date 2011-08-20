@@ -225,50 +225,43 @@
 
                                     </li>
                                 </g:each>
+                                <li class="checkboxList">
+                                  <g:if test="${session.user}">
+                                    <div id="newTermLink">
+                                        <a href="#" onclick="javascript:showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
+                                    </div>
+    
+                                    <% int i = 0; %>
+                                    <div id="newTerm" style="display:none">
+                                        <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
+                                            <g:message code="edit.term.term"/> <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                            <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
+                                                <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+                                            </g:if>
+                                            <g:else>
+                                                <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+                                            </g:else>
+                                            <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                            <g:if test="${i == 0}">
+                                                <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a>
+                                                <div id="languageLevelHelp" style="display: none">
+                                                    <g:render template="languageLevelHelp" />
+                                                </div>
+                                            </g:if>
+                                            <%--
+                                            <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
+                                            <br />
+                                            <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAcronym_${i}" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
+                                            <label><g:radio id="wordFormAbbreviation_${i}" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
+                                            --%>
+                                            <% i++ %>
+                                            <br />
+                                        </g:while>
+                                    </div>
+                                  </g:if>
+                                </li>
                             </ul>
-
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                            </td>
-                            <td valign='top' class='value ${hasErrors(bean:newTerm,'errors')}'>
-
-                              <g:if test="${session.user}">
-                                <div id="newTermLink">
-                                    <a href="#" onclick="javascript:showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
-                                </div>
-
-                                <% int i = 0; %>
-                                <div id="newTerm" style="display:none">
-                                    <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                        <g:message code="edit.term.term"/> <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
-                                        <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
-                                            <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
-                                        </g:if>
-                                        <g:else>
-                                            <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
-                                        </g:else>
-                                        <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
-                                        <g:if test="${i == 0}">
-                                            <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a>
-                                            <div id="languageLevelHelp" style="display: none">
-                                                <g:render template="languageLevelHelp" />
-                                            </div>
-                                        </g:if>
-                                        <%--
-                                        <g:select name="wordGrammar.id_${i}" optionKey="id" from="${WordGrammar.list()}" />&nbsp;
-                                        <br />
-                                        <label><g:radio id="wordFormCommon_${i}" name="wordForm_${i}" value="common" checked="${true}" />&nbsp;<g:message code='edit.common.word'/></label>&nbsp;
-                                        <label><g:radio id="wordFormAcronym_${i}" name="wordForm_${i}" value="acronym" checked="${false}" />&nbsp;<g:message code='edit.acronym'/></label>&nbsp;
-                                        <label><g:radio id="wordFormAbbreviation_${i}" name="wordForm_${i}" value="abbreviation" checked="${false}" />&nbsp;<g:message code='edit.shortform'/></label>
-                                        --%>
-                                        <% i++ %>
-                                        <br />
-                                    </g:while>
-                                </div>
-                              </g:if>
 
                             </td>
                         </tr>
@@ -285,80 +278,73 @@
                                         title="${message(code:'edit.category.prefer')}" />
                                 </g:if>
                             </g:if>
-                            <g:if test="${synset.categoryLinks.size() > 0}">
-                              <ul style="margin-top:0px">
-                              <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                            <ul style="margin-top:0px">
+                                <g:if test="${synset.categoryLinks.size() > 0}">
+                                  <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                                      <li class="checkboxList">
+    
+                                        <input type="hidden" id="delete_catLinkId_${catLink.id}" name="delete_catLinkId_${catLink.id}" value=""/>
+                                        <div id="catLinkId_${catLink.id}">
+    
+                                            <g:if test="${session.user}">
+                                              <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
+                                                align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
+                                            </g:if>
+                                            <g:else>
+                                              <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                            </g:else>
+    
+                                            <g:if test="${prefTerms}">
+                                                &nbsp;
+                                                <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
+                                                <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
+                                                    checked="${isPreferred}" />
+                                            </g:if>
+                                            ${catLink.category}
+                                            <g:if test="${catLink.category.categoryType}">
+                                                   <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
+                                            </g:if>
+                                        </div>
+                                      </li>
+                                  </g:each>
+                              
+                                </g:if>
+
                                   <li class="checkboxList">
-
-                                    <input type="hidden" id="delete_catLinkId_${catLink.id}" name="delete_catLinkId_${catLink.id}" value=""/>
-                                    <div id="catLinkId_${catLink.id}">
-
-                                        <g:if test="${session.user}">
-                                          <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
-                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
-                                        </g:if>
-                                        <g:else>
-                                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
-                                        </g:else>
-
-                                        <g:if test="${prefTerms}">
-                                            &nbsp;
-                                            <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
-                                            <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
-                                                checked="${isPreferred}" />
-                                        </g:if>
-                                        ${catLink.category}
-                                        <g:if test="${catLink.category.categoryType}">
-                                               <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
-                                        </g:if>
-                                    </div>
+                                    <g:if test="${session.user}">
+                                         <%-- Change or add new category --%>
+                                         <g:if test="${synset.preferredCategory?.categoryName == 'Unknown'}">
+                                             <div id="changeCategoryLink">
+                                                <a href="#" onclick="javascript:showChangeCategory();return false;"><g:message code='edit.change.category'/></a>
+                                             </div>
+                                         </g:if>
+                                         <g:else>
+                                             <div id="newCategoryLink">
+                                                 <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
+                                             </div>
+                                         </g:else>
+        
+                                         <div id="newCategory" style="display:none">
+                                             <% i = 0; %>
+                                             <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
+                                                 <select name="category.id_${i}" id="category.id_${i}" >
+                                                    <option value="null">[none]</option>
+                                                    <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
+                                                        <option value="${category.id}">${category.toString()?.encodeAsHTML()}
+                                                            <g:if test="${category.categoryType}">
+                                                                [${category.categoryType}]
+                                                            </g:if>
+                                                        </option>
+                                                    </g:each>
+                                                 </select>
+                                                 <br />
+                                                 <% i++ %>
+                                             </g:while>
+                                         </div>
+                                     </g:if>
                                   </li>
-                              </g:each>
-                              </ul>
-                            </g:if>
-                            <g:if test="${synset.categoryLinks == null || synset.categoryLinks.size() == 0}">
-                                <span class="noMatches"><g:message code='edit.none'/></span>
-                            </g:if>
 
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                            </td>
-                            <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
-
-                             <g:if test="${session.user}">
-                                 <%-- Change or add new category --%>
-                                 <g:if test="${synset.preferredCategory?.categoryName == 'Unknown'}">
-                                     <div id="changeCategoryLink">
-                                        <a href="#" onclick="javascript:showChangeCategory();return false;"><g:message code='edit.change.category'/></a>
-                                     </div>
-                                 </g:if>
-                                 <g:else>
-                                     <div id="newCategoryLink">
-                                         <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
-                                     </div>
-                                 </g:else>
-
-                                 <div id="newCategory" style="display:none">
-                                     <% i = 0; %>
-                                     <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
-                                         <select name="category.id_${i}" id="category.id_${i}" >
-                                            <option value="null">[none]</option>
-                                            <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
-                                                <option value="${category.id}">${category.toString()?.encodeAsHTML()}
-                                                    <g:if test="${category.categoryType}">
-                                                        [${category.categoryType}]
-                                                    </g:if>
-                                                </option>
-                                            </g:each>
-                                         </select>
-                                         <br />
-                                         <% i++ %>
-                                     </g:while>
-                                 </div>
-                             </g:if>
+                            </ul>
 
                             </td>
                         </tr>
