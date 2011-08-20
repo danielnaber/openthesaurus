@@ -215,7 +215,7 @@
 
                                     </li>
                                 </g:each>
-                                <li class="checkboxList">
+                                <li class="checkboxList" style="margin-top:10px">
                                   <g:if test="${session.user}">
                                     <div id="newTermLink">
                                         <a href="#" onclick="javascript:showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
@@ -248,6 +248,7 @@
 
                             </td>
                         </tr>
+                        <tr><td></td></tr>
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
@@ -293,7 +294,7 @@
                               
                                 </g:if>
 
-                                  <li class="checkboxList">
+                                  <li class="checkboxList" ${synset.categoryLinks.size() > 0 ? 'style="margin-top:10px"' : ''}>
                                     <g:if test="${session.user}">
                                          <%-- Change or add new category --%>
                                          <g:if test="${synset.preferredCategory?.categoryName == 'Unknown'}">
@@ -331,6 +332,7 @@
 
                             </td>
                         </tr>
+                        <tr><td></td></tr>
 
                         <g:if test="${LinkType.count() > 0}">
 

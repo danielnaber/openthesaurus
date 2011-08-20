@@ -44,7 +44,7 @@
 
         <g:if test="${session.user && showAddLink}">
         <li class="checkboxList">
-            <div id="addSynsetLink-${linkTypeName}" style="margin-top:5px">
+            <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
                 <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link"/></a>
             </div>
          <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
@@ -76,3 +76,4 @@
     
     </td>
 </tr>
+<tr><td></td></tr>
