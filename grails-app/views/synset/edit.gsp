@@ -433,31 +433,6 @@
                             </tr>
                         </g:if>
 
-                        <g:if test="${synset.source}">
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <g:message code='edit.source'/>
-                                </td>
-                                <td valign='top' class='lessImportantValue'>
-                                    ${synset.source?.encodeAsHTML()}
-                                </td>
-                            </tr>
-                        </g:if>
-
-                        <g:if test="${showOrigSource}">
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    Orig. Source:
-                                </td>
-                                <td valign='top' class='lessImportantValue'>
-                                    ${synset.originalURI?.toString()?.encodeAsHTML()}
-                                    <g:if test="${synset.sources?.size() > 0}">
-                                        ${synset.sources?.sort().toString()?.encodeAsHTML()}
-                                    </g:if>
-                                </td>
-                            </tr>
-                        </g:if>
-
                         <g:if test="${session.user}">
                               <tr class='prop'>
                                   <td valign='top' class='name'>
