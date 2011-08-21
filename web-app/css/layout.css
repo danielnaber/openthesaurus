@@ -407,6 +407,7 @@ pre.api {
 }
 .colspanlist th {
   background: #dddddd;
+  font-weight: bold;
 }
 .del {
   text-decoration: line-through;
@@ -449,6 +450,11 @@ pre.api {
   font-weight: normal !important;
 }
 
+.otherMeaningSearchLink {
+  font-weight: normal !important;
+  color: #448cbd !important;
+}
+
 strong {
   font-weight: bold;
 }
@@ -456,4 +462,8 @@ strong {
 .languageLevelHelp {
   font-weight: bold;
   color: #333333;
+}
+
+.noTopMargin {
+    margin-top: 0px;
 }

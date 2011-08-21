@@ -98,7 +98,7 @@
 
         <hr />
 
-        <h2><g:message code='edit.headline' args="${[synset.toShortString()?.encodeAsHTML()]}"/></h2>
+        <h1 style="margin-bottom:12px"><g:message code='edit.headline' args="${[synset.toShortString()?.encodeAsHTML()]}"/></h1>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
@@ -132,7 +132,7 @@
                     <tbody>
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <g:message code='edit.terms'/>
+                                <h2 class="noTopMargin"><g:message code='edit.terms'/></h2>
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
@@ -174,8 +174,7 @@
                                                 </g:else>
                                             </g:if>
     
-                                            <g:link class="${isPreferred ? 'preferredTerm' : ''}" controller='term' action='edit' id='${t.id}'>
-                                                ${t.toString()?.encodeAsHTML()}</g:link>
+                                            <strong>${t.toString()?.encodeAsHTML()}</strong>
     
                                             &nbsp;
                                             <g:if test="${t.isAcronym}">
@@ -192,7 +191,12 @@
                                             </g:if>
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                             <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                            <g:link title="${message(code:'edit.find.all.meanings')}" class="termMetaInfo lightlink" action="search" params="[q : t.word]">[${termCount}]</g:link>
+                                            
+                                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
+                                                [<g:message code='edit.edit.term'/>]</g:link>
+                                                
+                                            <g:link title="${message(code:'edit.find.all.meanings', args: [t.word.encodeAsHTML()])}"
+                                                class="termMetaInfo otherMeaningSearchLink" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                         
                                         </div>
 
@@ -207,14 +211,16 @@
 
                                         <g:set var="termLinkInfos" value="${t.termLinkInfos()}"/>
                                         <g:if test="${termLinkInfos.size() > 0}">
-                                          &nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                           <g:each var='termLinkInfo' in='${termLinkInfos}'>
-                                            ${termLinkInfo.getLinkName().encodeAsHTML()}: <g:link controller="synset" action="edit" id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().encodeAsHTML()}</g:link>
+                                            ${termLinkInfo.getLinkName().encodeAsHTML()}: <g:link controller="synset" 
+                                                action="edit" id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().encodeAsHTML()}</g:link>
                                           </g:each>
                                         </g:if>
 
                                     </li>
                                 </g:each>
+                                
                                 <li class="checkboxList" style="margin-top:10px">
                                   <g:if test="${session.user}">
                                     <div id="newTermLink">
@@ -252,7 +258,7 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <g:message code='edit.categories'/>
+                                <h2 class="noTopMargin"><g:message code='edit.categories'/></h2>
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
@@ -312,7 +318,7 @@
                                              <% i = 0; %>
                                              <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
                                                  <select name="category.id_${i}" id="category.id_${i}" >
-                                                    <option value="null">[none]</option>
+                                                    <option value="null">[keine weitere Kategorie]</option>
                                                     <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
                                                         <option value="${category.id}">${category.toString()?.encodeAsHTML()}
                                                             <g:if test="${category.categoryType}">
@@ -342,15 +348,15 @@
                             <%
                             Set displayedSynsets = new HashSet()
                             %>
-                            <g:render template="link" model="[title:'Assoziationen', linkTypeName:'Assoziation',
-                                synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
-
                             <g:render template="link" model="[title:'Oberbegriffe', linkTypeName:'Oberbegriff',
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
                             <g:render template="link" model="[title:'Unterbegriffe', linkTypeName:'Unterbegriff',
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:false, displayedSynsets: displayedSynsets,
                                 reverseLink:true]" />
+
+                            <g:render template="link" model="[title:'Assoziationen', linkTypeName:'Assoziation',
+                                synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
                         </g:if>
 
@@ -409,7 +415,7 @@
                         <g:if test="${session.user}">
                             <tr class='prop'>
                                 <td class='name' valign="top">
-                                    <g:message code='edit.delete'/>
+                                    <h2 class="noTopMargin"><g:message code='edit.delete'/></h2>
                                 </td>
                                 <td valign='top'>
                                     <div class="buttons">
@@ -455,7 +461,8 @@
                         <g:if test="${session.user}">
                               <tr class='prop'>
                                   <td valign='top' class='name'>
-                                      <label for='changeComment'><g:message code='edit.comment.for.change'/></label>
+                                     <h2 class="noTopMargin" style="margin-bottom: 0px;"><g:message code='edit.comment.for.change'/></h2>
+                                     <g:message code='edit.comment.for.change.detail'/>
                                   </td>
                                   <td valign='top' class='value'>
                                       <input ${disabled} onkeypress="return avoidSubmitOnReturn(event);" size="40" id="changeComment" type="text" name="changeComment" value="" />

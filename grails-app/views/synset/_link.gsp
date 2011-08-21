@@ -2,7 +2,7 @@
 
 <tr class='prop'>
     <td valign='top' class='name'>
-        ${title}:
+        <h2 class="noTopMargin">${title}</h2>
     </td>
     <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
@@ -45,7 +45,7 @@
         <g:if test="${session.user && showAddLink}">
         <li class="checkboxList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
-                <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link"/></a>
+                <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
             </div>
          <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
             <g:textField name="q${linkTypeName}" value="" onkeypress="return doSearchOnReturn(event, '${linkTypeName}');"/>
