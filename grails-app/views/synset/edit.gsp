@@ -15,9 +15,11 @@
             document.getElementById('addSynsetProgress').style.position='relative';
             document.getElementById('addSynsetProgress').style.visibility='visible';
           }
+
           function loadedSearch() {
             document.getElementById('addSynsetProgress').style.visibility='hidden';
           }
+
           function deleteItem(id, termId) {
             var deleted = document.getElementById('delete_' + id + '_' + termId).value == 'delete';
             var hiddenFieldName = 'delete_' + id + '_' + termId;
@@ -31,6 +33,7 @@
             }
             return false;
           }
+
           // We have two submit buttons in the page and we cannot guarantee that
           // the correct one is used, so disable submit-by-return:
           function avoidSubmitOnReturn(event) {
@@ -38,6 +41,7 @@
             	  return false;
         	  }
           }
+
           function doSearchOnReturn(event, linkType) {
               if (event.keyCode == 13) {
                   // start a search on return (copied from the generated code):
@@ -46,6 +50,7 @@
                   return false;
               }
           }
+
           // TODO: use dojo for this?!
           // TODO: avoid scroll jumping on click
           function showNewTerm() {
@@ -54,28 +59,33 @@
             document.editForm.word_0.focus();
             return false;
           }
+
           function showNewCategory() {
             document.getElementById('newCategoryLink').style.display='none';
             document.getElementById('newCategory').style.display='block';
             return false;
           }
+
           function showChangeCategory() {
             document.getElementById('changeCategoryLink').style.display='none';
             document.getElementById('newCategory').style.display='block';
             return false;
           }
+
           function showNewSynsetLink(linkType) {
             document.getElementById('addSynsetLink-' + linkType).style.display='none';
             document.getElementById('addSynset-' + linkType).style.display='block';
             document.editForm["q" + linkType].focus();
             return false;
           }
+
           function showAddComment() {
             document.getElementById('addCommentLink').style.display='none';
             document.getElementById('addComment').style.display='block';
             document.editForm.userComment.focus();
             return false;
           }
+
           function toggleId(divId) {
             if (document.getElementById(divId).style.display == 'block') {
                 document.getElementById(divId).style.display='none';
@@ -83,14 +93,7 @@
                 document.getElementById(divId).style.display='block';
              }
           }
-          function toggleLanguageLevelHelp() {
-            if (document.getElementById('languageLevelHelp').style.display == 'block') {
-                document.getElementById('languageLevelHelp').style.display='none';
-            } else {
-                document.getElementById('languageLevelHelp').style.display='block';
-            }
-            return false;
-          }
+
         // -->
         </script>
     </head>
@@ -239,7 +242,7 @@
                                             </g:else>
                                             <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
                                             <g:if test="${i == 0}">
-                                                <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a>
+                                                <a href="#" onclick="javascript:toggleId('languageLevelHelp');return false;">[?]</a>
                                                 <div id="languageLevelHelp" style="display: none">
                                                     <g:render template="languageLevelHelp" />
                                                 </div>

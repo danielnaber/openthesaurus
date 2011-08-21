@@ -26,7 +26,7 @@
     <td valign="top">Neue Seiten:
         <ul>
             <li><g:link controller="random" action="synsets"><g:message code="random.headline"/></g:link></li>
-            <li><g:link controller="association" action="list"><g:message code="association.headline"/></g:link></li>
+            <li><g:link controller="association" action="list">Synonyme mit Assoziationen</g:link></li>
         </ul>
     </td>
 </tr>

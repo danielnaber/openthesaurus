@@ -46,7 +46,15 @@
         <li class="checkboxList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
                 <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
+                <g:if test="${linkTypeName == 'Assoziation'}">
+                     <a href="#" onclick="javascript:toggleId('associationHelp');return false;">[?]</a>
+                </g:if>        
             </div>
+            <g:if test="${linkTypeName == 'Assoziation'}">
+                <div id="associationHelp" style="display: none">
+                    <g:render template="/synset/associationHelp" />
+                </div>
+            </g:if>        
          <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
             <g:textField name="q${linkTypeName}" value="" onkeypress="return doSearchOnReturn(event, '${linkTypeName}');"/>
             <input type="hidden" name="linkType${linkTypeName}.id" value="${LinkType.findByLinkName(linkTypeName).id}">
