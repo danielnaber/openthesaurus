@@ -22,6 +22,10 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-08-20</span></td>
+    <td valign="top">Die Seite mit den Details zu einer Synonymgruppe (<a href="../synonyme/edit/21934">Beispiel</a>) wurde neu gestaltet</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-05-23</span></td>
     <td valign="top">Neue Seiten:
         <ul>
