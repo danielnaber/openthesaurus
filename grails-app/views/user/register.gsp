@@ -93,7 +93,7 @@
                             </td>
                             <td>
                                 <div class="buttons">
-                                    <span class="button"><input class="login" type="submit" value="${message(code:'user.register.form.submit')}"/></span>
+                                    <input class="login submitButton" type="submit" value="${message(code:'user.register.form.submit')}"/>
                                 </div>
                             </td>
                         </tr>
