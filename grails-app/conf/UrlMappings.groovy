@@ -2,6 +2,7 @@ class UrlMappings {
 
   static mappings = {
       "404"(view:"/errors/notFound")
+      "500"(view:"/errors/serverError")
       
       "/"(controller:'home', action:'index') 
       
