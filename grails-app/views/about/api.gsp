@@ -119,7 +119,7 @@
 
         <h2>Anfrage-Limitierung</h2>
 
-        <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse werden die Antworten verzögert.
+        <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung.
         Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
         Erhöhung des Limits bitten.</p>
 
