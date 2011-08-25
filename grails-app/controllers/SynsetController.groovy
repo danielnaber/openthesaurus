@@ -384,9 +384,12 @@ class SynsetController extends BaseController {
     }
 
     String sleepTimeInfo = ""
-    if (slowDownIps.contains(ip) || ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
+    if (slowDownIps.contains(ip)) {
       Thread.sleep(sleepTime)
       sleepTimeInfo = "+" + sleepTime + "ms"
+    }
+    if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
+      throw new Exception("Too many requests from your ip address - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
     }
     return sleepTimeInfo
   }
