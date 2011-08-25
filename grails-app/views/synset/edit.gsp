@@ -205,7 +205,7 @@
 
                                         <g:if test="${t.userComment}">
                                             <div style="margin-left: 22px">
-                                                <g:message code="edit.term.comment"/>
+                                                <g:message code="edit.term.comment"/>:
                                                 <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
                                             </div>
                                         </g:if>
@@ -233,14 +233,14 @@
                                     <% int i = 0; %>
                                     <div id="newTerm" style="display:none">
                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                            <g:message code="edit.term.term"/> <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                            <g:message code="edit.term.term"/>: <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
                                             <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
                                                 <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
                                             </g:if>
                                             <g:else>
                                                 <g:select class="submitButton" name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                             </g:else>
-                                            <g:message code="edit.term.level"/> <g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                            <g:message code="edit.term.level"/>: <g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
                                             <g:if test="${i == 0}">
                                                 <a href="#" onclick="javascript:toggleId('languageLevelHelp');return false;">[?]</a>
                                                 <div id="languageLevelHelp" style="display: none">

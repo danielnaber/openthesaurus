@@ -38,7 +38,7 @@
         
             <hr />
         
-            <h2><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h2>
+            <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h1>
     
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -64,7 +64,7 @@
                         
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='word'><g:message code="edit.term.term"/></label>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.term"/></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'word','errors')}'>
                                     <input ${disabled} type="text" id='word' name='word' value="${fieldValue(bean:term,field:'word')}"/>
@@ -73,7 +73,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='${term.synset.id}'><g:message code="edit.term.synset"/></label>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.synset"/></h2>
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:link controller="synset" action="edit" id="${term.synset.id}">${term.synset.toString()?.encodeAsHTML()}</g:link>
@@ -92,7 +92,7 @@
 						    <g:else>
 	                            <tr class='prop'>
 	                                <td valign='top' class='name'>
-	                                    <label><g:message code="edit.term.language"/></label>
+	                                    <h2 class="noTopMargin"><g:message code="edit.term.language"/></h2>
 	                                </td>
 	                                <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
 	                                    <g:if test="${session.user}">
@@ -109,7 +109,7 @@
 							<%-- 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='wordGrammar'><g:message code="edit.term.word.form"/></label>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.word.form"/></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'wordGrammar','errors')}'>
                                     <g:if test="${session.user}">
@@ -125,7 +125,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label><g:message code="edit.term.level"/> <a href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a></label>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.level"/> <a style="font-weight:normal" href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
@@ -152,7 +152,7 @@
                             <%-- 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='synset'>Level:</label>
+                                    <h2 class="noTopMargin">Level</h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:select value="${term.level?.id}" name="level.id" 
@@ -219,7 +219,7 @@
                                 </g:if>
                                 <g:else>
                                     <tr>
-                                      <td>Antonym:</td>
+                                      <td><h2 class="noTopMargin">Antonym</h2></td>
                                       <td><span class="noMatches"><g:message code='edit.term.antonyms.none'/></span></td>
                                     </tr>
                                 </g:else>
@@ -227,7 +227,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label><g:message code="edit.term.comment"/><br />
+                                    <h2 class="noTopMargin" style="margin-bottom: 0px;"><g:message code="edit.term.comment"/></h2>
                                     <g:message code="edit.term.comment2"/></label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
@@ -250,8 +250,8 @@
                             	<td>
 					                <g:if test="${session.user}">
 						                <div class="buttons">
-						                    <span class="button"><g:actionSubmit class="save" 
-						                    	action="update" value="${message(code:'edit.term.submit')}" /></span>
+						                    <g:actionSubmit class="save submitButton" 
+						                    	action="update" value="${message(code:'edit.term.submit')}" />
 						                </div>
 						            </g:if>
                             	</td>
