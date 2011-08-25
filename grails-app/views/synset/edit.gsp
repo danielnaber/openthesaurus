@@ -238,9 +238,9 @@
                                                 <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
                                             </g:if>
                                             <g:else>
-                                                <g:select name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+                                                <g:select class="submitButton" name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
                                             </g:else>
-                                            <g:message code="edit.term.level"/> <g:select name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                            <g:message code="edit.term.level"/> <g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
                                             <g:if test="${i == 0}">
                                                 <a href="#" onclick="javascript:toggleId('languageLevelHelp');return false;">[?]</a>
                                                 <div id="languageLevelHelp" style="display: none">
@@ -320,8 +320,8 @@
                                          <div id="newCategory" style="display:none">
                                              <% i = 0; %>
                                              <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
-                                                 <select name="category.id_${i}" id="category.id_${i}" >
-                                                    <option value="null">[keine weitere Kategorie]</option>
+                                                 <select class="submitButton" name="category.id_${i}" id="category.id_${i}" >
+                                                    <option value="null"><g:message code='edit.no.further.category'/></option>
                                                     <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
                                                         <option value="${category.id}">${category.toString()?.encodeAsHTML()}
                                                             <g:if test="${category.categoryType}">
@@ -425,11 +425,11 @@
                                         <g:if test="${synset.isVisible}">
                                             <a href="javascript:toggleId('deleteButton')">${message(code:'edit.delete.button')}</a>
                                             <div id="deleteButton" style="display:${showOnlyDeleteButton ? 'block' : 'none'};margin-top:12px">
-                                                <span class="submitButton"><g:actionSubmit action="hide" class="hide" value="${message(code:'edit.delete.now.button')}" /></span>
+                                                <g:actionSubmit action="hide" class="hide submitButton" value="${message(code:'edit.delete.now.button')}" />
                                             </div>
                                         </g:if>
                                         <g:else>
-                                            <span class="submitButton"><g:actionSubmit action="unhide" class="unhide" value="${message(code:'edit.undelete.button')}" /></span>
+                                            <g:actionSubmit action="unhide" class="unhide submitButton" value="${message(code:'edit.undelete.button')}" />
                                         </g:else>
                                     </div>
                                 </td>
@@ -452,7 +452,7 @@
                                 <td>
                                     <g:if test="${!showOnlyDeleteButton && synset?.isVisible}">
                                         <div class="buttons">
-                                            <span class="submitButton"><g:actionSubmit action="update" class="save" value="${message(code:'edit.submit')}" /></span>
+                                            <g:actionSubmit action="update" class="save submitButton" value="${message(code:'edit.submit')}" />
                                         </div>
                                     </g:if>
                                 </td>

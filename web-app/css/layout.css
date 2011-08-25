@@ -467,3 +467,7 @@ strong {
 .noTopMargin {
     margin-top: 0px;
 }
+
+.submitButton {
+    padding: 3px;
+}
