@@ -239,7 +239,7 @@
 	                                        ${term.userComment?.toString()?.encodeAsHTML()}
 										</g:if>
 										<g:else>
-											<span class="metaInfo"><g:message code="edit.no.comment"/></span>
+											<span class="noMatches"><g:message code="edit.no.comment"/></span>
 										</g:else>
                                     </g:else>
                                 </td>

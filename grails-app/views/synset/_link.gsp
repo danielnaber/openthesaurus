@@ -38,7 +38,7 @@
            </g:if>
         </g:each>
         
-        <g:if test="${nymCount == 0 && linkTypeName == 'Unterbegriff'}">
+        <g:if test="${nymCount == 0 && (linkTypeName == 'Unterbegriff' || !session.user)}">
              <li class="checkboxList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
         </g:if>        
 

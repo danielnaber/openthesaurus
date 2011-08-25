@@ -271,6 +271,11 @@
                                         title="${message(code:'edit.category.prefer')}" />
                                 </g:if>
                             </g:if>
+                            <g:else>
+                                <g:if test="${!session.user}">
+                                    <span class="noMatches"><g:message code="edit.not.set"/></span>
+                                </g:if>
+                            </g:else>
                             <ul style="margin-top:0px">
                                 <g:if test="${synset.categoryLinks.size() > 0}">
                                   <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
