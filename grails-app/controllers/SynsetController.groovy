@@ -343,7 +343,7 @@ class SynsetController extends BaseController {
               
     }
 
-  // artificially slow down response if users make too many requests
+  // throw exception if user makes too many requests
   private String preventRequestFlooding() {
     while (apiRequestEvents.size() > API_REQUEST_QUEUE_SIZE) {
       apiRequestEvents.remove(0)
@@ -389,7 +389,7 @@ class SynsetController extends BaseController {
       sleepTimeInfo = "+" + sleepTime + "ms"
     }
     if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
-      throw new Exception("Too many requests from your ip address - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
+      throw new Exception("Too many requests from your ip address (${IpTools.getRealIpAddress(request)}) - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
     }
     return sleepTimeInfo
   }
