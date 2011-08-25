@@ -34,7 +34,7 @@
                             </g:if>
                             <g:if test="${categoryStrings}">
                               <div class="category">
-                                <span class="categoryHead"><g:message code='edit.categories'/></span>
+                                <span class="categoryHead"><g:message code='edit.categories'/>:</span>
                                 <span class="categoryTerm">${categoryStrings.join(' | ')}</span>
                               </div>
                             </g:if>
@@ -53,12 +53,7 @@
                             	</g:else>
 
 	                        	<g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
-                                    <g:if test="${session.user}">
-                                      <g:set var="delim"><span class="d">&nbsp;&ndash;</span></g:set>
-                                    </g:if>
-                                    <g:else>
-                                      <g:set var="delim" />
-                                    </g:else>
+                                    <g:set var="delim" />
 	                        	</g:if>
 	                        	<g:else>
 		                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
