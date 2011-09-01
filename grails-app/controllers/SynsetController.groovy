@@ -287,6 +287,7 @@ class SynsetController extends BaseController {
                + " q:${params.q}")
             
           // TODO: fix json output
+          // see http://jira.grails.org/browse/GRAILS-7983
           //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
             renderApiResponse(searchResult, similarTerms, partialMatchResult, startsWithResult)
