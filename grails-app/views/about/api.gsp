@@ -16,8 +16,9 @@
 		abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
 		unterstützt. Noch nicht unterstützt wird die Wikipedia/Wiktionary-Suche.</p>
 		
-		<p><strong>Hinweis: das Ausgabe-Format kann sich ändern. Es wird jedoch nur erweitert,
-        bestehende Teile werden nicht ohne Ankündigung geändert.</strong></p>
+		<p><strong>Hinweis: wer die API über reines Testen hinaus benutzt, sollte sich bitte vorher bei
+		<i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
+		um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</strong></p>
 		
 		<h2>Suchanfrage</h2>
 		
@@ -36,11 +37,11 @@
 &lt;matches>
   &lt;metaData>
     &lt;apiVersion content="0.1.3"/>
-    &lt;warning content="WARNING -- this API is in beta -- the format may change without warning!"/>
-    &lt;copyright content="Copyright (C) 2009 Daniel Naber (www.danielnaber.de)"/>
+    &lt;warning content="WARNING -- this XML format may be extended without warning"/>
+    &lt;copyright content="Copyright (C) 2011 Daniel Naber (www.danielnaber.de)"/>
     &lt;license content="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"/>
     &lt;source content="http://www.openthesaurus.de"/>
-    &lt;date content="Sat Mar 06 22:47:25 CET 2010"/>
+    &lt;date content="Sat Mar 06 22:47:25 CET 2011"/>
   &lt;/metaData>
   &lt;synset id="1234">
     &lt;categories>
