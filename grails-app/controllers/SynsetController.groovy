@@ -147,7 +147,7 @@ class SynsetController extends BaseController {
      * Handle the old URLs like "http://www.openthesaurus.de/synonyme/search?q=haus" but without redirecting API requests
      */
     def oldSearch = {
-      if (params.format == 'text/xml') {
+      if (params.format == 'text/xml' || params.format == 'text/json') {
         // we don't redirect API requests to avoid the redirect overhead for mobile devices
         search()
       } else {
@@ -176,8 +176,7 @@ class SynsetController extends BaseController {
         Connection conn
         try {
           conn = dataSource.getConnection()
-          
-          boolean apiRequest = params.format == "text/xml"
+          boolean apiRequest = params.format == "text/xml" || params.format == "text/json"
           boolean spellApiRequest = params.similar == "true"
           boolean allApiRequest = params.mode == "all"
           int partialApiFromResultRequest = 0
@@ -281,7 +280,14 @@ class SynsetController extends BaseController {
           boolean mobileBrowser = BrowserDetection.isMobileDevice(request)
           String mobileInfo = mobileBrowser ? "m=y" : "m=n"
           
-          String qType = params.format == "text/xml" ? "xml" : "htm"
+          String qType
+          if (params.format == "text/xml") {
+            qType = "xml"
+          } else if (params.format == "text/json") {
+            qType = "jso"
+          } else {
+            qType = "htm"
+          }
           log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
@@ -290,7 +296,11 @@ class SynsetController extends BaseController {
           // see http://jira.grails.org/browse/GRAILS-7983
           //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
-            renderApiResponse(searchResult, similarTerms, partialMatchResult, startsWithResult)
+            if (params.format == "text/json") {
+              renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
+            } else {
+              renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
+            }
             return
           }
 
@@ -395,10 +405,11 @@ class SynsetController extends BaseController {
     return sleepTimeInfo
   }
 
-  private void renderApiResponse(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
+  // NOTE: keep in sync with JSON!
+  private void renderApiResponseAsXml(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
-      render(contentType:params.format, encoding:"utf-8") {
+      render(contentType:"text/xml", encoding:"utf-8") {
         matches {
           metaData {
             apiVersion(content:"0.1.3")
@@ -411,8 +422,6 @@ class SynsetController extends BaseController {
             date(content:new Date().toString())
           }
           for (s in searchResult.synsetList) {
-            //FIXME: the attribute used here flattens and thus destroys the JSON
-            // while it works fine for XML:
             synset(id:s.id) {
               if (s.categoryLinks != null) {
                 categories {
@@ -458,7 +467,67 @@ class SynsetController extends BaseController {
         }
       }
     }
-    
+
+    // NOTE: keep in sync with XML!
+    private void renderApiResponseAsJson(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
+        // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
+        // workaround with feed plugin 1.4 and Grails 1.1
+        render(contentType:"text/json", encoding:"utf-8") {
+            metaData apiVersion: "0.1",
+                warning: "ACHTUNG, Beta-Version! JSON-Format kann sich noch ändern. Bitte vor ernsthafter Nutzung feedback@openthesaurus.de kontaktieren.",
+                copyright: grailsApplication.config.thesaurus.apiCopyright,
+                license: grailsApplication.config.thesaurus.apiLicense,
+                source: grailsApplication.config.thesaurus.apiSource,
+                date: new Date().toString()
+            synsets {
+                for (s in searchResult.synsetList) {
+                  synset {
+                    id id:s.id
+                    if (s.categoryLinks != null) {
+                      categories {
+                        for (catLink in s.categoryLinks) {
+                          category name:catLink.category.categoryName
+                        }
+                      }
+                    }
+                    for (t in s.sortedTerms()) {
+                      if (t.level) {
+                        term term:t, level:t.level.levelName
+                      } else {
+                        term term:t
+                      }
+                    }
+                  }
+                }
+                if (similarTerms) {
+                  similarterms {
+                    int i = 0
+                    for (simTerm in similarTerms) {
+                      term term:simTerm.term, distance:simTerm.dist
+                      if (++i >= 5) {
+                        break
+                      }
+                    }
+                  }
+                }
+                if (substringTerms && substringTerms.size() > 0) {
+                  substringterms {
+                    for (substringTerm in substringTerms) {
+                      term(term:substringTerm.term)
+                    }
+                  }
+                }
+                /*if (startsWithTerms && startsWithTerms.size() > 0) {
+                  startswithterms {
+                    for (startsWithTerm in startsWithTerms) {
+                      term(term:startsWithTerm.term)
+                    }
+                  }
+                }*/
+            }
+        }
+    }
+        
     def substring = {
       if(!params.offset) params.offset = "0"
       if(!params.max) params.max = "20"
