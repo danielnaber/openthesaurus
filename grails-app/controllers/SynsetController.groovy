@@ -147,7 +147,7 @@ class SynsetController extends BaseController {
      * Handle the old URLs like "http://www.openthesaurus.de/synonyme/search?q=haus" but without redirecting API requests
      */
     def oldSearch = {
-      if (params.format == 'text/xml' || params.format == 'text/json') {
+      if (params.format == 'text/xml' || params.format == 'application/json') {
         // we don't redirect API requests to avoid the redirect overhead for mobile devices
         search()
       } else {
@@ -176,7 +176,7 @@ class SynsetController extends BaseController {
         Connection conn
         try {
           conn = dataSource.getConnection()
-          boolean apiRequest = params.format == "text/xml" || params.format == "text/json"
+          boolean apiRequest = params.format == "text/xml" || params.format == "application/json"
           boolean spellApiRequest = params.similar == "true"
           boolean allApiRequest = params.mode == "all"
           int partialApiFromResultRequest = 0
@@ -283,7 +283,7 @@ class SynsetController extends BaseController {
           String qType
           if (params.format == "text/xml") {
             qType = "xml"
-          } else if (params.format == "text/json") {
+          } else if (params.format == "application/json") {
             qType = "jso"
           } else {
             qType = "htm"
@@ -293,7 +293,7 @@ class SynsetController extends BaseController {
                + " q:${params.q}")
             
           if (apiRequest) {
-            if (params.format == "text/json") {
+            if (params.format == "application/json") {
               renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
             } else {
               renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
