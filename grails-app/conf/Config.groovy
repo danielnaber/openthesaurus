@@ -21,6 +21,8 @@ environments {
     }
 }
 
+grails.json.legacy.builder=false
+
 /* comment in to locally test mail sending:
 grails {
    mail {

@@ -292,9 +292,6 @@ class SynsetController extends BaseController {
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
             
-          // TODO: fix json output
-          // see http://jira.grails.org/browse/GRAILS-7983
-          //if (params.format == "text/xml" || params.format == "text/json") {
           if (apiRequest) {
             if (params.format == "text/json") {
               renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
@@ -472,59 +469,56 @@ class SynsetController extends BaseController {
     private void renderApiResponseAsJson(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
         // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
         // workaround with feed plugin 1.4 and Grails 1.1
+
         render(contentType:"text/json", encoding:"utf-8") {
-            metaData apiVersion: "0.1",
+
+            metaData apiVersion: "0.2",
                 warning: "ACHTUNG, Beta-Version! JSON-Format kann sich noch ändern. Bitte vor ernsthafter Nutzung feedback@openthesaurus.de kontaktieren.",
                 copyright: grailsApplication.config.thesaurus.apiCopyright,
                 license: grailsApplication.config.thesaurus.apiLicense,
                 source: grailsApplication.config.thesaurus.apiSource,
                 date: new Date().toString()
-            synsets {
+
+            synsets = array {
                 for (s in searchResult.synsetList) {
-                  synset {
-                    id id:s.id
+                    List categoryNames = []
                     if (s.categoryLinks != null) {
-                      categories {
                         for (catLink in s.categoryLinks) {
-                          category name:catLink.category.categoryName
+                            categoryNames.add(catLink.category.categoryName)
                         }
-                      }
                     }
-                    for (t in s.sortedTerms()) {
-                      if (t.level) {
-                        term term:t, level:t.level.levelName
-                      } else {
-                        term term:t
-                      }
+                    element id: s.id, categories: categoryNames, terms: array {
+                        for (t in s.sortedTerms()) {
+                            if (t.level) {
+                                element term: t.word, level: t.level.levelName
+                            } else {
+                                element term: t.word
+                            }
+                        }
                     }
-                  }
                 }
-                if (similarTerms) {
-                  similarterms {
+            }
+
+            if (similarTerms) {
+                similarterms  = array {
                     int i = 0
                     for (simTerm in similarTerms) {
-                      term term:simTerm.term, distance:simTerm.dist
-                      if (++i >= 5) {
-                        break
-                      }
+                        element term:simTerm.term, distance:simTerm.dist
+                        if (++i >= 5) {
+                            break
+                        }
                     }
-                  }
                 }
-                if (substringTerms && substringTerms.size() > 0) {
-                  substringterms {
-                    for (substringTerm in substringTerms) {
-                      term(term:substringTerm.term)
-                    }
-                  }
-                }
-                /*if (startsWithTerms && startsWithTerms.size() > 0) {
-                  startswithterms {
-                    for (startsWithTerm in startsWithTerms) {
-                      term(term:startsWithTerm.term)
-                    }
-                  }
-                }*/
             }
+            
+            if (substringTerms && substringTerms.size() > 0) {
+                substringterms  = array {
+                    for (substringTerm in substringTerms) {
+                        element term:substringTerm.term
+                    }
+                }
+            }
+
         }
     }
         
