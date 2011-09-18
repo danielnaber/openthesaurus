@@ -24,6 +24,10 @@ class AboutController extends BaseController {
         []
     }
 
+    def jsonpExample = {
+        []
+    }
+    
     def fakeError = {
         throw new Exception("This is a fake error.")
     }

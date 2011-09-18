@@ -20,7 +20,7 @@
 		<i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
 		um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</strong></p>
 		
-		<h2>Suchanfrage</h2>
+		<h2>Suchanfrage für XML</h2>
 		
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
 		die das Wort <span class="bsp">test</span> beinhalten, abgefragt werden:</p>
@@ -56,6 +56,27 @@
   &lt;/synset>
 &lt;/matches>
 </pre>
+
+
+        <a name="json"><h2>Suchanfrage für JSON</h2></a>
+        
+        <p>Statt <span class="apioption">text/xml</span> kann <span class="apioption">application/json</span>
+        angegeben werden, um das Ergebnis im JSON-Format zu erhalten.</p>
+        
+        <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>test</strong>&amp;format=application/json</a></pre>
+
+        <g:render template="jsonWarning"/>
+        
+
+        <h2>Suchanfrage für JSONP</h2>
+        
+        <p>Mit der Übergabe einer Callback-Methode kann der JSON-Code als Parameter einer Funktion übergeben werden.
+        <g:link action="jsonpExample">Eine Beispiel-Seite</g:link>.</p>
+
+        <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json&amp;callback=myCallback">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>test</strong>&amp;format=application/json&amp;callback=myCallback</a></pre>
+        
+        <g:render template="jsonWarning"/>
+
 
         <h2>Optionen</h2>
 

@@ -294,7 +294,22 @@ class SynsetController extends BaseController {
             
           if (apiRequest) {
             if (params.format == "application/json") {
-              renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
+              if (params.callback) {
+                // JSONP: Get the actual JSON content via HTTP and add the callback - all other ways to make 
+                // this work failed or were equally ugly:
+                def paramsList = []
+                for (param in params.keySet()) {
+                  if (param != "callback") {
+                    paramsList.add(param + "=" + URLEncoder.encode(params[param], "utf-8"))
+                  }
+                }
+                def paramsString = StringUtils.join(paramsList, "&")
+                String url = grailsApplication.config.thesaurus.serverURL  + createLinkTo(dir:'synonyme') + "/search?" + paramsString
+                String urlContent = new URL(url).text
+                render "${params.callback}(${urlContent})"
+              } else {
+                renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
+              }
             } else {
               renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
             }

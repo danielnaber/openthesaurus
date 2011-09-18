@@ -22,6 +22,10 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-09-18</span></td>
+    <td valign="top">Ab sofort steht die Beta-Version einer <a href="api#json">JSON-API</a> zur Verfügung.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-08-26</span></td>
     <td valign="top">Die Beschränkung der <a href="api">API</a> musste verschärft werden: bei mehr als 60 Anfragen pro Minute 
     erfolgt jetzt keine Ausbremsung mehr, stattdessen wird ein Fehler zurückgegeben.</td>
