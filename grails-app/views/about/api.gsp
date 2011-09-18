@@ -68,7 +68,7 @@
         <g:render template="jsonWarning"/>
         
 
-        <h2>Suchanfrage für JSONP</h2>
+        <a name="jsonp"><h2>Suchanfrage für JSONP</h2></a>
         
         <p>Mit der Übergabe einer Callback-Methode kann der JSON-Code als Parameter einer Funktion übergeben werden.
         <g:link action="jsonpExample">Eine Beispiel-Seite</g:link>.</p>
@@ -81,8 +81,9 @@
         <h2>Optionen</h2>
 
         <ul class="apioptions">
-          <li><span class="apioption">format=text/xml</span>: Aktiviert den API-Modus, so dass die Antwort als XML zurückgeliefert wird. Andere
-            Formate werden derzeit nicht unterstützt.</li>
+          <li><span class="apioption">format=text/xml</span> oder <span class="apioption">format=application/json</span>: Aktiviert den API-Modus, so dass 
+          die Antwort als XML bzw. JSON zurückgeliefert wird.</li>
+          <li><span class="apioption">callback</span>: siehe <a href="#jsonp">JSONP</a></li>
           <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
           ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
           Tippfehlers machen zu können. Beispielanfrage:
