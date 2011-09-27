@@ -20,11 +20,18 @@ grep -c "Search(ms):xml" $LOG >>$OUT
 echo -n "API Searches (JSON): " >>$OUT
 grep -c "Search(ms):jso" $LOG >>$OUT
 
-echo -n "Warnings: " >>$OUT
-grep -c "WARN" $LOG >>$OUT
+echo "" >>$OUT
 
-echo -n "Errors: " >>$OUT    
+echo -n "Errors: " >>$OUT
 grep -c "ERR" $LOG >>$OUT
+
+echo -n "Warnings (without empty queries): " >>$OUT
+grep "WARN" $LOG | grep -c -v "No query specified for search" >>$OUT
+
+echo -n "Empty query warnings: " >>$OUT
+grep -c "No query specified for search" $LOG >>$OUT
+
+echo "" >>$OUT
 
 echo -n "Succesful Logins: " >>$OUT
 grep -c "login successful" $LOG >>$OUT
@@ -34,6 +41,8 @@ grep -c "login failed for user" $LOG >>$OUT
 
 echo -n "Access denied: " >>$OUT
 grep -c "Access denied" $LOG >>$OUT
+
+echo "" >>$OUT
 
 echo -n "User registrations: " >>$OUT
 grep -c "Creating user:" $LOG >>$OUT
@@ -61,8 +70,8 @@ echo "Registrations:" >>$OUT
 grep -A 1 "Sent registration mail " $LOG >>$OUT
 
 echo "" >>$OUT
-echo "Warnings:" >>$OUT
-grep "WARN" $LOG >>$OUT
+echo "Warnings (without empty queries):" >>$OUT
+grep "WARN" $LOG | grep -v "No query specified for search" >>$OUT
 
 echo "" >>$OUT
 echo "Errors": >>$OUT
