@@ -26,7 +26,10 @@
 
 <script type="text/javascript">
 <!--
-    document.searchform.q.focus();
-	document.searchform.q.select();
+var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
+if (!touchOS) {
+  document.searchform.q.focus();
+  document.searchform.q.select();
+}
 // -->
 </script>
