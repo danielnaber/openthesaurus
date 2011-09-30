@@ -7,10 +7,10 @@
                                 <g:set var="wikipediaTitle" value="${term}"/>
                             </g:if>
                             <g:elseif test="${i > 0 && i < wikipediaResult.size() - 1}">
-                                <g:link action="search" params="${[q: StringTools.normalize(term)]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
+                                <g:link action="search" params="${[q: StringTools.slashEscape(StringTools.normalize(term))]}">${term.encodeAsHTML()}</g:link><span class="d">&nbsp;&middot;</span>
                             </g:elseif>
                             <g:else>
-                                <g:link action="search" params="${[q: StringTools.normalize(term)]}">${term.encodeAsHTML()}</g:link>
+                                <g:link action="search" params="${[q: StringTools.slashEscape(StringTools.normalize(term))]}">${term.encodeAsHTML()}</g:link>
                             </g:else>
                             <% i++; %>
                         </g:each>
