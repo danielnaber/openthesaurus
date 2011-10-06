@@ -151,7 +151,7 @@ class UserController extends BaseController {
         throw new Exception("User not found for id ${params.userId}")
       }
       if (user.confirmationDate) {
-        log.warn("Confirming registration had happened before for ${params.userId}, ${params.code}")
+        log.warn("Confirming registration had happened before for user ${user}, ${params.code}")
         //FIXME: i18n
         flash.message = "Your user account has already been confirmed before"
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
@@ -250,7 +250,8 @@ class UserController extends BaseController {
               flash.message = message(code:'user.invalid.login.expired')
               return
             } else {
-              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)})")
+              ThesaurusUser tmpUser = ThesaurusUser.findByUserId(params.userId)
+              log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}), user object: ${tmpUser}, salt: ${tmpUser?.salt}")
               flash.message = message(code:'user.invalid.login')
             }
           }
