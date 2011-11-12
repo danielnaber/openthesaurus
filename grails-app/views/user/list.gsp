@@ -25,9 +25,11 @@
                         
                    	        <g:sortableColumn property="realName" title="DisplayName" />
 
-                   	        <g:sortableColumn property="permission" title="Permission" />
+                   	        <g:sortableColumn property="permission" title="Perm" />
 
                    	        <g:sortableColumn property="creationDate" title="Registration" />
+                   	        
+                   	        <g:sortableColumn property="confirmationDate" title="Confirm" />
                         
                    	        <g:sortableColumn property="lastLoginDate" title="Last Login" />
 
@@ -45,9 +47,11 @@
 
                             <td>${user.permission?.toString()?.encodeAsHTML()}</td>
                         
-                            <td><g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${user.creationDate}"/></td>
+                            <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
+                            
+                            <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
 
-                            <td><g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${user.lastLoginDate}"/></td>
+                            <td><g:formatDate format="yyyy-MM-dd" date="${user.lastLoginDate}"/></td>
 
                             <td>${user.blocked ? "yes" : ""}</td>
                         

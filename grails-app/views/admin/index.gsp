@@ -1,3 +1,4 @@
+<%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
         <title>vithesaurus - admin page</title>
@@ -42,7 +43,7 @@
         <g:link controller="admin" action="checkNormalizedTermIntegrity">Normalized term integrity</g:link>
         </p>
 
-		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription</h2>
+		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription of ${ThesaurusUser.count()} users</h2>
 
         <div class="colspanlist">
           <table>
@@ -50,8 +51,9 @@
               <tr>
                   <th>Email</th>
                   <th>DisplayName</th>
-                  <th>Permission</th>
+                  <th>Perm</th>
                   <th>Registration</th>
+                  <th>Confirm</th>
                   <th>Last Login</th>
                   <th>Blocked</th>
               </tr>
@@ -61,8 +63,9 @@
                   <td>${latestUser.userId.encodeAsHTML()}</td>
                   <td>${latestUser.realName?.encodeAsHTML()}</td>
                   <td>${latestUser.permission?.encodeAsHTML()}</td>
-                  <td>${latestUser.creationDate}</td>
-                  <td>${latestUser.lastLoginDate}</td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.creationDate}"/></td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.confirmationDate}"/></td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.lastLoginDate}"/></td>
                   <td>${latestUser.blocked ? "yes" : ""}</td>
               </tr>
           </g:each>
