@@ -471,3 +471,7 @@ strong {
 .submitButton {
     padding: 3px;
 }
+
+.metaInfo {
+    color: #888888;
+}

@@ -10,7 +10,7 @@
 
             <hr/>
 
-            <h2>User List</h2>
+            <h2>User List (${ThesaurusUser.count()})</h2>
 
             <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>

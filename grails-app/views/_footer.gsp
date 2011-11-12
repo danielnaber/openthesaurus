@@ -72,18 +72,9 @@
                 <td>&nbsp;</td>
                 <td>
                     <g:link controller="user" action="login" class="lightlink"
-                       params="${linkParams}"><strong>Anmelden</strong> und mitmachen</g:link>
+                       params="${linkParams}"><strong>Einloggen</strong> und mitmachen</g:link>
                 </td>
             </g:else>
-            </tr>
-          </table>
-        </div>
-        <div class="iconLink">
-          <table>
-            <tr>
-              <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" alt="Twitter-Icon"/></a></td>
-              <td>&nbsp;</td>
-              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a></td>
             </tr>
           </table>
         </div>
@@ -115,12 +106,23 @@
         <div class="iconLink">
           <table>
             <tr>
+              <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" alt="Twitter-Icon"/></a></td>
+              <td>&nbsp;</td>
+              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a></td>
+            </tr>
+          </table>
+        </div>
+        <%--
+        <div class="iconLink">
+          <table>
+            <tr>
               <td><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img src="${createLinkTo(dir:'images',file:'icon-android.png')}" alt="Android-Icon"/></a></td>
               <td>&nbsp;</td>
               <td><a class="lightlink" href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für <strong>Android</strong></a></td>
             </tr>
           </table>
         </div>
+        --%>
       </td>
       <td>
       </td>

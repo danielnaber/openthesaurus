@@ -31,7 +31,7 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="40" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
+                                <input size="30" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.email.description"/></span>
                             </td>
@@ -42,7 +42,7 @@
                                 <label for='userId'><g:message code="user.register.display.name"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="40" type="text" id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}"/>
+                                <input size="30" type="text" id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}"/>
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.display.name.description"/></span>
                             </td>
@@ -53,7 +53,7 @@
                                 <label for='password1'><g:message code="user.login.form.password"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="40" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}"/>
+                                <input size="30" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}"/>
                             </td>
                         </tr>
 
@@ -62,7 +62,7 @@
                                 <label for='password2'><g:message code="user.register.form.password.repeat"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="40" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}"/>
+                                <input size="30" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}"/>
                             </td>
                         </tr>
 
@@ -70,7 +70,13 @@
                             <td valign='top' class='name'>
                             </td>
                             <td valign='top' class='value'>
-                                <label for="subscribeToMailingList"><g:checkBox name="subscribeToMailingList"/> <g:message code="user.register.form.mailinglist"/></label>
+                                <label for="subscribeToMailingList">
+                                <table>
+                                    <tr>
+                                        <td valign="top"><g:checkBox name="subscribeToMailingList"/></td>
+                                        <td valign="top"><g:message code="user.register.form.mailinglist"/></label></td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
 
@@ -84,7 +90,7 @@
                             <td valign='top' class='value'>
                                 <label><input type="checkbox" name="fix"/> ich will bestehende Einträge korrigieren</label><br/>
                                 <label><input type="checkbox" name="add"/> ich will neue Einträge hinzufügen</label><br/>
-                                <label><input type="checkbox" name="other"/> sonstiges, nämlich:</label> <input type="text" name="reason"/><br/>
+                                <label><input type="checkbox" name="other"/> sonstiges, nämlich:</label> <input type="text" name="reason" size="30"/><br/>
                             </td>
                         </tr>
 
