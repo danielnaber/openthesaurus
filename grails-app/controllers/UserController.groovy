@@ -54,16 +54,19 @@ class UserController extends BaseController {
       user.realName = params.visibleName
       checkCaptcha(params, user)
       if (!params.userId || params.userId.trim().isEmpty() || !params.userId.contains("@")) {
+        log.warn("Registration: user entered invalid email address: '${params.userId}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.email'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
       if (!params.visibleName || params.visibleName.trim().isEmpty()) {
+        log.warn("Registration: user entered invalid visible name: '${params.visibleName}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.visible.name'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
       if (ThesaurusUser.findByRealName(params.visibleName)) {
+        log.warn("Registration: user entered existing visible name: '${params.visibleName}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.visible.name.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
@@ -128,7 +131,7 @@ class UserController extends BaseController {
           }
         }
         if (!foundCorrectAnswer) {
-          log.warn("User " + user + " entered invalid captcha: '${params.cap}'")
+          log.warn("Registration failed: user " + user + " entered invalid captcha: '${params.cap}'")
           user.errors.reject('thesaurus.error', [].toArray(), message(code: 'user.register.missing.captcha'))
           render(view: 'register', model: [user: user], contentType: "text/html", encoding: "UTF-8")
         }
@@ -141,12 +144,12 @@ class UserController extends BaseController {
     
     private checkPasswords(ThesaurusUser user) {
       if (params.password1 != params.password2) {
-        user.errors.reject('thesaurus.error', [].toArray(), 
-            message(code:'user.register.different.passwords'))
+        log.warn("Registration failed: passwords didn't match")
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.different.passwords'))
       }
       if (params.password1.length() < MIN_PASSWORD_LENGTH) {
-        user.errors.reject('thesaurus.error', [].toArray(), 
-            message(code:'user.register.short.password', args:[MIN_PASSWORD_LENGTH]))
+        log.warn("Registration failed: password too short (${params.password1.length()} chars)")
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.short.password', args:[MIN_PASSWORD_LENGTH]))
       }
     }
     
