@@ -76,7 +76,6 @@
 			<div class="answer">
 			OpenThesaurus funktioniert mit <a href="http://www.openoffice.org">OpenOffice.org</a> /
                 <a href="http://www.documentfoundation.org/download/">LibreOffice</a>,
-				<a href="http://www.oracle.com/us/products/applications/open-office/index.html">Oracle Open Office (StarOffice)</a>,
 				<a href="http://www.koffice.org/kword/">KWord</a> und 
 				<a href="http://www.papyrus.de">Papyrus</a>.
 			</div>
