@@ -37,13 +37,13 @@
     
         <h2>Lizenz</h2>
 
-        <p>Die Daten von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
+        <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
           <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
           Das bedeutet vereinfacht gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
           können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
           und openthesaurus.de als die ursprüngliche Quelle angegeben wird.</p>
 
-        <p>Der Sourcecode der Website befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
+        <p>Der <strong>Sourcecode der Website</strong> befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
           bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.
         </p>
 
