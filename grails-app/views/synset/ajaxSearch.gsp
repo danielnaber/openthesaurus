@@ -7,7 +7,7 @@
 	        <g:each in="${synsetList}" status="i" var="synset">
 	             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 	                 <td><g:radio name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
-	                    checked="${i == 0 ? true : false }"/></td>
+	                    checked="${false}"/></td>
 	                 <td>
 	                     <g:link target="_blank" action="edit" id="${synset.id}">
 	                     	 <g:set var="firstVal" value="${true}"/>
