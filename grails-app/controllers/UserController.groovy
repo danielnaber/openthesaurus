@@ -52,21 +52,19 @@ class UserController extends BaseController {
       String hashedPassword = md5sum(params.password1, salt)
       def user = new ThesaurusUser(params.userId, hashedPassword, salt, ThesaurusUser.USER_PERM)
       user.realName = params.visibleName
-      if (!params.userId || params.userId.trim().isEmpty()) {
-        user.errors.reject('thesaurus.error', [].toArray(), 
-            message(code:'user.register.missing.email'))
+      checkCaptcha(params, user)
+      if (!params.userId || params.userId.trim().isEmpty() || !params.userId.contains("@")) {
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.email'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
       if (!params.visibleName || params.visibleName.trim().isEmpty()) {
-        user.errors.reject('thesaurus.error', [].toArray(), 
-            message(code:'user.register.missing.visible.name'))
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.visible.name'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
       if (ThesaurusUser.findByRealName(params.visibleName)) {
-        user.errors.reject('thesaurus.error', [].toArray(),
-            message(code:'user.register.user.visible.name.exists'))
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.visible.name.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
@@ -96,7 +94,7 @@ class UserController extends BaseController {
           body message(code:'user.register.email.body', args:[activationLink]) 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
-        log.info("Registration reason: fix=${params.fix}, add=${params.add}, other=${params.reason}")
+        log.info("Registration reason: fix=${params.fix}, add=${params.add}, other=${params.reason}. mailingList=${params.subscribeToMailingList}")
         if (params.subscribeToMailingList) {
           sendMail {
             from params.userId
@@ -114,6 +112,27 @@ class UserController extends BaseController {
         return
       }
       [email: params.userId]
+    }
+
+    private def checkCaptcha(params, ThesaurusUser user) {
+      if (ThesaurusConfigurationEntry.findByKey('captcha.question')) {
+        List expectedAnswers = ThesaurusConfigurationEntry.findAllByKey('captcha.answer')
+        if (expectedAnswers.size() == 0) {
+          throw new Exception("No possible captcha answers found")
+        }
+        boolean foundCorrectAnswer = false
+        for (expectedAnswer in expectedAnswers) {
+          if (params.cap?.toLowerCase()?.trim() == expectedAnswer.value) {
+            foundCorrectAnswer = true
+            break
+          }
+        }
+        if (!foundCorrectAnswer) {
+          log.warn("User " + user + " entered invalid captcha: '${params.cap}'")
+          user.errors.reject('thesaurus.error', [].toArray(), message(code: 'user.register.missing.captcha'))
+          render(view: 'register', model: [user: user], contentType: "text/html", encoding: "UTF-8")
+        }
+      }
     }
 
     private String getRandomSalt() {

@@ -1,4 +1,4 @@
-  
+<%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -70,27 +70,40 @@
                             <td valign='top' class='name'>
                             </td>
                             <td valign='top' class='value'>
-                                <label for="subscribeToMailingList">
                                 <table>
                                     <tr>
-                                        <td valign="top"><g:checkBox name="subscribeToMailingList"/></td>
-                                        <td valign="top"><g:message code="user.register.form.mailinglist"/></label></td>
+                                        <td valign="top"><g:checkBox name="subscribeToMailingList" checked="${params.subscribeToMailingList == 'on'}"/></td>
+                                        <td valign="top"><label for="subscribeToMailingList"><g:message code="user.register.form.mailinglist"/></label></td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
+                        
+                        <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
+                            <tr class='prop'>
+                                <td valign='top' class='name' colspan="2">
+                                    <label for='userId'><b>Sicherheitsbabfrage:</b></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td valign='top' class='value'>${ThesaurusConfigurationEntry.findByKey('captcha.question').value}
+                                    <input type="text" name="cap" size="5" value="${params.cap?.encodeAsHTML()}"/></td>
+                            </tr>
+                        </g:if>
 
                         <tr class='prop'>
                             <td valign='top' class='name' colspan="2">
-                                <label for='userId'>Grund für die Anmeldung:</label>
+                                <label for='userId'><b>Grund für die Anmeldung:</b></label>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td valign='top' class='value'>
-                                <label><input type="checkbox" name="fix"/> ich will bestehende Einträge korrigieren</label><br/>
-                                <label><input type="checkbox" name="add"/> ich will neue Einträge hinzufügen</label><br/>
-                                <label><input type="checkbox" name="other"/> sonstiges, nämlich:</label> <input type="text" name="reason" size="30"/><br/>
+                                <g:checkBox name="fix" checked="${params.fix == 'on'}"/><label for="fix"> ich will bestehende Einträge korrigieren</label><br/>
+                                <g:checkBox name="add" checked="${params.add == 'on'}"/><label for="add"> ich will neue Einträge hinzufügen</label><br/>
+                                <g:checkBox name="other" checked="${params.other == 'on'}"/><label for="other"> sonstiges, nämlich:</label>
+                                    <input type="text" name="reason" size="30" value="${params.reason?.encodeAsHTML()}"/><br/>
                             </td>
                         </tr>
 
