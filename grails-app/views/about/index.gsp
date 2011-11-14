@@ -85,7 +85,6 @@
         <ul>
             <li><a href="http://www.tekl.de/deutsch/OpenThesaurus_Deutsch.html">Wörterbuch-Plugin (ab Mac OS X 10.5) von Wolfgang Reszel</a></li>
             <li><a href="http://www.pindarsign.de/webblog/?p=57">Wörterbuch-Plugin (ab Mac OS X 10.5) von Simon Dittlmann</a></li>
-            <li><a href="http://www.mathematik.uni-marburg.de/~schmidtm/thesaurus/index.php">Dashboard-Widget von Matthias Schmidt</a></li>
         </ul>
 
 
