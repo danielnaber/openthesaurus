@@ -27,4 +27,5 @@
 	             </tr>
 	        </g:each>
 	    </table>
+	    <div class="metaInfo">Tipp: Auswahl mit den rauf/runter Cursor-Tasten</div>
     </g:else>

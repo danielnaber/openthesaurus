@@ -53,11 +53,22 @@
           var minChars = 2;
           var linkType = null;
           var currentValue = null;
+          var cursorPosition = -1;
 
           function doSearchOnKeyUp(event, tmpLinkType) {
               switch (event.keyCode) {
                   case Event.KEY_UP:
+                      if (cursorPosition > 0) {
+                          cursorPosition--;
+                          $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
+                      }
+                      return;
                   case Event.KEY_DOWN:
+                      if ($('radioButton' + tmpLinkType + (cursorPosition + 1))) {
+                          cursorPosition++;
+                          $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
+                      }
+                      return;
                   case Event.KEY_RIGHT:
                   case Event.KEY_LEFT:
                   case 13:
@@ -78,6 +89,7 @@
               if (searchString === '' || searchString.length < minChars) {
                   $('synsetLink' + linkType).update("");
               } else {
+                  cursorPosition = -1;
                   new Ajax.Updater('synsetLink' + linkType,
                     '${createLinkTo(dir:"synset/ajaxSearch",file:"")}',
                     {
