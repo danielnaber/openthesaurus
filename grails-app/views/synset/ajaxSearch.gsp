@@ -28,4 +28,21 @@
 	        </g:each>
 	    </table>
 	    <div class="metaInfo">Tipp: Auswahl mit den rauf/runter Cursor-Tasten</div>
+
     </g:else>
+
+    <table>
+      <tr>
+        <td valign="top">
+          <g:link action="create" params="[term : params.q]" target="_blank">
+               <img src="${createLinkTo(dir:'images',file:'icon-add.png')}" alt="Add icon" />
+          </g:link>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <g:link action="create" params="[term : params.q]" target="_blank">
+               <g:message code="result.create.synset" args="${[params.q.encodeAsHTML()]}" />
+          </g:link>
+        </td>
+      </tr>
+    </table>

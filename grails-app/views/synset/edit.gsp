@@ -71,14 +71,17 @@
                       return;
                   case Event.KEY_RIGHT:
                   case Event.KEY_LEFT:
-                  case 13:
                       return;
               }
               linkType = tmpLinkType;
               clearInterval(onChangeInterval);
               var searchString = document.editForm["q" + linkType].value;
-              if (currentValue != searchString) {
+              // keyCode 13 (Return) allows user to force reload, i.e. if they added a term in a different tab:
+              if (currentValue != searchString || event.keyCode == 13) {
                   onChangeInterval = setInterval("onValueChange()", deferRequestMillis);
+              }
+              if (event.keyCode == 13) {
+                  return;
               }
           }
           

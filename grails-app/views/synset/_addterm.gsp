@@ -3,7 +3,7 @@
   <tr>
     <td valign="top">
       <g:link action="create" params="[term : term]">
-           <img src="../images/icon-add.png" alt="Add icon" />
+           <img src="${createLinkTo(dir:'images',file:'icon-add.png')}" alt="Add icon" />
       </g:link>
     </td>
     <td>&nbsp;</td>
