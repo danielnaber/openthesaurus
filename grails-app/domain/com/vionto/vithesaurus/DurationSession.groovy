@@ -17,6 +17,10 @@
  */ 
 package com.vionto.vithesaurus
 
+/**
+ * A cookie-based long-term session that survives Tomcat restarts
+ * and Tomcat's short session timeout.
+ */
 class DurationSession {
 
   String sessionId
