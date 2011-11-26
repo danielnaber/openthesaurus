@@ -6,11 +6,10 @@
 	    <table>
 	        <g:each in="${synsetList}" status="i" var="synset">
 	             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-	                 <td><g:radio name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
+	                 <td><g:radio id="radioButton${i}" name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
 	                    checked="${false}"/></td>
 	                 <td>
-	                     <g:link target="_blank" action="edit" id="${synset.id}">
-	                     	 <g:set var="firstVal" value="${true}"/>
+	                     <label for="radioButton${i}"><g:set var="firstVal" value="${true}"/>
 	                         <g:each in="${synset?.otherTerms()?.sort()}" var="term">
 	                             <g:if test="${!firstVal}">
 	                             	<span class="d">&middot;</span>
@@ -21,7 +20,8 @@
                                  </g:if>
 	                             <g:set var="firstVal" value="${false}"/>
 	                         </g:each>
-	                     </g:link>
+	                     </label>
+	                     <g:link target="_blank" action="edit" id="${synset.id}">&gt;&gt;&nbsp;Details</g:link>
 	                 </td>
 	             </tr>
 	        </g:each>

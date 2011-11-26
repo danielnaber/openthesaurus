@@ -56,25 +56,14 @@
                 </div>
             </g:if>        
          <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
-            <g:textField name="q${linkTypeName}" value="" onkeypress="return doSearchOnReturn(event, '${linkTypeName}');"/>
+            <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSearchOnKeyUp(event, '${linkTypeName}');" autocomplete="off"/>
             <input type="hidden" name="linkType${linkTypeName}.id" value="${LinkType.findByLinkName(linkTypeName).id}">
             
-    		<%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
-    		<%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
-            <a href="${createLinkTo(dir:'synset/ajaxSearch')}" 
-            	onclick="new Ajax.Updater('synsetLink${linkTypeName}','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q${linkTypeName}.value + '&linkTypeName=${linkTypeName}'});return false;"
-            	><g:message code="edit.link.lookup"/></a>
-                  
-            <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
-            <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
-                  update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
-            -->
-    
-            <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
+            <span id="addSynsetProgress${linkTypeName}" style="visibility:hidden;position:absolute">
                 <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
                    title="Searching..."/>
             </span>
-            <div id="synsetLink${linkTypeName}">
+            <div id="synsetLink${linkTypeName}" style="min-height:200px">
             </div>
          </div>
          </li>

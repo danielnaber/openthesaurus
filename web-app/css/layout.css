@@ -475,3 +475,13 @@ strong {
 .metaInfo {
     color: #888888;
 }
+
+/* user input: */
+.inp {
+    font-weight: bold;
+    color: #888888;
+}
+
+.noAjaxMatches {
+    margin: 5px;
+}

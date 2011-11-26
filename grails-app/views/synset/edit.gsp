@@ -11,13 +11,13 @@
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
-          function loadSearch() {
-            document.getElementById('addSynsetProgress').style.position='relative';
-            document.getElementById('addSynsetProgress').style.visibility='visible';
+          function loadSearch(linkType) {
+            document.getElementById('addSynsetProgress' + linkType).style.position='relative';
+            document.getElementById('addSynsetProgress' + linkType).style.visibility='visible';
           }
 
-          function loadedSearch() {
-            document.getElementById('addSynsetProgress').style.visibility='hidden';
+          function loadedSearch(linkType) {
+            document.getElementById('addSynsetProgress' + linkType).style.visibility='hidden';
           }
 
           function deleteItem(id, termId) {
@@ -37,17 +37,57 @@
           // We have two submit buttons in the page and we cannot guarantee that
           // the correct one is used, so disable submit-by-return:
           function avoidSubmitOnReturn(event) {
-        	  if (event.keyCode == 13) {
-            	  return false;
-        	  }
+              if (event.keyCode == 13) {
+                  return false;
+              }
           }
 
-          function doSearchOnReturn(event, linkType) {
+          function doNotSubmitOnReturn(event) {
               if (event.keyCode == 13) {
-                  // start a search on return (copied from the generated code):
-                  new Ajax.Updater('synsetLink' + linkType,'${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q=' + document.editForm["q" + linkType].value + '&linkTypeName=' + linkType});
-                  // don't send the outer form:
                   return false;
+              }
+          }
+          
+          var onChangeInterval = null;
+          var deferRequestMillis = 200;
+          var minChars = 2;
+          var linkType = null;
+          var currentValue = null;
+
+          function doSearchOnKeyUp(event, tmpLinkType) {
+              switch (event.keyCode) {
+                  case Event.KEY_UP:
+                  case Event.KEY_DOWN:
+                  case Event.KEY_RIGHT:
+                  case Event.KEY_LEFT:
+                  case 13:
+                      return;
+              }
+              linkType = tmpLinkType;
+              clearInterval(onChangeInterval);
+              var searchString = document.editForm["q" + linkType].value;
+              if (currentValue != searchString) {
+                  onChangeInterval = setInterval("onValueChange()", deferRequestMillis);
+              }
+          }
+          
+          function onValueChange() {
+              clearInterval(onChangeInterval);
+              var searchString = document.editForm["q" + linkType].value;
+              currentValue = searchString;
+              if (searchString === '' || searchString.length < minChars) {
+                  $('synsetLink' + linkType).update("");
+              } else {
+                  new Ajax.Updater('synsetLink' + linkType,
+                    '${createLinkTo(dir:"synset/ajaxSearch",file:"")}',
+                    {
+                     asynchronous: true,
+                     evalScripts: false,
+                     onLoaded: function(e){loadedSearch(linkType)},
+                     onLoading: function(e){loadSearch(linkType)},
+                     parameters:'q=' + searchString + '&linkTypeName=' + linkType
+                    }
+                  );
               }
           }
 
