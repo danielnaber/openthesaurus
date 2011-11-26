@@ -1,4 +1,4 @@
-
+<%@page import="com.vionto.vithesaurus.tools.StringTools" %>
     <g:if test="${synsetList.size() == 0}">
     	<g:message code="result.no.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
     </g:if>
@@ -10,15 +10,24 @@
 	                 <td><g:radio id="${radioButtonId}" name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
 	                    checked="${false}"/></td>
 	                 <td>
-	                     <label for="${radioButtonId}"><g:set var="firstVal" value="${true}"/>
+	                     <label for="${radioButtonId}">
+	                         <g:set var="firstVal" value="${true}"/>
 	                         <g:each in="${synset?.otherTerms()?.sort()}" var="term">
+                                 <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
+                                 <g:set var="cleanedMatch" value='${StringTools.normalize(match).equals(params.q)}'/>
 	                             <g:if test="${!firstVal}">
 	                             	<span class="d">&middot;</span>
+	                             </g:if>
+	                             <g:if test="${cleanedMatch}">
+	                                <span class="synsetmatch">
 	                             </g:if>
 	                             ${term.toString()?.encodeAsHTML()}
                                  <g:if test="${term.level}">
                                    (${term.level.shortLevelName})
                                  </g:if>
+	                             <g:if test="${cleanedMatch}">
+	                                </span>
+	                             </g:if>
 	                             <g:set var="firstVal" value="${false}"/>
 	                         </g:each>
 	                     </label>
