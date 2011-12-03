@@ -10,7 +10,19 @@
 
         <hr />
 
-		<h2>API-Zugriff</h2>
+        <h2>API-Zugriff</h2>
+        
+        <ul>
+          <li><a href="#allgemeines">Allgemeines</a></li>
+          <li><a href="#xml">Suchanfrage für XML</a></li>
+          <li><a href="#json">Suchanfrage für JSON</a></li>
+          <li><a href="#jsonp">Suchanfrage für JSONP</a></li>
+          <li><a href="#optionen">Optionen</a></li>
+          <li><a href="#probleme">Bekannte Probleme</a></li>
+          <li><a href="#limits">Anfrage-Limitierung</a></li>
+        </ul>
+        
+		<h2><a name="allgemeines">Allgemeines</a></h2>
 		
 		<p>Viele Daten dieser Website können direkt über eine HTTP-Schnittstelle
 		abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
@@ -20,7 +32,7 @@
 		<i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
 		um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</strong></p>
 		
-		<h2>Suchanfrage für XML</h2>
+		<h2><a name="xml">Suchanfrage für XML</a></h2>
 		
 		<p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
 		die das Wort <span class="bsp">test</span> beinhalten, abgefragt werden:</p>
@@ -29,7 +41,7 @@
 
         <p>Kommt im Suchwort ein Sonderzeichen vor, muss es mit UTF-8 URL-kodiert werden (z.B. wird <tt>hören</tt> zu <tt>h%C3%B6ren</tt>).</p>
 		
-		<h2>Ergebnis</h2>
+		<h3>Ergebnis</h3>
 		
 		<p>Das Ergebnis der Anfrage ist eine XML-Datei mit folgendem Format:</p>
 		
@@ -58,7 +70,7 @@
 </pre>
 
 
-        <a name="json"><h2>Suchanfrage für JSON</h2></a>
+        <h2><a name="json">Suchanfrage für JSON</a></h2>
         
         <p>Statt <span class="apioption">text/xml</span> kann <span class="apioption">application/json</span>
         angegeben werden, um das Ergebnis im JSON-Format zu erhalten.</p>
@@ -68,7 +80,7 @@
         <g:render template="jsonWarning"/>
         
 
-        <a name="jsonp"><h2>Suchanfrage für JSONP</h2></a>
+        <h2><a name="jsonp">Suchanfrage für JSONP</a></h2>
         
         <p>Mit der Übergabe einer Callback-Methode kann der JSON-Code als Parameter einer Funktion übergeben werden.
         <g:link action="jsonpExample">Eine Beispiel-Seite</g:link>.</p>
@@ -78,7 +90,7 @@
         <g:render template="jsonWarning"/>
 
 
-        <h2>Optionen</h2>
+        <h2><a name="optionen">Optionen</a></h2>
 
         <ul class="apioptions">
           <li><span class="apioption">format=text/xml</span> oder <span class="apioption">format=application/json</span>: Aktiviert den API-Modus, so dass 
@@ -133,23 +145,18 @@
         </ul>
 
 
-        <h2>Bekannte Probleme</h2>
+        <h2><a name="probleme">Bekannte Probleme</a></h2>
 
-        <ul>
-          <li>Umlaute werden bei der Suche wie ihre nicht-Umlaute behandelt, so findet <span class="bsp">tur</span>
-            auch den Eintrag zu <span class="bsp">Tür</span> und umgekehrt.</li>
-        </ul>
+        <p>Umlaute werden bei der Suche wie ihre nicht-Umlaute behandelt, so findet <span class="bsp">tur</span>
+            auch den Eintrag zu <span class="bsp">Tür</span> und umgekehrt.</p>
 
-        <h2>Anfrage-Limitierung</h2>
+        <h2><a name="limits">Anfrage-Limitierung</a></h2>
 
         <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung (HTTP-Code 500).
         Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
-        Erhöhung des Limits bitten.</p>
+        Erhöhung des Limits bitten. Zusätzlich zur direkten Abfrage stehen weiterhin
+        <g:link action="download">Downloads</g:link> der Datenbank zur Verfügung. Statt Massenabfragen
+        über die API sollte dieser Download genutzt werden.</p>
 
-		<h2>Download</h2>
-		
-		<p>Zusätzlich zur direkten Abfrage stehen weiterhin
-		<g:link action="download">Downloads</g:link> der Datenbank zur Verfügung.</p>
-		
     </body>
 </html>
