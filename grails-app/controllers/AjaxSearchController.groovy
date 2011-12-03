@@ -31,7 +31,7 @@ class AjaxSearchController extends BaseController {
     def ajaxMainSearch = {
         long startTime = System.currentTimeMillis()
         SynsetController synsetController = new SynsetController()
-        String query = params.q.trim()
+        String query = params.q
         def directMatches = synsetController.doSearch(query, null, null, null, 10, 0)
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
