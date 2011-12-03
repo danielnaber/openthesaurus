@@ -8,10 +8,11 @@
 
         <hr/>
           
-		<h2>Admin Page</h2>
-		
+        <h2>Admin Page</h2>
+
         <p>
         Manage:
+        <g:link controller="test">Simple self-test</g:link> |
         <g:link controller="user" action="list">Users</g:link> |
         <g:link controller="language" action="list">Languages</g:link> |
         <g:link controller="source" action="list">Sources</g:link> |
@@ -34,12 +35,11 @@
 
         <p>Lists:
         <g:link controller="check" action="listInvisibleSynsets">Invisible synsets</g:link>
-        </p>
-
-        <p>Term Checks:
-        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link></p>
-
-        <p>Sanity checks:
+        <br/>
+        Term Checks:
+        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
+        <br/>
+        Sanity checks:
         <g:link controller="admin" action="checkNormalizedTermIntegrity">Normalized term integrity</g:link>
         </p>
 
