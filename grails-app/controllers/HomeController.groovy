@@ -19,4 +19,8 @@ class HomeController {
     
     def index = {}
     
+    def directSearch = {
+        []
+    }
+    
 }
