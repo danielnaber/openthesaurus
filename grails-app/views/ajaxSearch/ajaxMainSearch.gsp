@@ -13,7 +13,7 @@
                  <g:set var="firstVal" value="${true}"/>
                  <g:each in="${synset?.otherTerms()?.sort()}" var="term">
                      <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
-                     <g:set var="cleanedMatch" value='${StringTools.normalize(match).equals(params.q)}'/>
+                     <g:set var="cleanedMatch" value='${StringTools.normalize(match).equalsIgnoreCase(params.q)}'/>
                      <g:if test="${!firstVal}">
                         <span class="d">&middot;</span>
                      </g:if>
