@@ -14,12 +14,6 @@
       var minChars = 2;
       var currentValue = null;
 
-      function doNotSubmitOnReturn(event) {
-          if (event.keyCode == 13) {
-              return false;
-          }
-      }
-
       function doSearchOnKeyUp(event) {
           switch (event.keyCode) {
               case Event.KEY_UP:
@@ -28,7 +22,6 @@
                   return;
               case Event.KEY_RIGHT:
               case Event.KEY_LEFT:
-              case 13:  // Return
                   return;
           }
           clearInterval(onChangeInterval);

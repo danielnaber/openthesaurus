@@ -18,7 +18,7 @@
   <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
     <g:if test="${isDirectSearch}">
-      <g:set var="directSearchAttributes" value='onkeypress=\"return doNotSubmitOnReturn(event);\" onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
+      <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
       <span id="spinner" style="visibility:hidden;position:absolute;left:257px;top:99px">
         <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" alt="Wartesymbol" />
       </span>
