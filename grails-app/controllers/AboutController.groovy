@@ -59,18 +59,18 @@ class AboutController extends BaseController {
     def newsarchive = {
         []
     }
-    
+
     /** Livewatch.de server monitoring */
     def livecheck = {
-      	Pattern p = Pattern.compile("[a-f0-9]{32}")
-      	String key = request.getParameter("key")
-      	if (key == null) {
-      		render "Alles OK"
-      	} else if (p.matcher(key).matches()) {
-      	    render key
-      	} else {
-      	    render ""
-      	}
+        Pattern p = Pattern.compile("[a-f0-9]{32}")
+        String key = request.getParameter("key")
+        if (key == null) {
+            render "Alles OK"
+        } else if (p.matcher(key).matches()) {
+            render key
+        } else {
+            render ""
+        }
     }
 
 }
