@@ -67,7 +67,7 @@
 </head>
 <body>
 
-  <div id="body" style="padding:130px 0 120px 0;">
+  <div id="body" style="padding:80px 0 120px 0;">
 
     <div id="content">
 

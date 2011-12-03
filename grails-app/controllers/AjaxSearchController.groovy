@@ -27,12 +27,14 @@ class AjaxSearchController extends BaseController {
      * 
      * TODO: duplicate matches, e.g. for "Saxofon"
      * TODO: grüß matches gruß and vice versa
+     * TODO: gets confused when query appears in parenthesis int the database (e.g. search "wörtlich")
      */
     def ajaxMainSearch = {
         long startTime = System.currentTimeMillis()
         SynsetController synsetController = new SynsetController()
         String query = params.q
-        def directMatches = synsetController.doSearch(query, null, null, null, 10, 0)
+        // get 10 + 1 matches so we can display the "there are more matches" link:
+        def directMatches = synsetController.doSearch(query, null, null, null, 11, 0)
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
         def minLengthForSubstringQuery = 3
