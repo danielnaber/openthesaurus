@@ -21,12 +21,9 @@
                        <g:if test="${cleanedMatch}">
                           <span class="synsetmatch">
                        </g:if>
-                       ${term.toString()?.encodeAsHTML()}
+                       ${term.toString()?.encodeAsHTML()}<g:if test="${cleanedMatch}"></span></g:if>
                        <g:if test="${term.level}">
                          <span class="metaInfo">(${term.level.shortLevelName})</span>
-                       </g:if>
-                       <g:if test="${cleanedMatch}">
-                          </span>
                        </g:if>
                        <g:set var="firstVal" value="${false}"/>
                    </g:each>
