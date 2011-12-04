@@ -69,7 +69,7 @@ Please refer to the container's documentation on how to do that.
 BUILDING
 
 If you want to build vithesaurus on your own you will need
-Grails 1.1.1 (http://www.grails.org).
+Grails 1.3.7 (http://www.grails.org).
 
 For development, your database needs to be configured in
 grails-app/conf/datasource-dev.properties. Use "grails run-app"
