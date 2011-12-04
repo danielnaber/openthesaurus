@@ -3,7 +3,7 @@
 <%@page import="java.util.regex.Matcher" %>
 
     <g:if test="${synsetList.size() == 0}">
-        <div class="metaInfo" style="margin-top:4px;margin-bottom:4px">
+        <div class="metaInfo" style="margin-top:8px;margin-bottom:4px">
             <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
         </div>
     </g:if>
@@ -19,7 +19,7 @@
                           <span class="d">&middot;</span>
                        </g:if>
                        <g:if test="${cleanedMatch}">
-                          <span class="synsetmatch">
+                          <span class="synsetmatchDirect">
                        </g:if>
                        ${term.toString()?.encodeAsHTML()}<g:if test="${cleanedMatch}"></span></g:if>
                        <g:if test="${term.level}">
@@ -64,7 +64,7 @@
                      </g:if>
                      <%
                      Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
-                     String matchingTerm = matcher.replaceAll("<span class=\"synsetmatch\">\$1</span>");
+                     String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
                      %>
                      ${matchingTerm}
                      <g:if test="${term.level}">

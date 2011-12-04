@@ -265,6 +265,12 @@ h3 {
   background: #fcffd0;
 }
 
+.synsetmatchDirect {
+  background: #fcffd0;
+  font-weight: bold;
+  color: #444444;
+}
+
 .wordLevel {
   color: #57a4d8;
 }
