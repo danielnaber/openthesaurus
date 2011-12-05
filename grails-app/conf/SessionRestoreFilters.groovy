@@ -1,5 +1,6 @@
 import javax.servlet.http.Cookie
 import com.vionto.vithesaurus.DurationSession
+import uk.co.smartkey.jforumsecuresso.SecurityTools
 
 /**
  * vithesaurus - web-based thesaurus management tool
@@ -26,6 +27,19 @@ class SessionRestoreFilters {
                 restoreSessionIfPossible(session, request)
                 return true
             }            
+        }
+        ssoForForumFilter(controller:'*', action:'*') {
+            before = {
+                Cookie cookie
+                if (session.user) {
+                    String encryptedData = SecurityTools.getInstance().encryptCookieValues(session.user.userId, session.user.realName)
+                    cookie = new Cookie(SecurityTools.FORUM_COOKIE_NAME, encryptedData)
+                    // TODO: unlimited maxAge if user is logged in forever (i.e. has checked to box to keep logged in):
+                    cookie.maxAge = 60 * 30  // seconds
+                    cookie.path = "/"
+                    response.addCookie(cookie)
+                }
+            }
         }
     }
     

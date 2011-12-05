@@ -17,9 +17,10 @@
  */ 
 
 import com.vionto.vithesaurus.*
-import java.security.MessageDigest
 import com.vionto.vithesaurus.tools.IpTools
+import java.security.MessageDigest
 import javax.servlet.http.Cookie
+import uk.co.smartkey.jforumsecuresso.SecurityTools
 
 class UserController extends BaseController {
     
@@ -288,7 +289,8 @@ class UserController extends BaseController {
         session.user = null
         session.controllerName = null
         session.actionName = null
-        cleanDurationSession(response)
+        cleanCookie(response, LOGIN_COOKIE_NAME)
+        cleanCookie(response, SecurityTools.FORUM_COOKIE_NAME)
         flash.message = message(code:'user.logged.out')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
     }
@@ -471,10 +473,10 @@ class UserController extends BaseController {
         return bigInt.toString(16)
     }
 
-    private void cleanDurationSession(def response) {
+    private void cleanCookie(def response, String cookieName) {
       Cookie[] cookies = request.getCookies()
       for (cookie in cookies) {
-        if (cookie.getName() == LOGIN_COOKIE_NAME) {
+        if (cookie.getName() == cookieName) {
           cookie.setMaxAge(0)		// effectively deletes the cookie
           cookie.setPath("/")
           response.addCookie(cookie)
