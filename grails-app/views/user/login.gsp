@@ -22,6 +22,7 @@
         </g:hasErrors>
 
         <g:form action="login" method="post" name="loginform">
+            <input type="hidden" name="returnUrl" value="${params.returnUrl?.encodeAsHTML()}"/>
             <div class="dialog">
                 <table>
                     <tbody>

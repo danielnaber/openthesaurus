@@ -263,6 +263,9 @@ class UserController extends BaseController {
                     redirect(controller:session.controllerName,
                             action: session.actionName)
                 }
+            } else if (params.returnUrl && (params.returnUrl.startsWith("http://www.openthesaurus.de") || params.returnUrl.startsWith("https://www.openthesaurus.de"))) {
+                // used by jforum
+                redirect(url:params.returnUrl)
             } else {
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
