@@ -22,6 +22,14 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-12-07</span></td>
+    <td valign="top">Ab sofort gibt es ein <a href="/jforum">Forum</a>.</td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-12-03</span></td>
+    <td valign="top">Neu: die <a href="/direct">Schnellsuche</a>, die Treffer schon während des Tippens zeigt.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-09-18</span></td>
     <td valign="top">Ab sofort steht die Beta-Version einer <a href="api#json">JSON-API</a> zur Verfügung.</td>
 </tr>
