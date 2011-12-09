@@ -354,6 +354,7 @@
                                                     checked="${isPreferred}" />
                                             </g:if>
                                             ${catLink.category}
+                                            <g:link controller="term" action="list" params="${[categoryId:catLink.category.id]}">(zeigen)</g:link>
                                             <g:if test="${catLink.category.categoryType}">
                                                    <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
                                             </g:if>
