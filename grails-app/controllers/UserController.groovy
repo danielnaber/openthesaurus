@@ -233,7 +233,14 @@ class UserController extends BaseController {
               return
             }
             log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
-            flash.message = message(code:'user.logged.in')
+            boolean forumRedirect = params.returnUrl &&
+                    (params.returnUrl.startsWith("http://www.openthesaurus.de") || params.returnUrl.startsWith("https://www.openthesaurus.de"))
+            if (forumRedirect) {
+              // used by jforum
+              flash.message = message(code:'user.logged.in.with.url', args:[params.returnUrl])
+            } else {
+              flash.message = message(code:'user.logged.in')
+            }
             session.user = user
             if (params.logincookie) {
                 addDurationSession(session, response, user)
@@ -263,9 +270,8 @@ class UserController extends BaseController {
                     redirect(controller:session.controllerName,
                             action: session.actionName)
                 }
-            } else if (params.returnUrl && (params.returnUrl.startsWith("http://www.openthesaurus.de") || params.returnUrl.startsWith("https://www.openthesaurus.de"))) {
-                // used by jforum
-                redirect(url:params.returnUrl)
+            } else if (forumRedirect) {
+                redirect(url:params.returnUrl)   // TODO: use redirect via HTML page so cookie can be set
             } else {
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
