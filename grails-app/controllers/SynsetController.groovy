@@ -692,13 +692,11 @@ class SynsetController extends BaseController {
     }
     
     def searchSimilarTerms(String term, Connection conn) {
-      String sql = """SELECT word, lookup FROM memwords 
-			WHERE ((
-				CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
-				OR
-				(
-				CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
-				ORDER BY word"""
+      String sql = """SELECT word, lookup FROM memwords WHERE (
+                (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
+                OR
+                (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
+                ORDER BY word"""
       PreparedStatement ps
       ResultSet resultSet
       def matches = []
@@ -742,31 +740,6 @@ class SynsetController extends BaseController {
           }
       }
       return matches
-    }
-
-    def variation = {
-      String limit = ""
-      if (params.id == 'ch') {
-        limit = "schweiz."
-      } else if (params.id == 'at') {
-        limit = "österr."
-      } else {
-        throw new Exception("Unknown variation '${params.id}'")
-      }
-      String headline = message(code:'variation.headline.' + params.id)
-      String title = message(code:'variation.title.' + params.id)
-      String intro = message(code:'variation.intro.' + params.id)
-      def termList = Term.withCriteria {
-          or {
-            ilike('word', "%" + limit + "%")
-          }
-          synset {
-              eq('isVisible', true)
-          }
-          order('word', 'asc')
-      }
-      [headline: headline, title: title, intro: intro,
-       termList: termList]
     }
 
     /**
@@ -873,6 +846,31 @@ class SynsetController extends BaseController {
     String[] getTermsFromTextArea(String str) {
         String[] terms = str.split("[\n\r]")
         return terms.findAll { term -> term.trim() != "" }
+    }
+
+    def variation = {
+      String limit = ""
+      if (params.id == 'ch') {
+        limit = "schweiz."
+      } else if (params.id == 'at') {
+        limit = "österr."
+      } else {
+        throw new Exception("Unknown variation '${params.id}'")
+      }
+      String headline = message(code:'variation.headline.' + params.id)
+      String title = message(code:'variation.title.' + params.id)
+      String intro = message(code:'variation.intro.' + params.id)
+      def termList = Term.withCriteria {
+          or {
+            ilike('word', "%" + limit + "%")
+          }
+          synset {
+              eq('isVisible', true)
+          }
+          order('word', 'asc')
+      }
+      [headline: headline, title: title, intro: intro,
+       termList: termList]
     }
 
     def edit = {
