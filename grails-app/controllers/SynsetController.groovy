@@ -63,22 +63,6 @@ class SynsetController extends BaseController {
         redirect(controller:'statistics', action:'index')
     }
     
-    /*def list = {
-        if(!params.max) params.max = 10
-        [ synsetList: Synset.findAllByIsVisible(true,
-            [sort:params.sort, order:params.order,
-             offset:params.offset, max:10]) ]
-    }*/
-
-    /**
-     * Return a simplified search result snippet to be embedded
-     * via Ajax.
-     */
-    def ajaxSearch = {
-        params.ajaxSearch = 1
-        search()
-    }
-
     /**
      * Search all terms from a textarea (one query per line) return a page
      * with merged results.
@@ -116,6 +100,15 @@ class SynsetController extends BaseController {
       }
     }
 
+    /**
+     * Return a simplified search result snippet to be embedded
+     * via Ajax.
+     */
+    def ajaxSearch = {
+        params.ajaxSearch = 1
+        search()
+    }
+    
     /**
      * Search for term and return a page with all synsets that contain
      * the term.
