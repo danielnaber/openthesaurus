@@ -58,52 +58,11 @@ class SynsetController extends BaseController {
         redirect(action:list,params:params)
     }
 
-    /**
-     * Show page with statistics about the database, e.g. number of synsets.
-     */
     def statistics = {
-        // global statistics:
-        def criteria = UserEvent.createCriteria()
-        int latestChangesAllSections = criteria.count {
-          gt('creationDate', new Date() - 7)
-        }
-        // per-user statistics (i.e. top users):
-        Connection conn
-        PreparedStatement ps
-        ResultSet resultSet
-        try {
-          conn = dataSource.getConnection()
-          String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
-            FROM user_event, thesaurus_user
-            WHERE
-  			thesaurus_user.id = user_event.by_user_id AND
-  			user_event.creation_date >= DATE_SUB(NOW(), INTERVAL ? DAY)
-  			GROUP BY by_user_id
-  		    ORDER BY ct DESC
-  		    LIMIT ?"""
-          List topUsers = []
-          ps = conn.prepareStatement(sql)
-          ps.setInt(1, 365)	// days
-          ps.setInt(2, 10)	// max matches
-          resultSet = ps.executeQuery()
-          while (resultSet.next()) {
-            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct")))
-          }
-          [ latestChangesAllSections: latestChangesAllSections,
-            topUsers: topUsers ]
-        } finally {
-          if (resultSet != null) {
-            resultSet.close()
-          }
-          if (ps != null) {
-            ps.close()
-          }
-          if (conn != null) {
-            conn.close()
-          }
-        }
+        // this is an old URL, keep it supported
+        redirect(controller:'statistics', action:'index')
     }
-
+    
     /*def list = {
         if(!params.max) params.max = 10
         [ synsetList: Synset.findAllByIsVisible(true,

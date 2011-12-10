@@ -43,12 +43,22 @@
                           <td valign="top" align="right" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                       </tr>
 
+                    <!--
+                    <tr class="prop">
+                        <td colspan="2" valign="top" class="name">
+                          <br/>
+                          <br/>
+                          <br/>
+                          <img src="../images/fake_stats.png"/></td>
+                    </tr>
+                    -->
+                    
                   </table>
               </td>
 
             <td>&nbsp;&nbsp;&nbsp;</td>
 
-              <td>
+              <td valign="top">
 
                   <h2><g:message code="statistics.top.users" /></h2>
 
