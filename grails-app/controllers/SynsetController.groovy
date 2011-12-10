@@ -1274,58 +1274,6 @@ class SynsetController extends BaseController {
                 language: firstLanguage])
     }
 
-    /**
-     * Used to create a synset from the list of concept suggestions (via Ajax).
-     */
-    /*def createSynset = {
-        if (!params.term) throw new Exception("parameter 'term' must be set")
-        if (!params["language.id"]) throw new Exception("parameter 'language.id' must be set")
-        if (!params["section.id"]) throw new Exception("parameter 'section.id' must be set")
-        if (!params["category.id"]) throw new Exception("parameter 'category.id' must be set")
-        if (params["category.id"] == "null") {    // no category selected by user
-            response.status = 500
-            render "<strong>Error: Please select a category</strong>"
-            return
-        }
-        def synset = new Synset()
-        // save section and category:
-        Section section = Section.get(params["section.id"].toInteger())
-        assert(section)
-        synset.section = section
-        Category category = Category.get(params["category.id"].toInteger())
-        assert(category)
-        synset.addCategoryLink(new CategoryLink(synset, category))
-        // save term as preferred term:
-        Language language = Language.get(params["language.id"])
-        Term term = new Term(params.term, language, synset)
-        TermValidator validator = new TermValidator(term)
-        try {
-            validator.extendedValidate()
-        } catch (IllegalArgumentException e) {
-            response.status = 500
-            render "<strong>Error: term cannot be validated: ${e.encodeAsHTML()}</strong>"
-            return
-        }
-        if (!term.validate()) {
-            // validate happens on save() but the user shouldn't see a real exception:
-            response.status = 500
-            render "<strong>Error: term cannot be validated: ${term.errors}</strong>"
-            return
-        }
-        if (!term.save()) {
-            throw new Exception("Cannot create term: ${term.errors}")
-        }
-        synset.addTerm(term)
-        // save synset and log information:
-        LogInfo logInfo = getLogInfo(null, synset, "created from synset suggestion")
-        boolean result = synset.saveAndLog(logInfo)
-        if (!result) {
-            throw new Exception("Cannot create synset: ${synset.errors}")
-        }
-        render(template:"/synsetSuggestion/createdSynset", model:[id:synset.id,
-            term: params.term])
-    }*/
-    
     def save = {
         def synset = new Synset(params)
         synset.isVisible = true
