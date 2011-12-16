@@ -7,9 +7,9 @@
 	        <g:each in="${synsetList}" status="i" var="synset">
 	             <g:set var="radioButtonId" value="radioButton${params.linkTypeName.encodeAsHTML()}${i}"/>
 	             <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-	                 <td><g:radio id="${radioButtonId}" name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
+	                 <td valign="top"><g:radio id="${radioButtonId}" name="targetSynset${params.linkTypeName.encodeAsHTML()}.id" value="${synset.id}"
 	                    checked="${false}"/></td>
-	                 <td>
+	                 <td valign="top">
 	                     <label for="${radioButtonId}">
 	                         <g:set var="firstVal" value="${true}"/>
 	                         <g:each in="${synset?.otherTerms()?.sort()}" var="term">
