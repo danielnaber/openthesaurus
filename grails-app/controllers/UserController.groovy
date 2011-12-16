@@ -233,14 +233,7 @@ class UserController extends BaseController {
               return
             }
             log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
-            boolean forumRedirect = params.returnUrl &&
-                    (params.returnUrl.startsWith("http://www.openthesaurus.de") || params.returnUrl.startsWith("https://www.openthesaurus.de"))
-            if (forumRedirect) {
-              // used by jforum
-              flash.message = message(code:'user.logged.in.with.url', args:[params.returnUrl])
-            } else {
-              flash.message = message(code:'user.logged.in')
-            }
+            flash.message = message(code:'user.logged.in')
             session.user = user
             if (params.logincookie) {
                 addDurationSession(session, response, user)
@@ -253,7 +246,12 @@ class UserController extends BaseController {
             }
             // TODO: there must be a better way for this "redirect after 
             // login" problem (maybe "originalRequestParameters"?)
-            if (redirectParams?.controller && redirectParams?.action) {
+            boolean forumRedirect = params.returnUrl && isOurOwnUrl(params.returnUrl)
+            if (forumRedirect) {
+                // no direct redirect because the cookies need to be set first in the user's browser
+                // *before* he arrives at the forum page:
+                redirect(action:'redirect', params:[url: params.returnUrl])
+            } else if (redirectParams?.controller && redirectParams?.action) {
                 redirect(controller:redirectParams?.controller,
                         action: redirectParams?.action, params:redirectParams)
             } else if (session.controllerName && session.actionName && session.origId) {
@@ -270,8 +268,6 @@ class UserController extends BaseController {
                     redirect(controller:session.controllerName,
                             action: session.actionName)
                 }
-            } else if (forumRedirect) {
-                redirect(url:params.returnUrl)   // TODO: use redirect via HTML page so cookie can be set
             } else {
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
@@ -287,6 +283,19 @@ class UserController extends BaseController {
               flash.message = message(code:'user.invalid.login')
             }
           }
+        }
+    }
+
+    boolean isOurOwnUrl(String url) {
+        return (url.startsWith("http://www.openthesaurus.de") || url.startsWith("https://www.openthesaurus.de"))
+    }
+
+    def redirect = {
+        if (isOurOwnUrl(params.url)) {
+            redirect(url: params.url)
+        } else {
+            log.warn("Someone tried to redirect to url '${params.url}', which is not allowed. Showing error message.")
+            render "Error: invalid redirect URL"
         }
     }
     
