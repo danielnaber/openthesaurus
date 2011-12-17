@@ -22,6 +22,11 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2011-12-18</span></td>
+    <td valign="top">Es können jetzt Antonyme (Gegenwörter) eingetragen werden. Die 
+        <g:link controller="term" action="antonyms">Liste aller bisher erfassten Antonyme</g:link>.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-12-07</span></td>
     <td valign="top">Ab sofort gibt es ein <a href="/jforum">Forum</a>.</td>
 </tr>
