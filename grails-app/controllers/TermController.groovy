@@ -68,12 +68,9 @@ class TermController extends BaseController {
         if (term) {
             boolean wordWasChanged = params.word != term.word
             if (wordWasChanged && term.synset.containsWord(params.word)) {
-                /*term.errors.reject('thesaurus.duplicate.term',
-                      [term.encodeAsHTML()].toArray(),
-                      'already in concept')*/
-                // TODO: "{0}" in error doesn't get substituted:
-                term.errors.rejectValue('word', 'thesaurus.duplicate.term')
-                render(view:'edit',model:[term:term],
+                term.errors.rejectValue('word', 'thesaurus.duplicate.term.noparam')
+                List termLinkInfos = term.termLinkInfos()
+                render(view:'edit',model:[term:term, termLinkInfos:termLinkInfos, id:term.id],
                         contentType:"text/html", encoding:"UTF-8")
                 return
             }
