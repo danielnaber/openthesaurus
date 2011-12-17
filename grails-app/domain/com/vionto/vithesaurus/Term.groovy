@@ -98,11 +98,11 @@ class Term implements Comparable, Cloneable {
         // the other direction (eg. hot->cold, cold->hot):
         List termLinkInfos = []
         for (TermLink link : termLinks) {
-            termLinkInfos.add(new TermLinkInfo(this, link.targetTerm, link.linkType.linkName, true))
+            termLinkInfos.add(new TermLinkInfo(link.id, this, link.targetTerm, link.linkType.linkName, true))
         }
         List reverseLinks = TermLink.findAllByTargetTerm(this)
         for (TermLink link : reverseLinks) {
-            termLinkInfos.add(new TermLinkInfo(this, link.term, link.linkType.otherDirectionLinkName, false))
+            termLinkInfos.add(new TermLinkInfo(link.id, this, link.term, link.linkType.otherDirectionLinkName, false))
         }
         return termLinkInfos
     }
@@ -151,7 +151,7 @@ class Term implements Comparable, Cloneable {
     }
 
     /**
-     * Save and log to both logging system and database. Returns true
+     * Log to both logging system and database. Returns true
      * @throws RuntimeException if logging to database didn't work
      */
     def log(LogInfo logInfo) {
@@ -181,7 +181,7 @@ class Term implements Comparable, Cloneable {
      */
     boolean saveAndLog(LogInfo logInfo, boolean extendedValidateVar) {
         if (logInfo == null) {
-            throw new NullPointerException("loginfo may not be null")
+            throw new NullPointerException("logInfo may not be null")
         }
         if (extendedValidate() &&
                 this.synset.extendedValidate(extendedValidateVar) && save()) {

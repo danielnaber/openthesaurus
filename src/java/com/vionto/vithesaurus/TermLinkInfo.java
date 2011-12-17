@@ -6,18 +6,23 @@ package com.vionto.vithesaurus;
  */
 public class TermLinkInfo {
 
+    private final long id;
     private final Term term1;
     private final Term term2;
     private final String linkName;
     private final boolean outgoingLink;
 
-    public TermLinkInfo(Term term1, Term term2, String linkName, boolean outgoingLink) {
+    public TermLinkInfo(long id, Term term1, Term term2, String linkName, boolean outgoingLink) {
+        this.id = id;
         this.term1 = term1;
         this.term2 = term2;
         this.linkName = linkName;
         this.outgoingLink = outgoingLink;
     }
 
+    public long getId() {
+        return id;
+    }
 
     public Term getTerm1() {
         return term1;
@@ -35,4 +40,8 @@ public class TermLinkInfo {
         return outgoingLink;
     }
 
+    @Override
+    public String toString() {
+        return term1 + "<--" + linkName +"-->" + term2;
+    }
 }

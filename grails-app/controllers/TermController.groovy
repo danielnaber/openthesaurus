@@ -31,19 +31,22 @@ class TermController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def edit = {
-        def term = Term.get( params.id )
+        def term = Term.get(params.id)
         if(!term) {
             flash.message = "Term not found with id ${params.id}"
             redirect(action:list)
         }
         else {
             List termLinkInfos = term.termLinkInfos()
+            if (termLinkInfos.size() > 1) {
+                throw new Exception("More than one term link for term ${term}: ${termLinkInfos}")
+            }
             return [ term : term, id: term.id, termLinkInfos: termLinkInfos ]
         }
     }
 
     def update = {
-        Term term = Term.get( params.id )
+        Term term = Term.get(params.id)
         Term termBackup = term.clone()
         if (term) {
             boolean wordWasChanged = params.word != term.word
@@ -57,7 +60,7 @@ class TermController extends BaseController {
                         contentType:"text/html", encoding:"UTF-8")
                 return
             }
-            
+            saveAntonym(params, term, session, request, termBackup)
             // create a term just for validation (we cannot assign the new 
             // properties to variable 'term' as it will then be saved even
             // if it's invalid -- see http://jira.codehaus.org/browse/GRAILS-2480):
@@ -95,6 +98,72 @@ class TermController extends BaseController {
             flash.message = "Term not found with id ${params.id}"
             redirect(action:edit,id:params.id)
         }
+    }
+
+    private def saveAntonym(params, Term term, session, request, Term termBackup) {
+        if (params.targetAntonymTermId || params.deleteExistingTermLink) {
+            if (params.deleteExistingTermLink) {
+                TermLink termLinkToDelete = TermLink.get(params.deleteExistingTermLink.toLong())
+                if (!termLinkToDelete) {
+                    throw new Exception("No term link found with id ${params.deleteExistingTermLink}")
+                }
+                logTermLink("deleting link", termLinkToDelete)
+            }
+            deleteOldTermLink(term)
+        }
+        if (params.targetAntonymTermId) {
+            TermLinkType antonymType = TermLinkType.findByLinkName("Antonym")
+            if (!antonymType) {
+                throw new Exception("No 'Antonym' link type found, please configure it")
+            }
+            Term otherTerm = Term.get(params.targetAntonymTermId)
+            if (!otherTerm) {
+                throw new Exception("No term found with id ${params.targetAntonymTermId}")
+            }
+            TermLink termLink = new TermLink(term, otherTerm, antonymType)
+            if (!termLink.save()) {
+                throw new Exception("Could not save link: ${synsetLink.errors}, status $evalStatus")
+            }
+            logTermLink("linking", termLink)
+        }
+    }
+
+    private deleteOldTermLink(Term term) {
+        List termLinks = TermLink.withCriteria {
+            or {
+                eq('term', term)
+                eq('targetTerm', term)
+            }
+        }
+        if (termLinks.size() > 1) {
+            throw new Exception("More than one term link for term ${term}: ${termLinkInfos}")
+        }
+        if (termLinks.size() == 1) {
+            termLinks.get(0).delete(flush:true)
+        }
+    }
+    
+    private logTermLink(String actionName, TermLink termLink) {
+        String logText =
+            "$actionName: ${termLink.term} (${termLink.term.synset.toShortString()}) " +
+            "${termLink.linkType.verbName} " +
+            "${termLink.targetTerm} (${termLink.targetTerm.synset.toShortString()})"
+        LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), termLink,
+                logText, params.changeComment)
+        termLink.term.log(linkLogInfo)
+    }
+
+    def ajaxSearch = {
+        List terms = Term.withCriteria {
+          synset {
+            eq('isVisible', true)
+          }
+          or {
+            eq('word', params.q)
+            eq('normalizedWord', params.q)
+          }
+        }
+        [terms: terms]
     }
 
     def list = {

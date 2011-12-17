@@ -7,20 +7,27 @@
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
-	        function showNewTermLink() {
-    	        document.getElementById('addTermLinkLink').style.display='none';
-        	    document.getElementById('addTermLink').style.display='block';
-            	document.editForm.q.focus();
-            	return false;
+            function deleteItem(id, termLinkId) {
+                var hiddenFieldName = 'deleteExistingTermLink';
+                var deleted = document.getElementById(hiddenFieldName).value != "";
+                var divName = id + '_' + termLinkId;
+                if (deleted) {
+                    document.getElementById(hiddenFieldName).value = '';
+                    document.getElementById(divName).style.textDecoration = '';
+                } else {
+                    document.getElementById(hiddenFieldName).value = termLinkId;
+                    document.getElementById(divName).style.textDecoration = 'line-through';
+                }
+                return false;
             }
-	        function doSearchOnReturn(event) {
-	            if (event.keyCode == 13) {
-	                // start a search on return (copied from the generated code):
-	                new Ajax.Updater('termLink','${createLinkTo(dir:"synset/ajaxSearch",file:"")}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;
-	                // don't send the outer form:
-	                return false;
-	            }
-	        }
+
+            function showNewTermLink() {
+                document.getElementById('addTermLinkLink').style.display='none';
+                document.getElementById('addTermLink').style.display='block';
+                document.editForm.qAntonym.focus();
+                return false;
+            }
+
             function toggleLanguageLevelHelp() {
               if (document.getElementById('languageLevelHelp').style.display == 'block') {
                   document.getElementById('languageLevelHelp').style.display='none';
@@ -29,6 +36,9 @@
               }
               return false;
             }
+
+            <g:render template="/synset/completion"/>
+
         // -->
         </script>
     </head>
@@ -161,7 +171,7 @@
                             </tr>
                             --%>
 
-							<%--
+                            <%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                 </td>
@@ -175,56 +185,53 @@
                                 </td>
                             </tr>
                             --%> 
+                            
+                            <g:if test="${session.user}">
+                              <tr class='prop'>
+                                <td valign="top"><h2 class="noTopMargin">Antonym</h2></td>
+                                <td valign="top">
 
-                            <g:if test="${session.user && false}"><%-- FIXME
-
-                                <div id="addTermLinkLink" style="margin-top:5px">
-                                    <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.link"/></a>
-                                </div>
-                                <div id="addTermLink" style="display:none;margin-top:5px">
-                                    <g:textField name="q" value="" onkeypress="return doSearchOnReturn(event);"/>
-                                    <g:select name="linkType.id"
-                                          optionKey="id" from="${TermLinkType.list().sort()}" />
-
-                                    <%-- we have to use this instead of g:remoteLink to inject the value of the search form, see below:  --%>
-                                    <%-- NOTE: keep in sync with doSearchOnReturn() javascript:--%>
-                                    <a href="${createLinkTo(dir:'synset/ajaxSearch')}"
-                                        onclick="new Ajax.Updater('termLink','${createLinkTo(dir:'synset/ajaxSearch')}',{asynchronous:true,evalScripts:true,onLoaded:function(e){loadedSearch()},onLoading:function(e){loadSearch()},parameters:'q='+document.editForm.q.value});return false;"
-                                        ><g:message code="edit.link.lookup"/></a>
-
-                                    <!-- see http://jira.codehaus.org/browse/GRAILS-3205 for why we cannot use this:
-                                    <g:submitToRemote value="${message(code:'edit.link.lookup')}" action="ajaxSearch"
-                                          update="synsetLink" onLoading="loadSearch()" onLoaded="loadedSearch()" method="get" />
-                                    -->
-                                    <span id="addSynsetProgress" style="visibility:hidden;position:absolute">
-                                        <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
-                                           title="Searching..."/>
-                                    </span>
-                                    <div id="termLink">
+                                  <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
+                                    <g:set var="termLinkInfo" value="${termLinkInfos.get(0)}"/>
+                                    <div id="Antonym_${termLinkInfo.id}">
+                                      <g:if test="${session.user}">
+                                        <input type="hidden" id="deleteExistingTermLink" name="deleteExistingTermLink" value=""/>
+                                        <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img 
+                                          align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                                      </g:if>
+                                      <g:else>
+                                        <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                      </g:else>
+                                        <g:link controller="term" action="edit"
+                                            id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
+                                          (<g:link controller="synset" action="edit"
+                                            id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
                                     </div>
-                                </div>
+                                  </g:if>
 
+                                  <div id="addTermLinkLink" style="margin-top:5px">
+                                      <g:if test="${termLinkInfos.size() == 0}">
+                                          <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
+                                      </g:if>
+                                      <g:else>
+                                          <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.change.antonym"/></a>
+                                      </g:else>
+                                  </div>
+                                  <div id="addTermLink" style="display:none;margin-top:5px">
+                                      <g:textField name="qAntonym" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSearchOnKeyUp(event, 'Antonym', 'term/ajaxSearch');" autocomplete="off"/>
+                                      <span id="addSynsetProgressAntonym" style="visibility:hidden;position:absolute">
+                                          <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
+                                             title="Searching..."/>
+                                      </span>
+                                      <!-- term link, the name is a bit misleading... -->
+                                      <div id="synsetLinkAntonym" style="min-height:200px;width:450px">
+                                      </div>
+                                  </div>
+
+                                </td>
+                              </tr>
                             </g:if>
-                            <g:else>
-                                <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
-                                    <g:each var="termLinkInfo" in="${termLinkInfos}">
-                                      <tr>
-                                        <td>${termLinkInfo.getLinkName().encodeAsHTML()}:</td>
-                                        <td><g:link controller="term" action="edit"
-                                              id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
-                                            (<g:link controller="synset" action="edit"
-                                              id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)</td>
-                                      </tr>
-                                    </g:each>
-                                </g:if>
-                                <g:else>
-                                    <tr>
-                                      <td><h2 class="noTopMargin">Antonym</h2></td>
-                                      <td><span class="noMatches"><g:message code='edit.term.antonyms.none'/></span></td>
-                                    </tr>
-                                </g:else>
-                            </g:else>
-
+                              
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <h2 class="noTopMargin" style="margin-bottom: 0px;"><g:message code="edit.term.comment"/></h2>

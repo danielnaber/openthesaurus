@@ -38,6 +38,7 @@ class LogInfo {
     String oldValue
     String newValue
     SynsetLink synsetLink
+    TermLink termLink
 
     /**
      * Synset linking.
@@ -48,6 +49,23 @@ class LogInfo {
              throw new Exception("synsetLink cannot be null")
          }
          this.synsetLink = synsetLink
+         this.byUser = session?.user
+         this.ipAddress = ipAddress
+         this.eventType = LINKING
+         this.oldValue = description
+         this.newValue = description
+         this.description = userDescription
+    }
+
+    /**
+     * Term linking (for antonyms).
+     */
+    LogInfo(def session, String ipAddress, TermLink termLink, String description,
+            String userDescription) {
+         if (!termLink) {
+             throw new Exception("termLink cannot be null")
+         }
+         this.termLink = termLink
          this.byUser = session?.user
          this.ipAddress = ipAddress
          this.eventType = LINKING

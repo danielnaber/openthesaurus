@@ -11,18 +11,10 @@
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
         <script type="text/javascript">
         <!--
-          function loadSearch(linkType) {
-            document.getElementById('addSynsetProgress' + linkType).style.position='relative';
-            document.getElementById('addSynsetProgress' + linkType).style.visibility='visible';
-          }
-
-          function loadedSearch(linkType) {
-            document.getElementById('addSynsetProgress' + linkType).style.visibility='hidden';
-          }
 
           function deleteItem(id, termId) {
-            var deleted = document.getElementById('delete_' + id + '_' + termId).value == 'delete';
             var hiddenFieldName = 'delete_' + id + '_' + termId;
+            var deleted = document.getElementById(hiddenFieldName).value == 'delete';
             var divName = id + '_' + termId;
             if (deleted) {
               document.getElementById(hiddenFieldName).value = '';
@@ -34,77 +26,8 @@
             return false;
           }
 
-          // We have two submit buttons in the page and we cannot guarantee that
-          // the correct one is used, so disable submit-by-return:
-          function avoidSubmitOnReturn(event) {
-              if (event.keyCode == 13) {
-                  return false;
-              }
-          }
+          <g:render template="completion"/>
 
-          function doNotSubmitOnReturn(event) {
-              if (event.keyCode == 13) {
-                  return false;
-              }
-          }
-          
-          var onChangeInterval = null;
-          var deferRequestMillis = 200;
-          var minChars = 2;
-          var linkType = null;
-          var currentValue = null;
-          var cursorPosition = -1;
-
-          function doSearchOnKeyUp(event, tmpLinkType) {
-              switch (event.keyCode) {
-                  case Event.KEY_UP:
-                      if (cursorPosition > 0) {
-                          cursorPosition--;
-                          $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
-                      }
-                      return;
-                  case Event.KEY_DOWN:
-                      if ($('radioButton' + tmpLinkType + (cursorPosition + 1))) {
-                          cursorPosition++;
-                          $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
-                      }
-                      return;
-                  case Event.KEY_RIGHT:
-                  case Event.KEY_LEFT:
-                      return;
-              }
-              linkType = tmpLinkType;
-              clearInterval(onChangeInterval);
-              var searchString = document.editForm["q" + linkType].value;
-              // keyCode 13 (Return) allows user to force reload, i.e. if they added a term in a different tab:
-              if (currentValue != searchString || event.keyCode == 13) {
-                  onChangeInterval = setInterval("onValueChange()", deferRequestMillis);
-              }
-              if (event.keyCode == 13) {
-                  return;
-              }
-          }
-          
-          function onValueChange() {
-              clearInterval(onChangeInterval);
-              var searchString = document.editForm["q" + linkType].value;
-              currentValue = searchString;
-              if (searchString === '' || searchString.length < minChars) {
-                  $('synsetLink' + linkType).update("");
-              } else {
-                  cursorPosition = -1;
-                  new Ajax.Updater('synsetLink' + linkType,
-                    '${createLinkTo(dir:"synset/ajaxSearch",file:"")}',
-                    {
-                     asynchronous: true,
-                     evalScripts: false,
-                     onLoaded: function(e){loadedSearch(linkType)},
-                     onLoading: function(e){loadSearch(linkType)},
-                     parameters:'q=' + searchString + '&linkTypeName=' + linkType
-                    }
-                  );
-              }
-          }
 
           // TODO: use dojo for this?!
           // TODO: avoid scroll jumping on click
