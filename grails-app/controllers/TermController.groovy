@@ -30,13 +30,30 @@ class TermController extends BaseController {
 
     def index = { redirect(action:list,params:params) }
 
+    def antonyms = {
+        if(!params.max) params.max = 20
+        else params.max = Integer.parseInt(params.max)
+        if(!params.offset) params.offset = 0
+        else params.offset = Integer.parseInt(params.offset)
+        TermLinkType antonymType = TermLinkType.findByLinkName("Antonym")
+        List termLinks = TermLink.withCriteria {
+            eq('linkType', antonymType)
+            term {
+                order("word", "asc")
+            }
+            maxResults(params.max)
+            firstResult(params.offset)
+        }
+        int matchCount = TermLink.count()
+        [termLinks: termLinks, matchCount: matchCount]
+    }
+    
     def edit = {
         def term = Term.get(params.id)
-        if(!term) {
+        if (!term) {
             flash.message = "Term not found with id ${params.id}"
             redirect(action:list)
-        }
-        else {
+        } else {
             List termLinkInfos = term.termLinkInfos()
             if (termLinkInfos.size() > 1) {
                 throw new Exception("More than one term link for term ${term}: ${termLinkInfos}")

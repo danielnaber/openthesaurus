@@ -39,6 +39,11 @@
                       </tr>
 
                       <tr class="prop">
+                          <td valign="top" class="name"><g:message code="statistics.antonyms" /></td>
+                          <td valign="top" align="right" class="value"><g:decimal number="${TermLink.countByLinkType(TermLinkType.findByLinkName('Antonym'))}" /></td>
+                      </tr>
+                    
+                      <tr class="prop">
                           <td valign="top" class="name"><g:message code="statistics.changes_last_7_days" /></td>
                           <td valign="top" align="right" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                       </tr>
