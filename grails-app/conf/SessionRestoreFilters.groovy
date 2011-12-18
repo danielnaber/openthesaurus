@@ -30,38 +30,54 @@ class SessionRestoreFilters {
         }
         ssoForForumFilter(controller:'*', action:'*') {
             before = {
-                Cookie cookie
                 if (session.user) {
-                    String encryptedData = SecurityTools.getInstance().encryptCookieValues(session.user.userId, session.user.realName)
-                    cookie = new Cookie(SecurityTools.FORUM_COOKIE_NAME, encryptedData)
-                    // TODO: unlimited maxAge if user is logged in forever (i.e. has checked to box to keep logged in):
-                    cookie.maxAge = 60 * 30  // seconds
-                    cookie.path = "/"
-                    response.addCookie(cookie)
+                    int cookieMaxAge
+                    DurationSession dSession = getDurationSession(request)
+                    if (dSession) {
+                        // user has checked the box to stay logged in, so do that for the forum, too
+                        cookieMaxAge = UserController.LOGIN_COOKIE_AGE
+                    } else {
+                        cookieMaxAge = -1  // end of browser session
+                    }
+                    setForumCookie(session, response, cookieMaxAge)
                 }
             }
         }
     }
-    
+
     private void restoreSessionIfPossible(def session, def request) {
         if (!session.user) {
             // user doesn't have a login session yet. look at cookies so users can stay logged in (almost) forever:
-            Cookie[] cookies = request.getCookies()
-            for (cookie in cookies) {
-                // "loginCookie" is the long-term cookie used to identify users
-                // so they don't have to re-login on each visit:
-                if (cookie.getName() == UserController.LOGIN_COOKIE_NAME) {
-                    DurationSession dSession = DurationSession.findBySessionId(cookie.getValue())
-                    if (!dSession) {
-                        //log.info("No DurationSession found for cookie ${cookie.getValue()}")
-                    } else {
-                        log.info("Using user's old session found in cookie: ${dSession.user}")
-                        session.user = dSession.user
-                    }
-                    break
-                }
+            DurationSession dSession = getDurationSession(request)
+            if (dSession) {
+                session.user = dSession.user
             }
         }
+    }
+    
+    private DurationSession getDurationSession(request) {
+        Cookie[] cookies = request.getCookies()
+        for (cookie in cookies) {
+            // "loginCookie" is the long-term cookie used to identify users
+            // so they don't have to re-login on each visit:
+            if (cookie.getName() == UserController.LOGIN_COOKIE_NAME) {
+                DurationSession dSession = DurationSession.findBySessionId(cookie.getValue())
+                if (dSession) {
+                    log.info("Using user's old session found in cookie: ${dSession.user}")
+                    return dSession
+                }
+                break
+            }
+        }
+        return null
+    }
+    
+    private def setForumCookie(session, response, int cookieMaxAge) {
+        String encryptedData = SecurityTools.getInstance().encryptCookieValues(session.user.userId, session.user.realName)
+        Cookie cookie = new Cookie(SecurityTools.FORUM_COOKIE_NAME, encryptedData)
+        cookie.maxAge = cookieMaxAge
+        cookie.path = "/"
+        response.addCookie(cookie)
     }
     
 }

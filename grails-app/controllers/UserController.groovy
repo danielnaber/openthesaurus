@@ -28,7 +28,7 @@ class UserController extends BaseController {
 
     public static final  String DEFAULT_SALT = "hi234z2ejgrr97otw4ujzt4wt7jtsr4975FERedefef"  // only for old users before per-user-salt was introduced
     
-    private static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
+    public static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
     
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
