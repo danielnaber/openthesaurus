@@ -870,18 +870,14 @@ class SynsetController extends BaseController {
 
         long startTime = System.currentTimeMillis()
         if (!params.containsKey("id")) {
-            flash.message = "Please select a concept."
-            redirect(action:list)
+            response.sendError(404)
             return
         }
         def synset = Synset.get( params.id )
 
-        if(!synset) {
-            flash.message = "Concept not found with id ${params.id}"
-            // TODO: don't go to list view
-            redirect(action:list)
-        }
-        else {
+        if (!synset) {
+            response.sendError(404)
+        } else {
             if (!params.max) params.max = 10
             if (!params.sort) params.sort = "creationDate"
             if (!params.order) params.order = "desc"
