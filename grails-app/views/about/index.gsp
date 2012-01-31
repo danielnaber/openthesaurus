@@ -82,31 +82,21 @@
         </ul>
 
 
-        <h2>OpenThesaurus auf dem Mac</h2>
-
-        <ul>
-            <li><a href="http://www.tekl.de/deutsch/OpenThesaurus_Deutsch.html">Wörterbuch-Plugin (ab Mac OS X 10.5) von Wolfgang Reszel</a></li>
-            <li><a href="http://www.pindarsign.de/webblog/?p=57">Wörterbuch-Plugin (ab Mac OS X 10.5) von Simon Dittlmann</a></li>
-        </ul>
-
-
         <h2>OpenThesaurus in anderen Sprachen</h2>
 
         <ul>
-            <!-- <li><a href="http://www.opentaal.org/opentaalbank/thesaurus">Niederländisch</a></li> -->
             <li><a href="http://synonimy.sourceforge.net/">Polnisch</a></li>
             <li><a href="http://openthesaurus.caixamagica.pt/">Portugiesisch</a></li>
             <li><a href="http://www.openthesaurus.tk">Slowakisch</a></li>
             <li><a href="http://www.tezaver.si/">Slowenisch</a></li>
             <li><a href="http://openthes-es.berlios.de">Spanisch</a></li>
-            <!-- <li><a href="http://synonymer.merg.net/">Norwegisch</a></li>  -->
         </ul>
 
 
         <h2>Papers über OpenThesaurus</h2>
 
         <p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
-        Dokumentation exisitiert bisher leider nicht.</p>
+        Dokumentation existiert bisher leider nicht.</p>
 
         <ul>
             <li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
