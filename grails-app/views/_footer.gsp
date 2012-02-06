@@ -109,7 +109,8 @@
             <tr>
               <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" alt="Twitter-Icon"/></a></td>
               <td>&nbsp;</td>
-              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a></td>
+              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a>
+                 <span style="font-weight: normal;"> - auch per</span> <a href="http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=openthesaurus">RSS</a></td>
             </tr>
           </table>
         </div>
