@@ -55,6 +55,8 @@
 
                   <g:render template="addterm" model="${[term:cleanTerm]}" />
 
+                  <g:render template="forumlink" />
+
                   <g:render template="/ads/resultpage_bottom"/>
                   
                 </td>

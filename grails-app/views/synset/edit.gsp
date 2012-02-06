@@ -443,6 +443,13 @@
                               </tr>
                         </g:if>
 
+                        <tr>
+                            <td></td>
+                            <td>
+                                <g:render template="forumlink" />
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
 
