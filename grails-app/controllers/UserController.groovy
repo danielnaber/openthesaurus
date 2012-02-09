@@ -60,6 +60,12 @@ class UserController extends BaseController {
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
+      if (!params.acceptLicense) {
+        log.warn("Registration: user didn't accept license: '${params.userId}'")
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.license'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
+      }
       if (!params.visibleName || params.visibleName.trim().isEmpty()) {
         log.warn("Registration: user entered invalid visible name: '${params.visibleName}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.visible.name'))
@@ -98,7 +104,6 @@ class UserController extends BaseController {
           body message(code:'user.register.email.body', args:[activationLink]) 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
-        log.info("Registration reason: fix=${params.fix}, add=${params.add}, other=${params.reason}. mailingList=${params.subscribeToMailingList}")
         if (params.subscribeToMailingList) {
           sendMail {
             from params.userId

@@ -72,13 +72,29 @@
                             <td valign='top' class='value'>
                                 <table>
                                     <tr>
+                                        <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}"/></td>
+                                        <td valign="top"><label for="acceptLicense">Ich bin einverstanden, dass alle meine Beiträge
+                                            (Synonyme, Assoziationen, Forumsbeiträge etc.) unter der <a target="_blank" href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a>
+                                            oder einer anderen Open-Content-Lizenz veröffentlicht werden</label></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                            </td>
+                            <td valign='top' class='value'>
+                                <table>
+                                    <tr>
                                         <td valign="top"><g:checkBox name="subscribeToMailingList" checked="${params.subscribeToMailingList == 'on'}"/></td>
                                         <td valign="top"><label for="subscribeToMailingList"><g:message code="user.register.form.mailinglist"/></label></td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-                        
+
+
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
@@ -86,26 +102,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td valign='top' class='value'>${ThesaurusConfigurationEntry.findByKey('captcha.question').value}
+                                <td>${ThesaurusConfigurationEntry.findByKey('captcha.question').value}</td>
+                                <td valign='top' class='value'>
                                     <input type="text" name="cap" size="5" value="${params.cap?.encodeAsHTML()}"/></td>
                             </tr>
                         </g:if>
 
-                        <tr class='prop'>
-                            <td valign='top' class='name' colspan="2">
-                                <label for='userId'><b>Grund für die Anmeldung:</b></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td valign='top' class='value'>
-                                <g:checkBox name="fix" checked="${params.fix == 'on'}"/><label for="fix"> ich will bestehende Einträge korrigieren</label><br/>
-                                <g:checkBox name="add" checked="${params.add == 'on'}"/><label for="add"> ich will neue Einträge hinzufügen</label><br/>
-                                <g:checkBox name="other" checked="${params.other == 'on'}"/><label for="other"> sonstiges, nämlich:</label>
-                                    <input type="text" name="reason" size="30" value="${params.reason?.encodeAsHTML()}"/><br/>
-                            </td>
-                        </tr>
 
                         <tr>
                             <td>
