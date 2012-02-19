@@ -155,6 +155,9 @@
                                                 </g:else>
                                             </g:if>
     
+                                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
+                                                [<g:message code='edit.edit.term'/>]</g:link>
+
                                             <strong>${t.toString()?.encodeAsHTML()}</strong>
     
                                             &nbsp;
@@ -173,9 +176,6 @@
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
                                             <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
                                             
-                                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                                [<g:message code='edit.edit.term'/>]</g:link>
-                                                
                                             <g:link title="${message(code:'edit.find.all.meanings', args: [t.word.encodeAsHTML()])}"
                                                 class="termMetaInfo otherMeaningSearchLink" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                         
