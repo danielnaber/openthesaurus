@@ -497,3 +497,20 @@ strong {
 .noAjaxMatches {
     margin: 5px;
 }
+
+/* statistics page: */
+tr .prop {
+    background-color: #ffffff;
+}
+
+tr .prop2 {
+    background-color: #f2f2f2;
+}
+
+.statName {
+    font-weight: bold;
+}
+
+.statsTable td {
+    padding: 8px;
+}
