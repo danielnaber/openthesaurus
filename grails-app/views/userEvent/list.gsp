@@ -42,7 +42,7 @@
                           filteredParams = params.findAll { entry, val -> entry != 'sort'}
                           %>
 
-                          <g:sortableColumn property="creationDate" title="${message(code:'changelist.column.date')}"
+                          <g:sortableColumn style="width:110px" property="creationDate" title="${message(code:'changelist.column.date')}"
                               params="${filteredParams}"/>
 
                           <g:sortableColumn property="byUser" title="${message(code:'changelist.column.user')}"
@@ -59,14 +59,17 @@
                   <g:each in="${userEventList}" status="i" var="userEvent">
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" style="border-top-width: 1px; border-top-style: solid; border-top-color: #aaa;">
 
-                          <td><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${userEvent.creationDate}"/></td>
+                          <td valign="top">
+                              <g:formatDate format="yyyy-MM-dd" date="${userEvent.creationDate}"/>
+                              <span class="metaInfo"><g:formatDate format="HH:mm" date="${userEvent.creationDate}"/></span>
+                          </td>
 
-                          <td>${userEvent.byUser?.realName?.encodeAsHTML()}</td>
+                          <td valign="top">${userEvent.byUser?.realName?.encodeAsHTML()}</td>
 
-                          <td><g:link controller="synset" action="edit"
+                          <td valign="top"><g:link controller="synset" action="edit"
                               id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()?.encodeAsHTML()}</g:link></td>
 
-                          <td>${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
+                          <td valign="top">${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
 
                       </tr>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
