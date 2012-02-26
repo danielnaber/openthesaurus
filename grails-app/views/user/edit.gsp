@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Logbuch für ${user.userId.encodeAsHTML()} - OpenThesaurus</title>
+        <title><g:message code="user.edit.title" args="${[user.userId.encodeAsHTML()]}"/></title>
     </head>
     <body>
 
@@ -11,7 +11,7 @@
 
             <hr/>
 
-            <h2>Logbuch für ${user.userId.encodeAsHTML()}</h2>
+            <h2><g:message code="user.edit.headline" args="${[user.userId.encodeAsHTML()]}"/></h2>
 
             <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>
@@ -61,7 +61,7 @@
                         
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    Angezeigter Name:
+                                    <g:message code="user.edit.display.name"/>
                                 </td>
                                 <td valign='top' class='value'>
                                     ${user.realName ? user.realName.encodeAsHTML() : "-"}
@@ -70,7 +70,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    Datum der Anmeldung:
+                                    <g:message code="user.edit.date.of.registration"/>
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:formatDate format="yyyy-MM-dd" date="${user?.creationDate}"/>
@@ -79,7 +79,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <g:link controller="userEvent" action="list" params="${[userId: user.userId]}">Liste aller meiner Beiträge</g:link>
+                                    <g:link controller="userEvent" action="list" params="${[userId: user.userId]}"><g:message code="user.edit.my.edits"/></g:link>
                                 </td>
                             </tr>
 
