@@ -41,7 +41,7 @@
         <li style="margin-top:20px"><a href="../old/thes_de_DE_v2.zip">Deutscher Thesaurus for OpenOffice.org 2.x, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
         <li><a href="../old/kword_thesaurus.txt.gz">Thesaurus für KWord, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 
-        <li style="margin-top:20px">OpenThesaurus als Software für Mac und Android <a href="./">auf dieser Seite</a></li>
+        <li style="margin-top:20px">OpenThesaurus App für Android <a href="./">auf dieser Seite</a></li>
 
         </ul>
 
