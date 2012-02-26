@@ -207,6 +207,9 @@
                                         id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
                                 </div>
                               </g:if>
+                              <g:else>
+                                <span class="metaInfo"><g:message code="edit.term.antonyms.none"/></span>
+                              </g:else>
                               <g:if test="${session.user}">
                                   <div id="addTermLinkLink" style="margin-top:5px">
                                       <g:if test="${termLinkInfos.size() == 0}">
