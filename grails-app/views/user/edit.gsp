@@ -79,7 +79,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <g:link controller="userEvent" action="list" params="${[userId: user.userId]}"><g:message code="user.edit.my.edits"/></g:link>
+                                    <g:link controller="userEvent" action="list" params="${[userId: user.userId]}"><g:message code="user.edit.my.edits" args="${[eventCount]}"/></g:link>
                                 </td>
                             </tr>
 

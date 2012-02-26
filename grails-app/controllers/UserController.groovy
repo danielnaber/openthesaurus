@@ -422,7 +422,8 @@ class UserController extends BaseController {
     def edit = {
         if(session.user) {
           ThesaurusUser user = session.user
-          return [ user : user ]
+          int eventCount = UserEvent.countByByUser(user)
+          return [ user: user, eventCount: eventCount ]
         } else {
           flash.message = "User not found with id ${params.id}"
           redirect(action:list)
