@@ -56,8 +56,10 @@ class StatisticsController extends BaseController {
           while (resultSet.next()) {
             topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct")))
           }
+          AssociationController associationController = new AssociationController()
+          int associationCount = associationController.getAssociationCount()[0]
           [ latestChangesAllSections: latestChangesAllSections,
-            topUsers: topUsers ]
+            topUsers: topUsers, associationCount: associationCount ]
         } finally {
           if (resultSet != null) {
             resultSet.close()

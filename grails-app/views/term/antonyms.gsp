@@ -17,7 +17,7 @@
                 <tbody>
                 <g:each in="${termLinks}" var="termLink">
                     <tr>
-                        <td>
+                        <td style="padding: 2px">
                           <g:link controller="term" action="edit" id="${termLink.term.id}">${termLink.term.encodeAsHTML()}</g:link> ~
                           <g:link controller="term" action="edit" id="${termLink.targetTerm.id}">${termLink.targetTerm.encodeAsHTML()}</g:link>
                         </td>

@@ -39,12 +39,12 @@
                       </tr>
 
                       <tr class="prop2">
-                          <td valign="top" align="right" class="statName"><g:message code="statistics.associations" /></td>
-                          <td valign="top" class="value"><g:decimal number="${SynsetLink.countByLinkType(LinkType.findByLinkName('Assoziation'))}" /></td>
+                          <td valign="top" align="right" class="statName"><g:link controller="association" action="list"><g:message code="statistics.associations" /></g:link></td>
+                          <td valign="top" class="value"><g:decimal number="${associationCount}" /></td>
                       </tr>
 
                       <tr class="prop">
-                          <td valign="top" align="right" class="statName"><g:message code="statistics.antonyms" /></td>
+                          <td valign="top" align="right" class="statName"><g:link controller="term" action="antonyms"><g:message code="statistics.antonyms" /></g:link></td>
                           <td valign="top" class="value"><g:decimal number="${TermLink.countByLinkType(TermLinkType.findByLinkName('Antonym'))}" /></td>
                       </tr>
                     

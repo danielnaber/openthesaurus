@@ -23,14 +23,9 @@ class AssociationController extends BaseController {
     def list = {
         if(!params.offset) params.offset = 0
         else params.offset = Integer.parseInt(params.offset)
-        LinkType associationType = LinkType.findByLinkName("Assoziation")
-        def synsetCountResult = SynsetLink.withCriteria {
-            eq('linkType', associationType)
-            projections {
-                countDistinct('synset')
-            }
-        }
-        def synsetCount = synsetCountResult.get(0)
+        com.vionto.vithesaurus.LinkType associationType
+        int synsetCount
+        (synsetCount, associationType) = getAssociationCount()
         def synsets = SynsetLink.withCriteria {
             eq('linkType', associationType)
             firstResult(params.offset)
@@ -41,5 +36,17 @@ class AssociationController extends BaseController {
         }
         [synsetCount: synsetCount, synsets: synsets, desiredLinkType: associationType]
     }
-    
+
+    private List getAssociationCount() {
+        LinkType associationType = LinkType.findByLinkName("Assoziation")
+        def synsetCountResult = SynsetLink.withCriteria {
+            eq('linkType', associationType)
+            projections {
+                countDistinct('synset')
+            }
+        }
+        def synsetCount = synsetCountResult.get(0)
+        return [synsetCount, associationType]
+    }
+
 }
