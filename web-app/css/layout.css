@@ -488,6 +488,10 @@ strong {
     color: #888888;
 }
 
+.termMetaInfo {
+    color: #888888;
+}
+
 /* user input: */
 .inp {
     font-weight: bold;

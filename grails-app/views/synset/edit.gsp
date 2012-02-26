@@ -160,7 +160,6 @@
 
                                             <strong>${t.toString()?.encodeAsHTML()}</strong>
     
-                                            &nbsp;
                                             <g:if test="${t.isAcronym}">
                                                 <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
                                             </g:if>
@@ -168,7 +167,7 @@
                                                 <span class="termMetaInfo">[<g:message code='edit.shortform'/>]</span>
                                             </g:if>
                                             <g:if test="${t.level}">
-                                                <span class="termMetaInfo">[${t.level.toString()?.encodeAsHTML()}]</span>
+                                                <span class="termMetaInfo">${t.level.toString()?.encodeAsHTML()}</span>
                                             </g:if>
                                             <g:if test="${t.wordGrammar && t.wordGrammar.form != 'undefined'}">
                                                 <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
