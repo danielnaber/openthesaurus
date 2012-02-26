@@ -186,29 +186,28 @@
                             </tr>
                             --%> 
                             
-                            <g:if test="${session.user}">
-                              <tr class='prop'>
-                                <td valign="top"><h2 class="noTopMargin">Antonym</h2></td>
-                                <td valign="top">
+                          <tr class='prop'>
+                            <td valign="top"><h2 class="noTopMargin">Antonym</h2></td>
+                            <td valign="top">
 
-                                  <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
-                                    <g:set var="termLinkInfo" value="${termLinkInfos.get(0)}"/>
-                                    <div id="Antonym_${termLinkInfo.id}">
-                                      <g:if test="${session.user}">
-                                        <input type="hidden" id="deleteExistingTermLink" name="deleteExistingTermLink" value=""/>
-                                        <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img 
-                                          align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
-                                      </g:if>
-                                      <g:else>
-                                        <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
-                                      </g:else>
-                                        <g:link controller="term" action="edit"
-                                            id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
-                                          (<g:link controller="synset" action="edit"
-                                            id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
-                                    </div>
+                              <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
+                                <g:set var="termLinkInfo" value="${termLinkInfos.get(0)}"/>
+                                <div id="Antonym_${termLinkInfo.id}">
+                                  <g:if test="${session.user}">
+                                    <input type="hidden" id="deleteExistingTermLink" name="deleteExistingTermLink" value=""/>
+                                    <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img
+                                      align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                                   </g:if>
-
+                                  <g:else>
+                                    <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                  </g:else>
+                                    <g:link controller="term" action="edit"
+                                        id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
+                                      (<g:link controller="synset" action="edit"
+                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
+                                </div>
+                              </g:if>
+                              <g:if test="${session.user}">
                                   <div id="addTermLinkLink" style="margin-top:5px">
                                       <g:if test="${termLinkInfos.size() == 0}">
                                           <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
@@ -227,11 +226,10 @@
                                       <div id="synsetLinkAntonym" style="min-height:200px;width:450px">
                                       </div>
                                   </div>
+                              </g:if>
+                            </td>
+                          </tr>
 
-                                </td>
-                              </tr>
-                            </g:if>
-                              
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <h2 class="noTopMargin" style="margin-bottom: 0px;"><g:message code="edit.term.comment"/></h2>
