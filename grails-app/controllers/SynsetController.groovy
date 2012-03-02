@@ -124,7 +124,7 @@ class SynsetController extends BaseController {
         }
         
         params.q = StringTools.slashUnescape(params.q)
-        
+
         Connection conn
         try {
           conn = dataSource.getConnection()
@@ -775,6 +775,12 @@ class SynsetController extends BaseController {
             or {
               eq('word', query)
               eq('normalizedWord', StringTools.normalize(query))
+              if (query.startsWith("sich ") || query.startsWith("etwas ")) {
+                  // special case for German reflexive etc - keep in sync with _mainmatches.gsp
+                  String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
+                  eq('word', simplifiedQuery)
+                  eq('normalizedWord', simplifiedQuery)
+              }
             }
             synset {
                 if (section) {

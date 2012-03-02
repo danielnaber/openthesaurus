@@ -59,7 +59,12 @@
 		                        	<g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
 	                        	</g:else>
 
-	                        	<g:if test="${params.q.toLowerCase() == term.toString().toLowerCase() || params.q.toLowerCase() == term.normalizedWord?.toLowerCase()}">
+                            	<g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
+                            	<g:set var="lowercaseNormTerm" value="${term.normalizedWord?.toLowerCase()}"/>
+                            	<g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
+                            	<g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^sich ', '').replaceAll('^etwas ', '')}"/>
+	                        	<g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
+                                        lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm}">
                                 	<span class="synsetmatch">${displayTerm}</span>${delim}
 	                        	</g:if>
 	                        	<g:else>
