@@ -39,7 +39,7 @@ public class StringTools {
   }
     
   public static String normalize(String word) {
-    return word.replaceAll("\\(.*?\\)", "").trim();
+    return word.replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
   }
   
   public static String normalizeForSort(String s) {
