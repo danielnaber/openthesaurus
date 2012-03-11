@@ -59,6 +59,12 @@ h1 {
   margin-bottom: 2px;
 }
 
+.associations {
+    margin-top: 1px;
+    margin-bottom: 2px;
+    font-weight: normal;
+}
+
 .superordinateHead {
   text-transform: uppercase;
   font-weight: bold;

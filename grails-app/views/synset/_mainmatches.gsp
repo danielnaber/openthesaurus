@@ -39,7 +39,7 @@
                               </div>
                             </g:if>
 
-                            <span class="result">
+                            <div class="result">
 		                    <g:set var="counter" value="${0}"/>
                             <g:each in="${synset?.sortedTerms()}" var="term">
                             	<g:if test="${term.level}">
@@ -74,6 +74,22 @@
 
 		                        <g:set var="counter" value="${counter + 1}"/>
                             </g:each>
+
+                                <g:set var="associationSynsetStrings" value="${[]}"/>
+                                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                                  <g:if test="${synsetLink.linkType.linkName == 'Assoziation' && associationSynsetStrings.size() < 3}">
+                                    <%
+                                    associationSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false))
+                                    %>
+                                  </g:if>
+                                </g:each>
+                                <g:if test="${associationSynsetStrings}">
+                                  <div class="associations">
+                                    <span class="superordinateHead">Assoziationen:</span>
+                                    <span class="superordinateTerms">${associationSynsetStrings.join(' | ')}</span>
+                                  </div>
+                                </g:if>
+
                               <g:link action="edit" id="${synset.id}">
                                 <g:if test="${session.user}">
                                   <span class="changeLink"><g:message code="result.edit"/></span>
@@ -82,7 +98,7 @@
                                   <span class="changeLink"><g:message code="result.details"/></span>
                                 </g:else>
                               </g:link>
-                            </span>
+                            </div>
 
                         </div>
                    </g:each>
