@@ -18,12 +18,23 @@
 <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
 
 <tr class="newsYearDelimiter">
+    <td>2012</td>
+    <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2012-03-16</span></td>
+    <td valign="top">Auf der Suchergebnis-Seite werden die Assoziationen jetzt direkt angezeigt. Bisher wurden
+        über 1.100 Assoziationen erfasst.</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr class="newsYearDelimiter">
     <td>2011</td>
     <td></td>
 </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2011-12-18</span></td>
-    <td valign="top">Es können jetzt Antonyme (Gegenwörter) eingetragen werden. Die 
+    <td valign="top">Es können jetzt Antonyme (Gegenwörter) eingetragen werden. Die
         <g:link controller="term" action="antonyms">Liste aller bisher erfassten Antonyme</g:link>.</td>
 </tr>
 <tr>
