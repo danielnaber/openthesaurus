@@ -204,7 +204,7 @@
                                     <g:link controller="term" action="edit"
                                         id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
                                       (<g:link controller="synset" action="edit"
-                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
+                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3)}</g:link>)
                                 </div>
                               </g:if>
                               <g:else>

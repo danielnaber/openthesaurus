@@ -9,7 +9,7 @@
                             <g:each in="${synset.synsetLinks}" var="synsetLink">
                               <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
                                 <%
-                                superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false))
+                                superSynsetStrings.add(synsetLink.targetSynset.toLinkedShortStringWithShortLevel(3, false))
                                 %>
                               </g:if>
                             </g:each>
@@ -27,8 +27,9 @@
                             <g:set var="categoryStrings" value="${[]}"/>
                             <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
                               <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
+                                <g:set var="catLinkUrl" value="${createLink(controller:'term', action:'list', params:[categoryId: catLink.category.id])}"/>
                                 <%
-                                categoryStrings.add(catLink.category)
+                                categoryStrings.add("<a href='${catLinkUrl}'>" + catLink.category + "</a>")
                                 %>
                               </g:each>
                             </g:if>
@@ -79,7 +80,7 @@
                                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
                                   <g:if test="${synsetLink.linkType.linkName == 'Assoziation' && associationSynsetStrings.size() < 3}">
                                     <%
-                                    associationSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false))
+                                    associationSynsetStrings.add(synsetLink.targetSynset.toLinkedShortStringWithShortLevel(3, false))
                                     %>
                                   </g:if>
                                 </g:each>

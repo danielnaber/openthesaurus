@@ -26,7 +26,7 @@
                         </g:else>
         
                         <g:link controller='synset' action='edit'
-                            id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true).encodeAsHTML()}</g:link>
+                            id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true)}</g:link>
                             
                     </div>
                 </li>

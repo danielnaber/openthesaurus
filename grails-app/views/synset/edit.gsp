@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code='edit.title' args="${[synset.toShortString()?.encodeAsHTML()]}"/></title>
+        <title><g:message code='edit.title' args="${[synset.toShortString()]}"/></title>
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
         </g:if>
@@ -79,7 +79,7 @@
 
         <hr />
 
-        <h1 style="margin-bottom:12px"><g:message code='edit.headline' args="${[synset.toShortString()?.encodeAsHTML()]}"/></h1>
+        <h1 style="margin-bottom:12px"><g:message code='edit.headline' args="${[synset.toShortString()]}"/></h1>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>

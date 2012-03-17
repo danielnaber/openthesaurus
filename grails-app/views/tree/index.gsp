@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <g:if test="${synsetToOpen}">
-        	<title>${synsetToOpen.toShortString().encodeAsHTML()} - <g:message code="tree.title" /></title>
+        	<title>${synsetToOpen.toShortString()} - <g:message code="tree.title" /></title>
         </g:if>
         <g:else>
 	        <title><g:message code="tree.title" /></title>

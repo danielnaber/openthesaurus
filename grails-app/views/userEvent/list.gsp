@@ -67,7 +67,7 @@
                           <td valign="top">${userEvent.byUser?.realName?.encodeAsHTML()}</td>
 
                           <td valign="top"><g:link controller="synset" action="edit"
-                              id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()?.encodeAsHTML()}</g:link></td>
+                              id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()}</g:link></td>
 
                           <td valign="top">${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
 

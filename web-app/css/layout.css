@@ -72,9 +72,16 @@ h1 {
   font-size: 11px;
 }
 
+.superordinateTerms a {
+  color: #707070;
+  font-size: 11px;
+  font-weight: normal;
+}
+
 .superordinateTerms {
   color: #707070;
   font-size: 11px;
+  font-weight: normal;
 }
 
 .category {
@@ -84,6 +91,12 @@ h1 {
   text-transform: uppercase;
   font-weight: bold;
   color: #707070;
+  font-size: 11px;
+}
+
+.categoryTerm a {
+  color: #707070;
+  font-weight: normal;
   font-size: 11px;
 }
 

@@ -497,35 +497,23 @@ class Synset implements Cloneable {
         return sb.toString()
     }
 
-    private String getLinkString(def links, int evalMode) {
-        StringBuilder sb = new StringBuilder()
-        for (link in links.sort()) {
-            if (link.evaluationStatus == evalMode) {
-                // show eg. "hypernym:blah | hypernym:blubb |"
-                sb.append(link.linkType)
-                sb.append(":")
-                if (link.targetSynset.synsetPreferredTerm) {
-                    sb.append(link.targetSynset.synsetPreferredTerm)
-                } else {
-                    sb.append(link.targetSynset.toShortString())
-                }
-                sb.append(" | ")
-            }
-        }
-        return sb.toString()
-    }
-
-    private String toShortStringInternal(int maxSize = 3, boolean addEllipses, boolean addLevel) {
+    private String toShortStringInternal(int maxSize = 3, boolean addEllipses, boolean addLevel, boolean addLink) {
         def terms = sortedTerms()
         if (terms.size() == 0) {
           return "[empty]"
         }
         List enhancedTerms = []
         for (term in terms) {
+          def linkPrefix = ""
+          def linkSuffix = ""
+          if (addLink) {
+              linkPrefix = "<a href='${term.word.encodeAsURL()}'>"
+              linkSuffix = "</a>"
+          }
           if (term.level && addLevel) {
-              enhancedTerms.add(term.word + " (" + term.level.shortLevelName + ")")
+              enhancedTerms.add(linkPrefix + term.word.encodeAsHTML() + " (" + term.level.shortLevelName.encodeAsHTML() + ")" + linkSuffix)
           } else {
-            enhancedTerms.add(term.word)
+              enhancedTerms.add(linkPrefix + term.word.encodeAsHTML() + linkSuffix)
           }
           if (enhancedTerms.size() >= maxSize) {
               break
@@ -543,14 +531,21 @@ class Synset implements Cloneable {
      * A string representation that includes the short term level (if any), limited by the number of terms (default: 3)
      */
     String toShortStringWithShortLevel(int maxSize = 3, boolean addEllipses) {
-        return toShortStringInternal(maxSize, addEllipses, true)
+        return toShortStringInternal(maxSize, addEllipses, true, false)
+    }
+
+    /**
+     * A string representation that includes the short term level (if any), limited by the number of terms (default: 3)
+     */
+    String toLinkedShortStringWithShortLevel(int maxSize = 3, boolean addEllipses) {
+        return toShortStringInternal(maxSize, addEllipses, true, true)
     }
 
     /**
      * A string representation limited by the number of terms (default: 3)
      */
     String toShortString(int maxSize = 3, boolean addEllipses = true) {
-        return toShortStringInternal(maxSize, addEllipses, false)
+        return toShortStringInternal(maxSize, addEllipses, false, false)
     }
 
     /**

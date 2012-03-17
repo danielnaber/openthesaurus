@@ -21,7 +21,7 @@
         <div class="list">
             <ul>
                 <g:each in="${synsets}" status="i" var="synset">
-                    <li><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(Integer.MAX_VALUE, true).encodeAsHTML()}</g:link></li>
+                    <li><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(Integer.MAX_VALUE, true)}</g:link></li>
                 </g:each>
             </ul>
         </div>

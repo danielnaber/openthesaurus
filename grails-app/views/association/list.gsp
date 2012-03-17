@@ -21,11 +21,11 @@
         <div class="list">
             <ul>
                 <g:each in="${synsets}" var="synset">
-                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</g:link>
+                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(5, true)}</g:link>
                         <ul style="margin-bottom: 12px;margin-top: 1px">
                             <g:each in="${synset.synsetLinks}" var="synsetLink">
                                 <g:if test="${synsetLink.linkType == desiredLinkType}">
-                                    <li style="margin-top: 1px">${synsetLink.targetSynset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</li>
+                                    <li style="margin-top: 1px">${synsetLink.targetSynset.toShortStringWithShortLevel(5, true)}</li>
                                 </g:if>
                             </g:each>
                         </ul>
