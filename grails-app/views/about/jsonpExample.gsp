@@ -41,7 +41,7 @@
         }
         </script>
         
-        <script type="text/javascript" src="${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=${query}&amp;format=application/json&callback=myCallback">
+        <script type="text/javascript" src="${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=${query}&amp;format=application/json&amp;callback=myCallback">
         </script>
 
     </body>
