@@ -106,7 +106,7 @@
 </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2010-03-09</span></td>
-    <td valign="top">Mit <a href="http://www.cyrket.com/p/android/com.fc.ot/">OpenThesaurus für Android</a> wurde
+    <td valign="top">Mit <a href="https://play.google.com/store/apps/details?id=com.fc.ot">OpenThesaurus für Android</a> wurde
       die Beta-Version einer Android-App veröffentlicht.
       Kostenlos erhältlich im Market.</td>
 </tr>
