@@ -17,16 +17,13 @@
       function doSearchOnKeyUp(event) {
           switch (event.keyCode) {
               case Event.KEY_UP:
-                  return;
               case Event.KEY_DOWN:
-                  return;
               case Event.KEY_RIGHT:
               case Event.KEY_LEFT:
                   return;
           }
           clearInterval(onChangeInterval);
           var searchString = document.searchform.q.value;
-          //alert(searchString);
           if (currentValue != searchString) {
               onChangeInterval = setInterval("onValueChange()", deferRequestMillis);
           }
@@ -67,22 +64,23 @@
 </head>
 <body>
 
-  <div id="body" style="padding:80px 0 120px 0;">
+  <div id="body" style="padding:80px 0 50px 0;">
 
     <div id="content">
 
       <g:render template="/searchform" model="${[homepage: false, isDirectSearch: true]}"/>
 
-      <!--
       <g:render template="/loggedin"/>
-      -->
+      <g:if test="${session.user}">
+          <hr/>
+      </g:if>
 
       <g:if test="${flash.message}">
           <div class="message">${flash.message}</div>
       </g:if>
 
-      <div id="searchResultArea" style="margin-top:10px;min-height:400px"></div>
-        
+      <div id="searchResultArea" style="margin-top:10px;min-height:150px"></div>
+
     </div>
 
   </div>

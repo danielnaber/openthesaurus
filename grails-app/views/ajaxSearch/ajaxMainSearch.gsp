@@ -21,13 +21,14 @@
                        <g:if test="${cleanedMatch}">
                           <span class="synsetmatchDirect">
                        </g:if>
-                       ${term.toString()?.encodeAsHTML()}<g:if test="${cleanedMatch}"></span></g:if>
-                       <g:if test="${term.level}">
-                         <span class="metaInfo">(${term.level.shortLevelName})</span>
-                       </g:if>
+                       <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                           ${term.toString()?.encodeAsHTML()}<g:if test="${cleanedMatch}"></span></g:if>
+                           <g:if test="${term.level}">
+                             <span class="metaInfo">(${term.level.shortLevelName})</span>
+                           </g:if>
+                       </g:link>
                        <g:set var="firstVal" value="${false}"/>
                    </g:each>
-                   <g:link controller="synset" action="edit" id="${synset.id}">&gt;&gt;&nbsp;mehr</g:link>
                  </g:if>
             </div>
         </g:each>
@@ -66,13 +67,14 @@
                      Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
                      String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
                      %>
-                     ${matchingTerm}
-                     <g:if test="${term.level}">
-                       <span class="metaInfo">(${term.level.shortLevelName})</span>
-                     </g:if>
+                     <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                         ${matchingTerm}
+                         <g:if test="${term.level}">
+                           <span class="metaInfo">(${term.level.shortLevelName})</span>
+                         </g:if>
+                     </g:link>
                      <g:set var="firstVal" value="${false}"/>
                  </g:each>
-                 <g:link controller="synset" action="edit" id="${synset.id}">&gt;&gt;&nbsp;mehr</g:link>
              </div>
         </g:each>
         <g:if test="${substringSynsetList.size() > 5}">
