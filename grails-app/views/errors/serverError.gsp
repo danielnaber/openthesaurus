@@ -18,7 +18,7 @@
 	  			background-color:white;
 	  			border:1px solid black;
 	  			margin:3px;
-	  			font-family:courier;
+	  			font-family:courier,serif;
 	  		}
 	  </style>
   </head>
@@ -28,8 +28,8 @@
     <h1>OpenThesaurus Server-Fehler</h1>
 
     <p>Es ist etwas schiefgegangen - bitte versuch es in ein paar Minuten nochmal neu. Wenn es dann noch
-    nicht geht, bitte kontaktiert uns unter feedback <span>at</span> openthesaurus.de und unter
-    Angabe der Fehlermeldung unter und dieses Zeitstempels: ${new Date()}</p>
+    nicht geht, bitte kontaktiere uns unter feedback <span>at</span> openthesaurus.de unter
+    Angabe der Fehlermeldung und dieses Zeitstempels: ${new Date()}</p>
     
     <p><strong>Fehlermeldung:</strong> ${exception.message?.encodeAsHTML()}</p>
 
