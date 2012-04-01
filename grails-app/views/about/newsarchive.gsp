@@ -22,6 +22,10 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2012-03-31</span></td>
+    <td valign="top">Auf der Homepage werden Treffer jetzt schon während des Tippens angezeigt.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2012-03-16</span></td>
     <td valign="top">Auf der Suchergebnis-Seite werden die Assoziationen jetzt direkt angezeigt. Bisher wurden
         über 1.100 Assoziationen erfasst.</td>
