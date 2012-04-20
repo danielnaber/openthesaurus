@@ -25,10 +25,10 @@
     </g:if>
       
     <g:if test="${params && params.q}">
-      <input ${directSearchAttributes} style="outline: none" accesskey="s" type="text" id="search-field" name="q" value="${StringTools.slashUnescape(params.q.encodeAsHTML())}" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="${StringTools.slashUnescape(params.q.encodeAsHTML())}" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:if>
     <g:else>
-      <input ${directSearchAttributes} style="outline: none" onclick="if (!('ontouchstart' in document.documentElement)) { document.searchform.q.select() }" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
     <g:if test="${isDirectSearch}">
       <br/>
