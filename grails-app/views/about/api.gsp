@@ -10,7 +10,7 @@
 
         <hr />
 
-        <h2>API-Zugriff</h2>
+        <h2>Webservice/API-Zugriff</h2>
         
         <ul>
           <li><a href="#allgemeines">Allgemeines</a></li>
