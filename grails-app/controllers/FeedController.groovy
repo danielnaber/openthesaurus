@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 import com.vionto.vithesaurus.*
+import org.apache.commons.lang.StringEscapeUtils
 
 /**
  * RSS feed of latest changes. Also see UserEventController.
@@ -79,7 +80,8 @@ class FeedController extends BaseController {
            if (event.getClass() == com.vionto.vithesaurus.UserTermEvent && event.eventType == LogInfo.CREATION) {
              // this is part of the synset change info already
            } else {
-             entry(username.encodeAsHTML() + ": " + title + ": " + event.synset.toShortString(5)) {
+             String changeDesc = StringEscapeUtils.unescapeHtml(event.synset.toShortString(5))
+             entry(username.encodeAsHTML() + ": " + title + ": " + changeDesc) {
                publishedDate = event.creationDate
                //actually <guid> must be unique but I cannot set this it seems, so let's make
                //the link unique, as this is used as guid:

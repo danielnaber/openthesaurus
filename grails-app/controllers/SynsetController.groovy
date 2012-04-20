@@ -23,6 +23,7 @@ import java.sql.PreparedStatement
 import org.apache.commons.lang.StringUtils
 import com.vionto.vithesaurus.tools.IpTools
 import com.vionto.vithesaurus.tools.StringTools
+import org.apache.commons.lang.StringEscapeUtils
 
 class SynsetController extends BaseController {
 
@@ -1018,9 +1019,9 @@ class SynsetController extends BaseController {
             for (synsetLinkId in synsetLinkIdsToDelete) {
                 SynsetLink synsetLink = SynsetLink.get(synsetLinkId)
                 String logText =
-                    "removing link: ${synsetLink.targetSynset.toShortString()} " +
+                    "removing link: ${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())} " +
                     "${synsetLink.linkType.verbName} " +
-                    "${synsetLink.synset.toShortString()}"
+                    "${StringEscapeUtils.unescapeHtml(synsetLink.synset.toShortString())}"
                 logSynsetLink(logText, synset, synsetLink)
                 synset.removeFromSynsetLinks(synsetLink)
                 synsetLink.delete()
@@ -1418,9 +1419,9 @@ class SynsetController extends BaseController {
             return
         }
         String logText =
-            "adding link: ${synsetLink.targetSynset.toShortString()} " +
+            "adding link: ${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())} " +
             "${synsetLink.linkType.verbName} " +
-            "${synsetLink.synset.toShortString()}"
+            "${StringEscapeUtils.unescapeHtml(synsetLink.synset.toShortString())}"
         logSynsetLink(logText, fromSynset, synsetLink)
     }
 
