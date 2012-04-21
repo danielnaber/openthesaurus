@@ -123,7 +123,7 @@ class TermController extends BaseController {
                 }
                 logTermLink("deleting link", termLinkToDelete)
             }
-            deleteOldTermLink(term)
+            term.deleteTermLink()
         }
         if (params.targetAntonymTermId) {
             TermLinkType antonymType = TermLinkType.findByLinkName("Antonym")
@@ -142,21 +142,6 @@ class TermController extends BaseController {
         }
     }
 
-    private deleteOldTermLink(Term term) {
-        List termLinks = TermLink.withCriteria {
-            or {
-                eq('term', term)
-                eq('targetTerm', term)
-            }
-        }
-        if (termLinks.size() > 1) {
-            throw new Exception("More than one term link for term ${term}: ${termLinkInfos}")
-        }
-        if (termLinks.size() == 1) {
-            termLinks.get(0).delete(flush:true)
-        }
-    }
-    
     private logTermLink(String actionName, TermLink termLink) {
         String logText =
             "$actionName: ${termLink.term} (${termLink.term.synset.toShortString()}) " +

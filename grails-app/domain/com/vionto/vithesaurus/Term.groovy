@@ -92,7 +92,24 @@ class Term implements Comparable, Cloneable {
     String toString() {
         return word
     }
-    
+
+    void deleteTermLink() {
+        List termLinks = TermLink.withCriteria {
+            or {
+                eq('term', this)
+                eq('targetTerm', this)
+            }
+        }
+        if (termLinks.size() > 1) {
+            throw new Exception("More than one term link for term ${this}: ${termLinks}")
+        }
+        if (termLinks.size() == 1) {
+            def termLink = termLinks.get(0)
+            removeFromTermLinks(termLink)
+            termLink.delete(flush:true)
+        }
+    }
+
     List termLinkInfos() {
         // a link always goes into one direction, but we also need
         // the other direction (eg. hot->cold, cold->hot):
