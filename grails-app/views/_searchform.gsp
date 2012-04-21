@@ -33,7 +33,6 @@
     <g:if test="${isDirectSearch}">
       <br/>
       <span class="metaInfo">
-      <noscript class="nojs">Für diese Funktion bitte Javascript anstellen</noscript>
       <script type="text/javascript">
         <!--
         var firstPart = "feedback";
