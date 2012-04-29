@@ -83,7 +83,7 @@
         </g:if>
     </g:else>
         
-    <hr style="margin-bottom:5px"/>
+    <hr style="margin-bottom:20px"/>
         
     <table>
       <tr>
@@ -98,5 +98,8 @@
                <g:message code="result.create.synset" args="${[params.q.encodeAsHTML()]}" />
           </g:link>
         </td>
+      </tr>
+      <tr>
+          <td colspan="3"><g:render template="/synset/forumlink" /></td>
       </tr>
     </table>
