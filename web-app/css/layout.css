@@ -377,10 +377,9 @@ li.checkboxList {
   font-size: 14px;
   font-weight: bold;
   margin-top: 25px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .faqitem .answer {
-  margin-left: 10px;
 }
 .faqitem .answer ul {
   margin-top: 5px;

@@ -70,6 +70,7 @@
 		</div>
 
 		<div class="faqitem">
+      <img src="${createLinkTo(dir:'images',file:message(code:'hr_light.png'))}" style="width:100%;height:2px;margin-top:20px;" alt="Trennlinie"/>
 			<div class="question">
 				<a name="textverarbeitungen">In welche Textverarbeitungen kann ich OpenThesaurus direkt integrieren?</a>
 			</div>
@@ -82,6 +83,7 @@
 		</div>
 
 		<div class="faqitem">
+      <img src="${createLinkTo(dir:'images',file:message(code:'hr_light.png'))}" style="width:100%;height:2px;margin-top:20px;" alt="Trennlinie"/>
 			<div class="question">
 				<a name="aenderungen">Was soll ich bei meinen Änderungen an OpenThesaurus beachten?</a>
 			</div>
@@ -118,6 +120,7 @@
 		 -->
 
 		<div class="faqitem">
+      <img src="${createLinkTo(dir:'images',file:message(code:'hr_light.png'))}" style="width:100%;height:2px;margin-top:20px;" alt="Trennlinie"/>
 			<div class="question">
 				<a name="english">I'm looking for an English thesaurus.</a>
 			</div>
