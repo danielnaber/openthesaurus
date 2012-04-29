@@ -444,6 +444,11 @@
                         <tr>
                             <td></td>
                             <td>
+                                <g:if test="${!session.user}">
+                                      <g:link controller="user" action="login" class="link"
+                                            params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" /> Anmelden und diesen Eintrag verbessern</g:link>
+                                </g:if>
+                                <br/>
                                 <g:render template="forumlink" />
                             </td>
                         </tr>
