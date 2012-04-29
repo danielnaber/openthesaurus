@@ -44,7 +44,12 @@ class AjaxSearchController extends BaseController {
                 def substringTermMatches = synsetController.searchPartialResult(query, conn, 0, 5)
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = synsetController.doSearch(substringMatch.term, null, null, null, 10, 0)
-                    substringSynsetList.addAll(substringMatches.synsetList) 
+                    // avoid duplicates:
+                    for (synset in substringMatches.synsetList) {
+                        if (!substringSynsetList.contains(synset)) {
+                            substringSynsetList.add(synset)
+                        }
+                    }
                 }
             } finally {
                 conn.close()
