@@ -85,7 +85,7 @@
         
     <hr style="margin-bottom:20px"/>
         
-    <table>
+    <table style="opacity: 0.7">
       <tr>
         <td valign="top">
           <g:link controller="synset" action="create" params="[term : params.q]">
@@ -99,7 +99,9 @@
           </g:link>
         </td>
       </tr>
-      <tr>
+      <g:if test="${params.forumLink != 'false'}">
+        <tr>
           <td colspan="3"><g:render template="/synset/forumlink" /></td>
-      </tr>
+        </tr>
+      </g:if>
     </table>
