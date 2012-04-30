@@ -31,16 +31,6 @@
       <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
     <g:if test="${isDirectSearch}">
-      <br/>
-      <span class="metaInfo">
-      <script type="text/javascript">
-        <!--
-        var firstPart = "feedback";
-        var lastPart = "openthesaurus" + ".de";
-        document.write("Probleme? Ideen? <a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'>Mail an <strong>feedback<" + "/strong>!<" + "/a>");
-        // -->
-      </script>
-      </span>
     </g:if>
   </form>
 </div>
