@@ -28,21 +28,31 @@
               });
 
             function doSearchOnKeyUp(event) {
-                switch (event.keyCode) {
-                    case Event.KEY_UP:
-                    case Event.KEY_DOWN:
-                    case Event.KEY_RIGHT:
-                    case Event.KEY_LEFT:
-                        return;
-                }
-                clearInterval(onChangeInterval);
-                var searchString = document.searchform.q.value;
-                if (currentValue != searchString) {
-                    onChangeInterval = setInterval("onValueChange()", deferRequestMillis);
+                // also see layout.css - if the transform is not applied (it's not in Opera because
+                // it makes fonts fuzzy) we cannot use the popup as it will be misplaced, covering the
+                // query box:
+                var isMozilla = $('body').getStyle('-moz-transform');
+                var isWebkit = $('body').getStyle('-webkit-transform');
+                //var isMs = $('body').getStyle('-ms-transform');
+                var isMs = false;  // not yet enabled, layout problems with the skew
+                var hasTransformEnabled = isMozilla || isWebkit || isMs;
+                if (hasTransformEnabled) {
+                    switch (event.keyCode) {
+                        case Event.KEY_UP:
+                        case Event.KEY_DOWN:
+                        case Event.KEY_RIGHT:
+                        case Event.KEY_LEFT:
+                            return;
+                    }
+                    clearInterval(onChangeInterval);
+                    var searchString = document.searchform.q.value;
+                    if (currentValue != searchString) {
+                        onChangeInterval = setInterval("onSynsetSearchValueChange()", deferRequestMillis);
+                    }
                 }
             }
 
-            function onValueChange() {
+            function onSynsetSearchValueChange() {
                 clearInterval(onChangeInterval);
                 var searchString = document.searchform.q.value;
                 currentValue = searchString;
@@ -60,20 +70,20 @@
                       {
                        asynchronous: true,
                        evalScripts: false,
-                       onLoaded: function(e){loadedSearch()},
-                       onLoading: function(e){loadSearch()},
+                       onLoaded: function(e){loadedSynsetSearch()},
+                       onLoading: function(e){loadSynsetSearch()},
                        parameters:'q=' + searchString + "&forumLink=false"
                       }
                     );
                 }
             }
 
-            function loadSearch() {
+            function loadSynsetSearch() {
                 document.getElementById('spinner').style.position='absolute';
                 document.getElementById('spinner').style.visibility='visible';
             }
 
-            function loadedSearch() {
+            function loadedSynsetSearch() {
                 document.getElementById('spinner').style.visibility='hidden';
             }
 

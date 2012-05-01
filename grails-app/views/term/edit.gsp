@@ -220,7 +220,7 @@
                                       </g:else>
                                   </div>
                                   <div id="addTermLink" style="display:none;margin-top:5px">
-                                      <g:textField name="qAntonym" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSearchOnKeyUp(event, 'Antonym', 'term/ajaxSearch');" autocomplete="off"/>
+                                      <g:textField name="qAntonym" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, 'Antonym', 'term/ajaxSearch');" autocomplete="off"/>
                                       <span id="addSynsetProgressAntonym" style="visibility:hidden;position:absolute">
                                           <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
                                              title="Searching..."/>

@@ -19,6 +19,10 @@ body {
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(-1.5deg);
   -webkit-transform-origin: 0 0;
+  /* commented out because it broke the layout (main content was skewed)
+  -ms-transform: skewY(-1.5deg);
+  -ms-transform-origin: 0 0;
+  */
   /* commented out because of fuzzy rendering in Opera
   -o-transform: skewY(-1.5deg);
   -o-transform-origin: 0 0;
@@ -31,6 +35,10 @@ body {
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(1.5deg);
   -webkit-transform-origin: 0 0;
+  /* see above
+  -ms-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  */
   /* see above
   -o-transform: skewY(1.5deg);
   -o-transform-origin: 0 0;

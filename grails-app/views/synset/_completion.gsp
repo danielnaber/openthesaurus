@@ -28,7 +28,7 @@ var linkType = null;
 var currentValue = null;
 var cursorPosition = -1;
 
-function doSearchOnKeyUp(event, tmpLinkType, ajaxUrl) {
+function doSynsetSearchOnKeyUp(event, tmpLinkType, ajaxUrl) {
     switch (event.keyCode) {
         case Event.KEY_UP:
             if (cursorPosition > 0) {
