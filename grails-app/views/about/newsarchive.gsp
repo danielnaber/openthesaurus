@@ -22,6 +22,11 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2012-05-01</span></td>
+    <td valign="top">Mit Firefox und Chrome werden jetzt auf allen Seiten die ersten Treffer schon während des Tippens
+        angezeigt (bisher war das nur auf der Homepage so).</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2012-03-31</span></td>
     <td valign="top">Auf der Homepage werden Treffer jetzt schon während des Tippens angezeigt.</td>
 </tr>
