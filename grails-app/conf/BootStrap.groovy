@@ -57,7 +57,7 @@ class BootStrap {
          // add default section so there's at least one section available:
          TermLinkType termLinkType = new TermLinkType("Antonym")
          termLinkType.otherDirectionLinkName = "Antonym"
-         termLinkType.verbName = "is das Antonym von"
+         termLinkType.verbName = "ist das Antonym von"
          boolean created = termLinkType.save()
          assert(created)
          log.info("Created " + termLinkType)
