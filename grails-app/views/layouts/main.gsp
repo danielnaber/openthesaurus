@@ -20,7 +20,7 @@
 
             Event.observe(window.document, "keydown", function(e) {
                 var key = (e.which) ? e.which : e.keyCode;
-                if (key == 27) {  // Escape
+                if (key == Event.KEY_ESC) {
                     $('searchResultArea').hide();
                     $('body').setStyle({backgroundColor: '#F7F7F7'});
                     $('searchResultArea').update("");
@@ -42,6 +42,8 @@
                         case Event.KEY_DOWN:
                         case Event.KEY_RIGHT:
                         case Event.KEY_LEFT:
+                        case Event.KEY_TAB:
+                        case 17:   // Ctrl
                             return;
                     }
                     clearInterval(onChangeInterval);
