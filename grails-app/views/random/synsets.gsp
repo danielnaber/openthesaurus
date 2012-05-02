@@ -21,7 +21,16 @@
         <div class="list">
             <ul>
                 <g:each in="${synsets}" status="i" var="synset">
-                    <li><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(Integer.MAX_VALUE, true)}</g:link></li>
+                    <li><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(Integer.MAX_VALUE, true)}</g:link>
+                        <g:if test="${synset.categoryLinks}">
+                            <br/>
+                            <span class="metaInfo">Kategorien:
+                            <g:each in="${synset.categoryLinks}" var="category">
+                                ${category.category.categoryName.encodeAsHTML()}
+                            </g:each>
+                            </span>
+                        </g:if>
+                    </li>
                 </g:each>
             </ul>
         </div>
