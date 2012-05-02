@@ -44,6 +44,7 @@
                         case Event.KEY_LEFT:
                         case Event.KEY_TAB:
                         case 17:   // Ctrl
+                        case 116:  // F5
                             return;
                     }
                     clearInterval(onChangeInterval);
