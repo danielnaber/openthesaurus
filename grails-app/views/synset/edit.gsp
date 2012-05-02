@@ -478,7 +478,13 @@
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                           <td valign="top" width="110"><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
                           <td valign="top">${event.byUser.realName?.encodeAsHTML()}</td>
-                          <td valign="top">${diffs.get(event)}</td>
+                          <td valign="top">${diffs.get(event)
+                                  .replaceAll("linking:", " <span class='add'>verlinkt:</span> ")
+                                  .replaceAll("adding link:", " <span class='add'>verlinkt:</span> ")
+                                  .replaceAll("deleting link:", " <span class='del'>Link entfernt:</span> ")
+                                  .replaceAll("ist das Antonym von", " <b>ist das Antonym von</b> ")
+                                  .replaceAll(" assoziiert ", " <b>assoziiert</b> ")
+                                  .replaceAll(" ist ein Oberbegriff von ", " <b>ist ein Oberbegriff von</b> ")}</td>
                           <td valign="top">${event.changeDesc?.encodeAsHTML()}</td>
                       </tr>
                   </g:each>
