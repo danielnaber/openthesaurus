@@ -1452,6 +1452,12 @@ class SearchResult {
 class PartialMatch {
   String term
   String highlightTerm
+
+  @Override
+  public String toString() {
+    return term
+  }
+
 }
 
 /** Compare so that synsets whose relevant term has no language level set is preferred. */

@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 import java.sql.Connection
+import com.vionto.vithesaurus.Synset
 
 class AjaxSearchController extends BaseController {
 
@@ -37,6 +38,7 @@ class AjaxSearchController extends BaseController {
         def directMatches = synsetController.doSearch(query, null, null, null, 11, 0)
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
+        def subwordSynsetList = []
         def minLengthForSubstringQuery = 3
         if (query.length() >= minLengthForSubstringQuery) {
             Connection conn = dataSource.getConnection()
@@ -44,21 +46,40 @@ class AjaxSearchController extends BaseController {
                 def substringTermMatches = synsetController.searchPartialResult(query, conn, 0, 5)
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = synsetController.doSearch(substringMatch.term, null, null, null, 10, 0)
-                    // avoid duplicates:
-                    for (synset in substringMatches.synsetList) {
-                        if (!substringSynsetList.contains(synset)) {
-                            substringSynsetList.add(synset)
-                        }
-                    }
+                    addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
                 }
             } finally {
                 conn.close()
             }
         }
         long runTime = System.currentTimeMillis() - startTime
+        synsetList.addAll(subwordSynsetList)
         log.info("ajaxSearch: ${runTime}ms for '${query}'")
         [synsetList: synsetList, substringSynsetList: substringSynsetList,
          minLengthForSubstringQuery: minLengthForSubstringQuery]
+    }
+
+    private addSynsetMatches(PartialMatch substringMatch, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
+        for (synset in substringMatches.synsetList) {
+            if (synset.toString().toLowerCase().matches(".*\\b" + params.q + "\\b.*")) {
+                if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
+                    subwordSynsetList.add(synset)
+                }
+            } else {
+                if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
+                    substringSynsetList.add(synset)
+                }
+            }
+        }
+    }
+
+    private boolean alreadyListed(Synset synset, List... lists) {
+        for (list in lists) {
+            if (list.contains(synset)) {
+                return true
+            }
+        }
+        return false
     }
 
 }
