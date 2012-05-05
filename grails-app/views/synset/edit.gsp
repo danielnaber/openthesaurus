@@ -387,7 +387,7 @@
                           <td valign="top">${diffs.get(event)
                                   .replaceAll("linking:", " <span class='add'>verlinkt:</span> ")
                                   .replaceAll("adding link:", " <span class='add'>verlinkt:</span> ")
-                                  .replaceAll("deleting link:", " <span class='del'>Link entfernt:</span> ")
+                                  .replaceAll("(deleting|removing) link:", " <span class='del'>Link entfernt:</span> ")
                                   .replaceAll("ist das Antonym von", " <b>ist das Antonym von</b> ")
                                   .replaceAll(" assoziiert ", " <b>assoziiert</b> ")
                                   .replaceAll(" ist ein Oberbegriff von ", " <b>ist ein Oberbegriff von</b> ")}</td>
