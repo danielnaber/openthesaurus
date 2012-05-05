@@ -9,6 +9,8 @@ import com.vionto.vithesaurus.tools.DbUtils
  */
 class MemoryDatabaseCreationService {
 
+  static transactional = false
+
   def dataSource
 
   /**

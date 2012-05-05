@@ -30,6 +30,7 @@ class SynsetController extends BaseController {
     def requestLimiterService
     def searchService
     def memoryDatabaseCreationService
+    def baseformService
 
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
@@ -37,9 +38,6 @@ class SynsetController extends BaseController {
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
-
-    private static final BaseformFinder baseformFinder = new BaseformFinder()
-    private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
@@ -262,7 +260,7 @@ class SynsetController extends BaseController {
             }
             descriptionText = synonymsForDescription.toString()
           } else {
-            baseforms = baseformFinder.getBaseForms(conn, params.q.trim())
+            baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
           [ partialMatchResult : partialMatchResult,
