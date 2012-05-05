@@ -35,9 +35,6 @@ class SynsetController extends BaseController {
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
 
-    // maximum distance for a term to be accepted as similar term:
-    final int MAX_DIST = 3
-
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
@@ -176,14 +173,18 @@ class SynsetController extends BaseController {
           List wikipediaResult = []
           long wikipediaStartTime = System.currentTimeMillis()
           if (!apiRequest) {
-            wikipediaResult = searchWikipedia(params.q, conn)
+            if (grailsApplication.config.thesaurus.wikipediaLinks == "true") {
+              wikipediaResult = searchService.searchWikipedia(params.q, conn)
+            }
           }
           long wikipediaTime = System.currentTimeMillis() - wikipediaStartTime
 
           List wiktionaryResult = []
           long wiktionaryStartTime = System.currentTimeMillis()
           if (!apiRequest) {
-            wiktionaryResult = searchWiktionary(params.q, conn)
+            if (grailsApplication.config.thesaurus.wiktionaryLinks == "true") {
+              wiktionaryResult = searchService.searchWiktionary(params.q, conn)
+            }
           }
           long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
           
@@ -191,12 +192,12 @@ class SynsetController extends BaseController {
           long similarStartTime = System.currentTimeMillis()
           if (apiRequest) {
             if (spellApiRequest || allApiRequest) {
-              similarTerms = searchSimilarTerms(params.q, conn)
+              similarTerms = searchService.searchSimilarTerms(params.q, conn)
             } else {
               similarTerms = null
             }
           } else {
-            similarTerms = searchSimilarTerms(params.q, conn)
+            similarTerms = searchService.searchSimilarTerms(params.q, conn)
           }
           long similarTime = System.currentTimeMillis() - similarStartTime
 
@@ -443,105 +444,6 @@ class SynsetController extends BaseController {
       memoryDatabaseCreationService.createMemoryDatabase(grailsApplication.config.thesaurus.hiddenSynsets)
       log.info("Finished creating in-memory database")
       render "OK"
-    }
-    
-    def searchWikipedia(String term, Connection conn) {
-      if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
-        return null
-      }
-      String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
-            WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
-      PreparedStatement ps = null
-      ResultSet resultSet = null
-      def matches = []
-      try {
-          ps = conn.prepareStatement(sql)
-          ps.setString(1, term)
-          resultSet = ps.executeQuery()
-          int i = 0
-          while (resultSet.next()) {
-            if (i == 0) {
-              matches.add(resultSet.getString("title"))
-            }
-            matches.add(resultSet.getString("link"))
-            i++
-          }
-      } finally {
-        DbUtils.closeQuietly(resultSet)
-        DbUtils.closeQuietly(ps)
-      }
-      return matches
-    }
-
-    def searchWiktionary(String term, Connection conn) {
-      if (grailsApplication.config.thesaurus.wiktionaryLinks != "true") {
-        return null
-      }
-      String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
-      PreparedStatement ps = null
-      ResultSet resultSet = null
-      def matches = []
-      try {
-        ps = conn.prepareStatement(sql)
-        ps.setString(1, term)
-        resultSet = ps.executeQuery()
-        if (resultSet.next()) {
-          matches.add(resultSet.getString("headword"))
-          matches.add(resultSet.getString("meanings"))
-          matches.add(resultSet.getString("synonyms"))
-        }
-      } finally {
-        DbUtils.closeQuietly(resultSet)
-        DbUtils.closeQuietly(ps)
-      }
-      return matches
-    }
-    
-    def searchSimilarTerms(String term, Connection conn) {
-      String sql = """SELECT word, lookup FROM memwords WHERE (
-                (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
-                OR
-                (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
-                ORDER BY word"""
-      PreparedStatement ps = null
-      ResultSet resultSet = null
-      def matches = []
-      try {
-          ps = conn.prepareStatement(sql)
-          int wordLength = term.length()
-          ps.setInt(1, wordLength-1)
-          ps.setInt(2, wordLength+1)
-          ps.setInt(3, wordLength-1)
-          ps.setInt(4, wordLength+1)
-          resultSet = ps.executeQuery()
-          // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
-          String lowerTerm = term.toLowerCase()
-          while (resultSet.next()) {
-            String dbTerm = resultSet.getString("word").toLowerCase()
-            if (dbTerm.equals(lowerTerm)) {
-              continue
-            }
-            //TODO: use a fail-fast algorithm here (see Lucene's FuzzyTermQuery):
-            int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
-            if (dist <= MAX_DIST) {
-              matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
-            } else {
-              dbTerm = resultSet.getString("lookup")
-              if (dbTerm) {
-                dbTerm = dbTerm.toLowerCase()
-                dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
-                if (dist <= MAX_DIST) {
-                  matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
-                }
-              }
-            }
-          }
-          Collections.sort(matches)		// makes sure lowest distances come first
-      } finally {
-          DbUtils.closeQuietly(resultSet)
-          DbUtils.closeQuietly(ps)
-      }
-      return matches
     }
 
     /**
