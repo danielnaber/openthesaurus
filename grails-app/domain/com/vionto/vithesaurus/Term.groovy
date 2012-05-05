@@ -63,20 +63,10 @@ class Term implements Comparable, Cloneable {
     }
 
     static mapping = {
-        //id generator:'sequence', params:[sequence:'term_seq']
     }
 
-    /*
-    TODO: create db index?
-    static mapping = {
-        table 'term'
-        columns {
-            word column:'word', index:'word_index'
-        }
-    }*/
-
     Term() {
-        // TODO: test cases fail if we remove this :-(
+        // needed for test cases
     }
 
     Term(String word, Language language, Synset synset) {
@@ -200,8 +190,9 @@ class Term implements Comparable, Cloneable {
         if (logInfo == null) {
             throw new NullPointerException("logInfo may not be null")
         }
-        if (extendedValidate() &&
-                this.synset.extendedValidate(extendedValidateVar) && save()) {
+        TermValidator validator = new TermValidator(this)
+        validator.extendedValidate()
+        if (this.synset.extendedValidate(extendedValidateVar) && save()) {
             // log to database:
             log(logInfo)
             return true
@@ -211,9 +202,9 @@ class Term implements Comparable, Cloneable {
         }
     }
 
-    private boolean extendedValidate() {
+    void extendedValidate() {
         TermValidator validator = new TermValidator(this)
-        return validator.extendedValidate()
+        validator.extendedValidate()
     }
 
     /**

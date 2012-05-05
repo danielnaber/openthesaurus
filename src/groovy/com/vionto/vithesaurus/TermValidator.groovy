@@ -17,8 +17,6 @@
  */ 
 package com.vionto.vithesaurus
 
-import com.vionto.vithesaurus.Term
-
 class TermValidator {
 
     Term term
@@ -34,25 +32,15 @@ class TermValidator {
     }
 
     /**
-     * A constructor for validatidation of not yet stored terms.
-     * @param A string to be validated.
+     * Extended Validation for a term, throws exception in case of problems
      */
-     public TermValidator(String w) {
-        this.word = w
-     }
-
-    /**
-     * Extended Validation for a term.
-     * @return True, if validation didn't throw an exception.
-     */
-    public boolean extendedValidate() {
+    public void extendedValidate() {
         assert (word.length() >= 1)
         if (term) {
             validateWordForm()
         }
         validateBrackets()
         validateTermRegex()
-        return true
     }
 
     /**
@@ -61,8 +49,7 @@ class TermValidator {
      */
     private void validateWordForm() {
         if (term.isShortForm && term.isAcronym) {
-            throw new IllegalArgumentException("[$word] Should not be " +
-                    "both: shortform and acronym")
+            throw new IllegalArgumentException("[$word] Should not be both: shortform and acronym")
         }
     }
 
@@ -75,10 +62,8 @@ class TermValidator {
         int parenthesis = word.count("(") - word.count(")")
         int square = word.count("[") - word.count("]")
         int braces = word.count("{") - word.count("}")
-        //int arrowBrackets = word.count("<") - word.count(">")
         if (parenthesis != 0 || square != 0 || braces != 0) {
-            throw new IllegalArgumentException("[$word] Number of opening and " +
-                    "closing brackets must be the same ")
+            throw new IllegalArgumentException("[$word] Number of opening and closing brackets must be the same")
         }
     }
 
@@ -88,8 +73,7 @@ class TermValidator {
      * @throws IllegalArgumentException
      */
     private void validateTermRegex() {
-
-        if(word.matches("\\s.*") || word.matches(".*\\s")) {
+        if (word.matches("\\s.*") || word.matches(".*\\s")) {
             throw new IllegalArgumentException("[$word] Term should not start or end with whitespace")
         }
         if (word.matches(".*-\\s[A-Z].*") || word.matches(".*-\\s[1-9].*")) {
@@ -98,6 +82,5 @@ class TermValidator {
         if (word.matches(".*\\s{2}.*")) {
             throw new IllegalArgumentException("[$word] Term should not contain double-white-space")
         }
-
     }
 }

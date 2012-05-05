@@ -602,93 +602,34 @@ class SynsetController extends BaseController {
             try {
                 addSynsetLinks(synset)
                 deleteTerms(synset)
+                deleteCategoryLinks(synset)
+                deleteSynsetLinks(synset)
+                // add a category link:
+                int newCategoryCount = 0
+                while (newCategoryCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)) {
+                    if (params['category.id_'+newCategoryCount] == "null") {
+                        newCategoryCount++
+                        continue
+                    }
+                    addCategory(synset, params['category.id_' + newCategoryCount])
+                    newCategoryCount++
+                }
+                addNewTerms(synset)
             } catch (Exception e) {
                 synset.errors.reject(e.getMessage(), [].toArray(), e.getMessage())
                 render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
                 return
             }
-            deleteCategoryLinks(synset)
-            deleteSynsetLinks(synset)
-            
-            // change or add a category link:
-            int newCategoryCount = 0
-            while (newCategoryCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)) {
-                if (params['category.id_'+newCategoryCount] == "null") {
-                    newCategoryCount++
-                    continue
-                }
-                addCategory(synset, params['category.id_' + newCategoryCount])
-                newCategoryCount++
-            }
 
-            // add new term:
-            int newTermCount = 0
-            while (newTermCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)) {
-                if (!params['word_'+newTermCount]) {
-                    newTermCount++
-                    continue
-                }
-                def language = Language.get(params['language.id_'+newTermCount])
-                Term newTerm = new Term(params['word_'+newTermCount], language, synset)
-                newTerm.isShortForm = params['wordForm_'+newTermCount] == "abbreviation" ? true : false
-                newTerm.isAcronym = params['wordForm_'+newTermCount] == "acronym" ? true : false
-                if (params['level.id_'+newTermCount] && params['level.id_'+newTermCount] != "null") {
-                    newTerm.level = TermLevel.get(params['level.id_'+newTermCount])
-                }
-                if (params['wordGrammar.id_'+newTermCount] && params['wordGrammar.id_'+newTermCount] != "null") {
-                    newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_'+newTermCount])
-                }
-                LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
-                      null, newTerm, params.changeComment)
-                if (synset.containsWord(params['word_'+newTermCount])) {
-                    newTerm.errors.reject('thesaurus.duplicate.term',
-                          [newTerm.encodeAsHTML()].toArray(),
-                          'already in concept')
-                    render(view:'edit',model:[synset:synset, newTerm:newTerm],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                }
-                if (!newTerm.validate()) {
-                    render(view:'edit',model:[synset:synset, newTerm:newTerm],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                }
-                try {
-                    if (!newTerm.extendedValidate()) {
-                        return
-                    }
-                } catch (IllegalArgumentException e) {
-                    synset.errors.reject(e.getMessage(),
-                            [].toArray(), e.getMessage())
-                    render(view:'edit',model:[synset:synset, newTerm:newTerm],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                }
-
-                synset.addTerm(newTerm)
-                def saved = newTerm.saveAndLog(logInfo)
-                if (!saved) {
-                    render(view:'edit',model:[synset:synset, newTerm:newTerm],
-                            contentType:"text/html", encoding:"UTF-8")
-                    return
-                }
-                newTermCount++
-            }
-
-            LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
-                    origSynset, synset, params.changeComment)
+            LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), origSynset, synset, params.changeComment)
             if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
                 flash.message = message(code:'edit.updated')
                 redirect(action:edit,id:synset.id)
+            } else {
+                synset.errors.reject('thesaurus.error', [].toArray(), 'Could not save and/or log changes')
+                render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
             }
-            else {
-                synset.errors.reject('thesaurus.error',
-                    [].toArray(), 'Could not save and/or log changes')
-                render(view:'edit',model:[synset:synset],
-                        contentType:"text/html", encoding:"UTF-8")
-            }
-        }
-        else {
+        } else {
             flash.message = "Concept not found with id ${params.id}"
             redirect(action:edit,id:params.id)
         }
@@ -762,6 +703,59 @@ class SynsetController extends BaseController {
             logSynsetLink(logText, synset, synsetLink)
             synset.removeFromSynsetLinks(synsetLink)
             synsetLink.delete()
+        }
+    }
+
+    /**
+     * Add the category to given synset with the given id, re-render
+     * page in case of errors.
+     */
+    private void addCategory(Synset synset, String categoryID) {
+        Category category = Category.get(categoryID)
+        def catLink = new CategoryLink(synset, category)
+        if (synset.containsCategoryLink(catLink)) {
+            synset.errors.reject('thesaurus.duplicate.link', [].toArray(), 'already in concept')
+            render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
+            return
+        }
+        synset.addCategoryLink(catLink)
+    }
+
+    private int addNewTerms(Synset synset) {
+        int newTermCount = 0
+        while (newTermCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)) {
+            if (!params['word_' + newTermCount]) {
+                newTermCount++
+                continue
+            }
+            def language = Language.get(params['language.id_' + newTermCount])
+            Term newTerm = new Term(params['word_' + newTermCount], language, synset)
+            newTerm.isShortForm = params['wordForm_' + newTermCount] == "abbreviation" ? true : false
+            newTerm.isAcronym = params['wordForm_' + newTermCount] == "acronym" ? true : false
+            if (params['level.id_' + newTermCount] && params['level.id_' + newTermCount] != "null") {
+                newTerm.level = TermLevel.get(params['level.id_' + newTermCount])
+            }
+            if (params['wordGrammar.id_' + newTermCount] && params['wordGrammar.id_' + newTermCount] != "null") {
+                newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_' + newTermCount])
+            }
+            LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), null, newTerm, params.changeComment)
+            if (synset.containsWord(params['word_' + newTermCount])) {
+                throw new Exception(message(code:'thesaurus.duplicate.term', args: [newTerm.word.encodeAsHTML()]))
+            }
+            if (!newTerm.validate()) {
+                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word.encodeAsHTML(), newTerm.errors]))
+            }
+            try {
+                newTerm.extendedValidate()
+            } catch (IllegalArgumentException e) {
+                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word.encodeAsHTML(), e.getMessage()]))
+            }
+            synset.addTerm(newTerm)
+            def saved = newTerm.saveAndLog(logInfo)
+            if (!saved) {
+                throw new Exception(message(code:'thesaurus.error.saving.changes', args: [newTerm.word.encodeAsHTML(), newTerm.errors]))
+            }
+            newTermCount++
         }
     }
 
@@ -905,21 +899,6 @@ class SynsetController extends BaseController {
                    searchTerms:getTermsFromTextArea(searchTerms)],
                    contentType:"text/html", encoding:"UTF-8")
         }
-    }
-
-    /**
-     * Add the category to given synset with the given id, re-render
-     * page in case of errors.
-     */
-    void addCategory(Synset synset, String categoryID) {
-        Category category = Category.get(categoryID)
-        def catLink = new CategoryLink(synset, category)
-        if (synset.containsCategoryLink(catLink)) {
-            synset.errors.reject('thesaurus.duplicate.link', [].toArray(), 'already in concept')
-            render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
-            return
-        }
-        synset.addCategoryLink(catLink)
     }
 
     /**
