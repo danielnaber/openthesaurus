@@ -39,8 +39,7 @@ class TermTests extends GroovyTestCase {
         t1.userComment = "my comment"
         t1.isShortForm = true
 
-        String exp = "word1 || abbrev=true | acronym=false | language=en | " +
-                "form=null | comment=my comment"
+        String exp = "word1 || comment=my comment"
         assertEquals(exp, t1.toDetailedString())
     }
 

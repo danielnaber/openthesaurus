@@ -34,7 +34,7 @@ class SynsetTests extends GroovyTestCase {
         assertEquals("word1", s.toString())
         Term t2 = new Term("word2", english, s)
         s.addTerm(t2)
-        assertEquals("word1 | word2", s.toString())
+        assertEquals("word1 · word2", s.toString())
     }
 
     void testToDetailedString() {
@@ -51,43 +51,34 @@ class SynsetTests extends GroovyTestCase {
         s.addCategoryLink(catLink2)
         s.addCategoryLink(catLink1)
         
-        String exp = "| word1 || isVisible=true || comment=null || " +
-            "preferredTerms=en:word1 || " +
-            "preferredCategory=mycat2 || " + 
-            "section=null || " + 
+        String exp = "| word1 || visible || " +
             "categories=mycat1|mycat2"
         assertEquals(exp, s.toDetailedString())
 
         Term t2 = new Term("aword2", english, s)
         s.userComment = "my comment."
         s.addTerm(t2)
-        exp = "| aword2 | word1 || isVisible=true || comment=my comment. || " +
-            "preferredTerms=en:word1 || " +
-            "preferredCategory=mycat2 || " + 
-            "section=null || " + 
+        exp = "| aword2 · word1 || visible || comment=my comment. || " +
             "categories=mycat1|mycat2"
         assertEquals(exp, s.toDetailedString())
         
         s.setPreferredTerm(english, t2)
-        exp = "| aword2 | word1 || isVisible=true || comment=my comment. || " +
-            "preferredTerms=en:aword2 || " +
-            "preferredCategory=mycat2 || " + 
-            "section=null || " + 
+        exp = "| aword2 · word1 || visible || comment=my comment. || " +
             "categories=mycat1|mycat2"
         assertEquals(exp, s.toDetailedString())
     }
 
     void testAddDuplicateTerm() {
-		Synset s = new Synset()
+        Synset s = new Synset()
         Term t1 = new Term("word1", english, s)
-		s.addTerm(t1)
-		Term t2 = new Term("word1", english, s)
-		try {
-			s.addTerm(t2)
-			fail()
-		} catch (IllegalArgumentException e) {
-		  // expected, term cannot be added twice
-		}
-    }
-    
+        s.addTerm(t1)
+        Term t2 = new Term("word1", english, s)
+        try {
+            s.addTerm(t2)
+            fail()
+        } catch (IllegalArgumentException expected) {
+            // expected, term cannot be added twice
+        }
+  }
+
 }
