@@ -13,7 +13,7 @@
         <h2>JSON/JSONP Beispiel</h2>
 
         <p>Diese Seite fragt OpenThesaurus über die JSON-<g:link action="api">API</g:link> an und zeigt das Ergebnis unten an.
-        Siehe Quelltext dieser Seite für den Source-Code.</p>
+        Siehe "myCallback" im Quelltext dieser Seite für den Source-Code.</p>
 
         <g:render template="jsonWarning"/>
 
