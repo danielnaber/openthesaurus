@@ -24,6 +24,7 @@ import org.apache.commons.lang.StringUtils
 import com.vionto.vithesaurus.tools.IpTools
 import com.vionto.vithesaurus.tools.StringTools
 import org.apache.commons.lang.StringEscapeUtils
+import com.vionto.vithesaurus.tools.DbUtils
 
 class SynsetController extends BaseController {
 
@@ -121,7 +122,7 @@ class SynsetController extends BaseController {
         
         params.q = StringTools.slashUnescape(params.q)
 
-        Connection conn
+        Connection conn = null
         try {
           conn = dataSource.getConnection()
           boolean apiRequest = params.format == "text/xml" || params.format == "application/json"
@@ -296,9 +297,7 @@ class SynsetController extends BaseController {
             runTime : totalTime ]
 
         } finally {
-          if (conn != null) {
-            conn.close()
-          }
+          DbUtils.closeQuietly(conn)
         }
               
     }
@@ -444,8 +443,8 @@ class SynsetController extends BaseController {
       }
 
       log.info("Creating in-memory database, request by " + IpTools.getRealIpAddress(request))
-      Connection conn
-      PreparedStatement ps
+      Connection conn = null
+      PreparedStatement ps = null
       try {
         conn = dataSource.getConnection()
         executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
@@ -473,26 +472,19 @@ class SynsetController extends BaseController {
         log.info("Finished creating in-memory database")
         render "OK"
       } finally {
-          if (ps != null) {
-            ps.close()
-          }
-          if (conn != null) {
-            conn.close()
-          }
+        DbUtils.closeQuietly(ps)
+        DbUtils.closeQuietly(conn)
       }
     }
     
     private void executeQuery(String sql, Connection conn) {
-      PreparedStatement ps
+      PreparedStatement ps = conn.prepareStatement(sql)
       try {
-        ps = conn.prepareStatement(sql)
         ps.execute()
       } finally {
-        if (ps != null) {
-          ps.close()
-        }
+        DbUtils.closeQuietly(ps)
       }
-    }    
+    }
 
     def searchWikipedia(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
@@ -500,8 +492,8 @@ class SynsetController extends BaseController {
       }
       String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
             WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
-      PreparedStatement ps
-      ResultSet resultSet
+      PreparedStatement ps = null
+      ResultSet resultSet = null
       def matches = []
       try {
           ps = conn.prepareStatement(sql)
@@ -516,12 +508,8 @@ class SynsetController extends BaseController {
             i++
           }
       } finally {
-        if (resultSet != null) {
-          resultSet.close()
-        }
-        if (ps != null) {
-          ps.close()
-        }
+        DbUtils.closeQuietly(resultSet)
+        DbUtils.closeQuietly(ps)
       }
       return matches
     }
@@ -531,8 +519,8 @@ class SynsetController extends BaseController {
         return null
       }
       String sql = """SELECT headword, meanings, synonyms FROM wiktionary WHERE headword = ?"""
-      PreparedStatement ps 
-      ResultSet resultSet
+      PreparedStatement ps = null
+      ResultSet resultSet = null
       def matches = []
       try {
         ps = conn.prepareStatement(sql)
@@ -544,12 +532,8 @@ class SynsetController extends BaseController {
           matches.add(resultSet.getString("synonyms"))
         }
       } finally {
-        if (resultSet != null) {
-          resultSet.close()
-        }
-        if (ps != null) {
-          ps.close()
-        }
+        DbUtils.closeQuietly(resultSet)
+        DbUtils.closeQuietly(ps)
       }
       return matches
     }
@@ -560,8 +544,8 @@ class SynsetController extends BaseController {
                 OR
                 (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
                 ORDER BY word"""
-      PreparedStatement ps
-      ResultSet resultSet
+      PreparedStatement ps = null
+      ResultSet resultSet = null
       def matches = []
       try {
           ps = conn.prepareStatement(sql)
@@ -595,12 +579,8 @@ class SynsetController extends BaseController {
           }
           Collections.sort(matches)		// makes sure lowest distances come first
       } finally {
-          if (resultSet != null) {
-            resultSet.close()
-          }
-          if (ps != null) {
-            ps.close()            
-          }
+          DbUtils.closeQuietly(resultSet)
+          DbUtils.closeQuietly(ps)
       }
       return matches
     }

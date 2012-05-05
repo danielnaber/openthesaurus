@@ -4,6 +4,7 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import com.vionto.vithesaurus.PartialMatch
+import com.vionto.vithesaurus.tools.DbUtils
 
 class SearchService {
 
@@ -22,9 +23,9 @@ class SearchService {
   }
 
   int getPartialResultTotalMatches(String query) {
-    Connection conn
-    PreparedStatement ps
-    ResultSet resultSet
+    Connection conn = null
+    PreparedStatement ps = null
+    ResultSet resultSet = null
     try {
       conn = dataSource.getConnection()
       String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
@@ -34,21 +35,21 @@ class SearchService {
       resultSet.next()
       return resultSet.getInt("totalMatches")
     } finally {
-      if (resultSet != null) { resultSet.close() }
-      if (ps != null) { ps.close() }
-      if (conn != null) { conn.close() }
+      DbUtils.closeQuietly(resultSet)
+      DbUtils.closeQuietly(ps)
+      DbUtils.closeQuietly(conn)
     }
   }
 
   /** Substring matches */
   private List searchPartialResultInternal(String term, String sqlTerm, boolean filterExactMatch, int fromPos, int maxNum) {
-    String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
-    Connection conn
-    PreparedStatement ps
-    ResultSet resultSet
-    def matches = []
+    Connection conn = null
+    PreparedStatement ps = null
+    ResultSet resultSet = null
+    List matches = []
     try {
       conn = dataSource.getConnection()
+      String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
       ps = conn.prepareStatement(sql)
       ps.setString(1, sqlTerm)
       resultSet = ps.executeQuery()
@@ -61,9 +62,9 @@ class SearchService {
         matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
       }
     } finally {
-      if (resultSet != null) { resultSet.close() }
-      if (ps != null) { ps.close() }
-      if (conn != null) { conn.close() }
+      DbUtils.closeQuietly(resultSet)
+      DbUtils.closeQuietly(ps)
+      DbUtils.closeQuietly(conn)
     }
     return matches
   }
