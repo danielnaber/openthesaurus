@@ -29,7 +29,6 @@ class AjaxSearchController extends BaseController {
      * Return a simplified search result (exact and substring matches) to be fetched
      * via Ajax.
      * 
-     * TODO: duplicate matches, e.g. for "Saxofon"
      * TODO: grüß matches gruß and vice versa
      * TODO: gets confused when query appears in parenthesis int the database (e.g. search "wörtlich")
      */
