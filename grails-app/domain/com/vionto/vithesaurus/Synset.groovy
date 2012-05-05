@@ -24,16 +24,8 @@ package com.vionto.vithesaurus;
 class Synset implements Cloneable {
 
     boolean isVisible
-    Source source   // Note: there's also sources for cases there are more sources
     String originalURI      // used to track the original source and its ID
     String userComment
-    // The preferred term for the synset (not per language). This causes
-    // redundancy, but we need it to sort by preferred term (also see
-    // PREFERRED_TERM_LANGS) -- not supported by GUI anymore!
-    String synsetPreferredTerm
-    Category preferredCategory
-    Section section
-    int evaluation
     Integer importStatus    // != null -> automatically imported
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
     // NOTE: keep clone() in sync when adding properties!
@@ -44,31 +36,19 @@ class Synset implements Cloneable {
     }
 
     static hasMany = [terms:Term,
-                      semTypeLinks:SemTypeLink,
                       synsetLinks:SynsetLink,
-                      synsetLinkSuggestions:SynsetLinkSuggestion,
                       categoryLinks:CategoryLink,
-                      userEvents:UserEvent,
-                      preferredTermLinks:PreferredTermLink,
-                      sources:SourceLink]
+                      userEvents:UserEvent]
 
     static constraints = {
         userComment(nullable:true)
-        source(nullable:true)
         originalURI(nullable:true)
-        section(nullable:true)
-        synsetPreferredTerm(nullable:true)
         importStatus(nullable:true)
         originalId(nullable:true)
-        preferredCategory(nullable:true)
     }
 
     // prepended to get a display "id":
     final static String URI_PREFIX = ""
-
-    // the preferred term is taken from this languages (i.e. English is used
-    // if there is an English term, only then German is used etc):
-    final static def PREFERRED_TERM_LANGS = ["en", "de", "fr", "it"]
 
     /**
      * Create a new empty but visible synset.
@@ -76,7 +56,6 @@ class Synset implements Cloneable {
     Synset() {
         terms = new HashSet()
         isVisible = true
-        evaluation = 0
     }
 
     /**
@@ -121,10 +100,6 @@ class Synset implements Cloneable {
             categoryLinks = []
         }
         categoryLinks.add(categoryLink)
-        if (categoryLinks.size() == 1) {
-            // first category, make it the preferred category:
-            preferredCategory = categoryLink.category
-        }
     }
 
     /**
@@ -168,36 +143,6 @@ class Synset implements Cloneable {
         log.info("Deleting synset link: ${synsetLink}")
         synsetLinks.remove(synsetLink)
         synsetLink.delete()
-    }
-
-    /**
-     * Add the given synset link suggestion to this synset.
-     * @throws IllegalArgumentException if this synsetLinkSuggestion already exists
-     */
-    void addSynsetLinkSuggestion(SynsetLinkSuggestion synsetLinkSuggestion) {
-        if (synsetLinkSuggestion && synsetLinkSuggestions.contains(synsetLinkSuggestion)) {
-            throw new IllegalArgumentException("Synset already contain synset " +
-                    "link suggestion: ${synsetLinkSuggestion}")
-        }
-        if (!synsetLinkSuggestions) {
-            synsetLinkSuggestions = []
-        }
-        log.info("Adding synset link suggestion: ${synsetLinkSuggestion}")
-        synsetLinkSuggestions.add(synsetLinkSuggestion)
-    }
-
-    /**
-     * Remove the given linkSuggestion from this synset.
-     * @throws IllegalArgumentException if linkSuggestion doesn't exist in this synset
-     */
-    void removeLink(SynsetLinkSuggestion synsetLinkSuggestion) {
-        if (!synsetLinkSuggestions.contains(synsetLinkSuggestion)) {
-            throw new IllegalArgumentException("Synset doesn't contain link suggestion:"
-                    + "${synsetLinkSuggestion}")
-        }
-        log.info("Deleting synset link suggestion: ${synsetLinkSuggestion}")
-        synsetLinkSuggestions.remove(synsetLinkSuggestion)
-        synsetLinkSuggestion.delete()
     }
 
     /**
@@ -279,29 +224,6 @@ class Synset implements Cloneable {
         return allLinks.sort()
     }
 
-    /**
-     * Get a sorted list of all links to other synsets.
-     */
-    List sortedSynsetLinkSuggestions() {
-        List allLinks = new ArrayList()
-        List incomingLinks = SynsetLinkSuggestion.findAllByTargetSynset(this)
-        for (incomingLink in incomingLinks) {
-            // add links that point to this synset with its type
-            // reversed to the other direction (e.g. hypernym -> hyponym):
-            LinkType tempLinkType =
-                new LinkType(linkName: incomingLink.linkType.otherDirectionLinkName)
-            SynsetLinkSuggestion l = new SynsetLinkSuggestion(incomingLink)
-            l.id = incomingLink.id
-            l.linkType = tempLinkType
-            // change direction:
-            l.synset = incomingLink.targetSynset
-            l.targetSynset = incomingLink.synset
-            allLinks.add(l)
-        }
-        allLinks.addAll(synsetLinkSuggestions)
-        return allLinks.sort()
-    }
-
     // not called "getGeneratedURI" because Grails assumes a property then
     // and gets confused:
     String generatedURI() {
@@ -318,8 +240,7 @@ class Synset implements Cloneable {
 
     /**
      * Detailed string representation used for showing differences in the
-     * UserEvent view, thus doesn't contain properties that cannot
-     * be modified like "source" etc.
+     * UserEvent view.
      */
     String toDetailedString() {
         // the "|" at the beginning works around a bug in the diff
@@ -459,14 +380,12 @@ class Synset implements Cloneable {
         clone = super.clone()       // will clone trivial types
         // TODO: also make a real deep copy here via copy constructor:
         clone.terms = new HashSet(terms)
-        clone.preferredTermLinks = new HashSet(preferredTermLinks)
         clone.categoryLinks = new HashSet(categoryLinks)
         // calling clone() is not enough:
         clone.synsetLinks = []
         for (link in synsetLinks) {
             clone.addSynsetLink(new SynsetLink(link))
         }
-        clone.semTypeLinks = new HashSet(semTypeLinks)
         return clone
     }
 

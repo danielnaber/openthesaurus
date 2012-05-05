@@ -17,8 +17,6 @@
  */ 
 package com.vionto.vithesaurus
 
-import com.vionto.vithesaurus.Synset
-
 /**
  * Synset validator that checks several logical constraints.
  */
@@ -37,8 +35,8 @@ class SynsetValidator {
     }
 
     /**
-     * If extendedValidate() is exectuted without params
-     * no extended valdation will be obtained.
+     * If extendedValidate() is executed without params
+     * no extended validation will be obtained.
      */
     public boolean extendedValidate() {
         extendedValidate(false)
@@ -53,17 +51,10 @@ class SynsetValidator {
         if (fullValidation) {
             // some simple assertions
             assert (synset)
-            //assert (synset.preferredCategory)
-            //assert (synset.categoryLinks)
-            //assert (synset.synsetPreferredTerm)
             assert (synset.terms)
-            //assert (synset.section)
             assert (synset.terms.size() > 0)
-            assert (synset.terms.size() >= synset.preferredTermLinks.size())
             // validate the synset components in detail
             validateTerms()
-            //validatePreferredTerm()
-            //validatePreferredTermLinks()
             validateCategoryLinks()
             validateSynsetLinks()
             validateNonSelfReference()
@@ -92,77 +83,18 @@ class SynsetValidator {
     }
 
     /**
-     * Checks if the synset.synsetPreferredTerm can be found as term in
-     * the synset.terms list. If not an exception will be thrown.
-     * @throws IllegalArgumentException
-     */
-    private void validatePreferredTerm() {
-        def found = false
-        for (term in synset.terms) {
-            if (term.word.equals(synset.synsetPreferredTerm)) {
-                found = true
-                break
-            }
-        }
-        if (!found) {
-            throw new IllegalArgumentException("[${synset.id}] Linked terms " +
-                    "don't contain annotated preferredTerm: " +
-                    "${synset.synsetPreferredTerm}")
-        }
-    }
-
-    /**
-     * Checks if all preferredTerms are also linked and therefore listed
-     * in the synset.terms list. If not an exception will be thrown.
-     * Checks if the number of languages is equal to the number of preferred
-     * terms. If not an exception is thrown.
-     * @throws IllegalArgumentException
-     */
-    private void validatePreferredTermLinks() {
-        for (preferredTermLink in synset.preferredTermLinks) {
-            if (!synset.terms.contains(preferredTermLink.term)) {
-                throw new IllegalArgumentException("[${synset.id}] " +
-                        "Preferred Term Link '${preferredTermLink.term}' " +
-                        "refers to unbound term")
-            }
-        }
-        List languages = []
-        for (term in synset.terms) {
-            if (!languages.contains(term.language)) {
-                languages.add(term.language)
-            }
-        }
-        if (languages.size() != synset.preferredTermLinks.size()) {
-            throw new IllegalArgumentException("[${synset.id}] " +
-                    "Number of preferred terms (${synset.preferredTermLinks.size()}) " +
-                    "is not equal to number of languages in " +
-                    "synset (${languages.size()})")
-        }
-    }
-
-    /**
-     * If the synset category is the category 'Unknown' there should be no
-     * other category or an exception will be thrown.
-     * Checks for duplicate links, duplicated listed category and checks
-     * if the synset preferredCategory is part of the synset categories. If
-     * some of them fail an exception will be thrown.
+     * Checks for duplicate links and duplicated listed categories.
      * @throws IllegalArgumentException
      */
     private void validateCategoryLinks() {
         List categoryLinkSet = []
         List categories = []
-        if (synset.preferredCategory?.categoryName == CATEGORY_UNKNOWN
-                && synset.categoryLinks.size() > 1) {
-            throw new IllegalArgumentException("[${synset.id}] If Category " +
-                    "is $CATEGORY_UNKNOWN there should be no other category")
-        }
 
         for (categoryLink in synset.categoryLinks) {
             if (!categoryLinkSet.contains(categoryLink)) {
                 categoryLinkSet.add(categoryLink)
             } else {
-                throw new IllegalArgumentException("[${synset.id}] " +
-                        "Duplicate CategoryLink: $categoryLink")
+                throw new IllegalArgumentException("[${synset.id}] " + "Duplicate CategoryLink: $categoryLink")
             }
             if (!categories.contains(categoryLink.category)) {
                 categories.add(categoryLink.category)
@@ -171,17 +103,10 @@ class SynsetValidator {
                         "'${categoryLink.category}' listed twice or more")
             }
         }
-        /*if (synset.preferredCategory) {
-          if (!categories.contains(synset.preferredCategory)) {
-            throw new IllegalArgumentException("[${synset.id}] Preferred " +
-                    "Category '${synset.preferredCategory}' is not linked to synset")
-          }
-        }*/
     }
 
     /**
-     * Checks if the sysnet is linked to another synset twice. If so
-     * an exception will be thrown.
+     * Checks if the synset is linked to another synset twice. If so an exception will be thrown.
      * @throws IllegalArgumentException
      */
     private void validateSynsetLinks() {
@@ -190,8 +115,7 @@ class SynsetValidator {
             if (!synsetLinkSet.contains(synsetLink)) {
                 synsetLinkSet.add(synsetLink)
             } else {
-                throw new IllegalArgumentException("[${synset.id}] " +
-                        "Duplicate SynsetLink: $synsetLink")
+                throw new IllegalArgumentException("[${synset.id}] " + "Duplicate SynsetLink: $synsetLink")
             }
         }
     }

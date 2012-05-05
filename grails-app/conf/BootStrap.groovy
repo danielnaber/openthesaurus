@@ -49,10 +49,6 @@ class BootStrap {
          cat.isDisabled = false
          cat.save()
        }
-       if (!Section.findBySectionName("other")) {
-         // add default section so there's at least one section available:
-         new Section("other").save()
-       }
        if (!TermLinkType.findByLinkName("Antonym")) {
          // add default section so there's at least one section available:
          TermLinkType termLinkType = new TermLinkType("Antonym")

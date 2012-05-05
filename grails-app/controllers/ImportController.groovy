@@ -1,5 +1,5 @@
 /**
- * vthesaurus - web-based thesaurus management tool
+ * vithesaurus - web-based thesaurus management tool
  * Copyright (C) 2009 vionto GmbH, www.vionto.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -82,8 +82,6 @@ class ImportController extends BaseController {
         assert(german)
         Category otherCategory = Category.findByCategoryName("other")
         assert(otherCategory)
-        Section otherSection = Section.findBySectionName("other")
-        assert(otherSection)
         LinkType superLinkType = LinkType.findByLinkName("Oberbegriff")
         assert(superLinkType)
         TermLinkType antonymLinkType = TermLinkType.findByLinkName("Antonym")
@@ -102,13 +100,10 @@ class ImportController extends BaseController {
           if (rs.getInt("subject_id")) {
             Category cat = oldSubjectIdToCategory.get(rs.getInt("subject_id"))
             categoryLink = new CategoryLink(synset, cat)
-            synset.preferredCategory = cat
           } else {
             categoryLink = new CategoryLink(synset, otherCategory)
-            synset.preferredCategory = otherCategory
           }
           synset.addCategoryLink(categoryLink)
-          synset.section = otherSection
           int termCount = 0
           while (rs2.next()) {
             String term = convert(rs2.getString("word"))

@@ -228,20 +228,6 @@ class Term implements Comparable, Cloneable {
         }
     }
 
-    /**
-     * List terms with the same word as this one, but only those
-     * which are in the same section as this one.
-     */
-    List listHomonymsInSection() {
-        return Term.withCriteria {
-            eq('word', word)
-            synset {
-                eq('isVisible', true)
-                eq('section', synset.section)
-            }
-        }
-    }
-
     static int countVisibleTerms() {
         def c = Term.createCriteria()
         int count = c.count {

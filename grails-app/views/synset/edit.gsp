@@ -154,8 +154,7 @@
                                                 <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
                                             </g:if>
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
-                                            <g:set var="termCountThisSection" value="${t.listHomonymsInSection().size()}"/>
-                                            
+
                                             <g:link title="${message(code:'edit.find.all.meanings', args: [t.word.encodeAsHTML()])}"
                                                 class="termMetaInfo otherMeaningSearchLink" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                         
@@ -255,17 +254,10 @@
                                   <li class="checkboxList" ${synset.categoryLinks.size() > 0 ? 'style="margin-top:10px"' : ''}>
                                     <g:if test="${session.user}">
                                          <%-- Change or add new category --%>
-                                         <g:if test="${synset.preferredCategory?.categoryName == 'Unknown'}">
-                                             <div id="changeCategoryLink">
-                                                <a href="#" onclick="javascript:showChangeCategory();return false;"><g:message code='edit.change.category'/></a>
-                                             </div>
-                                         </g:if>
-                                         <g:else>
-                                             <div id="newCategoryLink">
-                                                 <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
-                                             </div>
-                                         </g:else>
-        
+                                         <div id="newCategoryLink">
+                                             <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
+                                         </div>
+
                                          <div id="newCategory" style="display:none">
                                              <% i = 0; %>
                                              <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewCategories)}">
@@ -295,7 +287,6 @@
                         <g:if test="${LinkType.count() > 0}">
 
                             <g:set var="synsetLinks" value="${synset?.sortedSynsetLinks()}"/>
-                            <g:set var="suggestedSynsetLinks" value="${synset?.sortedSynsetLinkSuggestions()}"/>
 
                             <%
                             Set displayedSynsets = new HashSet()
@@ -311,58 +302,6 @@
                                 synset:synset, synsetLinks:synsetLinks, showAddLink:true, displayedSynsets: displayedSynsets]" />
 
                         </g:if>
-
-                        <g:if test="${Section.count() > 1}">
-                            <tr class='prop'>
-                                <td class='name'>
-                                    <g:message code='edit.thesaurus'/>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:synset,field:'section','errors')}'>
-                                    <g:if test="${session.user}">
-                                        <g:select name="section.id" from="${Section.list()}" optionKey="id"
-                                            value="${synset.section?.id}" />
-                                    </g:if>
-                                    <g:else>
-                                        ${synset.section}
-                                    </g:else>
-                                </td>
-                            </tr>
-                        </g:if>
-
-                        <%--
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <g:message code='edit.comment'/>
-                            </td>
-                            <td valign='top' class='value ${hasErrors(bean:synset,field:'userComment','errors')}'>
-
-                                <g:if test="${synset.userComment}">
-                                    <div id="addComment">
-                                        <g:if test="${session.user}">
-                                            <g:textArea id='userComment' name='userComment' value="${synset.userComment}"/>
-                                        </g:if>
-                                        <g:else>
-                                            <g:textArea readonly="true" id='userComment' name='userComment' value="${synset.userComment}"/>
-                                        </g:else>
-                                    </div>
-                                </g:if>
-                                <g:else>
-                                    <g:if test="${session.user}">
-                                        <div id="addCommentLink">
-                                            <a href="#" onclick="javascript:showAddComment();return false;"><g:message code="edit.add.comment"/></a>
-                                        </div>
-                                        <div id="addComment" style="display:none">
-                                            <g:textArea id='userComment' name='userComment' value="${synset.userComment}"/>
-                                        </div>
-                                    </g:if>
-                                    <g:else>
-                                        <span class="noMatches"><g:message code="edit.no.comment"/></span>
-                                    </g:else>
-                                </g:else>
-
-                            </td>
-                        </tr>
-                        --%>
 
                         <g:if test="${session.user}">
                             <tr class='prop'>

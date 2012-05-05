@@ -15,13 +15,11 @@
         <g:link controller="test">Simple self-test</g:link> |
         <g:link controller="user" action="list">Users</g:link> |
         <g:link controller="language" action="list">Languages</g:link> |
-        <g:link controller="source" action="list">Sources</g:link> |
         <g:link controller="category" action="list">Categories</g:link> |
         <g:link controller="termLevel" action="list">Term Level</g:link> |
         <g:link controller="linkType" action="list">Synset Link Types</g:link> |
         <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
         <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
-        <g:link controller="section" action="list">Thesauri</g:link> |
         <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link> |
         <g:link controller="synset" action="createMemoryDatabase">createMemoryDatabase</g:link>
         </p>

@@ -619,29 +619,8 @@ class SynsetController extends BaseController {
                     newCategoryCount++
                     continue
                 }
-                if (synset.preferredCategory?.categoryName == UNKNOWN_CATEGORY_NAME) {
-                    def catLinks = CategoryLink.findAllBySynset(synset)
-                    if (catLinks.size() > 1) {
-                        synset.errors.reject('thesaurus.error.category.change',
-                                [].toArray(), 'change not possible')
-                        render(view:'edit',model:[synset:synset],
-                                contentType:"text/html", encoding:"UTF-8")
-                        return
-                    }
-                    CategoryLink catLink = catLinks.getAt(0)
-                    synset.removeLink(catLink)
-                }
                 addCategory(synset, params['category.id_' + newCategoryCount])
                 newCategoryCount++
-            }
-            // change preferred category:
-            if (params.preferred_category) {
-                Category category = Category.get(params.preferred_category)
-                //log.info("params.preferred_category = ${params.preferred_category}, cat = ${category}")
-                // not setting active to 'Unknown'
-                if (category.categoryName != UNKNOWN_CATEGORY_NAME) {
-                    synset.preferredCategory = category
-                }
             }
 
             // add new term:
@@ -845,8 +824,7 @@ class SynsetController extends BaseController {
             throw new Exception("Cannot create synset: ${synset.errors}")
         }
         render(template:"/synsetSuggestion/addedSynonym", 
-                model:[id:synset.id, prefTerm: synset.synsetPreferredTerm,
-                language: firstLanguage])
+                model:[id:synset.id, language: firstLanguage])
     }
 
     def save = {
@@ -932,17 +910,6 @@ class SynsetController extends BaseController {
     }
 
     /**
-     * Get all the languages which are used by the given synset's terms.
-     */
-    Set getLanguages(Synset synset) {
-        Set languages = new HashSet()
-        for (term in synset.terms) {
-            languages.add(term.language)
-        }
-        return languages
-    }
-
-    /**
      * Add the category to given synset with the given id, re-render
      * page in case of errors.
      */
@@ -962,7 +929,6 @@ class SynsetController extends BaseController {
      */
     void addSynsetLink(Synset fromSynset, Synset toSynset, LinkType linkType) {
         def synsetLink = new SynsetLink(fromSynset, toSynset, linkType)
-        synsetLink.evaluationStatus = SynsetLink.EVAL_APPROVED
         if (fromSynset.containsSynsetLink(synsetLink)) {
             fromSynset.errors.reject('thesaurus.duplicate.link',
                 [].toArray(), 'already in concept')

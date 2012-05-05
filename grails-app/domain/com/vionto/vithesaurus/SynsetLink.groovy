@@ -22,30 +22,14 @@ package com.vionto.vithesaurus;
  */
 class SynsetLink implements Comparable {
 
-    Synset targetSynset
-    LinkType linkType
-
-    /**
-     * EVAL_APPROVED for links from SynsetLinkSuggestion that
-     * have been manually approved, EVAL_REJECTED for links that have been
-     * explicitly rejected. Only links with an evaluationStatus of null may
-     * be deleted when importing new potential hypernym/hyponyms!
-     */
-    int evaluationStatus
-    final static int EVAL_APPROVED = 1
-    final static int EVAL_REJECTED = 2
-    
-    /**
-     * Number of facts backing this link - only useful if this is generated from
-     * a suggested link
-     */
-    int factCount = 0
-    
     static belongsTo = [synset:Synset]
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'synset_link_seq']
     }
+
+    Synset targetSynset
+    LinkType linkType
 
     SynsetLink() {
     }
@@ -55,16 +39,6 @@ class SynsetLink implements Comparable {
      */
     SynsetLink(SynsetLink link) {
         this(link.synset, link.targetSynset, link.linkType)
-        this.evaluationStatus = link.evaluationStatus
-        this.factCount = link.factCount
-    }
-
-    /**
-     * Create a SynsetLink based on a suggested SynsetLink.
-     */
-    SynsetLink(SynsetLinkSuggestion link) {
-        this(link.synset, link.targetSynset, link.linkType)
-        this.factCount = link.factCount
     }
 
     SynsetLink(Synset fromSynset, Synset toSynset, LinkType linkType) {
@@ -89,22 +63,13 @@ class SynsetLink implements Comparable {
      */
     int compareTo(Object other) {
         if (other.linkType.linkName == linkType.linkName) {
-            if (targetSynset.synsetPreferredTerm == null
-                || other.targetSynset.synsetPreferredTerm == null) {
-                return targetSynset.id - other.targetSynset.id		// any order, but stable
-            }
-            return targetSynset.synsetPreferredTerm.
-                compareToIgnoreCase(other.targetSynset.synsetPreferredTerm)
+            return targetSynset.id - other.targetSynset.id		// any order, but stable
         } else {
             return linkType.linkName.compareToIgnoreCase(other.linkType.linkName)
         }
     }
 
     String toString() {
-        if (targetSynset.synsetPreferredTerm) {
-            return "${linkType}@${targetSynset.synsetPreferredTerm}"
-        } else {
-            return "${linkType}@${targetSynset.terms}"
-        }
+        return "${linkType}@${targetSynset.terms}"
     }
 }
