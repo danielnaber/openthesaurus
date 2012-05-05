@@ -38,6 +38,7 @@
                 var hasTransformEnabled = isMozilla || isWebkit || isMs;
                 if (hasTransformEnabled) {
                     switch (event.keyCode) {
+                        case Event.KEY_RETURN:
                         case Event.KEY_UP:
                         case Event.KEY_DOWN:
                         case Event.KEY_RIGHT:
@@ -47,6 +48,8 @@
                         case 17:   // Ctrl
                         case 18:   // Alt
                         case 20:   // Caps Lock
+                        case 35:   // End
+                        case 36:   // Pos1
                         case 116:  // F5
                             return;
                     }
