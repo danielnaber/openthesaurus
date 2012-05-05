@@ -14,28 +14,25 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 import com.vionto.vithesaurus.*;
 
-// Tests for the Groovy object diff tools
 class DiffToolTests extends GroovyTestCase {
-    
-    void testDiff() {
-		Synset s1 = new Synset()
-		Synset s2 = new Synset()
-		DiffTool diffTool = new DiffTool()
-		List diffs = diffTool.diff(s1, s2)
-		//println diffs
-        assertEquals(0, diffs.size())
-        
-        s1.originalURI = "foobar"
-  		diffs = diffTool.diff(s1, s2)
-  		//println diffs
-  		assertEquals(1, diffs.size())
 
-		s2.originalURI = "foobar"
-      	diffs = diffTool.diff(s1, s2)
-   		assertEquals(0, diffs.size())
-    }
-    
+  void testDiff() {
+    Synset s1 = new Synset()
+    Synset s2 = new Synset()
+    DiffTool diffTool = new DiffTool()
+    List diffs = diffTool.diff(s1, s2)
+    assertEquals(0, diffs.size())
+
+    s1.originalURI = "foobar"
+    diffs = diffTool.diff(s1, s2)
+    assertEquals(1, diffs.size())
+
+    s2.originalURI = "foobar"
+    diffs = diffTool.diff(s1, s2)
+    assertEquals(0, diffs.size())
+  }
+
 }
