@@ -403,8 +403,8 @@ class SynsetController extends BaseController {
     }
         
     def substring = {
-      if(!params.offset) params.offset = "0"
-      if(!params.max) params.max = "20"
+      if (!params.offset) params.offset = "0"
+      if (!params.max) params.max = "20"
       int offset = Integer.parseInt(params.offset)
       int maxMatches = Integer.parseInt(params.max)
       List partialMatchResult = searchService.searchPartialResult(params.q, offset, maxMatches)
@@ -580,15 +580,12 @@ class SynsetController extends BaseController {
         
         LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
             origSynset, synset, params.changeComment)
-        if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
+        if (!synset.hasErrors() && synset.saveAndLog(logInfo)) {
             flash.message = successMsg
             redirect(action:edit,id:synset.id)
-        }
-        else {
-            synset.errors.reject('thesaurus.error',
-                [].toArray(), 'Could not save and/or log changes')
-            render(view:'edit',model:[synset:synset],
-                    contentType:"text/html", encoding:"UTF-8")
+        } else {
+            synset.errors.reject('thesaurus.error', [].toArray(), 'Could not save and/or log changes')
+            render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
         }
     }
     
@@ -616,13 +613,14 @@ class SynsetController extends BaseController {
                 }
                 addNewTerms(synset)
             } catch (Exception e) {
+                log.warn(synset.toString() + ": " + e.toString())
                 synset.errors.reject(e.getMessage(), [].toArray(), e.getMessage())
                 render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
                 return
             }
 
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), origSynset, synset, params.changeComment)
-            if(!synset.hasErrors() && synset.saveAndLog(logInfo)) {
+            if (!synset.hasErrors() && synset.saveAndLog(logInfo)) {
                 flash.message = message(code:'edit.updated')
                 redirect(action:edit,id:synset.id)
             } else {
@@ -721,7 +719,7 @@ class SynsetController extends BaseController {
         synset.addCategoryLink(catLink)
     }
 
-    private int addNewTerms(Synset synset) {
+    private void addNewTerms(Synset synset) {
         int newTermCount = 0
         while (newTermCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)) {
             if (!params['word_' + newTermCount]) {
@@ -915,7 +913,7 @@ class SynsetController extends BaseController {
         }
         fromSynset.addSynsetLink(synsetLink)
         def saved = synsetLink.saveAndLog()
-        if(!synsetLink.validate() || !saved) {
+        if (!synsetLink.validate() || !saved) {
             fromSynset.errors = synsetLink.errors
             render(view:'edit',model:[synset:fromSynset],
                     contentType:"text/html", encoding:"UTF-8")
