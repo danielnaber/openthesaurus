@@ -721,14 +721,12 @@ class SynsetController extends BaseController {
     }
 
     def edit = {
-
         long startTime = System.currentTimeMillis()
         if (!params.containsKey("id")) {
             response.sendError(404)
             return
         }
-        def synset = Synset.get( params.id )
-
+        def synset = Synset.get(params.id)
         if (!synset) {
             response.sendError(404)
         } else {
@@ -753,13 +751,11 @@ class SynsetController extends BaseController {
     }
 
     def hide = {
-        hideSynset(true, message(code:'edit.delete.missing.comment'),
-            message(code:'edit.delete.success'))
+        hideSynset(true, message(code:'edit.delete.missing.comment'), message(code:'edit.delete.success'))
     }
     
     def unhide = {
-        hideSynset(false, message(code:'edit.delete.missing.comment'),
-            message(code:'edit.undelete.success'))
+        hideSynset(false, message(code:'edit.delete.missing.comment'), message(code:'edit.undelete.success'))
     }
     
     private hideSynset(boolean hide, String errorMsg, String successMsg) {
@@ -999,67 +995,12 @@ class SynsetController extends BaseController {
         }
     }
 
-    /**
-     * Get the values of the checkboxes that are selected. Useful if there's
-     * more than one checkbox with the same name.
-     */
-    def getCheckboxIDs(Object param) {
-        List ids = new ArrayList()
-        if (param.getClass().isArray()) {
-            // more than one checkbox selected
-            ids.addAll(Arrays.asList(param))
-        } else {
-            // one checkbox selected
-            ids.add(param)
-        }
-        return ids
-    }
-
-    private void saveSynsetLink(int synsetLinkId, int evalStatus, Synset synset) {
-        SynsetLinkSuggestion synsetSuggestionLink = SynsetLinkSuggestion.get(synsetLinkId)
-        SynsetLink synsetLink = new SynsetLink(synsetSuggestionLink)
-        synsetLink.evaluationStatus = evalStatus
-        boolean saved = synsetLink.save()
-        if (!saved) {
-            throw new Exception("Could not save link: ${synsetLink.errors}, status $evalStatus")
-        }
-        String actionName
-        if (evalStatus == SynsetLink.EVAL_APPROVED) {
-            actionName = "approving"
-        } else if (evalStatus == SynsetLink.EVAL_REJECTED) {
-            actionName = "rejecting"
-        } else {
-            throw new Exception("Unknown eval status: $evalStatus")
-        }
-        String logText =
-            "$actionName: ${synsetLink.synset.toShortString()} " +
-            "${synsetLink.linkType.verbName} " +
-            "${synsetLink.targetSynset.toShortString()}"
-        logSynsetLink(logText, synset, synsetLink)
-    }
-
     private void logSynsetLink(String logText, Synset synset, SynsetLink synsetLink) {
-        LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), synsetLink,
-                logText, params.changeComment)
+        LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), synsetLink, logText, params.changeComment)
         boolean saved = synset.saveAndLog(linkLogInfo)
         if (!saved) {
             throw new Exception("Could not save approve log: ${synset.errors}")
         }
-    }
-
-    /**
-     * Get the IDs of keys like "evaluate_link_1944" that have the given
-     * val as their value. The id is the part of the key after paramPrefix.
-     */
-    List getEvaluationRadioButtonIDs(def log, String paramPrefix, String val) {
-        List ids = []
-        for (param in params) {
-            if (param.key.startsWith(paramPrefix) && param.value == val) {
-                String id = param.key.substring(paramPrefix.length())
-                ids.add(Integer.parseInt(id))
-            }
-        }
-        return ids
     }
 
     def create = {
@@ -1166,23 +1107,11 @@ class SynsetController extends BaseController {
                 return
             }
         }
-        // check that the category is set:
-        /*if (params.category.id == null || params.category.id == "null") {
-            synset.errors.rejectValue('categoryLinks', 'thesaurus.invalid.category')
-            render(view:'multiSearch', model:[synset:synset,
-                    searchTerms:getTermsFromTextArea(searchTerms)],
-                    contentType:"text/html", encoding:"UTF-8")
-            return
-        }
-        addCategory(synset, params.category.id)
-        synset.preferredCategory = Category.get(params.category.id)
-        */
         LogInfo logInfo = getLogInfo(null, synset, params.changeComment)
         if (!synset.hasErrors() && synset.saveAndLog(logInfo, false)) {
             for (term in termsToCreate) {
                 synset.addToTerms(term)
-                logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
-                        null, synset, params.changeComment)
+                logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), null, synset, params.changeComment)
                 if (!term.validate()) {
                     synset.errors = term.errors
                     render(view:'multiSearch', model:[synset:synset,
@@ -1308,9 +1237,9 @@ class WordLevelComparator implements Comparator {
     int compare(Object o1, Object o2) {
         Synset syn1 = (Synset) o1
         Synset syn2 = (Synset) o2
-        int syn1prio = hasLevelForQuery(syn1.terms) ? 1 : 0
-        int syn2prio = hasLevelForQuery(syn2.terms) ? 1 : 0
-        return syn1prio - syn2prio
+        int syn1Prio = hasLevelForQuery(syn1.terms) ? 1 : 0
+        int syn2Prio = hasLevelForQuery(syn2.terms) ? 1 : 0
+        return syn1Prio - syn2Prio
     }
     
     boolean hasLevelForQuery(def terms) {
