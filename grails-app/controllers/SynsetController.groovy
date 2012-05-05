@@ -29,8 +29,8 @@ import com.vionto.vithesaurus.tools.DbUtils
 class SynsetController extends BaseController {
 
     def requestLimiterService
-
     def searchService
+    def memoryDatabaseCreationService
 
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
@@ -38,12 +38,11 @@ class SynsetController extends BaseController {
     // maximum distance for a term to be accepted as similar term:
     final int MAX_DIST = 3
 
-    private static BaseformFinder baseformFinder = new BaseformFinder()
-    
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
 
+    private static final BaseformFinder baseformFinder = new BaseformFinder()
     private static final UNKNOWN_CATEGORY_NAME = 'Unknown'
 
     // the delete, save and update actions only accept POST requests
@@ -436,56 +435,16 @@ class SynsetController extends BaseController {
     /**
      * Create the in-memory database of all terms for fast substring search
      */
-    // TODO: use quartz
     def createMemoryDatabase = {
       if (!isLocalHost(request)) {
         throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
-
       log.info("Creating in-memory database, request by " + IpTools.getRealIpAddress(request))
-      Connection conn = null
-      PreparedStatement ps = null
-      try {
-        conn = dataSource.getConnection()
-        executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
-        executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
-        executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
-      
-        ps = conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
-        ps.setString(1, new Date().toString())
-        ps.execute()
-
-        // setString() on a PreparedStatement won't work, so insert value of hidden synsets directly:
-        String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
-            FROM term, synset
-            WHERE 
-              term.synset_id = synset.id AND
-              synset.is_visible = 1 AND
-              synset.id NOT IN (${grailsApplication.config.thesaurus.hiddenSynsets})
-            ORDER BY word"""
-        ps = conn.prepareStatement(sql)
-        ps.execute()
-
-        executeQuery("RENAME TABLE memwords TO memwordsBak, memwordsTmp TO memwords", conn)
-        executeQuery("DROP TABLE memwordsBak", conn)
-
-        log.info("Finished creating in-memory database")
-        render "OK"
-      } finally {
-        DbUtils.closeQuietly(ps)
-        DbUtils.closeQuietly(conn)
-      }
+      memoryDatabaseCreationService.createMemoryDatabase(grailsApplication.config.thesaurus.hiddenSynsets)
+      log.info("Finished creating in-memory database")
+      render "OK"
     }
     
-    private void executeQuery(String sql, Connection conn) {
-      PreparedStatement ps = conn.prepareStatement(sql)
-      try {
-        ps.execute()
-      } finally {
-        DbUtils.closeQuietly(ps)
-      }
-    }
-
     def searchWikipedia(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
         return null
