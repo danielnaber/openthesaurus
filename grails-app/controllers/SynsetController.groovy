@@ -432,16 +432,11 @@ class SynsetController extends BaseController {
      * of total matches is not always accurate.
      */
     def searchSynsets(String query, int max = -1, int offset = 0) {
-        String sortField = params.sort ? params.sort : "synsetPreferredTerm"
-        if (grailsApplication.config.thesaurus.prefTerm == 'false') {
-          sortField = params.sort ? params.sort : "id"
-        }
+        String sortField = params.sort ? params.sort : "id"
         String sortOrder = params.order ? params.order : "asc"
 
         boolean completeResult = false
 
-        //long t = System.currentTimeMillis()
-        
         // TODO: why don't we use Synset.withCriteria here, it would
         // free us from the need to remove duplicates manually
         // => there's a bug(?) so that the synsets are incomplete,
@@ -556,8 +551,7 @@ class SynsetController extends BaseController {
             boolean showOrigSource =
                 grailsApplication.config.thesaurus.showOriginalSource == "true"
             long runTime = System.currentTimeMillis() - startTime
-            boolean prefTerms = grailsApplication.config.thesaurus.prefTerm != 'false'
-            return [ synset : synset, eventListCount : eventListCount, eventList : eventList, prefTerms: prefTerms,
+            return [ synset : synset, eventListCount : eventListCount, eventList : eventList,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
                      runTime : runTime ]
         }
@@ -606,82 +600,17 @@ class SynsetController extends BaseController {
 
         if (synset) {
             synset.properties = params
-            // add links to other synsets:
-            List linkTypes = LinkType.getAll()
-            for (linkType in linkTypes) {
-                String synsetParamId = params["targetSynset" + linkType.linkName + ".id"]
-                if (synsetParamId) {
-                    Synset targetSynset = Synset.get(synsetParamId)
-                    if (targetSynset == null) {
-                        throw new Exception("Synset not found for link type: " + linkType.linkName)
-                    }
-                    String linkTypeToUseParam = "linkType" + linkType.linkName + ".id"
-                    LinkType linkTypeToUse = LinkType.get(params[linkTypeToUseParam])
-                    if (linkTypeToUse == null) {
-                        throw new Exception("Link type not found: " + linkTypeToUseParam)
-                    }
-                    if (synset.id == targetSynset.id) { // don't link a synset to itself
-                        synset.errors.reject('thesaurus.error.synset.selfreference', [].toArray(), 'Error saving changes')
-                        render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
-                        return
-                    } else {
-                        addSynsetLink(synset, targetSynset, linkTypeToUse)
-                    }
-                }
-            }
 
-            // delete terms:
-            List deleteTermIds = []
-            for (term in synset.terms) {
-                if (params['delete_' + term.id] == 'delete') {
-                    deleteTermIds.add(term.id)
-                }
-            }
-            if (synset.terms.size() - deleteTermIds.size() <= 0) {
-                synset.errors.reject('thesaurus.empty.synset', [].toArray(), 'Error saving changes')
+            try {
+                addSynsetLinks(synset)
+                deleteTerms(synset)
+            } catch (Exception e) {
+                synset.errors.reject(e.getMessage(), [].toArray(), e.getMessage())
                 render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
                 return
             }
-            for (deleteID in deleteTermIds) {
-                Term delTerm = Term.get(deleteID)
-                try {
-                    synset.removeTerm(delTerm)
-                } catch (IllegalArgumentException e) {
-                    synset.errors.reject(e.getMessage(), [].toArray(), e.getMessage())
-                    render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
-                    return
-                }
-            }
-
-            // delete category links:
-            List catLinksToDelete = []
-            for (catLink in synset.categoryLinks) {
-                if (params['delete_catLinkId_' + catLink.id] == 'delete') {
-                    catLinksToDelete.add(catLink)
-                }
-            }
-            for (catLink in catLinksToDelete) {
-                synset.removeLink(catLink)
-            }
-
-            // delete synset links:
-            List synsetLinkIdsToDelete = []
-            for (synsetLink in synset.sortedSynsetLinks()) {
-                String linkName = params['delete_' + synsetLink.linkType.linkName + '_' + synsetLink.id]
-                if (linkName == 'delete') {
-                    synsetLinkIdsToDelete.add(synsetLink.id)
-                }
-            }
-            for (synsetLinkId in synsetLinkIdsToDelete) {
-                SynsetLink synsetLink = SynsetLink.get(synsetLinkId)
-                String logText =
-                    "removing link: ${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())} " +
-                    "${synsetLink.linkType.verbName} " +
-                    "${StringEscapeUtils.unescapeHtml(synsetLink.synset.toShortString())}"
-                logSynsetLink(logText, synset, synsetLink)
-                synset.removeFromSynsetLinks(synsetLink)
-                synsetLink.delete()
-            }
+            deleteCategoryLinks(synset)
+            deleteSynsetLinks(synset)
             
             // change or add a category link:
             int newCategoryCount = 0
@@ -714,23 +643,7 @@ class SynsetController extends BaseController {
                     synset.preferredCategory = category
                 }
             }
-            // change preferred term:
-            Set languages = getLanguages(synset)
-            if (grailsApplication.config.thesaurus.prefTerm == 'true') {
-              for (language in languages) {
-                def termID = params["preferred_"+language.shortForm]
-                if (termID == null) {
-                    log.warn("No preferred term id for ${language.shortForm}")
-                } else {
-                    def term = Term.get(termID)
-                    if (term == null) {
-                        log.warn("No term found for id ${termID}")
-                    } else {
-                        synset.setPreferredTerm(language, term)
-                    }
-                }
-              }
-            }
+
             // add new term:
             int newTermCount = 0
             while (newTermCount < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)) {
@@ -776,10 +689,6 @@ class SynsetController extends BaseController {
                 }
 
                 synset.addTerm(newTerm)
-                if (!synset.hasPreferredTerm(newTerm.language) 
-                      && grailsApplication.config.thesaurus.prefTerm == 'true') {
-                    synset.setPreferredTerm(newTerm.language, newTerm)
-                }
                 def saved = newTerm.saveAndLog(logInfo)
                 if (!saved) {
                     render(view:'edit',model:[synset:synset, newTerm:newTerm],
@@ -808,7 +717,78 @@ class SynsetController extends BaseController {
         }
     }
 
-    private void logSynsetLink(String logText, Synset synset, SynsetLink synsetLink) {
+    private void addSynsetLinks(Synset synset) {
+        List linkTypes = LinkType.getAll()
+        for (linkType in linkTypes) {
+            String synsetParamId = params["targetSynset" + linkType.linkName + ".id"]
+            if (synsetParamId) {
+                Synset targetSynset = Synset.get(synsetParamId)
+                if (targetSynset == null) {
+                    throw new Exception("Synset not found for link type: " + linkType.linkName)
+                }
+                String linkTypeToUseParam = "linkType" + linkType.linkName + ".id"
+                LinkType linkTypeToUse = LinkType.get(params[linkTypeToUseParam])
+                if (linkTypeToUse == null) {
+                    throw new Exception("Link type not found: " + linkTypeToUseParam)
+                }
+                if (synset.id == targetSynset.id) { // don't link a synset to itself
+                    throw new Exception(message(code:'thesaurus.error.synset.selfreference'))
+                } else {
+                    addSynsetLink(synset, targetSynset, linkTypeToUse)
+                }
+            }
+        }
+    }
+
+    private void deleteTerms(Synset synset) {
+      List deleteTermIds = []
+      for (term in synset.terms) {
+          if (params['delete_' + term.id] == 'delete') {
+              deleteTermIds.add(term.id)
+          }
+      }
+      if (synset.terms.size() - deleteTermIds.size() <= 0) {
+          throw new Exception(message(code:'thesaurus.empty.synset'))
+      }
+      for (deleteID in deleteTermIds) {
+          Term delTerm = Term.get(deleteID)
+          synset.removeTerm(delTerm)
+      }
+  }
+
+    private void deleteCategoryLinks(Synset synset) {
+        List catLinksToDelete = []
+        for (catLink in synset.categoryLinks) {
+            if (params['delete_catLinkId_' + catLink.id] == 'delete') {
+                catLinksToDelete.add(catLink)
+            }
+        }
+        for (catLink in catLinksToDelete) {
+            synset.removeLink(catLink)
+        }
+    }
+
+    private void deleteSynsetLinks(Synset synset) {
+        List synsetLinkIdsToDelete = []
+        for (synsetLink in synset.sortedSynsetLinks()) {
+            String linkName = params['delete_' + synsetLink.linkType.linkName + '_' + synsetLink.id]
+            if (linkName == 'delete') {
+                synsetLinkIdsToDelete.add(synsetLink.id)
+            }
+        }
+        for (synsetLinkId in synsetLinkIdsToDelete) {
+            SynsetLink synsetLink = SynsetLink.get(synsetLinkId)
+            String logText =
+                "removing link: ${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())} " +
+                        "${synsetLink.linkType.verbName} " +
+                        "${StringEscapeUtils.unescapeHtml(synsetLink.synset.toShortString())}"
+            logSynsetLink(logText, synset, synsetLink)
+            synset.removeFromSynsetLinks(synsetLink)
+            synsetLink.delete()
+        }
+    }
+
+  private void logSynsetLink(String logText, Synset synset, SynsetLink synsetLink) {
         LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), synsetLink, logText, params.changeComment)
         boolean saved = synset.saveAndLog(linkLogInfo)
         if (!saved) {
@@ -940,13 +920,6 @@ class SynsetController extends BaseController {
                          contentType:"text/html", encoding:"UTF-8")
                     return
                 }
-            }
-            // we need to set the preferred terms here because the
-            // terms have to be saved first to get their id:
-            if (grailsApplication.config.thesaurus.prefTerm == 'true') {
-              for (lang in preferredTerms.keySet()) {
-                synset.setPreferredTerm(lang, preferredTerms.get(lang))
-              }
             }
             flash.message = message(code:'create.created')
             redirect(action:edit,id:synset.id)

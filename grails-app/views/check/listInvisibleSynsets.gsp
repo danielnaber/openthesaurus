@@ -26,22 +26,14 @@
             
             <table>
                 <tr>
-                    <th width="40%">Preferred Term</th>
-                    <th width="40%">Other Terms</th>
+                    <th width="40%">Synset</th>
                     <th width="10%">Thesaurus</th>
                     <th width="10%">Source</th>
                 </tr>
                <g:each in="${synsetList}" status="i" var="synset">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td><g:link controller="synset" action="edit" 
-                            id="${synset.id}">${synset?.preferredTerm().toString()?.encodeAsHTML()}</g:link></td>
-                        <td>
-                            <g:link controller="synset" action="edit" id="${synset.id}">
-	                            <g:each in="${synset?.otherTerms()?.sort()}" var="term">
-	                                ${term.toString()?.encodeAsHTML()}<br/>
-	                            </g:each>
-	                        </g:link>
-	                    </td>
+                            id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link></td>
                         <td>${synset?.section?.toString()?.encodeAsHTML()}</td>
                         <td>${synset?.source?.toString()?.encodeAsHTML()}</td>
                     </tr>

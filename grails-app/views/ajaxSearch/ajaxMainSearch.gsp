@@ -15,7 +15,7 @@
             <div style="margin-top:4px;margin-bottom:10px">
                  <g:set var="firstVal" value="${true}"/>
                  <g:if test="${i < 10}">
-                   <g:each in="${synset?.otherTerms()?.sort()}" var="term">
+                   <g:each in="${synset?.terms?.sort()}" var="term">
                        <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
                        <g:set var="cleanedMatch" value='${StringTools.normalize(match).equalsIgnoreCase(params.q)}'/>
                        <g:if test="${!firstVal}">
@@ -64,7 +64,7 @@
         <g:each in="${substringSynsetList}" status="i" var="synset">
              <div style="margin-bottom:10px">
                  <g:set var="firstVal" value="${true}"/>
-                 <g:each in="${synset?.otherTerms()?.sort()}" var="term">
+                 <g:each in="${synset?.terms?.sort()}" var="term">
                      <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
                      <g:set var="cleanedMatch" value='${StringTools.normalize(match).contains(params.q)}'/>
                      <g:if test="${!firstVal}">

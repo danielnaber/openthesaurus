@@ -96,7 +96,6 @@ class TermController extends BaseController {
             }
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
-            term.synset.updatePreferredTerm()
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                     termBackup, term, params.changeComment)
             if (!term.hasErrors() && term.saveAndLog(logInfo)) {

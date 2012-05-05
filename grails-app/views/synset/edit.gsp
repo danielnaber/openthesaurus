@@ -117,12 +117,6 @@
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
-                            <g:if test="${prefTerms}">
-                                &nbsp;
-                                <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-                                    title="Select one preferred term per language" />
-                            </g:if>
-
                             <ul style="margin-top:0px">
                                 <g:set var="previousLanguage" value=""/>
                                 <g:each var='t' in='${synset?.sortedTerms()}'>
@@ -141,19 +135,6 @@
                                             <g:else>
                                               <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
                                             </g:else>
-    
-                                            <g:if test="${prefTerms}">
-                                                &nbsp;
-                                                <g:set var="isPreferred" value="${PreferredTermLink.countByTerm(t) > 0}"/>
-                                                <g:if test="${isPreferred}">
-                                                    <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                        checked="${isPreferred}" id="preferred_${t.language.shortForm}_${t.id}" />
-                                                </g:if>
-                                                <g:else>
-                                                    <g:managedRadio disabled="${!session.user}" name="preferred_${t.language.shortForm}" value="${t.id}"
-                                                        checked="${false}" />
-                                                </g:else>
-                                            </g:if>
     
                                             <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
                                                 [<g:message code='edit.edit.term'/>]</g:link>
@@ -241,17 +222,9 @@
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
-                            <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
-                                <g:if test="${prefTerms}">
-                                    <img src="${createLinkTo(dir:'images',file:'preferred.png')}" alt="Preferred"
-                                        title="${message(code:'edit.category.prefer')}" />
-                                </g:if>
+                            <g:if test="${!session.user}">
+                                <span class="noMatches"><g:message code="edit.not.set"/></span>
                             </g:if>
-                            <g:else>
-                                <g:if test="${!session.user}">
-                                    <span class="noMatches"><g:message code="edit.not.set"/></span>
-                                </g:if>
-                            </g:else>
                             <ul style="margin-top:0px">
                                 <g:if test="${synset.categoryLinks.size() > 0}">
                                   <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
@@ -268,12 +241,6 @@
                                               <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
                                             </g:else>
     
-                                            <g:if test="${prefTerms}">
-                                                &nbsp;
-                                                <g:set var="isPreferred" value="${synset.preferredCategory?.categoryName == catLink.category.categoryName}"/>
-                                                <g:managedRadio disabled="${!session.user}" name="preferred_category" value="${catLink.category.id}"
-                                                    checked="${isPreferred}" />
-                                            </g:if>
                                             ${catLink.category}
                                             <g:link controller="term" action="list" params="${[categoryId:catLink.category.id]}"><g:message code="edit.show.category.terms"/></g:link>
                                             <g:if test="${catLink.category.categoryType}">

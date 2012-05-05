@@ -12,7 +12,7 @@
 	                 <td valign="top">
 	                     <label for="${radioButtonId}">
 	                         <g:set var="firstVal" value="${true}"/>
-	                         <g:each in="${term.synset.otherTerms()?.sort()}" var="tmpTerm">
+	                         <g:each in="${term.synset.terms?.sort()}" var="tmpTerm">
                                  <g:set var="match" value='${tmpTerm.toString()?.toLowerCase()}'/>
                                  <g:set var="cleanedMatch" value='${StringTools.normalize(match).equals(params.q)}'/>
 	                             <g:if test="${!firstVal}">

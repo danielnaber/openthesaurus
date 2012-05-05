@@ -61,11 +61,6 @@ class SynsetTests extends GroovyTestCase {
         exp = "| aword2 · word1 || visible || comment=my comment. || " +
             "categories=mycat1|mycat2"
         assertEquals(exp, s.toDetailedString())
-        
-        s.setPreferredTerm(english, t2)
-        exp = "| aword2 · word1 || visible || comment=my comment. || " +
-            "categories=mycat1|mycat2"
-        assertEquals(exp, s.toDetailedString())
     }
 
     void testAddDuplicateTerm() {

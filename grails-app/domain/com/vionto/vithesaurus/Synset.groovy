@@ -17,8 +17,6 @@
  */ 
 package com.vionto.vithesaurus;
 
-import com.vionto.vithesaurus.SynsetValidator
-
 /**
  * A set of terms and other meta information. This makes
  * up a meaning / concept.
@@ -31,7 +29,7 @@ class Synset implements Cloneable {
     String userComment
     // The preferred term for the synset (not per language). This causes
     // redundancy, but we need it to sort by preferred term (also see
-    // PREFERRED_TERM_LANGS):
+    // PREFERRED_TERM_LANGS) -- not supported by GUI anymore!
     String synsetPreferredTerm
     Category preferredCategory
     Section section
@@ -91,10 +89,6 @@ class Synset implements Cloneable {
             throw new IllegalArgumentException("Synset already contains word: ${term.word}")
         }
         terms.add(term)
-        if (terms.size() == 1) {
-            // the first term, so make it the preferred term:
-            setPreferredTerm(term.language, term)
-        }
     }
 
     /**
@@ -104,27 +98,6 @@ class Synset implements Cloneable {
     void removeTerm(Term term) {
         if (!terms.contains(term)) {
             throw new IllegalArgumentException("Synset doesn't contain term: ${term}")
-        }
-        Set sameLanguageTerms = terms.findAll { it.language == term.language }
-        Term prefTerm = preferredTerm(term.language)
-        if (prefTerm && prefTerm.word == term.word) {
-            // we usually cannot delete the preferred term, unless
-            // it is the only term in its language:
-            if (sameLanguageTerms.size() == 1) {
-                PreferredTermLink toDelete = null
-                for (link in preferredTermLinks) {
-                    if (link.term == term) {
-                        toDelete = link
-                        break
-                    }
-                }
-                if (toDelete) {
-                    preferredTermLinks.remove(toDelete)
-                    toDelete.delete()
-                }
-            } else {
-                throw new IllegalArgumentException("Cannot delete the preferred term: ${term}")
-            }
         }
         log.info("Deleting term: ${term}")
         for (termLink in term.termLinks) {
@@ -228,68 +201,6 @@ class Synset implements Cloneable {
     }
 
     /**
-     * Sets a term as the preferred term for the given language,
-     * removing the old preferred term if there was one.
-     */
-    void setPreferredTerm(Language lang, Term term) {
-        PreferredTermLink linkToDelete = null
-        // first delete existing preferred term for this language, if any:
-        for (link in preferredTermLinks) {
-            if (link.language == lang) {
-                linkToDelete = link
-                break
-            }
-        }
-        if (linkToDelete) {
-            linkToDelete.delete()
-            preferredTermLinks.remove(linkToDelete)
-        }
-        // now add the new preferred term:
-        addToPreferredTermLinks(new PreferredTermLink(language:lang, term:term))
-        // set the non-language-specific preferred Term by taking it
-        // from the "best" language we have:
-        updatePreferredTerm()
-    }
-
-    /**
-     * Set the preferred term used for sorting to one of the preferred
-     * terms per language, preferring English over German etc.
-     */
-    void updatePreferredTerm() {
-        for (bestLanguage in PREFERRED_TERM_LANGS) {
-            Language prefTermLang = Language.findByShortForm(bestLanguage)
-            if (prefTermLang && hasPreferredTerm(prefTermLang)) {
-                synsetPreferredTerm = preferredTerm(prefTermLang)
-                log.debug("preferred term for ${id} set to ${synsetPreferredTerm}")
-                break
-            }
-        }
-    }
-
-    /**
-     * Gets the preferred term.
-     */
-    String preferredTerm() {
-        return synsetPreferredTerm
-    }
-
-    /**
-     * Gets all terms expect the preferred term.
-     */
-    List otherTerms() {
-        String preferredTerm = preferredTerm()
-        List otherTermList = []
-        for (term in terms) {
-            if (preferredTerm == null) {
-                otherTermList.add(term)
-            } else if (term.word != preferredTerm) {
-                otherTermList.add(term)
-            }
-        }
-        return otherTermList
-    }
-
-    /**
      * Returns true if the synset contains the given term (case-sensitive).
      */
     boolean containsWord(String word) {
@@ -312,31 +223,6 @@ class Synset implements Cloneable {
           }
         }
         return false
-    }
-
-    /**
-     * Returns true if the synset has a preferred term for the given language.
-     */
-    boolean hasPreferredTerm(Language lang) {
-        for (link in preferredTermLinks) {
-            if (link.language == lang) {
-                return true
-            }
-        }
-        return false
-    }
-
-    /**
-     * Gets the preferred term for a given language. Returns null if there
-     * is not preferred term for for that language.
-     */
-    Term preferredTerm(Language language) {
-        for (link in preferredTermLinks) {
-            if (link.language == language) {
-                return link.term
-            }
-        }
-        return null
     }
 
     /**
