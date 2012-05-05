@@ -9,7 +9,7 @@
     </g:if>
     <g:else>
         <%
-        Pattern directPattern = Pattern.compile("\\b(" + params.q.encodeAsHTML() + ")\\b", Pattern.CASE_INSENSITIVE);
+        Pattern directPattern = Pattern.compile("\\b(" + params.q + ")\\b", Pattern.CASE_INSENSITIVE);
         %>
         <g:each in="${synsetList}" status="i" var="synset">
             <div style="margin-top:4px;margin-bottom:10px">
@@ -22,8 +22,11 @@
                           <span class="d">&middot;</span>
                        </g:if>
                        <%
-                       Matcher directMatcher = directPattern.matcher(term.toString().encodeAsHTML());
-                       String directMatchingTerm = directMatcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
+                       Matcher directMatcher = directPattern.matcher(term.toString());
+                       String directMatchingTerm = directMatcher.replaceAll("___beginhighlight___\$1___endhighlight___");
+                       directMatchingTerm = directMatchingTerm.encodeAsHTML();
+                       directMatchingTerm = directMatchingTerm.replace("___beginhighlight___", "<span class=\"synsetmatchDirect\">");
+                       directMatchingTerm = directMatchingTerm.replace("___endhighlight___", "</span>");
                        %>
                        <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
                            ${directMatchingTerm}
