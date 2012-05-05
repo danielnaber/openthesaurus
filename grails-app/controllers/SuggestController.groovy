@@ -40,7 +40,7 @@ class SuggestController extends BaseController {
             if (term.isEmpty() || term.matches("\\d+")) {
                 continue
             }
-            SearchResult result = controller.doSearch(term, null, null, null)
+            SearchResult result = controller.searchSynsets(term)
             int matches = result.totalMatches
             if (matches == 0) {
                 Set baseforms = baseformFinder.getBaseForms(conn, term)
@@ -51,7 +51,7 @@ class SuggestController extends BaseController {
                     }
                 } else {
                     for (baseform in baseforms) {
-                        result = controller.doSearch(baseform, null, null, null)
+                        result = controller.searchSynsets(baseform)
                         if (result.totalMatches == 0 && !unknownTermsBaseforms.contains(baseform)) {
                             unknownTermsBaseforms.add(baseform)
                             unknownTerms.add(term)

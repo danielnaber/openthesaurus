@@ -37,7 +37,7 @@ class AjaxSearchController extends BaseController {
         SynsetController synsetController = new SynsetController()
         String query = params.q
         // get 10 + 1 matches so we can display the "there are more matches" link:
-        def directMatches = synsetController.doSearch(query, null, null, null, 11, 0)
+        def directMatches = synsetController.searchSynsets(query, 11, 0)
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
         def subwordSynsetList = []
@@ -45,9 +45,10 @@ class AjaxSearchController extends BaseController {
         if (query.length() >= minLengthForSubstringQuery) {
             Connection conn = dataSource.getConnection()
             try {
+                // TODO: increase the limits?!
                 def substringTermMatches = searchService.searchPartialResult(query, 0, 5)
                 for (substringMatch in substringTermMatches) {
-                    def substringMatches = synsetController.doSearch(substringMatch.term, null, null, null, 10, 0)
+                    def substringMatches = synsetController.searchSynsets(substringMatch.term, 10, 0)
                     addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
                 }
             } finally {

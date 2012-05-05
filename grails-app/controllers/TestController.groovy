@@ -20,19 +20,19 @@ import java.sql.Connection
 class TestController extends BaseController {
 
     def dataSource
-    
+    def searchService
+
     def index = {
         render "Running simple self-test (specific to openthesaurus.de)<br/>"
         assumeMatches("Tür", 1)
         assumeMatches("Tur", 1)  // not really correct, but a known bug
         assumeMatches("aishuifezerfewjv", 0)
         assumeMatches("Bank", 2)
-        SynsetController synsetController = new SynsetController()
         String searchString = "grüß got"
         assumeMatches(searchString, 1, {
             Connection conn = dataSource.getConnection()
             try {
-                synsetController.searchPartialResult(searchString, conn, 0, 5).size()
+              searchService.searchPartialResult(searchString, 0, 5).size()
             } finally {
                 conn.close()
             }
@@ -42,7 +42,7 @@ class TestController extends BaseController {
     private assumeMatches(String searchString, int expectedMatches) {
         assumeMatches(searchString, expectedMatches, {
                     SynsetController synsetController = new SynsetController()
-                    synsetController.doSearch(searchString, null, null, null, 10, 0).synsetList.size()
+                    synsetController.searchSynsets(searchString, 10, 0).synsetList.size()
         })
     }
     

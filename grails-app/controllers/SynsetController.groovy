@@ -18,8 +18,7 @@
 
 import com.vionto.vithesaurus.*
 import java.sql.Connection
-import java.sql.ResultSet
-import java.sql.PreparedStatement
+
 import org.apache.commons.lang.StringUtils
 import com.vionto.vithesaurus.tools.IpTools
 import com.vionto.vithesaurus.tools.StringTools
@@ -64,7 +63,7 @@ class SynsetController extends BaseController {
         def allMatches = []
         String[] searchTerms = getTermsFromTextArea(params.terms)
         for (term in searchTerms) {
-              def searchResult = doSearch(term, null, null, null)
+              def searchResult = searchSynsets(term)
               for (match in searchResult.synsetList) {
                 if (!allMatches.contains(match)) {
                     allMatches.add(match)
@@ -188,7 +187,7 @@ class SynsetController extends BaseController {
           }
           long wiktionaryTime = System.currentTimeMillis() - wiktionaryStartTime
           
-          List similarTerms = []
+          List similarTerms
           long similarStartTime = System.currentTimeMillis()
           if (apiRequest) {
             if (spellApiRequest || allApiRequest) {
@@ -201,28 +200,10 @@ class SynsetController extends BaseController {
           }
           long similarTime = System.currentTimeMillis() - similarStartTime
 
-          Section section = null
-          Source source = null
-          Category category = null
-          if (!params['ajaxSearch']) {
-              if (params['section.id']) {
-                  section = params['section.id'] == "null" ?
-                          null : Section.get(params['section.id'])
-              }
-              if (params['source.id']) {
-                  source = params['source.id'] == "null" ?
-                          null : Source.get(params['source.id'])
-              }
-              if (params['category.id']) {
-                  category = params['category.id'] == "null" ?
-                          null : Category.get(params['category.id'])
-              }
-          }
           int offset = params.offset ? Integer.parseInt(params.offset) : 0
           int maxResults = params.max ? Integer.parseInt(params.max) : 10
           long dbStartTime = System.currentTimeMillis()
-          def searchResult = doSearch(params.q.trim(), section, source, category,
-                  maxResults, offset)
+          def searchResult = searchSynsets(params.q.trim(), maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
@@ -447,25 +428,10 @@ class SynsetController extends BaseController {
     }
 
     /**
-     * Internal implementation of the search via fulltext (currently disabled)
-     * or database search via Hibernate query.
-     * See doDBSearch() for parameters.
-     */
-    def doSearch(String query, Section section, Source source, Category category,
-            int max = -1, int offset = 0) {
-        // currently we always use DB search, not fulltext search
-        // because it was too slow on indexing:
-        //log.info("search for ${query} (section:${section}, source:${source}, " +
-        //        "category:${category})")
-        return doDBSearch(query, section, source, category, max, offset)
-    }
-
-    /**
      * Hibernate-based search implementation. Note that the number
      * of total matches is not always accurate.
      */
-    def doDBSearch(String query, Section section, Source source,
-            Category category, int max = -1, int offset = 0) {
+    def searchSynsets(String query, int max = -1, int offset = 0) {
         String sortField = params.sort ? params.sort : "synsetPreferredTerm"
         if (grailsApplication.config.thesaurus.prefTerm == 'false') {
           sortField = params.sort ? params.sort : "id"
@@ -494,20 +460,6 @@ class SynsetController extends BaseController {
               }
             }
             synset {
-                if (section) {
-                    eq('section', section)
-                }
-                if (source) {
-                    eq('source', source)
-                }
-                if (category) {
-                    or {
-                        eq('preferredCategory', category)
-                        preferredCategory {
-                            eq('categoryType', category)
-                        }
-                    }
-                }
                 eq('isVisible', true)
                 order(sortField, sortOrder)
                 maxResults(UPPER_BOUND)
@@ -750,7 +702,7 @@ class SynsetController extends BaseController {
                     CategoryLink catLink = catLinks.getAt(0)
                     synset.removeLink(catLink)
                 }
-                addCategory(synset, params['category.id_'+newCategoryCount])
+                addCategory(synset, params['category.id_' + newCategoryCount])
                 newCategoryCount++
             }
             // change preferred category:
@@ -1025,10 +977,8 @@ class SynsetController extends BaseController {
         Category category = Category.get(categoryID)
         def catLink = new CategoryLink(synset, category)
         if (synset.containsCategoryLink(catLink)) {
-            synset.errors.reject('thesaurus.duplicate.link',
-                [].toArray(), 'already in concept')
-            render(view:'edit',model:[synset:synset],
-                    contentType:"text/html", encoding:"UTF-8")
+            synset.errors.reject('thesaurus.duplicate.link', [].toArray(), 'already in concept')
+            render(view:'edit',model:[synset:synset], contentType:"text/html", encoding:"UTF-8")
             return
         }
         synset.addCategoryLink(catLink)

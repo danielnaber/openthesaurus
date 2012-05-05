@@ -465,28 +465,6 @@ class Synset implements Cloneable {
           sb.append(" || comment=${userComment}")
         }
 
-        /*if (preferredTermLinks) {
-            sb.append(" preferredTerms=")
-            int prefLinkCount = 0
-            for (link in preferredTermLinks.sort()) {
-                if (prefLinkCount > 0) {
-                    sb.append("|")
-                }
-                // show eg. "en:house|de:Haus|"
-                sb.append(link.language.shortForm)
-                sb.append(":")
-                sb.append(link.term)
-                prefLinkCount++
-            }
-            sb.append(" ||")
-        }*/
-        //sb.append(" preferredCategory=")
-        //sb.append(preferredCategory)
-        //sb.append(" ||")
-        //sb.append(" section=")
-        //sb.append(section)
-        //sb.append(" ||")
-
         int categoryLinkCount = 0
         if (categoryLinks && categoryLinks.size() > 0) {
           sb.append(" || categories=")
@@ -576,7 +554,7 @@ class Synset implements Cloneable {
                   log.error("Log entry validation failed: ${event.errors}")
                   return false
               }
-              // additonally, log to logging system:
+              // additionally, log to logging system:
               log.info("UserEvent: " + event)
               return true
         } else {
