@@ -29,6 +29,8 @@ class SynsetController extends BaseController {
 
     def requestLimiterService
 
+    def searchService
+
     // The maximum for the search query. Avoids out of memory
     final int UPPER_BOUND = 1000
 
@@ -149,7 +151,7 @@ class SynsetController extends BaseController {
                   partialApiMaxResultsRequest = 250
                 }
               }
-              partialMatchResult = searchPartialResult(params.q, conn, partialApiFromResultRequest, partialApiMaxResultsRequest)
+              partialMatchResult = searchService.searchPartialResult(params.q, partialApiFromResultRequest, partialApiMaxResultsRequest)
             }
             if (startsWithApiRequest || allApiRequest) {
               if (params.startsWithFromResults) {
@@ -162,12 +164,12 @@ class SynsetController extends BaseController {
                   startsWithApiMaxResultsRequest = 250
                 }
               }
-              startsWithResult = searchStartsWithResult(params.q, conn, startsWithApiFromResultRequest, startsWithApiMaxResultsRequest)
+              startsWithResult = searchService.searchStartsWithResult(params.q, startsWithApiFromResultRequest, startsWithApiMaxResultsRequest)
             }
           } else {
             // we display 10 matches in the page and use the next one (if any) to
             // decide whether there are more matches:
-            partialMatchResult = searchPartialResult(params.q, conn, 0, 11)
+            partialMatchResult = searchService.searchPartialResult(params.q, 0, 11)
           }
           long partialMatchTime = System.currentTimeMillis() - partialMatchStartTime
           
@@ -262,16 +264,6 @@ class SynsetController extends BaseController {
             return
           }
 
-          // for temporary stats:
-          /*if (wikipediaResult != null && wikipediaResult.size() > 0) {
-            if (Title45info.findByTitle(params.q)) {
-              log.info("45info cliplink" + ", UA: " + request.getHeader("User-Agent"))
-            } else {
-              log.info("45info searchlink" + ", UA: " + request.getHeader("User-Agent"))
-            }
-            log.info("eyeplorer pagelink" + ", UA: " + request.getHeader("User-Agent"))
-          }*/
-
           String descriptionText = null
           def baseforms = []
           if (searchResult.totalMatches > 0) {
@@ -300,7 +292,6 @@ class SynsetController extends BaseController {
             completeResult: searchResult.completeResult,
             baseforms: baseforms,
             upperBound: UPPER_BOUND,
-            mobileBrowser: mobileBrowser,
             descriptionText : descriptionText,
             runTime : totalTime ]
 
@@ -438,81 +429,16 @@ class SynsetController extends BaseController {
       if(!params.max) params.max = "20"
       int offset = Integer.parseInt(params.offset)
       int maxMatches = Integer.parseInt(params.max)
-      Connection conn
-      PreparedStatement ps
-      ResultSet resultSet
-      try {
-        conn = dataSource.getConnection()
-        List partialMatchResult = searchPartialResult(params.q, conn, offset, maxMatches)
-        // get total matches:
-        String sql = "SELECT count(*) AS totalMatches FROM memwords WHERE word LIKE ?"
-        ps = conn.prepareStatement(sql)
-        ps.setString(1, "%" + params.q + "%")
-        resultSet = ps.executeQuery()
-        resultSet.next()
-        int totalMatches = resultSet.getInt("totalMatches")
-        [matches: partialMatchResult, totalMatches: totalMatches]
-      } finally {
-        if (resultSet != null) {
-          resultSet.close()
-        }
-        if (ps != null) {
-          ps.close()
-        }
-        if (conn != null) {
-          conn.close()
-        }
-      }
-     }
-
-    /** Substring matches */
-    private List searchPartialResult(String term, Connection conn, int fromPos, int maxNum) {
-      return searchPartialResultInternal(term, "%" + term + "%", true, conn, fromPos, maxNum)
+      List partialMatchResult = searchService.searchPartialResult(params.q, offset, maxMatches)
+      int totalMatches = searchService.getPartialResultTotalMatches(params.q)
+      [matches: partialMatchResult, totalMatches: totalMatches]
     }
-
-    /** Words that start with a given term */
-    private List searchStartsWithResult(String term, Connection conn, int fromPos, int maxNum) {
-      return searchPartialResultInternal(term, term + "%", false, conn, fromPos, maxNum)
-    }
-
-    /** Substring matches */
-    private List searchPartialResultInternal(String term, String sqlTerm, boolean filterExactMatch, Connection conn, int fromPos, int maxNum) {
-      String sql = "SELECT word FROM memwords WHERE word LIKE ? ORDER BY word ASC LIMIT ${fromPos}, ${maxNum}"
-      PreparedStatement ps
-      ResultSet resultSet
-      def matches = []
-      try {
-          ps = conn.prepareStatement(sql)
-          ps.setString(1, sqlTerm)
-          resultSet = ps.executeQuery()
-          //Pattern pattern = Pattern.compile(Pattern.quote(term.encodeAsHTML()), Pattern.CASE_INSENSITIVE)
-          while (resultSet.next()) {
-            String matchedTerm = resultSet.getString("word")
-            if (filterExactMatch && matchedTerm.toLowerCase() == term.toLowerCase()) {
-              continue
-            }
-            String result = matchedTerm.encodeAsHTML()
-            // currently not useful:
-            //Matcher m = pattern.matcher(result)
-            //result = m.replaceAll("<span class='match'>\$0</span>")
-            matches.add(new PartialMatch(term:matchedTerm, highlightTerm:result))
-          }
-      } finally {
-          if (resultSet != null) {
-            resultSet.close()
-          }
-          if (ps != null) {
-            ps.close()
-          }
-      }
-      return matches
-   }
 
     /**
      * Create the in-memory database of all terms for fast substring search
      */
     // TODO: use quartz
-    def createMemoryDatabase= {
+    def createMemoryDatabase = {
       if (!isLocalHost(request)) {
         throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
@@ -750,8 +676,6 @@ class SynsetController extends BaseController {
         if (totalMatches < UPPER_BOUND) {
             completeResult = true
         }
-        
-        //log.info(">>"+(System.currentTimeMillis()-t) + "ms")
         
         def synsetList = []
         Set ids = new HashSet()
@@ -1389,18 +1313,6 @@ class SearchResult {
         this.synsetList = synsetList
         this.completeResult = completeResult
     }
-}
-
-/** Match of a substring search. */
-class PartialMatch {
-  String term
-  String highlightTerm
-
-  @Override
-  public String toString() {
-    return term
-  }
-
 }
 
 /** Compare so that synsets whose relevant term has no language level set is preferred. */

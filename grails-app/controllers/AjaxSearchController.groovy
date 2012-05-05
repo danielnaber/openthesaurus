@@ -17,10 +17,13 @@
  */ 
 import java.sql.Connection
 import com.vionto.vithesaurus.Synset
+import com.vionto.vithesaurus.PartialMatch
 
 class AjaxSearchController extends BaseController {
 
     def dataSource       // will be injected
+
+    def searchService
 
     /**
      * Return a simplified search result (exact and substring matches) to be fetched
@@ -43,7 +46,7 @@ class AjaxSearchController extends BaseController {
         if (query.length() >= minLengthForSubstringQuery) {
             Connection conn = dataSource.getConnection()
             try {
-                def substringTermMatches = synsetController.searchPartialResult(query, conn, 0, 5)
+                def substringTermMatches = searchService.searchPartialResult(query, 0, 5)
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = synsetController.doSearch(substringMatch.term, null, null, null, 10, 0)
                     addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
