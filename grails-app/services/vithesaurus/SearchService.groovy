@@ -17,8 +17,7 @@ class SearchService {
   private static final int MAX_SIMILARITY_DISTANCE = 3
 
   List searchWikipedia(String query, Connection conn) {
-    String sql = """SELECT link, title FROM wikipedia_links, wikipedia_pages
-          WHERE wikipedia_pages.title = ? AND wikipedia_pages.page_id = wikipedia_links.page_id"""
+    String sql = "SELECT link, title FROM wikipedia WHERE title = ?"
     PreparedStatement ps = null
     ResultSet resultSet = null
     List matches = []

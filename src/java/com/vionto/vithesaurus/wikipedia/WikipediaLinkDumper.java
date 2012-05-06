@@ -69,20 +69,13 @@ public class WikipediaLinkDumper {
     saxParser.getXMLReader().setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
         false);  
     System.out.println("SET NAMES utf8;");
-    System.out.println("DROP TABLE IF EXISTS wikipedia_pages;");
-    System.out.println("CREATE TABLE `wikipedia_pages` ( " + 
-        "`page_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY , " + 
-        "`title` VARCHAR( 100 ) NOT NULL " + 
-        ") ENGINE = MYISAM;");
-    System.out.println("DROP TABLE IF EXISTS wikipedia_links;");
-    System.out.println("CREATE TABLE `wikipedia_links` ( " + 
-        " `page_id` INT NOT NULL , " + 
-        " `link` VARCHAR( 100 ) NOT NULL " + 
+    System.out.println("DROP TABLE IF EXISTS wikipedia;");
+    System.out.println("CREATE TABLE `wikipedia` ( " +
+        "title VARCHAR( 100 ) NOT NULL, " +
+        "link VARCHAR( 100 ) NOT NULL " +
         ") ENGINE = MYISAM;");
     saxParser.parse(is, handler);
-    System.out.println("ALTER TABLE `wikipedia_pages` ADD INDEX ( `page_id` );");
-    System.out.println("ALTER TABLE `wikipedia_pages` ADD INDEX ( `title` );");
-    System.out.println("ALTER TABLE `wikipedia_links` ADD INDEX ( `page_id` );");
+    System.out.println("ALTER TABLE `wikipedia` ADD INDEX ( `title` );");
   }
 
   public static void main(final String[] args) throws Exception {
@@ -127,6 +120,7 @@ public class WikipediaLinkDumper {
         String qName, Attributes attrs) {
       if (qName.equals("title")) {
         position = TITLE;
+        title = new StringBuilder();
       } else if (qName.equals("text")) {
         position = TEXT;
       } else {
@@ -140,16 +134,13 @@ public class WikipediaLinkDumper {
       if (qName.equals("title")) {
         pageCount++;
         // test:
-        //if (pageCount > 5000)
+        //if (pageCount > 100)
         //  System.exit(1);
-        System.out.println("INSERT INTO wikipedia_pages VALUES ("+pageCount+", '" +
-            escape(title.toString().trim())+ "');");
-        title = new StringBuilder();
       } else if (qName.equals("text")) {
+        final String escapedTitle = escape(title.toString().trim());
         final List<String> links = extractLinks(text.toString());
         for (String link : links) {
-          System.out.println("INSERT INTO wikipedia_links VALUES (" +pageCount+ ", '"
-              +escape(link)+ "');");
+          System.out.println("INSERT INTO wikipedia (title, link) VALUES ('" + escapedTitle + "', '" + escape(link) + "');");
         }
         text = new StringBuilder();
       } else {
