@@ -5,6 +5,10 @@
     <g:if test="${synsetList.size() == 0}">
         <div class="metaInfo" style="margin-top:8px;margin-bottom:4px">
             <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
+            <g:if test="${similarTerms.size() > 0}">
+                <g:set var="simTerm" value="${similarTerms.get(0).term}"/>
+                - meinten Sie <g:link url="${createLinkTo(dir:'synonyme')}/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
+            </g:if>
         </div>
     </g:if>
     <g:else>

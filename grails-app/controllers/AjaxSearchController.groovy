@@ -41,6 +41,8 @@ class AjaxSearchController extends BaseController {
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
         def subwordSynsetList = []
+        def similarTerms = []
+        boolean spellcheck = false
         def minLengthForSubstringQuery = 3
         if (query.length() >= minLengthForSubstringQuery) {
             Connection conn = dataSource.getConnection()
@@ -51,15 +53,23 @@ class AjaxSearchController extends BaseController {
                     def substringMatches = synsetController.searchSynsets(substringMatch.term, 10, 0)
                     addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
                 }
+                synsetList.addAll(subwordSynsetList)
+                if (synsetList.size() == 0 && substringSynsetList.size() == 0) {
+                    similarTerms = searchService.searchSimilarTerms(query, conn)
+                    spellcheck = true
+                }
             } finally {
                 conn.close()
             }
         }
         long runTime = System.currentTimeMillis() - startTime
-        synsetList.addAll(subwordSynsetList)
-        log.info("ajaxSearch: ${runTime}ms for '${query}'")
+        if (spellcheck) {
+            log.info("ajaxSearch: ${runTime}ms for '${query}' (incl. spellcheck)")
+        } else {
+            log.info("ajaxSearch: ${runTime}ms for '${query}'")
+        }
         [synsetList: synsetList, substringSynsetList: substringSynsetList,
-         minLengthForSubstringQuery: minLengthForSubstringQuery]
+         minLengthForSubstringQuery: minLengthForSubstringQuery, similarTerms: similarTerms]
     }
 
     private addSynsetMatches(PartialMatch substringMatch, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
