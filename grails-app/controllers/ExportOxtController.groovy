@@ -108,7 +108,7 @@ class ExportOxtController extends BaseController {
         if (!origWord) {
           throw new Exception("'${word}' not found in map")
         }
-        def result = ctrl.doDBSearch(origWord, null, null, null)
+        def result = ctrl.searchSynsets(origWord)
         if (limit > 0 && count > limit) {
           //useful for testing
           break
