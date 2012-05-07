@@ -71,8 +71,8 @@ public class WikipediaLinkDumper {
     System.out.println("SET NAMES utf8;");
     System.out.println("DROP TABLE IF EXISTS wikipedia;");
     System.out.println("CREATE TABLE `wikipedia` ( " +
-        "title VARCHAR( 100 ) NOT NULL, " +
-        "link VARCHAR( 100 ) NOT NULL " +
+        "title VARCHAR( 100 ) CHARACTER SET utf8 NOT NULL, " +
+        "link VARCHAR( 100 ) CHARACTER SET utf8 NOT NULL " +
         ") ENGINE = MYISAM;");
     saxParser.parse(is, handler);
     System.out.println("ALTER TABLE `wikipedia` ADD INDEX ( `title` );");
