@@ -5,8 +5,8 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import com.vionto.vithesaurus.PartialMatch
 import com.vionto.vithesaurus.tools.DbUtils
-import org.apache.commons.lang.StringUtils
 import com.vionto.vithesaurus.SimilarMatch
+import org.apache.commons.lang3.StringUtils
 
 class SearchService {
 
@@ -73,28 +73,27 @@ class SearchService {
     try {
         ps = conn.prepareStatement(sql)
         int wordLength = query.length()
-        ps.setInt(1, wordLength-1)
-        ps.setInt(2, wordLength+1)
-        ps.setInt(3, wordLength-1)
-        ps.setInt(4, wordLength+1)
+        ps.setInt(1, wordLength - 1)
+        ps.setInt(2, wordLength + 1)
+        ps.setInt(3, wordLength - 1)
+        ps.setInt(4, wordLength + 1)
         resultSet = ps.executeQuery()
         // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
-        String lowerTerm = query.toLowerCase()
+        String lowercaseQuery = query.toLowerCase()
         while (resultSet.next()) {
-          String dbTerm = resultSet.getString("word").toLowerCase()
-          if (dbTerm.equals(lowerTerm)) {
+          String lowercaseDbTerm = resultSet.getString("word").toLowerCase()
+          if (lowercaseDbTerm.equals(lowercaseQuery)) {
             continue
           }
-          //TODO: use a fail-fast algorithm here (see Lucene's FuzzyTermQuery):
-          int dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
-          if (dist <= MAX_SIMILARITY_DISTANCE) {
+          int dist = StringUtils.getLevenshteinDistance(lowercaseDbTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+          if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
             matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
           } else {
-            dbTerm = resultSet.getString("lookup")
-            if (dbTerm) {
-              dbTerm = dbTerm.toLowerCase()
-              dist = StringUtils.getLevenshteinDistance(dbTerm, lowerTerm)
-              if (dist <= MAX_SIMILARITY_DISTANCE) {
+            String lookupTerm = resultSet.getString("lookup")
+            if (lookupTerm) {
+              String lowercaseLookupTerm = lookupTerm.toLowerCase()
+              dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+              if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
                 matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
               }
             }
