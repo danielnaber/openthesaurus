@@ -44,7 +44,7 @@
       <tr>
         <td valign="top">
           <g:link controller="synset" action="create" params="[term : params.q]" target="_blank">
-               <img src="${createLinkTo(dir:'images',file:'icon-add.png')}" alt="Add icon" />
+               <img src="${createLinkTo(dir:'images',file:'icon-add.png')}" width="11" height="11" alt="Add icon" />
           </g:link>
         </td>
         <td>&nbsp;</td>

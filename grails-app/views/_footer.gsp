@@ -46,7 +46,7 @@
             <tr>
             <g:if test="${session.user}">
                 <td>
-                  <img src="${createLinkTo(dir:'images',file:'icon-login.png')}" alt="Login-Icon"/>
+                  <img src="${createLinkTo(dir:'images',file:'icon-login.png')}" width="30" height="30" alt="Login-Icon"/>
                 </td>
                 <td>&nbsp;</td>
                 <td>
@@ -68,7 +68,7 @@
                                 actionName:webRequest.getActionName()]}" />
                   </g:else>
                   <g:link controller="user" action="login"
-                     params="${linkParams}"><img src="${createLinkTo(dir:'images',file:'icon-login.png')}" alt="Login-Icon"/></g:link>
+                     params="${linkParams}"><img src="${createLinkTo(dir:'images',file:'icon-login.png')}" width="30" height="30" alt="Login-Icon"/></g:link>
                 </td>
                 <td>&nbsp;</td>
                 <td>
@@ -87,7 +87,7 @@
                 <!--
                 var firstPart = "feedback";
                 var lastPart = "openthesaurus.de";
-                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" alt=\"Kontakt-Icon\"/><" + "/a>");
+                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"30\" height=\"30\" alt=\"Kontakt-Icon\"/><" + "/a>");
                 // -->
                 </script>
               </td>
@@ -107,7 +107,7 @@
         <div class="iconLink">
           <table>
             <tr>
-              <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" alt="Twitter-Icon"/></a></td>
+              <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" width="30" height="30" alt="Twitter-Icon"/></a></td>
               <td>&nbsp;</td>
               <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a>
                  <span style="font-weight: normal;"> - auch per</span> <a href="http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=openthesaurus">RSS</a></td>

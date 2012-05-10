@@ -20,7 +20,7 @@
     <g:if test="${isDirectSearch}">
       <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
       <span id="spinner" style="visibility:hidden;position:absolute;left:257px;top:99px">
-        <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" alt="Wartesymbol" />
+        <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" width="32" height="32" alt="Wartesymbol" />
       </span>
     </g:if>
       
