@@ -26,6 +26,25 @@ class SearchServiceTest extends GroovyTestCase {
     def searchService
     def memoryDatabaseCreationService
 
+    def testSearchMostSimilarTerm() {
+        Connection conn = dataSource.getConnection()
+        try {
+            initMemoryDatabase()
+
+            def term = searchService.searchMostSimilarTerm("hello", conn)
+            assertEquals("hallo/1", term.toString())
+
+            def term2 = searchService.searchMostSimilarTerm("HELLO", conn)
+            assertEquals("hallo/1", term2.toString())
+
+            def term3 = searchService.searchMostSimilarTerm("halloZZ", conn)
+            assertEquals("halloX/2", term3.toString())
+
+        } finally {
+            conn.close()
+        }
+    }
+
     def testSearchSimilarTerms() {
         Connection conn = dataSource.getConnection()
         try {
@@ -35,21 +54,16 @@ class SearchServiceTest extends GroovyTestCase {
             assertEquals(0, otherTerms.size())
 
             def terms1 = searchService.searchSimilarTerms("hallo", conn)
-            assertEquals(2, terms1.size())
             assertEquals("(blubb) hallo/0", terms1.get(0).toString())
             assertEquals("halloX/1", terms1.get(1).toString())
 
             def terms2 = searchService.searchSimilarTerms("hello", conn)
-            assertEquals(3, terms2.size())
-            // TODO: hallo/1 should be first
             assertEquals("[(blubb) hallo/1, hallo/1, halloX/2]", terms2.toString())
 
             def terms2Uppercase = searchService.searchSimilarTerms("HELLO", conn)
-            assertEquals(3, terms2Uppercase.size())
             assertEquals("[(blubb) hallo/1, hallo/1, halloX/2]", terms2Uppercase.toString())
 
             def farthestTerms = searchService.searchSimilarTerms("halloZZ", conn)
-            assertEquals(1, farthestTerms.size())
             assertEquals("[halloX/2]", farthestTerms.toString())
 
         } finally {

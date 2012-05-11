@@ -1,3 +1,20 @@
+/**
+ * vithesaurus - web-based thesaurus management tool
+ * Copyright (C) 2012 Daniel Naber (www.danielnaber.de)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package vithesaurus
 
 import java.sql.Connection
@@ -7,6 +24,7 @@ import com.vionto.vithesaurus.PartialMatch
 import com.vionto.vithesaurus.tools.DbUtils
 import com.vionto.vithesaurus.SimilarMatch
 import org.apache.commons.lang3.StringUtils
+import com.vionto.vithesaurus.SimilarLengthComparator
 
 class SearchService {
 
@@ -59,6 +77,30 @@ class SearchService {
       DbUtils.closeQuietly(ps)
     }
     return matches
+  }
+
+  def searchMostSimilarTerm(String query, Connection conn) {
+    def similarTerms = searchSimilarTerms(query, conn)
+    if (similarTerms.size() > 0) {
+        int smallestDistance = similarTerms.get(0).dist
+        def smallDistTerms = getTermsWithDistance(similarTerms, smallestDistance)
+        Collections.sort(smallDistTerms, new SimilarLengthComparator(query))
+        return smallDistTerms.get(0)
+    } else {
+        return []
+    }
+  }
+
+  private List getTermsWithDistance(List similarTerms, int smallestDiff) {
+    def smallestDiffTerms = []
+    for (similarTerm in similarTerms) {
+      if (similarTerm.dist == smallestDiff) {
+        smallestDiffTerms.add(similarTerm)
+      } else {
+        return smallestDiffTerms
+      }
+    }
+    return smallestDiffTerms
   }
 
   def searchSimilarTerms(String query, Connection conn) {
