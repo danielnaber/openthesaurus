@@ -41,7 +41,7 @@ class AjaxSearchController extends BaseController {
         def synsetList = directMatches.synsetList
         def substringSynsetList = []
         def subwordSynsetList = []
-        def similarTerms = []
+        def mostSimilarTerm = null
         boolean spellcheck = false
         def minLengthForSubstringQuery = 3
         if (query.length() >= minLengthForSubstringQuery) {
@@ -55,7 +55,7 @@ class AjaxSearchController extends BaseController {
                 }
                 synsetList.addAll(subwordSynsetList)
                 if (synsetList.size() == 0 && substringSynsetList.size() == 0) {
-                    similarTerms = searchService.searchSimilarTerms(query, conn)
+                    mostSimilarTerm = searchService.searchMostSimilarTerm(query, conn)
                     spellcheck = true
                 }
             } finally {
@@ -69,7 +69,7 @@ class AjaxSearchController extends BaseController {
             log.info("ajaxSearch: ${runTime}ms for '${query}'")
         }
         [synsetList: synsetList, substringSynsetList: substringSynsetList,
-         minLengthForSubstringQuery: minLengthForSubstringQuery, similarTerms: similarTerms]
+         minLengthForSubstringQuery: minLengthForSubstringQuery, mostSimilarTerm: mostSimilarTerm]
     }
 
     private addSynsetMatches(PartialMatch substringMatch, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
