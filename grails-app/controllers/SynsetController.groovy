@@ -118,9 +118,7 @@ class SynsetController extends BaseController {
           boolean apiRequest = params.format == "text/xml" || params.format == "application/json"
           boolean spellApiRequest = params.similar == "true"
           boolean allApiRequest = params.mode == "all"
-          int partialApiFromResultRequest = 0
           boolean partialApiRequest = params.substring == "true"
-          int startsWithApiFromResultRequest = 0
           boolean startsWithApiRequest = params.startswith == "true"
 
           List partialMatchResult = []
@@ -128,34 +126,14 @@ class SynsetController extends BaseController {
           long partialMatchStartTime = System.currentTimeMillis()
           String sleepTimeInfo = ""
           if (apiRequest) {
-
             sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
-
             if (partialApiRequest || allApiRequest) {
-              if (params.substringFromResults) {
-                partialApiFromResultRequest = Integer.parseInt(params.substringFromResults)
-              }
-              int partialApiMaxResultsRequest = 10
-              if (params.substringMaxResults) {
-                partialApiMaxResultsRequest = Integer.parseInt(params.substringMaxResults)
-                if (partialApiMaxResultsRequest > 250) {
-                  partialApiMaxResultsRequest = 250
-                }
-              }
-              partialMatchResult = searchService.searchPartialResult(params.q, partialApiFromResultRequest, partialApiMaxResultsRequest)
+              int partialSearchOffset = params.substringFromResults ? Integer.parseInt(params.substringFromResults) : 0
+              partialMatchResult = searchService.searchPartialResult(params.q, partialSearchOffset, getPartialSearchMax())
             }
             if (startsWithApiRequest || allApiRequest) {
-              if (params.startsWithFromResults) {
-                startsWithApiFromResultRequest = Integer.parseInt(params.startsWithFromResults)
-              }
-              int startsWithApiMaxResultsRequest = 10
-              if (params.startsWithMaxResults) {
-                startsWithApiMaxResultsRequest = Integer.parseInt(params.startsWithMaxResults)
-                if (startsWithApiMaxResultsRequest > 250) {
-                  startsWithApiMaxResultsRequest = 250
-                }
-              }
-              startsWithResult = searchService.searchStartsWithResult(params.q, startsWithApiFromResultRequest, startsWithApiMaxResultsRequest)
+              int startsWithSearchOffset = params.startsWithFromResults ? Integer.parseInt(params.startsWithFromResults) : 0
+              startsWithResult = searchService.searchStartsWithResult(params.q, startsWithSearchOffset, getStartsWithSearchMax())
             }
           } else {
             // we display 10 matches in the page and use the next one (if any) to
@@ -215,18 +193,7 @@ class SynsetController extends BaseController {
           String metaTagDescriptionText = null
           def baseforms = []
           if (searchResult.totalMatches > 0) {
-            int wordCount = 0
-            StringBuilder synonymsForDescription = new StringBuilder()
-            for (Synset synset in searchResult.synsetList) {
-              for (Term term in synset?.sortedTerms()) {
-                if (wordCount < 15) {
-                  synonymsForDescription.append(term.toString())
-                  synonymsForDescription.append(", ")
-                  wordCount++
-                }
-              }
-            }
-            metaTagDescriptionText = synonymsForDescription.toString()
+            metaTagDescriptionText = getMetaTagDescription(searchResult)
           } else {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
@@ -248,7 +215,23 @@ class SynsetController extends BaseController {
               
     }
 
-    private String getQueryType() {
+  private int getPartialSearchMax() {
+    int partialApiMaxResultsRequest = 10
+    if (params.substringMaxResults) {
+      partialApiMaxResultsRequest = Math.min(Integer.parseInt(params.substringMaxResults), 250)
+    }
+    return partialApiMaxResultsRequest
+  }
+
+  private int getStartsWithSearchMax() {
+    int startsWithApiMaxResultsRequest = 10
+    if (params.startsWithMaxResults) {
+      startsWithApiMaxResultsRequest = Math.min(Integer.parseInt(params.startsWithMaxResults), 250)
+    }
+    return startsWithApiMaxResultsRequest
+  }
+
+  private String getQueryType() {
         String qType
         if (params.format == "text/xml") {
             qType = "xml"
@@ -283,7 +266,22 @@ class SynsetController extends BaseController {
         }
     }
 
-    // NOTE: keep in sync with JSON!
+  private String getMetaTagDescription(SearchResult searchResult) {
+    int wordCount = 0
+    StringBuilder synonymsForDescription = new StringBuilder()
+    for (Synset synset in searchResult.synsetList) {
+      for (Term term in synset?.sortedTerms()) {
+        if (wordCount < 15) {
+          synonymsForDescription.append(term.toString())
+          synonymsForDescription.append(", ")
+          wordCount++
+        }
+      }
+    }
+    return synonymsForDescription.toString()
+  }
+
+  // NOTE: keep in sync with JSON!
   private void renderApiResponseAsXml(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
