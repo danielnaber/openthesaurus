@@ -205,46 +205,17 @@ class SynsetController extends BaseController {
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
-          boolean mobileBrowser = BrowserDetection.isMobileDevice(request)
-          String mobileInfo = mobileBrowser ? "m=y" : "m=n"
-          
-          String qType
-          if (params.format == "text/xml") {
-            qType = "xml"
-          } else if (params.format == "application/json") {
-            qType = "jso"
-          } else {
-            qType = "htm"
-          }
-          log.info("Search(ms):${qType} ${mobileInfo} ${totalTime} db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
+          String qType = getQueryType()
+          log.info("Search(ms):${qType} ${totalTime} db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
             
           if (apiRequest) {
-            if (params.format == "application/json") {
-              if (params.callback) {
-                // JSONP: Get the actual JSON content via HTTP and add the callback - all other ways to make 
-                // this work failed or were equally ugly:
-                def paramsList = []
-                for (param in params.keySet()) {
-                  if (param != "callback") {
-                    paramsList.add(param + "=" + URLEncoder.encode(params[param], "utf-8"))
-                  }
-                }
-                def paramsString = StringUtils.join(paramsList, "&")
-                String url = grailsApplication.config.thesaurus.serverURL  + createLinkTo(dir:'synonyme') + "/search?" + paramsString
-                String urlContent = new URL(url).text
-                render "${params.callback}(${urlContent})"
-              } else {
-                renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
-              }
-            } else {
-              renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
-            }
+            renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult)
             return
           }
 
-          String descriptionText = null
+          String metaTagDescriptionText = null
           def baseforms = []
           if (searchResult.totalMatches > 0) {
             int wordCount = 0
@@ -258,7 +229,7 @@ class SynsetController extends BaseController {
                 }
               }
             }
-            descriptionText = synonymsForDescription.toString()
+            metaTagDescriptionText = synonymsForDescription.toString()
           } else {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
@@ -272,7 +243,7 @@ class SynsetController extends BaseController {
             completeResult: searchResult.completeResult,
             baseforms: baseforms,
             upperBound: UPPER_BOUND,
-            descriptionText : descriptionText,
+            descriptionText : metaTagDescriptionText,
             runTime : totalTime ]
 
         } finally {
@@ -281,8 +252,42 @@ class SynsetController extends BaseController {
               
     }
 
+    private String getQueryType() {
+        String qType
+        if (params.format == "text/xml") {
+            qType = "xml"
+        } else if (params.format == "application/json") {
+            qType = "jso"
+        } else {
+            qType = "htm"
+        }
+        return qType
+    }
 
-  // NOTE: keep in sync with JSON!
+    private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult) {
+        if (params.format == "application/json") {
+            if (params.callback) {
+                // JSONP: Get the actual JSON content via HTTP and add the callback - all other ways to make
+                // this work failed or were equally ugly:
+                def paramsList = []
+                for (param in params.keySet()) {
+                    if (param != "callback") {
+                        paramsList.add(param + "=" + URLEncoder.encode(params[param], "utf-8"))
+                    }
+                }
+                def paramsString = StringUtils.join(paramsList, "&")
+                String url = grailsApplication.config.thesaurus.serverURL + createLinkTo(dir: 'synonyme') + "/search?" + paramsString
+                String urlContent = new URL(url).text
+                render "${params.callback}(${urlContent})"
+            } else {
+                renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
+            }
+        } else {
+            renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
+        }
+    }
+
+    // NOTE: keep in sync with JSON!
   private void renderApiResponseAsXml(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
       // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
       // workaround with feed plugin 1.4 and Grails 1.1
@@ -568,10 +573,8 @@ class SynsetController extends BaseController {
         def origSynset = synset.clone()
         
         if (!params.changeComment || params.changeComment.trim().equals("")) {
-            synset.errors.reject('thesaurus.error',
-                  [].toArray(), errorMsg)
-            render(view:'edit',model:[synset:synset, showOnlyDeleteButton:true],
-                  contentType:"text/html", encoding:"UTF-8")
+            synset.errors.reject('thesaurus.error', [].toArray(), errorMsg)
+            render(view:'edit',model:[synset:synset, showOnlyDeleteButton:true], contentType:"text/html", encoding:"UTF-8")
             return
         }
         
