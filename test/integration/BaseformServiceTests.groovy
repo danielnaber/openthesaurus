@@ -59,6 +59,10 @@ class BaseformServiceTests extends GrailsUnitTestCase {
 
     private void exec(String sql, Connection conn) {
         def statement = conn.prepareStatement(sql)
-        statement.execute()
+        try {
+            statement.execute()
+        } finally  {
+            statement.close()
+        }
     }
 }
