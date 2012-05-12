@@ -25,6 +25,10 @@ import com.vionto.vithesaurus.tools.DbUtils
 import com.vionto.vithesaurus.SimilarMatch
 import org.apache.commons.lang3.StringUtils
 import com.vionto.vithesaurus.SimilarLengthComparator
+import com.vionto.vithesaurus.Term
+import com.vionto.vithesaurus.tools.StringTools
+import com.vionto.vithesaurus.WordLevelComparator
+import com.vionto.vithesaurus.SearchResult
 
 class SearchService {
 
@@ -32,7 +36,72 @@ class SearchService {
 
   def dataSource
 
+  // The maximum for the search query. Avoids out of memory
+  private static final int UPPER_BOUND = 1000
   private static final int MAX_SIMILARITY_DISTANCE = 3
+
+  /**
+   * Hibernate-based search implementation. Note that the number
+   * of total matches is not always accurate.
+   */
+  def searchSynsets(String query, int max = -1, int offset = 0) {
+      boolean completeResult = false
+
+      // TODO: why don't we use Synset.withCriteria here, it would
+      // free us from the need to remove duplicates manually
+      // => there's a bug(?) so that the synsets are incomplete,
+      // i.e. the terms are missing unless they match "ilike('word', query)",
+      // see http://jira.codehaus.org/browse/GRAILS-2793
+      // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
+      def termList = Term.withCriteria {
+          or {
+            eq('word', query)
+            eq('normalizedWord', StringTools.normalize(query))
+            if (query.startsWith("sich ") || query.startsWith("etwas ")) {
+                // special case for German reflexive etc - keep in sync with _mainmatches.gsp
+                String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
+                eq('word', simplifiedQuery)
+                eq('normalizedWord', simplifiedQuery)
+            }
+          }
+          synset {
+              eq('isVisible', true)
+              maxResults(UPPER_BOUND)
+          }
+      }
+      int totalMatches = termList.size()
+      if (totalMatches < UPPER_BOUND) {
+          completeResult = true
+      }
+
+      def synsetList = []
+      Set ids = new HashSet()
+      int i = 0
+      for (term in termList) {
+          // avoid duplicates:
+          if (!ids.contains(term.synset.id)) {
+              i++
+              if (i <= offset) {
+                  ids.add(term.synset.id)
+                  continue
+              }
+              synsetList.add(term.synset)
+              ids.add(term.synset.id)
+              if (max > 0 && synsetList.size() >= max) {
+                  break
+              }
+          }
+      }
+      // We count terms, not synsets so the number of matches may
+      // not be correct - make it correct at least if there are only
+      // a few hits (the user can easily see then that the number is
+      // incorrect):
+      if (synsetList.size() < max && offset == 0) {
+          totalMatches = synsetList.size()
+      }
+      Collections.sort(synsetList, new WordLevelComparator(query))
+      return new SearchResult(totalMatches, synsetList, completeResult)
+  }
 
   List searchWikipedia(String query, Connection conn) {
     String sql = "SELECT link, title FROM wikipedia WHERE title = ?"

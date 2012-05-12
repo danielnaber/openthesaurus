@@ -32,9 +32,6 @@ class SynsetController extends BaseController {
     def memoryDatabaseCreationService
     def baseformService
 
-    // The maximum for the search query. Avoids out of memory
-    final int UPPER_BOUND = 1000
-
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'variation', 'substring']]
@@ -61,7 +58,7 @@ class SynsetController extends BaseController {
         def allMatches = []
         String[] searchTerms = getTermsFromTextArea(params.terms)
         for (term in searchTerms) {
-              def searchResult = searchSynsets(term)
+              def searchResult = searchService.searchSynsets(term)
               for (match in searchResult.synsetList) {
                 if (!allMatches.contains(match)) {
                     allMatches.add(match)
@@ -201,7 +198,7 @@ class SynsetController extends BaseController {
           int offset = params.offset ? Integer.parseInt(params.offset) : 0
           int maxResults = params.max ? Integer.parseInt(params.max) : 10
           long dbStartTime = System.currentTimeMillis()
-          def searchResult = searchSynsets(params.q.trim(), maxResults, offset)
+          def searchResult = searchService.searchSynsets(params.q.trim(), maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
@@ -242,7 +239,6 @@ class SynsetController extends BaseController {
             totalMatches: searchResult.totalMatches,
             completeResult: searchResult.completeResult,
             baseforms: baseforms,
-            upperBound: UPPER_BOUND,
             descriptionText : metaTagDescriptionText,
             runTime : totalTime ]
 
@@ -428,73 +424,6 @@ class SynsetController extends BaseController {
       memoryDatabaseCreationService.createMemoryDatabase(grailsApplication.config.thesaurus.hiddenSynsets)
       log.info("Finished creating in-memory database")
       render "OK"
-    }
-
-    /**
-     * Hibernate-based search implementation. Note that the number
-     * of total matches is not always accurate.
-     */
-    def searchSynsets(String query, int max = -1, int offset = 0) {
-        String sortField = params.sort ? params.sort : "id"
-        String sortOrder = params.order ? params.order : "asc"
-
-        boolean completeResult = false
-
-        // TODO: why don't we use Synset.withCriteria here, it would
-        // free us from the need to remove duplicates manually
-        // => there's a bug(?) so that the synsets are incomplete,
-        // i.e. the terms are missing unless they match "ilike('word', query)",
-        // see http://jira.codehaus.org/browse/GRAILS-2793
-        // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
-        def termList = Term.withCriteria {
-            or {
-              eq('word', query)
-              eq('normalizedWord', StringTools.normalize(query))
-              if (query.startsWith("sich ") || query.startsWith("etwas ")) {
-                  // special case for German reflexive etc - keep in sync with _mainmatches.gsp
-                  String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
-                  eq('word', simplifiedQuery)
-                  eq('normalizedWord', simplifiedQuery)
-              }
-            }
-            synset {
-                eq('isVisible', true)
-                order(sortField, sortOrder)
-                maxResults(UPPER_BOUND)
-            }
-        }
-        int totalMatches = termList.size()
-        if (totalMatches < UPPER_BOUND) {
-            completeResult = true
-        }
-        
-        def synsetList = []
-        Set ids = new HashSet()
-        int i = 0
-        for (term in termList) {
-            // avoid duplicates:
-            if (!ids.contains(term.synset.id)) {
-                i++
-                if (i <= offset) {
-                    ids.add(term.synset.id)
-                    continue
-                }
-                synsetList.add(term.synset)
-                ids.add(term.synset.id)
-                if (max > 0 && synsetList.size() >= max) {
-                    break
-                }
-            }
-        }
-        // We count terms, not synsets so the number of matches may
-        // not be correct - make it correct at least if there are only
-        // a few hits (the user can easily see then that the number is
-        // incorrect):
-        if (synsetList.size() < max && offset == 0) {
-            totalMatches = synsetList.size()
-        }
-        Collections.sort(synsetList, new WordLevelComparator(query))
-        return new SearchResult(totalMatches, synsetList, completeResult)
     }
 
     /**
@@ -935,19 +864,5 @@ class SynsetController extends BaseController {
     LogInfo getLogInfo(Object oldObj, Object newObj, String changeDesc) {
         return new LogInfo(session, IpTools.getRealIpAddress(request), oldObj,
                 newObj, changeDesc)
-    }
-}
-
-/**
- * Container for a partial search result plus the number of total matches.
- */
-class SearchResult {
-    int totalMatches
-    List synsetList
-    boolean completeResult // 'false' if there are more results than given back
-    SearchResult(int totalMatches, List synsetList, boolean completeResult) {
-        this.totalMatches = totalMatches
-        this.synsetList = synsetList
-        this.completeResult = completeResult
     }
 }
