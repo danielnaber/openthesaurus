@@ -29,7 +29,25 @@ class MemoryDatabaseCreationServiceTest extends GrailsUnitTestCase {
     def testMemoryDatabaseCreation() {
         fillDatabase()
         memoryDatabaseCreationService.createMemoryDatabase("-1")
+        assertMemoryDatabaseContent()
+        // test that re-creation works as well:
+        memoryDatabaseCreationService.createMemoryDatabase("-1")
+        assertMemoryDatabaseContent()
+    }
 
+    private void fillDatabase() {
+        def synsets = Synset.list()
+        for (synset in synsets) {
+            synset.delete()
+        }
+        def german = Language.findByShortForm("de")
+        Synset synset1 = new Synset()
+        synset1.addTerm(new Term("hallo", german, synset1))
+        synset1.addTerm(new Term("blah (xxx)", german, synset1))
+        synset1.save(failOnError: true, flush: true)
+    }
+
+    private void assertMemoryDatabaseContent() {
         Connection conn = dataSource.getConnection()
         try {
             def statement = conn.prepareStatement("SELECT * FROM memwords ORDER BY word")
@@ -47,17 +65,5 @@ class MemoryDatabaseCreationServiceTest extends GrailsUnitTestCase {
         } finally {
             conn.close()
         }
-    }
-
-    private void fillDatabase() {
-        def synsets = Synset.list()
-        for (synset in synsets) {
-            synset.delete()
-        }
-        def german = Language.findByShortForm("de")
-        Synset synset1 = new Synset()
-        synset1.addTerm(new Term("hallo", german, synset1))
-        synset1.addTerm(new Term("blah (xxx)", german, synset1))
-        synset1.save(failOnError: true, flush: true)
     }
 }
