@@ -41,8 +41,7 @@ class TestController extends BaseController {
 
     private assumeMatches(String searchString, int expectedMatches) {
         assumeMatches(searchString, expectedMatches, {
-                    SynsetController synsetController = new SynsetController()
-                    synsetController.searchSynsets(searchString, 10, 0).synsetList.size()
+          searchService.searchSynsets(searchString, 10, 0).synsetList.size()
         })
     }
     
