@@ -36,6 +36,7 @@ class ExportOxtController extends BaseController {
 
   def dataSource       // will be injected
   def sessionFactory   // will be injected
+  def searchService
 
   String encoding = "UTF-8"
 
@@ -89,7 +90,6 @@ class ExportOxtController extends BaseController {
 
       List sortedWords = []
       Map wordToOrigWord = new HashMap()
-      SynsetController ctrl = new SynsetController()
 
       while (rs.next()) {
         String word = rs.getString("word")
@@ -108,7 +108,7 @@ class ExportOxtController extends BaseController {
         if (!origWord) {
           throw new Exception("'${word}' not found in map")
         }
-        def result = ctrl.searchSynsets(origWord)
+        def result = searchService.searchSynsets(origWord)
         if (limit > 0 && count > limit) {
           //useful for testing
           break
