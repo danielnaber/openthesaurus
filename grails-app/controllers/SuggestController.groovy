@@ -23,6 +23,7 @@ class SuggestController extends BaseController {
     def beforeInterceptor = [action: this.&adminAuth]
 
     def dataSource       // will be injected
+    def searchService
     
     def index = {
         []
@@ -32,7 +33,6 @@ class SuggestController extends BaseController {
         String text = params.text
         Connection conn = dataSource.getConnection()
         String[] terms = text.split("[\\s+\\.,;\"':„“?()]")
-        SynsetController controller = new SynsetController()
         BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
         List unknownTermsBaseforms = []
@@ -40,7 +40,7 @@ class SuggestController extends BaseController {
             if (term.isEmpty() || term.matches("\\d+")) {
                 continue
             }
-            SearchResult result = controller.searchSynsets(term)
+            SearchResult result = searchService.searchSynsets(term)
             int matches = result.totalMatches
             if (matches == 0) {
                 Set baseforms = baseformFinder.getBaseForms(conn, term)
@@ -51,7 +51,7 @@ class SuggestController extends BaseController {
                     }
                 } else {
                     for (baseform in baseforms) {
-                        result = controller.searchSynsets(baseform)
+                        result = searchService.searchSynsets(baseform)
                         if (result.totalMatches == 0 && !unknownTermsBaseforms.contains(baseform)) {
                             unknownTermsBaseforms.add(baseform)
                             unknownTerms.add(term)
