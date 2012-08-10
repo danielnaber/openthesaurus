@@ -476,6 +476,11 @@ pre.api {
   border: 1px solid #dddddd;
 }
 
+.paginateButtons .currentStep {
+  color: white;
+  background-color: #0071BD;
+}
+
 .nojs {
   margin-top: 5px;
   margin-bottom: 5px;
