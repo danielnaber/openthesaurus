@@ -218,9 +218,15 @@ class Synset implements Cloneable {
             // change direction:
             l.synset = incomingLink.targetSynset
             l.targetSynset = incomingLink.synset
-            allLinks.add(l)
+            if (l.targetSynset.isVisible) {
+                allLinks.add(l)
+            }
         }
-        allLinks.addAll(synsetLinks)
+        for (link in synsetLinks) {
+            if (link.targetSynset.isVisible) {
+              allLinks.add(link)
+            }
+        }
         return allLinks.sort()
     }
 
