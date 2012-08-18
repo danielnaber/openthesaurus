@@ -44,15 +44,16 @@
           und openthesaurus.de als die ursprüngliche Quelle angegeben wird.</p>
 
         <p>Der <strong>Sourcecode der Website</strong> befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
-          bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.
+          bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
           Die Installation ist in einem <a href="http://vithesaurus.svn.sourceforge.net/viewvc/vithesaurus/trunk/README?revision=HEAD&amp;view=markup">README</a>
-          beschrieben.
+          und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">im Forum</a> beschrieben.
         </p>
 
     
         <h2>Design</h2>
 
-        <p>Das Design dieser Website stammt von <a href="http://www.sabinesieg.de">Sabine Sieg</a>.</p>
+        <p>Das Design dieser Website stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg<!--</a>-->.</p>
+
 
         <h2>Änderungen und News zu OpenThesaurus</h2>
 
