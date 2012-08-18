@@ -13,7 +13,10 @@
     </g:if>
     <g:else>
         <%
-        Pattern directPattern = Pattern.compile("\\b(" + params.q + ")\\b", Pattern.CASE_INSENSITIVE);
+        String umlautNormalizedQuery = params.q
+        // treat o = ö - this is debatable, but it's how MySQL searches, so highlight this way:
+        umlautNormalizedQuery = umlautNormalizedQuery.replaceAll('[ÜüUu]', '[ÜüUu]').replaceAll('[ÄäAa]', '[ÄäAa]').replaceAll('[ÖöOo]', '[ÖöOo]')
+        Pattern directPattern = Pattern.compile("\\b(" + umlautNormalizedQuery + ")\\b", Pattern.CASE_INSENSITIVE);
         %>
         <g:each in="${synsetList}" status="i" var="synset">
             <div style="margin-top:4px;margin-bottom:10px">
@@ -48,7 +51,7 @@
             <g:link controller="synset" action="search" params="${[q: params.q]}"><g:message code="result.ajax.show.all.exact.matches" /></g:link>
         </g:if>
     </g:else>
-        
+
     <hr style="margin-bottom:5px"/>
 
     <g:if test="${substringSynsetList.size() == 0}">
