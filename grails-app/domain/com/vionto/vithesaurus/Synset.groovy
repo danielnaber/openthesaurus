@@ -224,7 +224,7 @@ class Synset implements Cloneable {
         }
         for (link in synsetLinks) {
             if (link.targetSynset.isVisible) {
-              allLinks.add(link)
+                allLinks.add(link)
             }
         }
         return allLinks.sort()

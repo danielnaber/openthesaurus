@@ -24,11 +24,20 @@
                     <li><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(Integer.MAX_VALUE, true)}</g:link>
                         <g:if test="${synset.categoryLinks}">
                             <br/>
-                            <span class="metaInfo">Kategorien:
-                            <g:each in="${synset.categoryLinks}" var="category">
-                                ${category.category.categoryName.encodeAsHTML()}
+                            <span class="metaInfo">Kategorien:</span>
+                                <g:each in="${synset.categoryLinks}" var="category">
+                                    <g:link controller="term" action="list" params="${[categoryId:category.category.id]}">
+                                        <span class="metaInfo lightlink">${category.category.categoryName.encodeAsHTML()}</span></g:link>
+                                </g:each>
+                        </g:if>
+                        <g:if test="${synset.sortedSynsetLinks()}">
+                            <br/>
+                            <g:each in="${synset.sortedSynsetLinks()}" var="link">
+                                <g:set var="linkName" value="${link.linkType.toString().encodeAsHTML()}"/>
+                                <span class="metaInfo">${linkName}:</span>
+                                    <g:link controller='synset' action='edit' id="${link.targetSynset.id}">
+                                        <span class="metaInfo lightlink" style="font-weight: normal">${link.targetSynset.toShortStringWithShortLevel(4, true)}</span></g:link><br/>
                             </g:each>
-                            </span>
                         </g:if>
                     </li>
                 </g:each>
