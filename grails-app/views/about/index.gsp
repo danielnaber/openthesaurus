@@ -41,7 +41,7 @@
           <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
           Das bedeutet vereinfacht gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
           können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
-          und openthesaurus.de als die ursprüngliche Quelle angegeben wird.</p>
+          und openthesaurus.de mit Link als die ursprüngliche Quelle angegeben wird.</p>
 
         <p>Der <strong>Sourcecode der Website</strong> befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
           bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
@@ -50,9 +50,12 @@
         </p>
 
     
-        <h2>Design</h2>
+        <h2>Technik &amp; Design</h2>
 
-        <p>Das Design dieser Website stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg<!--</a>-->.</p>
+        <p>Die Website ist mit <a href="http://www.grails.org">Grails</a> umgesetzt und nutzt <a href="http://www.mysql.com">MySQL</a>
+        als Datenbank.
+        Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg<!--</a>-->
+        </p>
 
 
         <h2>Änderungen und News zu OpenThesaurus</h2>
