@@ -123,6 +123,25 @@ class UserController extends BaseController {
       [email: params.userId]
     }
 
+    def changePassword = {
+      ThesaurusUser user = session.user
+      [user:user]
+    }
+
+    def doChangePassword = {
+      ThesaurusUser origUser = session.user
+      ThesaurusUser user = ThesaurusUser.get(origUser.id)
+      checkPasswords(user)
+      if (user.errors.allErrors.size() > 0) {
+        flash.message = user.errors.allErrors[0].defaultMessage
+        render(view:'changePassword', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
+      }
+      savePassword(user, params.password1)
+      flash.message = message(code:'user.change.password.changed')
+      redirect(action: 'edit')
+    }
+
     private def checkCaptcha(params, ThesaurusUser user) {
       if (ThesaurusConfigurationEntry.findByKey('captcha.question')) {
         List expectedAnswers = ThesaurusConfigurationEntry.findAllByKey('captcha.answer')
@@ -150,11 +169,11 @@ class UserController extends BaseController {
     
     private checkPasswords(ThesaurusUser user) {
       if (params.password1 != params.password2) {
-        log.warn("Registration failed: passwords didn't match")
+        log.warn("Registration or password update failed: passwords didn't match")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.different.passwords'))
       }
       if (params.password1.length() < MIN_PASSWORD_LENGTH) {
-        log.warn("Registration failed: password too short (${params.password1.length()} chars)")
+        log.warn("Registration or password update failed: password too short (${params.password1.length()} chars)")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.short.password', args:[MIN_PASSWORD_LENGTH]))
       }
     }
@@ -371,16 +390,20 @@ class UserController extends BaseController {
           return
         }
         log.info("Setting user password for '${user.userId}'")
+        savePassword(user, params.password1)
+        [user: user]
+    }
+
+    private void savePassword(ThesaurusUser user, String password) {
         String salt = getRandomSalt()
-        user.password = md5sum(params.password1, salt)
+        user.password = md5sum(password, salt)
         user.salt = salt
         boolean saved = user.validate() && user.save()
         if (!saved) {
           throw new Exception("Could not save new password: ${user.errors}")
         }
-        [user: user]
     }
-    
+
     private checkPasswordResetConfirmation(ThesaurusUser user) {
         if (!user.confirmationCode || user.confirmationCode == "") {
           log.warn("Empty/null confirmation code in database for user '${params.userId}' doesn't allow password reset")
