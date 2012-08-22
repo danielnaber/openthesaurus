@@ -7,6 +7,6 @@
     <span class="d">&middot;</span>
     <g:link controller="user" action="edit"><g:message code="user.edit.link"/></g:link>
     <span class="d">&middot;</span>
-    <g:link controller="user" action="logout">Logout</g:link>
+    <g:link controller="user" action="logout"><g:message code="user.logout"/></g:link>
 </g:if>
 </div>
