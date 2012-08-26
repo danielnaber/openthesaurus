@@ -26,25 +26,29 @@ import com.vionto.vithesaurus.ThesaurusConfigurationEntry
 
 class OpenThesaurusWebTests extends grails.util.WebTest {
 
-   void testXml() {
+   void testSuite() {
        initData()
+       xml()
+       json()
+       jsonCallback()
+   }
 
-       invoke '/synset/createMemoryDatabase'
-       verifyText('OK')
-
+   void xml() {
        invoke '/synonyme/search?q=test&format=text/xml'
        verifySynsets()
 
        // similarity search:
        invoke '/synonyme/search?q=txst&format=text/xml&similar=true'
+       verifyMetaData()
        verifyXPath(xpath: "/matches/similarterms/term[@term ='Test' and @distance=1]")
        not {
            verifyXPath(xpath: "/matches/synset")
            verifyXPath(xpath: "/matches/substringterms")
        }
 
-       // substring substring:
+       // substring search:
        invoke '/synonyme/search?q=te&format=text/xml&substring=true'
+       verifyMetaData()
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
        not {
@@ -53,6 +57,7 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
        }
 
        invoke '/synonyme/search?q=te&format=text/xml&substring=true&substringFromResults=1'
+       verifyMetaData()
        verifyXPath(xpath: "/matches/substringterms")
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
        not {
@@ -62,6 +67,7 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
        }
 
        invoke '/synonyme/search?q=te&format=text/xml&substring=true&substringMaxResults=1'
+       verifyMetaData()
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
        not {
            verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
@@ -69,12 +75,19 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
            verifyXPath(xpath: "/matches/similarterms")
        }
 
+       // starts with search:
+       invoke '/synonyme/search?q=te&format=text/xml&startswith=true'
+       verifyMetaData()
+       verifyXPath(xpath: "/matches/startswithterms/term[@term ='Tess öäüß']")
+       verifyXPath(xpath: "/matches/startswithterms/term[@term ='Test']")
+
        // all search modes at once:
-       invoke '/synonyme/search?q=test&format=text/xml&substring=true&mode=all'
+       invoke '/synonyme/search?q=test&format=text/xml&mode=all'
        verifySynsets()
        verifyXPath(xpath: "/matches/startswithterms/term[@term ='Test']")
 
-       invoke '/synonyme/search?q=tes&format=text/xml&substring=true&mode=all'
+       invoke '/synonyme/search?q=tes&format=text/xml&mode=all'
+       verifyMetaData()
        verifyXPath(xpath: "/matches/similarterms/term[@term ='Test' and @distance=1]")
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
        verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
@@ -83,6 +96,8 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
    }
 
     private void verifySynsets() {
+        verifyMetaData()
+
         verifyXPath(xpath: '/matches/synset[@id=1]')
         verifyXPath(xpath: '/matches/synset[@id=1]/categories', '')
         verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='Test']")
@@ -97,12 +112,24 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
         }
     }
 
+    private void verifyMetaData() {
+        verifyXPath(xpath: '/matches/metaData/apiVersion')
+        verifyXPath(xpath: '/matches/metaData/warning')
+        verifyXPath(xpath: '/matches/metaData/copyright')
+        verifyXPath(xpath: '/matches/metaData/license')
+        verifyXPath(xpath: '/matches/metaData/source')
+        verifyXPath(xpath: '/matches/metaData/source')
+        verifyXPath(xpath: '/matches/metaData/date')
+    }
+
     private void initData() {
         new TermLevel(levelName: 'colloquial', shortLevelName: 'coll').save(failOnError: true)
         new com.vionto.vithesaurus.Category(categoryName: 'meine Kategorie').save(failOnError: true)
         createSynset1()
         createSynset2()
         new ThesaurusConfigurationEntry(key: "requestLimitMaxRequests", value: "1000").save(failOnError: true)
+        invoke '/synset/createMemoryDatabase'
+        verifyText('OK')
     }
 
     private void createSynset1() {
@@ -130,12 +157,40 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
         term1.save()
     }
 
-    /*void testJson() {
-        // TODO: test
+    void json() {
+        invoke '/synonyme/search?q=test&format=application/json'
+        verifyJsonMetaData()
+        verifyText('{"id":1,"categories":[],"terms":[{"term":"Tess öäüß","level":"colloquial"},{"term":"Test"}]}')
+        verifyText('{"id":2,"categories":["meine Kategorie"],"terms":[{"term":"Test"}]}')
+
+        invoke '/synonyme/search?q=txst&format=application/json&similar=true'
+        verifyJsonMetaData()
+        verifyText('"similarterms":[{"term":"Test","distance":1}]}')
+
+        invoke '/synonyme/search?q=te&format=application/json&substring=true'
+        verifyJsonMetaData()
+        verifyText('"substringterms":[{"term":"Tess öäüß"},{"term":"Test"}]}')
+
+        invoke '/synonyme/search?q=tes&format=application/json&mode=all'
+        verifyJsonMetaData()
+        verifyText('"similarterms":[{"term":"Test","distance":1}]')
+        verifyText('"substringterms":[{"term":"Tess öäüß"},{"term":"Test"}]')
     }
 
-    void testJsonCallback() {
-        // TODO: test
-    }*/
+    private void verifyJsonMetaData() {
+        verifyText('"apiVersion":"0.2"')
+        verifyText('"copyright":"Copyright')
+        verifyText('"license":"GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"')
+        verifyText('"source":"http://')
+        verifyText('"date":')
+    }
+
+    void jsonCallback() {
+        invoke '/synonyme/search?q=test&format=application/json&callback=myCallback'
+        verifyJsonMetaData()
+        verifyText('myCallback(')
+        verifyText('{"id":1,"categories":[],"terms":[{"term":"Tess öäüß","level":"colloquial"},{"term":"Test"}]}')
+        verifyText('{"id":2,"categories":["meine Kategorie"],"terms":[{"term":"Test"}]}')
+    }
 
 }
