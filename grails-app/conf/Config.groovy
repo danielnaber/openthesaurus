@@ -31,6 +31,9 @@ grails {
      password = "fixme"
   }
 }
+
+// for the production system, see /etc/exim4/passwd.client
+
 */
 
 
