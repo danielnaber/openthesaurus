@@ -22,54 +22,94 @@ import com.vionto.vithesaurus.Language
 import com.vionto.vithesaurus.Term
 import com.vionto.vithesaurus.TermLevel
 import com.vionto.vithesaurus.CategoryLink
+import com.vionto.vithesaurus.ThesaurusConfigurationEntry
 
 class OpenThesaurusWebTests extends grails.util.WebTest {
 
-   //def dataSource
-   //def memoryDatabaseCreationService
-
    void testXml() {
        initData()
-       //memoryDatabaseCreationService.createMemoryDatabase("12345")
+
+       invoke '/synset/createMemoryDatabase'
+       verifyText('OK')
 
        invoke '/synonyme/search?q=test&format=text/xml'
-       verifyXPath(xpath: '/matches/synset')
-       verifyXPath(xpath: '/matches/synset[@id=1]')
-       verifyXPath(xpath: '/matches/synset[@id=1]/categories', '')
-       verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='Test']")
-       verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='öäüß']")
-       verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='öäüß' and @level='colloquial']")
+       verifySynsets()
 
-       verifyXPath(xpath: '/matches/synset[@id=2]')
-       verifyXPath(xpath: "/matches/synset[@id=2]/categories/category[@name = 'meine Kategorie']")
-
-       not {
-           verifyXPath(xpath: '/matches/synset[@id=3]')
-       }
-
-       // similarity search: TODO - requires memory database
-       /*invoke '/synonyme/search?q=txst&format=text/xml&similar=true'
-       verifyXPath(xpath: "/matches/similarterms")
+       // similarity search:
+       invoke '/synonyme/search?q=txst&format=text/xml&similar=true'
        verifyXPath(xpath: "/matches/similarterms/term[@term ='Test' and @distance=1]")
        not {
            verifyXPath(xpath: "/matches/synset")
-       }*/
+           verifyXPath(xpath: "/matches/substringterms")
+       }
 
-       // TODO: test activating substring, substringFromResults, substringMaxResults, mode=all
+       // substring substring:
+       invoke '/synonyme/search?q=te&format=text/xml&substring=true'
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
+       not {
+           verifyXPath(xpath: "/matches/synset")
+           verifyXPath(xpath: "/matches/similarterms")
+       }
+
+       invoke '/synonyme/search?q=te&format=text/xml&substring=true&substringFromResults=1'
+       verifyXPath(xpath: "/matches/substringterms")
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
+       not {
+           verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
+           verifyXPath(xpath: "/matches/synset")
+           verifyXPath(xpath: "/matches/similarterms")
+       }
+
+       invoke '/synonyme/search?q=te&format=text/xml&substring=true&substringMaxResults=1'
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
+       not {
+           verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
+           verifyXPath(xpath: "/matches/synset")
+           verifyXPath(xpath: "/matches/similarterms")
+       }
+
+       // all search modes at once:
+       invoke '/synonyme/search?q=test&format=text/xml&substring=true&mode=all'
+       verifySynsets()
+       verifyXPath(xpath: "/matches/startswithterms/term[@term ='Test']")
+
+       invoke '/synonyme/search?q=tes&format=text/xml&substring=true&mode=all'
+       verifyXPath(xpath: "/matches/similarterms/term[@term ='Test' and @distance=1]")
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Tess öäüß']")
+       verifyXPath(xpath: "/matches/substringterms/term[@term ='Test']")
+       verifyXPath(xpath: "/matches/startswithterms/term[@term ='Tess öäüß']")
+       verifyXPath(xpath: "/matches/startswithterms/term[@term ='Test']")
    }
+
+    private void verifySynsets() {
+        verifyXPath(xpath: '/matches/synset[@id=1]')
+        verifyXPath(xpath: '/matches/synset[@id=1]/categories', '')
+        verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='Test']")
+        verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='Tess öäüß']")
+        verifyXPath(xpath: "/matches/synset[@id=1]/term[@term='Tess öäüß' and @level='colloquial']")
+
+        verifyXPath(xpath: '/matches/synset[@id=2]')
+        verifyXPath(xpath: "/matches/synset[@id=2]/categories/category[@name = 'meine Kategorie']")
+
+        not {
+            verifyXPath(xpath: '/matches/synset[@id=3]')
+        }
+    }
 
     private void initData() {
         new TermLevel(levelName: 'colloquial', shortLevelName: 'coll').save(failOnError: true)
         new com.vionto.vithesaurus.Category(categoryName: 'meine Kategorie').save(failOnError: true)
         createSynset1()
         createSynset2()
+        new ThesaurusConfigurationEntry(key: "requestLimitMaxRequests", value: "1000").save(failOnError: true)
     }
 
     private void createSynset1() {
         Synset synset = new Synset(isVisible: true)
         Language language = Language.findByShortForm("de")
         Term term1 = new Term("Test", language, synset)
-        Term term2 = new Term("öäüß", language, synset)
+        Term term2 = new Term("Tess öäüß", language, synset)
         term2.level = TermLevel.findByShortLevelName("coll")
         synset.save()
         synset.addToTerms(term1)
