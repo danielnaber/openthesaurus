@@ -140,6 +140,10 @@
           zurückgegeben werden sollen. Funktioniert nur zusammen mit <span class="apioption">substring=true</span>.
           Der Standardwert ist 10, Maximalwert ist 250.</li>
 
+          <li><span class="apioption">startswith=true</span>: Wie <tt>substring=true</tt>, findet aber nur Wörter, die
+          mit dem angebenen Suchbegriff anfangen. Beschränkung der Treffer ähnlich wie bei <tt>substring</tt>,
+          aber mit <tt>startsWithFromResults</tt> und <tt>startsWithMaxResults</tt>.</li>
+
           <li><span class="apioption">supersynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
           (optionalen) Oberbegriffe mitgeliefert werden <em>(seit August 2012, bisher nur für XML)</em>.</li>
 
