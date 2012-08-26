@@ -352,7 +352,7 @@ class SynsetController extends BaseController {
         render(contentType:"text/json", encoding:"utf-8") {
 
             metaData apiVersion: "0.2",
-                warning: "ACHTUNG, Beta-Version! JSON-Format kann sich noch ändern. Bitte vor ernsthafter Nutzung feedback@openthesaurus.de kontaktieren.",
+                warning: "ACHTUNG: Bitte vor ernsthafter Nutzung feedback@openthesaurus.de kontaktieren, um bei API-Änderungen informiert zu werden",
                 copyright: grailsApplication.config.thesaurus.apiCopyright,
                 license: grailsApplication.config.thesaurus.apiLicense,
                 source: grailsApplication.config.thesaurus.apiSource,
