@@ -44,30 +44,29 @@
 		<h3>Ergebnis</h3>
 		
 		<p>Das Ergebnis der Anfrage ist eine XML-Datei mit folgendem Format:</p>
-		
-<pre class="api">
-&lt;matches>
-  &lt;metaData>
-    &lt;apiVersion content="0.1.3"/>
-    &lt;warning content="WARNING -- this XML format may be extended without warning"/>
-    &lt;copyright content="Copyright (C) 2011 Daniel Naber (www.danielnaber.de)"/>
-    &lt;license content="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"/>
-    &lt;source content="http://www.openthesaurus.de"/>
-    &lt;date content="Sat Mar 06 22:47:25 CET 2011"/>
-  &lt;/metaData>
-  &lt;synset id="1234">
-    &lt;categories>
-      &lt;category name="Name der Kategorie"/>
-    &lt;/categories>
-    &lt;term term="Bedeutung 1, Wort 1"/>
-    &lt;term term="Bedeutung 1, Wort 2"/>
-  &lt;/synset>
-  &lt;synset id="2345">
-    &lt;categories/>
-    &lt;term term="Bedeutung 2, Wort 1"/>
-  &lt;/synset>
-&lt;/matches>
-</pre>
+
+        <%-- Use geshi (like on languagetool.org/development/ for highlighting: --%>
+<pre class="api"><span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;matches<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;apiVersion</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;0.1.3&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;warning</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;WARNING -- this XML format may be extended without warning&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;copyright</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Copyright (C) 2011 Daniel Naber (www.danielnaber.de)&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;license</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;GNU LESSER GENERAL PUBLIC LICENSE Version 2.1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;source</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;http://www.openthesaurus.de&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;date</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Sat Mar 06 22:47:25 CET 2011&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;1234&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;category</span> <span style="color: #000066;">name</span>=<span style="color: #bb0000;">&quot;Name der Kategorie&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 2&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;2345&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 2, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/matches<span style="font-weight: bold; color: black;">&gt;</span></span></span></pre>
 
 
         <h2><a name="json">Suchanfrage für JSON</a></h2>
