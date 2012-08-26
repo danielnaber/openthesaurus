@@ -23,10 +23,17 @@ import com.vionto.vithesaurus.Term
 import com.vionto.vithesaurus.TermLevel
 import com.vionto.vithesaurus.CategoryLink
 import com.vionto.vithesaurus.ThesaurusConfigurationEntry
+import com.vionto.vithesaurus.SynsetLink
+import com.vionto.vithesaurus.LinkType
 
 class OpenThesaurusWebTests extends grails.util.WebTest {
 
+   private Language language = Language.findByShortForm("de")
+   private LinkType linkType
+
    void testSuite() {
+       linkType = new LinkType(linkName: 'Oberbegriff', otherDirectionLinkName: 'Unterbegriff', verbName: 'ist Oberbegriff von')
+       linkType.save(failOnError: true)
        initData()
        xml()
        json()
@@ -81,6 +88,12 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
        verifyXPath(xpath: "/matches/startswithterms/term[@term ='Tess öäüß']")
        verifyXPath(xpath: "/matches/startswithterms/term[@term ='Test']")
 
+        // include super and subordinate synset in search:
+       invoke '/synonyme/search?q=test&format=text/xml&supersynsets=true&subsynsets=true'
+       verifySynsets()
+       verifyXPath(xpath: "/matches/synset[@id=2]/supersynsets/synset/term[@term ='Mein Oberbegriff']")
+       verifyXPath(xpath: "/matches/synset[@id=2]/subsynsets/synset/term[@term ='Mein U-n-t-e-r-begriff']")
+
        // all search modes at once:
        invoke '/synonyme/search?q=test&format=text/xml&mode=all'
        verifySynsets()
@@ -127,6 +140,8 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
         new com.vionto.vithesaurus.Category(categoryName: 'meine Kategorie').save(failOnError: true)
         createSynset1()
         createSynset2()
+        createSuperSynset()
+        createSubSynset()
         new ThesaurusConfigurationEntry(key: "requestLimitMaxRequests", value: "1000").save(failOnError: true)
         invoke '/synset/createMemoryDatabase'
         verifyText('OK')
@@ -134,7 +149,6 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
 
     private void createSynset1() {
         Synset synset = new Synset(isVisible: true)
-        Language language = Language.findByShortForm("de")
         Term term1 = new Term("Test", language, synset)
         Term term2 = new Term("Tess öäüß", language, synset)
         term2.level = TermLevel.findByShortLevelName("coll")
@@ -146,7 +160,6 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
 
     private void createSynset2() {
         Synset synset = new Synset(isVisible: true)
-        Language language = Language.findByShortForm("de")
         Term term1 = new Term("Test", language, synset)
         synset.save()
         synset.addToTerms(term1)
@@ -154,6 +167,30 @@ class OpenThesaurusWebTests extends grails.util.WebTest {
         CategoryLink categoryLink = new CategoryLink(category: category, synset: synset)
         categoryLink.save()
         synset.addToCategoryLinks(categoryLink)
+        term1.save()
+    }
+
+    private void createSuperSynset() {
+        Synset synset = new Synset(isVisible: true)
+        Term term1 = new Term("Mein Oberbegriff", language, synset)
+        synset.save()
+        synset.addToTerms(term1)
+        Synset otherSynset = Synset.get(2)
+        SynsetLink link = new SynsetLink(otherSynset, synset, linkType)
+        link.save(failOnError: true)
+        synset.addToSynsetLinks(link)
+        term1.save()
+    }
+
+    private void createSubSynset() {
+        Synset synset = new Synset(isVisible: true)
+        Term term1 = new Term("Mein U-n-t-e-r-begriff", language, synset)   // spell so that "te" substring won't match
+        synset.save()
+        synset.addToTerms(term1)
+        Synset otherSynset = Synset.get(2)
+        SynsetLink link = new SynsetLink(synset, otherSynset, linkType)
+        link.save(failOnError: true)
+        synset.addToSynsetLinks(link)
         term1.save()
     }
 

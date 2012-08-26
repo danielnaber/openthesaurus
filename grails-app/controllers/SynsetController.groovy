@@ -313,7 +313,42 @@ class SynsetController extends BaseController {
                   term(term:t)
                 }
               }                    
+              if (params.supersynsets == 'true' || params.mode == 'all') {
+                supersynsets {
+                  for (link in s.sortedSynsetLinks()) {
+                    if (link.linkType.linkName == 'Oberbegriff') {
+                      synset {
+                        for (t in link.targetSynset.sortedTerms()) {
+                          if (t.level) {
+                            term(term:t, level:t.level.levelName)
+                          } else {
+                            term(term:t)
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              if (params.subsynsets == 'true' || params.mode == 'all') {
+                subsynsets {
+                  for (link in s.sortedSynsetLinks()) {
+                    if (link.linkType.linkName == 'Unterbegriff') {
+                      synset {
+                        for (t in link.targetSynset.sortedTerms()) {
+                          if (t.level) {
+                            term(term:t, level:t.level.levelName)
+                          } else {
+                            term(term:t)
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
+
           }
           if (similarTerms) {
             similarterms {
