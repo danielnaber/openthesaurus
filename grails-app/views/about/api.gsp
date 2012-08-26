@@ -139,9 +139,15 @@
           <li><span class="apioption">substringMaxResults</span>: Gibt an, wie viele Teilwort-Treffer insgesamt
           zurückgegeben werden sollen. Funktioniert nur zusammen mit <span class="apioption">substring=true</span>.
           Der Standardwert ist 10, Maximalwert ist 250.</li>
-          
-          <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>
-            und <tt>substring=true</tt>.</li>
+
+          <li><span class="apioption">supersynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
+          (optionalen) Oberbegriffe mitgeliefert werden <em>(seit August 2012, bisher nur für XML)</em>.</li>
+
+          <li><span class="apioption">subsynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
+          (optionalen) Unterbegriffe mitgeliefert werden <em>(seit August 2012, bisher nur für XML)</em>.</li>
+
+          <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>,
+            <tt>substring=true</tt>, <tt>supersynsets=true</tt> und <tt>subsynsets=true</tt>.</li>
         </ul>
 
 
