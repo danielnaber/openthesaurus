@@ -150,7 +150,8 @@
           (optionalen) Unterbegriffe mitgeliefert werden <em>(seit August 2012, bisher nur für XML)</em>.</li>
 
           <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>,
-            <tt>substring=true</tt>, <tt>supersynsets=true</tt> und <tt>subsynsets=true</tt>.</li>
+            <tt>substring=true</tt>, <tt>supersynsets=true</tt> und <tt>subsynsets=true</tt>. Dieser Modus
+            sollte nur zum Testen benutzt werden, um einen Überblick über die Möglichkeiten zu bekommen.</li>
         </ul>
 
 
