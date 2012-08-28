@@ -43,12 +43,12 @@
                     ${sdf.format(new Date(dbDump.lastModified()))},
                     ${String.format("%.2f", dbDump.length()/1000/1000)}MB</a></li>
 
-            <li>Siehe auch <a href="api">API-Zugriff</a></li>
+            <li>Siehe auch: <a href="api">API-Zugriff</a></li>
 
             <li style="margin-top:15px"><a href="../old/thes_de_DE_v2.zip">Deutscher Thesaurus for OpenOffice.org 2.x, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
             <li><a href="../old/kword_thesaurus.txt.gz">Thesaurus für KWord, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 
-            <li style="margin-top:15px">In den Zusammenhang vielleicht auch nützlich:
+            <li style="margin-top:15px">In dem Zusammenhang vielleicht auch nützlich:
                 <a href="http://www.danielnaber.de/morphologie/">Deutsches Vollformen-Wörterbuch zum Download</a> -
                 eine Liste deutscher Wörter mit allen flektierten Formen und ihren grammatischen Eigenschaften</li>
 
