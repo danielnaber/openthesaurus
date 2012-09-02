@@ -57,20 +57,32 @@
                   </thead>
                   <tbody>
                   <g:each in="${userEventList}" status="i" var="userEvent">
-                      <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" style="border-top-width: 1px; border-top-style: solid; border-top-color: #aaa;">
+                      <g:if test="${prevSynsetId != userEvent.synset.id || prevUserId != userEvent.byUser.id}">
+                          <g:set var="newEntry" value="${true}"/>
+                      </g:if>
+                      <g:else>
+                          <g:set var="newEntry" value="${false}"/>
+                      </g:else>
+                      <g:set var="prevSynsetId" value="${userEvent.synset.id}"/>
+                      <g:set var="prevUserId" value="${userEvent.byUser.id}"/>
+                      <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" style="${newEntry ? 'border-top-width: 1px; border-top-style: solid; border-top-color: #aaa;' : ''}">
 
                           <td valign="top">
-                              <g:formatDate format="yyyy-MM-dd" date="${userEvent.creationDate}"/>
-                              <span class="metaInfo"><g:formatDate format="HH:mm" date="${userEvent.creationDate}"/></span>
+                              <g:if test="${newEntry}">
+                                  <g:formatDate format="yyyy-MM-dd" date="${userEvent.creationDate}"/>
+                                  <span class="metaInfo"><g:formatDate format="HH:mm" date="${userEvent.creationDate}"/></span>
+                              </g:if>
                           </td>
 
-                          <td>
-                              <g:if test="${userEvent.byUser.realName}">
-                                  ${userEvent.byUser.realName.encodeAsHTML()}
+                          <td valign="top">
+                              <g:if test="${newEntry}">
+                                  <g:if test="${userEvent.byUser.realName}">
+                                      ${userEvent.byUser.realName.encodeAsHTML()}
+                                  </g:if>
+                                  <g:else>
+                                      <span class="anonUserId">#${userEvent.byUser.id}</span>
+                                  </g:else>
                               </g:if>
-                              <g:else>
-                                  <span class="anonUserId">#${userEvent.byUser.id}</span>
-                              </g:else>
                           </td>
 
                           <td valign="top"><g:link controller="synset" action="edit"
