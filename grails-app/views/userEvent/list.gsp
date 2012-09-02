@@ -64,7 +64,14 @@
                               <span class="metaInfo"><g:formatDate format="HH:mm" date="${userEvent.creationDate}"/></span>
                           </td>
 
-                          <td valign="top">${userEvent.byUser?.realName?.encodeAsHTML()}</td>
+                          <td>
+                              <g:if test="${userEvent.byUser.realName}">
+                                  ${userEvent.byUser.realName.encodeAsHTML()}
+                              </g:if>
+                              <g:else>
+                                  <span class="anonUserId">#${userEvent.byUser.id}</span>
+                              </g:else>
+                          </td>
 
                           <td valign="top"><g:link controller="synset" action="edit"
                               id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString()}</g:link></td>

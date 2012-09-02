@@ -549,3 +549,7 @@ tr .prop2 {
 .statsTable td {
     padding: 8px;
 }
+
+.anonUserId {
+    color: #777777;
+}

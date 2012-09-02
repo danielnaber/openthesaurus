@@ -376,14 +376,24 @@
               <table>
                   <tr>
                       <th><g:message code='edit.changelog.date'/></th>
-                      <th><g:message code='edit.changelog.user'/></th>
+                      <th style="min-width: 55px"><g:message code='edit.changelog.user'/></th>
                       <th><g:message code='edit.changelog.change'/></th>
                       <th><g:message code='edit.changelog.comment'/></th>
                   </tr>
                   <g:each var='event' in='${eventList}' status='i'>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                          <td valign="top" width="110"><g:formatDate format="yyyy-MM-dd'&nbsp;'HH:mm" date="${event.creationDate}"/></td>
-                          <td valign="top">${event.byUser.realName?.encodeAsHTML()}</td>
+                          <td valign="top" width="110">
+                              <g:formatDate format="yyyy-MM-dd" date="${event.creationDate}"/>
+                              <span class="metaInfo"><g:formatDate format="HH:mm" date="${event.creationDate}"/></span>
+                          </td>
+                          <td valign="top">
+                              <g:if test="${event.byUser.realName}">
+                                  ${event.byUser.realName.encodeAsHTML()}
+                              </g:if>
+                              <g:else>
+                                  <span class="anonUserId">#${event.byUser.id}</span>
+                              </g:else>
+                          </td>
                           <td valign="top">${diffs.get(event)
                                   .replaceAll("linking:", " <span class='add'>verlinkt:</span> ")
                                   .replaceAll("adding link:", " <span class='add'>verlinkt:</span> ")
