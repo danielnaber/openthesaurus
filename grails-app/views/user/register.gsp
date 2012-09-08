@@ -31,7 +31,8 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
+                                <input size="30" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                       id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required />
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.email.description"/></span>
                             </td>
@@ -39,10 +40,11 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <label for='userId'><g:message code="user.register.display.name"/></label>
+                                <label for='visibleName'><g:message code="user.register.display.name"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="text" id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}"/>
+                                <input size="30" type="text" placeholder="${message(code:'user.register.display.name.placeholder')}"
+                                       id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}" required />
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.display.name.description"/></span>
                             </td>
@@ -53,7 +55,7 @@
                                 <label for='password1'><g:message code="user.login.form.password"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}"/>
+                                <input size="30" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}" required />
                             </td>
                         </tr>
 
@@ -62,7 +64,7 @@
                                 <label for='password2'><g:message code="user.register.form.password.repeat"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}"/>
+                                <input size="30" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}" required />
                             </td>
                         </tr>
 
@@ -72,7 +74,7 @@
                             <td valign='top' class='value'>
                                 <table>
                                     <tr>
-                                        <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}"/></td>
+                                        <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}" required="true" /></td>
                                         <td valign="top"><label for="acceptLicense">Ich bin einverstanden, dass alle meine Beiträge
                                             (Synonyme, Assoziationen, Forumsbeiträge etc.) unter der <a target="_blank" href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a>
                                             oder einer anderen Open-Content-Lizenz veröffentlicht werden</label></td>
@@ -98,13 +100,13 @@
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <label for='userId'><b>Sicherheitsbabfrage:</b></label>
+                                    <label for='captcha'><b>Sicherheitsbabfrage:</b></label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>${ThesaurusConfigurationEntry.findByKey('captcha.question').value}</td>
                                 <td valign='top' class='value'>
-                                    <input type="text" name="cap" size="5" value="${params.cap?.encodeAsHTML()}"/></td>
+                                    <input type="text" id="captcha" name="cap" size="5" value="${params.cap?.encodeAsHTML()}" required /></td>
                             </tr>
                         </g:if>
 

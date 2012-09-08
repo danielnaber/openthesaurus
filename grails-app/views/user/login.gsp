@@ -38,7 +38,9 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="text" id='userId' name='userId' value="${params.userId?.encodeAsHTML()}"/>
+                                <%-- not using type="email" because of user 'admin'... --%>
+                                <input size="30" type="text" placeholder="${message(code:'user.register.email.placeholder')}" spellcheck="false"
+                                       id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required/>
                             </td>
                         </tr>
 
@@ -47,8 +49,8 @@
                                 <label for='password'><g:message code="user.login.form.password"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="password" id='password' name='password' value=""/><br/>
-                                <g:message code="user.login.forgot.password"/>
+                                <input size="30" type="password" id='password' name='password' value="" required/><br/>
+                                <div style="margin-top: 5px"><g:message code="user.login.forgot.password"/></div>
                             </td>
                         </tr>
 
