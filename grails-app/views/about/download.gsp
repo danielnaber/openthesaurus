@@ -57,12 +57,15 @@
 
         <h2>Download der Software</h2>
 
-        <p>Den <a href="http://www.grails.org">Grails</a>-Sourcecode der Website kann man unter dem Namen
+        <p>Die <a href="http://www.grails.org">Grails</a>-basierte Website kann man unter dem Namen
           <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
-          bei Sourceforge herunterladen. Er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
+          bei Sourceforge mit Subversion auschecken:</p>
+
+          <pre style="margin-bottom: 10px" class="api">svn co https://vithesaurus.svn.sourceforge.net/svnroot/vithesaurus/trunk openthesaurus</pre>
+
+          <p>Der Sourcecode steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
           Die Installation ist in einem <a href="http://vithesaurus.svn.sourceforge.net/viewvc/vithesaurus/trunk/README?revision=HEAD&amp;view=markup">README</a>
-          und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">hier im Forum</a> beschrieben.
-        </p>
+          und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">hier im Forum</a> beschrieben.</p>
 
     </body>
 </html>
