@@ -5,13 +5,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="download.title" /></title>
-        <meta name="description" content="Download der freien OpenThesaurus-Daten in verschiedenen Formaten, u.a. Text und für OpenOffice.org."/>
+        <meta name="description" content="Download der freien OpenThesaurus-Daten in verschiedenen Formaten, u.a. Text und für OpenOffice.org/LibreOffice."/>
     </head>
     <body>
 
         <hr />
     
-        <h2>Download der OpenThesaurus-Daten</h2>
+        <h2>Download der Daten</h2>
 
         <p>Die Wörter aus OpenThesaurus lassen sich hier in verschiedenen Formaten
         herunterladen. Sie stehen unter der
@@ -48,11 +48,21 @@
             <li style="margin-top:15px"><a href="../old/thes_de_DE_v2.zip">Deutscher Thesaurus for OpenOffice.org 2.x, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
             <li><a href="../old/kword_thesaurus.txt.gz">Thesaurus für KWord, 2009-08-02</a> (wird nicht mehr aktualisiert)</li>
 
-            <li style="margin-top:15px">In dem Zusammenhang vielleicht auch nützlich:
-                <a href="http://www.danielnaber.de/morphologie/">Deutsches Vollformen-Wörterbuch zum Download</a> -
-                eine Liste deutscher Wörter mit allen flektierten Formen und ihren grammatischen Eigenschaften</li>
-
         </ul>
+
+        <p style="margin-top: 15px">In dem Zusammenhang vielleicht auch nützlich:
+            <a href="http://www.danielnaber.de/morphologie/">Deutsches Vollformen-Wörterbuch zum Download</a> -
+            eine Liste deutscher Wörter mit allen flektierten Formen und ihren grammatischen Eigenschaften</p>
+
+
+        <h2>Download der Software</h2>
+
+        <p>Den <a href="http://www.grails.org">Grails</a>-Sourcecode der Website kann man unter dem Namen
+          <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
+          bei Sourceforge herunterladen. Er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
+          Die Installation ist in einem <a href="http://vithesaurus.svn.sourceforge.net/viewvc/vithesaurus/trunk/README?revision=HEAD&amp;view=markup">README</a>
+          und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">hier im Forum</a> beschrieben.
+        </p>
 
     </body>
 </html>

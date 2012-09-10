@@ -31,8 +31,7 @@
 
         <h2>Werbung</h2>
 
-        <p>Um auf openthesaurus.de zu werben, wenden Sie sich <a href="imprint">direkt an uns</a> oder an unsere Agentur:<br/>
-        scharfe//media, Tharandter Straße 31-33, 01159 Dresden, Telefon: 0351-4568 0118, <a href="http://www.scharfe-media.de">www.scharfe-media.de</a></p>
+        <p>Um auf openthesaurus.de zu werben, wenden Sie sich <a href="imprint">direkt an uns</a>.</p>
 
     
         <h2>Lizenz</h2>
