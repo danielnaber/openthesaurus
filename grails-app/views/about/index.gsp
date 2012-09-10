@@ -53,7 +53,7 @@
 
         <p>Die Website ist mit <a href="http://www.grails.org">Grails</a> umgesetzt und nutzt <a href="http://www.mysql.com">MySQL</a>
         als Datenbank.
-        Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg<!--</a>-->
+        Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg.<!--</a>-->
         </p>
 
 
@@ -73,15 +73,12 @@
         <h2>OpenThesaurus auf Android</h2>
 
         <ul>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für Android</a>.
-              Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
-              Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurusforandroid/">Sourcecode</a>)</li>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.ad.openthesaurus/OpenThesaurus-de">OpenThesaurus.de</a>.
-              Vom Android-Handy aus: <a href="market://search?q=OpenThesaurus">im Market suchen</a><br/>
-              Lizenz: GPLv3 (<a href="http://code.google.com/p/openthesaurus-de/">Sourcecode</a>)</li>
-            <li><a href="http://www.androidpit.de/de/android/market/apps/app/de.offlinethesaurus/Offline-Thesaurus-Synonyme">Offline Thesaurus (Synonyme)</a>.
-              Vom Android-Handy aus: <a href="market://search?q=Offline+Thesaurus">im Market suchen</a><br/>
-              Lizenz: GPLv3 (<a href="http://code.google.com/p/offline-openthesaurus-de/">Sourcecode</a>)</li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.fc.ot">OpenThesaurus für Android</a>.
+              Lizenz: GPLv3, <a href="http://code.google.com/p/openthesaurusforandroid/">Sourcecode</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=de.ad.openthesaurus">OpenThesaurus.de</a>.
+              Lizenz: GPLv3, <a href="http://code.google.com/p/openthesaurus-de/">Sourcecode</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=de.offlinethesaurus">Offline Thesaurus (Synonyme)</a>.
+              Lizenz: GPLv3, <a href="http://code.google.com/p/offline-openthesaurus-de/">Sourcecode</a></li>
         </ul>
 
 
@@ -98,8 +95,7 @@
 
         <h2>Papers über OpenThesaurus</h2>
 
-        <p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben. Eine aktuellere
-        Dokumentation existiert bisher leider nicht.</p>
+        <p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben.</p>
 
         <ul>
             <li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
