@@ -29,11 +29,6 @@
         angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
 
 
-        <h2>Werbung</h2>
-
-        <p>Um auf openthesaurus.de zu werben, wenden Sie sich <a href="imprint">direkt an uns</a>.</p>
-
-    
         <h2>Lizenz</h2>
 
         <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
