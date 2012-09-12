@@ -33,7 +33,7 @@ class UserController extends BaseController {
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
                                       'lostPassword', 'requestPasswordReset', 'confirmPasswordReset',
-                                      'resetPassword']]
+                                      'resetPassword', 'profile']]
 
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST',
                                  confirmPasswordReset: 'GET', requestPasswordReset:'POST']
@@ -42,6 +42,15 @@ class UserController extends BaseController {
 
     def index = {
         redirect(action:list,params:params)
+    }
+
+    def profile = {
+      ThesaurusUser user = ThesaurusUser.get(params.uid)
+      if (!user) {
+          throw new Exception("No user for id '${params.uid.encodeAsHTML()}'")
+      }
+      String visibleName = user.realName ? user.realName : "#" + user.id
+      [user:user, visibleName:visibleName]
     }
 
     def register = {

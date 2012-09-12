@@ -17,17 +17,13 @@
               <div class="message">${flash.message}</div>
           </g:if>
 
-          <g:if test="${params.userId}">
-            <h3>von Benutzer ${params.userId.encodeAsHTML()} (${totalMatches} Treffer)</h3>
-          </g:if>
-
-          <g:if test="${session.user?.permission == 'admin'}">
-              <form action="list" method="get" style="margin-bottom: 10px" class="adminOnly">
-                <%-- TODO: i18n: Filter by user or change description (use % as joker): --%>
-                  Nach Benutzer-ID suchen:
-                  <input name="userId" value="${params?.userId?.encodeAsHTML()}" />
-                  <input type="submit" value="Suchen" />
-              </form>
+          <g:if test="${user}">
+            <g:if test="${user.realName}">
+                <h3>von Benutzer ${user.realName.encodeAsHTML()} (<g:decimal number="${totalMatches}"/> Treffer)</h3>
+            </g:if>
+            <g:else>
+                <h3>von Benutzer <span class="anonUserId">#${user.id}</span> (<g:decimal number="${totalMatches}"/> Treffer)</h3>
+            </g:else>
           </g:if>
 
           <g:render template="navigation"/>
@@ -76,12 +72,14 @@
 
                           <td valign="top">
                               <g:if test="${newEntry}">
-                                  <g:if test="${userEvent.byUser.realName}">
-                                      ${userEvent.byUser.realName.encodeAsHTML()}
-                                  </g:if>
-                                  <g:else>
-                                      <span class="anonUserId">#${userEvent.byUser.id}</span>
-                                  </g:else>
+                                  <g:link params="${[uid:userEvent.byUser.id]}">
+                                      <g:if test="${userEvent.byUser.realName}">
+                                          ${userEvent.byUser.realName.encodeAsHTML()}
+                                      </g:if>
+                                      <g:else>
+                                          <span class="anonUserId">#${userEvent.byUser.id}</span>
+                                      </g:else>
+                                  </g:link>
                               </g:if>
                           </td>
 
@@ -104,8 +102,8 @@
           <g:render template="navigation"/>
 
           <g:form style="margin-top:15px">
-            <g:if test="${params.userId}">
-              <g:hiddenField name="userId" value="${params.userId.encodeAsHTML()}"/>
+            <g:if test="${user}">
+              <g:hiddenField name="uid" value="${user.id}"/>
             </g:if>
             <g:hiddenField name="offset" value="${params.offset}"/>
             Einträge pro Seite: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>

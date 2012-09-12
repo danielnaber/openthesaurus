@@ -29,36 +29,6 @@
                     <table>
                         <tbody>
 
-                            <%--
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='password'>Password:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:user,field:'password','errors')}'>
-                                    <input type="password" id='password' name='password' value=""/>
-                                    <br />
-                                    <span class="metaInfo">enter only if you want to change your password</span>
-                                </td>
-                            </tr> 
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='realName'>Real Name:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:user,field:'realName','errors')}'>
-                                    <input type="text" id='realName' name='realName' value="${fieldValue(bean:user,field:'realName')}"/>
-                                </td>
-                            </tr> 
-                        
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='permission'>Permission:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:user,field:'permission','errors')}'>
-                                    <g:select id='permission' name='permission' from='${user.constraints.permission.inList.collect{it.encodeAsHTML()}}' value="${fieldValue(bean:user,field:'permission')}" ></g:select>
-                                </td>
-                            </tr> --%>
-                        
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <g:message code="user.edit.display.name"/>
@@ -79,13 +49,19 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <g:link controller="userEvent" action="list" params="${[userId: user.userId]}"><g:message code="user.edit.my.edits" args="${[eventCount]}"/></g:link>
+                                    <g:link controller="userEvent" action="list" params="${[uid: user.id]}"><g:message code="user.edit.my.edits" args="${[eventCount]}"/></g:link>
                                 </td>
                             </tr>
 
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
                                     <g:link action="changePassword"><g:message code="user.edit.password"/></g:link>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name' colspan="2">
+                                    <g:link action="profile" params="${[uid:user.id]}"><g:message code="user.edit.public.profile"/></g:link>
                                 </td>
                             </tr>
 

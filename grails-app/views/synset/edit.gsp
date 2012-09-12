@@ -387,12 +387,14 @@
                               <span class="metaInfo"><g:formatDate format="HH:mm" date="${event.creationDate}"/></span>
                           </td>
                           <td valign="top">
-                              <g:if test="${event.byUser.realName}">
-                                  ${event.byUser.realName.encodeAsHTML()}
-                              </g:if>
-                              <g:else>
-                                  <span class="anonUserId">#${event.byUser.id}</span>
-                              </g:else>
+                              <g:link controller="user" action="profile" params="${[uid:event.byUser.id]}">
+                                  <g:if test="${event.byUser.realName}">
+                                      ${event.byUser.realName.encodeAsHTML()}
+                                  </g:if>
+                                  <g:else>
+                                      <span class="anonUserId">#${event.byUser.id}</span>
+                                  </g:else>
+                              </g:link>
                           </td>
                           <td valign="top">${diffs.get(event)
                                   .replaceAll("linking:", " <span class='add'>verlinkt:</span> ")

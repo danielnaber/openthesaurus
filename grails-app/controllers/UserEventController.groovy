@@ -35,25 +35,21 @@ class UserEventController extends BaseController {
         if (params.jumpToPage) {
             params.offset = (Integer.parseInt(params.jumpToPage) - 1) * params.max
         }
-        
+
+        def ThesaurusUser user
+        if (params.uid) {
+            user = ThesaurusUser.get(params.long('uid'))
+        }
         def crit = UserEvent.createCriteria()
         int totalMatches = crit.count {
-            if (params.userId) {
-                or {
-                    byUser {
-                        ilike('userId', params.userId)
-                    }
-                }
+            if (user) {
+                eq('byUser', user)
             }
         }
         
         def eventList = UserEvent.withCriteria {
-            if (params.userId) {
-                or {
-                    byUser {
-                        ilike('userId', params.userId)
-                    }
-                }
+            if (params.uid) {
+                eq('byUser', user)
             }
             maxResults(params.max)
             firstResult(params.offset)
@@ -64,8 +60,8 @@ class UserEventController extends BaseController {
         def typeNames = [:]
         UserEventTools tools = new UserEventTools()
         tools.buildMetaInformation(eventList, diffs, typeNames)
-        [ userEventList: eventList, diffs: diffs, typeNames : typeNames,
-          totalMatches: totalMatches ]
+        [ userEventList: eventList, diffs: diffs, typeNames: typeNames,
+          totalMatches: totalMatches, user: user ]
     }
 
 }
