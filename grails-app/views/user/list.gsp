@@ -39,7 +39,7 @@
                             <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
                             <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
                             <td><g:formatDate format="yyyy-MM-dd" date="${user.lastLoginDate}"/></td>
-                            <td><g:link controller="userEvent" action="list" params="${[userId:user.userId]}">${UserEvent.countByByUser(user)}</g:link></td>
+                            <td><g:link controller="userEvent" action="list" params="${[uid:user.id]}">${UserEvent.countByByUser(user)}</g:link></td>
                             <td>${user.blocked ? "yes" : ""}</td>
                         </tr>
                     </g:each>
