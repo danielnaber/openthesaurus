@@ -35,6 +35,8 @@
   </form>
 </div>
 
+<g:render template="/hint"/>
+
 <script type="text/javascript">
 <!--
 var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
