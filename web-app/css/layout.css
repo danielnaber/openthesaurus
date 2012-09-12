@@ -553,3 +553,20 @@ tr .prop2 {
 .anonUserId {
     color: #777777;
 }
+
+.adminOnly {
+    padding: 2px;
+    border-style: dotted;
+    border-color: darkblue;
+    border-width: 1px;
+    background-color: #eeeeee;
+}
+
+.hint {
+    background: #ffca6a;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0a437;
+    font-weight: bold;
+}
