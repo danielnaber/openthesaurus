@@ -53,18 +53,20 @@
                   <th>Registration</th>
                   <th>Confirm</th>
                   <th>Last Login</th>
+                  <th>Events</th>
                   <th>Blocked</th>
               </tr>
           </thead>
-          <g:each in="${latestUsers}" status="i" var="latestUser">
+          <g:each in="${latestUsers}" status="i" var="user">
               <tr>
-                  <td>${latestUser.userId.encodeAsHTML()}</td>
-                  <td>${latestUser.realName?.encodeAsHTML()}</td>
-                  <td>${latestUser.permission?.encodeAsHTML()}</td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.creationDate}"/></td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.confirmationDate}"/></td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${latestUser.lastLoginDate}"/></td>
-                  <td>${latestUser.blocked ? "yes" : ""}</td>
+                  <td><a style="font-weight: normal" href="mailto:${user.userId.encodeAsURL()}">${user.userId.encodeAsHTML()}</a></td>
+                  <td>${user.realName?.encodeAsHTML()}</td>
+                  <td>${user.permission?.encodeAsHTML()}</td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
+                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.lastLoginDate}"/></td>
+                  <td><g:link controller="userEvent" action="list" params="${[userId:user.userId]}">${UserEvent.countByByUser(user)}</g:link></td>
+                  <td>${user.blocked ? "yes" : ""}</td>
               </tr>
           </g:each>
           <tr>

@@ -18,11 +18,11 @@
           </g:if>
 
           <g:if test="${params.userId}">
-            <p>Gefiltert: nur Benutzer ${params.userId.encodeAsHTML()}</p>
+            <h3>von Benutzer ${params.userId.encodeAsHTML()} (${totalMatches} Treffer)</h3>
           </g:if>
 
           <g:if test="${session.user?.permission == 'admin'}">
-              <form action="list" method="get" style="margin-bottom: 10px">
+              <form action="list" method="get" style="margin-bottom: 10px" class="adminOnly">
                 <%-- TODO: i18n: Filter by user or change description (use % as joker): --%>
                   Nach Benutzer-ID suchen:
                   <input name="userId" value="${params?.userId?.encodeAsHTML()}" />
