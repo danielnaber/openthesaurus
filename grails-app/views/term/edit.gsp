@@ -77,7 +77,7 @@
                                     <h2 class="noTopMargin"><g:message code="edit.term.term"/></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'word','errors')}'>
-                                    <input ${disabled} type="text" id='word' name='word' value="${fieldValue(bean:term,field:'word')}"/>
+                                    <input ${disabled} type="text" id='word' name='word' spellcheck="true" value="${fieldValue(bean:term,field:'word')}"/>
                                 </td>
                             </tr> 
 
@@ -240,7 +240,7 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${session.user}">
-                                        <g:textArea rows="5" cols="40" id='userComment' name='userComment' value="${term.userComment}"/>
+                                        <g:textArea rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
 										<g:if test="${term.userComment}">

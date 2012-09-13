@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="${message(code:'html.lang')}">
 <head>
   <title><g:layoutTitle default="OpenThesaurus" /></title>
   <meta name='keywords' content='${message(code:"homepage.meta.keywords")}' />

@@ -189,7 +189,8 @@
                                     <% int i = 0; %>
                                     <div id="newTerm" style="display:none">
                                         <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                            <g:message code="edit.term.term"/>: <input onkeypress="return avoidSubmitOnReturn(event);" class="termInput" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                            <g:message code="edit.term.term"/>: <input onkeypress="return avoidSubmitOnReturn(event);"
+                                                class="termInput" spellcheck="true" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
                                             <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
                                                 <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
                                             </g:if>
@@ -331,7 +332,8 @@
                                      <g:message code='edit.comment.for.change.detail'/>
                                   </td>
                                   <td valign='top' class='value'>
-                                      <input ${disabled} onkeypress="return avoidSubmitOnReturn(event);" size="40" id="changeComment" type="text" name="changeComment" value="" />
+                                      <input ${disabled} onkeypress="return avoidSubmitOnReturn(event);" size="40"
+                                           id="changeComment" spellcheck="true" type="text" name="changeComment" value="" />
                                   </td>
                               </tr>
 

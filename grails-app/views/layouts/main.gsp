@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="${message(code:'html.lang')}">
     <head>
         <title><g:layoutTitle default="OpenThesaurus" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
