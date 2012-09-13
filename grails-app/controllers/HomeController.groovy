@@ -20,7 +20,7 @@ class HomeController {
     def index = {}
     
     def directSearch = {
-        []
+        redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
     }
     
 }
