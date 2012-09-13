@@ -68,7 +68,7 @@
 
     <div id="content">
 
-      <g:render template="/searchform" model="${[homepage: false, isDirectSearch: true]}"/>
+      <g:render template="/searchform" model="${[homepage: true]}"/>
 
       <g:render template="/loggedin"/>
       <g:if test="${session.user}">
