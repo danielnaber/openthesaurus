@@ -142,15 +142,11 @@ h1 {
   margin:0 auto;
 }
 
-#search img {
-  display: block;
-}
-
 #search .claim {
   text-align: right;
   text-transform: uppercase;
   padding-right: 60px;
-  margin-top: -23px;
+  margin-top: -26px;
   font-size: 10px;
   margin-bottom: 8px;
 }
