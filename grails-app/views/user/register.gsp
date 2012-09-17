@@ -11,6 +11,8 @@
 
         <h2><g:message code="user.register.headline"/></h2>
 
+        <p><g:message code="user.register.intro"/></p>
+
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
         </g:if>
