@@ -22,7 +22,7 @@ class WordLevelComparator implements Comparator {
 
     boolean hasLevelForQuery(def terms) {
         for (Term term : terms) {
-            if (term.word.equalsIgnoreCase(query) && term.level) {
+            if ((term.word.equalsIgnoreCase(query) || term.normalizedWord?.equalsIgnoreCase(query)) && term.level) {
                 return true
             }
         }
