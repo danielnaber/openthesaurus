@@ -50,7 +50,7 @@
                 </td>
                 <td>&nbsp;</td>
                 <td>
-                  <g:link controller="user" action="logout">Logout ${session.user.userId.toString()?.encodeAsHTML()}</g:link>
+                  <g:link controller="user" action="logout">Logout</g:link>
                 </td>
             </g:if>
             <g:else>
