@@ -44,7 +44,7 @@
                  evalScripts: false,
                  onLoaded: function(e){loadedSearch()},
                  onLoading: function(e){loadSearch()},
-                 parameters:'q=' + searchString
+                 parameters:'q=' + searchString + "&home=true"
                 }
               );
           }

@@ -2,6 +2,11 @@
 <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.util.regex.Matcher" %>
 
+    <g:if test="${params.home != 'true'}">
+        <div style="float: right;"><a href="#" onclick="closePopup();return false;"><img
+                src="${createLinkTo(dir:'images',file:'close.png')}" alt="${message(code:'popup.alt.attribute')}" title="${message(code:'popup.title.attribute')}"></a></div>
+    </g:if>
+
     <g:if test="${synsetList.size() == 0}">
         <div class="metaInfo" style="margin-top:8px;margin-bottom:4px">
             <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>

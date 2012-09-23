@@ -5,7 +5,7 @@
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
-        <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:message(code:'index'))}" />
+        <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch',file:'index')}" />
         <g:render template="/script"/>
         <g:layoutHead />
 
@@ -21,11 +21,15 @@
             Event.observe(window.document, "keydown", function(e) {
                 var key = (e.which) ? e.which : e.keyCode;
                 if (key == Event.KEY_ESC) {
-                    $('searchResultArea').hide();
-                    $('body').setStyle({backgroundColor: '#F7F7F7'});
-                    $('searchResultArea').update("");
+                    closePopup();
                 }
               });
+
+            function closePopup() {
+                $('searchResultArea').hide();
+                $('body').setStyle({backgroundColor: '#F7F7F7'});
+                $('searchResultArea').update("");
+            }
 
             function doSearchOnKeyUp(event) {
                 // also see layout.css - if the transform is not applied (it's not in Opera because
