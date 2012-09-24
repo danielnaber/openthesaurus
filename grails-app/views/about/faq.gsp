@@ -134,18 +134,6 @@
 		<%--
 		<div class="faqitem">
 			<div class="question">
-			I want to start a thesaurus project like OpenThesaurus, but for a new language. What should I do?
-			</div>
-			<div class="answer">
-			<p>Please download <a href="https://sourceforge.net/projects/vithesaurus">vithesaurus</a>
-			and <a href="imprint.php">contact me</a> if you have any questions.
-			</div>
-		</div>
-		--%>
-
-		<%--
-		<div class="faqitem">
-			<div class="question">
 			</div>
 			<div class="answer">
 			</div>

@@ -22,6 +22,11 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2012-09-24</span></td>
+    <td valign="top">Der Sourcecode von OpenThesaurus steht jetzt
+        <a href="https://github.com/danielnaber/openthesaurus">bei github</a> zur Verfügung.</td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2012-08-27</span></td>
     <td valign="top">Die <a href="api#optionen">XML-API</a> wurde um die Möglichkeit erweitert, Ober- und
         Unterbegriffe abfragen zu können.</td>

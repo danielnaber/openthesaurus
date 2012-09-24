@@ -37,9 +37,9 @@
           können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
           und openthesaurus.de mit Link als die ursprüngliche Quelle angegeben wird.</p>
 
-        <p>Der <strong>Sourcecode der Website</strong> befindet sich unter dem Namen <a href="http://sourceforge.net/projects/vithesaurus/">vithesaurus</a>
-          bei Sourceforge, er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
-          Die Installation ist in einem <a href="http://vithesaurus.svn.sourceforge.net/viewvc/vithesaurus/trunk/README?revision=HEAD&amp;view=markup">README</a>
+        <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
+          er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
+          Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README">README</a>
           und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">im Forum</a> beschrieben.
         </p>
 
