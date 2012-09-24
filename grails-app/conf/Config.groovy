@@ -9,15 +9,15 @@
 environments {
     test {
         grails.config.locations = [ "classpath:datasource-test.properties",
-                "classpath:vithesaurus-dev.properties" ]
+                "classpath:openthesaurus-dev.properties" ]
     }
     development {
         grails.config.locations = [ "classpath:datasource-dev.properties",
-                "classpath:vithesaurus-dev.properties" ]
+                "classpath:openthesaurus-dev.properties" ]
     }
     production {
         grails.config.locations = [ "classpath:datasource.properties",
-                "classpath:vithesaurus.properties" ]
+                "classpath:openthesaurus.properties" ]
     }
 }
 
@@ -43,7 +43,7 @@ if(System.properties["${appName}.config.location"]) {
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
-// vithesaurus settings: see vithesaurus.properties
+// openthesaurus settings: see openthesaurus.properties
 
 log4j = {
     appenders {
