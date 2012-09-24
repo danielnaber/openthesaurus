@@ -67,7 +67,7 @@ grep -c "Finished creating in-memory database" $LOG >>$OUT
 
 echo "" >>$OUT
 echo "Registrations:" >>$OUT
-grep -A 1 "Sent registration mail " $LOG >>$OUT
+grep "Sent registration mail " $LOG >>$OUT
 
 echo "" >>$OUT
 echo "Warnings (without empty queries):" >>$OUT
