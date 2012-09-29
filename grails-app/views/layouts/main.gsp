@@ -40,6 +40,10 @@
                 //var isMs = $('body').getStyle('-ms-transform');
                 var isMs = false;  // not yet enabled, layout problems with the skew
                 var hasTransformEnabled = isMozilla || isWebkit || isMs;
+                if ((event.keyCode == 45/*Insert*/ || event.keyCode == 65/*A*/ || event.keyCode == 67/*C*/) && event.ctrlKey) {
+                    // opening the popup makes no sense for these key combinations
+                    return;
+                }
                 if (hasTransformEnabled) {
                     switch (event.keyCode) {
                         case Event.KEY_RETURN:
