@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Find Potentially Missing Synonyms - vithesaurus</title>
+        <title>Find Potentially Missing Synonyms - OpenThesaurus</title>
         <meta name="layout" content="main" />
     </head>
     <body>

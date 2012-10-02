@@ -1,7 +1,7 @@
 <%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
-        <title>vithesaurus - admin page</title>
+        <title>OpenThesaurus - admin page</title>
         <meta name="layout" content="main" />
     </head>
     <body>
