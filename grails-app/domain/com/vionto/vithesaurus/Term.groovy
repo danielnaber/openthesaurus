@@ -105,7 +105,12 @@ class Term implements Comparable, Cloneable {
         // the other direction (eg. hot->cold, cold->hot):
         List termLinkInfos = []
         for (TermLink link : termLinks) {
-            termLinkInfos.add(new TermLinkInfo(link.id, this, link.targetTerm, link.linkType.linkName, true))
+            try {
+                termLinkInfos.add(new TermLinkInfo(link.id, this, link.targetTerm, link.linkType.linkName, true))
+            } catch (org.hibernate.ObjectNotFoundException e) {
+                // can happen with deleted terms before the 2012-04-21 fix
+                log.error("Could not get term link #${link.id} for term '${word}' in synset '${synset}'")
+            }
         }
         List reverseLinks = TermLink.findAllByTargetTerm(this)
         for (TermLink link : reverseLinks) {
