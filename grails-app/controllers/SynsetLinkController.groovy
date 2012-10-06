@@ -1,5 +1,5 @@
 /**
- * vithesaurus - web-based thesaurus management tool
+ * OpenThesaurus - web-based thesaurus management tool
  * Copyright (C) 2009 vionto GmbH, www.vionto.com
  *
  * This program is free software: you can redistribute it and/or modify
