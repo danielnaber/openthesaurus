@@ -36,6 +36,12 @@ Please refer to the container's documentation on how to do that.
    This can be done by calling a command like this:
    curl -I http://localhost:8080/openthesaurus/synset/createMemoryDatabase
 
+   Since the size of in-memory tables is 16M by default, after a while the above operation
+   might start to fail (you will get 500 Internal Server Error as response of the above URL 
+   and you will see "memWordsTmp is full" in your server logs. In this case what you need to
+   do is increase max_heap_table_size in MySQL. You can use "SHOW VARIABLES" to see the current
+   value of this variable in your installation.
+
 4. Set the values in WEB-INF/classes/openthesaurus.properties
 
 5. For bigger data sets it might be necessary to created indexes manually in
