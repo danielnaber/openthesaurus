@@ -13,7 +13,7 @@
         alt="<g:message code='logo.alt.text'/>" width="341" height="93" /></a></div>
   </g:else>
 
-  <p class="claim">Synonyme und Assoziationen</p>
+  <p class="claim"><g:message code="homepage.claim"/></p>
     
   <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
@@ -28,7 +28,7 @@
       <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="${StringTools.slashUnescape(params.q.encodeAsHTML())}" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:if>
     <g:else>
-      <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
+      <input ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="<g:message code="homepage.search"/>" /><input style="border-width:0px" type="image" title="Synonym finden" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
     <g:if test="${isDirectSearch}">
     </g:if>
