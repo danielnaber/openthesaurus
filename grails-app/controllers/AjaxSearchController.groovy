@@ -19,6 +19,7 @@ import java.sql.Connection
 import com.vionto.vithesaurus.Synset
 import com.vionto.vithesaurus.PartialMatch
 import com.vionto.vithesaurus.SearchResult
+import java.util.regex.Pattern
 
 class AjaxSearchController extends BaseController {
 
@@ -74,7 +75,7 @@ class AjaxSearchController extends BaseController {
 
     private addSynsetMatches(PartialMatch substringMatch, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
         for (synset in substringMatches.synsetList) {
-            if (synset.toString().toLowerCase().matches(".*\\b" + params.q + "\\b.*")) {
+            if (synset.toString().toLowerCase().matches(".*\\b" + Pattern.quote(params.q) + "\\b.*")) {
                 if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
                     subwordSynsetList.add(synset)
                 }

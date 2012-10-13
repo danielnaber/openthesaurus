@@ -18,10 +18,13 @@
     </g:if>
     <g:else>
         <%
-        String umlautNormalizedQuery = params.q
+        String quotedQuery = Pattern.quote(params.q)
         // treat o = ö - this is debatable, but it's how MySQL searches, so highlight this way:
-        umlautNormalizedQuery = umlautNormalizedQuery.replaceAll('[ÜüUu]', '[ÜüUu]').replaceAll('[ÄäAa]', '[ÄäAa]').replaceAll('[ÖöOo]', '[ÖöOo]')
-        Pattern directPattern = Pattern.compile("\\b(" + umlautNormalizedQuery + ")\\b", Pattern.CASE_INSENSITIVE);
+        // TODO: this had to be commented out again because it doesn't work with quoting the input,
+        // which is needed to avoid an exception if a user searches for e.g. "foo) "
+        //umlautNormalizedQuery = umlautNormalizedQuery.replaceAll('[ÜüUu]', '[ÜüUu]').replaceAll('[ÄäAa]', '[ÄäAa]').replaceAll('[ÖöOo]', '[ÖöOo]')
+        String directPatternStr = "\\b(" + quotedQuery + ")\\b";
+        Pattern directPattern = Pattern.compile(directPatternStr, Pattern.CASE_INSENSITIVE);
         %>
         <g:each in="${synsetList}" status="i" var="synset">
             <div style="margin-top:4px;margin-bottom:10px">
@@ -71,7 +74,7 @@
     </g:if>
     <g:else>
         <%
-        Pattern pattern = Pattern.compile("(" + params.q.encodeAsHTML() + ")", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("(" + Pattern.quote(params.q.encodeAsHTML()) + ")", Pattern.CASE_INSENSITIVE);
         %>
         <g:each in="${substringSynsetList}" status="i" var="synset">
              <div style="margin-bottom:10px">
