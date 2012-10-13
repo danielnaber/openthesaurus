@@ -24,8 +24,8 @@
                         <g:else>
                           <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
                         </g:else>
-        
-                        <g:link controller='synset' action='edit'
+
+                        <g:link title="${link.targetSynset.toShortStringWithShortLevel(20, true).decodeHTML()}" controller='synset' action='edit'
                             id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true)}</g:link>
                             
                     </div>
