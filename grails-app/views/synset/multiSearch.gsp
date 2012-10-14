@@ -28,7 +28,7 @@
             <table>
                <g:each in="${synsetList}" status="i" var="synset">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td style="padding-bottom: 8px"><g:link action="edit" id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link></td>
+                        <td style="padding-bottom: 8px"><g:link action="edit" id="${synset.id}">${synset?.toShortStringWithShortLevel(Integer.MAX_VALUE, false)}</g:link></td>
                     </tr>
                </g:each>
             </table>
