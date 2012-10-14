@@ -21,14 +21,14 @@
               <li><g:link controller="association" action="list"><g:message code="association.link"/></g:link></li>
               <li><g:link controller="term" action="antonyms"><g:message code="antonyms.link"/></g:link></li>
               <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
-              <li style="margin-top:14px">Wörter nach Sprachniveau:
+              <li style="margin-top:14px"><g:message code="word.list.by.level"/>
               <ul style="margin-top:0px">
                 <g:each in="${TermLevel.list()}" var="level">
                   <li><g:link controller="term" action="list" params="${[levelId:level.id]}">${level.encodeAsHTML()}</g:link></li>
                 </g:each>
               </ul>
               </li>
-              <li style="margin-top:14px">Wörter nach Kategorie:
+              <li style="margin-top:14px"><g:message code="word.list.by.category"/>
               <ul style="margin-top:0px">
                 <g:each in="${Category.withCriteria { eq('isDisabled', false) }.sort()}" var="category">
                   <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
