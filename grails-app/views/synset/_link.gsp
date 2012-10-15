@@ -18,7 +18,7 @@
                     <div id="${linkTypeName}_${link.id}">
         
                         <g:if test="${session.user}">
-                          <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img 
+                          <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
                             align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                         </g:if>
                         <g:else>
@@ -46,15 +46,23 @@
         <li class="checkboxList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
                 <a href="#" onclick="showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
+                <g:if test="${linkTypeName == 'Oberbegriff'}">
+                     <a href="#" onclick="toggleId('superordinateHelp');return false;">[?]</a>
+                </g:if>        
                 <g:if test="${linkTypeName == 'Assoziation'}">
                      <a href="#" onclick="toggleId('associationHelp');return false;">[?]</a>
-                </g:if>        
+                </g:if>
             </div>
+            <g:if test="${linkTypeName == 'Oberbegriff'}">
+                <div id="superordinateHelp" style="display: none">
+                    <g:render template="/synset/superordinateHelp" />
+                </div>
+            </g:if>        
             <g:if test="${linkTypeName == 'Assoziation'}">
                 <div id="associationHelp" style="display: none">
                     <g:render template="/synset/associationHelp" />
                 </div>
-            </g:if>        
+            </g:if>
          <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
             <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, '${linkTypeName}', 'synset/ajaxSearch');" autocomplete="off"/>
             <input type="hidden" name="linkType${linkTypeName}.id" value="${LinkType.findByLinkName(linkTypeName).id}">
