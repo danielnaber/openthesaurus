@@ -45,9 +45,9 @@
         <g:if test="${session.user && showAddLink}">
         <li class="checkboxList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
-                <a href="#" onclick="javascript:showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
+                <a href="#" onclick="showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
                 <g:if test="${linkTypeName == 'Assoziation'}">
-                     <a href="#" onclick="javascript:toggleId('associationHelp');return false;">[?]</a>
+                     <a href="#" onclick="toggleId('associationHelp');return false;">[?]</a>
                 </g:if>        
             </div>
             <g:if test="${linkTypeName == 'Assoziation'}">
