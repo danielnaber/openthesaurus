@@ -1,0 +1,689 @@
+diff -u -r templates/default/bottom.htm templates_ot/templates//default/bottom.htm
+--- templates/default/bottom.htm	2011-12-01 01:00:44.000000000 +0100
++++ templates_ot/templates//default/bottom.htm	2012-10-01 11:05:12.000000000 +0200
+@@ -1,23 +1,135 @@
+-</td>
+-</tr>
+-	<tr>
+-		<td align="center">
+-			<#if session?exists && session.isAdmin()><span class="gen"><a id="adminpanel" href='${JForumContext.encodeURL("/admBase/login")}'>${I18n.getMessage("ForumBase.admin")}</a></span></#if>
+-		</td>
+-	</tr>
+-
+-	<tr>
+-		<td align="center">
+-			<span class="copyright">Powered by <a class="copyright" href="http://jforum2.googlecode.com/" target="_blank">JForum ${version}</a> &copy; 2011 <a class="copyright" href="http://jforum.net/team.jsp" target="_blank">JForum Team</a> &bull; Maintained by <a class="copyright" href="http://www.andowson.com/" target="_blank">Andowson.com</a></span>
+-		</td>
+-	</tr>
+-</table>
+-
+-<#if hasCodeBlock?default(false)>
+-	<#include "highlighter_js.htm"/>
+-</#if>
++
++
++    </div>
++
++  </div>
++
++  <div id="foot">
++  <table width="800">
++
++    <tr>
++      <td height="120" width="370" class="claim" colspan="2">
++        <div style="margin-bottom: 20px">
++          OpenThesaurus ist ein freies deutsches Synonymwörterbuch, bei dem jeder mitmachen kann.
++        </div>
++      </td>
++      <td width="60"></td>
++      <td width="370" class="visualads">
++      </td>
++    </tr>
++    <tr>
++
++      <td colspan="2">
++        <img style="width:100%;height:2px;margin-bottom:20px" src="/images/hr.png" alt="Trennlinie"/>
++      </td>
++      <td></td>
++      <td>
++        <img style="width:100%;height:2px;margin-bottom:20px" src="/images/hr.png" alt="Trennlinie"/>
++      </td>
++    </tr>
++    <tr>
++
++      <td width="270">
++        <ul>
++          <li><a href="/about/index">Über OpenThesaurus</a></li>
++          <li><a href="/about/faq">FAQ</a></li>
++          <li><a href="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">Newsletter</a></li>
++          <li><a href="/about/newsarchive">News-Archiv</a></li>
++          <li><a href="/userEvent/list">Daten-Änderungen</a></li>
++
++          <li><a href="/synset/statistics">Statistik</a></li>
++
++          <li style="margin-top:16px"><a href="/woerter/listen">Wortlisten</a></li>
++          <li><a href="/about/api">Webservice / API</a></li>
++          <li><a href="/about/download">Download</a></li>
++
++          <li style="margin-top:16px"><a href="/about/imprint">Impressum</a></li>
++
++        </ul>
++      </td>
++      <td width="130">
++        <div class="iconLink">
++          <table>
++            <tr>
++            
++                <td>
++                </td>
++
++                <td>&nbsp;</td>
++                <td>
++                </td>
++            
++            </tr>
++          </table>
++        </div>
++
++        <div class="iconLink">
++          <table>
++            <tr>
++              <td>
++                <script type="text/javascript">
++                <!--
++                var firstPart = "feedback";
++                var lastPart = "openthesaurus.de";
++                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"/images/icon-mail.png\" alt=\"Kontakt-Icon\"/><" + "/a>");
++                // -->
++                </script>
++              </td>
++              <td>&nbsp;</td>
++              <td>
++
++                <script type="text/javascript">
++                <!--
++                var firstPart = "feedback";
++                var lastPart = "openthesaurus.de";
++                document.write("<a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'>Schreibe uns eine <strong>E-Mail<" + "/strong><" + "/a>");
++                // -->
++                </script>
++              </td>
++            </tr>
++          </table>
++        </div>
++        <div class="iconLink">
++          <table>
++            <tr>
++              <td><a href="http://twitter.com/openthesaurus"><img src="/images/icon-twitter.png" alt="Twitter-Icon"/></a></td>
++              <td>&nbsp;</td>
++              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a></td>
++            </tr>
++          </table>
++        </div>
++        
++      </td>
++      <td>
++
++      </td>
++      <td>
++        
++            
++
++        
++      </td>
++
++    </tr>
++  </table>
++</div>
++
++<#if session?exists && session.isAdmin()><span class="gen"><a id="adminpanel" href='${JForumContext.encodeURL("/admBase/login")}'>${I18n.getMessage("ForumBase.admin")}</a></span></#if>
+ 
+ <iframe src="${contextPath}/ping_session.jsp" height="0" width="0" frameborder="0" scrolling="no" title="session keeper"></iframe>
+ 
++<!-- Piwik -->
++<script type="text/javascript">
++var pkBaseURL = (("https:" == document.location.protocol) ? "https://openthesaurus.stats.mysnip-hosting.de/" : "http://openthesaurus.stats.mysnip-hosting.de/");
++document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
++</script><script type="text/javascript">
++try {
++var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 5);
++piwikTracker.trackPageView();
++piwikTracker.enableLinkTracking();
++} catch( err ) {}
++</script><noscript><p><img src="http://openthesaurus.stats.mysnip-hosting.de/piwik.php?idsite=5" style="border:0" alt="" /></p></noscript>
++<!-- End Piwik Tracking Code -->
++
+ </body>
+-</html>
+\ Kein Zeilenumbruch am Dateiende.
++</html>
+diff -u -r templates/default/forum_list.htm templates_ot/templates//default/forum_list.htm
+--- templates/default/forum_list.htm	2011-12-01 01:00:46.000000000 +0100
++++ templates_ot/templates//default/forum_list.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -5,11 +5,13 @@
+ 		<td width="100%" height="318" valign="top">
+ 			<table cellspacing="0" cellpadding="2" width="100%" align="center" border="0">
+ 				<tr>
++					<!--
+ 					<td valign="bottom" align="left">
+ 						<#if logged><span class="gensmall">${I18n.getMessage("ForumListing.lastVisit")}: ${lastVisit}</span><br /></#if>
+ 						<span class="gensmall">${I18n.getMessage("ForumListing.date")}: ${now}</span><br />
+ 						<span class="forumlink"><a class="forumlink" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a></span>
+ 					</td>
++					-->
+ 					<td class="gensmall" valign="bottom" align="right">&nbsp;
+ 					<#if logged>
+ 						<a class="gensmall" href="${JForumContext.encodeURL("/forums/newMessages")}">${I18n.getMessage("ForumListing.readLastVisitMessages")}</a>
+@@ -97,48 +99,7 @@
+ 				</tr>
+ 			</table>
+ 
+-			<table class="forumline" cellspacing="1" cellpadding="3" width="100%" border="0">
+-				<tr>
+-					<td class="cathead" colspan="2" height="28"><span class="cattitle">${I18n.getMessage("ForumListing.whoIsOnline")}</span></td>
+-				</tr>
+ 
+-				<tr>
+-					<td class="row1" valign="middle" align="center" rowspan="2"><img src="${contextPath}/templates/${templateName}/images/whosonline.gif" alt="[Who's Online]"/></td>
+-					<td class="row1 gensmall" align="left" width="100%">
+-						${I18n.getMessage("ForumListing.totalMessagesInfo", [ totalMessages ])}<br />
+-						${I18n.getMessage("ForumListing.registeredUsers", [ totalRegisteredUsers ])}<br />
+-						${I18n.getMessage("ForumListing.newestUser")} <a href="${JForumContext.encodeURL("/user/profile/${lastUser.id}")}">${lastUser.username}</a>
+-					</td>
+-				</tr>
+-
+-				<tr>
+-					<td class="row1 gensmall" align="left">
+-						<#assign adminColor = "class='admin'"/>
+-						<#assign moderatorColor = "class='moderator'"/>
+-						<#assign color = ""/>
+-
+-						${I18n.getMessage("ForumListing.numberOfUsersOnline", [ totalOnlineUsers, totalRegisteredOnlineUsers, totalAnonymousUsers ])}&nbsp;&nbsp;
+-
+-						[ <span ${adminColor}>${I18n.getMessage("Administrator")}</span> ]&nbsp;[ <span ${moderatorColor}>${I18n.getMessage("Moderator")}</span> ]
+-						<br />
+-						${I18n.getMessage("ForumListing.mostUsersEverOnline", [ mostUsersEverOnline.getTotal(), mostUsersEverOnline.getDate()?string ])}
+-						<br />
+-						${I18n.getMessage("ForumListing.connectedUsers")}:
+-
+-						<#list userSessions as us>
+-							<#if us.isAdmin()>
+-								<#assign color = adminColor/>
+-							<#elseif us.isModerator()>
+-								<#assign color = moderatorColor/>
+-							<#else>
+-								<#assign color = ""/>
+-							</#if>
+-
+-								<a href="${JForumContext.encodeURL("/user/profile/${us.userId}")}"><span ${color}>${us.username}</span></a>&nbsp;
+-						</#list>
+-					</td>
+-				</tr>
+-			</table>
+ 
+ 			<br />
+ 
+@@ -178,9 +139,10 @@
+ 					<td>&nbsp;&nbsp;</td>
+ 					<td align="center" width="20"><img src="${contextPath}/templates/${templateName}/images/folder.gif" alt="[Folder]" /></td>
+ 					<td><span class="gensmall">${I18n.getMessage("ForumListing.noNewMessages")}</span></td>
++<!--
+ 					<td>&nbsp;&nbsp;</td>
+ 					<td align="center" width="20"><img src="${contextPath}/templates/${templateName}/images/folder_lock.gif" alt="[Lock Folder]" /></td>
+-					<td><span class="gensmall">${I18n.getMessage("ForumListing.blocked")}</span></td>
++					<td><span class="gensmall">${I18n.getMessage("ForumListing.blocked")}</span></td>-->
+ 				</tr>
+ 			</table>
+ 		</td>
+diff -u -r templates/default/forum_show.htm templates_ot/templates//default/forum_show.htm
+--- templates/default/forum_show.htm	2011-12-01 01:00:46.000000000 +0100
++++ templates_ot/templates//default/forum_show.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -58,7 +58,7 @@
+               <#if readonly>
+               <span class="icon_reply_locked"><img src="${contextPath}/images/transp.gif" alt="" /></span>
+               <#elseif !readonly && !replyOnly>
+-							<a href="${JForumContext.encodeURL("/posts/insert/${forum.id}")}" rel="nofollow" class="icon_new_topic"><img src="${contextPath}/images/transp.gif" alt="" /></a>              
++							<a href="${JForumContext.encodeURL("/posts/insert/${forum.id}")}" rel="nofollow" class="icon_new_topic"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+               </#if>
+ 						</td>
+ 
+@@ -198,10 +198,12 @@
+ 					<tr class="bg_small_yellow">
+ 						<td ${class1} valign="middle" align="center" width="20"><@presentation.folderImage topic/></td>
+ 						<td ${class1} width="100%">
+-							<#if topic.hasAttach() && attachmentsEnabled><img src="${contextPath}/templates/${templateName}/images/icon_clip.gif" align="middle" alt="[Clip]" /></#if>
++							<#if topic.hasAttach() &&
++						attachmentsEnabled><img src="${contextPath}/templates/${templateName}/images/icon_clip.gif" align="middle" alt="[Clip]" /></#if>
+ 							<span class="topictitle">
+ 							<a href="${JForumContext.encodeURL("/posts/list/${topic.id}")}">
+ 							<#if topic.vote>${I18n.getMessage("ForumListing.pollLabel")}</#if>
++							&nbsp;
+ 							<#if (topic.title?length == 0)>
+ 								No Subject
+ 							<#else>
+@@ -272,7 +274,7 @@
+ 					</#if>
+ 
+ 					<td valign="middle" align="left" colspan="${colspan?default("0")}">
+-						<span class="nav">
++						&nbsp;<span class="nav">
+ 						<a class="nav" href="${JForumContext.encodeURL("/forums/list")}">${I18n.getMessage("ForumListing.forumIndex")}</a> &raquo;  <a class="nav" href="${JForumContext.encodeURL("/forums/show/${forum.id}")}">${forum.name?html}</a></span>
+ 					</td>
+ 
+@@ -284,6 +286,7 @@
+ 				</tr>
+ 			</table>
+ 
++			<!--
+ 			<table cellspacing="0" cellpadding="5" width="100%" border="0">
+ 				<tr>
+ 					<td align="left" class="gensmall">
+@@ -301,7 +304,9 @@
+ 					<td align="right"><@presentation.forumsComboTable/></td>
+ 				</tr>
+ 			</table>
++			-->
+ 
++			<!--
+ 			<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+ 				<tr>
+ 					<td valign="top" align="left">
+@@ -319,6 +324,7 @@
+ 					</#if>
+ 				</tr>
+ 			</table>
++				-->
+ 		</td>
+ 	</tr>
+ </table>
+diff -u -r templates/default/header.htm templates_ot/templates//default/header.htm
+--- templates/default/header.htm	2011-12-01 01:00:46.000000000 +0100
++++ templates_ot/templates//default/header.htm	2012-02-26 17:25:13.000000000 +0100
+@@ -3,91 +3,71 @@
+ <#assign logged = logged?default(false)/>
+ <#assign language = language?default("en_US")/>
+ <#assign hasCodeBlock = hasCodeBlock?default(false)/>
+-<?xml version="1.0" encoding="${encoding}" ?>
+-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-<html xmlns="http://www.w3.org/1999/xhtml">
++<!doctype html>
++<html>
+ <head>
+-<meta http-equiv="Content-Type" content="text/html; charset=${encoding}" />
+-<meta http-equiv="Pragma" content="no-cache" />	
+-<meta http-equiv="Expires" content="-1" />
+-<meta name="description" content="${metaDescription}" />
+-<meta name="keywords" content="${metaKeywords}" />
+-<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
+-<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
+-<#if isNewPost?exists || isEdit?exists || htmlAllowed?exists>
+-<link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/tabs.css" />
+-</#if>
+-<#if hasCodeBlock?default(false) || isNewPost?exists || isEdit?exists || htmlAllowed?exists>
+-	<#include "highlighter_css.htm"/>
+-</#if>
+-<title>${pageTitle?default("JForum")?html}</title>
++  <title>Forum - OpenThesaurus - Deutscher Thesaurus</title>
++  <meta name="keywords" content="Synonyme, Synonym, W&ouml;rterbuch, Thesaurus, sinnverwandte W&ouml;rter"/>
++  <meta name="description" content="OpenThesaurus ist ein freies deutsches W&ouml;rterbuch f&uuml;r Synonyme, bei dem jeder mitmachen kann."/>
++  <meta http-equiv="Pragma" content="no-cache" /> 
++  <meta http-equiv="Expires" content="-1" />
++  <link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/style.css" />
++  <link rel="stylesheet" type="text/css" href="${contextPath}/templates/${templateName}/styles/${language}.css" />
++  <link type="text/css" rel="stylesheet" href="/css/reset-min.css" />
++  <link type="text/css" rel="stylesheet" href="/css/layout.css" />
++  <link rel="shortcut icon" href="/images/favicon_openthesaurus.ico" />
++  <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="/openSearch/index" />
++
++  <link rel="alternate" type="application/rss+xml" title="Letzte Änderungen in OpenThesaurus" href="/feed" />
++  
++  
++  <meta name="layout" content="homepage"/>
++  <link rel="image_src" href="/images/screenshot_homepage_300px.png" /> 
++
+ </head>
+-<body class="${language}">
++<body>
++
++  
++
++  <div id="body" style="padding:80px 0 120px 0;">
++
++    <div id="content">
++
++      
++
++<div id="search">
++
++  
++    <div class="logo"><a href="/"><img
++        src="/images/openthesaurus-logo.png"
++        alt="OpenThesaurus Logo" width="341" height="93" /></a></div>
++  
++
++  <p class="claim">Synonyme und Assoziationen</p>
++    
++  <form action="/synonyme" onsubmit="window.location='/synonyme/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
++
++    
++      
++    
++      <input style="outline: none" onclick="document.searchform.q.select()" accesskey="s" type="text" id="search-field" name="q" value="Suchwort" /><input type="image" title="Synonym finden" src="/images/search-submit.png" />
++    
++    
++  </form>
++</div>
++
++<script type="text/javascript">
+ <!--
+-Original theme from phpBB (http://www.phpbb.com) subSilver
+-Created by subBlue design
+-http://www.subBlue.com
+-
+-Modifications by JForum Team
+--->
+-<table width="100%" border="0">
+-	<tr>
+-		<td>
+-			<table cellspacing="0" cellpadding="0" width="100%" border="0">
+-				<tr>
+-					<td>
+-						<a href="${homepageLink}"><img src="${contextPath}/templates/${templateName}/images/logo.jpg" vspace="1" border="0" alt="[Logo]" /></a>
+-					</td>
+-					 
+-					<td width="100%" align="center" valign="middle">
+-						<span class="boardtitle">${forumTitle?default("JForum")}</span>
+-						<table cellspacing="0" cellpadding="2" border="0">
+-							<tr>
+-								<td valign="top" nowrap="nowrap" align="center">&nbsp;									
+-									<span class="mainmenu"><img src="${contextPath}/templates/${templateName}/images/icon_mini_search.gif" alt="[Search]"/> <a id="search" class="mainmenu" href="${JForumContext.encodeURL("/search/filters")}"><b>${I18n.getMessage("ForumBase.search")}</b></a> &nbsp;
+-									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Recent Topics]" /> <a id="latest" class="mainmenu" href="${JForumContext.encodeURL("/recentTopics/list")}">${I18n.getMessage("ForumBase.recentTopics")}</a> &nbsp;
+-									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Hottest Topics]" /> <a id="hottest" class="mainmenu" href="${JForumContext.encodeURL("/hottestTopics/list")}">${I18n.getMessage("ForumBase.hottestTopics")}</a> &nbsp;
+-									<img src="${contextPath}/templates/${templateName}/images/icon_mini_recentTopics.gif" alt="[Top Downloads]" /> <a id="topdownload" class="mainmenu" href="${JForumContext.encodeURL("/topDownloads/list")}">${I18n.getMessage("ForumBase.topDownloads")}</a> &nbsp;
+-									<img src="${contextPath}/templates/${templateName}/images/icon_mini_members.gif" alt="[Members]" /> <a id="userlist" class="mainmenu" href="${JForumContext.encodeURL("/user/list")}">${I18n.getMessage("ForumBase.usersList")}</a> &nbsp;
+-									<span class="mainmenu"><img src="${contextPath}/templates/${templateName}/images/icon_mini_groups.gif" alt="[Groups]" /> <a id="backtosite" class="mainmenu" href="${homepageLink}">${I18n.getMessage("ForumBase.backToSite")}</a>&nbsp;
+-									
+-									<br />
+-
+-									<#if canAccessModerationLog?default(false)>										
+-										<img src="${contextPath}/templates/${templateName}/images/icon_mini_members.gif" alt="[Moderation Log]" /> <a id="moderationlog" class="mainmenu" href="${JForumContext.encodeURL("/moderation/showActivityLog")}">${I18n.getMessage("ModerationLog.moderationLog")}</a> &nbsp;
+-									</#if>
+-
+-									<#if logged>										
+-										<img src="${contextPath}/templates/${templateName}/images/icon_mini_profile.gif" border="0" alt="[Profile]" /> <a id="myprofile" class="mainmenu" href="${JForumContext.encodeURL("/user/edit/${session.userId}")}">${I18n.getMessage("ForumBase.profile")}</a>&nbsp; 
+-										<#if bookmarksEnabled>
+-											<img src="${contextPath}/templates/${templateName}/images/icon_minipost.gif" alt="[Post]" /> <a class="mainmenu" href="${JForumContext.encodeURL("/bookmarks/list/${session.userId}")}">${I18n.getMessage("Bookmarks.myBag")}</a>&nbsp;
+-										</#if>
+-										<img src="${contextPath}/templates/${templateName}/images/icon_mini_message.gif" border="0" alt="[Message]" /> <a id="privatemessages" class="mainmenu" href="${JForumContext.encodeURL("/pm/inbox")}">
+-											<#if (session.privateMessages > 0)>
+-												${I18n.getMessage("ForumBase.newPm")}: (${session.privateMessages})
+-											<#else>
+-												${I18n.getMessage("ForumBase.privateMessages")}
+-											</#if>
+-										</a>&nbsp;
+-										</span>
+-
+-										<#if !sso>
+-											<img src="${contextPath}/templates/${templateName}/images/icon_mini_login.gif" border="0" alt="[Login]" /> <a id="logout" class="mainmenu" href="${JForumContext.encodeURL("/user/logout")}">${I18n.getMessage("ForumBase.logout")} [${session.username}]</a>
+-										</#if>
+-									</#if>
+-	
+-									<#if !logged && !sso>
+-										<img src="${contextPath}/templates/${templateName}/images/icon_mini_register.gif" border="0" alt="[Register]" /> <a id="register" class="mainmenu" href="${JForumContext.encodeURL("/user/insert")}">${I18n.getMessage("ForumBase.register")}</a>&nbsp;/&nbsp;</span>
+-										<img src="${contextPath}/templates/${templateName}/images/icon_mini_login.gif" border="0" alt="[Login]" /> <a id="login" class="mainmenu" href="${JForumContext.encodeURL("/user/login")}">${I18n.getMessage("ForumBase.login")}</a>&nbsp;
+-									</#if>
+-									</span>									
+-								</td>
+-							</tr>
+-						</table>
+-					</td>
+-				</tr>
+-			</table>
+-		</td>
+-	</tr>
+-	<tr>
+-		<td>
++var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
++if (!touchOS) {
++  document.searchform.q.focus();
++  document.searchform.q.select();
++}
++// -->
++</script>
++
++
++      <div style="margin-top:23px">
++
++</div>
++
+diff -u -r templates/default/post_form.htm templates_ot/templates//default/post_form.htm
+--- templates/default/post_form.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_form.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -363,7 +363,7 @@
+ 								<!-- Textarea -->
+ 								<tr>
+ 									<td valign="top">
+-										<textarea class="message" onkeyup="storeCaret(this);" onclick="storeCaret(this);" onselect="storeCaret(this);" tabindex="3" name="message" rows="15" cols="35"><#if post?exists><#if quote?exists>[quote=${quoteUser}]${post.text?html}[/quote]<#else>${post.text?html}</#if></#if></textarea> 
++										<textarea class="jforumMessage" onkeyup="storeCaret(this);" onclick="storeCaret(this);" onselect="storeCaret(this);" tabindex="3" name="message" rows="15" cols="35"><#if post?exists><#if quote?exists>[quote=${quoteUser}]${post.text?html}[/quote]<#else>${post.text?html}</#if></#if></textarea> 
+ 									</td>
+ 								</tr>
+ 							</table>
+diff -u -r templates/default/post_options_tab.htm templates_ot/templates//default/post_options_tab.htm
+--- templates/default/post_options_tab.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_options_tab.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -10,22 +10,29 @@
+ 		<td><label for="disable_bbcode">${I18n.getMessage("PostForm.disableBbCode")}</label></td>
+ 	</tr>
+ 	<tr>
++		<!--
+ 		<td><input type="checkbox" id="disable_smilies" name="disable_smilies" ${smiliesChecked}/></td>
+ 		<td><label for="disable_smilies">${I18n.getMessage("PostForm.disableSmilies")}</label></td>
++		-->
++		<td><input type="hidden" id="disable_smilies" name="disable_smilies" value="" /></td>
+ 	</tr>
+ 
+ 	<#if user.id != 1>
++		<!--
+ 		<tr>
+ 			<td><input type="checkbox" id="attach_sig" name="attach_sig" ${signatureChecked}/></td>
+ 			<td><label for="attach_sig">${I18n.getMessage("PostForm.appendSignature")}</label></td>
+ 		</tr>
++		-->
+ 
++		<!--
+ 		<#if forum?exists>
+ 		<tr>
+ 			<td><input type="checkbox" id="notify" name="notify" ${repliesChecked}/></td>
+ 			<td><label for="notify">${I18n.getMessage("PostForm.notifyReplies")}</label></td>
+ 		</tr>
+ 		</#if>
++		-->	
+ 	</#if>
+ 
+ 	<#if setType?default(true) && forum?exists && canCreateStickyOrAnnouncementTopics?default(false)>
+diff -u -r templates/default/post_show_action_buttons_inc.htm templates_ot/templates//default/post_show_action_buttons_inc.htm
+--- templates/default/post_show_action_buttons_inc.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_show_action_buttons_inc.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -7,9 +7,11 @@
+ 	</div>
+ 	<div class="subject">&nbsp;&nbsp; &nbsp;<b>${I18n.getMessage("PostShow.subject")}:</b> <a name="p${post.id}">${post.subject?default("")?html}</a></div>
+ 	<div class="action">
++		<!--
+ 		<#if karmaEnabled>
+ 			<script type="text/javascript">writeStars(${post.karma.karmaPoints}, ${post.id});</script>
+ 		</#if>
++		-->
+ 
+ 		<#if topic.status != STATUS_LOCKED && !readonly>
+ 			<a href="${JForumContext.encodeURL("/posts/quote/${start}/${post.id}")}" rel="nofollow" class="icon_quote"><img src="${contextPath}/images/transp.gif" alt="" /></a>
+diff -u -r templates/default/post_show.htm templates_ot/templates//default/post_show.htm
+--- templates/default/post_show.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_show.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -71,7 +71,7 @@
+ 							<span class="icon_reply_locked"><img src="${contextPath}/images/transp.gif" alt="" /></span>
+ 						<#else>
+ 							<#if !readonly>
+-								<a href="${JForumContext.encodeURL("/posts/reply/${start}/${topic.id}")}" rel="nofollow" class="icon_reply nav"><img src="${contextPath}/images/transp.gif" alt="" /></a>
++								<a href="${JForumContext.encodeURL("/posts/reply/${start}/${topic.id}")}" rel="nofollow" class="icon_reply nav"><img src="${contextPath}/images/transp.gif" alt="" /></a>&nbsp;
+ 							<#else>
+ 								<#assign colspan = "2"/>
+ 							</#if>
+@@ -225,7 +225,7 @@
+ 						<span class="icon_reply_locked"><img src="${contextPath}/images/transp.gif" alt="" /></span>
+ 					<#else>
+ 						<#if !readonly>
+-							<a href="${JForumContext.encodeURL("/posts/reply/${start}/${topic.id}")}" rel="nofollow" class="icon_reply nav"><img src="${contextPath}/images/transp.gif" alt="" /></a>
++							<a href="${JForumContext.encodeURL("/posts/reply/${start}/${topic.id}")}" rel="nofollow" class="icon_reply nav"><img src="${contextPath}/images/transp.gif" alt="" /></a>&nbsp;
+ 						<#else>
+ 							<#assign colspan = "2"/>
+ 						</#if>
+@@ -366,11 +366,14 @@
+ 				<tr>
+ 					<td align="left" valign="top" class="gensmall">
+ 						<#if logged>
++							<!--
+ 							<#if bookmarksEnabled>
+ 								<a href="#bookmark" onclick="addBookmark(2, ${topic.id});"><img src="${contextPath}/templates/${templateName}/images/icon_bookmark.gif" align="middle" alt="Bookmark" />&nbsp;${I18n.getMessage("Bookmarks.addTo")}</a>
+ 								<br />
+ 							</#if>
++							-->
+ 						
++							<!--
+ 							<#if !watching>
+ 								<#assign watchMessage = I18n.getMessage("PostShow.watch")/>
+ 								<a href="#watch" onclick="watchTopic('${JForumContext.encodeURL("/posts/watch/${start}/${topic.id}")}', '${I18n.getMessage("PostShow.confirmWatch")}');">
+@@ -379,9 +382,10 @@
+ 								<a href="${JForumContext.encodeURL("/posts/unwatch/${start}/${topic.id}")}">
+ 							</#if>
+ 							<img src="${contextPath}/templates/${templateName}/images/watch.gif" align="middle" alt="Watch" />&nbsp;${watchMessage}</a>
++							-->
+ 						</#if>
+ 					</td>
+-					<td align="right"><@presentation.forumsComboTable/></td>
++					<!--<td align="right"><@presentation.forumsComboTable/></td>-->
+ 				</tr>
+ 			</table>
+ 		</td>
+diff -u -r templates/default/post_show_user_inc.htm templates_ot/templates//default/post_show_user_inc.htm
+--- templates/default/post_show_user_inc.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_show_user_inc.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -1,4 +1,5 @@
+ <span class="genmed"><b>${user.username?html}</b></span>
++<!--
+ <br />
+ <#if karmaEnabled && post.userId != 1>
+ 	<script type="text/javascript">writeStars(${user.karma.karmaPoints}, "${user.id}${post.id}");</script>
+@@ -46,4 +47,5 @@
+ 	</#if>
+ </#if>
+ </span>
+-<br />
+\ Kein Zeilenumbruch am Dateiende.
++<br />
++-->
+\ Kein Zeilenumbruch am Dateiende.
+diff -u -r templates/default/post_show_user_profile_inc.htm templates_ot/templates//default/post_show_user_profile_inc.htm
+--- templates/default/post_show_user_profile_inc.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/post_show_user_profile_inc.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -1,3 +1,4 @@
++<!--
+ <table cellspacing="0" cellpadding="0" border="0" width="100%">
+ <tr>
+ 	<td valign="middle" nowrap="nowrap"> 
+@@ -43,4 +44,5 @@
+ 		</td>
+ 	</#if>
+ </tr>
+-</table>
+\ Kein Zeilenumbruch am Dateiende.
++</table>
++-->
+diff -u -r templates/default/styles/style.css templates_ot/templates//default/styles/style.css
+--- templates/default/styles/style.css	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/styles/style.css	2012-02-02 21:18:35.000000000 +0100
+@@ -1,15 +1,10 @@
+ img { border: 0px; }
+ font, th, td, p { font-family: verdana, arial, helvetica, sans-serif; }
+ 
+-/* Links */
+-a:link { color: #01336b; text-decoration: none; }
+-a:active { color: #01336b }
+-a:visited { color: #01336b; text-decoration: none; }
+-a:hover { color: #dd6900; text-decoration: underline; }
+ 
+ hr { border: #dfdfdf 1px solid; height: 0px }
+-.bodyline { border: #cccccc 1px solid;  }
+-.forumline { border: #006699 2px solid; }
++.bodyline { border: #cccccc 0px solid;  }
++.forumline { border: #006699 0px solid; }
+ 
+ /* td */
+ td.row1 { background-color: #fafafa; }
+@@ -265,7 +260,7 @@
+ }
+ 
+ blockquote dl.codebox code { font-size: 1.0em; }
+-input.subject, textarea.message { width: 100%; }
++input.subject, textarea.jforumMessage { width: 100%; }
+ .postTabContents { padding-top: 24px; }
+ .postTabContents div { background-color: #E5EDF3; }
+ 
+diff -u -r templates/default/user_profile.htm templates_ot/templates//default/user_profile.htm
+--- templates/default/user_profile.htm	2011-12-01 01:00:48.000000000 +0100
++++ templates_ot/templates//default/user_profile.htm	2012-02-02 21:18:35.000000000 +0100
+@@ -18,7 +18,8 @@
+ 	</tr>
+ 
+ 	<tr>
+-		<td class="catleft" align="center" width="40%" height="28"><b><span class="gen">${I18n.getMessage("UserProfile.avatar")}</span></b></td>
++		<td class="catleft" align="center" width="40%"
++	height="28"><!--<b><span class="gen">${I18n.getMessage("UserProfile.avatar")}</span></b>--></td>
+ 		<td class="catright" align="center" width="60%"><b><span class="gen">${I18n.getMessage("UserProfile.allAbout")} ${u.username}</span></b></td>
+     </tr>
+ 
+@@ -33,6 +34,7 @@
+ 					<img src="${contextPath}/images/avatar/${u.avatar}" border="0" alt="avatar" /><br />
+ 				</#if>
+ 			</#if>
++			<!--
+ 			<span class="postdetails">
+ 				${I18n.getMessage("PostShow.ranking")}: ${rank.getRankTitle(u.rankId, u.totalPosts)}
+ 			
+@@ -40,6 +42,7 @@
+ 					<br />${I18n.getMessage("Karma.karma")}: <script type="text/javascript">writeStars(${u.karma.karmaPoints}, ${u.id});</script>
+ 				</#if>
+ 			</span>
++			-->
+ 		</td>
+ 
+ 		<td class="row1" valign="top" rowspan="3">
+@@ -104,6 +107,7 @@
+ 				</tr>
+ 				</#if>
+ 
++				<!--
+ 				<#if bookmarksEnabled>
+ 				<tr>
+ 					<td valign="top" nowrap="nowrap" align="right"><span class="gen">${I18n.getMessage("Bookmarks.myBag")}:</span></td>
+@@ -115,11 +119,13 @@
+ 						</#if>
+ 						</td>
+ 				</tr>
++				-->
+ 				</#if>
+ 			</table>
+ 		</td>
+ 	</tr>
+     
++    	<!--
+ 	<tr>
+ 		<td class="catleft" align="center" height="28"><b><span class="gen">${I18n.getMessage("UserProfile.contact")} ${u.username}</span></b></td>
+ 	</tr>
+@@ -175,5 +181,6 @@
+ 			</#if>
+ 		</td>
+ 	</tr>
++	-->
+ </table>
+ <#include "bottom.htm"/>
+Nur in templates_ot/templates/: default_bak.
