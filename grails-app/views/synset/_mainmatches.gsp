@@ -107,7 +107,7 @@
 
 </g:if>
 <g:else>
-    <div style="margin-top:15px;margin-bottom:5px;font-weight:bold"><g:message code="result.no.matches"/></div>
+    <h2><g:message code="result.no.matches"/></h2>
     <g:if test="${baseforms.size() > 0}">
         <div><strong><g:message code="result.no.matches.baseforms"/></strong><br/>
             <span class="result">
