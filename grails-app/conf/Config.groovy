@@ -47,7 +47,7 @@ grails.enable.native2ascii = true
 
 log4j = {
     appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{2} - %m%n')
+        console name:'stdout', layout:pattern(conversionPattern: '[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{1} - %m%n')
     }
     root {
         error 'stdout'
