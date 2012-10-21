@@ -181,7 +181,7 @@ class SynsetController extends BaseController {
           long totalTime = System.currentTimeMillis() - startTime
           
           String qType = getQueryType()
-          log.info("Search(ms):${qType} ${totalTime} db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
+          log.info("Search(ms):${qType} ${searchResult.totalMatches}matches ${totalTime}ms db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
             

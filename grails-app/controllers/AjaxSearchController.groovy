@@ -64,10 +64,11 @@ class AjaxSearchController extends BaseController {
             }
         }
         long runTime = System.currentTimeMillis() - startTime
+        String message = "ajaxSearch: ${runTime}ms for '${query}', ${synsetList.size()}+${substringSynsetList.size} matches"
         if (spellcheck) {
-            log.info("ajaxSearch: ${runTime}ms for '${query}' (incl. spellcheck)")
+            log.info("${message} (incl. spellcheck)")
         } else {
-            log.info("ajaxSearch: ${runTime}ms for '${query}'")
+            log.info("${message}")
         }
         [synsetList: synsetList, substringSynsetList: substringSynsetList,
          minLengthForSubstringQuery: minLengthForSubstringQuery, mostSimilarTerm: mostSimilarTerm]
