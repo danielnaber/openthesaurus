@@ -9,8 +9,11 @@
       <td width="60"></td>
       <td width="370" class="visualads">
         <g:if test="${homepage}">
-          <g:render template="/ads/newhomepage"/>
+          <g:render template="/ads/homepage"/>
         </g:if>
+        <g:else>
+          <g:render template="/ads/footer"/>
+        </g:else>
       </td>
     </tr>
     <tr>
