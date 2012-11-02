@@ -566,3 +566,8 @@ tr .prop2 {
     border: 1px solid #e0a437;
     font-weight: bold;
 }
+
+/* specific for openthesaurus.de (for sprachdirekt ad) */
+u {
+    text-decoration: none;
+}
