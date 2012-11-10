@@ -222,7 +222,7 @@
                             </td>
                             <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
-                            <g:if test="${!session.user}">
+                            <g:if test="${synset.categoryLinks.size() == 0 && !session.user}">
                                 <span class="noMatches"><g:message code="edit.not.set"/></span>
                             </g:if>
                             <ul style="margin-top:0px">
