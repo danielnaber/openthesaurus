@@ -15,7 +15,7 @@
         
         <h2>Über OpenThesaurus</h2>
 
-        <p>OpenThesaurus ist eine interaktive Website zur Entwicklung eines deutschsprachigen Wörterbuchs für Synonyme.
+        <p>OpenThesaurus ist ein deutschsprachiges Wörterbuch für Synonyme und Assoziationen.
         Man kann damit Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert
         die <a href="../synset/search?q=falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
         verkehrt</span> als Synonyme.</p>
@@ -25,15 +25,14 @@
         in denen ein Wort vorkommt (z.B. <span class="bsp">roh</span> -&gt; <span class="bsp">roh, ungekocht</span>
         und einen anderen Eintrag für <span class="bsp">roh, rau, grob, unsanft</span>). Bei
         den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen
-        und neue hinzufügen. Findet die Suche keine Treffer, wird ein Link
-        angeboten, mit dem man das Wort zu OpenThesaurus hinzufügen kann.</p>
+        und neue hinzufügen.</p>
 
 
         <h2>Lizenz</h2>
 
         <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
           <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
-          Das bedeutet vereinfacht gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
+          Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
           können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
           und openthesaurus.de mit Link als die ursprüngliche Quelle angegeben wird.</p>
 
@@ -80,6 +79,7 @@
         <h2>OpenThesaurus in anderen Sprachen</h2>
 
         <ul>
+            <li><a href="http://www.openthesaurus.gr/">Griechisch</a></li>
             <li><a href="http://synonimy.sourceforge.net/">Polnisch</a></li>
             <li><a href="http://openthesaurus.caixamagica.pt/">Portugiesisch</a></li>
             <li><a href="http://www.openthesaurus.tk">Slowakisch</a></li>
