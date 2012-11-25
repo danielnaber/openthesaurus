@@ -30,11 +30,12 @@ class SynsetController extends BaseController {
     def requestLimiterService
     def searchService
     def memoryDatabaseCreationService
+    def wordListService
     def baseformService
 
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
-                                      'createMemoryDatabase', 'variation', 'substring']]
+                                      'createMemoryDatabase', 'refreshRemoteWordLists', 'variation', 'substring']]
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
@@ -198,6 +199,8 @@ class SynsetController extends BaseController {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
+          boolean wordInRemoteGenderList = wordListService.isWordInGenderList(params.q)
+
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
             wiktionaryResult : wiktionaryResult,
@@ -207,7 +210,9 @@ class SynsetController extends BaseController {
             completeResult: searchResult.completeResult,
             baseforms: baseforms,
             descriptionText : metaTagDescriptionText,
-            runTime : totalTime ]
+            runTime : totalTime,
+            wordInRemoteGenderList: wordInRemoteGenderList
+          ]
 
         } finally {
           DbUtils.closeQuietly(conn)
@@ -456,6 +461,18 @@ class SynsetController extends BaseController {
       log.info("Creating in-memory database, request by " + IpTools.getRealIpAddress(request))
       memoryDatabaseCreationService.createMemoryDatabase(grailsApplication.config.thesaurus.hiddenSynsets)
       log.info("Finished creating in-memory database")
+      render "OK"
+    }
+
+    /**
+     * Get lists from korrekturen.de - specific to openthesaurus.de.
+     */
+    def refreshRemoteWordLists = {
+      if (!isLocalHost(request)) {
+        throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
+      }
+      wordListService.refreshGenderList()
+      // TODO: also use other lists
       render "OK"
     }
 

@@ -68,6 +68,18 @@
             <table>
               <tr>
                 <td>
+
+                  <g:if test="${wordInRemoteGenderList}">
+
+                      <h2>Rechtschreibung</h2>
+
+                      <a href="http://www.korrekturen.de/cgi-bin/wortliste_suche.pl?ordner=genus&amp;suchbegr=${cleanTerm.encodeAsURL()}">Tipps
+                      zum grammatischen Geschlecht (der, die, das)<br/>auf korrekturen.de</a>
+
+                      <hr style="margin-top:20px" />
+
+                  </g:if>
+
                   <g:render template="wiktionary"/>
 
                   <hr style="margin-top:20px" />
