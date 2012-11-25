@@ -12,7 +12,11 @@ class WordListService {
 
   def isWordInGenderList(String word) {
     if (genderWords) {
-      return genderWords.contains(word.trim().toLowerCase())
+      def inList = genderWords.contains(word.trim().toLowerCase())
+      if (inList) {
+        log.info("Linking korrekturen.de for gender tips for '${word.trim()}'")
+      }
+      return inList
     }
     return false
   }
@@ -38,6 +42,11 @@ class WordListService {
       genderWords.clear()
     }
     genderWords.addAll(words)
+    List firstItems = getSomeItems(genderWords)
+    log.info("Done refreshing gender list - list now contains ${genderWords.size()} items - ${firstItems}...")
+  }
+
+  private List getSomeItems(HashSet<String> genderWords) {
     List firstItems = []
     for (String item in genderWords) {
       firstItems.add(item)
@@ -45,7 +54,7 @@ class WordListService {
         break
       }
     }
-    log.info("Done refreshing gender list - list now contains ${genderWords.size()} items - ${firstItems}...")
+    return firstItems
   }
 
 }
