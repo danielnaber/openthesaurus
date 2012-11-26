@@ -71,21 +71,25 @@
                       <div style="margin-top: 20px">
                   </g:if>
                   <g:if test="${remoteWordUrl}">
-                      <a href="${remoteWordUrl.encodeAsHTML()}">Tipps zur Rechtschreibung von '${params.q.trim().encodeAsHTML()}'
-                      <br/>auf korrekturen.de</a>
-                      <hr style="margin-top:20px" />
+                      <div style="margin-bottom: 5px">
+                          <a href="${remoteWordUrl.encodeAsHTML()}">Tipps zur Rechtschreibung von '${params.q.trim().encodeAsHTML()}'
+                          <br/>auf korrekturen.de</a>
+                      </div>
                   </g:if>
                   <g:if test="${remoteGenderUrl}">
-                      <a href="${remoteGenderUrl.encodeAsHTML()}">Tipps zum grammatischen Geschlecht (der, die, das)
-                      <br/>von '${params.q.trim().encodeAsHTML()}' auf korrekturen.de</a>
-                      <hr style="margin-top:20px" />
+                      <div style="margin-bottom: 5px">
+                          <a href="${remoteGenderUrl.encodeAsHTML()}">Tipps zum grammatischen Geschlecht (der, die, das)
+                          <br/>von '${params.q.trim().encodeAsHTML()}' auf korrekturen.de</a>
+                      </div>
                   </g:if>
                   <g:if test="${remoteMistakeUrl}">
-                      <a href="${remoteMistakeUrl.encodeAsHTML()}">Tipps zu typischen Fehlern mit '${params.q.trim().encodeAsHTML()}'
-                      <br/>auf korrekturen.de</a>
-                      <hr style="margin-top:20px" />
+                      <div style="margin-bottom: 5px">
+                          <a href="${remoteMistakeUrl.encodeAsHTML()}">Tipps zu typischen Fehlern mit '${params.q.trim().encodeAsHTML()}'
+                          <br/>auf korrekturen.de</a>
+                      </div>
                   </g:if>
                   <g:if test="${remoteWordUrl || remoteGenderUrl || remoteMistakeUrl}">
+                      <hr style="margin-top:20px" />
                       </div>
                   </g:if>
 
