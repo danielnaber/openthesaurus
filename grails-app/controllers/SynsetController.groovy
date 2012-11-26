@@ -199,7 +199,7 @@ class SynsetController extends BaseController {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
-          boolean wordInRemoteGenderList = wordListService.isWordInGenderList(params.q)
+          String remoteGenderUrl = wordListService.remoteGenderUrl(params.q)
 
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
@@ -211,7 +211,7 @@ class SynsetController extends BaseController {
             baseforms: baseforms,
             descriptionText : metaTagDescriptionText,
             runTime : totalTime,
-            wordInRemoteGenderList: wordInRemoteGenderList
+            remoteGenderUrl: remoteGenderUrl
           ]
 
         } finally {
