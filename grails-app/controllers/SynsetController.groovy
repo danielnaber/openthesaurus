@@ -199,6 +199,7 @@ class SynsetController extends BaseController {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
+          String remoteWordUrl = wordListService.remoteWordUrl(params.q)
           String remoteGenderUrl = wordListService.remoteGenderUrl(params.q)
 
           [ partialMatchResult : partialMatchResult,
@@ -211,6 +212,7 @@ class SynsetController extends BaseController {
             baseforms: baseforms,
             descriptionText : metaTagDescriptionText,
             runTime : totalTime,
+            remoteWordUrl: remoteWordUrl,
             remoteGenderUrl: remoteGenderUrl
           ]
 
@@ -471,6 +473,7 @@ class SynsetController extends BaseController {
       if (!isLocalHost(request)) {
         throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
+      wordListService.refreshWordList()
       wordListService.refreshGenderList()
       // TODO: also use other lists
       render "OK"

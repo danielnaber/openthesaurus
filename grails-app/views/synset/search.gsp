@@ -69,13 +69,15 @@
               <tr>
                 <td>
 
+                  <g:if test="${remoteWordUrl}">
+                      <a href="${remoteWordUrl.encodeAsHTML()}">Tipps
+                      zur Rechtschreibung von '${params.q.trim().encodeAsURL()}'<br/>auf korrekturen.de</a>
+                      <hr style="margin-top:20px" />
+                  </g:if>
                   <g:if test="${remoteGenderUrl}">
-
                       <a href="${remoteGenderUrl.encodeAsHTML()}">Tipps
                       zum grammatischen Geschlecht (der, die, das)<br/>auf korrekturen.de</a>
-
                       <hr style="margin-top:20px" />
-
                   </g:if>
 
                   <g:render template="wiktionary"/>
