@@ -10,6 +10,7 @@ class WordListService {
 
   Map<String,String> wordToUrl = null
   Map<String,String> wordToGenderUrl = null
+  Map<String,String> wordToMistakeUrl = null
 
   def remoteWordUrl(String word) {
     return getUrlFromMapOrNull(word, wordToUrl)
@@ -17,6 +18,10 @@ class WordListService {
 
   def remoteGenderUrl(String word) {
     return getUrlFromMapOrNull(word, wordToGenderUrl)
+  }
+
+  def remoteCommonMistakeUrl(String word) {
+    return getUrlFromMapOrNull(word, wordToMistakeUrl)
   }
 
   def getUrlFromMapOrNull(String word, Map map) {
@@ -40,8 +45,13 @@ class WordListService {
     log.info("Done refreshing gender list - list now contains ${wordToGenderUrl.size()} items - ${getSomeKeys(wordToGenderUrl)}...")
   }
 
+  def refreshCommonMistakesList() {
+    wordToMistakeUrl = loadListFromUrl("http://www.korrekturen.de/data/lemmata/fehler.txt")
+    log.info("Done refreshing common mistakes list - list now contains ${wordToMistakeUrl.size()} items - ${getSomeKeys(wordToMistakeUrl)}...")
+  }
+
   def loadListFromUrl(String url) {
-    log.info("Refreshing gender list from ${url}")
+    log.info("Refreshing list from ${url}")
     Map<String,String> wordMap = new HashMap<String,String>()
     String text = new URL(url).getText("utf-8")
     Scanner scanner = new Scanner(text)

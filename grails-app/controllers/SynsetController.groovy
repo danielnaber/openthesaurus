@@ -201,6 +201,7 @@ class SynsetController extends BaseController {
 
           String remoteWordUrl = wordListService.remoteWordUrl(params.q)
           String remoteGenderUrl = wordListService.remoteGenderUrl(params.q)
+          String remoteMistakeUrl = wordListService.remoteCommonMistakeUrl(params.q)
 
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
@@ -213,7 +214,8 @@ class SynsetController extends BaseController {
             descriptionText : metaTagDescriptionText,
             runTime : totalTime,
             remoteWordUrl: remoteWordUrl,
-            remoteGenderUrl: remoteGenderUrl
+            remoteGenderUrl: remoteGenderUrl,
+            remoteMistakeUrl: remoteMistakeUrl
           ]
 
         } finally {
@@ -475,7 +477,7 @@ class SynsetController extends BaseController {
       }
       wordListService.refreshWordList()
       wordListService.refreshGenderList()
-      // TODO: also use other lists
+      wordListService.refreshCommonMistakesList()
       render "OK"
     }
 
