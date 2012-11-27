@@ -73,11 +73,19 @@ class WordListService {
       for (String part : wordParts) {
         part = part.trim().toLowerCase()
         if (part.length() > 0) {
-          wordMap.put(part, parts[1])
+          String targetUrl = sanityCheckUrl(parts[1])
+          wordMap.put(part, targetUrl)
         }
       }
     }
     return wordMap
+  }
+
+  String sanityCheckUrl(String url) {
+    if (url.length() < 250 && url.trim().startsWith("http://www.korrekturen.de") || url.trim().startsWith("http://korrekturen.de")) {
+      return url
+    }
+    throw new Exception("Unexpected URL or URL length: ${url}")
   }
 
   private List getSomeKeys(Map<String,String> wordMap) {
