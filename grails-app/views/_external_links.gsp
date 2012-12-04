@@ -8,7 +8,7 @@
 
 <p style="line-height: 175%">
 
-    <a href="http://formulierung-mit-stil.de/?fsearched=${latin1Query}&amp;faction=find" title="Wortformen">Formulierung-mit-Stil.de</a>
+    <a href="http://formulierung-mit-stil.de/?fsearched=${latin1Query}&amp;faction=find" title="Formulierungen und Varianten">Formulierung-mit-Stil.de</a>
 
     <span class="d">&middot;</span>
     <a href="http://www.canoo.net/services/Controller?input=${latin1Query}&amp;service=inflection" title="Wortformen">Canoo.net</a>
