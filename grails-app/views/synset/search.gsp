@@ -55,8 +55,6 @@
 
                   <g:render template="forumlink" />
 
-                  <g:render template="/ads/resultpage_bottom"/>
-                  
                 </td>
               </tr>
             </table>

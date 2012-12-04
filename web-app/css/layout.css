@@ -571,3 +571,10 @@ tr .prop2 {
 u {
     text-decoration: none;
 }
+
+.partnerSites {
+    margin-top: 0px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}

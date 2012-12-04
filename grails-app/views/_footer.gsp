@@ -135,6 +135,9 @@
         <g:if test="${homepage}">
             <g:render template="/ads/homepage_bottom"/>
         </g:if>
+        <g:else>
+            <g:render template="/ads/resultpage_bottom"/>
+        </g:else>
       </td>
     </tr>
   </table>
