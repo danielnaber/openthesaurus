@@ -199,9 +199,11 @@ class SynsetController extends BaseController {
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
-          String remoteWordUrl = wordListService.remoteWordUrl(params.q)
-          String remoteGenderUrl = wordListService.remoteGenderUrl(params.q)
-          String remoteMistakeUrl = wordListService.remoteCommonMistakeUrl(params.q)
+          // this is specific to the German OpenThesaurus:
+          WordListLookup remoteWordLookup = wordListService.remoteWordUrlAndMetaInfo(params.q)
+          WordListLookup remoteGenderLookup = wordListService.remoteGenderUrlAndMetaInfo(params.q)
+          WordListLookup remoteMistakeLookup = wordListService.remoteCommonMistakeUrlAndMetaInfo(params.q)
+          // end of parts that's specific to the German OpenThesaurus
 
           [ partialMatchResult : partialMatchResult,
             wikipediaResult : wikipediaResult,
@@ -213,9 +215,9 @@ class SynsetController extends BaseController {
             baseforms: baseforms,
             descriptionText : metaTagDescriptionText,
             runTime : totalTime,
-            remoteWordUrl: remoteWordUrl,
-            remoteGenderUrl: remoteGenderUrl,
-            remoteMistakeUrl: remoteMistakeUrl
+            remoteWordLookup: remoteWordLookup,
+            remoteGenderLookup: remoteGenderLookup,
+            remoteMistakeLookup: remoteMistakeLookup
           ]
 
         } finally {

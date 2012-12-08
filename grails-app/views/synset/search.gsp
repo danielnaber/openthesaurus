@@ -65,31 +65,39 @@
               <tr>
                 <td>
 
-                  <g:if test="${remoteWordUrl || remoteGenderUrl || remoteMistakeUrl}">
+                  <%-- this is specific to German OpenThesaurus, but it doesn't harm for other languages --%>
+                  <g:if test="${remoteWordLookup || remoteGenderLookup || remoteMistakeLookup}">
                       <div style="margin-top: 20px">
                   </g:if>
-                  <g:if test="${remoteWordUrl}">
+                  <g:if test="${remoteWordLookup}">
                       <div style="margin-bottom: 5px">
-                          <a href="${remoteWordUrl.encodeAsHTML()}">Tipps zur Rechtschreibung von '${params.q.trim().encodeAsHTML()}'
+                          <a href="${remoteWordLookup.url.encodeAsHTML()}">Tipps zur Rechtschreibung von '${params.q.trim().encodeAsHTML()}'
                           <br/>auf korrekturen.de</a>
                       </div>
                   </g:if>
-                  <g:if test="${remoteGenderUrl}">
+                  <g:if test="${remoteGenderLookup}">
                       <div style="margin-bottom: 5px">
-                          <a href="${remoteGenderUrl.encodeAsHTML()}">Tipps zum grammatischen Geschlecht (der, die, das)
-                          <br/>von '${params.q.trim().encodeAsHTML()}' auf korrekturen.de</a>
+                          <g:if test="${remoteGenderLookup.metaInfo.contains(' / ')}">
+                              Je nach Bedeutung heißt es ${remoteGenderLookup.metaInfo.encodeAsHTML().replaceAll("&lt;i&gt;", "<i>").replaceAll("&lt;/i&gt;", "</i>")}
+                              ${remoteGenderLookup.term.encodeAsHTML()}.<br/>Details auf <a href="${remoteGenderLookup.url.encodeAsHTML()}">korrekturen.de</a>.
+                          </g:if>
+                          <g:else>
+                              Der Artikel von ${remoteGenderLookup.term.encodeAsHTML()} ist: ${remoteGenderLookup.metaInfo.encodeAsHTML().replaceAll("&lt;i&gt;", "<i>").replaceAll("&lt;/i&gt;", "</i>")}
+                              <br/>Mehr auf <a href="${remoteGenderLookup.url.encodeAsHTML()}">korrekturen.de</a>.
+                          </g:else>
                       </div>
                   </g:if>
-                  <g:if test="${remoteMistakeUrl}">
+                  <g:if test="${remoteMistakeLookup}">
                       <div style="margin-bottom: 5px">
-                          <a href="${remoteMistakeUrl.encodeAsHTML()}">Tipps zu typischen Fehlern mit '${params.q.trim().encodeAsHTML()}'
+                          <a href="${remoteMistakeLookup.url.encodeAsHTML()}">Tipps zu typischen Fehlern mit '${params.q.trim().encodeAsHTML()}'
                           <br/>auf korrekturen.de</a>
                       </div>
                   </g:if>
-                  <g:if test="${remoteWordUrl || remoteGenderUrl || remoteMistakeUrl}">
+                  <g:if test="${remoteWordLookup || remoteGenderLookup || remoteMistakeLookup}">
                       <hr style="margin-top:20px" />
                       </div>
                   </g:if>
+                  <%-- end of part that's specific to German OpenThesaurus --%>
 
                   <g:render template="wiktionary"/>
 
