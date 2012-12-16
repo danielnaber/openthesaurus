@@ -77,9 +77,7 @@
                                 <table>
                                     <tr>
                                         <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}" required="true" /></td>
-                                        <td valign="top"><label for="acceptLicense">Ich bin einverstanden, dass alle meine Beiträge
-                                            (Synonyme, Assoziationen, Forumsbeiträge etc.) unter der <a target="_blank" href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a>
-                                            oder einer anderen Open-Content-Lizenz veröffentlicht werden</label></td>
+                                        <td valign="top"><label for="acceptLicense"><g:message code="user.register.form.accept.license"/></label></td>
                                     </tr>
                                 </table>
                             </td>
