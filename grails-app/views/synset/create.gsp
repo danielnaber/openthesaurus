@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="create.title"/></title>         
+        <title><g:message code="create.title"/></title>
     </head>
     <body>
 
@@ -39,6 +39,9 @@
                                         <g:textArea rows="5" cols="30" id='terms' name='terms' spellcheck="true" value=""/>
                                     </g:else>
                                 </td>
+                                <td valign='top'>
+                                    <g:message code="create.example"/>
+                                </td>
                             </tr>
                             
                             <tr>
@@ -46,7 +49,7 @@
                             	<td>
 					                <div class="buttons">
 					                    <span class="button"><input
-					                    	class="save" type="submit" value="${message(code:'create.continue')}"/></span>
+					                    	class="submitButton" type="submit" value="${message(code:'create.continue')}"/></span>
 					                </div>
                             	</td>
                             </tr> 
