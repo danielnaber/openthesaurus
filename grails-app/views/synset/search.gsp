@@ -1,3 +1,5 @@
+          <td width="365">
+            <h1><g:message code='result.matches.for.header' /></h1>
 <%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
@@ -6,7 +8,7 @@
         <title><g:message code='result.matches.for.title' args="${[params.q.encodeAsHTML()]}"/></title>
 
         <g:if test="${descriptionText}">
-          <meta name="description" content="Gefundene Synonyme: ${descriptionText.encodeAsHTML()}..."/>
+          <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
         </g:if>
 
     </head>
@@ -49,7 +51,7 @@
 
                   <hr style="margin-top:20px" />
 
-                  <h2>Nicht das Richtige dabei?</h2>
+                  <h2><g:message code='result.matches.no.like' /></h2>
 
                   <g:render template="addterm" model="${[term:cleanTerm]}" />
 

@@ -208,8 +208,7 @@ class UserController extends BaseController {
       }
       if (user.confirmationDate) {
         log.warn("Confirming registration had happened before for user ${user}, ${params.code}")
-        //FIXME: i18n
-        flash.message = "Your user account has already been confirmed before"
+        flash.message = message(code:'user.register.account.confirmed.already')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
       } else {
         if (user.confirmationCode != params.code) {
@@ -217,9 +216,7 @@ class UserController extends BaseController {
         }
         user.confirmationDate = new Date()
         log.info("Confirming registration successful for ${params.userId}, ${params.code}")
-        //FIXME: i18n
-        //flash.message = "Your user account has been confirmed. You may now <a href='login'>log in</a>."
-        flash.message = "Ihr Account wurde aktiviert - Sie können sich jetzt <a href='user/login'>einloggen</a>."
+        flash.message = message(code:'user.register.account.activated')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
       }
     }

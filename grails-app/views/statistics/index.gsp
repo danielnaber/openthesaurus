@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="statistics.title" /></title>
-        <meta name="description" content="Statistik über die Größe der OpenThesaurus-Datenbank und Beiträge der Community."/>
+        <meta name="description" content="${message(code:'statistics.description')}" />
     </head>
     <body>
 
@@ -96,7 +96,7 @@
                           <td colspan="2">
                               <div style="margin-top: 10px">
                                   <g:link controller="user" action="login" class="link"
-                                        params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" /> Anmelden und mitmachen</g:link>
+                                        params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" />&nbsp;<g:message code="statistics.register" /></g:link>
                               </div>
                           </td>
                       </tr>

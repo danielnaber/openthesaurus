@@ -1,5 +1,5 @@
 <%@page import="com.vionto.vithesaurus.tools.*" %>
-					<h2 style="margin-top:0px">Teilwort-Treffer und ähnliche Wörter</h2>
+					<h2 style="margin-top:0px"><g:message code='result.matches.partial' /></h2>
 
                     <p class="partialMatches">
                     <g:set var="moreSubstringTerms" value="${false}" />
@@ -15,7 +15,7 @@
                         </g:else>
                     </g:each>
                     <g:if test="${partialMatchResult.size() == 0}">
-                        <span class="noMatches">Kein Teilwort-Treffer</span>
+                        <span class="noMatches"><g:message code='result.matches.partial.nomatch' /></span>
                     </g:if>
                     <g:if test="${partialMatchResult.size() > 8}">
                         &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="../images/arrow-blue.png" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
@@ -32,6 +32,6 @@
                         </g:if>
                     </g:each>
                     <g:if test="${similarTerms.size() == 0}">
-                        <span class="noMatches">Keine ähnlichen Treffer</span>
+                        <span class="noMatches"><g:message code='result.matches.similar.nomatch' /></span>
                     </g:if>
                     </p>

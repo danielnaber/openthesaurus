@@ -1,10 +1,9 @@
-<%@page import="com.vionto.vithesaurus.*" %>  
+<%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="changelist.title"/></title>
-        <meta name="description" content="Liste der Änderungen an den OpenThesaurus-Daten, die von der Community vorgenommen wurden."/>
         <meta name="robots" content="noindex, nofollow" />
     </head>
     <body>
@@ -19,10 +18,10 @@
 
           <g:if test="${user}">
             <g:if test="${user.realName}">
-                <h3>von Benutzer ${user.realName.encodeAsHTML()} (<g:decimal number="${totalMatches}"/> Treffer)</h3>
+                <h3><g:message code="edit.changelog.user"/> ${user.realName.encodeAsHTML()} (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
             </g:if>
             <g:else>
-                <h3>von Benutzer <span class="anonUserId">#${user.id}</span> (<g:decimal number="${totalMatches}"/> Treffer)</h3>
+                <h3><g:message code="edit.changelog.user"/> <span class="anonUserId">#${user.id}</span> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
             </g:else>
           </g:if>
 
@@ -106,9 +105,9 @@
               <g:hiddenField name="uid" value="${user.id}"/>
             </g:if>
             <g:hiddenField name="offset" value="${params.offset}"/>
-            Einträge pro Seite: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>
-            Springen zu Seite: <g:textField name="jumpToPage" size="3"/>
-            <g:submitButton name="name" value="Ändern"/>
+            <g:message code="edit.changelog.itemsperpage"/>: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>
+            <g:message code="edit.changelog.jumptopage"/>: <g:textField name="jumpToPage" size="3"/>
+            <g:submitButton name="name" value="${message(code:'edit.changelog.change')}"/>
           </g:form>
 
     </body>

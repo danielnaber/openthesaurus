@@ -3,7 +3,7 @@
     <tr>
       <td height="120" width="370" class="claim" colspan="2">
         <div style="margin-bottom: 20px">
-          OpenThesaurus ist ein freies deutsches Synonymwörterbuch, bei dem jeder mitmachen kann.
+          <g:message code="homepage.tagline"/>
         </div>
       </td>
       <td width="60"></td>
@@ -18,11 +18,11 @@
     </tr>
     <tr>
       <td colspan="2">
-        <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Trennlinie"/>
+        <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Separator"/>
       </td>
       <td></td>
       <td>
-        <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Trennlinie"/>
+        <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Separator"/>
       </td>
     </tr>
     <tr>
@@ -76,7 +76,7 @@
                 <td>&nbsp;</td>
                 <td>
                     <g:link controller="user" action="login" class="lightlink"
-                       params="${linkParams}"><strong>Einloggen</strong> und mitmachen</g:link>
+                       params="${linkParams}"><g:message code="footer.login"/></g:link>
                 </td>
             </g:else>
             </tr>
@@ -88,9 +88,9 @@
               <td>
                 <script type="text/javascript">
                 <!--
-                var firstPart = "feedback";
-                var lastPart = "openthesaurus.de";
-                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"30\" height=\"30\" alt=\"Kontakt-Icon\"/><" + "/a>");
+                var firstPart = "<g:message code="footer.email.beforeAt"/>";
+                var lastPart = "<g:message code="footer.email.afterAt"/>";
+                document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"30\" height=\"30\" alt=\"Contact-Icon\"/><" + "/a>");
                 // -->
                 </script>
               </td>
@@ -98,9 +98,9 @@
               <td>
                 <script type="text/javascript">
                 <!--
-                var firstPart = "feedback";
-                var lastPart = "openthesaurus.de";
-                document.write("<a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'>Schreibe uns eine <strong>E-Mail<" + "/strong><" + "/a>");
+                var firstPart = "<g:message code="footer.email.beforeAt"/>";
+                var lastPart = "<g:message code="footer.email.afterAt"/>";
+                document.write("<a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'><g:message code="footer.email"/><" + "/a>");
                 // -->
                 </script>
               </td>
@@ -112,18 +112,17 @@
             <tr>
               <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" width="30" height="30" alt="Twitter-Icon"/></a></td>
               <td>&nbsp;</td>
-              <td><a class="lightlink" href="http://twitter.com/openthesaurus">Folge uns auf <strong>twitter</strong></a>
-                 <span style="font-weight: normal;"> - auch per</span> <a href="http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=openthesaurus">RSS</a></td>
+              <td><g:message code="footer.twitter"/></td>
             </tr>
           </table>
         </div>
-        <%--
         <div class="iconLink">
+        <%--
           <table>
             <tr>
               <td><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img src="${createLinkTo(dir:'images',file:'icon-android.png')}" alt="Android-Icon"/></a></td>
               <td>&nbsp;</td>
-              <td><a class="lightlink" href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android">OpenThesaurus für <strong>Android</strong></a></td>
+              <td><a class="lightlink" href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><g:message code="footer.android"/> <strong>Android</strong></a></td>
             </tr>
           </table>
         </div>
