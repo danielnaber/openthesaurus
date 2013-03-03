@@ -1,6 +1,6 @@
 <html>
   <head>
-	  <title>OpenThesaurus Fehler</title>
+	  <title><g:message code="server.error.title"/></title>
 	  <style type="text/css">
 	  		.message {
 	  			border: 1px solid black;
@@ -25,13 +25,11 @@
   
   <body>
 
-    <h1>OpenThesaurus Server-Fehler</h1>
+    <h1><g:message code="server.error.headline"/></h1>
 
-    <p>Es ist etwas schiefgegangen - bitte versuch es in ein paar Minuten nochmal neu. Wenn es dann noch
-    nicht geht, bitte kontaktiere uns unter feedback <span>at</span> openthesaurus.de unter
-    Angabe der Fehlermeldung und dieses Zeitstempels: ${new Date()}</p>
+    <p><g:message code="server.error.description"/>: ${new Date()}</p>
     
-    <p><strong>Fehlermeldung:</strong> ${exception.message?.encodeAsHTML()}</p>
+    <p><strong><g:message code="server.error.message"/></strong> ${exception.message?.encodeAsHTML()}</p>
 
     <%--
     <h1>xxxGrails Runtime Exception</h1>
