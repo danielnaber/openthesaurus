@@ -429,7 +429,7 @@ class SynsetController extends BaseController {
             }
 
             if (similarTerms) {
-                similarterms  = array {
+                similarterms = array {
                     int i = 0
                     for (simTerm in similarTerms) {
                         element term:simTerm.term, distance:simTerm.dist
@@ -441,9 +441,17 @@ class SynsetController extends BaseController {
             }
             
             if (substringTerms && substringTerms.size() > 0) {
-                substringterms  = array {
+                substringterms = array {
                     for (substringTerm in substringTerms) {
                         element term:substringTerm.term
+                    }
+                }
+            }
+
+            if (startsWithTerms && startsWithTerms.size() > 0) {
+                startswithterms = array {
+                    for (startsWithTerm in startsWithTerms) {
+                        element term:startsWithTerm.term
                     }
                 }
             }
