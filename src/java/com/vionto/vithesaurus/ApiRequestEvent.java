@@ -25,8 +25,8 @@ import java.util.List;
  */
 public class ApiRequestEvent {
 
-    private String remoteIpAddress;
-    private Date date;
+    private final String remoteIpAddress;
+    private final Date date;
 
     public ApiRequestEvent(String remoteIpAddress, Date date) {
         this.remoteIpAddress = remoteIpAddress;
