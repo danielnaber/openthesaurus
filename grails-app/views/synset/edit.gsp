@@ -314,7 +314,7 @@
                                         <g:if test="${synset.isVisible}">
                                             <a href="javascript:toggleId('deleteButton')">${message(code:'edit.delete.button')}</a>
                                             <div id="deleteButton" style="display:${showOnlyDeleteButton ? 'block' : 'none'};margin-top:12px">
-                                                <g:actionSubmit action="hide" class="hide submitButton" value="${message(code:'edit.delete.now.button')}" />
+                                                <g:actionSubmit style="background-color: #ff9790" action="hide" class="hide submitButton" value="${message(code:'edit.delete.now.button')}" />
                                             </div>
                                         </g:if>
                                         <g:else>
