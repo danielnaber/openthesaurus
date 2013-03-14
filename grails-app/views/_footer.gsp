@@ -116,8 +116,8 @@
             </tr>
           </table>
         </div>
-        <div class="iconLink">
         <%--
+        <div class="iconLink">
           <table>
             <tr>
               <td><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img src="${createLinkTo(dir:'images',file:'icon-android.png')}" alt="Android-Icon"/></a></td>
