@@ -63,7 +63,7 @@ class SessionRestoreFilters {
             if (cookie.getName() == UserController.LOGIN_COOKIE_NAME) {
                 DurationSession dSession = DurationSession.findBySessionId(cookie.getValue())
                 if (dSession) {
-                    log.info("Using user's old session found in cookie: ${dSession.user}")
+                    log.debug("Using user's old session found in cookie: ${dSession.user}")
                     return dSession
                 }
                 break
