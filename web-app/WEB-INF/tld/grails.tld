@@ -540,7 +540,7 @@
             <scope>NESTED</scope>
         </variable>
         <attribute>
-            <name>name</name>
+            <name>tagName</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
