@@ -1,8 +1,7 @@
 <script type="text/javascript">
   var isFocused = false;
   function selectSearchField(originalQuery) {
-      var isTouchDevice = 'ontouchstart' in document.documentElement;
-      if (!isFocused && document.searchform && document.searchform.q && !isTouchDevice) {
+      if (!isFocused && document.searchform && document.searchform.q) {
           document.searchform.q.select();
           isFocused = true;
       }
