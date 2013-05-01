@@ -2,6 +2,7 @@ package vithesaurus
 
 import com.vionto.vithesaurus.ThesaurusConfigurationEntry
 import com.vionto.vithesaurus.ApiRequestEvent
+import com.vionto.vithesaurus.TooManyRequestsException
 import com.vionto.vithesaurus.tools.IpTools
 
 class RequestLimiterService {
@@ -66,7 +67,7 @@ class RequestLimiterService {
       sleepTimeInfo = "+" + sleepTime + "ms"
     }
     if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
-      throw new Exception("Too many requests from your IP address (${IpTools.getRealIpAddress(request)}) - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
+      throw new TooManyRequestsException(IpTools.getRealIpAddress(request))
     }
     return sleepTimeInfo
   }

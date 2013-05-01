@@ -127,7 +127,13 @@ class SynsetController extends BaseController {
           long partialMatchStartTime = System.currentTimeMillis()
           String sleepTimeInfo = ""
           if (apiRequest) {
-            sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
+            try {
+              sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
+            } catch (TooManyRequestsException e) {
+              log.info("Too many requests from ${e.getIpAddress()}, blocking request")
+              render(status: 429/*too many requests*/, "Too many requests from your IP address (${e.getIpAddress()}) - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
+              return
+            }
             if (partialApiRequest || allApiRequest) {
               int partialSearchOffset = params.substringFromResults ? Integer.parseInt(params.substringFromResults) : 0
               partialMatchResult = searchService.searchPartialResult(params.q, partialSearchOffset, getPartialSearchMax())
