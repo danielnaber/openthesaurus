@@ -6,7 +6,7 @@
   <title><g:message code="homepage.title"/></title>
   <meta name="layout" content="homepage" />
   <link rel="image_src" href="${createLinkTo(dir:'images',file:'screenshot_homepage_300px.png')}" />
-  <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
+  <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
   <script type="text/javascript">
   <!--
       var onChangeInterval = null;

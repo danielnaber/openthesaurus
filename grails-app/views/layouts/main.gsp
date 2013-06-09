@@ -9,7 +9,7 @@
         <g:render template="/script"/>
         <g:layoutHead />
 
-        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
         <!-- Note: this partially duplicates code from directSearch.gsp -->
         <script type="text/javascript">
         <!--

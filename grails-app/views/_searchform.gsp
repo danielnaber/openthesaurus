@@ -39,10 +39,12 @@
 
 <script type="text/javascript">
 <!--
-var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
-if (!touchOS) {
-  document.searchform.q.focus();
-  document.searchform.q.select();
-}
+document.observe('dom:loaded', function() {
+    var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
+    if (!touchOS) {
+      document.searchform.q.focus();
+      document.searchform.q.select();
+    }    
+});
 // -->
 </script>
