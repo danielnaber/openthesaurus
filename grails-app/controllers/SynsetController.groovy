@@ -265,7 +265,7 @@ class SynsetController extends BaseController {
             if (params.callback) {
                 String validCallbackPattern = '^[a-zA-Z0-9_-]+$'
                 if (!params.callback.matches(validCallbackPattern)) {
-                    throw new Exception("Invalid callback parameter: only characters [a-zA-Z0-9_-] are allowed")
+                    throw new Exception("Invalid callback parameter: only characters [a-zA-Z0-9_.-] are allowed")
                 }
                 // JSONP: Get the actual JSON content via HTTP and add the callback - all other ways to make
                 // this work failed or were equally ugly:
