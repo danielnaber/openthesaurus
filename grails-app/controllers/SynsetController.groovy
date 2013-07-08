@@ -263,7 +263,7 @@ class SynsetController extends BaseController {
     private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult) {
         if (params.format == "application/json") {
             if (params.callback) {
-                String validCallbackPattern = '^[a-zA-Z0-9_-]+$'
+                String validCallbackPattern = '^[a-zA-Z0-9_.-]+$'
                 if (!params.callback.matches(validCallbackPattern)) {
                     throw new Exception("Invalid callback parameter: only characters [a-zA-Z0-9_.-] are allowed")
                 }
