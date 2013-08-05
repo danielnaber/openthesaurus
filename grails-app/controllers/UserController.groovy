@@ -305,7 +305,7 @@ class UserController extends BaseController {
             ThesaurusUser userById = ThesaurusUser.findByUserId(params.userId)
             if (userById && userById.password == '__expired__') {
               log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): account has expired")
-              flash.message = message(code:'user.invalid.login.expired')
+              flash.message = message(code:'user.invalid.login.expired', args:[createLink(controller: 'user', action: 'lostPassword', params: [userId: userById.userId])])
               return
             } else {
               ThesaurusUser tmpUser = ThesaurusUser.findByUserId(params.userId)
