@@ -155,7 +155,7 @@
                                             </g:if>
                                             <g:set var="termCount" value="${t.listHomonyms().size()}"/>
 
-                                            <g:link title="${message(code:'edit.find.all.meanings', args: [t.word.encodeAsHTML()])}"
+                                            <g:link title="${message(code:'edit.find.all.meanings', args: [t.word])}"
                                                 class="termMetaInfo otherMeaningSearchLink" action="search" params="[q : t.word]">[${termCount}]</g:link>
                                         
                                         </div>
