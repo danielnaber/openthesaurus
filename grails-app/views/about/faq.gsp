@@ -103,7 +103,10 @@
 						Österreichische Wörter mit <span class="bsp">(österr.)</span>,
 						schweizerische mit <span class="bsp">(schweiz.)</span> kennzeichnen.</li>
 					<li>Fremdwörter können durchaus hinzugefügt werden.
-						Beispiel: <span class="bsp">Appendix, Blinddarm</span></li>
+						Beispiel: <span class="bsp">Appendix</span> als Synonym für Blinddarm</li>
+					<li>Die Teile eines Eintrags, die in Klammern stehen, werden bei der Suche ignoriert.
+						Beispiel: <span class="bsp">(sich) ergeben</span> kann auch gefunden werden, wenn ein Benutzer
+						nach <span class="bsp">ergeben</span> sucht</li>
 				</ul>
 			</div>
 		</div>
