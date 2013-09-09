@@ -112,6 +112,10 @@ class SearchServiceTest extends GroovyTestCase {
     }
 
     private void initMemoryDatabase() {
+        // clean up the data other tests left:
+        Term.executeUpdate('delete from Term')
+        Synset.executeUpdate('delete from Synset')
+
         def german = Language.findByShortForm("de")
         Synset synset1 = new Synset()
         synset1.addTerm(new Term("hallo", german, synset1))
