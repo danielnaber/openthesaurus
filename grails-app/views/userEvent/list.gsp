@@ -71,7 +71,7 @@
 
                           <td valign="top">
                               <g:if test="${newEntry}">
-                                  <g:link params="${[uid:userEvent.byUser.id]}">
+                                  <g:link controller="userEvent" action="list" params="${[uid:userEvent.byUser.id]}">
                                       <g:if test="${userEvent.byUser.realName}">
                                           ${userEvent.byUser.realName.encodeAsHTML()}
                                       </g:if>

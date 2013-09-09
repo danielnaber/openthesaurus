@@ -43,7 +43,7 @@ abstract class BaseController {
         return false
     }
 
-    public boolean isLocalHost(HttpServletRequest request) {
+    protected boolean isLocalHost(HttpServletRequest request) {
         String ip = IpTools.getRealIpAddress(request)
         return ip == "127.0.0.1" || ip == "0:0:0:0:0:0:0:1" || ip == "::1"
     }
