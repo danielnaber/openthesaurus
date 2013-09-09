@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="user.edit.title" args="${[visibleName.encodeAsHTML()]}"/></title>
+        <title><g:message code="user.edit.title" args="${[visibleName]}"/></title>
     </head>
     <body>
 
@@ -12,7 +12,7 @@
 
             <hr/>
 
-            <h2><g:message code="user.edit.headline" args="${[visibleName.encodeAsHTML()]}"/></h2>
+            <h2><g:message code="user.edit.headline" args="${[visibleName]}"/></h2>
 
             <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>

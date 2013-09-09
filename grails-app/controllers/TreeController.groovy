@@ -81,7 +81,7 @@ class TreeController extends BaseController {
           }
           subContent.append("<tt><a href=\"${createLink(controller:'tree', id:synset.id)}#target\">[-]</a></tt> ")
           subContent.append("<a href=\"${createLink(controller:'synset', action:'edit', id:subSynset.id)}\"><b>" 
-              + subSynset.toShortString() + "</b></a>\n")
+              + subSynset.toShortString().encodeAsHTML() + "</b></a>\n")
           subContent.append("<ul class='tree'>\n")
           getSubordinateSynsetsHtml(subSynset, synsetIdsToOpen, subContent)
           subContent.append("</ul>\n")
@@ -96,7 +96,7 @@ class TreeController extends BaseController {
             sb.append("<tt><a href=\"${createLink(controller:'tree', id:subSynset.id)}#target\">[+]</a></tt> ")
           }
           sb.append("<a href=\"${createLink(controller:'synset', action:'edit', id:subSynset.id)}\">"
-              + subSynset.toShortString() + "</a>")
+              + subSynset.toShortString().encodeAsHTML() + "</a>")
           sb.append("</li>\n")
         }
       }

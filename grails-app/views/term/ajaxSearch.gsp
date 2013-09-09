@@ -50,7 +50,7 @@
         <td>&nbsp;</td>
         <td>
           <g:link controller="synset" action="create" params="[term : params.q]" target="_blank">
-               <g:message code="result.create.synset" args="${[params.q.encodeAsHTML()]}" />
+               <g:message code="result.create.synset" args="${[params.q]}" />
           </g:link>
         </td>
       </tr>

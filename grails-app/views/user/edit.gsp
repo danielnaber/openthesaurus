@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="user.edit.title" args="${[user.userId.encodeAsHTML()]}"/></title>
+        <title><g:message code="user.edit.title" args="${[user.userId]}"/></title>
     </head>
     <body>
 
@@ -11,7 +11,7 @@
 
             <hr/>
 
-            <h2><g:message code="user.edit.headline" args="${[user.userId.encodeAsHTML()]}"/></h2>
+            <h2><g:message code="user.edit.headline" args="${[user.userId]}"/></h2>
 
             <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>

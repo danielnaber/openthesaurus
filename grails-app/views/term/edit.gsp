@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="edit.term.title" args="${[term.toString()?.encodeAsHTML()]}"/></title>
+        <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
         <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
         <script type="text/javascript">
         <!--
@@ -48,7 +48,7 @@
         
             <hr />
         
-            <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()?.encodeAsHTML()]}"/></h1>
+            <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()]}"/></h1>
     
             <g:if test="${flash.message}">
                 <div class="message">${flash.message}</div>
@@ -204,7 +204,7 @@
                                     <g:link controller="term" action="edit"
                                         id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
                                       (<g:link controller="synset" action="edit"
-                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3)}</g:link>)
+                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
                                 </div>
                               </g:if>
                               <g:else>

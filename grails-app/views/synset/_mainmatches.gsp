@@ -9,7 +9,7 @@
             <g:each in="${synset.synsetLinks}" var="synsetLink">
                 <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
                     <%
-                        superSynsetStrings.add(synsetLink.targetSynset.toLinkedShortStringWithShortLevel(3, false))
+                        superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
                     %>
                 </g:if>
             </g:each>
@@ -80,7 +80,7 @@
                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
                     <g:if test="${synsetLink.linkType.linkName == 'Assoziation' && associationSynsetStrings.size() < 3}">
                         <%
-                            associationSynsetStrings.add(synsetLink.targetSynset.toLinkedShortStringWithShortLevel(3, false))
+                            associationSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
                         %>
                     </g:if>
                 </g:each>

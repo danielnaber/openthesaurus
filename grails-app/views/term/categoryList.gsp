@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <title><g:message code="categorylist.title" args="${[category.categoryName.encodeAsHTML()]}" /></title>
+        <title><g:message code="categorylist.title" args="${[category.categoryName]}" /></title>
         <meta name="robots" content="noindex, nofollow" />
     </head>
     <body>
@@ -11,7 +11,7 @@
 
         <p><g:link controller="woerter"><g:message code="word.list.backlink" /></g:link></p>
 
-        <h2><g:message code="categorylist.headline" args="${[category.categoryName.encodeAsHTML()]}"/> (${matchCount})</h2>
+        <h2><g:message code="categorylist.headline" args="${[category.categoryName]}"/> (${matchCount})</h2>
 
         <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>

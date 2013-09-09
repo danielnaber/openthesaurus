@@ -9,7 +9,7 @@
 
     <g:if test="${synsetList.size() == 0}">
         <div class="metaInfo" style="margin-top:8px;margin-bottom:4px">
-            <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
+            <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()]}"/>
             <g:if test="${mostSimilarTerm}">
                 <g:set var="simTerm" value="${mostSimilarTerm.term}"/>
                 - meinten Sie <g:link url="${createLinkTo(dir:'synonyme')}/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
@@ -117,7 +117,7 @@
         <td>&nbsp;</td>
         <td>
           <g:link controller="synset" action="create" params="[term : params.q]">
-               <g:message code="result.create.synset" args="${[params.q.encodeAsHTML()]}" />
+               <g:message code="result.create.synset" args="${[params.q]}" />
           </g:link>
         </td>
       </tr>

@@ -3,13 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>${title.toString()?.encodeAsHTML()}</title>
+        <title>${title.toString()}</title>
     </head>
     <body>
 
         <div class="body">
 
-            <h1>${title.toString()?.encodeAsHTML()} (${synsetList.size()} matches)</h1>
+            <h1>${title.toString()} (${synsetList.size()} matches)</h1>
 
             <g:if test="${flash.message}">
 	            <div class="message">${flash.message}</div>

@@ -9,7 +9,7 @@
     <td>&nbsp;</td>
     <td>
       <g:link action="create" params="[term : term]">
-           <g:message code="result.create.synset" args="${[StringTools.slashUnescape(term.encodeAsHTML())]}" />
+           <g:message code="result.create.synset" args="${[StringTools.slashUnescape(term)]}" />
       </g:link>
     </td>
   </tr>

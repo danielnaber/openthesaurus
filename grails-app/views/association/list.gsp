@@ -21,7 +21,7 @@
         <div class="list">
             <ul>
                 <g:each in="${synsets}" var="synset">
-                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(5, true)}</g:link>
+                    <li style="margin-bottom: 1px"><g:link controller="synset" action="edit" id="${synset.id}">${synset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</g:link>
                         <ul style="margin-bottom: 12px;margin-top: 1px">
                             <g:set var="synsetLinks" value="${new ArrayList(synset.synsetLinks).sort()}"/>
                             <g:each in="${synsetLinks}" var="synsetLink">

@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
    		<meta name="layout" content="main" />
-        <title><g:message code='result.matches.for.title' args="${[params.q.encodeAsHTML()]}"/></title>
+        <title><g:message code='result.matches.for.title' args="${[params.q]}"/></title>
 
         <g:if test="${descriptionText}">
           <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
@@ -111,7 +111,7 @@
 
                   <hr style="margin-top:20px" />
 
-                  <h2><g:message code="result.external.search" args="${[params.q.encodeAsHTML()]}"/></h2>
+                  <h2><g:message code="result.external.search" args="${[params.q]}"/></h2>
 
                   <g:render template="/external_links" model="${[q:params.q]}"/>
                   

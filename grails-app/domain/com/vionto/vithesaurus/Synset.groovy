@@ -292,23 +292,17 @@ class Synset implements Cloneable {
         return sb.toString()
     }
 
-    private String toShortStringInternal(int maxSize = 3, boolean addEllipses, boolean addLevel, boolean addLink) {
+    private String toShortStringInternal(int maxSize = 3, boolean addEllipses, boolean addLevel) {
         def terms = sortedTerms()
         if (terms.size() == 0) {
           return "[empty]"
         }
         List enhancedTerms = []
         for (term in terms) {
-          def linkPrefix = ""
-          def linkSuffix = ""
-          if (addLink) {
-              linkPrefix = "<a href='${term.word.encodeAsURL()}'>"
-              linkSuffix = "</a>"
-          }
           if (term.level && addLevel) {
-              enhancedTerms.add(linkPrefix + term.word.encodeAsHTML() + " (" + term.level.shortLevelName.encodeAsHTML() + ")" + linkSuffix)
+              enhancedTerms.add(term.word + " (" + term.level.shortLevelName + ")")
           } else {
-              enhancedTerms.add(linkPrefix + term.word.encodeAsHTML() + linkSuffix)
+              enhancedTerms.add(term.word)
           }
           if (enhancedTerms.size() >= maxSize) {
               break
@@ -326,21 +320,14 @@ class Synset implements Cloneable {
      * A string representation that includes the short term level (if any), limited by the number of terms (default: 3)
      */
     String toShortStringWithShortLevel(int maxSize = 3, boolean addEllipses) {
-        return toShortStringInternal(maxSize, addEllipses, true, false)
-    }
-
-    /**
-     * A string representation that includes the short term level (if any), limited by the number of terms (default: 3)
-     */
-    String toLinkedShortStringWithShortLevel(int maxSize = 3, boolean addEllipses) {
-        return toShortStringInternal(maxSize, addEllipses, true, true)
+        return toShortStringInternal(maxSize, addEllipses, true)
     }
 
     /**
      * A string representation limited by the number of terms (default: 3)
      */
     String toShortString(int maxSize = 3, boolean addEllipses = true) {
-        return toShortStringInternal(maxSize, addEllipses, false, false)
+        return toShortStringInternal(maxSize, addEllipses, false)
     }
 
     /**

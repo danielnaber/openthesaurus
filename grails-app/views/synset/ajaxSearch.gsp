@@ -1,6 +1,6 @@
 <%@page import="com.vionto.vithesaurus.tools.StringTools" %>
     <g:if test="${synsetList.size() == 0}">
-    	<g:message code="result.no.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
+    	<g:message code="result.no.matches.for" args="${[params.q.toString()]}"/>
     </g:if>
     <g:else>
 	    <table>
@@ -50,7 +50,7 @@
         <td>&nbsp;</td>
         <td>
           <g:link action="create" params="[term : params.q]" target="_blank">
-               <g:message code="result.create.synset" args="${[params.q.encodeAsHTML()]}" />
+               <g:message code="result.create.synset" args="${[params.q]}" />
           </g:link>
         </td>
       </tr>

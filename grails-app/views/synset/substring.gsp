@@ -4,13 +4,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title><g:message code="substring.title" args="${[params.q.encodeAsHTML()]}"/></title>
+        <title><g:message code="substring.title" args="${[params.q]}"/></title>
     </head>
     <body>
 
           <hr />
 
-          <h2><g:message code="substring.headline" args="${[totalMatches, params.q.encodeAsHTML()]}"/></h2>
+          <h2><g:message code="substring.headline" args="${[totalMatches, params.q]}"/></h2>
 
           <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>
