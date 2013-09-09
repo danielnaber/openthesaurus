@@ -18,6 +18,15 @@
 <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
 
 <tr class="newsYearDelimiter">
+    <td>2013</td>
+    <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2013-09-08</span></td>
+    <td valign="top">OpenThesaurus umfasst jetzt <g:link controller="statistics">über 100.000 Wörter</g:link>.</td>
+</tr>
+
+<tr class="newsYearDelimiter">
     <td>2012</td>
     <td></td>
 </tr>
