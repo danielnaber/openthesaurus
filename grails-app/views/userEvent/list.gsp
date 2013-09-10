@@ -5,6 +5,7 @@
         <meta name="layout" content="main" />
         <title><g:message code="changelist.title"/></title>
         <meta name="robots" content="noindex, nofollow" />
+        <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
     </head>
     <body>
 
