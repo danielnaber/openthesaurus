@@ -9,6 +9,8 @@ import com.vionto.vithesaurus.tools.DbUtils
  */
 class MemoryDatabaseCreationService {
 
+  public static FIELD_LENGTH = 50
+    
   static transactional = false
 
   def dataSource
@@ -24,8 +26,8 @@ class MemoryDatabaseCreationService {
     try {
       conn = dataSource.getConnection()
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(50) NOT NULL, lookup VARCHAR(50)) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
 
       ps = conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
       ps.setString(1, new Date().toString())
