@@ -1,6 +1,6 @@
 OpenThesaurus - a web-based thesaurus management tool (formerly called vithesaurus)
 Copyright (C) 2009 vionto GmbH, www.vionto.com
-Copyright (C) 2011,2012 Daniel Naber, www.danielnaber.de
+Copyright (C) 2011-2013 Daniel Naber, www.danielnaber.de
 
 OpenThesaurus is a web-based tool for the development and maintenance of
 thesauri and ontologies. It requires a Java application server or
@@ -76,7 +76,7 @@ Please refer to the container's documentation on how to do that.
 BUILDING
 
 If you want to build OpenThesaurus on your own you will need
-Grails 1.3.7 (http://www.grails.org).
+Grails 2.2.4 (http://www.grails.org).
 
 For development, your database needs to be configured in
 grails-app/conf/datasource-dev.properties. Use "grails run-app"
