@@ -35,19 +35,11 @@ class SynsetValidator {
     }
 
     /**
-     * If extendedValidate() is executed without params
-     * no extended validation will be obtained.
-     */
-    public boolean extendedValidate() {
-        extendedValidate(false)
-    }
-
-    /**
      * Makes an extended validation for synsets.
      * @param A boolean value, if a full validation should be executed.
      * @return True if validation didn't fail.
      */
-    private boolean extendedValidate(boolean fullValidation) {
+    public boolean extendedValidate(boolean fullValidation) {
         if (fullValidation) {
             // some simple assertions
             assert (synset)
@@ -65,7 +57,7 @@ class SynsetValidator {
     }
 
     /**
-     * Checks if synset contains duplicated terms. It's a comparsion
+     * Checks if synset contains duplicated terms. It's a comparison
      * of the 'terms.word' and therefore a String compare. If there is a
      * duplicated entry an exception will be thrown.
      * @throws IllegalArgumentException
