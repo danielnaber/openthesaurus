@@ -17,6 +17,8 @@
  */ 
 
 import com.vionto.vithesaurus.*
+import groovy.sql.Sql
+
 import java.sql.Connection
 
 import org.apache.commons.lang.StringUtils
@@ -510,6 +512,20 @@ class SynsetController extends BaseController {
     String[] getTermsFromTextArea(String str) {
         String[] terms = str.split("[\n\r]")
         return terms.findAll { term -> term.trim() != "" }
+    }
+
+    def listBySize = {
+        def direction = params.direction == 'asc' ? 'asc' : 'desc'
+        int offset = params.offset ? params.offset.toInteger() : 0
+        List synsets = []
+        def sql = new Sql(dataSource)
+        sql.eachRow("select synset.id, count(synset_id) from term, synset" +
+                " where term.synset_id = synset.id and synset.is_visible = 1" +
+                " group by synset_id order by count(synset_id) ${direction}" +
+                " limit ${offset}, 10", 
+            { row -> synsets.add(Synset.get(row[0])) })
+        int totalMatches = Synset.countByIsVisible(true) 
+        [synsets: synsets, totalMatches: totalMatches, direction: direction]
     }
 
     def variation = {

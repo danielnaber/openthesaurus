@@ -21,6 +21,10 @@
               <li><g:link controller="association" action="list"><g:message code="association.link"/></g:link></li>
               <li><g:link controller="term" action="antonyms"><g:message code="antonyms.link"/></g:link></li>
               <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
+              <li><g:message code="by.size.headline"/>:
+                  <g:link controller="synset" action="listBySize" params="${[direction: 'desc']}"><g:message code="by.size.headline.largest"/></g:link>,
+                  <g:link controller="synset" action="listBySize" params="${[direction: 'asc']}"><g:message code="by.size.headline.smallest"/></g:link>
+              </li>
               <li style="margin-top:14px"><g:message code="word.list.by.level"/>
               <ul style="margin-top:0px">
                 <g:each in="${TermLevel.list()}" var="level">
