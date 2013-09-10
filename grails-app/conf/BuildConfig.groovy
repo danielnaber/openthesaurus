@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         runtime 'mysql:mysql-connector-java:5.1.16'
-        test "net.sourceforge.htmlunit:2.11"
+        test "net.sourceforge.htmlunit:htmlunit:2.10"  // 2.11 didn't work...
     }
 
     plugins {
@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
 
         build ":tomcat:$grailsVersion"
         
-        test(":webtest:3.0.0") {
+        test(":webtest:3.0.1") {
             excludes 'htmlunit'
         }
     }

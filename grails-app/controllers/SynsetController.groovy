@@ -276,7 +276,9 @@ class SynsetController extends BaseController {
                     }
                 }
                 def paramsString = StringUtils.join(paramsList, "&")
-                String url = grailsApplication.config.thesaurus.serverURL + createLinkTo(dir: 'synonyme') + "/search?" + paramsString
+                def serverUrl = new URL(grailsApplication.config.thesaurus.serverURL)
+                def server = serverUrl.protocol + "://" + serverUrl.host + ":" + serverUrl.port
+                String url = server + createLinkTo(dir: 'synonyme') + "/search?" + paramsString
                 String urlContent = new URL(url).text
                 render "${params.callback}(${urlContent})"
             } else {

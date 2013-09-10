@@ -26,6 +26,9 @@ import com.vionto.vithesaurus.ThesaurusConfigurationEntry
 import com.vionto.vithesaurus.SynsetLink
 import com.vionto.vithesaurus.LinkType
 
+// in case of problems, see:
+// http://grails.1312388.n4.nabble.com/Geb-dependency-woes-td4642623.html
+// http://markmail.org/message/wqcsuis7vupqk645#query:+page:1+mid:ljdfm7yqcqnz335t+state:results
 class OpenThesaurusWebTests extends grails.util.WebTest {
 
    private Language language = Language.findByShortForm("de")
