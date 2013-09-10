@@ -59,7 +59,7 @@
                                 </p>
 							<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
 								<div class="copyrightInfo">
-									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord.encodeAsHTML(),wiktionaryWord.encodeAsURL()]}"/>
+									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord,wiktionaryWord.encodeAsURL()]}"/>
 								</div>
 							</g:if>
 						</g:else>

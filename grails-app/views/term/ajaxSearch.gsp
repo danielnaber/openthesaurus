@@ -1,6 +1,6 @@
 <%@page import="com.vionto.vithesaurus.tools.StringTools" %>
     <g:if test="${terms.size() == 0}">
-        <g:message code="result.no.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
+        <g:message code="result.no.matches.for" args="${[params.q]}"/>
     </g:if>
     <g:else>
 	    <table>

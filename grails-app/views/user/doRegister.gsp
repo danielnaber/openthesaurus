@@ -15,7 +15,7 @@
               <div class="message">${flash.message}</div>
           </g:if>
 
-          <p><g:message code="user.register.check.email" args="${[email.encodeAsHTML()]}"/></p>
+          <p><g:message code="user.register.check.email" args="${[email]}"/></p>
 
           <g:if test="${params.subscribeToMailingList}">
             <p><g:message code="user.register.check.email.mailinglist"/></p>

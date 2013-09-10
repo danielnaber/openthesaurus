@@ -13,7 +13,7 @@
               <div class="message">${flash.message}</div>
           </g:if>
 
-          <p><g:message code="user.reset.password.done" args="${[user.userId.encodeAsHTML()]}"/></p>
-			        
+          <p><g:message code="user.reset.password.done" args="${[user.userId]}"/></p>
+
     </body>
 </html>

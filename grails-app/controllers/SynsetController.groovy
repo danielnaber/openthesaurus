@@ -745,20 +745,20 @@ class SynsetController extends BaseController {
             }
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), null, newTerm, params.changeComment)
             if (synset.containsWord(params['word_' + newTermCount])) {
-                throw new Exception(message(code:'thesaurus.duplicate.term', args: [newTerm.word.encodeAsHTML()]))
+                throw new Exception(message(code:'thesaurus.duplicate.term', args: [newTerm.word], encodeAs: 'Text'))
             }
             if (!newTerm.validate()) {
-                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word.encodeAsHTML(), newTerm.errors]))
+                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word, newTerm.errors], encodeAs: 'Text'))
             }
             try {
                 newTerm.extendedValidate()
             } catch (IllegalArgumentException e) {
-                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word.encodeAsHTML(), e.getMessage()]))
+                throw new Exception(message(code:'thesaurus.invalid.term', args: [newTerm.word, e.getMessage()], encodeAs: 'Text'))
             }
             synset.addTerm(newTerm)
             def saved = newTerm.saveAndLog(logInfo)
             if (!saved) {
-                throw new Exception(message(code:'thesaurus.error.saving.changes', args: [newTerm.word.encodeAsHTML(), newTerm.errors]))
+                throw new Exception(message(code:'thesaurus.error.saving.changes', args: [newTerm.word, newTerm.errors], encodeAs: 'Text'))
             }
             newTermCount++
         }

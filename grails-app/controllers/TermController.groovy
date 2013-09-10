@@ -99,7 +99,7 @@ class TermController extends BaseController {
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                     termBackup, term, params.changeComment)
             if (!term.hasErrors() && term.saveAndLog(logInfo)) {
-                flash.message =message(code:'edit.term.updated', args:[term.encodeAsHTML()])
+                flash.message = message(code:'edit.term.updated', args:[term])
                 redirect(controller:'synset',action:edit,id:term.synset.id)
             }
             else {

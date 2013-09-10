@@ -68,7 +68,7 @@
                 <g:message code="result.ajax.too.short" args="${[minLengthForSubstringQuery]}"/>
             </g:if>
             <g:else>
-                <g:message code="result.ajax.no.substring.matches.for" args="${[params.q.toString()?.encodeAsHTML()]}"/>
+                <g:message code="result.ajax.no.substring.matches.for" args="${[params.q]}"/>
             </g:else>
         </div>
     </g:if>

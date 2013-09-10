@@ -21,7 +21,7 @@
 						<g:if test="${wikipediaResult.size() > 0}">
 							<div class="copyrightInfo">
 								<g:message code="result.wikipedia.license" 
-									args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle.encodeAsHTML(),wikipediaTitle.encodeAsURL()]}"/>
+									args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle,wikipediaTitle.encodeAsURL()]}"/>
 							</div>
 						</g:if>
 					</g:if>

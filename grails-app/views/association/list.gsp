@@ -26,7 +26,7 @@
                             <g:set var="synsetLinks" value="${new ArrayList(synset.synsetLinks).sort()}"/>
                             <g:each in="${synsetLinks}" var="synsetLink">
                                 <g:if test="${synsetLink.linkType == desiredLinkType}">
-                                    <li style="margin-top: 1px">${synsetLink.targetSynset.toShortStringWithShortLevel(5, true)}</li>
+                                    <li style="margin-top: 1px">${synsetLink.targetSynset.toShortStringWithShortLevel(5, true).encodeAsHTML()}</li>
                                 </g:if>
                             </g:each>
                         </ul>

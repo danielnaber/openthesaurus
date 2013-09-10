@@ -144,13 +144,13 @@ class RedirectController extends BaseController {
          } catch (Exception e) {
            // probably a spammer inserting a url into the parameter
            log.info("crappy id parameter in redirect: " + params.id)
-           flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
+           flash.message = message(code:'notfound.id.not.found', args:[params.id])
            response.sendError(404)
            return
          }
          Synset synset = Synset.findByOriginalId(params.id)
          if (synset == null) {
-           flash.message = message(code:'notfound.id.not.found', args:[params.id.encodeAsHTML()])
+           flash.message = message(code:'notfound.id.not.found', args:[params.id])
            response.sendError(404)
            return
          }
@@ -166,13 +166,13 @@ class RedirectController extends BaseController {
        } catch (Exception e) {
          // probably a spammer inserting a url into the parameter
          log.info("crappy wmid parameter in redirect: " + params.id)
-         flash.message = message(code:'notfound.id.not.found', args:[params.wmid.encodeAsHTML()])
+         flash.message = message(code:'notfound.id.not.found', args:[params.wmid])
          response.sendError(404)
          return
        }
        Term term = Term.findByOriginalId(params.wmid)
        if (term == null) {
-         flash.message = message(code:'notfound.termid.not.found', args:[params.wmid.encodeAsHTML()])
+         flash.message = message(code:'notfound.termid.not.found', args:[params.wmid])
          response.sendError(404)
          return
        }

@@ -5,9 +5,9 @@
         <meta name="layout" content="main" />
         <g:set var="cleanTermList" value="${[]}"/>
         <%
-        searchTerms.each{ cleanTermList.add(it.encodeAsHTML()) }
+        searchTerms.each{ cleanTermList.add(it) }
         %>
-        <g:set var="simpleDelim" value=" &middot; "/>
+        <g:set var="simpleDelim" value=" · "/>
         <title><g:message code="create.search.title" args="${[cleanTermList.join(simpleDelim)]}"/></title>
     </head>
     <body>
@@ -32,7 +32,7 @@
             <table>
                <g:each in="${synsetList}" status="i" var="synset">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td style="padding-bottom: 8px"><g:link action="edit" id="${synset.id}">${synset?.toShortStringWithShortLevel(Integer.MAX_VALUE, false)}</g:link></td>
+                        <td style="padding-bottom: 8px"><g:link action="edit" id="${synset.id}">${synset?.toShortStringWithShortLevel(Integer.MAX_VALUE, false)?.encodeAsHTML()}</g:link></td>
                     </tr>
                </g:each>
             </table>

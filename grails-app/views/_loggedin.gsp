@@ -1,6 +1,6 @@
 <div style="margin-top:23px">
 <g:if test="${session.user}">
-    <g:message code="user.successful.login" args="${[session.user.userId.toString()?.encodeAsHTML()]}"/>
+    <g:message code="user.successful.login" args="${[session.user.userId]}"/>
     <g:if test="${session.user.userId.toString() == 'admin'}">
         <span class="adminOnly"><g:link controller="admin" action="index">[admin]</g:link></span>
     </g:if>
