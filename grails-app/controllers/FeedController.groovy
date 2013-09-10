@@ -46,7 +46,6 @@ class FeedController extends BaseController {
          description = "Letzte Änderungen in OpenThesaurus"
          eventList.each() { event ->
            String desc
-           String title = ""
            if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent) {
              desc = "Eintrag"
            } else if (event.getClass() == com.vionto.vithesaurus.UserTermEvent) {
@@ -63,7 +62,7 @@ class FeedController extends BaseController {
            } else {
              desc += " ??? (${event.eventType})"
            }
-           title = desc
+           String titleStr = desc
            String username = event.byUser.realName
            if (!username) {
              username = "[anonym]"
@@ -81,7 +80,7 @@ class FeedController extends BaseController {
              // this is part of the synset change info already
            } else {
              String changeDesc = StringEscapeUtils.unescapeHtml(event.synset.toShortString(5))
-             entry(username.encodeAsHTML() + ": " + title + ": " + changeDesc) {
+             entry(username.encodeAsHTML() + ": " + titleStr + ": " + changeDesc) {
                publishedDate = event.creationDate
                //actually <guid> must be unique but I cannot set this it seems, so let's make
                //the link unique, as this is used as guid:
