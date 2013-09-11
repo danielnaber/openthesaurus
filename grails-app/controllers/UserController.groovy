@@ -110,7 +110,7 @@ class UserController extends BaseController {
           from message(code:'user.register.email.from')
           to params.userId
           subject message(code:'user.register.email.subject')     
-          body message(code:'user.register.email.body', args:[activationLink]) 
+          body message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text') 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
         if (params.subscribeToMailingList) {
@@ -365,8 +365,8 @@ class UserController extends BaseController {
         sendMail {    
           from message(code:'user.register.email.from')
           to params.userId
-          subject message(code:'user.lost.password.email.subject')     
-          body message(code:'user.lost.password.email.body', args:[params.userId, activationLink]) 
+          subject message(code:'user.lost.password.email.subject')
+          body message(code:'user.lost.password.email.body', args:[params.userId, activationLink], encodeAs: 'Text') 
         }
         log.info("Sent password reset mail to ${params.userId}, code ${user.confirmationCode}")
         [email: params.userId]
