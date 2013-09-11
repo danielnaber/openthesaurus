@@ -1,13 +1,10 @@
 #/bin/sh
-#dnaber, 2008-09-22, 2009-08-02
+#dnaber, 2013-09-11
 #helper script to deploy new version by overwriting the old one
 
-rm -rf temp-unzip
+rm target/openthesaurus-*.war
 grails war
-unzip -d temp-unzip target/openthesaurus-1.2.0.war
-
-cd temp-unzip
-
-scp -r WEB-INF/classes/ WEB-INF/grails-app/ WEB-INF/tld/ WEB-INF/*.xml openthesaurus.de:~/tomcat/webapps/ROOT/WEB-INF/
-scp -r WEB-INF/grails-app/i18n/* openthesaurus.de:~/tomcat/webapps/ROOT/WEB-INF/grails-app/i18n/
-scp -r css/ openthesaurus.de:~/tomcat/webapps/ROOT/
+scp target/openthesaurus-*.war openthesaurus.de:openthesaurus.war
+echo "Now login to the server and call:"
+echo "  unzip -d tomcat/webapps/ROOT/ openthesaurus.war"
+echo "  ./restart.sh"
