@@ -212,7 +212,7 @@ class UserController extends BaseController {
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
       } else {
         if (user.confirmationCode != params.code) {
-          throw new Exception("Confirmation code invalid for ${params.userId}, ${params.code} != ${user.confirmationCode}")
+          throw new Exception("Confirmation code invalid")
         }
         user.confirmationDate = new Date()
         log.info("Confirming registration successful for ${params.userId}, ${params.code}")
