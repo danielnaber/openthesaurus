@@ -1,5 +1,5 @@
 OpenThesaurus - a web-based thesaurus management tool (formerly called vithesaurus)
-Copyright (C) 2009 vionto GmbH, www.vionto.com
+Copyright (C) 2009 vionto GmbH, Berlin
 Copyright (C) 2011-2013 Daniel Naber, www.danielnaber.de
 
 OpenThesaurus is a web-based tool for the development and maintenance of
@@ -32,20 +32,20 @@ Please refer to the container's documentation on how to do that.
    on its first startup.
 
 3. For now, an in-memory database needs to be set up and updated regularly by
-   calling "synset/createMemoryDatabase" before OpenThesaurus can be used.
+   accessing the page "synset/createMemoryDatabase" before OpenThesaurus can be used.
    This can be done by calling a command like this:
    curl -I http://localhost:8080/openthesaurus/synset/createMemoryDatabase
 
    Since the size of in-memory tables is 16M by default, after a while the above operation
-   might start to fail (you will get 500 Internal Server Error as response of the above URL 
+   might start to fail (you will get 500 Internal Server Error as response at the above URL 
    and you will see "memWordsTmp is full" in your server logs. In this case what you need to
    do is increase max_heap_table_size in MySQL. You can use "SHOW VARIABLES" to see the current
    value of this variable in your installation.
 
 4. Set the values in WEB-INF/classes/openthesaurus.properties
 
-5. For bigger data sets it might be necessary to created indexes manually in
-   your database (later versions of OpenThesaurus might do this automatically):
+5. For bigger data sets it might be necessary to create indexes manually in
+   your database:
    ALTER TABLE `term` ADD INDEX ( `word` ) 
    ALTER TABLE `term` ADD INDEX ( `normalized_word` ) 
    ALTER TABLE `synset` ADD INDEX ( `is_visible` ) 
@@ -89,7 +89,7 @@ servlet container like Tomcat.
 
 DATA IMPORT
 
-Data from the old PHP version of OpenThesaurus can be imported by
+Data from the old PHP-based version of OpenThesaurus can be imported by
 calling http://localhost:8080/openthesaurus/import/index. Please check
 the result carefully as it has only been tested with the German data
 so far.
