@@ -39,7 +39,9 @@ public class StringTools {
   }
     
   public static String normalize(String word) {
-    return word.replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
+    String cleanWord = word.replaceAll("[.!?,]", "");
+    cleanWord = cleanWord.replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
+    return cleanWord;
   }
   
   public static String normalizeForSort(String s) {

@@ -37,11 +37,32 @@ class AdminController extends BaseController {
         for (term in terms) {
             String normalizedWord = StringTools.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
-              render "Error: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+                render "Error: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }
             count++
         }
         render "<br>Checked ${count} terms."
+        render "<form action='updateNormalizedTerms' method='post'>"
+        render "  <input type='submit' value='Update Normalized Fields'/>"
+        render "</form>"
+    }
+
+    def updateNormalizedTerms = {
+        if (request.method != 'POST') {
+            throw new Exception("Please call using method=POST")
+        }
+        List terms = Term.list()
+        int count = 0
+        for (term in terms) {
+            String normalizedWord = StringTools.normalize(term.word)
+            if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
+                term.normalizedWord = normalizedWord
+                term.save(failOnError: true)
+                render "Updated: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+            }
+            count++
+        }
+        render "<br>Updated ${count} terms."
     }
 
 }
