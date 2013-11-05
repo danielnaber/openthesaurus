@@ -80,7 +80,7 @@ class FeedController extends BaseController {
              // this is part of the synset change info already
            } else {
              String changeDesc = StringEscapeUtils.unescapeHtml(event.synset.toShortString(5))
-             entry(username.encodeAsHTML() + ": " + titleStr + ": " + changeDesc) {
+             entry(username + ": " + titleStr + ": " + changeDesc) {
                publishedDate = event.creationDate
                //actually <guid> must be unique but I cannot set this it seems, so let's make
                //the link unique, as this is used as guid:
