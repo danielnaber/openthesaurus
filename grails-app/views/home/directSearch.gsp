@@ -29,6 +29,7 @@
           }
       }
 
+      var runningRequests = 0;
       var lastUpdateTimeStamp = 0;
 
       function onValueChange() {
@@ -41,6 +42,7 @@
               cursorPosition = -1;
               var timeStamp = new Date().getTime();
               loadSearch();
+              runningRequests++;
               new Ajax.Request(
                 '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                 {
@@ -55,7 +57,14 @@
                      }
                  },
                  onFailure: function(response){$('searchResultArea').update(response.responseText)},
-                 onComplete: function(e){loadedSearch()},
+                 onComplete: function(e){
+                     if (runningRequests > 0) {
+                        runningRequests--;
+                     }
+                     if (runningRequests <= 0) {
+                         loadedSearch();
+                     }
+                 },
                  parameters:'q=' + searchString + "&home=true"
                 }
               );

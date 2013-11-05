@@ -69,6 +69,7 @@
                 }
             }
 
+            var runningRequests = 0;
             var lastUpdateTimeStamp = 0;
 
             function onSynsetSearchValueChange() {
@@ -86,6 +87,7 @@
                     cursorPosition = -1;
                     var timeStamp = new Date().getTime();
                     loadSynsetSearch();
+                    runningRequests++;
                     new Ajax.Request(
                       '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                       {
@@ -100,7 +102,14 @@
                           }
                        },
                        onFailure: function(response){$('searchResultArea').update(response.responseText)},
-                       onComplete: function(e){loadedSynsetSearch()},
+                       onComplete: function(e){
+                           if (runningRequests > 0) {
+                               runningRequests--;
+                           }
+                           if (runningRequests <= 0) {
+                               loadedSynsetSearch();
+                           }
+                       },
                        parameters:'q=' + searchString + "&forumLink=false"
                       }
                     );
