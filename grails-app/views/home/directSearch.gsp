@@ -29,6 +29,8 @@
           }
       }
 
+      var lastUpdateTimeStamp = 0;
+
       function onValueChange() {
           clearInterval(onChangeInterval);
           var searchString = document.searchform.q.value;
@@ -37,13 +39,23 @@
               $('searchResultArea').update("");
           } else {
               cursorPosition = -1;
-              new Ajax.Updater('searchResultArea',
+              var timeStamp = new Date().getTime();
+              loadSearch();
+              new Ajax.Request(
                 '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                 {
                  asynchronous: true,
                  evalScripts: false,
-                 onLoaded: function(e){loadedSearch()},
-                 onLoading: function(e){loadSearch()},
+                 onSuccess: function(response){
+                     if (timeStamp < lastUpdateTimeStamp) {
+                         //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                     } else {
+                         $('searchResultArea').update(response.responseText)
+                         lastUpdateTimeStamp = timeStamp;
+                     }
+                 },
+                 onFailure: function(response){$('searchResultArea').update(response.responseText)},
+                 onComplete: function(e){loadedSearch()},
                  parameters:'q=' + searchString + "&home=true"
                 }
               );

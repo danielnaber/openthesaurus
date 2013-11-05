@@ -69,6 +69,8 @@
                 }
             }
 
+            var lastUpdateTimeStamp = 0;
+
             function onSynsetSearchValueChange() {
                 clearInterval(onChangeInterval);
                 var searchString = document.searchform.q.value;
@@ -82,13 +84,23 @@
                     $('body').setStyle({backgroundColor: '#e6e6e6'});
                     //$('searchResultTable').setStyle({opacity: 0.4}); -- too slow in Firefox
                     cursorPosition = -1;
-                    new Ajax.Updater('searchResultArea',
+                    var timeStamp = new Date().getTime();
+                    loadSynsetSearch();
+                    new Ajax.Request(
                       '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                       {
                        asynchronous: true,
                        evalScripts: false,
-                       onLoaded: function(e){loadedSynsetSearch()},
-                       onLoading: function(e){loadSynsetSearch()},
+                       onSuccess: function(response){
+                          if (timeStamp < lastUpdateTimeStamp) {
+                              //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                          } else {
+                              $('searchResultArea').update(response.responseText)
+                              lastUpdateTimeStamp = timeStamp;
+                          }
+                       },
+                       onFailure: function(response){$('searchResultArea').update(response.responseText)},
+                       onComplete: function(e){loadedSynsetSearch()},
                        parameters:'q=' + searchString + "&forumLink=false"
                       }
                     );
