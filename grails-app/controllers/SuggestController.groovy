@@ -20,7 +20,7 @@ import java.sql.Connection
 
 class SuggestController extends BaseController {
     
-    def beforeInterceptor = [action: this.&adminAuth]
+    def beforeInterceptor = [action: this.&auth]
 
     def dataSource       // will be injected
     def searchService
@@ -31,26 +31,27 @@ class SuggestController extends BaseController {
 
     def findPotentiallyMissingSynonyms = {
         String text = params.text
+        log.info("Checking ${text.length()} chars of text for unknown words")
         Connection conn = dataSource.getConnection()
         String[] terms = text.split("[\\s+\\.,;\"':„“?()]")
         BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
         List unknownTermsBaseforms = []
         for (term in terms) {
-            if (term.isEmpty() || term.matches("\\d+")) {
+            if (term.trim().isEmpty() || term.matches("\\d+") || !term.matches(".*[a-zA-Z].*")) {
                 continue
             }
             SearchResult result = searchService.searchSynsets(term)
             int matches = result.totalMatches
             if (matches == 0) {
-                Set baseforms = baseformFinder.getBaseForms(conn, term)
-                if (baseforms.size() == 0) {
+                Set baseForms = baseformFinder.getBaseForms(conn, term)
+                if (baseForms.size() == 0) {
                     if (!unknownTerms.contains(term)) {
                         unknownTerms.add(term)
                         unknownTermsBaseforms.add(null)
                     }
                 } else {
-                    for (baseform in baseforms) {
+                    for (baseform in baseForms) {
                         result = searchService.searchSynsets(baseform)
                         if (result.totalMatches == 0 && !unknownTermsBaseforms.contains(baseform)) {
                             unknownTermsBaseforms.add(baseform)

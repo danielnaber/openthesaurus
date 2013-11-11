@@ -53,9 +53,13 @@
 					                </div>
                             	</td>
                             </tr> 
-
                         </tbody>
                     </table>
+
+                    <p style="margin-top: 15px">
+                        <g:link controller="suggest"><g:message code="user.create.synset.missingwords.link"/></g:link>
+                    </p>
+                    
                 </div>
             </g:form>
 
