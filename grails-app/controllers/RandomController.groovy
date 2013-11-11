@@ -24,6 +24,7 @@ import com.vionto.vithesaurus.Synset
 class RandomController extends BaseController {
     
     def dataSource
+    def randomWordService
     
     def synsets = {
         Connection conn
@@ -50,6 +51,25 @@ class RandomController extends BaseController {
           }
         }
         [synsets: synsets]
+    }
+    
+    def words = {
+        int wordCount = params.count ? Integer.parseInt(params.count) : 1
+        int maxWords = 100
+        if (wordCount > maxWords) {
+          throw new Exception("Too many words requested: ${wordCount}, maximum is ${maxWords}")
+        }
+        def randomWords = randomWordService.getRandomWords(wordCount)
+        render(contentType:"text/json", encoding:"utf-8") {
+          metaData apiVersion: "0.2",
+                   warning: "ACHTUNG: Bitte vor ernsthafter Nutzung feedback@openthesaurus.de kontaktieren, um bei API-Änderungen informiert zu werden",
+                   copyright: grailsApplication.config.thesaurus.apiCopyright,
+                   license: grailsApplication.config.thesaurus.apiLicense,
+                   source: grailsApplication.config.thesaurus.apiSource,
+                   date: new Date().toString(),
+                   wordCount: randomWordService.getRandomWordsCount()
+          result words: randomWords
+      }
     }
     
 }
