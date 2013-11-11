@@ -5,9 +5,9 @@
     </head>
     <body>
 
-		<hr />
+        <hr />
 
-		<h2><g:message code="missingwords.headline"/></h2>
+        <h2><g:message code="missingwords.headline"/></h2>
 
         <p><g:message code="missingwords.copytext"/></p>
 
