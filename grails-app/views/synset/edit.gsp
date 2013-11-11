@@ -404,6 +404,9 @@
                                   .replaceAll("(deleting|removing) link:", " <span class='del'>Link entfernt:</span> ")
                                   .replaceAll("ist das Antonym von", " <b>ist das Antonym von</b> ")
                                   .replaceAll(" assoziiert ", " <b>assoziiert</b> ")
+                                  .replaceAll("&lt;b&gt;", "<b>")
+                                  .replaceAll("&lt;/b&gt;", "</b>")
+                                  .replaceAll("&lt;br/&gt;", "<br/>")
                                   .replaceAll(" ist ein Oberbegriff von ", " <b>ist ein Oberbegriff von</b> ")}</td>
                           <td valign="top">${event.changeDesc?.encodeAsHTML()}</td>
                       </tr>

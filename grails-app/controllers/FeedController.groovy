@@ -67,7 +67,7 @@ class FeedController extends BaseController {
            if (!username) {
              username = "[anonym]"
            }
-           desc += " von Benutzer ${username.encodeAsHTML()}: "
+           desc += " von Benutzer ${username.encodeAsHTML()}:<br/><br/>"
            String moreInfo = ""
            if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent && event.eventType == LogInfo.CREATION) {
              // we only get a mostly useless 'empty', so add the synset itself:
@@ -89,7 +89,12 @@ class FeedController extends BaseController {
                  type = "text/html"
                  desc + diffs.get(event)
                    .replaceAll("class='add'>", "style='font-weight:bold;color:green'> ")
-                   .replaceAll("class='del'>", "style='font-weight:bold;color:red;text-decoration: line-through'> ") + moreInfo
+                   .replaceAll("class='del'>", "style='font-weight:bold;color:red;text-decoration: line-through'> ")
+                   // we don't just want to allow all HTML for security reasons, but it's okay to un-escape
+                   // some harmless tags here:
+                   .replaceAll("&lt;br/&gt;", "<br/>")
+                   .replaceAll("&lt;b&gt;", "<b>")
+                   .replaceAll("&lt;/b&gt;", "</b>") + moreInfo
                }
              }
            }

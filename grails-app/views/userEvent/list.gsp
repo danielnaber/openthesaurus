@@ -92,7 +92,10 @@
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                           <td></td>
                           <td></td>
-                          <td>${diffs.get(userEvent)}</td>
+                          <td>${diffs.get(userEvent)
+                                  .replaceAll("&lt;br/&gt;", "<br/>")
+                                  .replaceAll("&lt;b&gt;", "<b>")
+                                  .replaceAll("&lt;/b&gt;", "</b>")}</td>
                       </tr>
                   </g:each>
                   </tbody>
