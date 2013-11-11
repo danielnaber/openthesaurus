@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <g:set var="preventSearchFocus" value="true" scope="request" />
         <meta name="layout" content="main" />
         <title><g:message code="create.title"/></title>
     </head>
@@ -33,10 +34,10 @@
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:if test="${params.term}">
-                                        <g:textArea rows="5" cols="30" id='terms' name='terms' spellcheck="true" value="${StringTools.slashUnescape(params.term)}\n"/>
+                                        <g:textArea autofocus rows="5" cols="30" id='terms' name='terms' spellcheck="true" value="${StringTools.slashUnescape(params.term)}\n"/>
                                     </g:if>
                                     <g:else>
-                                        <g:textArea rows="5" cols="30" id='terms' name='terms' spellcheck="true" value=""/>
+                                        <g:textArea autofocus rows="5" cols="30" id='terms' name='terms' spellcheck="true" value=""/>
                                     </g:else>
                                 </td>
                                 <td valign='top'>

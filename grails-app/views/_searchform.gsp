@@ -37,14 +37,17 @@
 
 <g:render template="/hint"/>
 
-<script type="text/javascript">
-<!--
-document.observe('dom:loaded', function() {
-    var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
-    if (!touchOS) {
-      document.searchform.q.focus();
-      document.searchform.q.select();
-    }    
-});
-// -->
-</script>
+
+<g:if test="${preventSearchFocus != 'true'}">
+    <script type="text/javascript">
+    <!--
+    document.observe('dom:loaded', function() {
+        var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
+        if (!touchOS) {
+          document.searchform.q.focus();
+          document.searchform.q.select();
+        }    
+    });
+    // -->
+    </script>
+</g:if>

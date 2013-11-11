@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <g:set var="preventSearchFocus" value="true" scope="request" />
         <meta name="layout" content="main" />
         <title><g:message code="user.lost.password.title"/></title>         
     </head>
@@ -38,7 +39,7 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                <input autofocus="" size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
                                        id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" spellcheck="false" required />
                             </td>
                         </tr>

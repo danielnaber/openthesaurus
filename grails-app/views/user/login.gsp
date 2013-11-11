@@ -3,6 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
+        <g:set var="preventSearchFocus" value="true" scope="request" />
         <title><g:message code="user.login.title"/></title>         
     </head>
     <body>
@@ -39,7 +40,7 @@
                             </td>
                             <td valign='top' class='value'>
                                 <%-- not using type="email" because of user 'admin'... --%>
-                                <input size="30" type="text" placeholder="${message(code:'user.register.email.placeholder')}" spellcheck="false"
+                                <input autofocus size="30" type="text" placeholder="${message(code:'user.register.email.placeholder')}" spellcheck="false"
                                        id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required/>
                             </td>
                         </tr>
@@ -77,11 +78,5 @@
             </div>
         </g:form>
 
-      <script type="text/javascript">
-      <!--
-          document.loginform.userId.focus();
-      // -->
-      </script>
-        
     </body>
 </html>

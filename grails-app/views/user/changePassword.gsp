@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <g:set var="preventSearchFocus" value="true" scope="request" />
         <meta name="layout" content="main" />
         <title><g:message code="user.change.password.title"/></title>
     </head>
@@ -45,7 +46,7 @@
                                     <g:message code="user.change.password.password"/>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <g:passwordField name="password1"/>
+                                    <g:passwordField name="password1" autofocus="" />
                                 </td>
                             </tr> 
 
