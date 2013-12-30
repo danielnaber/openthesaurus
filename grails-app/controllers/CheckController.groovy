@@ -126,44 +126,16 @@ class CheckController extends BaseController {
      * List homonyms, i.e. words that appear in more than one synset.
      */
     def listHomonyms = {
-        log.info("running listHomonyms")
-        if (params['section.id'] != "null" && Integer.parseInt(params['section.id']) == 0) {
-            // special case to display to page faster (listing all
-            // homonyms of all sections  is rarely useful anyway):
-            [ wordMap : new HashMap() ]
-        }
         Connection conn = dataSource.getConnection()
         Statement st = conn.createStatement()
-        String sectionLimit = ""
-        if (params['section.id'] && params['section.id'] != "null") {
-            // example how to build cross-thesaurus homonym lists:
-            //sectionLimit = "AND (synset.section_id = " +
-            //    "${Integer.parseInt(params['section.id'])} OR synset.section_id = 4771269)"
-            sectionLimit = "AND (synset.section_id = " +
-                "${Integer.parseInt(params['section.id'])})"
-        }
-        // lowercase normalized:
-        String sql
-        if (params.ignoreCase) {
-            sql = """SELECT lower(word),
-                count(lower(word)) AS counter
-                FROM term, synset
-                WHERE
-                    synset.id = term.synset_id AND
-                    synset.is_visible = 1
-                    $sectionLimit
-                    GROUP BY lower(word) ORDER BY counter DESC"""
-        } else {
-            sql = """SELECT word,
+        int limit = params.limit ? Integer.parseInt(params.limit) : 250
+        String sql = """SELECT word,
                 count(word) AS counter
                 FROM term, synset
                 WHERE
                     synset.id = term.synset_id AND
                     synset.is_visible = 1
-                    $sectionLimit
-                GROUP BY word ORDER BY counter DESC"""
-        }
-        log.debug("listHomonyms SQL: $sql")
+                GROUP BY word ORDER BY counter DESC LIMIT $limit"""
         ResultSet rs = st.executeQuery(sql)
         List homonyms = []
         List homonymCounts = []
@@ -182,7 +154,7 @@ class CheckController extends BaseController {
         st.close()
         conn.close()
         assert(homonyms.size() == homonymCounts.size())
-        [ homonyms : homonyms, homonymCounts: homonymCounts ]
+        [ homonyms : homonyms, homonymCounts: homonymCounts, limit: limit ]
     }
 
     /**
