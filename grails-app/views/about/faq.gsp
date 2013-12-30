@@ -107,6 +107,7 @@
 					<li>Die Teile eines Eintrags, die in Klammern stehen, werden bei der Suche ignoriert.
 						Beispiel: <span class="bsp">(sich) ergeben</span> kann auch gefunden werden, wenn ein Benutzer
 						nach <span class="bsp">ergeben</span> sucht</li>
+					<li>Mehr auf <a href="https://github.com/danielnaber/openthesaurus/wiki/Richtlinien-f%C3%BCr-Eintr%C3%A4ge-in-OpenThesaurus">dieser Wiki-Seite</a></li>
 				</ul>
 			</div>
 		</div>
