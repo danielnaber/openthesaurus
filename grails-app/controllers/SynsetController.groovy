@@ -183,7 +183,7 @@ class SynsetController extends BaseController {
           long similarTime = System.currentTimeMillis() - similarStartTime
 
           int offset = params.offset ? Integer.parseInt(params.offset) : 0
-          int maxResults = params.max ? Integer.parseInt(params.max) : 10
+          int maxResults = params.max ? Integer.parseInt(params.max) : -1
           long dbStartTime = System.currentTimeMillis()
           def searchResult = searchService.searchSynsets(params.q.trim(), maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
