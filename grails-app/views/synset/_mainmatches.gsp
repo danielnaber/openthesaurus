@@ -76,18 +76,41 @@
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>
 
-                <g:set var="associationSynsetStrings" value="${[]}"/>
+                <g:set var="associationSynsets" value="${[]}"/>
+                <g:set var="moreAssociationSynsets" value="${[]}"/>
                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
-                    <g:if test="${synsetLink.linkType.linkName == 'Assoziation' && associationSynsetStrings.size() < 3}">
-                        <%
-                            associationSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
-                        %>
+                    <g:if test="${synsetLink.linkType.linkName == 'Assoziation'}">
+                        <g:if test="${associationSynsets.size() < 3}">
+                            <%
+                                associationSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:if>
+                        <g:else>
+                            <%
+                                moreAssociationSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:else>
                     </g:if>
                 </g:each>
-                <g:if test="${associationSynsetStrings}">
+                <g:if test="${associationSynsets}">
                     <div class="associations">
                         <span class="superordinateHead">Assoziationen:</span>
-                        <span class="superordinateTerms">${associationSynsetStrings.join(' | ')}</span>
+                        <ul class="associationList">
+                            <g:each in="${associationSynsets}" var="item">
+                                <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
+                            </g:each>
+                            <g:if test="${moreAssociationSynsets}">
+                                <li id="associationShowLink${synset.id}"><a href="#" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.association.show.all"/></a></li>
+                            </g:if>
+                        </ul>
+                        <g:if test="${moreAssociationSynsets}">
+                            <ul id="association${synset.id}" class="associationList" style="display: none">
+                                <g:each in="${moreAssociationSynsets}" var="item">
+                                    <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
+                                </g:each>
+                                <li><a href="#" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.association.show.less"/></a></li>
+                            </ul>
+                        </g:if>
                     </div>
                 </g:if>
 

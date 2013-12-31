@@ -578,3 +578,22 @@ u {
     font-weight: bold;
     font-size: 16px;
 }
+
+.associationList {
+    color: #888888;
+}
+
+#body .associations ul {
+    margin-top: 0;
+    margin-bottom: 5px;
+    margin-left: 25px;
+}
+
+.associationList li {
+    font-size: 11px;
+    list-style: square;
+}
+
+.associationList a {
+    color: #888888;
+}
