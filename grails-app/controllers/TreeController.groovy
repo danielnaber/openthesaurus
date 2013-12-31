@@ -45,7 +45,7 @@ class TreeController extends BaseController {
          synsetToOpen: synsetToOpen]
     }
 
- 	private void getSuperordinateSynsetIds(Synset synset, List topSynsetIds) {
+    private void getSuperordinateSynsetIds(Synset synset, List topSynsetIds) {
         for (link in synset.synsetLinks) {
           if (link.linkType.linkName == grailsApplication.config.thesaurus.tree.superordinateName) {
             topSynsetIds.add(link.targetSynset.id)
@@ -53,9 +53,9 @@ class TreeController extends BaseController {
             break
           }
         }
- 	}
+    }
 
-   	private List getSubordinateSynsetIds(Synset synset) {
+    private List getSubordinateSynsetIds(Synset synset) {
         def subSynsets = Synset.withCriteria {
           synsetLinks {
             linkType {
@@ -65,8 +65,8 @@ class TreeController extends BaseController {
           }
         }
         return subSynsets
-   	}
-   	
+    }
+
     private void getSubordinateSynsetsHtml(Synset synset, List synsetIdsToOpen, StringBuilder sb) {
       List subSynsets = getSubordinateSynsetIds(synset)
       for (subSynset in subSynsets) {
