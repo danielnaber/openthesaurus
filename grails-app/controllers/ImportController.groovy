@@ -129,7 +129,6 @@ class ImportController extends BaseController {
           }
           render "<br>\n"
           count++
-          //FIXME
           //if (count > 3000) {
           //  break
           //}

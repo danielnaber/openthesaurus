@@ -247,7 +247,7 @@ class ExportOxtController extends BaseController {
     StringTools.writeToStream(new File(grailsApplication.config.thesaurus.export.manifestFile), zos)
     zos.close()
     fos.close()
-    // this is a publically visible file so make the new version visible atomically:
+    // this is a publicly visible file so make the new version visible atomically:
     zipFile.renameTo(new File(finalName))
   }
 
