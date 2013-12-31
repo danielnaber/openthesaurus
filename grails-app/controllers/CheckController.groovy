@@ -75,9 +75,7 @@ class CheckController extends BaseController {
      * List all synsets that are not visible.
      */
     def listInvisibleSynsets = {
-        if(!params.max) params.max = 10
-        if(!params.sort) params.sort = "synsetPreferredTerm"
-        params.offset = params.offset ? Integer.parseInt(params.offset) : 0
+        int offset = params.offset ? Integer.parseInt(params.offset) : 0
         // get the invisible synsets to display:
         def synsetList = Synset.withCriteria {
             eq('isVisible', false)
@@ -87,11 +85,11 @@ class CheckController extends BaseController {
                 }
             }
             maxResults(10)
-            firstResult(params.offset)
-            order(params.sort)
+            firstResult(offset)
+            order('id')
         }
         // get the number of invisible synsets:
-        int totalMatches = -1
+        int totalMatches
         if (params.filter) {
             def synsetListComplete = Synset.withCriteria {
                 eq('isVisible', false)

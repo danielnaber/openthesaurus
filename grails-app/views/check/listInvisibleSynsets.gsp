@@ -8,14 +8,16 @@
     <body>
 
         <div class="body">
+            
+            <hr/>
         
+            <h2>Check for invisible concepts (${totalMatches} matches)</h2>
+
             <div class="warning">Please note that this page displays invisible concepts that
             cannot be found using the normal search feature.</div>
 
-            <h1>Check for invisible concepts (${totalMatches} matches)</h1>
-
             <g:if test="${flash.message}">
-	            <div class="message">${flash.message}</div>
+                <div class="message">${flash.message}</div>
             </g:if>
             
             <form method="get">
@@ -24,31 +26,19 @@
                 <input type="submit" value="Go" />
             </form>
             
-            <table>
-                <tr>
-                    <th width="40%">Synset</th>
-                    <th width="10%">Thesaurus</th>
-                    <th width="10%">Source</th>
-                </tr>
+            <ul>
                <g:each in="${synsetList}" status="i" var="synset">
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        <td><g:link controller="synset" action="edit" 
-                            id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link></td>
-                        <td>${synset?.section?.toString()?.encodeAsHTML()}</td>
-                        <td>${synset?.source?.toString()?.encodeAsHTML()}</td>
-                    </tr>
+                    <li>
+                        <g:link controller="synset" action="edit" 
+                            id="${synset.id}">${synset?.toString()?.encodeAsHTML()}</g:link>
+                    </li>
                </g:each>
-			</table>
-			
+            </ul>
+
             <div class="paginateButtons">
                 <g:paginate total="${totalMatches}" params="${params}" />
             </div>
             
-            <p>
-            <br />
-            <g:link controller="correction" action="askDeleteInvisible">Delete
-                all Invisible concepts</g:link></p> 
-			
         </div>
     </body>
 </html>
