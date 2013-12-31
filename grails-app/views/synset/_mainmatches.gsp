@@ -94,7 +94,7 @@
                 </g:each>
                 <g:if test="${associationSynsets}">
                     <div class="associations">
-                        <span class="superordinateHead">Assoziationen:</span>
+                        <span class="superordinateHead"><g:message code="edit.link.associations"/></span>
                         <ul class="associationList">
                             <g:each in="${associationSynsets}" var="item">
                                 <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>

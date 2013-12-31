@@ -101,7 +101,7 @@
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <label for='captcha'><b>Sicherheitsbabfrage:</b></label>
+                                    <label for='captcha'><b><g:message code="user.register.form.captcha"/></b></label>
                                 </td>
                             </tr>
                             <tr>

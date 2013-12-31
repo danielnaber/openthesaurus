@@ -36,7 +36,7 @@
 	             </tr>
 	        </g:each>
 	    </table>
-	    <div class="metaInfo">Tipp: Auswahl mit den rauf/runter Cursor-Tasten</div>
+	    <div class="metaInfo"><g:message code="result.tip"/></div>
 
     </g:else>
 
