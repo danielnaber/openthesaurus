@@ -57,49 +57,51 @@
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>
 
-                <g:set var="superSynsetStrings" value="${[]}"/>
+                <g:set var="superSynsets" value="${[]}"/>
                 <g:each in="${synset.synsetLinks}" var="synsetLink">
                     <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
                         <%
-                            superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
+                            superSynsets.add(synsetLink.targetSynset)
                         %>
                     </g:if>
                 </g:each>
-                <g:if test="${superSynsetStrings}">
+                <g:if test="${superSynsets}">
                     <div class="superordinate">
                         <span class="superordinateHead">Oberbegriffe:</span>
-                        <span class="superordinateTerms">${superSynsetStrings.join(' | ')}</span>
+                        <ul class="associationList">
+                            <g:render template="linkMatches" model="${[links:superSynsets]}"/>
+                        </ul>
                     </div>
                 </g:if>
 
-                <g:set var="subSynsetStrings" value="${[]}"/>
-                <g:set var="moreSubSynsetStrings" value="${[]}"/>
+                <g:set var="subSynsets" value="${[]}"/>
+                <g:set var="moreSubSynsets" value="${[]}"/>
                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
                     <g:if test="${synsetLink.linkType.linkName == 'Unterbegriff'}">
-                        <g:if test="${subSynsetStrings.size() < 3}">
+                        <g:if test="${subSynsets.size() < 3}">
                             <%
-                                subSynsetStrings.add(synsetLink.targetSynset)
+                                subSynsets.add(synsetLink.targetSynset)
                             %>
                         </g:if>
                         <g:else>
                             <%
-                                moreSubSynsetStrings.add(synsetLink.targetSynset)
+                                moreSubSynsets.add(synsetLink.targetSynset)
                             %>
                         </g:else>
                     </g:if>
                 </g:each>
-                <g:if test="${subSynsetStrings}">
+                <g:if test="${subSynsets}">
                     <div class="superordinate">
                         <span class="superordinateHead">Unterbegriffe:</span>
                         <ul class="associationList">
-                            <g:render template="linkMatches" model="${[links:subSynsetStrings]}"/>
-                            <g:if test="${moreSubSynsetStrings}">
+                            <g:render template="linkMatches" model="${[links:subSynsets]}"/>
+                            <g:if test="${moreSubSynsets}">
                                 <li id="subSynsetShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
-                        <g:if test="${moreSubSynsetStrings}">
+                        <g:if test="${moreSubSynsets}">
                             <ul id="subSynset${synset.id}" class="associationList" style="display: none">
-                                <g:render template="linkMatches" model="${[links:moreSubSynsetStrings]}"/>
+                                <g:render template="linkMatches" model="${[links:moreSubSynsets]}"/>
                                 <li><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
