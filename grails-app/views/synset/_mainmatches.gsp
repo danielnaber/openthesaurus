@@ -68,8 +68,45 @@
                 <g:if test="${superSynsetStrings}">
                     <div class="superordinate">
                         <span class="superordinateHead">Oberbegriffe:</span>
-                        <span class="superordinateTerms">
-                            ${superSynsetStrings.join(' | ')}</span>
+                        <span class="superordinateTerms">${superSynsetStrings.join(' | ')}</span>
+                    </div>
+                </g:if>
+
+                <g:set var="subSynsetStrings" value="${[]}"/>
+                <g:set var="moreSubSynsetStrings" value="${[]}"/>
+                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                    <g:if test="${synsetLink.linkType.linkName == 'Unterbegriff'}">
+                        <g:if test="${subSynsetStrings.size() < 3}">
+                            <%
+                                subSynsetStrings.add(synsetLink.targetSynset)
+                            %>
+                        </g:if>
+                        <g:else>
+                            <%
+                                moreSubSynsetStrings.add(synsetLink.targetSynset)
+                            %>
+                        </g:else>
+                    </g:if>
+                </g:each>
+                <g:if test="${subSynsetStrings}">
+                    <div class="superordinate">
+                        <span class="superordinateHead">Unterbegriffe:</span>
+                        <ul class="associationList">
+                            <g:each in="${subSynsetStrings}" var="item">
+                                <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
+                            </g:each>
+                            <g:if test="${moreSubSynsetStrings}">
+                                <li id="subSynsetShowLink${synset.id}"><a href="#" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.association.show.all"/></a></li>
+                            </g:if>
+                        </ul>
+                        <g:if test="${moreSubSynsetStrings}">
+                            <ul id="subSynset${synset.id}" class="associationList" style="display: none">
+                                <g:each in="${moreSubSynsetStrings}" var="item">
+                                    <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
+                                </g:each>
+                                <li><a href="#" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.association.show.less"/></a></li>
+                            </ul>
+                        </g:if>
                     </div>
                 </g:if>
 

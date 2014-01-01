@@ -576,9 +576,16 @@ tr .prop2 {
 
 .associationList {
     color: #707070;
+    font-weight: normal;
 }
 
 #body .associations ul {
+    margin-top: 0;
+    margin-bottom: 5px;
+    margin-left: 25px;
+}
+
+#body .superordinate ul {
     margin-top: 0;
     margin-bottom: 5px;
     margin-left: 25px;
