@@ -92,19 +92,15 @@
                     <div class="superordinate">
                         <span class="superordinateHead">Unterbegriffe:</span>
                         <ul class="associationList">
-                            <g:each in="${subSynsetStrings}" var="item">
-                                <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
-                            </g:each>
+                            <g:render template="linkMatches" model="${[links:subSynsetStrings]}"/>
                             <g:if test="${moreSubSynsetStrings}">
-                                <li id="subSynsetShowLink${synset.id}"><a href="#" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
+                                <li id="subSynsetShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreSubSynsetStrings}">
                             <ul id="subSynset${synset.id}" class="associationList" style="display: none">
-                                <g:each in="${moreSubSynsetStrings}" var="item">
-                                    <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
-                                </g:each>
-                                <li><a href="#" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
+                                <g:render template="linkMatches" model="${[links:moreSubSynsetStrings]}"/>
+                                <li><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>
@@ -130,19 +126,15 @@
                     <div class="associations">
                         <span class="superordinateHead"><g:message code="edit.link.associations"/></span>
                         <ul class="associationList">
-                            <g:each in="${associationSynsets}" var="item">
-                                <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
-                            </g:each>
+                            <g:render template="linkMatches" model="${[links:associationSynsets]}"/>
                             <g:if test="${moreAssociationSynsets}">
-                                <li id="associationShowLink${synset.id}"><a href="#" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
+                                <li id="associationShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreAssociationSynsets}">
                             <ul id="association${synset.id}" class="associationList" style="display: none">
-                                <g:each in="${moreAssociationSynsets}" var="item">
-                                    <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
-                                </g:each>
-                                <li><a href="#" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
+                                <g:render template="linkMatches" model="${[links:moreAssociationSynsets]}"/>
+                                <li><a href="#" class="moreLessLink" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>

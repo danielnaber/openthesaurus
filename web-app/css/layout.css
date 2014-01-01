@@ -596,6 +596,14 @@ tr .prop2 {
     list-style: square;
 }
 
+.associationList li a {
+    font-weight: normal;
+}
+
+.associationList li .moreLessLink {
+    font-weight: bold;
+}
+
 .associationList a {
     color: #707070;
 }
