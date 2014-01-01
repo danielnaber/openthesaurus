@@ -96,7 +96,7 @@
                                 <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
                             </g:each>
                             <g:if test="${moreSubSynsetStrings}">
-                                <li id="subSynsetShowLink${synset.id}"><a href="#" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.association.show.all"/></a></li>
+                                <li id="subSynsetShowLink${synset.id}"><a href="#" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreSubSynsetStrings}">
@@ -104,7 +104,7 @@
                                 <g:each in="${moreSubSynsetStrings}" var="item">
                                     <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
                                 </g:each>
-                                <li><a href="#" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.association.show.less"/></a></li>
+                                <li><a href="#" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>
@@ -134,7 +134,7 @@
                                 <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
                             </g:each>
                             <g:if test="${moreAssociationSynsets}">
-                                <li id="associationShowLink${synset.id}"><a href="#" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.association.show.all"/></a></li>
+                                <li id="associationShowLink${synset.id}"><a href="#" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreAssociationSynsets}">
@@ -142,7 +142,7 @@
                                 <g:each in="${moreAssociationSynsets}" var="item">
                                     <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">${item.toShortStringWithShortLevel(3, true).encodeAsHTML()}</li>
                                 </g:each>
-                                <li><a href="#" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.association.show.less"/></a></li>
+                                <li><a href="#" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>
