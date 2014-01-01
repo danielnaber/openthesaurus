@@ -63,13 +63,13 @@ h1 {
 }
 
 .superordinate {
-  margin-top: 18px;
-  margin-bottom: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .associations {
-    margin-top: 1px;
-    margin-bottom: 2px;
+    margin-top: 0;
+    margin-bottom: 0;
     font-weight: normal;
 }
 
@@ -575,7 +575,7 @@ tr .prop2 {
 }
 
 .associationList {
-    color: #888888;
+    color: #707070;
 }
 
 #body .associations ul {
@@ -590,5 +590,5 @@ tr .prop2 {
 }
 
 .associationList a {
-    color: #888888;
+    color: #707070;
 }

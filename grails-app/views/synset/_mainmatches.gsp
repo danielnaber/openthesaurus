@@ -3,26 +3,7 @@
 
     <g:each in="${synsetList}" status="i" var="synset">
 
-        <div style="margin-bottom: 10px;margin-top:0px">
-
-            <g:set var="superSynsetStrings" value="${[]}"/>
-            <g:each in="${synset.synsetLinks}" var="synsetLink">
-                <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
-                    <%
-                        superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
-                    %>
-                </g:if>
-            </g:each>
-            <g:if test="${superSynsetStrings}">
-                <div class="superordinate">
-                    <span class="superordinateHead">Oberbegriffe:</span>
-                    <span class="superordinateTerms">
-                        ${superSynsetStrings.join(' | ')}</span>
-                </div>
-            </g:if>
-            <g:else>
-                <div class="superordinate"></div>
-            </g:else>
+        <div style="margin-bottom: 10px;margin-top:16px">
 
             <g:set var="categoryStrings" value="${[]}"/>
             <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">
@@ -75,6 +56,22 @@
 
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>
+
+                <g:set var="superSynsetStrings" value="${[]}"/>
+                <g:each in="${synset.synsetLinks}" var="synsetLink">
+                    <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
+                        <%
+                            superSynsetStrings.add(synsetLink.targetSynset.toShortStringWithShortLevel(3, false).encodeAsHTML())
+                        %>
+                    </g:if>
+                </g:each>
+                <g:if test="${superSynsetStrings}">
+                    <div class="superordinate">
+                        <span class="superordinateHead">Oberbegriffe:</span>
+                        <span class="superordinateTerms">
+                            ${superSynsetStrings.join(' | ')}</span>
+                    </div>
+                </g:if>
 
                 <g:set var="associationSynsets" value="${[]}"/>
                 <g:set var="moreAssociationSynsets" value="${[]}"/>
