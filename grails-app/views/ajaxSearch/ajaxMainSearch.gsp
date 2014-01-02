@@ -32,7 +32,6 @@
                  <g:if test="${i < 10}">
                    <g:each in="${synset?.terms?.sort()}" var="term">
                        <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
-                       <g:set var="cleanedMatch" value='${StringTools.normalize(match).equalsIgnoreCase(params.q)}'/>
                        <g:if test="${!firstVal}">
                           <span class="d">&middot;</span>
                        </g:if>
@@ -81,7 +80,6 @@
                  <g:set var="firstVal" value="${true}"/>
                  <g:each in="${synset?.terms?.sort()}" var="term">
                      <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
-                     <g:set var="cleanedMatch" value='${StringTools.normalize(match).contains(params.q)}'/>
                      <g:if test="${!firstVal}">
                         <span class="d">&middot;</span>
                      </g:if>
