@@ -69,7 +69,7 @@
                     <div class="superordinate">
                         <span class="superordinateHead"><g:message code="edit.link.super.synsets"/></span>
                         <span class="superordinateTerms">
-                            <g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span']}"/>
+                            <g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span', showSynsetDelimiter: true]}"/>
                         </span>
                     </div>
                 </g:if>

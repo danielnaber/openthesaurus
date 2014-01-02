@@ -1,4 +1,7 @@
-<g:each in="${links}" var="item">
+<g:each in="${links}" var="item" status="synsetCount">
+    <g:if test="${showSynsetDelimiter && synsetCount > 0}">
+        |
+    </g:if>
     <${itemPrefix} title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">
         <g:each in="${item.sortedTerms()}" var="term" status="termCount">
             <g:if test="${termCount < 3}">
