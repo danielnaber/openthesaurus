@@ -59,7 +59,7 @@
 
                 <g:set var="superSynsets" value="${[]}"/>
                 <g:each in="${synset.synsetLinks}" var="synsetLink">
-                    <g:if test="${synsetLink.linkType.linkName == 'Oberbegriff'}">
+                    <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.super.synsets.db.name')}">
                         <%
                             superSynsets.add(synsetLink.targetSynset)
                         %>
@@ -67,7 +67,7 @@
                 </g:each>
                 <g:if test="${superSynsets}">
                     <div class="superordinate">
-                        <span class="superordinateHead">Oberbegriffe:</span>
+                        <span class="superordinateHead"><g:message code="edit.link.super.synsets"/></span>
                         <span class="superordinateTerms">
                             <g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span']}"/>
                         </span>
@@ -77,7 +77,7 @@
                 <g:set var="subSynsets" value="${[]}"/>
                 <g:set var="moreSubSynsets" value="${[]}"/>
                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
-                    <g:if test="${synsetLink.linkType.linkName == 'Unterbegriff'}">
+                    <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.sub.synsets.db.name')}">
                         <g:if test="${subSynsets.size() < 3}">
                             <%
                                 subSynsets.add(synsetLink.targetSynset)
@@ -92,7 +92,7 @@
                 </g:each>
                 <g:if test="${subSynsets}">
                     <div class="superordinate">
-                        <span class="superordinateHead">Unterbegriffe:</span>
+                        <span class="superordinateHead"><g:message code="edit.link.sub.synsets"/></span>
                         <ul class="associationList">
                             <g:render template="linkMatches" model="${[links:subSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                             <g:if test="${moreSubSynsets}">
@@ -111,7 +111,7 @@
                 <g:set var="associationSynsets" value="${[]}"/>
                 <g:set var="moreAssociationSynsets" value="${[]}"/>
                 <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
-                    <g:if test="${synsetLink.linkType.linkName == 'Assoziation'}">
+                    <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.association.db.name')}">
                         <g:if test="${associationSynsets.size() < 3}">
                             <%
                                 associationSynsets.add(synsetLink.targetSynset)
