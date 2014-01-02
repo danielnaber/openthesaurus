@@ -37,7 +37,11 @@ class AdminController extends BaseController {
         for (term in terms) {
             String normalizedWord = StringTools.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
-                render "Error: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+                render "Error1: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+            }
+            String normalizedWord2 = StringTools.normalize2(term.word)
+            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2) {
+                render "Error2: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord2}</a><br />"
             }
             count++
         }
@@ -58,7 +62,13 @@ class AdminController extends BaseController {
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
                 term.normalizedWord = normalizedWord
                 term.save(failOnError: true)
-                render "Updated: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+                render "Updated1: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+            }
+            String normalizedWord2 = StringTools.normalize2(term.word)
+            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2) {
+                term.normalizedWord2 = normalizedWord2
+                term.save(failOnError: true)
+                render "Updated2: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }
             count++
         }

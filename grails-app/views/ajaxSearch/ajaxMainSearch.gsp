@@ -18,7 +18,7 @@
     </g:if>
     <g:else>
         <%
-        String quotedQuery = Pattern.quote(params.q)
+        String quotedQuery = Pattern.quote(params.q?.trim())
         // treat o = ö - this is debatable, but it's how MySQL searches, so highlight this way:
         // TODO: this had to be commented out again because it doesn't work with quoting the input,
         // which is needed to avoid an exception if a user searches for e.g. "foo) "
@@ -41,6 +41,9 @@
                        directMatchingTerm = directMatchingTerm.encodeAsHTML();
                        directMatchingTerm = directMatchingTerm.replace("___beginhighlight___", "<span class=\"synsetmatchDirect\">");
                        directMatchingTerm = directMatchingTerm.replace("___endhighlight___", "</span>");
+                       if (term.normalizedWord2?.equalsIgnoreCase(params.q?.trim())) {
+                           directMatchingTerm = '<span class="synsetmatchDirect">' + directMatchingTerm + '</span>'
+                       }
                        %>
                        <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
                            ${directMatchingTerm}

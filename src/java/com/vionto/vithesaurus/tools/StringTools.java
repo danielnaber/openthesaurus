@@ -37,10 +37,22 @@ public class StringTools {
   public static String slashUnescape(String str) {
     return str.replace("___", "/");
   }
-    
+
+  /**
+   * Normalize the word for the 'normalizedWord' field.
+   */
   public static String normalize(String word) {
     String cleanWord = word.replaceAll("[.!?,]", "");
     cleanWord = cleanWord.replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
+    return cleanWord;
+  }
+  
+  /**
+   * Normalize the word for the 'normalizedWord2' field.
+   */
+  public static String normalize2(String word) {
+    String cleanWord = word.replaceAll("[.!?,]", "");
+    cleanWord = cleanWord.replace("(", "").replace(")", "").replaceAll("\\s+", " ").trim();
     return cleanWord;
   }
   

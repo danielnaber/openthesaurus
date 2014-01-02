@@ -94,6 +94,10 @@ class TermController extends BaseController {
             if (normalizedWord != params.word) {
                 term.normalizedWord = normalizedWord
             }
+            String normalizedWord2 = StringTools.normalize2(params.word)
+            if (normalizedWord2 != params.word) {
+                term.normalizedWord2 = normalizedWord2
+            }
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),

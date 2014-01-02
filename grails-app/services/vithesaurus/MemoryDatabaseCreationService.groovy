@@ -26,15 +26,15 @@ class MemoryDatabaseCreationService {
     try {
       conn = dataSource.getConnection()
       executeQuery("DROP TABLE IF EXISTS memwordsTmp", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
-      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwordsTmp (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH}), lookup2 VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
+      executeQuery("CREATE TABLE IF NOT EXISTS memwords (word VARCHAR(${FIELD_LENGTH}) NOT NULL, lookup VARCHAR(${FIELD_LENGTH}), lookup2 VARCHAR(${FIELD_LENGTH})) ENGINE = MEMORY COLLATE = 'utf8_general_ci'", conn)
 
       ps = conn.prepareStatement("INSERT INTO memwordsTmp (word, lookup) VALUES ('__last_modified__', ?)")
       ps.setString(1, new Date().toString())
       ps.execute()
 
       // setString() on a PreparedStatement won't work, so insert value of hidden synsets directly:
-      String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word
+      String sql = """INSERT INTO memwordsTmp SELECT DISTINCT word, normalized_word, normalized_word2
         FROM term, synset
         WHERE
           term.synset_id = synset.id AND

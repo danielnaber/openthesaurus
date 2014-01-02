@@ -26,7 +26,8 @@ class Term implements Comparable, Cloneable {
 
     Synset synset           // synset to which this term belongs
     String word
-    String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses removed)
+    String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses and their content removed)
+    String normalizedWord2	// normalized version of 'word' for searches (e.g. parentheses around words removed)
     boolean isShortForm     // is the word an abbreviation?
     boolean isAcronym       // is the word an acronym (e.g. AIDS)
     Language language
@@ -59,6 +60,7 @@ class Term implements Comparable, Cloneable {
         userComment(nullable:true, size: 0..255)
         wordGrammar(nullable:true)
         normalizedWord(nullable:true)
+        normalizedWord2(nullable:true)
         originalId(nullable:true)
     }
 
@@ -74,6 +76,10 @@ class Term implements Comparable, Cloneable {
         String normalizedWord = StringTools.normalize(this.word)
         if (this.word != normalizedWord) {
           this.normalizedWord = normalizedWord
+        }
+        String normalizedWord2 = StringTools.normalize2(this.word)
+        if (this.word != normalizedWord2) {
+          this.normalizedWord2 = normalizedWord2
         }
         this.language = language
         this.synset = synset

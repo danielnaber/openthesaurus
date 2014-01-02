@@ -57,6 +57,7 @@ class SearchService {
           or {
             eq('word', query)
             eq('normalizedWord', StringTools.normalize(query))
+            eq('normalizedWord2', StringTools.normalize2(query))
             if (query.startsWith("sich ") || query.startsWith("etwas ")) {
                 // special case for German reflexive etc - keep in sync with _mainmatches.gsp
                 String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
@@ -173,10 +174,12 @@ class SearchService {
   }
 
   def searchSimilarTerms(String query, Connection conn) {
-    String sql = """SELECT word, lookup FROM memwords WHERE (
+    String sql = """SELECT word, lookup, lookup2 FROM memwords WHERE (
               (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
               OR
-              (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?))
+              (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?)
+              OR
+              (CHAR_LENGTH(lookup2) >= ? AND CHAR_LENGTH(lookup2) <= ?))
               ORDER BY word"""
     PreparedStatement ps = null
     ResultSet resultSet = null
@@ -184,10 +187,14 @@ class SearchService {
     try {
         ps = conn.prepareStatement(sql)
         int wordLength = query.length()
-        ps.setInt(1, wordLength - 1)
-        ps.setInt(2, wordLength + 1)
-        ps.setInt(3, wordLength - 1)
-        ps.setInt(4, wordLength + 1)
+        def minLength = wordLength - 1
+        def maxLength = wordLength + 1
+        ps.setInt(1, minLength)
+        ps.setInt(2, maxLength)
+        ps.setInt(3, minLength)
+        ps.setInt(4, maxLength)
+        ps.setInt(5, minLength)
+        ps.setInt(6, maxLength)
         resultSet = ps.executeQuery()
         // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
         String lowercaseQuery = query.toLowerCase()
@@ -201,13 +208,9 @@ class SearchService {
             matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
           } else {
             String lookupTerm = resultSet.getString("lookup")
-            if (lookupTerm) {
-              String lowercaseLookupTerm = lookupTerm.toLowerCase()
-              dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
-              if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
-                matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
-              }
-            }
+            maybeAddMatchesFor(lookupTerm, lowercaseQuery, matches, resultSet)
+            String lookupTerm2 = resultSet.getString("lookup2")
+            maybeAddMatchesFor(lookupTerm2, lowercaseQuery, matches, resultSet)
           }
         }
         Collections.sort(matches)		// makes sure lowest distances come first
@@ -218,7 +221,18 @@ class SearchService {
     return matches
   }
 
-  /** Substring matches */
+    private void maybeAddMatchesFor(String lookupTerm, String lowercaseQuery, List matches, ResultSet resultSet) {
+        int dist
+        if (lookupTerm) {
+            String lowercaseLookupTerm = lookupTerm.toLowerCase()
+            dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+            if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
+                matches.add(new SimilarMatch(term: resultSet.getString("word"), dist: dist))
+            }
+        }
+    }
+
+    /** Substring matches */
   List searchPartialResult(String term, int fromPos, int maxNum) {
     return searchPartialResultInternal(term, "%" + term + "%", true, fromPos, maxNum)
   }

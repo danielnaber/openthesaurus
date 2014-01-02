@@ -43,11 +43,12 @@
 
                     <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
                     <g:set var="lowercaseNormTerm" value="${term.normalizedWord?.toLowerCase()}"/>
+                    <g:set var="lowercaseNormTerm2" value="${term.normalizedWord2?.toLowerCase()}"/>
                     <g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
                     <%-- keep in sync with SearchService.groovy: --%>
                     <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
                     <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
-                            lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm}">
+                            lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
                         <span class="synsetmatch">${displayTerm}</span>${delim}
                     </g:if>
                     <g:else>
