@@ -35,12 +35,15 @@ class AdminController extends BaseController {
         List terms = Term.list()
         int count = 0
         for (term in terms) {
+            if (!term.synset.isVisible) {
+                continue
+            }
             String normalizedWord = StringTools.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
                 render "Error1: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }
             String normalizedWord2 = StringTools.normalize2(term.word)
-            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2) {
+            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2 && normalizedWord2 != normalizedWord) {
                 render "Error2: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord2}</a><br />"
             }
             count++
@@ -58,6 +61,9 @@ class AdminController extends BaseController {
         List terms = Term.list()
         int count = 0
         for (term in terms) {
+            if (!term.synset.isVisible) {
+                continue
+            }
             String normalizedWord = StringTools.normalize(term.word)
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
                 term.normalizedWord = normalizedWord
@@ -65,14 +71,14 @@ class AdminController extends BaseController {
                 render "Updated1: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
             }
             String normalizedWord2 = StringTools.normalize2(term.word)
-            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2) {
+            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2 && normalizedWord2 != normalizedWord) {
                 term.normalizedWord2 = normalizedWord2
                 term.save(failOnError: true)
-                render "Updated2: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+                render "Updated2: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord2}</a><br />"
             }
             count++
         }
-        render "<br>Updated ${count} terms."
+        render "<br>Ran over ${count} terms."
     }
 
 }
