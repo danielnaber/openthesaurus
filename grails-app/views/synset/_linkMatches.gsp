@@ -1,5 +1,5 @@
 <g:each in="${links}" var="item">
-    <li title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">
+    <${itemPrefix} title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">
         <g:each in="${item.sortedTerms()}" var="term" status="termCount">
             <g:if test="${termCount < 3}">
                 <g:if test="${termCount > 0}">
@@ -16,5 +16,5 @@
                 &middot; ...
             </g:elseif>
         </g:each>
-    </li>
+    <${itemSuffix}>
 </g:each>

@@ -68,9 +68,9 @@
                 <g:if test="${superSynsets}">
                     <div class="superordinate">
                         <span class="superordinateHead">Oberbegriffe:</span>
-                        <ul class="associationList">
-                            <g:render template="linkMatches" model="${[links:superSynsets]}"/>
-                        </ul>
+                        <span class="superordinateTerms">
+                            <g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span']}"/>
+                        </span>
                     </div>
                 </g:if>
 
@@ -94,14 +94,14 @@
                     <div class="superordinate">
                         <span class="superordinateHead">Unterbegriffe:</span>
                         <ul class="associationList">
-                            <g:render template="linkMatches" model="${[links:subSynsets]}"/>
+                            <g:render template="linkMatches" model="${[links:subSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                             <g:if test="${moreSubSynsets}">
                                 <li id="subSynsetShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreSubSynsets}">
                             <ul id="subSynset${synset.id}" class="associationList" style="display: none">
-                                <g:render template="linkMatches" model="${[links:moreSubSynsets]}"/>
+                                <g:render template="linkMatches" model="${[links:moreSubSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                                 <li><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
@@ -128,14 +128,14 @@
                     <div class="associations">
                         <span class="superordinateHead"><g:message code="edit.link.associations"/></span>
                         <ul class="associationList">
-                            <g:render template="linkMatches" model="${[links:associationSynsets]}"/>
+                            <g:render template="linkMatches" model="${[links:associationSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                             <g:if test="${moreAssociationSynsets}">
                                 <li id="associationShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreAssociationSynsets}">
                             <ul id="association${synset.id}" class="associationList" style="display: none">
-                                <g:render template="linkMatches" model="${[links:moreAssociationSynsets]}"/>
+                                <g:render template="linkMatches" model="${[links:moreAssociationSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                                 <li><a href="#" class="moreLessLink" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
