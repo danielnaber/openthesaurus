@@ -28,7 +28,8 @@ class DiffTool {
                                  "constraints", "log", "hasMany", "version", "sortedTerms",
                                  "userEvents", "sortedSynsetLinks", "mapping",
                                  "tERM_REGEXP", "pREFERRED_TERM_LANGS", "uRI_PREFIX",
-                                 "TERM_REGEXP", "PREFERRED_TERM_LANGS", "URI_PREFIX"]
+                                 "TERM_REGEXP", "PREFERRED_TERM_LANGS", "URI_PREFIX",
+                                 "gormDynamicFinders"]
 
     /**
      * Compares two objects by comparing their properties and returns
@@ -41,17 +42,17 @@ class DiffTool {
         }
         //
         if (oldObj == null) {
-          // okay, no old object to compate to, so let's "compare"
+          // okay, no old object to compare to, so let's "compare"
           // to an empty object
           oldObj = new Object()
         }
         List diffs = new ArrayList()
-        Map newObjprops = new HashMap()
+        Map newObjProps = new HashMap()
         for (prop in oldObj.metaClass.properties) {
             if (ignoreProp(prop)) {
                 continue
             }
-            newObjprops.put(prop.name, oldObj.getProperty(prop.name))
+            newObjProps.put(prop.name, oldObj.getProperty(prop.name))
         }
         // find all props that differ or that are not in newObj:
         for (prop in oldObj.metaClass.properties) {
