@@ -18,8 +18,32 @@
 <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
 
 <tr class="newsYearDelimiter">
+    <td>2014</td>
+    <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2014-01-02</span></td>
+    <td valign="top">Auf der Ergebnisseite werden jetzt auch alle Unterbegriffe angezeigt. Sind
+        es viele, kann man sie mit dem "Alle anzeigen"-Link einblenden:
+        <a href="../synonyme/Währung">Beispiel 1</a>, <a href="../synonyme/Haus">Beispiel 2</a>.
+        Außerdem sind aller Ober-, Unterbegriffe und Assoziationen Links, so dass man damit
+        bequem eine weitere Suche auslösen kann.
+    </td>
+</tr>
+
+<tr class="newsYearDelimiter">
     <td>2013</td>
     <td></td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2013-12-31</span></td>
+    <td valign="top">Die <g:link controller="association" action="list">Liste der Assoziationen</g:link> umfasst
+        jetzt schon mehr als 5000 Verknüpfungen zwischen Synonymgruppen.</td>
+</tr>
+<tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2013-11-11</span></td>
+    <td valign="top">Neues Feature für Mitwirkende: <g:link controller="suggest">Möglicherweise fehlende Wörter finden</g:link>
+         - damit lassen sich ganze Texte auf Wörter durchsuchen, die noch nicht in OpenThesaurus stehen</td>
 </tr>
 <tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2013-09-08</span></td>
