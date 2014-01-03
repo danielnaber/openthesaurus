@@ -4,8 +4,10 @@ class UrlMappings {
       "404"(view:"/errors/notFound")
       "500"(view:"/errors/serverError")
       
-      "/"(controller:'home', action:'directSearch')
+      "/"(controller:'home', action:'index')
       "/direct"(controller:'redirect', action:'homepage') 
+      "/home/directSearch"(controller:'redirect', action:'homepage') 
+      "/home/"(controller:'redirect', action:'homepage') 
       
       "/$controller/$action?/$id?" {
         constraints {
