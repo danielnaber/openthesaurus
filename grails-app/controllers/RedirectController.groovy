@@ -52,6 +52,10 @@ class RedirectController extends BaseController {
        permanentRedirect("synonyme/" + q, response)
    }
 
+   def homepage = {
+       permanentRedirect("", response)
+   }
+
    def faq = {
        permanentRedirect("about/faq", response)
    }
