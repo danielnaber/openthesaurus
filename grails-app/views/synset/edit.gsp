@@ -1,4 +1,4 @@
-<%@page import="com.vionto.vithesaurus.*" %>
+<%@page import="com.vionto.vithesaurus.tools.StringTools; com.vionto.vithesaurus.*" %>
 <g:javascript library="prototype" />
 <html>
     <head>
@@ -162,7 +162,7 @@
 
                                         <g:if test="${t.userComment}">
                                             <div style="margin-left: 22px">
-                                                <span class="termMetaInfo">${t.userComment?.encodeAsHTML()}</span>
+                                                <span class="termMetaInfo">${StringTools.wikipediaUrlsToLinks(t.userComment.encodeAsHTML())}</span>
                                             </div>
                                         </g:if>
 

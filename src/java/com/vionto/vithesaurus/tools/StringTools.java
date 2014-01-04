@@ -18,6 +18,8 @@
 package com.vionto.vithesaurus.tools;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Some useful tools for dealing with Strings.
@@ -25,6 +27,9 @@ import java.io.*;
 public class StringTools {
 
   private static final int BUFFER_SIZE = 4096;
+
+  // based on http://www.codinghorror.com/blog/2008/10/the-problem-with-urls.html:
+  private static final Pattern URL_PATTERN = Pattern.compile("\\(?\\bhttps?://..\\.wikipedia.org/[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]");
 
   private StringTools() {
     // static methods only, no public constructor
@@ -36,6 +41,11 @@ public class StringTools {
 
   public static String slashUnescape(String str) {
     return str.replace("___", "/");
+  }
+
+  public static String wikipediaUrlsToLinks(String textWithUrls) {
+    Matcher matcher = URL_PATTERN.matcher(textWithUrls);
+    return matcher.replaceAll("<a href='$0'>Wikipedia</a>");
   }
 
   /**
