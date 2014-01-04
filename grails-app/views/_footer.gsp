@@ -26,7 +26,7 @@
           <li><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
           <li><a href="/jforum/forums/show/1.page">Forum</a></li>
           <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
-          <li><g:link url="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss"><g:message code="homepage.mailing_list"/></g:link></li>
+          <li><g:link controller="about" action="newsletter"><g:message code="homepage.mailing_list"/></g:link></li>
           <li><g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link></li>
           <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
           <li><g:link controller="statistics"><g:message code="statistics"/></g:link></li>

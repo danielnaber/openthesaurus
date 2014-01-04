@@ -60,6 +60,10 @@ class AboutController extends BaseController {
         []
     }
 
+    def newsletter = {
+        []
+    }
+
     /** Livewatch.de server monitoring */
     def livecheck = {
         Pattern p = Pattern.compile("[a-f0-9]{32}")
