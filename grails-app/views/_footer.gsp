@@ -7,13 +7,8 @@
         </div>
       </td>
       <td width="60"></td>
-      <td width="370" class="visualads">
-        <g:if test="${homepage}">
-          <g:render template="/ads/homepage"/>
-        </g:if>
-        <g:else>
-          <g:render template="/ads/footer"/>
-        </g:else>
+      <td width="370">
+        <g:render template="/ads/footer"/>
       </td>
     </tr>
     <tr>
@@ -116,17 +111,6 @@
             </tr>
           </table>
         </div>
-        <%--
-        <div class="iconLink">
-          <table>
-            <tr>
-              <td><a href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><img src="${createLinkTo(dir:'images',file:'icon-android.png')}" alt="Android-Icon"/></a></td>
-              <td>&nbsp;</td>
-              <td><a class="lightlink" href="http://www.androidpit.de/de/android/market/apps/app/com.fc.ot/OpenThesaurus-fuer-Android"><g:message code="footer.android"/> <strong>Android</strong></a></td>
-            </tr>
-          </table>
-        </div>
-        --%>
       </td>
       <td>
       </td>
