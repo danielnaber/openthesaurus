@@ -50,8 +50,8 @@ class AjaxSearchController extends BaseController {
             try {
                 // We only show up to 5 substring matches, but we need a higher limit here as this
                 // search works on the terms, not on the synsets.
-                // TODO: this still doesn't guarantee we get all matches
-                def substringTermMatches = searchService.searchPartialResult(query, 0, 10)
+                // TODO: this still doesn't guarantee we get all matches - increasing the value leads to performance problems
+                def substringTermMatches = searchService.searchPartialResult(query, 0, 6)
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0)
                     addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
