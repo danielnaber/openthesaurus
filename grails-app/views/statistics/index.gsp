@@ -55,17 +55,6 @@
                       <tr>
                           <td colspan="2" align="right" class="metaInfo">Stand: <g:formatDate format="dd.MM.yyyy HH:mm" /></td>
                       </tr>
-
-                    <!--
-                    <tr class="prop">
-                        <td colspan="2" valign="top" class="name">
-                          <br/>
-                          <br/>
-                          <br/>
-                          <img src="../images/fake_stats.png"/></td>
-                    </tr>
-                    -->
-                    
                   </table>
               </td>
 
@@ -82,7 +71,7 @@
                   <tr class="${cssClass}">
                       <td align="right" class="statName">
                           <g:if test="${topUser.displayName}">
-                              ${topUser.displayName.encodeAsHTML()}
+                              <g:link controller="user" action="profile" params="${[uid: topUser.userId]}">${topUser.displayName.encodeAsHTML()}</g:link>
                           </g:if>
                           <g:else>
                               <span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>

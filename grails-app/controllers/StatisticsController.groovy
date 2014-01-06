@@ -40,7 +40,7 @@ class StatisticsController extends BaseController {
         ResultSet resultSet
         try {
           conn = dataSource.getConnection()
-          String sql = """SELECT user_event.by_user_id, real_name, count(*) AS ct 
+          String sql = """SELECT user_event.by_user_id AS id, real_name, count(*) AS ct 
             FROM user_event, thesaurus_user
             WHERE
             thesaurus_user.id = user_event.by_user_id AND
@@ -54,7 +54,7 @@ class StatisticsController extends BaseController {
           ps.setInt(2, 10)	// max matches
           resultSet = ps.executeQuery()
           while (resultSet.next()) {
-            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct")))
+            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct"), userId: resultSet.getInt("id")))
           }
           AssociationController associationController = new AssociationController()
           int associationCount = associationController.getAssociationCount()[0]
