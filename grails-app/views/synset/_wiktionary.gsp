@@ -8,7 +8,7 @@
 						    .replaceAll("\\[\\[([^\\]]*?)\\|([^\\]]*?)\\]\\]", "\$2")
                             .replaceAll("\\[\\[(.*?)\\]\\]", "\$1")
 
-                            .replaceAll("\\{\\{(ugs|trans)\\.\\|[:,]\\}\\}", myMarker + "\$1" + myMarker)
+                            .replaceAll("\\{\\{(ugs|trans)[.:,](\\|:)?\\}\\}", myMarker + "\$1" + myMarker)
                             .replaceAll("\\{\\{refl\\.\\|:\\}\\}", myMarker + "{refl.}" + myMarker)
 
                             .replaceAll("\\{\\{(f|m|n)\\}\\}", myMarker + "{\$1}" + myMarker)
