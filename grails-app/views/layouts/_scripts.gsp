@@ -79,13 +79,14 @@
             new Ajax.Request(
                     '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                     {
+                        method: 'get',
                         asynchronous: true,
                         evalScripts: false,
                         onSuccess: function(response){
                             if (timeStamp < lastUpdateTimeStamp) {
                                 //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
                             } else {
-                                $('searchResultArea').update(response.responseText)
+                                $('searchResultArea').update(response.responseText);
                                 lastUpdateTimeStamp = timeStamp;
                             }
                         },
