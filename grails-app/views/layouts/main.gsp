@@ -3,7 +3,7 @@
     <head>
         <title><g:layoutTitle default="OpenThesaurus" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20140106" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <g:render template="/script"/>
@@ -11,6 +11,9 @@
         <g:render template="/layouts/scripts"/>
     </head>
     <body>
+
+    <div id="searchResultArea" class="searchResultPopup" style="display: none">
+    </div>
 
     <div id="body">
 
@@ -28,10 +31,7 @@
 
         <g:render template="/loggedin"/>
         
-       	<g:layoutBody />
-
-        <div id="searchResultArea" style="display:none;position:absolute;outline:3px solid white;padding:10px;margin:10px;border:solid 2px #aaaaaa;background-color:white;width:760px;min-height:100px;left:-10px;top:160px;">
-        </div>
+        <g:layoutBody />
 
       </div>
 

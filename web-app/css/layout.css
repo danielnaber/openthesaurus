@@ -607,6 +607,23 @@ tr .prop2 {
     opacity: 0.4;
 }
 
+.searchResultPopup {
+    position: absolute;
+    outline: 3px solid white;
+    padding: 10px;
+    display: block;
+    border: solid 2px #aaaaaa;
+    background-color: white;
+    width: 90%;
+    max-width: 760px;
+    min-height: 100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;  /* centers the div, http://stackoverflow.com/questions/16758102/ */
+    top: 230px;
+    z-index: 100;
+}
+
 .resultColumn {
     width: 370px;
     float: left;
