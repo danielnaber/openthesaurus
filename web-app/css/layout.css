@@ -607,3 +607,7 @@ tr .prop2 {
 .associationList a {
     color: #707070;
 }
+
+.invisibleSynset {
+    opacity: 0.4;
+}

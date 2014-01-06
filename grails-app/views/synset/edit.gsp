@@ -99,6 +99,7 @@
 
         <g:if test="${!synset?.isVisible}">
             <div class="warning"><g:message code='edit.invisible'/></div>
+            <div class="invisibleSynset">
         </g:if>
 
         <g:if test="${!session.user}">
@@ -418,6 +419,10 @@
               </div>
               
             </div>
+        </g:if>
+
+        <g:if test="${!synset?.isVisible}">
+            </div> <!-- end: invisibleSynset -->
         </g:if>
 
         <g:render template="/ads/edit_bottom"/>
