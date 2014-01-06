@@ -50,7 +50,12 @@
         <td>&nbsp;</td>
         <td>
           <g:link action="create" params="[term : params.q]" target="_blank">
-               <g:message code="result.create.synset" args="${[params.q]}" />
+              <g:if test="${synsetList.size() == 0}">
+                  <g:message code="result.create.synset" args="${[params.q]}" />
+              </g:if>
+              <g:else>
+                  <g:message code="result.create.another.synset" args="${[params.q]}" />
+              </g:else>
           </g:link>
         </td>
       </tr>

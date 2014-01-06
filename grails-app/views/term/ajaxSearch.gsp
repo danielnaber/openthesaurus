@@ -36,7 +36,7 @@
 	             </tr>
 	        </g:each>
 	    </table>
-	    <div class="metaInfo">Tipp: Auswahl mit den rauf/runter Cursor-Tasten</div>
+	    <div class="metaInfo"><g:message code="result.tip"/></div>
 
     </g:else>
 
@@ -50,7 +50,12 @@
         <td>&nbsp;</td>
         <td>
           <g:link controller="synset" action="create" params="[term : params.q]" target="_blank">
-               <g:message code="result.create.synset" args="${[params.q]}" />
+              <g:if test="${terms.size() == 0}">
+                  <g:message code="result.create.synset" args="${[params.q]}" />
+              </g:if>
+              <g:else>
+                  <g:message code="result.create.another.synset" args="${[params.q]}" />
+              </g:else>
           </g:link>
         </td>
       </tr>
