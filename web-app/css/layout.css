@@ -606,3 +606,22 @@ tr .prop2 {
 .invisibleSynset {
     opacity: 0.4;
 }
+
+.resultColumn {
+    width: 370px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.footerColumn {
+    width: 370px;
+    float: left;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 800px) {
+    #content,
+    #foot {
+        width: 490px;
+    }
+}
