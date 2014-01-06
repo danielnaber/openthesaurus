@@ -63,7 +63,7 @@
                                 <td></td>
                                 <td >
                                     <div class="buttons">
-                                        <span class="button"><g:actionSubmit  action="doChangePassword" class="save" value="${message(code:'user.change.password.submit')}" /></span>
+                                        <span class="button"><g:actionSubmit action="doChangePassword" class="submitButton" value="${message(code:'user.change.password.submit')}" /></span>
                                     </div>
                                 </td>
                             </tr>

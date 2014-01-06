@@ -16,7 +16,7 @@
           <textarea rows="20" cols="80" name="text" autofocus></textarea>
           <br />
           <br />
-          <g:submitButton name="Go" value="Suchen" />
+          <g:submitButton class="submitButton" name="Go" value="Suchen" />
         </g:form>
           
     </body>

@@ -551,11 +551,6 @@ tr .prop2 {
 }
 
 .adminOnly {
-    padding: 2px;
-    border-style: dotted;
-    border-color: darkblue;
-    border-width: 1px;
-    background-color: #eeeeee;
 }
 
 .hint {

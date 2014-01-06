@@ -2,7 +2,7 @@
 <g:if test="${session.user}">
     <g:message code="user.successful.login" args="${[session.user.userId]}"/>
     <g:if test="${session.user.userId.toString() == 'admin'}">
-        <span class="adminOnly"><g:link controller="admin" action="index">[admin]</g:link></span>
+        <span class="adminOnly"><g:link controller="admin" action="index">admin</g:link></span>
     </g:if>
     <span class="d">&middot;</span>
     <g:link controller="user" action="edit"><g:message code="user.edit.link"/></g:link>
