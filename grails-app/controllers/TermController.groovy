@@ -173,6 +173,9 @@ class TermController extends BaseController {
         [terms: terms]
     }
 
+    /**
+     * List the terms of a category.
+     */
     def list = {
         if(!params.max) params.max = 20
         else params.max = Integer.parseInt(params.max)

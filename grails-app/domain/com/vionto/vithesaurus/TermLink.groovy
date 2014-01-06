@@ -40,17 +40,6 @@ class TermLink {
         this.linkType = linkType
     }
     
-    def saveAndLog() {
-        def saved = save()
-        if (saved) {
-          log.info("linking term '${term.id}' to term ${targetTerm.id} " +
-                "with type ${linkType.id} (${linkType})")
-        } else {
-            log.info("could not link term '${term.id}' to term ${targetTerm.id}: ${errors}")
-        }
-        return saved
-    }
-
     String toString() {
         return "${linkType}@${targetTerm}"
     }

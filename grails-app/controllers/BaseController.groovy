@@ -1,6 +1,3 @@
-import javax.servlet.http.HttpServletRequest
-import com.vionto.vithesaurus.tools.IpTools
-
 /**
  * OpenThesaurus - web-based thesaurus management tool
  * Copyright (C) 2009 vionto GmbH, www.vionto.com
@@ -17,7 +14,9 @@ import com.vionto.vithesaurus.tools.IpTools
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
+import javax.servlet.http.HttpServletRequest
+import com.vionto.vithesaurus.tools.IpTools
 
 /**
  * Helper methods to protect pages by login.

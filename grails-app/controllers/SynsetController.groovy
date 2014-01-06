@@ -251,16 +251,16 @@ class SynsetController extends BaseController {
   }
 
   private String getQueryType() {
-        String qType
-        if (params.format == "text/xml") {
-            qType = "xml"
-        } else if (params.format == "application/json") {
-            qType = "jso"
-        } else {
-            qType = "htm"
-        }
-        return qType
-    }
+      String qType
+      if (params.format == "text/xml") {
+          qType = "xml"
+      } else if (params.format == "application/json") {
+          qType = "jso"
+      } else {
+          qType = "htm"
+      }
+      return qType
+  }
 
     private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult) {
         if (params.format == "application/json") {

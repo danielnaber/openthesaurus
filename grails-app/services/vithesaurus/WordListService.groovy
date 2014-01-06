@@ -91,7 +91,7 @@ class WordListService {
     return wordMap
   }
 
-  private String partsToMap(String[] wordParts, String targetUrl, HashMap<String, WordListLookup> wordMap, String term, String metaInfo) {
+  private void partsToMap(String[] wordParts, String targetUrl, HashMap<String, WordListLookup> wordMap, String term, String metaInfo) {
     String saneTargetUrl = sanityCheckUrl(targetUrl)
     for (String part : wordParts) {
       part = part.trim().toLowerCase()

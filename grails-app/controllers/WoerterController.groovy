@@ -16,8 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.vionto.vithesaurus.Category
-
 class WoerterController extends BaseController {
     
     def index = { redirect(action:listen,params:params) }

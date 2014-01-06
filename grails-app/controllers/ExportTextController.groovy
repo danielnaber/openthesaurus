@@ -40,9 +40,9 @@ class ExportTextController extends BaseController {
       File tmpFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp")
       log.info("Writing plain text export to " + tmpFile)
 
-      OutputStream fout= new FileOutputStream(tmpFile);
-      OutputStream bout= new BufferedOutputStream(fout);
-      OutputStreamWriter out = new OutputStreamWriter(bout, "utf-8");
+      OutputStream fout = new FileOutputStream(tmpFile)
+      OutputStream bout = new BufferedOutputStream(fout)
+      OutputStreamWriter out = new OutputStreamWriter(bout, "utf-8")
 
       String licenseText = message(code:'text.export.license')
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -88,9 +88,9 @@ class ExportTextController extends BaseController {
       
       rs.close()
       st.close()
-      out.close();
+      out.close()
       bout.close()
-      fout.close();
+      fout.close()
       conn.close()
       
       File tmpZipFile = new File(grailsApplication.config.thesaurus.export.text.output + ".tmp.zip")

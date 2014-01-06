@@ -230,12 +230,6 @@ class Synset implements Cloneable {
         return allLinks.sort()
     }
 
-    // not called "getGeneratedURI" because Grails assumes a property then
-    // and gets confused:
-    String generatedURI() {
-        return URI_PREFIX + id
-    }
-
     // NOTE: you need to adapt Diff.java if you make changes here
     String toString() {
         if (terms.size() == 0) {
@@ -369,8 +363,7 @@ class Synset implements Cloneable {
     }
 
     Object clone() {
-        Synset clone = new Synset()
-        clone = super.clone()       // will clone trivial types
+        Synset clone = super.clone()       // will clone trivial types
         // TODO: also make a real deep copy here via copy constructor:
         clone.terms = new HashSet(terms)
         clone.categoryLinks = new HashSet(categoryLinks)
