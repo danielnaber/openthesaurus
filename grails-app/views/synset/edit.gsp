@@ -183,7 +183,7 @@
                                 <li class="checkboxList" style="margin-top:10px">
                                   <g:if test="${session.user}">
                                     <div id="newTermLink">
-                                        <a href="#" onclick="javascript:showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
+                                        <a href="#" onclick="showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
                                     </div>
     
                                     <% int i = 0; %>
@@ -199,7 +199,7 @@
                                             </g:else>
                                             <g:message code="edit.term.level"/>: <g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
                                             <g:if test="${i == 0}">
-                                                <a href="#" onclick="javascript:toggleId('languageLevelHelp');return false;">[?]</a>
+                                                <a href="#" onclick="toggleId('languageLevelHelp');return false;">[?]</a>
                                                 <div id="languageLevelHelp" style="display: none">
                                                     <g:render template="languageLevelHelp" />
                                                 </div>
@@ -256,7 +256,7 @@
                                     <g:if test="${session.user}">
                                          <%-- Change or add new category --%>
                                          <div id="newCategoryLink">
-                                             <a href="#" onclick="javascript:showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
+                                             <a href="#" onclick="showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
                                          </div>
 
                                          <div id="newCategory" style="display:none">

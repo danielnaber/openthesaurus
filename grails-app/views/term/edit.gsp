@@ -213,10 +213,10 @@
                               <g:if test="${session.user}">
                                   <div id="addTermLinkLink" style="margin-top:5px">
                                       <g:if test="${termLinkInfos.size() == 0}">
-                                          <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
+                                          <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
                                       </g:if>
                                       <g:else>
-                                          <a href="#" onclick="javascript:showNewTermLink();return false;"><g:message code="edit.change.antonym"/></a>
+                                          <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.change.antonym"/></a>
                                       </g:else>
                                   </div>
                                   <div id="addTermLink" style="display:none;margin-top:5px">
