@@ -5,7 +5,7 @@
           <g:message code="homepage.tagline"/>
       </div>
 
-      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Separator"/>
+      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
 
       <ul style="float: left; margin-right: 60px">
           <li><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
@@ -107,7 +107,7 @@
         <g:render template="/ads/footer"/>
       </div>
 
-      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:message(code:'hr.png'))}" alt="Separator"/>
+      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
   </div>
 
 </div>
