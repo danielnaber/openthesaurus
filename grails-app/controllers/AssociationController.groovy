@@ -30,6 +30,9 @@ class AssociationController extends BaseController {
             eq('linkType', associationType)
             firstResult(params.offset)
             maxResults(10)
+            synset {
+                eq('isVisible', true)
+            }
             projections {
                 distinct('synset')
             }
@@ -41,6 +44,9 @@ class AssociationController extends BaseController {
         LinkType associationType = LinkType.findByLinkName("Assoziation")
         def synsetCountResult = SynsetLink.withCriteria {
             eq('linkType', associationType)
+            synset {
+                eq('isVisible', true)
+            }
             projections {
                 countDistinct('synset')
             }
