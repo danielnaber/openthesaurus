@@ -28,21 +28,19 @@ class LinkType {
         //id generator:'sequence', params:[sequence:'link_type_seq']
     }
 
-    // TODO: only for inter-synset relations?!
-
     /** E.g. "synonym" */
-	String linkName
-	/** E.g. "more specific synset" if linkName is "more generic synset" */
-	String otherDirectionLinkName
-	/** The name when used in a sentence, e.g. "A is a B" */
-	String verbName
-	
+    String linkName
+    /** E.g. "more specific synset" if linkName is "more generic synset" */
+    String otherDirectionLinkName
+    /** The name when used in a sentence, e.g. "A is a B" */
+    String verbName
+
     static constraints = {
         linkName(unique:true)
         verbName(unique:true)
-	}
+    }
 
-	String toString() {
-		return linkName
-	}
+    String toString() {
+        return linkName
+    }
 }

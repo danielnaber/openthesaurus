@@ -21,7 +21,7 @@ package com.vionto.vithesaurus;
  * Changes on a term caused by user.
  */
 class UserTermEvent extends UserEvent {
-	
+
     // we cannot use Term here as we then couldn't delete Terms:
     String word
     int termId

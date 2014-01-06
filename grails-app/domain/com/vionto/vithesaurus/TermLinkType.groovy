@@ -29,16 +29,16 @@ class TermLinkType {
     }
 
     /** E.g. "antonym" */
-	String linkName
-	/** E.g. "antonym" */
-	String otherDirectionLinkName
-	/** The name when used in a sentence, e.g. "A is a B" */
-	String verbName
-	
+    String linkName
+    /** E.g. "antonym" */
+    String otherDirectionLinkName
+    /** The name when used in a sentence, e.g. "A is a B" */
+    String verbName
+
     static constraints = {
         linkName(unique:true)
         verbName(unique:true)
-	}
+    }
 
     TermLinkType() {
     }
@@ -47,7 +47,7 @@ class TermLinkType {
       this.linkName = linkName
     }
     
-	String toString() {
-		return linkName
-	}
+    String toString() {
+        return linkName
+    }
 }

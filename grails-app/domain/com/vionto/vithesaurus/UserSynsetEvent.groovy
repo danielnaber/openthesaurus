@@ -21,7 +21,7 @@ package com.vionto.vithesaurus;
  * Changes on a synset caused by user, e.g. the creation of a synset.
  */
 class UserSynsetEvent extends UserEvent {
-	    
+
     UserSynsetEvent() {
         // should not be used 
     }
