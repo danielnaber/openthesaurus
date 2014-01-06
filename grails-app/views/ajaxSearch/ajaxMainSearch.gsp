@@ -79,26 +79,28 @@
         Pattern pattern = Pattern.compile("(" + Pattern.quote(params.q.encodeAsHTML()) + ")", Pattern.CASE_INSENSITIVE);
         %>
         <g:each in="${substringSynsetList}" status="i" var="synset">
-             <div style="margin-bottom:10px">
-                 <g:set var="firstVal" value="${true}"/>
-                 <g:each in="${synset?.terms?.sort()}" var="term">
-                     <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
-                     <g:if test="${!firstVal}">
-                        <span class="d">&middot;</span>
-                     </g:if>
-                     <%
-                     Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
-                     String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
-                     %>
-                     <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
-                         ${matchingTerm}
-                         <g:if test="${term.level}">
-                           <span class="metaInfo">(${term.level.shortLevelName})</span>
-                         </g:if>
-                     </g:link>
-                     <g:set var="firstVal" value="${false}"/>
-                 </g:each>
-             </div>
+            <g:if test="${i < 5}">
+                <div style="margin-bottom:10px">
+                    <g:set var="firstVal" value="${true}"/>
+                    <g:each in="${synset?.terms?.sort()}" var="term">
+                        <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
+                        <g:if test="${!firstVal}">
+                            <span class="d">&middot;</span>
+                        </g:if>
+                        <%
+                            Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
+                            String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
+                        %>
+                        <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                            ${matchingTerm}
+                            <g:if test="${term.level}">
+                                <span class="metaInfo">(${term.level.shortLevelName})</span>
+                            </g:if>
+                        </g:link>
+                        <g:set var="firstVal" value="${false}"/>
+                    </g:each>
+                </div>
+            </g:if>
         </g:each>
         <g:if test="${substringSynsetList.size() > 5}">
           <span class="metaInfo"><g:message code="result.ajax.more.substring.matches" /></span>

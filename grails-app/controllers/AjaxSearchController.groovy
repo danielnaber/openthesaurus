@@ -48,8 +48,10 @@ class AjaxSearchController extends BaseController {
         if (query.length() >= minLengthForSubstringQuery) {
             Connection conn = dataSource.getConnection()
             try {
-                // TODO: increase the limits?!
-                def substringTermMatches = searchService.searchPartialResult(query, 0, 5)
+                // We only show up to 5 substring matches, but we need a higher limit here as this
+                // search works on the terms, not on the synsets.
+                // TODO: this still doesn't guarantee we get all matches
+                def substringTermMatches = searchService.searchPartialResult(query, 0, 10)
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0)
                     addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
@@ -64,7 +66,7 @@ class AjaxSearchController extends BaseController {
             }
         }
         long runTime = System.currentTimeMillis() - startTime
-        String message = "ajaxSearch: ${runTime}ms for '${query}', ${synsetList.size()}+${substringSynsetList.size} matches"
+        String message = "ajaxSearch: ${runTime}ms for '${query}', ${synsetList.size()}+${substringSynsetList.size()} matches"
         if (spellcheck) {
             log.info("${message} (incl. spellcheck)")
         } else {
