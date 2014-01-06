@@ -18,6 +18,7 @@
 package com.vionto.vithesaurus;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -51,7 +52,9 @@ public class ApiRequestEvent {
         boolean limitedReached = false;
         // all requests before this date are considered old:
         final Date thresholdDate = new Date(System.currentTimeMillis() - maxAgeSeconds * 1000);
-        for (ApiRequestEvent requestEvent : requestEvents) {
+        Iterator<ApiRequestEvent> iterator = requestEvents.iterator();
+        while (iterator.hasNext()) {
+            final ApiRequestEvent requestEvent = iterator.next();
             if (requestEvent.getRemoteIpAddress().equals(remoteIpAddress) && requestEvent.getDate().after(thresholdDate)) {
                 requestsByIp++;
                 if (requestsByIp > maxRequests) {

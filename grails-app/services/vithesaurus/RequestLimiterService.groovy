@@ -5,6 +5,8 @@ import com.vionto.vithesaurus.ApiRequestEvent
 import com.vionto.vithesaurus.TooManyRequestsException
 import com.vionto.vithesaurus.tools.IpTools
 
+import java.util.concurrent.CopyOnWriteArrayList
+
 class RequestLimiterService {
 
   static transactional = false
@@ -16,7 +18,7 @@ class RequestLimiterService {
   private static final String REQUEST_LIMIT_IPS = "requestLimitIps"
   private static final String REQUEST_LIMIT_SPECIAL_IPS_PREFIX = "requestLimitForIp"
 
-  private apiRequestEvents = []
+  private apiRequestEvents = new CopyOnWriteArrayList()
 
   /**
    * Throw exception if user makes too many requests
