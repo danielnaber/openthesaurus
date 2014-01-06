@@ -79,7 +79,6 @@ class TermController extends BaseController {
             // properties to variable 'term' as it will then be saved even
             // if it's invalid -- see http://jira.codehaus.org/browse/GRAILS-2480):
             Term updatedTerm = new Term(term.word, term.language, term.synset)
-            updatedTerm.properties = params
             updatedTerm.isShortForm = params.wordForm == "abbreviation" ? true : false
             updatedTerm.isAcronym = params.wordForm == "acronym" ? true : false
             if (!updatedTerm.validate()) {
@@ -89,7 +88,13 @@ class TermController extends BaseController {
             }
 
             // validation okay, now change the real term:
-            term.properties = params
+            term.word = params.word
+            term.userComment = params.userComment
+            if (params['level.id'] && params['level.id'] != 'null') {
+                term.level = TermLevel.get(params['level.id'])
+            } else {
+                term.level = null
+            }
             String normalizedWord = StringTools.normalize(params.word)
             if (normalizedWord != params.word) {
                 term.normalizedWord = normalizedWord

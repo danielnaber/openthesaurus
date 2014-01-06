@@ -619,8 +619,6 @@ class SynsetController extends BaseController {
         def origSynset = synset.clone()
 
         if (synset) {
-            synset.properties = params
-
             try {
                 addSynsetLinks(synset)
                 deleteTerms(synset)
@@ -792,7 +790,6 @@ class SynsetController extends BaseController {
 
     def create = {
         def synset = new Synset()
-        synset.properties = params
         return ['synset':synset]
     }
 
