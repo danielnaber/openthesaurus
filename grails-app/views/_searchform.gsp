@@ -35,9 +35,6 @@
   </form>
 </div>
 
-<g:render template="/hint"/>
-
-
 <g:if test="${preventSearchFocus != 'true'}">
     <script type="text/javascript">
     <!--

@@ -20,14 +20,14 @@
                 <table>
                     <thead>
                         <tr>
-                   	        <g:sortableColumn property="userId" title="Email" />
-                   	        <g:sortableColumn property="realName" title="DisplayName" />
-                   	        <g:sortableColumn property="permission" title="Perm" />
-                   	        <g:sortableColumn property="creationDate" title="Registration" />
-                   	        <g:sortableColumn property="confirmationDate" title="Confirm" />
-                   	        <g:sortableColumn property="lastLoginDate" title="Last Login" />
-                   	        <th>Events</th>
-                   	        <g:sortableColumn property="blocked" title="Blocked" />
+                           <g:sortableColumn property="userId" title="Email" />
+                           <g:sortableColumn property="realName" title="DisplayName" />
+                           <g:sortableColumn property="permission" title="Perm" />
+                           <g:sortableColumn property="creationDate" title="Registration" />
+                           <g:sortableColumn property="confirmationDate" title="Confirm" />
+                           <g:sortableColumn property="lastLoginDate" title="Last Login" />
+                           <th>Events</th>
+                           <g:sortableColumn property="blocked" title="Blocked" />
                         </tr>
                     </thead>
                     <tbody>

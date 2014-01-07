@@ -20,6 +20,6 @@
           <g:if test="${params.subscribeToMailingList}">
             <p><g:message code="user.register.check.email.mailinglist"/></p>
           </g:if>
-			        
+
     </body>
 </html>

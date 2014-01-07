@@ -4,10 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <g:if test="${synsetToOpen}">
-        	<title>${synsetToOpen.toShortString().encodeAsHTML()} - <g:message code="tree.title" /></title>
+            <title>${synsetToOpen.toShortString().encodeAsHTML()} - <g:message code="tree.title" /></title>
         </g:if>
         <g:else>
-	        <title><g:message code="tree.title" /></title>
+            <title><g:message code="tree.title" /></title>
         </g:else>
     </head>
     <body>
@@ -22,7 +22,7 @@
               <div class="message">${flash.message}</div>
           </g:if>
 
-          <table style="border:0px">
+          <table style="border:0">
           <tr>
               <td><p><g:message code="tree.intro" /></p>
 

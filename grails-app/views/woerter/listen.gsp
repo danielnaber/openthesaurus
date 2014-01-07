@@ -26,14 +26,14 @@
                   <g:link controller="synset" action="listBySize" params="${[direction: 'asc']}"><g:message code="by.size.headline.smallest"/></g:link>
               </li>
               <li style="margin-top:14px"><g:message code="word.list.by.level"/>
-              <ul style="margin-top:0px">
+              <ul style="margin-top:0">
                 <g:each in="${TermLevel.list()}" var="level">
                   <li><g:link controller="term" action="list" params="${[levelId:level.id]}">${level.encodeAsHTML()}</g:link></li>
                 </g:each>
               </ul>
               </li>
               <li style="margin-top:14px"><g:message code="word.list.by.category"/>
-              <ul style="margin-top:0px">
+              <ul style="margin-top:0">
                 <g:each in="${Category.withCriteria { eq('isDisabled', false) }.sort()}" var="category">
                   <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
                 </g:each>

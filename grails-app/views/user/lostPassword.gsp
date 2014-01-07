@@ -8,7 +8,6 @@
     </head>
     <body>
 
-
         <hr/>
 
         <h2><g:message code="user.lost.password.headline"/></h2>
