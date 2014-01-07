@@ -47,14 +47,35 @@
                     <g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
                     <%-- keep in sync with SearchService.groovy: --%>
                     <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
-                    <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
-                            lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
-                        <span class="synsetmatch">${displayTerm}</span>${delim}
+
+                    <%
+                        long antonymTime = System.currentTimeMillis();
+                    %>
+                    <g:set var="antonymInfo" value=""/>
+                    <g:set var="antonymTitle" value=""/>
+                    <g:set var="termLinkInfos" value="${term.termLinkInfos()}"/>
+                    <g:if test="${termLinkInfos.size() > 0}">
+                        <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
+                        <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
+                            <g:set var="antonymInfo"><span class="antonymMarker"><sup>G</sup></span></g:set>
+                            <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute" args="${[termLinkInfo.term2.word.encodeAsHTML()]}"/></g:set>
+                        </g:if>
                     </g:if>
-                    <g:else>
-                        <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                        >${displayTerm}</g:link>${delim}
-                    </g:else>
+                    <%
+                        long antonymTotalTime = System.currentTimeMillis() - antonymTime;
+                    %>
+                    <!-- time for antonyms: ${antonymTotalTime}ms -->
+
+                    <span title="${antonymTitle}">
+                        <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
+                                lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
+                            <span class="synsetmatch">${displayTerm}</span>${antonymInfo}${delim}
+                        </g:if>
+                        <g:else>
+                            <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
+                            >${displayTerm}</g:link>${antonymInfo}${delim}
+                        </g:else>
+                    </span>
 
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>

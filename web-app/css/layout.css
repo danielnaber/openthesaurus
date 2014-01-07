@@ -607,6 +607,12 @@ tr .prop2 {
     opacity: 0.4;
 }
 
+.antonymMarker {
+    font-size: 12px;
+    margin-left: 2px;
+    color: #999999;
+}
+
 .searchResultPopup {
     position: absolute;
     outline: 3px solid white;
