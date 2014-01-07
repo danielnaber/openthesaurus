@@ -46,12 +46,14 @@ public class Diff {
     /** to used to mark end of "deleted content" sections: */
     private static final String DELETE_END = "</span>";
 
+    private Diff() {
+        // no public constructor, static methods only
+    }
+
     /**
      * Build a HTML-ready diff between two string where removed content is
      * marked with &lt;span class='del'&gt; and added content is marked with
      * &lt;span class='add'&gt;
-     *
-     * @author dan
      */
     public static String diff(String str1, String str2) {
         if (str1 == null) {

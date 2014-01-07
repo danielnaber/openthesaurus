@@ -19,7 +19,7 @@ package com.vionto.vithesaurus;
 
 public class TooManyRequestsException extends RuntimeException {
 
-    private String ipAddress;
+    private final String ipAddress;
 
     public TooManyRequestsException(String ipAddress) {
         this.ipAddress = ipAddress;

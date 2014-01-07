@@ -36,9 +36,9 @@ class UserEventTools {
             diffStr = diffStr.replaceFirst("^\\| ", "")
             diffs.put(event, diffStr)
             String typeName = ""
-            if (event.getClass() == com.vionto.vithesaurus.UserSynsetEvent) {
+            if (event.getClass() == UserSynsetEvent) {
                 typeName = "concept"
-            } else if (event.getClass() == com.vionto.vithesaurus.UserTermEvent) {
+            } else if (event.getClass() == UserTermEvent) {
                 typeName = "term"
             } else {
                 typeName = "unknown (${event.getClass()})"

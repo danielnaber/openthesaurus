@@ -51,7 +51,7 @@ public class BaseformFinder {
         } else {
             searchTerm = term;
         }
-        final Set<String> baseforms = new HashSet<String>();
+        final Set<String> baseForms = new HashSet<String>();
         final String sql = "SELECT baseform FROM word_mapping WHERE fullform = ?";
         final PreparedStatement statement = connection.prepareStatement(sql);
         try {
@@ -65,7 +65,7 @@ public class BaseformFinder {
                     } else {
                         baseform = resultSet.getString("baseform");
                     }
-                    baseforms.add(baseform);
+                    baseForms.add(baseform);
                 }
             } finally {
                 resultSet.close();
@@ -73,7 +73,7 @@ public class BaseformFinder {
         } finally {
             statement.close();
         }
-        return baseforms;
+        return baseForms;
     }
 
     private String joinAllButLast(List<String> parts, String lastPartBaseForm) {

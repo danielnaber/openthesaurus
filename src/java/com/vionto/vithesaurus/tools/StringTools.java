@@ -75,20 +75,15 @@ public class StringTools {
    * <code>&lt;, &gt;, &amp;</code> <br>
    * with <br>
    * <code>&amp;lt;, &amp;gt;, &amp;amp;</code><br>
-   * 
-   * @param string
-   *          The input string
-   * @return The modified String, with replacements.
    */
   public static String replaceHtmlMarkupChars(final String string) {
     return string.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   }
 
   /**
-   * Write the contents if {@code file} to {@code out}.
+   * Write the contents of {@code file} to {@code out}.
    * @param file input file
    * @param out stream to be written to
-   * @throws IOException
    */
   public static void writeToStream(final File file, final OutputStream out) throws IOException {
     final FileInputStream fis = new FileInputStream(file);

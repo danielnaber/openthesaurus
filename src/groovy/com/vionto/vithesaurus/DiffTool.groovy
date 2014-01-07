@@ -128,7 +128,7 @@ class NewProperty extends PropertyDifference {
 }
 
 /**
- * Information about a property thta has different values in two
+ * Information about a property that has different values in two
  * objects that are compared.
  */
 class PropertyValueDifference extends PropertyDifference {

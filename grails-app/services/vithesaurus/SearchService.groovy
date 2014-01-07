@@ -232,7 +232,7 @@ class SearchService {
         }
     }
 
-    /** Substring matches */
+  /** Substring matches */
   List searchPartialResult(String term, int fromPos, int maxNum) {
     return searchPartialResultInternal(term, "%" + term + "%", true, fromPos, maxNum)
   }
