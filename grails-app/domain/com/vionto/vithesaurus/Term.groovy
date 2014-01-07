@@ -97,7 +97,7 @@ class Term implements Comparable, Cloneable {
             }
         }
         if (termLinks.size() > 1) {
-            throw new Exception("More than one term link for term ${this}: ${termLinks}")
+            throw new Exception("More than one term link for term ${this} (#${this.id}): ${termLinks}")
         }
         if (termLinks.size() == 1) {
             def termLink = termLinks.get(0)

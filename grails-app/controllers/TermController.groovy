@@ -56,7 +56,7 @@ class TermController extends BaseController {
         } else {
             List termLinkInfos = term.termLinkInfos()
             if (termLinkInfos.size() > 1) {
-                throw new Exception("More than one term link for term ${term}: ${termLinkInfos}")
+                throw new Exception("More than one term link for term ${term} (#${this.id}): ${termLinkInfos}")
             }
             return [ term : term, id: term.id, termLinkInfos: termLinkInfos ]
         }
