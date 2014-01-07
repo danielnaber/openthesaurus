@@ -9,7 +9,7 @@ LOG=/tmp/openthesaurus-log.txt
 rm $OUT
 rm $LOG
 
-tail -n 250000 /home/dnaber/tomcat/logs/catalina.out | grep "$DATE" >$LOG
+tail -n 250000 /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | grep "$DATE" >$LOG
 
 echo -n "Web Searches: " >>$OUT
 grep -c "Search(ms):htm" $LOG >>$OUT
@@ -33,7 +33,7 @@ grep -c "No query specified for search" $LOG >>$OUT
 
 echo "" >>$OUT
 
-echo -n "Succesful Logins: " >>$OUT
+echo -n "Successful Logins: " >>$OUT
 grep -c "login successful" $LOG >>$OUT
 
 echo -n "Failed Logins: " >>$OUT
