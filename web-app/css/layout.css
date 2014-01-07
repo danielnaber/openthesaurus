@@ -630,6 +630,13 @@ tr .prop2 {
     z-index: 100;
 }
 
+.searchResultPopup hr {
+    color: #ffffff;
+    background-color: #ffffff;
+    border-top: solid 1px #cccccc;
+    border-bottom: solid 1px #ffffff;
+}
+
 .resultColumn {
     width: 370px;
     float: left;
