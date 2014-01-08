@@ -54,10 +54,18 @@ class ElasticSearchService {
     }
 
     def searchSynsets(String query, int max = -1, int offset = 0) {
+        // TODO:
+        // der Eintrag "(der) kleine Mann" sollte gefunden werden mit:
+        // (der) kleine Mann
+        // der kleine Mann
+        // kleine Mann
+        // kleiner Mann (<- dazu brauchen wir Normalisierung)
+        // kleiner Ma (<- während des Tippens)
+        // kleine Ma (<- während des Tippens)
+        // der kleine Ma (<- während des Tippens)
         long t = System.currentTimeMillis()
-        //def termQuery = QueryBuilders.termQuery("term", query) /*.boost(2.0f)*/
         def matchQuery = QueryBuilders.matchQuery("term", query).operator(MatchQueryBuilder.Operator.AND)
-        def prefixQuery = QueryBuilders.prefixQuery("term", query)
+        def prefixQuery = QueryBuilders.matchPhrasePrefixQuery("term", query)
         def queryObj = QueryBuilders.boolQuery().should(matchQuery).should(prefixQuery)
         SearchResponse result = client.prepareSearch("openthesaurus")
                 .setQuery(queryObj)
