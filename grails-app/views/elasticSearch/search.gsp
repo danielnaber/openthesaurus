@@ -13,7 +13,9 @@
                                 .encodeAsHTML()
                                 .replaceAll("___START", "<span class='synsetmatchDirect'>")
                                 .replaceAll("___END", "</span>")
-                        } &middot;
+                        } 
+                        <!--<span style="color:#ccc">${match.score}</span>-->
+                        &middot;
                     </g:if>
                     <g:else>
                         ${term.word.encodeAsHTML()} &middot;

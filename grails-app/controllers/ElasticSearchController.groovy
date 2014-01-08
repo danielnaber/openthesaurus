@@ -38,7 +38,9 @@ class ElasticSearchController {
             Synset synset = Synset.get(synsetId)
             String highlightTermWithSpan = result.highlightFields.get("term").fragments[0]
             String highlightTerm = highlightTermWithSpan.replaceAll("<span.*?>", "").replaceAll("</span>", "")
-            matches.add(new ElasticSearchMatch(synset:synset, highlightTerm: highlightTerm, highlightTermWithSpan: highlightTermWithSpan))
+            def match = new ElasticSearchMatch(synset: synset, highlightTerm: highlightTerm, 
+                    highlightTermWithSpan: highlightTermWithSpan, score: result.score)
+            matches.add(match)
         }
         long restTime = System.currentTimeMillis() - restTimeStart
         [matches: matches, esTime: esTime, restTime: restTime, totalHits: results.totalHits]

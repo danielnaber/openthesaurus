@@ -22,5 +22,6 @@ class ElasticSearchMatch {
     Synset synset
     String highlightTerm
     String highlightTermWithSpan
+    float score
     
 }
