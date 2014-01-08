@@ -15,6 +15,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+import com.vionto.vithesaurus.ElasticSearchMatch
 import com.vionto.vithesaurus.Synset
 
 class ElasticSearchController {
@@ -30,15 +32,16 @@ class ElasticSearchController {
         def results = elasticSearchService.searchSynsets(params.q)
         long esTime = System.currentTimeMillis() - esTimeStart
         long restTimeStart = System.currentTimeMillis()
-        List synsets = []
+        List matches = []
         for (result in results) {
             def synsetId = (long)result.source.get("synset_id")
-            log.info("ID: " + synsetId)
             Synset synset = Synset.get(synsetId)
-            synsets.add(synset)
+            String highlightTermWithSpan = result.highlightFields.get("term").fragments[0]
+            String highlightTerm = highlightTermWithSpan.replaceAll("<span.*?>", "").replaceAll("</span>", "")
+            matches.add(new ElasticSearchMatch(synset:synset, highlightTerm: highlightTerm, highlightTermWithSpan: highlightTermWithSpan))
         }
         long restTime = System.currentTimeMillis() - restTimeStart
-        [synsets: synsets, esTime: esTime, restTime: restTime, totalHits: results.totalHits]
+        [matches: matches, esTime: esTime, restTime: restTime, totalHits: results.totalHits]
     }
 
 }
