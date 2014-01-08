@@ -22,7 +22,7 @@
     
         <div id="content">
     
-            <g:render template="/searchform" model="${[homepage: false, isDirectSearch: true]}"/>
+            <g:render template="/searchform" model="${[homepage: true]}"/>
     
             <g:if test="${session.user}">
                 <noscript>
