@@ -33,6 +33,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
+        compile 'org.elasticsearch:elasticsearch:0.90.9'
+
         runtime 'mysql:mysql-connector-java:5.1.16'
         test "net.sourceforge.htmlunit:htmlunit:2.10"  // 2.11 didn't work...
     }

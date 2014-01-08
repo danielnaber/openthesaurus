@@ -2,3 +2,4 @@ openthesaurus.iml
 stacktrace.log
 target/
 devDb.*
+elasticsearch

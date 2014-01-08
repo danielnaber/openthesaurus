@@ -21,6 +21,10 @@ import com.vionto.vithesaurus.tools.StringTools
 class AdminController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
+
+    static def allowedMethods = [reindexElasticSearch: 'POST']
+    
+    def elasticSearchService
     
     def index = {
         final int resultLimit = 10
@@ -29,6 +33,11 @@ class AdminController extends BaseController {
           maxResults(resultLimit)
         }
         [latestUsers: latestUsers, resultLimit: resultLimit]
+    }
+    
+    def reindexElasticSearch() {
+        int docs = elasticSearchService.indexAll()
+        render "Done: indexed ${docs} synsets. See server log for details."
     }
 
     def checkNormalizedTermIntegrity = {

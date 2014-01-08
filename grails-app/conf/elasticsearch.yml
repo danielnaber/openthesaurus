@@ -1,0 +1,12 @@
+
+#nur, wenn ES nicht extern gestartet wurde:
+#cluster: 
+#  name:  OpenThesaurusCluster
+  
+path:
+  logs: /home/dnaber/crea/openthesaurus/elasticsearch
+  data: /home/dnaber/crea/openthesaurus/elasticsearch
+
+index:
+  number_of_shards: 1
+  number_of_replicas: 0

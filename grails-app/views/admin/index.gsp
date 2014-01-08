@@ -32,16 +32,18 @@
         </p>
 
         <p>Lists:
-        <g:link controller="check" action="listInvisibleSynsets">Invisible synsets</g:link>
-        <br/>
+        <g:link controller="check" action="listInvisibleSynsets">Invisible synsets</g:link>,
         Term Checks:
-        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>
-        <br/>
+        <g:link controller="check" action="listHomonyms" params="['section.id': 0]">Homonyms</g:link>,
         Sanity checks:
         <g:link controller="admin" action="checkNormalizedTermIntegrity">Normalized term integrity</g:link>
         </p>
+    
+        <g:form action="reindexElasticSearch" method="post">
+            Re-Index ElasticSearch: <input type="submit" value="re-index" onclick="return confirm('re-create index, deleting the existing one?');"/> (see server log for progress)
+        </g:form>
 
-		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription of ${ThesaurusUser.count()} users</h2>
+        <h2 style="margin-top:25px">Latest ${resultLimit} User subscription of ${ThesaurusUser.count()} users</h2>
 
         <div class="colspanlist">
           <table>
