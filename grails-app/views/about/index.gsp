@@ -25,7 +25,7 @@
         in denen ein Wort vorkommt (z.B. <span class="bsp">roh</span> -&gt; <span class="bsp">roh, ungekocht</span>
         und einen anderen Eintrag für <span class="bsp">roh, rau, grob, unsanft</span>). Bei
         den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen
-        und neue hinzufügen.</p>
+        und neue hinzufügen. Details dazu finden sich in der <a href="faq">FAQ</a>.</p>
 
 
         <h2>Lizenz</h2>
@@ -34,7 +34,7 @@
           <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
           Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
           können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
-          und openthesaurus.de mit Link als die ursprüngliche Quelle angegeben wird.</p>
+          und openthesaurus.de mit Link als die Quelle angegeben wird.</p>
 
         <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
           er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
@@ -49,24 +49,12 @@
         <p><g:link action="imprint">Siehe Impressum</g:link></p>
 
 
-        <h2>Technik &amp; Design</h2>
-
-        <p>Die Website ist mit <a href="http://www.grails.org">Grails</a> umgesetzt und nutzt <a href="http://www.mysql.com">MySQL</a>
-        als Datenbank.
-        Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg.<!--</a>-->
-        </p>
-
-
         <h2>Änderungen und News zu OpenThesaurus</h2>
 
         <ul>
-            <li><a href="../feed">RSS-Feed aller Aktualisierungen an den Daten</a></li>
+            <li><a href="newsletter">OpenThesaurus Newsletter</a></li>
             <li><a href="newsarchive">News-Archiv</a></li>
-            <li><a href="http://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">OpenThesaurus Mailingliste</a> (sehr wenig Traffic)
-                <ul>
-                    <li><a href="http://lists.berlios.de/pipermail/openthesaurus-discuss/">Archiv</a></li>
-                </ul>
-            </li>
+            <li><a href="../feed">RSS-Feed aller Aktualisierungen an den Daten</a></li>
         </ul>
 
 
@@ -91,6 +79,14 @@
             <li><a href="http://www.tezaver.si/">Slowenisch</a></li>
             <li><a href="http://openthes-es.berlios.de">Spanisch</a></li>
         </ul>
+
+
+        <h2>Technik &amp; Design</h2>
+    
+        <p>Die Website ist mit <a href="http://www.grails.org">Grails</a> umgesetzt und nutzt MySQL
+            als Datenbank.
+            Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg.<!--</a>-->
+        </p>
 
 
         <h2>Papers über OpenThesaurus</h2>
