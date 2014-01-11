@@ -58,7 +58,7 @@
                         <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
                         <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
                             <g:set var="antonymInfo"><span class="antonymMarker"><sup>G</sup></span></g:set>
-                            <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute" args="${[termLinkInfo.term2.word.encodeAsHTML()]}"/></g:set>
+                            <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute" args="${[termLinkInfo.term2.word]}"/></g:set>
                         </g:if>
                     </g:if>
                     <%
