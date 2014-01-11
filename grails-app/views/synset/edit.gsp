@@ -28,9 +28,6 @@
 
           <g:render template="completion"/>
 
-
-          // TODO: use dojo for this?!
-          // TODO: avoid scroll jumping on click
           function showNewTerm() {
             document.getElementById('newTermLink').style.display='none';
             document.getElementById('newTerm').style.display='block';
