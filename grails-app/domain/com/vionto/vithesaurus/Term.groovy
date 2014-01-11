@@ -99,6 +99,9 @@ class Term implements Comparable, Cloneable {
         // the other direction (eg. hot->cold, cold->hot):
         List termLinkInfos = []
         for (TermLink link : termLinks) {
+            if (!link.term.synset.isVisible) {
+                continue
+            }
             try {
                 termLinkInfos.add(new TermLinkInfo(link.id, this, link.targetTerm, link.linkType.linkName, true))
             } catch (org.hibernate.ObjectNotFoundException e) {
@@ -108,6 +111,9 @@ class Term implements Comparable, Cloneable {
         }
         List reverseLinks = TermLink.findAllByTargetTerm(this)
         for (TermLink link : reverseLinks) {
+            if (!link.term.synset.isVisible) {
+                continue
+            }
             termLinkInfos.add(new TermLinkInfo(link.id, this, link.term, link.linkType.otherDirectionLinkName, false))
         }
         return termLinkInfos
