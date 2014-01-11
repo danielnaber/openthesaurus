@@ -55,9 +55,6 @@ class TermController extends BaseController {
             redirect(action:list)
         } else {
             List termLinkInfos = term.termLinkInfos()
-            if (termLinkInfos.size() > 1) {
-                throw new Exception("More than one term link for term ${term} (#${term.id}): ${termLinkInfos}")
-            }
             return [ term : term, id: term.id, termLinkInfos: termLinkInfos ]
         }
     }
@@ -74,7 +71,7 @@ class TermController extends BaseController {
                         contentType:"text/html", encoding:"UTF-8")
                 return
             }
-            saveAntonym(params, term, session, request, termBackup)
+            saveAntonym(params, term)
             // create a term just for validation (we cannot assign the new 
             // properties to variable 'term' as it will then be saved even
             // if it's invalid -- see http://jira.codehaus.org/browse/GRAILS-2480):
@@ -122,18 +119,19 @@ class TermController extends BaseController {
         }
     }
 
-    private def saveAntonym(params, Term term, session, request, Term termBackup) {
-        if (params.targetAntonymTermId || params.deleteExistingTermLink) {
-            if (params.deleteExistingTermLink) {
-                TermLink termLinkToDelete = TermLink.get(params.deleteExistingTermLink.toLong())
+    private def saveAntonym(params, Term term) {
+        for (key in params.keySet()) {   // delete antonym links
+            if (key.startsWith("deleteExistingTermLink_Antonym_") && params[key]) {
+                long termLinkId = Long.parseLong(params[key])
+                TermLink termLinkToDelete = TermLink.get(termLinkId)
                 if (!termLinkToDelete) {
-                    throw new Exception("No term link found with id ${params.deleteExistingTermLink}")
+                    throw new Exception("No term link found with id ${termLinkId}")
                 }
                 logTermLink("deleting link", termLinkToDelete)
+                term.deleteTermLink(termLinkToDelete)
             }
-            term.deleteTermLink()
         }
-        if (params.targetAntonymTermId) {
+        if (params.targetAntonymTermId) {  // add another antonym link
             TermLinkType antonymType = TermLinkType.findByLinkName("Antonym")
             if (!antonymType) {
                 throw new Exception("No 'Antonym' link type found, please configure it")

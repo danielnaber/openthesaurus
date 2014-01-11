@@ -89,21 +89,9 @@ class Term implements Comparable, Cloneable {
         return word
     }
 
-    void deleteTermLink() {
-        List termLinks = TermLink.withCriteria {
-            or {
-                eq('term', this)
-                eq('targetTerm', this)
-            }
-        }
-        if (termLinks.size() > 1) {
-            throw new Exception("More than one term link for term ${this} (#${this.id}): ${termLinks}")
-        }
-        if (termLinks.size() == 1) {
-            def termLink = termLinks.get(0)
-            removeFromTermLinks(termLink)
-            termLink.delete(flush:true)
-        }
+    void deleteTermLink(TermLink termLink) {
+        removeFromTermLinks(termLink)
+        termLink.delete(flush:true)
     }
 
     List termLinkInfos() {

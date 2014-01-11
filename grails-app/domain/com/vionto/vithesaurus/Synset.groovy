@@ -80,8 +80,7 @@ class Synset implements Cloneable {
         }
         log.info("Deleting term: ${term}")
         for (termLink in term.termLinks) {
-            log.info("Deleting term link: ${termLink}")
-            term.deleteTermLink()
+            termLink.delete()
         }
         terms.remove(term)
         term.delete()

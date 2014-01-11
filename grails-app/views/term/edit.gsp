@@ -8,7 +8,7 @@
         <script type="text/javascript">
         <!--
             function deleteItem(id, termLinkId) {
-                var hiddenFieldName = 'deleteExistingTermLink';
+                var hiddenFieldName = 'deleteExistingTermLink_' + id + '_' + termLinkId;
                 var deleted = document.getElementById(hiddenFieldName).value != "";
                 var divName = id + '_' + termLinkId;
                 if (deleted) {
@@ -191,33 +191,32 @@
                             <td valign="top">
 
                               <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">
-                                <g:set var="termLinkInfo" value="${termLinkInfos.get(0)}"/>
-                                <div id="Antonym_${termLinkInfo.id}">
-                                  <g:if test="${session.user}">
-                                    <input type="hidden" id="deleteExistingTermLink" name="deleteExistingTermLink" value=""/>
-                                    <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img
-                                      align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
-                                  </g:if>
-                                  <g:else>
-                                    <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
-                                  </g:else>
-                                    <g:link controller="term" action="edit"
-                                        id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
-                                      (<g:link controller="synset" action="edit"
-                                        id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
-                                </div>
+                                  
+                                <g:each in="${termLinkInfos}" var="termLinkInfo">
+                                    <div id="Antonym_${termLinkInfo.id}" style="margin-bottom: 5px">
+                                        <g:if test="${session.user}">
+                                            <input type="hidden" id="deleteExistingTermLink_Antonym_${termLinkInfo.id}" name="deleteExistingTermLink_Antonym_${termLinkInfo.id}" value=""/>
+                                            <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img
+                                                    align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                                        </g:if>
+                                        <g:else>
+                                            <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                        </g:else>
+                                        <g:link controller="term" action="edit"
+                                                id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
+                                        (<g:link controller="synset" action="edit"
+                                                 id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().synset.toShortString(3).encodeAsHTML()}</g:link>)
+                                    </div>
+
+                                </g:each>
                               </g:if>
                               <g:else>
                                 <span class="metaInfo"><g:message code="edit.term.antonyms.none"/></span>
                               </g:else>
+                                  
                               <g:if test="${session.user}">
                                   <div id="addTermLinkLink" style="margin-top:5px">
-                                      <g:if test="${termLinkInfos.size() == 0}">
-                                          <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
-                                      </g:if>
-                                      <g:else>
-                                          <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.change.antonym"/></a>
-                                      </g:else>
+                                      <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
                                   </div>
                                   <div id="addTermLink" style="display:none;margin-top:5px">
                                       <g:textField name="qAntonym" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, 'Antonym', 'term/ajaxSearch');" autocomplete="off"/>
