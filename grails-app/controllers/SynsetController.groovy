@@ -37,7 +37,7 @@ class SynsetController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth,
                              except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
-                                      'createMemoryDatabase', 'refreshRemoteWordLists', 'variation', 'substring']]
+                                      'createMemoryDatabase', 'refreshRemoteWordLists', 'variation', 'substring', 'listBySize']]
 
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
