@@ -34,7 +34,7 @@
     <td valign="top">Auf der Ergebnisseite werden jetzt auch alle Unterbegriffe angezeigt. Sind
         es viele, kann man sie mit dem "Alle anzeigen"-Link einblenden:
         <a href="../synonyme/Währung">Beispiel 1</a>, <a href="../synonyme/Haus">Beispiel 2</a>.
-        Außerdem sind aller Ober-, Unterbegriffe und Assoziationen Links, so dass man damit
+        Außerdem sind alle Ober-, Unterbegriffe und Assoziationen Links, so dass man damit
         bequem eine weitere Suche auslösen kann.
     </td>
 </tr>
