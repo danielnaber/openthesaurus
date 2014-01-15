@@ -11,35 +11,46 @@
 
             <h2><g:message code="wordlists.head" /></h2>
 
-            <ul>
-              <%-- FIXME
-              <li><g:link controller="term" action="list"><g:message code="a_to_z"/></g:link></li>
-              --%>
-              <li><g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link></li>
-              <li><g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link></li>
-              <li><g:link controller="random" action="synsets"><g:message code="random.headline"/></g:link></li>
-              <li><g:link controller="association" action="list"><g:message code="association.link"/></g:link></li>
-              <li><g:link controller="term" action="antonyms"><g:message code="antonyms.link"/></g:link></li>
-              <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
-              <li><g:message code="by.size.headline"/>:
-                  <g:link controller="synset" action="listBySize" params="${[direction: 'desc']}"><g:message code="by.size.headline.largest"/></g:link>,
-                  <g:link controller="synset" action="listBySize" params="${[direction: 'asc']}"><g:message code="by.size.headline.smallest"/></g:link>
-              </li>
-              <li style="margin-top:14px"><g:message code="word.list.by.level"/>
-              <ul style="margin-top:0">
-                <g:each in="${TermLevel.list()}" var="level">
-                  <li><g:link controller="term" action="list" params="${[levelId:level.id]}">${level.encodeAsHTML()}</g:link></li>
-                </g:each>
-              </ul>
-              </li>
-              <li style="margin-top:14px"><g:message code="word.list.by.category"/>
-              <ul style="margin-top:0">
-                <g:each in="${Category.withCriteria { eq('isDisabled', false) }.sort()}" var="category">
-                  <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
-                </g:each>
-              </ul>
-              </li>
-            </ul>
+            <table>
+                <tr>
+                    <td valign="top">
+                        <ul>
+                            <%-- FIXME
+                            <li><g:link controller="term" action="list"><g:message code="a_to_z"/></g:link></li>
+                            --%>
+                            <li><g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link></li>
+                            <li><g:link controller="synset" action="variation" id="ch"><g:message code="swiss.words"/></g:link></li>
+                            <li><g:link controller="random" action="synsets"><g:message code="random.headline"/></g:link></li>
+                            <li><g:link controller="association" action="list"><g:message code="association.link"/></g:link></li>
+                            <li><g:link controller="term" action="antonyms"><g:message code="antonyms.link"/></g:link></li>
+                            <li><g:link controller="tree" action="index"><g:message code="tree.headline"/></g:link></li>
+                            <li><g:message code="by.size.headline"/>:<br/>
+                                <g:link controller="synset" action="listBySize" params="${[direction: 'desc']}"><g:message code="by.size.headline.largest"/></g:link>,<br/>
+                                <g:link controller="synset" action="listBySize" params="${[direction: 'asc']}"><g:message code="by.size.headline.smallest"/></g:link>
+                            </li>
+                            <li style="margin-top:14px"><g:message code="word.list.by.level"/>
+                                <ul style="margin-top:0">
+                                    <g:each in="${TermLevel.list()}" var="level">
+                                        <li><g:link controller="term" action="list" params="${[levelId:level.id]}">${level.encodeAsHTML()}</g:link></li>
+                                    </g:each>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td valign="top">
+                        <ul>
+                            <li><g:message code="word.list.by.category"/>
+                                <ul style="margin-top:0">
+                                    <g:each in="${Category.withCriteria { eq('isDisabled', false) }.sort()}" var="category">
+                                        <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
+                                    </g:each>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
 
     </body>
 </html>

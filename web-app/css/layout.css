@@ -45,6 +45,26 @@ body {
   */
 }
 
+#navigation {
+  width: 100%;
+  position: absolute;
+  background-color: #046ccb;
+  z-index: 100;
+  padding: 0;
+  margin: 0;
+}
+
+#navigation #navibar {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+#navigation a {
+  color: white;
+}
+
 p {
     margin-bottom: 10px;
 }

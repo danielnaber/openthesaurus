@@ -5,7 +5,7 @@
   <meta name='keywords' content='${message(code:"homepage.meta.keywords")}' />
   <meta name='description' content='${message(code:"homepage.meta.description")}' />
   <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
-  <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20140107" />
+  <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20140115" />
   <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
   <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch')}" />
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
@@ -17,6 +17,8 @@
 
     <div id="searchResultArea" class="searchResultPopup" style="display: none">
     </div>
+
+    <g:render template="/navigation"/>
 
     <div id="body">
     
