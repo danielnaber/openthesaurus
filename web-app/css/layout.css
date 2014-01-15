@@ -571,6 +571,7 @@ tr .prop2 {
 }
 
 .adminOnly {
+    font-weight: normal;
 }
 
 .hint {

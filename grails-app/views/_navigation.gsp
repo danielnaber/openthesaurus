@@ -10,6 +10,13 @@
                 </td>
                 <td style="text-align: right">
                     <g:if test="${session.user}">
+                        <g:if test="${session.user.userId.toString() == 'admin'}">
+                            <g:link controller="admin" action="index"><span class="adminOnly"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></g:link>
+                        </g:if>
+                        <g:else>
+                            <span style="color:white"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span>
+                        </g:else>
+                        &nbsp;
                         <g:link controller="user" action="logout">Logout</g:link>
                     </g:if>
                     <g:else>

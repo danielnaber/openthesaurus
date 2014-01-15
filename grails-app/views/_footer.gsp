@@ -28,44 +28,6 @@
           <div class="iconLink">
               <table>
                   <tr>
-                      <g:if test="${session.user}">
-                          <td>
-                              <img src="${createLinkTo(dir:'images',file:'icon-login.png')}" width="30" height="30" alt="Login-Icon"/>
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>
-                              <g:link controller="user" action="logout">Logout</g:link>
-                          </td>
-                      </g:if>
-                      <g:else>
-                          <td>
-                              <g:if test="${params.q}">
-                                  <g:set var="linkParams" value="${[q: params.q, controllerName: webRequest.getControllerName(),
-                                          actionName:webRequest.getActionName(), origId: params.id]}" />
-                              </g:if>
-                              <g:elseif test="${params.id}">
-                                  <g:set var="linkParams" value="${[controllerName: webRequest.getControllerName(),
-                                          actionName:webRequest.getActionName(), origId: params.id]}" />
-                              </g:elseif>
-                              <g:else>
-                                  <g:set var="linkParams" value="${[controllerName: webRequest.getControllerName(),
-                                          actionName:webRequest.getActionName()]}" />
-                              </g:else>
-                              <g:link controller="user" action="login"
-                                      params="${linkParams}"><img src="${createLinkTo(dir:'images',file:'icon-login.png')}" width="30" height="30" alt="Login-Icon"/></g:link>
-                          </td>
-                          <td>&nbsp;</td>
-                          <td>
-                              <g:link controller="user" action="login" class="lightlink"
-                                      params="${linkParams}"><g:message code="footer.login"/></g:link>
-                          </td>
-                      </g:else>
-                  </tr>
-              </table>
-          </div>
-          <div class="iconLink">
-              <table>
-                  <tr>
                       <td>
                           <script type="text/javascript">
                               <!--
