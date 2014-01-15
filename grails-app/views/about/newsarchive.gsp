@@ -22,6 +22,14 @@
     <td></td>
 </tr>
 <tr>
+    <td valign="top" align="right" width="90"><span class="newsdate">2014-01-11</span></td>
+    <td valign="top">Auf der Ergebnisseite werden jetzt auch alle Antonyme angezeigt: Wörter
+        mit Antonym haben ein kleines "G" (wie 'Gegenteil'). Bleibt man mit der Maus auf dem "G",
+        werden die Antonyme angezeigt. Mit Klick wird eine neue Suche gestartet:
+        <a href="../synonyme/klein">Beispielseite</a>
+    </td>
+</tr>
+<tr>
     <td valign="top" align="right" width="90"><span class="newsdate">2014-01-02</span></td>
     <td valign="top">Auf der Ergebnisseite werden jetzt auch alle Unterbegriffe angezeigt. Sind
         es viele, kann man sie mit dem "Alle anzeigen"-Link einblenden:
