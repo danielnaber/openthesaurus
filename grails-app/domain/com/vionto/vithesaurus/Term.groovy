@@ -17,7 +17,8 @@
  */ 
 package com.vionto.vithesaurus
 
-import com.vionto.vithesaurus.tools.StringTools;
+import com.vionto.vithesaurus.tools.StringTools
+import org.hibernate.ObjectNotFoundException;
 
 /**
  * A term - terms are what synsets are made of.
@@ -104,7 +105,7 @@ class Term implements Comparable, Cloneable {
             }
             try {
                 termLinkInfos.add(new TermLinkInfo(link.id, this, link.targetTerm, link.linkType.linkName, true))
-            } catch (org.hibernate.ObjectNotFoundException e) {
+            } catch (ObjectNotFoundException ignore) {
                 // can happen with deleted terms before the 2012-04-21 fix
                 log.error("Could not get term link #${link.id} for term '${word}' in synset '${synset}'")
             }
@@ -216,7 +217,7 @@ class Term implements Comparable, Cloneable {
      * List terms with the same word as this one.
      */
     List listHomonyms() {
-        return Term.withCriteria {
+        return withCriteria {
             or {
                 eq('word', word)
                 eq('word', normalizedWord)
@@ -232,7 +233,7 @@ class Term implements Comparable, Cloneable {
     }
 
     static int countVisibleTerms() {
-        def c = Term.createCriteria()
+        def c = createCriteria()
         int count = c.count {
             synset {
                 eq('isVisible', true)
@@ -242,7 +243,7 @@ class Term implements Comparable, Cloneable {
     }
 
     static int countVisibleUniqueTerms() {
-        def count = Term.withCriteria {
+        def count = withCriteria {
             synset {
                 eq('isVisible', true)
             }
