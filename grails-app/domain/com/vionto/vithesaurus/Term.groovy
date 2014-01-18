@@ -217,7 +217,14 @@ class Term implements Comparable, Cloneable {
      */
     List listHomonyms() {
         return Term.withCriteria {
-            eq('word', word)
+            or {
+                eq('word', word)
+                eq('word', normalizedWord)
+                // we'd need more to be correct but these are not active for performance reasons:
+                //eq('word', normalizedWord2)
+                //eq('normalizedWord', normalizedWord)
+                //eq('normalizedWord2', normalizedWord2)
+            }
             synset {
                 eq('isVisible', true)
             }
