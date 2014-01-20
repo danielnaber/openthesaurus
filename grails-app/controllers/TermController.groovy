@@ -150,8 +150,8 @@ class TermController extends BaseController {
 
     private logTermLink(String actionName, TermLink termLink) {
         String logText =
-            "$actionName: ${termLink.term} (${termLink.term.synset.toShortString()}) " +
-            "${termLink.linkType.verbName} " +
+            "$actionName:<br/><br/>${termLink.term} (${termLink.term.synset.toShortString()})<br/>" +
+            "<b>${termLink.linkType.verbName}</b><br/>" +
             "${termLink.targetTerm} (${termLink.targetTerm.synset.toShortString()})"
         LogInfo linkLogInfo = new LogInfo(session, IpTools.getRealIpAddress(request), termLink,
                 logText, params.changeComment)

@@ -942,7 +942,7 @@ class SynsetController extends BaseController {
             return
         }
         String logText =
-            "adding link: ${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())}<br/>" +
+            "adding link:<br/><br/>${StringEscapeUtils.unescapeHtml(synsetLink.targetSynset.toShortString())}<br/>" +
             "<b>${synsetLink.linkType.verbName}</b><br/>" +
             "${StringEscapeUtils.unescapeHtml(synsetLink.synset.toShortString())}"
         logSynsetLink(logText, fromSynset, synsetLink)
