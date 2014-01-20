@@ -48,7 +48,6 @@
           <thead>
               <tr>
                   <th>Email</th>
-                  <th>DisplayName</th>
                   <th>Perm</th>
                   <th>Registration</th>
                   <th>Confirm</th>
@@ -59,14 +58,16 @@
           </thead>
           <g:each in="${latestUsers}" status="i" var="user">
               <tr>
-                  <td><a style="font-weight: normal" href="mailto:${user.userId.encodeAsURL()}">${user.userId.encodeAsHTML()}</a></td>
-                  <td>${user.realName?.encodeAsHTML()}</td>
-                  <td>${user.permission?.encodeAsHTML()}</td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
-                  <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.lastLoginDate}"/></td>
-                  <td><g:link controller="userEvent" action="list" params="${[uid:user.id]}">${UserEvent.countByByUser(user)}</g:link></td>
-                  <td>${user.blocked ? "yes" : ""}</td>
+                  <td valign="top">
+                    <a style="font-weight: normal" href="mailto:${user.userId.encodeAsURL()}">${user.userId.encodeAsHTML()}</a><br/>
+                    ${user.realName?.encodeAsHTML()}
+                  </td>
+                  <td valign="top">${user.permission?.encodeAsHTML()}</td>
+                  <td valign="top"><g:formatDate format="yyyy-MM-dd" date="${user.creationDate}"/> <span class="metaInfo"><g:formatDate format="HH:mm" date="${user.creationDate}"/></span></td>
+                  <td valign="top"><g:formatDate format="yyyy-MM-dd" date="${user.confirmationDate}"/> <span class="metaInfo"><g:formatDate format="HH:mm" date="${user.confirmationDate}"/></span></td>
+                  <td valign="top"><g:formatDate format="yyyy-MM-dd" date="${user.lastLoginDate}"/> <span class="metaInfo"><g:formatDate format="HH:mm" date="${user.lastLoginDate}"/></span></td>
+                  <td valign="top" align="right"><g:link controller="userEvent" action="list" params="${[uid:user.id]}">${UserEvent.countByByUser(user)}</g:link></td>
+                  <td valign="top">${user.blocked ? "yes" : ""}</td>
               </tr>
           </g:each>
           <tr>

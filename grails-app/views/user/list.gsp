@@ -33,14 +33,14 @@
                     <tbody>
                     <g:each in="${userList}" status="i" var="user">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td><a href="mailto:${user.userId?.toString()?.encodeAsURL()}">${user.userId?.toString()?.encodeAsHTML()}</a></td>
-                            <td>${user.realName?.encodeAsHTML()}</td>
-                            <td>${user.permission?.toString()?.encodeAsHTML()}</td>
-                            <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
-                            <td><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
-                            <td><g:formatDate format="yyyy-MM-dd" date="${user.lastLoginDate}"/></td>
-                            <td><g:link controller="userEvent" action="list" params="${[uid:user.id]}">${UserEvent.countByByUser(user)}</g:link></td>
-                            <td>${user.blocked ? "yes" : ""}</td>
+                            <td valign="top"><a href="mailto:${user.userId?.toString()?.encodeAsURL()}">${user.userId?.toString()?.encodeAsHTML()}</a></td>
+                            <td valign="top">${user.realName?.encodeAsHTML()}</td>
+                            <td valign="top">${user.permission?.toString()?.encodeAsHTML()}</td>
+                            <td valign="top"><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
+                            <td valign="top"><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.confirmationDate}"/></td>
+                            <td valign="top"><g:formatDate format="yyyy-MM-dd" date="${user.lastLoginDate}"/></td>
+                            <td valign="top" align="right"><g:link controller="userEvent" action="list" params="${[uid:user.id]}">${UserEvent.countByByUser(user)}</g:link></td>
+                            <td valign="top">${user.blocked ? "yes" : ""}</td>
                         </tr>
                     </g:each>
                     </tbody>
