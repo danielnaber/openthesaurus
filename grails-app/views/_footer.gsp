@@ -59,11 +59,13 @@
   </div>
     
   <div class="footerColumn">
-      <div style="margin-bottom: 20px">
-        <g:render template="/ads/footer"/>
-      </div>
+
+      <g:render template="/ads/footer"/>
 
       <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
+
+      <g:render template="/ads/footer2"/>
+      
   </div>
 
 </div>
