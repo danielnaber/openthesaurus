@@ -187,7 +187,7 @@
                             --%> 
                             
                           <tr class='prop'>
-                            <td valign="top"><h2 class="noTopMargin">Antonym</h2></td>
+                            <td valign="top"><h2 class="noTopMargin"><g:message code="edit.term.antonym"/></h2></td>
                             <td valign="top">
 
                               <g:if test="${termLinkInfos && termLinkInfos.size() > 0}">

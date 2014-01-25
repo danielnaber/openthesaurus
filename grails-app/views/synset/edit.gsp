@@ -170,7 +170,12 @@
                                         <g:if test="${termLinkInfos.size() > 0}">
                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                           <g:each var='termLinkInfo' in='${termLinkInfos}'>
-                                            ${termLinkInfo.getLinkName().encodeAsHTML()}:
+                                              <g:if test="${termLinkInfo.getLinkName() == 'Antonym'}">
+                                                  <g:message code="edit.term.antonym"/>:
+                                              </g:if>
+                                              <g:else>
+                                                  ${termLinkInfo.getLinkName().encodeAsHTML()}:
+                                              </g:else>
                                               <g:link controller="synset" 
                                                 action="edit" id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().encodeAsHTML()}
                                                 <g:if test="${termLinkInfo.getTerm2().level}">
