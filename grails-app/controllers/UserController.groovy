@@ -262,7 +262,7 @@ class UserController extends BaseController {
               flash.message = message(code:'user.unconfirmed.login')
               return
             }
-            log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)})")
+            log.info("login successful for user ${user} (${IpTools.getRealIpAddress(request)}, logincookie: ${params.logincookie})")
             flash.message = message(code:'user.logged.in')
             session.user = user
             if (params.logincookie) {
@@ -280,25 +280,31 @@ class UserController extends BaseController {
             if (forumRedirect) {
                 // no direct redirect because the cookies need to be set first in the user's browser
                 // *before* he arrives at the forum page:
+                log.info("redirect [1] for user ${user} to ${params.returnUrl}")
                 redirect(action:'redirect', params:[url: params.returnUrl])
-            } else if (redirectParams?.controller && redirectParams?.action) {
+            } else if (redirectParams?.controller && redirectParams?.action && redirectParams?.action != "login") {
+                log.info("redirect [2] for user ${user} to controller/action/params: ${redirectParams?.controller}, ${redirectParams?.action}, ${params:redirectParams}")
                 redirect(controller:redirectParams?.controller,
                         action: redirectParams?.action, params:redirectParams)
-            } else if (session.controllerName && session.actionName && session.origId) {
+            } else if (session.controllerName && session.actionName && session.origId && session.actionName != "login") {
                 // useful redirect if someone is on content page with an id, 
                 // like "jthesaurus/synset/edit/123":
+                log.info("redirect [3] for user ${user} to controller/action/params: ${session.controllerName}, ${session.actionName}, id=${session.origId}")
                 redirect(controller:session.controllerName,
                         action: session.actionName, params:[id:session.origId])
-            } else if (session.controllerName && session.actionName) {
+            } else if (session.controllerName && session.actionName && session.actionName != "login") {
                 if (session.origQuery) {
+                    log.info("redirect [4] for user ${user} to controller/action/params: ${session.controllerName}, ${session.actionName}, q=${session.origQuery}")
                     redirect(controller:session.controllerName,
                             action: session.actionName,
                             params:[q:session.origQuery])
                 } else {
+                    log.info("redirect [5] for user ${user} to controller/action/params: ${session.controllerName}, ${session.actionName}")
                     redirect(controller:session.controllerName,
                             action: session.actionName)
                 }
             } else {
+                log.info("redirect [6] for user ${user} to homepage at ${grailsApplication.config.thesaurus.serverURL}")
                 redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
             }
           } else {
