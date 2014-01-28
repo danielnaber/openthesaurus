@@ -20,6 +20,18 @@
                         <g:link controller="user" action="logout">Logout</g:link>
                     </g:if>
                     <g:else>
+                        <g:if test="${params.q}">
+                            <g:set var="linkParams" value="${[q: params.q, controllerName: webRequest.getControllerName(),
+                                    actionName:webRequest.getActionName(), origId: params.id]}" />
+                        </g:if>
+                        <g:elseif test="${params.id}">
+                            <g:set var="linkParams" value="${[controllerName: webRequest.getControllerName(),
+                                    actionName:webRequest.getActionName(), origId: params.id]}" />
+                        </g:elseif>
+                        <g:else>
+                            <g:set var="linkParams" value="${[controllerName: webRequest.getControllerName(),
+                                    actionName:webRequest.getActionName()]}" />
+                        </g:else>
                         <g:link controller="user" action="login" class="lightlink" params="${linkParams}"><g:message code="footer.login"/></g:link>
                     </g:else>
                 </td>
