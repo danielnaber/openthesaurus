@@ -33,7 +33,7 @@ class SuggestController extends BaseController {
         String text = params.text
         log.info("Checking ${text.length()} chars of text for unknown words")
         Connection conn = dataSource.getConnection()
-        String[] terms = text.split("[\\s+\\.,;\"':„“?()]")
+        String[] terms = text.split("[\\s+\\.,;\"':„“?()«»]")
         BaseformFinder baseformFinder = new BaseformFinder()
         List unknownTerms = []
         List unknownTermsBaseforms = []
