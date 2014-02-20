@@ -204,7 +204,8 @@ class ImportController extends BaseController {
       while (rs.next()) {
           //render rs.getString("username") +"/" +  rs.getString("password") +  "<br>\n"
           def perms = rs.getString("perms") == "admin" ? ThesaurusUser.ADMIN_PERM : ThesaurusUser.USER_PERM
-          String password = UserController.md5sum(rs.getString("password"))
+          String salt = getRandomSalt()
+          String password = UserController.md5sum(rs.getString("password"), salt)
           ThesaurusUser user = new ThesaurusUser(rs.getString("username"), 
               password, perms)
           try {
@@ -220,6 +221,10 @@ class ImportController extends BaseController {
             throw new Exception("Could not save user: $user - $user.errors")
           }
       }
+    }
+
+    private String getRandomSalt() {
+        return Math.random() + Math.random()*0.33 + ""
     }
 
     private void importLinkTypes() {
