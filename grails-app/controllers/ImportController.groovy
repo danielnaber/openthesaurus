@@ -206,8 +206,7 @@ class ImportController extends BaseController {
           def perms = rs.getString("perms") == "admin" ? ThesaurusUser.ADMIN_PERM : ThesaurusUser.USER_PERM
           String salt = getRandomSalt()
           String password = UserController.md5sum(rs.getString("password"), salt)
-          ThesaurusUser user = new ThesaurusUser(rs.getString("username"), 
-              password, perms)
+          ThesaurusUser user = new ThesaurusUser(rs.getString("username"), password, salt, perms)
           try {
             user.creationDate = rs.getDate("subs_date")
             user.lastLoginDate = rs.getDate("last_login")
@@ -215,7 +214,7 @@ class ImportController extends BaseController {
             render "Ignoring exception: $e when parsing dates for user " + rs.getString("username") + "<br>"
           }
           user.realName = rs.getString("visiblename")
-          user.blocked = rs.getInt("blocked") == 1 ? true : false
+          user.blocked = rs.getInt("blocked") == 1
           boolean saved = user.save()
           if (!saved) {
             throw new Exception("Could not save user: $user - $user.errors")
