@@ -24,7 +24,6 @@ import java.sql.PreparedStatement
 import java.sql.SQLException
 import java.util.regex.Pattern
 import java.util.regex.Matcher
-import java.text.SimpleDateFormat
 
 /**
  * Import data from the old PHP version of OpenThesaurus
@@ -200,7 +199,6 @@ class ImportController extends BaseController {
       String sql = "SELECT username, password, visiblename, perms, subs_date, last_login, blocked FROM auth_user"
       PreparedStatement ps = conn.prepareStatement(sql)
       ResultSet rs = ps.executeQuery()
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
       while (rs.next()) {
           //render rs.getString("username") +"/" +  rs.getString("password") +  "<br>\n"
           def perms = rs.getString("perms") == "admin" ? ThesaurusUser.ADMIN_PERM : ThesaurusUser.USER_PERM
