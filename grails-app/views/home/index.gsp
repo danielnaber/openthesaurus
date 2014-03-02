@@ -10,6 +10,10 @@
 
 <hr/>
 
+<g:if test="${flash.message}">
+    <div class="message">${flash.message}</div>
+</g:if>
+
 <div style="height:100px">&nbsp;</div>
 
 </body>
