@@ -208,6 +208,7 @@ class ImportController extends BaseController {
           try {
             user.creationDate = rs.getDate("subs_date")
             user.lastLoginDate = rs.getDate("last_login")
+            user.confirmationDate = new Date(0)  // fake a date, as value does not exist in old data
           } catch (SQLException e) {
             render "Ignoring exception: $e when parsing dates for user " + rs.getString("username") + "<br>"
           }
