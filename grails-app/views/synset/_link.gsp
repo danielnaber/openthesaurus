@@ -8,7 +8,7 @@
 
     <g:set var="nymCount" value="${0}"/>
     
-    <ul style="margin-top:0px">
+    <ul style="margin-top:0">
     
         <g:each var='link' in='${synsetLinks}'>
            <g:if test="${link.linkType.toString() == linkTypeName}">
@@ -63,17 +63,23 @@
                     <g:render template="/synset/associationHelp" />
                 </div>
             </g:if>
-         <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
-            <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, '${linkTypeName}', 'synset/ajaxSearch');" autocomplete="off"/>
-            <input type="hidden" name="linkType${linkTypeName}.id" value="${LinkType.findByLinkName(linkTypeName).id}">
-            
-            <span id="addSynsetProgress${linkTypeName}" style="visibility:hidden;position:absolute">
-                <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
-                   title="Searching..."/>
-            </span>
-            <div id="synsetLink${linkTypeName}" style="min-height:200px">
-            </div>
-         </div>
+            <g:set var="linkType" value="${LinkType.findByLinkName(linkTypeName)}"/>
+            <g:if test="${linkType}">
+                <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
+                    <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, '${linkTypeName}', 'synset/ajaxSearch');" autocomplete="off"/>
+                    <input type="hidden" name="linkType${linkTypeName}.id" value="${linkType.id}">
+    
+                    <span id="addSynsetProgress${linkTypeName}" style="visibility:hidden;position:absolute">
+                        <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner image"
+                             title="Searching..."/>
+                    </span>
+                    <div id="synsetLink${linkTypeName}" style="min-height:200px">
+                    </div>
+                </div>
+            </g:if>
+            <g:else>
+                <div class="error">Error: link type '${linkTypeName.encodeAsHTML()}' not found</div>
+            </g:else>
          </li>
         </g:if>
     
