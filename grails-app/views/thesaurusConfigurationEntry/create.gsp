@@ -7,12 +7,17 @@
         <title>Create ThesaurusConfigurationEntry</title>         
     </head>
     <body>
+        <hr/>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><g:link controller="admin">Admin</g:link></span> &middot;
             <span class="menuButton"><g:link class="list" action="list">ThesaurusConfigurationEntry List</g:link></span>
         </div>
         <div class="body">
-            <h1>Create ThesaurusConfigurationEntry</h1>
+
+            <hr/>
+            
+            <h2>Create ThesaurusConfigurationEntry</h2>
+            
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>

@@ -7,8 +7,9 @@
         <title>ThesaurusConfigurationEntry List</title>
     </head>
     <body>
+        <hr/>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><g:link controller="admin">Admin</g:link></span> &middot;
             <span class="menuButton"><g:link class="create" action="create">New ThesaurusConfigurationEntry</g:link></span>
         </div>
         <div class="body">
