@@ -43,7 +43,10 @@ class AboutController extends BaseController {
         File dbDump = new File(new String(grailsApplication.config.thesaurus.dbDump))
         File textDump = new File(new String(grailsApplication.config.thesaurus.export.text.output))
         File oooDump = new File(new String(grailsApplication.config.thesaurus.export.oxt.output))
-        File oooDumpCh = new File(new String(grailsApplication.config.thesaurus.export.oxt.outputCH))
+        File oooDumpCh = null
+        if (grailsApplication.config.thesaurus.export.oxt.outputCH) {
+            oooDumpCh = new File(new String(grailsApplication.config.thesaurus.export.oxt.outputCH))
+        }
         [dbDump: dbDump, textDump: textDump, oooDump: oooDump, oooDumpCh: oooDumpCh]
     }
 

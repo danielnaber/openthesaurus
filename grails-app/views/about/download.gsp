@@ -35,7 +35,9 @@
                       <li><a href="../export/${oooDump.getName()}">Deutscher Thesaurus für LibreOffice/OpenOffice,
                         ${sdf.format(new Date(oooDump.lastModified()))},
                         ${String.format("%.2f", oooDump.length()/1000/1000)}MB</a></li>
-                      <li><a href="../export/${oooDumpCh.getName()}">Schweizer Version</a> (wie deutsch, nur alle <span class="bsp">ß</span> durch <span class="bsp">ss</span> ersetzt)</li>
+                      <g:if test="${oooDumpCh}">
+                        <li><a href="../export/${oooDumpCh.getName()}">Schweizer Version</a> (wie deutsch, nur alle <span class="bsp">ß</span> durch <span class="bsp">ss</span> ersetzt)</li>
+                      </g:if>
                     </ul>
                 </li>
     
