@@ -113,19 +113,8 @@ class UserController extends BaseController {
           body message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text') 
         }
         log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
-        if (params.subscribeToMailingList) {
-          sendMail {
-            from params.userId
-            to message(code:'user.register.email.mailinglist.to')
-            subject message(code:'user.register.email.mailinglist.subject')
-            body ''
-          }
-          String ip = IpTools.getRealIpAddress(request)
-          log.info("Sent mailing list registration request mail to " + message(code:'user.register.email.mailinglist.to') + " with From: " + params.userId + ", User IP: " + ip)
-        }
       } else {
-        user.errors.reject('thesaurus.error', [].toArray(), 
-            message(code:'user.register.user.exists'))
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }

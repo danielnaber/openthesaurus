@@ -84,20 +84,6 @@
                             </td>
                         </tr>
 
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                            </td>
-                            <td valign='top' class='value'>
-                                <table>
-                                    <tr>
-                                        <td valign="top"><g:checkBox name="subscribeToMailingList" checked="${params.subscribeToMailingList == 'on'}"/></td>
-                                        <td valign="top"><label for="subscribeToMailingList"><g:message code="user.register.form.mailinglist"/></label></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-
-
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
