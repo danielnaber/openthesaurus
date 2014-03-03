@@ -7,11 +7,10 @@
     </head>
     <body>
 
-        <!-- NOTE: -->
-        <!-- THIS CONTENT IS SPECIFIC TO WWW.OPENTHESAURUS.DE -->
-
         <hr />
-    
+
+        <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
+            
         <div class="dialog">
 
             <h2><g:message code="newsletter.headline"/></h2>
@@ -40,6 +39,13 @@
             </form>
             
         </div>
+
+        </g:if>
+        <g:else>
+    
+            (Nothing here yet)
+    
+        </g:else>
 
     </body>
 </html>
