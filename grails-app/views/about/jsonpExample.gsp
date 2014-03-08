@@ -22,6 +22,8 @@
             <g:set var="query" value="hütte"/>
 
             <p>Ergebnis der API-Anfrage nach "${query}":</p>
+            
+            <noscript class="warning">Das Beispiel benötigt JavaScript</noscript>
 
             <div id="resultArea" style="background:#dddddd;padding:5px"></div>
 
