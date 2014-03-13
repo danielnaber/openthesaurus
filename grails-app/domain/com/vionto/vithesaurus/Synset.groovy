@@ -237,6 +237,13 @@ class Synset implements Cloneable {
         return sortedTerms().join(" · ")
     }
 
+    String toUnsortedString() {
+        if (terms.size() == 0) {
+          return "[empty]"
+        }
+        return terms.join(" · ")
+    }
+
     /**
      * Detailed string representation used for showing differences in the
      * UserEvent view.

@@ -80,7 +80,7 @@ class AjaxSearchController extends BaseController {
 
     private addSynsetMatches(Pattern boundaryPattern, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
         for (synset in substringMatches.synsetList) {
-            Matcher matcher = boundaryPattern.matcher(synset.toString().toLowerCase())
+            Matcher matcher = boundaryPattern.matcher(synset.toUnsortedString().toLowerCase())
             if (matcher.matches()) {
                 if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
                     subwordSynsetList.add(synset)
