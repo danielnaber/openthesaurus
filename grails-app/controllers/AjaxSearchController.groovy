@@ -55,7 +55,7 @@ class AjaxSearchController extends BaseController {
                 def substringTermMatches = searchService.searchPartialResult(query, 0, 6)
                 Pattern boundaryPattern = Pattern.compile(".*\\b" + Pattern.quote(params.q) + "\\b.*")
                 for (substringMatch in substringTermMatches) {
-                    def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0)
+                    def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0, false)
                     addSynsetMatches(boundaryPattern, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
                 }
                 synsetList.addAll(subwordSynsetList)

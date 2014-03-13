@@ -44,7 +44,7 @@ class SearchService {
    * Hibernate-based search implementation. Note that the number
    * of total matches is not always accurate.
    */
-  def searchSynsets(String query, int max = -1, int offset = 0) {
+  def searchSynsets(String query, int max = -1, int offset = 0, boolean normalize = true) {
       boolean completeResult = false
 
       // TODO: why don't we use Synset.withCriteria here, it would
@@ -56,13 +56,17 @@ class SearchService {
       def termList = Term.withCriteria {
           or {
             eq('word', query)
-            eq('normalizedWord', StringTools.normalize(query))
-            eq('normalizedWord2', StringTools.normalize2(query))
+            if (normalize) {
+                eq('normalizedWord', StringTools.normalize(query))
+                eq('normalizedWord2', StringTools.normalize2(query))
+            }
             if (query.startsWith("sich ") || query.startsWith("etwas ")) {
-                // special case for German reflexive etc - keep in sync with _mainmatches.gsp
-                String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
                 eq('word', simplifiedQuery)
-                eq('normalizedWord', simplifiedQuery)
+                if (normalize) {
+                    // special case for German reflexive etc - keep in sync with _mainmatches.gsp
+                    String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
+                    eq('normalizedWord', simplifiedQuery)
+                }
             }
           }
           synset {
