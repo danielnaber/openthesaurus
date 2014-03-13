@@ -17,8 +17,9 @@
  */ 
 import java.sql.Connection
 import com.vionto.vithesaurus.Synset
-import com.vionto.vithesaurus.PartialMatch
 import com.vionto.vithesaurus.SearchResult
+
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class AjaxSearchController extends BaseController {
@@ -52,9 +53,10 @@ class AjaxSearchController extends BaseController {
                 // search works on the terms, not on the synsets.
                 // TODO: this still doesn't guarantee we get all matches - increasing the value leads to performance problems
                 def substringTermMatches = searchService.searchPartialResult(query, 0, 6)
+                Pattern boundaryPattern = Pattern.compile(".*\\b" + Pattern.quote(params.q) + "\\b.*")
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0)
-                    addSynsetMatches(substringMatch, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
+                    addSynsetMatches(boundaryPattern, substringMatches, synsetList, substringSynsetList, subwordSynsetList)
                 }
                 synsetList.addAll(subwordSynsetList)
                 if (synsetList.size() == 0 && substringSynsetList.size() == 0) {
@@ -76,9 +78,10 @@ class AjaxSearchController extends BaseController {
          minLengthForSubstringQuery: minLengthForSubstringQuery, mostSimilarTerm: mostSimilarTerm]
     }
 
-    private addSynsetMatches(PartialMatch substringMatch, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
+    private addSynsetMatches(Pattern boundaryPattern, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
         for (synset in substringMatches.synsetList) {
-            if (synset.toString().toLowerCase().matches(".*\\b" + Pattern.quote(params.q) + "\\b.*")) {
+            Matcher matcher = boundaryPattern.matcher(synset.toString().toLowerCase())
+            if (matcher.matches()) {
                 if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
                     subwordSynsetList.add(synset)
                 }
