@@ -78,8 +78,6 @@
 
             <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>test</strong>&amp;format=application/json</a></pre>
 
-            <g:render template="jsonWarning"/>
-
 
             <h2><a name="jsonp">Suchanfrage für JSONP</a></h2>
 
@@ -88,7 +86,6 @@
 
             <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json&amp;callback=myCallback">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>test</strong>&amp;format=application/json&amp;callback=myCallback</a></pre>
 
-            <g:render template="jsonWarning"/>
 
 
             <h2><a name="optionen">Optionen</a></h2>

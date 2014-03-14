@@ -17,8 +17,6 @@
             <p>Diese Seite fragt OpenThesaurus über die JSON-<g:link action="api">API</g:link> an und zeigt das Ergebnis unten an.
             Siehe "myCallback" im Quelltext dieser Seite für den Source-Code.</p>
 
-            <g:render template="jsonWarning"/>
-
             <g:set var="query" value="hütte"/>
 
             <p>Ergebnis der API-Anfrage nach "${query}":</p>
