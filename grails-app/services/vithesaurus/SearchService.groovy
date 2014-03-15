@@ -61,10 +61,10 @@ class SearchService {
                 eq('normalizedWord2', StringTools.normalize2(query))
             }
             if (query.startsWith("sich ") || query.startsWith("etwas ")) {
+                String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
                 eq('word', simplifiedQuery)
                 if (normalize) {
                     // special case for German reflexive etc - keep in sync with _mainmatches.gsp
-                    String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
                     eq('normalizedWord', simplifiedQuery)
                 }
             }
