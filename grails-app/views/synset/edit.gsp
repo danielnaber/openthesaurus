@@ -360,6 +360,8 @@
                         <tr>
                             <td></td>
                             <td>
+                                <g:set var="linkParams" value="${[controllerName: 'synset',
+                                        actionName: 'edit', origId: params.id]}" />
                                 <g:if test="${!session.user}">
                                       <g:link controller="user" action="login" class="link"
                                             params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" /> <g:message code="edit.login.to.improve"/></g:link>
