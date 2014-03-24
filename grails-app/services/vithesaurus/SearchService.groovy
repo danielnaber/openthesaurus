@@ -17,6 +17,8 @@
  */
 package vithesaurus
 
+import com.vionto.vithesaurus.DiffPositionComparator
+
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -158,7 +160,9 @@ class SearchService {
     if (similarTerms.size() > 0) {
         int smallestDistance = similarTerms.get(0).dist
         def smallDistTerms = getTermsWithDistance(similarTerms, smallestDistance)
-        Collections.sort(smallDistTerms, new SimilarLengthComparator(query))
+        // yes, this is guesswork:
+        def comparator = query.length() > 5 ? new DiffPositionComparator(query) : new SimilarLengthComparator(query)
+        Collections.sort(smallDistTerms, comparator)
         return smallDistTerms.get(0)
     } else {
         return []
