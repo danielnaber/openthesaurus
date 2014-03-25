@@ -163,6 +163,7 @@ class SearchService {
         // yes, this is guesswork:
         def comparator = query.length() > 5 ? new DiffPositionComparator(query) : new SimilarLengthComparator(query)
         Collections.sort(smallDistTerms, comparator)
+        log.info("Similar to '$query': " + smallDistTerms)
         return smallDistTerms.get(0)
     } else {
         return []
