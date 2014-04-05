@@ -33,7 +33,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.16'
+        runtime 'mysql:mysql-connector-java:5.1.30'
         test "net.sourceforge.htmlunit:htmlunit:2.10"  // 2.11 didn't work...
     }
 
