@@ -23,7 +23,7 @@
               erhalten dann eine zweite E-Mail mit einem weiteren Aktivierungs-Link.
               Der Newsletter informiert mehrmals pro Jahr über Neuigkeiten auf openthesaurus.de:</p>
 
-              <form action="http://46260.seu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
+              <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
                   <input id="text2567502" name="email" value="${params.userId.encodeAsHTML()}" type="text" size="30" />
                   <button type="submit">Newsletter abonnieren</button>
               </form>

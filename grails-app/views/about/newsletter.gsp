@@ -17,7 +17,7 @@
 
             <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus:</p>
 
-            <form action="http://46260.seu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
+            <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
                 <table>
                     <tbody>
                         <tr>
