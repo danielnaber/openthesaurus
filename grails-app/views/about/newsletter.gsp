@@ -17,22 +17,17 @@
 
             <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus:</p>
 
-            <form method="post" action="http://lists.berlios.de/mailman/subscribe/openthesaurus-discuss">
+            <form action="http://46260.seu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
                 <table>
                     <tbody>
                         <tr>
                             <td><g:message code="user.login.form.username"/></td>
-                            <td><input autofocus placeholder="${message(code:'user.register.email.placeholder')}" type="text" name="email" size="30"/></td>
+                            <td><input autofocus placeholder="${message(code:'user.register.email.placeholder')}" 
+                                       id="text2567502" name="email" value="" type="text" size="30"/></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input class="submitButton" type="submit" value="Newsletter abonnieren"/></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Zum <a href="https://lists.berlios.de/pipermail/openthesaurus-discuss/">Newsletter-Archiv</a>,
-                                zur <a href="https://lists.berlios.de/mailman/listinfo/openthesaurus-discuss">Abmeldung</a>
-                            </td>
+                            <td><button class="submitButton" type="submit">Newsletter abonnieren</button></td>
                         </tr>
                     </tbody>
                 </table>
