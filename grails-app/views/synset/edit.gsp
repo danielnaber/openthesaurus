@@ -169,14 +169,19 @@
                                         <g:set var="termLinkInfos" value="${t.termLinkInfos()}"/>
                                         <g:if test="${termLinkInfos.size() > 0}">
                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <g:set var="prevLinkName" value=""/>
                                           <g:each var='termLinkInfo' in='${termLinkInfos}'>
-                                              <g:if test="${termLinkInfo.getLinkName() == 'Antonym'}">
-                                                  <g:message code="edit.term.antonym"/>:
+                                              <g:if test="${termLinkInfo.getLinkName() == 'Antonym' && termLinkInfo.getLinkName() == prevLinkName}">
+                                                  &ndash;
                                               </g:if>
+                                              <g:elseif test="${termLinkInfo.getLinkName() == 'Antonym'}">
+                                                  <g:message code="edit.term.antonym"/>:
+                                              </g:elseif>
                                               <g:else>
                                                   ${termLinkInfo.getLinkName().encodeAsHTML()}:
                                               </g:else>
-                                              <g:link controller="synset" 
+                                              <g:set var="prevLinkName" value="${termLinkInfo.getLinkName()}"/>
+                                              <g:link title="${termLinkInfo.getTerm2().synset.toShortStringWithShortLevel(10, true)}" controller="synset" 
                                                 action="edit" id="${termLinkInfo.getTerm2().synset.id}">${termLinkInfo.getTerm2().encodeAsHTML()}
                                                 <g:if test="${termLinkInfo.getTerm2().level}">
                                                     <span class="meta">(${termLinkInfo.getTerm2().level.shortLevelName.encodeAsHTML()})</span>
