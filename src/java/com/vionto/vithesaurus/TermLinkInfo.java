@@ -21,7 +21,7 @@ package com.vionto.vithesaurus;
  * A link between two terms. Like TermLink but used to have one common type for links
  * in both directions so users only need to iterate over a list of TermLinkInfos.
  */
-public class TermLinkInfo {
+public class TermLinkInfo implements Comparable<TermLinkInfo> {
 
     private final long id;
     private final Term term1;
@@ -60,5 +60,17 @@ public class TermLinkInfo {
     @Override
     public String toString() {
         return term1 + "<--" + linkName +"-->" + term2;
+    }
+
+    // just get some stable sort order
+    @Override
+    public int compareTo(TermLinkInfo o) {
+        if (o.id < id) {
+            return 1;
+        } else if (o.id > id) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

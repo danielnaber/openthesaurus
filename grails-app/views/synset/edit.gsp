@@ -166,7 +166,7 @@
 
                                         <g:set var="previousLanguage" value="${t.language}"/>
 
-                                        <g:set var="termLinkInfos" value="${t.termLinkInfos()}"/>
+                                        <g:set var="termLinkInfos" value="${t.termLinkInfos().sort()}"/>
                                         <g:if test="${termLinkInfos.size() > 0}">
                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                           <g:set var="prevLinkName" value=""/>
