@@ -11,6 +11,12 @@ rm $LOG
 
 tail -n 250000 /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | grep "$DATE" >$LOG
 
+echo "From " >>$OUT
+grep -h $DATE /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | head -n1 >>$OUT
+echo "To " >>$OUT
+grep -h $DATE /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+
+echo "" >>$OUT
 echo -n "Web Searches: " >>$OUT
 grep -c "Search(ms):htm" $LOG >>$OUT
 
@@ -70,6 +76,10 @@ echo "Registrations:" >>$OUT
 grep "Sent registration mail " $LOG >>$OUT
 
 echo "" >>$OUT
+echo "Similarities (max. 500):" >>$OUT
+grep " Similar to " $LOG | head -n 500 >>$OUT
+
+echo "" >>$OUT
 echo "Warnings (without empty queries):" >>$OUT
 grep "WARN" $LOG | grep -v "No query specified for search" >>$OUT
 
@@ -77,4 +87,4 @@ echo "" >>$OUT
 echo "Errors": >>$OUT
 grep "ERROR" $LOG >>$OUT
 
-head -n 1000 $OUT | mail -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
+head -n 1000 $OUT | mail -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
