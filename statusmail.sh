@@ -76,8 +76,12 @@ echo "Registrations:" >>$OUT
 grep "Sent registration mail " $LOG >>$OUT
 
 echo "" >>$OUT
-echo "Similarities (max. 500):" >>$OUT
-grep " Similar to " $LOG | head -n 500 >>$OUT
+echo "Top 15 Similarities:" >>$OUT
+grep " Similar to " $LOG | sed 's/.*Similar to /Similar to /' | sort | uniq -c | sort -r -n | head -n 15 >>$OUT
+
+#echo "" >>$OUT
+#echo "Similarities (max. 100):" >>$OUT
+#grep " Similar to " $LOG | head -n 100 >>$OUT
 
 echo "" >>$OUT
 echo "Warnings (without empty queries):" >>$OUT
