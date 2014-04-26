@@ -174,8 +174,11 @@
                                                   <g:if test="${termLinkInfo.getLinkName() == 'Antonym' && termLinkInfo.getLinkName() == prevLinkName}">
                                                       &ndash;
                                                   </g:if>
+                                                  <g:elseif test="${termLinkInfo.getLinkName() == 'Antonym' && termLinkInfos.size() > 1}">
+                                                      <g:message code="edit.term.antonyms"/>
+                                                  </g:elseif>
                                                   <g:elseif test="${termLinkInfo.getLinkName() == 'Antonym'}">
-                                                      <g:message code="edit.term.antonym"/>:
+                                                      <g:message code="edit.term.antonym"/>
                                                   </g:elseif>
                                                   <g:else>
                                                       ${termLinkInfo.getLinkName().encodeAsHTML()}:
