@@ -665,25 +665,25 @@ tr .prop2 {
 }
 
 .footerColumn {
-    width: 370px;
+    width: 100%;
     float: left;
     margin-bottom: 50px;
 }
 
 @media (max-width: 800px) {
-    #body {
-        padding: 40px 3px 20px 3px;
+    #search {
+        width: 100%;
     }
     #content,
     #foot {
         margin-left: 3px;
         margin-right: 3px;
-        width: 401px;
+        width: 98%;
         /*background-color: #ffff00;  for debugging */
     }
     .logo {
-        margin-bottom: 8px;
-        /*display: none !important;*/
+        margin-bottom: 0;
+        display: none !important;
     }
     #search form {
         text-align: left;
@@ -696,12 +696,28 @@ tr .prop2 {
         padding-right: 38px;
     }
     .searchResultPopup {
-        top: 200px;
+        top: 140px;
     }
     .resultColumn {
-        width: 320px;
-        /*width: 100%;*/
+        width: 100%;
         float: left;
         margin-bottom: 15px;
+    }
+    #body {
+        padding: 50px 0 20px 0;
+        background-color:#F7F7F7;
+        margin-bottom:10px;
+    }
+    #search .claim {
+        display: none !important;
+    }
+    #search .mobileClaim {
+        /*text-transform: uppercase;*/
+    }
+}
+
+@media (min-width: 801px) {
+    #search .mobileClaim {
+        display: none !important;
     }
 }
