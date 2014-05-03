@@ -696,7 +696,7 @@ tr .prop2 {
         padding-right: 38px;
     }
     .searchResultPopup {
-        top: 140px;
+        top: 150px;
     }
     .resultColumn {
         width: 100%;
@@ -713,6 +713,7 @@ tr .prop2 {
     }
     #search .mobileClaim {
         /*text-transform: uppercase;*/
+        font-size: 16px;
     }
 }
 
