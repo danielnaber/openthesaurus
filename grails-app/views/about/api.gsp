@@ -49,26 +49,26 @@
 
         <%-- Use geshi (like on languagetool.org/development/ for highlighting: --%>
             <pre class="api"><span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;matches<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;apiVersion</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;0.1.3&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;warning</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;WARNING -- this XML format may be extended without warning&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;copyright</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Copyright (C) 2011 Daniel Naber (www.danielnaber.de)&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;license</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;GNU LESSER GENERAL PUBLIC LICENSE Version 2.1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;source</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;http://www.openthesaurus.de&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;date</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Sat Mar 06 22:47:25 CET 2011&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;1234&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;category</span> <span style="color: #000066;">name</span>=<span style="color: #bb0000;">&quot;Name der Kategorie&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 2&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;2345&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 2, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
-                &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
-                <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/matches<span style="font-weight: bold; color: black;">&gt;</span></span></span></pre>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;apiVersion</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;0.1.3&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;warning</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;WARNING -- this XML format may be extended without warning&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;copyright</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Copyright (C) 2011 Daniel Naber (www.danielnaber.de)&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;license</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;GNU LESSER GENERAL PUBLIC LICENSE Version 2.1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;source</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;http://www.openthesaurus.de&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;date</span> <span style="color: #000066;">content</span>=<span style="color: #bb0000;">&quot;Sat Mar 06 22:47:25 CET 2011&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/metaData<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;1234&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;category</span> <span style="color: #000066;">name</span>=<span style="color: #bb0000;">&quot;Name der Kategorie&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/categories<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 1, Wort 2&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;synset</span> <span style="color: #000066;">id</span>=<span style="color: #bb0000;">&quot;2345&quot;</span><span style="font-weight: bold; color: black;">&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;categories</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; &nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;term</span> <span style="color: #000066;">term</span>=<span style="color: #bb0000;">&quot;Bedeutung 2, Wort 1&quot;</span><span style="font-weight: bold; color: black;">/&gt;</span></span>
+&nbsp; <span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/synset<span style="font-weight: bold; color: black;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="font-weight: bold; color: black;">&lt;/matches<span style="font-weight: bold; color: black;">&gt;</span></span></span></pre>
 
 
             <h2><a name="json">Suchanfrage für JSON</a></h2>
@@ -103,14 +103,13 @@
                     Antwort (Ausschnitt):
 
                     <pre class="api">
-                        &lt;similarterms>
-                        &lt;term term="Umstand" distance="1"/>
-                        &lt;term term="(zeitlicher) Abstand" distance="3"/>
-                        &lt;term term="Abstand" distance="3"/>
-                        &lt;term term="amüsant" distance="3"/>
-                        &lt;term term="Anstalt" distance="3"/>
-                        &lt;/similarterms>
-                    </pre>
+&lt;similarterms>
+  &lt;term term="Umstand" distance="1"/>
+  &lt;term term="(zeitlicher) Abstand" distance="3"/>
+  &lt;term term="Abstand" distance="3"/>
+  &lt;term term="amüsant" distance="3"/>
+  &lt;term term="Anstalt" distance="3"/>
+&lt;/similarterms></pre>
                     <tt>distance</tt> gibt den Levenshtein-Abstand zum Suchwort an (Wörter in Klammern werden dabei ignoriert).
                 Die Wörter sind bereits nach diesem Abstand sortiert. Es werden nur Wörter vorgeschlagen, die auch
                 in OpenThesaurus vorhanden sind.
@@ -123,11 +122,10 @@
                     Antwort (Ausschnitt):
 
                     <pre class="api">
-                        &lt;substringterms>
-                        &lt;term term="(etwas) behandeln"/>
-                        &lt;term term="abhandeln"/>
-                        &lt;/substringterms>
-                    </pre>
+&lt;substringterms>
+  &lt;term term="(etwas) behandeln"/>
+  &lt;term term="abhandeln"/>
+&lt;/substringterms></pre>
                 </li>
 
                 <li><span class="apioption">substringFromResults</span>: Gibt an, ab welchem Eintrag die Teilwort-Treffer
