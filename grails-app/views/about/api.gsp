@@ -39,7 +39,7 @@
             <p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
             die das Wort <span class="bsp">test</span> beinhalten, abgefragt werden:</p>
 
-            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=text/xml">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>test</strong>&amp;format=text/xml</a></pre>
+            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=text/xml">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>test</strong>&amp;format=text/xml</a></pre>
 
             <p>Kommt im Suchwort ein Sonderzeichen vor, muss es mit UTF-8 URL-kodiert werden (z.B. wird <tt>hören</tt> zu <tt>h%C3%B6ren</tt>).</p>
 
@@ -76,7 +76,7 @@
             <p>Statt <span class="apioption">text/xml</span> kann <span class="apioption">application/json</span>
                 angegeben werden, um das Ergebnis im JSON-Format zu erhalten.</p>
 
-            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>test</strong>&amp;format=application/json</a></pre>
+            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>test</strong>&amp;format=application/json</a></pre>
 
 
             <h2><a name="jsonp">Suchanfrage für JSONP</a></h2>
@@ -98,7 +98,7 @@
                 ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
                 Tippfehlers machen zu können. Beispielanfrage:
 
-                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Umstant&amp;format=text/xml&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</a></pre>
+                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Umstant&amp;format=text/xml&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</a></pre>
 
                     Antwort (Ausschnitt):
 
@@ -117,7 +117,7 @@
                 <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
                 zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
 
-                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Hand&amp;format=text/xml&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</a></pre>
+                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Hand&amp;format=text/xml&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</a></pre>
 
                     Antwort (Ausschnitt):
 
