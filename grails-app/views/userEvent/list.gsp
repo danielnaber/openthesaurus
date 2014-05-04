@@ -44,10 +44,7 @@
                           <g:sortableColumn property="byUser" title="${message(code:'changelist.column.user')}"
                               params="${filteredParams}"/>
 
-                          <th></th>
-
-                          <g:sortableColumn property="changeDesc" title="${message(code:'changelist.column.comment')}"
-                              params="${filteredParams}"/>
+                          <th><g:message code='edit.changelog.change'/></th>
 
                       </tr>
                   </thead>
@@ -86,8 +83,6 @@
                           <td valign="top"><g:link controller="synset" action="edit"
                               id="${userEvent.synset.id}">${userEvent.synset?.toShortString(3).toString().encodeAsHTML()}</g:link></td>
 
-                          <td valign="top">${userEvent.changeDesc?.toString()?.encodeAsHTML()}</td>
-
                       </tr>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                           <td></td>
@@ -95,7 +90,12 @@
                           <td>${diffs.get(userEvent)
                                   .replaceAll("&lt;br/&gt;", "<br/>")
                                   .replaceAll("&lt;b&gt;", "<b>")
-                                  .replaceAll("&lt;/b&gt;", "</b>")}</td>
+                                  .replaceAll("&lt;/b&gt;", "</b>")}
+                              <g:if test="${userEvent.changeDesc}">
+                                  <br/>
+                                  <g:message code='edit.changelog.comment'/> ${userEvent.changeDesc?.toString().encodeAsHTML()}
+                              </g:if>
+                          </td>
                       </tr>
                   </g:each>
                   </tbody>
