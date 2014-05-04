@@ -351,7 +351,7 @@ h3 {
 }
 
 .dialog td {
-  padding: 5px 5px 5px 0px;
+  padding: 5px 5px 5px 0;
 }
 
 .bsp {
@@ -439,10 +439,6 @@ pre.api {
 }
 
 .newArchiveTable td {
-  padding: 5px;
-}
-
-.statistics td {
   padding: 5px;
 }
 
@@ -550,11 +546,11 @@ strong {
 }
 
 /* statistics page: */
-tr .prop {
+table .prop {
     background-color: #ffffff;
 }
 
-tr .prop2 {
+table .prop2 {
     background-color: #f2f2f2;
 }
 
