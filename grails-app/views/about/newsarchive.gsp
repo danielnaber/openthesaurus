@@ -106,7 +106,7 @@
         </tr>
         <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2011-02-21</span></td>
-            <td valign="top">Neue Seite: <g:link controller="woerter" action="listen">Wortlisten</g:link></td>
+            <td valign="top">Neue Seite: <g:link controller="wordList">Wortlisten</g:link></td>
         </tr>
         
         <tr><td>&nbsp;</td></tr>

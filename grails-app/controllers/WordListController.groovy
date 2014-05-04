@@ -16,11 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class WoerterController extends BaseController {
+class WordListController extends BaseController {
     
-    def index = { redirect(action:listen,params:params) }
-
-    def listen = {
+    def index = {
         if(!params.max) params.max = 10
         []
     }

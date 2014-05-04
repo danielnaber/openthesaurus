@@ -9,7 +9,7 @@
 
         <hr/>
 
-        <p><g:link controller="woerter"><g:message code="word.list.backlink" /></g:link></p>
+        <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
         <h2><g:message code="categorylist.headline" args="${[category.categoryName]}"/> (${matchCount})</h2>
 

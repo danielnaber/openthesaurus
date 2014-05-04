@@ -9,6 +9,8 @@ class UrlMappings {
       "/home/directSearch"(controller:'redirect', action:'homepage') 
       "/home/"(controller:'redirect', action:'homepage') 
       
+      "/woerter/listen"(controller:'wordList', action:'index') 
+      
       "/$controller/$action?/$id?" {
         constraints {
             // apply constraints here
