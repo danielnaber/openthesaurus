@@ -56,7 +56,7 @@
 
           </div>
 
-          <div style="float:left">
+          <div style="float:left" class="statistics">
 
               <table width="315" class="statsTable">
                   <tr>
@@ -73,7 +73,7 @@
                                   <span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
                               </g:else>
                           </td>
-                          <td><g:decimal number="${topUser.actions}"/></td>
+                          <td class="value"><g:decimal number="${topUser.actions}"/></td>
                       </tr>
                   </g:each>
                   <g:if test="${!session.user}">

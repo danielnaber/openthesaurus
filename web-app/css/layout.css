@@ -554,6 +554,10 @@ table .prop2 {
     background-color: #f2f2f2;
 }
 
+.statistics .value {
+    text-align: right;
+}
+
 .statName {
     font-weight: bold;
 }
