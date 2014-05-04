@@ -670,6 +670,16 @@ tr .prop2 {
     margin-bottom: 50px;
 }
 
+.leftColumn {
+    float: left;
+    width: 120px;
+}
+.rightColumn {
+    float: left;
+    width: 320px;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 800px) {
     #search {
         width: 100%;

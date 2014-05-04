@@ -1,10 +1,10 @@
 <%@page import="com.vionto.vithesaurus.*" %>
 
-<tr class='prop'>
-    <td valign='top' class='name'>
+    <div class='leftColumn name'>
         <h2 class="noTopMargin">${title}</h2>
-    </td>
-    <td valign='top' class='value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
+    </div>
+    
+    <div valign='top' class='rightColumn value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
     <g:set var="nymCount" value="${0}"/>
     
@@ -85,6 +85,5 @@
     
     </ul>
     
-    </td>
-</tr>
-<tr><td></td></tr>
+    </div>
+    <div style="clear: both"></div>
