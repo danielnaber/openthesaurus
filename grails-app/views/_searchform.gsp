@@ -2,6 +2,9 @@
 <%@page import="com.vionto.vithesaurus.tools.*" %>
 <div id="search">
 
+  <%-- move the logo/search block a bit to the left, looks like as if it is better centered: --%>
+  <div style="margin-right: 30px;">
+    
   <g:if test="${homepage}">
     <div class="logo"><img
         src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
@@ -35,6 +38,9 @@
     </g:else>
 
   </form>
+
+  </div>
+    
 </div>
 
 <g:if test="${preventSearchFocus != 'true'}">

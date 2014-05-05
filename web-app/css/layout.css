@@ -158,8 +158,8 @@ h1 {
 }
 
 #search {
-  width:401px;
-  margin:0 auto;
+  width: 430px;
+  margin: 0 auto;
 }
 
 #search .claim {
@@ -210,10 +210,6 @@ h1 {
   margin-bottom: 50px;
   text-align:left;
   width:780px;
-}
-
-#foot .claim {
-    max-width: 330px;
 }
 
 h2 {
@@ -550,11 +546,11 @@ strong {
 }
 
 /* statistics page: */
-table .prop {
+.statistics .prop {
     background-color: #ffffff;
 }
 
-table .prop2 {
+.statistics .prop2 {
     background-color: #f2f2f2;
 }
 
@@ -669,7 +665,7 @@ table .prop2 {
 }
 
 .footerColumn {
-    width: 100%;
+    width: 320px;
     float: left;
     margin-bottom: 50px;
 }
