@@ -670,13 +670,14 @@ strong {
     margin-bottom: 50px;
 }
 
+/* detail page: */
 .leftColumn {
     float: left;
     width: 120px;
 }
 .rightColumn {
     float: left;
-    width: 320px;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -724,6 +725,9 @@ strong {
     #search .mobileClaim {
         /*text-transform: uppercase;*/
         font-size: 16px;
+    }
+    .rightColumn {
+        width: 320px;
     }
 }
 
