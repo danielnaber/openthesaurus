@@ -1,11 +1,11 @@
 <div id="foot">
     
   <div class="footerColumn" style="margin-top: 44px; margin-right: 37px;">
-      <div class="claim" style="margin-bottom: 20px">
+      <div class="claim" style="margin-bottom: 23px">
           <g:message code="homepage.tagline"/>
       </div>
 
-      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
+      <img style="width:100%;height:2px;margin-bottom:23px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
 
       <ul style="float: left; margin-right: 60px">
           <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
@@ -62,7 +62,7 @@
 
       <g:render template="/ads/footer"/>
 
-      <img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
+      <!--<img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>-->
 
       <g:render template="/ads/footer2"/>
       
