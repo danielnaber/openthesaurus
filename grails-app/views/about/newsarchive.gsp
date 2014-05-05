@@ -21,6 +21,12 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2014-03-14</span></td>
+            <td valign="top">Unter <a href="http://openthesaurus.softcatala.org">openthesaurus.softcatala.org</a>
+                gibt es jetzt eine katalanische Version von OpenThesaurus.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2014-01-11</span></td>
             <td valign="top">Auf der Ergebnisseite werden jetzt auch alle Antonyme angezeigt: Wörter
                 mit Antonym haben ein kleines "G" (wie 'Gegenteil'). Bleibt man mit der Maus auf dem "G",
