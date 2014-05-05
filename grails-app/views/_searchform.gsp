@@ -22,7 +22,7 @@
   <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
     <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
-    <span id="spinner" style="visibility:hidden;position:absolute;left:257px;top:99px">
+    <span id="spinner" style="visibility:hidden;position:absolute;left:227px;top:99px">
       <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" width="32" height="32" alt="Loading" />
     </span>
 
