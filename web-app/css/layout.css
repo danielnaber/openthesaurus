@@ -12,9 +12,9 @@ body {
 }
 
 #body {
-  padding:80px 0 20px 0;
-  background-color:#F7F7F7;
-  margin-bottom:10px;
+  padding: 80px 0 20px 0;
+  background-color: #F7F7F7;
+  margin-bottom: 10px;
   -moz-transform: skewY(-1.5deg);
   -moz-transform-origin: 0 0;
   -webkit-transform: skewY(-1.5deg);
@@ -193,12 +193,12 @@ h1 {
 
   padding-left: 13px;
   padding-right: 48px;
-  border:none;
+  border: none;
   color: #333333;
 }
 
 #search input[type='image'] {
-  margin-left:-44px;
+  margin-left: -44px;
   margin-bottom: 4px;
 }
 
@@ -208,8 +208,8 @@ h1 {
 #foot {
   margin: 0 auto;
   margin-bottom: 50px;
-  text-align:left;
-  width:780px;
+  text-align: left;
+  width: 780px;
 }
 
 h2 {
@@ -282,11 +282,11 @@ h3 {
 }
 
 #foot td {
-  vertical-align:top;
+  vertical-align: top;
 }
 
 #foot .iconLink {
-  line-height:110%;
+  line-height: 110%;
   margin-bottom: 15px;
 }
 
@@ -369,7 +369,7 @@ h3 {
 
 .noMatches {
   color: #777777;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .addNewTerm {
@@ -715,8 +715,8 @@ strong {
     }
     #body {
         padding: 50px 0 20px 0;
-        background-color:#F7F7F7;
-        margin-bottom:10px;
+        background-color: #F7F7F7;
+        margin-bottom: 10px;
     }
     #search .claim {
         display: none !important;
