@@ -3,10 +3,10 @@
         <table style="width:100%">
             <tr>
                 <td>
-                    <g:link controller="about">Über</g:link>
-                    &nbsp;&nbsp;&nbsp;<g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
+                    <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
                     &nbsp;&nbsp;&nbsp;<a href="/jforum/forums/show/1.page">Forum</a>
                     &nbsp;&nbsp;&nbsp;<g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link>
+                    &nbsp;&nbsp;&nbsp;<g:link controller="about">Über</g:link>
                 </td>
                 <td style="text-align: right">
                     <g:if test="${session.user}">
