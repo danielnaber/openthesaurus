@@ -32,7 +32,7 @@
     
                 <h3>Widerspruch:</h3>
     
-                <iframe frameborder="no" width="600px" height="200px" src="http://openthesaurus.stats.mysnip-hosting.de/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
+                <iframe frameborder="no" width="600px" height="200px" src="//openthesaurus.stats.mysnip-hosting.de/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
 
             </g:if>
             <g:else>
