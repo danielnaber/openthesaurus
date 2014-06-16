@@ -141,7 +141,8 @@ class Term implements Comparable, Cloneable {
     }
 
     /**
-     * Used to first sort by language, then by term as a second criterion.
+     * Used to first sort by language, then term level sort value,
+     * then by term (alphabetically) as a final criterion.
      */
     int compareTo(Object other) {
         if (other.language == language) {
