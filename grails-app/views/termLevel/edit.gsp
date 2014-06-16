@@ -13,15 +13,20 @@
             <span class="menuButton"><g:link class="create" action="create">New TermLevel</g:link></span>
         </div>
         <div class="body">
+            
+            <hr/>
             <h1>Edit TermLevel</h1>
+            
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+                <div class="message">${flash.message}</div>
             </g:if>
+            
             <g:hasErrors bean="${termLevelInstance}">
             <div class="errors">
                 <g:renderErrors bean="${termLevelInstance}" as="list" />
             </div>
             </g:hasErrors>
+            
             <g:form method="post" >
                 <input type="hidden" name="id" value="${termLevelInstance?.id}" />
                 <div class="dialog">
@@ -43,6 +48,15 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:termLevelInstance,field:'shortLevelName','errors')}">
                                     <input type="text" id="shortLevelName" name="shortLevelName" value="${fieldValue(bean:termLevelInstance,field:'shortLevelName')}"/>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="sortValue">Sort Value:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:termLevelInstance,field:'sortValue','errors')}">
+                                    <input type="text" id="sortValue" name="sortValue" value="${fieldValue(bean:termLevelInstance,field:'sortValue')}"/>
                                 </td>
                             </tr> 
                         

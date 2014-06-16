@@ -13,10 +13,14 @@
             <span class="menuButton"><g:link class="create" action="create">New TermLevel</g:link></span>
         </div>
         <div class="body">
-            <h1>Show TermLevel</h1>
+
+            <hr/>
+            <h2>Show TermLevel</h2>
+            
             <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+                <div class="message">${flash.message}</div>
             </g:if>
+            
             <div class="dialog">
                 <table>
                     <tbody>
@@ -40,6 +44,13 @@
                             <td valign="top" class="name">Short Level Name:</td>
                             
                             <td valign="top" class="value">${fieldValue(bean:termLevelInstance, field:'shortLevelName')}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name">Sort Value:</td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean:termLevelInstance, field:'sortValue')}</td>
                             
                         </tr>
                     

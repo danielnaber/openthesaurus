@@ -145,15 +145,21 @@ class Term implements Comparable, Cloneable {
      */
     int compareTo(Object other) {
         if (other.language == language) {
-            String normalizedWord = StringTools.normalizeForSort(word)
-            String otherNormalizedWord = StringTools.normalizeForSort(other.word)
-            int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
-            if (compare == 0) {
-              // force stable order on words that only differ in case
-              return word.compareTo(other.word)
-          } else {
-              return compare
-          }
+            int sortValue = level?.sortValue ? level.sortValue : 0
+            int otherSortValue = other.level?.sortValue ? other.level.sortValue : 0
+            if (sortValue == otherSortValue) {
+                String normalizedWord = StringTools.normalizeForSort(word)
+                String otherNormalizedWord = StringTools.normalizeForSort(other.word)
+                int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
+                if (compare == 0) {
+                    // force stable order on words that only differ in case
+                    return word.compareTo(other.word)
+                } else {
+                    return compare
+                }
+            } else {
+                return sortValue - otherSortValue
+            }
         } else {
             return language.id - other.language.id
         }

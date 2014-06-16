@@ -24,18 +24,16 @@ class TermLevel {
   
   String levelName
   String shortLevelName
+  Integer sortValue
 
   static constraints = {
     levelName(unique:true)
     shortLevelName(unique:true)
-  }
-
-  static mapping = {
-      //id generator:'sequence', params:[sequence:'term_level_seq']
+      sortValue(nullable: true)
   }
 
   String toString() {
-      return levelName    
+      return levelName
   }
   
 }

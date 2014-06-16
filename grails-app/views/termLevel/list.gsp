@@ -32,6 +32,9 @@
                             <th></th>
                         
                             <g:sortableColumn property="shortLevelName" title="Short Level Name" />
+                            <th></th>
+                        
+                            <g:sortableColumn property="sortValue" title="Sort Value" />
                         
                         </tr>
                     </thead>
@@ -46,6 +49,9 @@
                             <td></td>
                         
                             <td>${fieldValue(bean:termLevelInstance, field:'shortLevelName')}</td>
+                            <td></td>
+                            
+                            <td>${fieldValue(bean:termLevelInstance, field:'sortValue')}</td>
                         
                         </tr>
                     </g:each>
