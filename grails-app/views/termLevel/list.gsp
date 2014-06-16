@@ -25,11 +25,13 @@
                     <thead>
                         <tr>
                         
-                   	        <g:sortableColumn property="id" title="Id" />
+                            <g:sortableColumn property="id" title="Id" />
+                            <th></th>
                         
-                   	        <g:sortableColumn property="levelName" title="Level Name" />
+                            <g:sortableColumn property="levelName" title="Level Name" />
+                            <th></th>
                         
-                   	        <g:sortableColumn property="shortLevelName" title="Short Level Name" />
+                            <g:sortableColumn property="shortLevelName" title="Short Level Name" />
                         
                         </tr>
                     </thead>
@@ -37,9 +39,11 @@
                     <g:each in="${termLevelInstanceList}" status="i" var="termLevelInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${termLevelInstance.id}">${fieldValue(bean:termLevelInstance, field:'id')}</g:link></td>
+                            <td>${fieldValue(bean:termLevelInstance, field:'id')}</td>
+                            <td></td>
                         
-                            <td>${fieldValue(bean:termLevelInstance, field:'levelName')}</td>
+                            <td><g:link action="show" id="${termLevelInstance.id}">${fieldValue(bean:termLevelInstance, field:'levelName')}</g:link></td>
+                            <td></td>
                         
                             <td>${fieldValue(bean:termLevelInstance, field:'shortLevelName')}</td>
                         
