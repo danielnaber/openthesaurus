@@ -135,7 +135,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <h2 class="noTopMargin"><g:message code="edit.term.level"/> <a style="font-weight:normal" href="#" onclick="javascript:toggleLanguageLevelHelp();return false;">[?]</a></h2>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.level"/> <a style="font-weight:normal" href="#" onclick="toggleLanguageLevelHelp();return false;">[?]</a></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
                                     <g:if test="${term.level == null}">
@@ -239,7 +239,7 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${session.user}">
-                                        <g:textArea rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
+                                        <g:textArea style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
 										<g:if test="${term.userComment}">
@@ -249,6 +249,18 @@
 											<span class="noMatches"><g:message code="edit.no.comment"/></span>
 										</g:else>
                                     </g:else>
+                                </td>
+                            </tr>
+                            
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <h2 class="noTopMargin" style="margin-bottom: 0;"><g:message code="edit.comment.for.change"/></h2>
+                                    <g:message code="edit.comment.for.change.detail"/>
+                                </td>
+                                <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
+                                    <g:if test="${session.user}">
+                                        <input style="width:300px" id='changeComment' name='changeComment' spellcheck="true" value=""/>
+                                    </g:if>
                                 </td>
                             </tr>
                             
