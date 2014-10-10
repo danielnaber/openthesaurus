@@ -3,7 +3,7 @@
     <!--
     var onChangeInterval = null;
     var deferRequestMillis = 200;
-    var minChars = 2;
+    var minChars = 1;
     var currentValue = null;
 
     function doSearchOnKeyUp(event) {
