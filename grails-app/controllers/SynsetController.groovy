@@ -27,6 +27,9 @@ import com.vionto.vithesaurus.tools.StringTools
 import org.apache.commons.lang.StringEscapeUtils
 import com.vionto.vithesaurus.tools.DbUtils
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 class SynsetController extends BaseController {
 
     def requestLimiterService
@@ -213,11 +216,21 @@ class SynsetController extends BaseController {
           WordListLookup remoteMistakeLookup = wordListService.remoteCommonMistakeUrlAndMetaInfo(params.q)
           // end of parts that's specific to the German OpenThesaurus
 
+          Pattern boundaryPattern = Pattern.compile(".*\\b" + Pattern.quote(params.q) + "\\b.*")
+          def substringSynsetList = []
+          def subwordSynsetList = []
+          for (substringMatch in partialMatchResult) {
+            def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0, false)
+            addSynsetMatches(boundaryPattern, substringMatches, searchResult.synsetList, substringSynsetList, subwordSynsetList)
+          }
+          
           def model = [ partialMatchResult : partialMatchResult,
                 wikipediaResult : wikipediaResult,
                 wiktionaryResult : wiktionaryResult,
                 similarTerms : similarTerms,
                 synsetList : searchResult.synsetList,
+                subwordSynsetList: subwordSynsetList,
+                substringSynsetList: substringSynsetList,
                 totalMatches: searchResult.totalMatches,
                 completeResult: searchResult.completeResult,
                 baseforms: baseforms,
@@ -238,6 +251,30 @@ class SynsetController extends BaseController {
         }
               
     }
+
+  private addSynsetMatches(Pattern boundaryPattern, SearchResult substringMatches, List synsetList, List substringSynsetList, List subwordSynsetList) {
+    for (synset in substringMatches.synsetList) {
+      Matcher matcher = boundaryPattern.matcher(synset.toUnsortedString().toLowerCase())
+      if (matcher.matches()) {
+        if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
+          subwordSynsetList.add(synset)
+        }
+      } else {
+        if (!alreadyListed(synset, substringSynsetList, subwordSynsetList, synsetList)) {           // avoid duplicates
+          substringSynsetList.add(synset)
+        }
+      }
+    }
+  }
+
+  private boolean alreadyListed(Synset synset, List... lists) {
+    for (list in lists) {
+      if (list.contains(synset)) {
+        return true
+      }
+    }
+    return false
+  }
 
   private int getPartialSearchMax() {
     int partialApiMaxResultsRequest = 10

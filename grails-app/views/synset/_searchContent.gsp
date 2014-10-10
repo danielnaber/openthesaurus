@@ -2,34 +2,22 @@
 
     <div class="resultColumn" style="margin-right:37px">
 
+        <g:render template="mainmatches" model="${[synsetList: synsetList]}"/>
+        
+        <hr/>
+
+        <g:render template="mainmatches" model="${[synsetList: subwordSynsetList]}"/>
+
+        <hr/>
+
+        <g:render template="mainmatches" model="${[synsetList: substringSynsetList]}"/>
+
         <g:set var="cleanTerm" value="${params.q.trim()}" />
         <g:if test="${totalMatches == 0}">
             <g:render template="addterm" model="${[term:cleanTerm]}" />
         </g:if>
 
         <hr style="margin-top:20px" />
-
-        <g:set var="cleanTerm" value="${params.q.trim()}" />
-        <p class="partialMatches">
-            <g:set var="moreSubstringTerms" value="${false}" />
-            <g:each in="${partialMatchResult}" var="term" status="counter">
-                <g:if test="${counter > 0 && counter < 8}">
-                    <span class="d">&middot;</span>
-                </g:if>
-                <g:if test="${counter < 8}">
-                    <g:link action="search" params="${[q: StringTools.slashEscape(term.term)]}">${term.highlightTerm}</g:link>
-                </g:if>
-                <g:else>
-                    <g:set var="moreSubstringTerms" value="${true}" />
-                </g:else>
-            </g:each>
-            <g:if test="${partialMatchResult.size() == 0}">
-                <span class="noMatches"><g:message code='result.matches.partial.nomatch' /></span>
-            </g:if>
-            <g:if test="${partialMatchResult.size() > 8}">
-                &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="${resource(dir:'images',file:'arrow-blue.png')}" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
-            </g:if>
-        </p>
 
         <g:render template="partialmatches"/>
 
