@@ -5,16 +5,9 @@
   <%-- move the logo/search block a bit to the left, looks like as if it is better centered: --%>
   <div style="margin-right: 30px;">
     
-  <g:if test="${homepage}">
-    <div class="logo"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></div>
-  </g:if>
-  <g:else>
-    <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
-  </g:else>
+  <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
+      src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
+      alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
 
   <p class="claim"><g:message code="homepage.claim"/></p>
   <p class="mobileClaim"><a href="${createLinkTo(dir:'/',file:'')}"><g:message code="homepage.claim.mobile"/></a></p>

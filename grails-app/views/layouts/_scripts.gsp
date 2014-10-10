@@ -95,9 +95,13 @@
 
     function loadedSynsetSearch(searchString) {
         document.getElementById('spinner').style.visibility='hidden';
-        //TODO: activate:
-        //var stateObj = { term: searchString };
-        //history.pushState(stateObj, searchString/*title*/, searchString);
+        var stateObj = {};
+        var localSynonymUrl = '${grailsApplication.config.thesaurus.localSynonymUrlPart}';
+        var newUrl = searchString;
+        if (document.URL.indexOf(localSynonymUrl) === -1) {
+            newUrl = localSynonymUrl + newUrl;
+        }
+        history.pushState(stateObj, searchString/*title*/, newUrl);
     }
 
     // -->
