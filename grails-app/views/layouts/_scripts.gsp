@@ -82,7 +82,7 @@
                                 loadedSynsetSearch(searchString);
                             }
                         },
-                        parameters:'q=' + searchString + "&forumLink=false&ajaxTest=true"
+                        parameters:'q=' + searchString + "&forumLink=false"
                     }
             );
         }
