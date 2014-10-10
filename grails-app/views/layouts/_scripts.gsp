@@ -6,19 +6,6 @@
     var minChars = 2;
     var currentValue = null;
 
-    Event.observe(window.document, "keydown", function(e) {
-        var key = (e.which) ? e.which : e.keyCode;
-        if (key == Event.KEY_ESC) {
-            closePopup();
-        }
-    });
-
-    function closePopup() {
-        $('searchResultArea').hide();
-        $('body').setStyle({backgroundColor: '#F7F7F7'});
-        $('searchResultArea').update("");
-    }
-
     function doSearchOnKeyUp(event) {
         // also see layout.css - if the transform is not applied (it's not in Opera because
         // it makes fonts fuzzy) we cannot use the popup as it will be misplaced, covering the
@@ -65,19 +52,15 @@
         var searchString = document.searchform.q.value;
         currentValue = searchString;
         if (searchString === '' || searchString.length < minChars) {
-            $('searchResultArea').hide();
-            $('body').setStyle({backgroundColor: '#F7F7F7'});
             $('searchResultArea').update("");
         } else {
-            $('searchResultArea').show();
-            $('body').setStyle({backgroundColor: '#e6e6e6'});
             //$('searchResultTable').setStyle({opacity: 0.4}); -- too slow in Firefox
             cursorPosition = -1;
             var timeStamp = new Date().getTime();
             loadSynsetSearch();
             runningRequests++;
             new Ajax.Request(
-                    '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
+                    '${createLinkTo(dir:"synset/ajaxSearch",file:"")}',
                     {
                         method: 'get',
                         asynchronous: true,
@@ -96,10 +79,10 @@
                                 runningRequests--;
                             }
                             if (runningRequests <= 0) {
-                                loadedSynsetSearch();
+                                loadedSynsetSearch(searchString);
                             }
                         },
-                        parameters:'q=' + searchString + "&forumLink=false"
+                        parameters:'q=' + searchString + "&forumLink=false&ajaxTest=true"
                     }
             );
         }
@@ -110,8 +93,11 @@
         document.getElementById('spinner').style.visibility='visible';
     }
 
-    function loadedSynsetSearch() {
+    function loadedSynsetSearch(searchString) {
         document.getElementById('spinner').style.visibility='hidden';
+        //TODO: activate:
+        //var stateObj = { term: searchString };
+        //history.pushState(stateObj, searchString/*title*/, searchString);
     }
 
     // -->

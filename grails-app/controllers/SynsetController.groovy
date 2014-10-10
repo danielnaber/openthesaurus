@@ -36,7 +36,7 @@ class SynsetController extends BaseController {
     def baseformService
 
     def beforeInterceptor = [action: this.&auth,
-                             except: ['index', 'list', 'search', 'oldSearch', 'edit', 'statistics',
+                             except: ['index', 'list', 'ajaxSearch', 'search', 'oldSearch', 'edit', 'statistics',
                                       'createMemoryDatabase', 'refreshRemoteWordLists', 'variation', 'substring', 'listBySize']]
 
     // the delete, save and update actions only accept POST requests
@@ -213,20 +213,25 @@ class SynsetController extends BaseController {
           WordListLookup remoteMistakeLookup = wordListService.remoteCommonMistakeUrlAndMetaInfo(params.q)
           // end of parts that's specific to the German OpenThesaurus
 
-          [ partialMatchResult : partialMatchResult,
-            wikipediaResult : wikipediaResult,
-            wiktionaryResult : wiktionaryResult,
-            similarTerms : similarTerms,
-            synsetList : searchResult.synsetList,
-            totalMatches: searchResult.totalMatches,
-            completeResult: searchResult.completeResult,
-            baseforms: baseforms,
-            descriptionText : metaTagDescriptionText,
-            runTime : totalTime,
-            remoteWordLookup: remoteWordLookup,
-            remoteGenderLookup: remoteGenderLookup,
-            remoteMistakeLookup: remoteMistakeLookup
+          def model = [ partialMatchResult : partialMatchResult,
+                wikipediaResult : wikipediaResult,
+                wiktionaryResult : wiktionaryResult,
+                similarTerms : similarTerms,
+                synsetList : searchResult.synsetList,
+                totalMatches: searchResult.totalMatches,
+                completeResult: searchResult.completeResult,
+                baseforms: baseforms,
+                descriptionText : metaTagDescriptionText,
+                runTime : totalTime,
+                remoteWordLookup: remoteWordLookup,
+                remoteGenderLookup: remoteGenderLookup,
+                remoteMistakeLookup: remoteMistakeLookup
           ]
+          if (params.ajaxSearch) {
+            render(template: 'searchContent', model: model)  
+          } else {
+            model
+          }
 
         } finally {
           DbUtils.closeQuietly(conn)

@@ -13,30 +13,31 @@
     </head>
     <body>
 
-    <div id="searchResultArea" class="searchResultPopup" style="display: none">
-    </div>
-
     <g:render template="/navigation"/>
 
     <div id="body">
 
-      <div id="content">
+        <div id="content">
 
-        <g:render template="/searchform" model="${[homepage: false]}"/>
+            <g:render template="/searchform" model="${[homepage: true]}"/>
 
-        <g:if test="${session.user}">
-          <noscript>
-              <div class="nojs">
-                 <g:message code='no.javascript.warning'/>
-              </div>
-          </noscript>
-        </g:if>
+            <g:if test="${session.user}">
+                <noscript>
+                    <div class="nojs">
+                        <g:message code='no.javascript.warning'/>
+                    </div>
+                </noscript>
+            </g:if>
 
-        <g:render template="/loggedin"/>
-        
-        <g:layoutBody />
+            <g:render template="/loggedin"/>
 
-      </div>
+            <div id="searchResultArea" class="searchResultPopup">
+
+                <g:layoutBody />
+                
+            </div>
+
+        </div>
 
     </div>
 
