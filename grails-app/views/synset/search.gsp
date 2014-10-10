@@ -1,5 +1,3 @@
-          <td width="365">
-            <h1><g:message code='result.matches.for.header' /></h1>
 <%@page import="com.vionto.vithesaurus.*" %>
 <html>
     <head>
