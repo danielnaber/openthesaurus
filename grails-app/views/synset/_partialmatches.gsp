@@ -1,5 +1,5 @@
 <%@page import="com.vionto.vithesaurus.tools.*" %>
-					<h2 style="margin-top:0px"><g:message code='result.matches.partial' /></h2>
+					<h2 style="margin-top:0"><g:message code='result.matches.partial' /></h2>
 
                     <p class="partialMatches">
                     <g:set var="moreSubstringTerms" value="${false}" />
@@ -18,7 +18,7 @@
                         <span class="noMatches"><g:message code='result.matches.partial.nomatch' /></span>
                     </g:if>
                     <g:if test="${partialMatchResult.size() > 8}">
-                        &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="../images/arrow-blue.png" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
+                        &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="${resource(dir:'images',file:'arrow-blue.png')}" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
                     </g:if>
                     </p>
 
