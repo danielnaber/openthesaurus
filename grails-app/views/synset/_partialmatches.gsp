@@ -1,5 +1,5 @@
 <%@page import="com.vionto.vithesaurus.tools.*" %>
-					<h2 style="margin-top:0"><g:message code='result.matches.partial' /></h2>
+					<h2 style="margin-top:0"><g:message code='result.matches.similar' /></h2>
 
                     <p class="similarMatches" style="margin-top:10px">
                     <g:each in="${similarTerms}" var="term" status="counter">

@@ -4,8 +4,6 @@
 
         <g:render template="mainmatches" model="${[synsetList: synsetList]}"/>
         
-        <hr/>
-
         <g:render template="mainmatches" model="${[synsetList: subwordSynsetList]}"/>
 
         <hr/>
