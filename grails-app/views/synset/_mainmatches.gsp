@@ -70,7 +70,7 @@
                     <span title="${antonymTitle}">
                         <g:if test="${substringMatchMode}">
                             <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                            >${displayTerm.replaceAll("(?i)(" + Pattern.quote(lowercaseQuery) + ")", "<span class='synsetmatch'>\$1</span>")}</g:link>${antonymInfo}${delim}
+                            >${displayTerm.replaceAll("(?i)(" + Pattern.quote(lowercaseQuery.encodeAsHTML()) + ")", "<span class='synsetmatch'>\$1</span>")}</g:link>${antonymInfo}${delim}
                         </g:if>
                         <g:elseif test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
                                 lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
