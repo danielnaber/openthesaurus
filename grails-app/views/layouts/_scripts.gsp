@@ -112,6 +112,7 @@
         // replaceState = no new history items, user also cannot go back to old searches (which
         // is sometimes a good thing, as we trigger searches during typing):
         history.replaceState(stateObj, searchString/*title*/, newUrl);
+        document.title = '${message(code: "result.matches.for.title")}'.replace(/\{0\}/, searchString);
     }
 
     // -->
