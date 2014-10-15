@@ -1,12 +1,12 @@
 <%@ page import="com.vionto.vithesaurus.tools.StringTools" %>
 
+    <hr/>
+
     <div class="resultColumn" style="margin-right:37px">
 
         <g:render template="mainmatches" model="${[synsetList: synsetList]}"/>
         
         <g:render template="mainmatches" model="${[synsetList: subwordSynsetList, substringMatchMode: true]}"/>
-
-        <hr style="margin-top: 22px"/>
 
         <g:render template="mainmatches" model="${[synsetList: substringSynsetList, substringMatchMode: true]}"/>
 

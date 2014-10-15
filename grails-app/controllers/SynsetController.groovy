@@ -231,7 +231,7 @@ class SynsetController extends BaseController {
                 synsetList : searchResult.synsetList,
                 subwordSynsetList: subwordSynsetList,
                 substringSynsetList: substringSynsetList,
-                totalMatches: searchResult.totalMatches,
+                totalMatches: searchResult.totalMatches + subwordSynsetList.size() + substringSynsetList.size(),
                 completeResult: searchResult.completeResult,
                 baseforms: baseforms,
                 descriptionText : metaTagDescriptionText,
