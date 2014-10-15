@@ -34,9 +34,9 @@
 
             <g:render template="/loggedin"/>
 
-            <g:layoutBody />
-
-            <div id="searchResultArea" class="searchResultPopup"></div>
+            <div id="searchResultArea" class="searchResultPopup">
+                <g:layoutBody />
+            </div>
 
         </div>
 

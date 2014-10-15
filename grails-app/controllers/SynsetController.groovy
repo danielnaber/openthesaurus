@@ -98,7 +98,15 @@ class SynsetController extends BaseController {
      * via Ajax.
      */
     def ajaxSearch = {
-        params.ajaxSearch = 1
+        params.embeddedSearch = 1
+        search()
+    }
+
+    /**
+     * When the submit button gets clicked and the user ends up on a new page (non-ajax). 
+     */
+    def fullPageSearch = {
+        params.fullPageSearch = 1
         search()
     }
     
@@ -243,10 +251,14 @@ class SynsetController extends BaseController {
                 remoteGenderLookup: remoteGenderLookup,
                 remoteMistakeLookup: remoteMistakeLookup
           ]
-          if (params.ajaxSearch) {
-            render(template: 'searchContent', model: model)  
+          if (params.partPageSearch) {
+            render(template: 'searchContent', model: model)  // the standard search (ajax)
+          } else if (params.fullPageSearch) {
+            render(view: 'search', model: model)  // the standard non-javascript search
+          } else if (params.embeddedSearch) {
+            render(view: 'ajaxSearch', model: model)  // e.g. searching associated terms when editing a synset
           } else {
-            model
+            throw new RuntimeException("No search parameter set")
           }
 
         } finally {

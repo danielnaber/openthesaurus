@@ -8,7 +8,7 @@
         
         <g:render template="mainmatches" model="${[synsetList: subwordSynsetList, substringMatchMode: true]}"/>
 
-        <g:if test="${synsetList.size() > 0 || subwordSynsetList.size() > 0}">
+        <g:if test="${(synsetList.size() > 0 || subwordSynsetList.size() > 0) && substringSynsetList.size() > 0}">
             <hr style="margin-top: 22px"/>
         </g:if>
 

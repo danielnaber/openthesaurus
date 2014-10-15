@@ -21,7 +21,7 @@ class UrlMappings {
       "/synonyme/edit/$id"(controller:'synset', action:'edit')
       "/synonyme/edit"(controller:'synset', action:'edit')
       "/synonyme/search"(controller:'synset', action:'oldSearch')
-      "/synonyme/$q"(controller:'synset', action:'search')
+      "/synonyme/$q"(controller:'synset', action:'fullPageSearch')
       // URLs like http://localhost:8080/openthesaurus/synonyme?q=Blechb%C3%BCchse&x=16&y=16 caused by
       // clicking the submit button with Javascript disabled:
       "/synonyme"(controller:'redirect', action:'searchwithoutjavascript')

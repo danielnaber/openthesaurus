@@ -60,7 +60,7 @@
             loadSynsetSearch();
             runningRequests++;
             new Ajax.Request(
-                    '${createLinkTo(dir:"synset/ajaxSearch",file:"")}',
+                    '${createLinkTo(dir:"synonyme",file:"")}/' + searchString,
                     {
                         method: 'get',
                         asynchronous: true,
@@ -82,7 +82,7 @@
                                 loadedSynsetSearch(searchString);
                             }
                         },
-                        parameters:'q=' + searchString + "&forumLink=false"
+                        parameters:"forumLink=false&partPageSearch=1"
                     }
             );
         }
