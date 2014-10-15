@@ -1,4 +1,4 @@
-<%@page import="com.vionto.vithesaurus.tools.*" %>
+<%@page import="java.util.regex.Pattern; com.vionto.vithesaurus.tools.*" %>
 <g:if test="${totalMatches > 0}">
 
     <g:each in="${synsetList}" status="i" var="synset">
@@ -68,10 +68,14 @@
                     <!-- time for antonyms: ${antonymTotalTime}ms -->
 
                     <span title="${antonymTitle}">
-                        <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
+                        <g:if test="${substringMatchMode}">
+                            <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
+                            >${displayTerm.replaceAll("(?i)(" + Pattern.quote(lowercaseQuery) + ")", "<span class='synsetmatch'>\$1</span>")}</g:link>${antonymInfo}${delim}
+                        </g:if>
+                        <g:elseif test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
                                 lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
                             <span class="synsetmatch">${displayTerm}</span>${antonymInfo}${delim}
-                        </g:if>
+                        </g:elseif>
                         <g:else>
                             <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
                             >${displayTerm}</g:link>${antonymInfo}${delim}
@@ -181,34 +185,3 @@
     </g:each>
 
 </g:if>
-<g:else>
-    <h2><g:message code="result.no.matches"/></h2>
-    <g:if test="${baseforms.size() > 0}">
-        <div><strong><g:message code="result.no.matches.baseforms"/></strong><br/>
-            <span class="result">
-                <g:each in="${baseforms}" var="term" status="counter">
-                    <g:link action="search" params="${[q: StringTools.slashEscape(term)]}">${term.encodeAsHTML()}</g:link>
-                    <g:if test="${counter < baseforms.size()-1}">
-                        <span class="d">&middot;</span>
-                    </g:if>
-                </g:each>
-            </span>
-        </div>
-        <br />
-    </g:if>
-    <g:if test="${similarTerms.size > 0}">
-        <div><strong><g:message code="result.no.matches.similar.words"/></strong><br/>
-            <span class="result">
-                <g:each in="${similarTerms}" var="term" status="counter">
-                    <g:if test="${counter < 3}">
-                        <g:link action="search" params="${[q: StringTools.slashEscape(term.term)]}">${term.term.encodeAsHTML()}</g:link>
-                        <g:if test="${counter < Math.min(2, similarTerms.size()-1)}">
-                            <span class="d">&middot;</span>
-                        </g:if>
-                    </g:if>
-                </g:each>
-            </span>
-        </div>
-        <br />
-    </g:if>
-</g:else>
