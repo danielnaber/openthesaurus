@@ -8,6 +8,10 @@
         
         <g:render template="mainmatches" model="${[synsetList: subwordSynsetList, substringMatchMode: true]}"/>
 
+        <g:if test="${synsetList.size() > 0 || subwordSynsetList.size() > 0}">
+            <hr style="margin-top: 22px"/>
+        </g:if>
+
         <g:render template="mainmatches" model="${[synsetList: substringSynsetList, substringMatchMode: true]}"/>
 
         <g:if test="${morePartialMatches}">
