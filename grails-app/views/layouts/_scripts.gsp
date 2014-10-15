@@ -93,6 +93,14 @@
         document.getElementById('spinner').style.visibility='visible';
     }
 
+    function submitSearchForm() {
+        var newUrl = '${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));
+        var stateObj = {};
+        // make the back button work (well, mostly - there are still duplicates entries in the history):
+        history.pushState(stateObj, searchform.q.value/*title*/, newUrl);
+        return true;
+    }
+
     function loadedSynsetSearch(searchString) {
         document.getElementById('spinner').style.visibility='hidden';
         var stateObj = {};
