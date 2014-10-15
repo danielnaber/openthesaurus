@@ -37,11 +37,15 @@ class Term implements Comparable, Cloneable {
     String userComment
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
 
+    String normalizedForSortVar
+
     /** Allowed term expression. TODO: read from configuration */
     final static String TERM_REGEXP =
         "[ 0-9a-zA-ZöäüÖÄÜßëçèéêáàóòÈÉÁÀÓÒãñíîş\\{\\}\\\"\\?\\*=()\\-\\+/.,'_:<>;%°" +
             "\\!\\[\\]²³&#ūαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσΣτΤυΥφΦχΧψΨωΩάΆέΈίΊήΉύΎϊϋΰΐœţ]+"
 
+    static transients = ['normalizedForSortVar']
+  
     static belongsTo = [synset:Synset]
     
     static hasMany = [termLinks:TermLink]
@@ -140,6 +144,13 @@ class Term implements Comparable, Cloneable {
         return sb.toString()
     }
 
+    String getNormalizedForSort() {
+        if (normalizedForSortVar == null) {
+             normalizedForSortVar = StringTools.normalizeForSort(word)
+        }
+        return normalizedForSortVar
+    }
+  
     /**
      * Used to first sort by language, then term level sort value,
      * then by term (alphabetically) as a final criterion.
@@ -148,8 +159,8 @@ class Term implements Comparable, Cloneable {
         int sortValue = level?.sortValue ? level.sortValue : 0
         int otherSortValue = other.level?.sortValue ? other.level.sortValue : 0
         if (sortValue == otherSortValue) {
-            String normalizedWord = StringTools.normalizeForSort(word)
-            String otherNormalizedWord = StringTools.normalizeForSort(other.word)
+            String normalizedWord = getNormalizedForSort()
+            String otherNormalizedWord = other.getNormalizedForSort()
             int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
             if (compare == 0) {
                 // force stable order on words that only differ in case
