@@ -23,6 +23,7 @@
 
             <div class="result">
                 <g:set var="counter" value="${0}"/>
+                <g:set var="synsetSortedTerms" value="${synset?.sortedTerms()}"/>
                 <g:each in="${synset?.sortedTerms()}" var="term">
                     <g:if test="${term.level}">
                         <g:set var="displayTerm" value="${term.toString().encodeAsHTML() + ' (' + term.level?.shortLevelName.encodeAsHTML() + ')'}"/>
@@ -34,7 +35,7 @@
                         <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
                     </g:else>
 
-                    <g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
+                    <g:if test="${counter == synsetSortedTerms?.size() - 1}">
                         <g:set var="delim" />
                     </g:if>
                     <g:else>
