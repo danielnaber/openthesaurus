@@ -199,17 +199,17 @@ class SynsetController extends BaseController {
           def searchResult = searchService.searchSynsets(params.q.trim(), maxResults, offset)
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
-          
           String qType = getQueryType()
-          log.info("Search(ms):${qType} ${searchResult.totalMatches}matches ${totalTime}ms db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
-               + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
-               + " q:${params.q}")
-            
+          
           if (apiRequest) {
+            log.info("Search(ms):${qType} ${searchResult.totalMatches}matches ${totalTime}ms db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
+                    + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
+                    + " q:${params.q}")
             renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult)
             return
           }
 
+          long startPostTime = System.currentTimeMillis()
           String metaTagDescriptionText = null
           def baseforms = []
           if (searchResult.totalMatches > 0) {
@@ -233,6 +233,12 @@ class SynsetController extends BaseController {
           }
           
           boolean morePartialMatches = partialMatchResult.size() > 10
+
+          totalTime = System.currentTimeMillis() - startTime
+          long postTime = System.currentTimeMillis() - startPostTime
+          log.info("Search(ms):${qType} ${searchResult.totalMatches}matches ${totalTime}ms db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
+                  + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime} post:${postTime}"
+                  + " q:${params.q}")
           
           def model = [ partialMatchResult : partialMatchResult,
                 wikipediaResult : wikipediaResult,
