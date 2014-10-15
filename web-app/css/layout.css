@@ -661,6 +661,11 @@ strong {
     margin-bottom: 50px;
 }
 
+.moreSubstringMatches {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 /* detail page: */
 .leftColumn {
     float: left;

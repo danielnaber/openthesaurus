@@ -224,6 +224,8 @@ class SynsetController extends BaseController {
             addSynsetMatches(boundaryPattern, substringMatches, searchResult.synsetList, substringSynsetList, subwordSynsetList)
           }
           
+          boolean morePartialMatches = partialMatchResult.size() > 10
+          
           def model = [ partialMatchResult : partialMatchResult,
                 wikipediaResult : wikipediaResult,
                 wiktionaryResult : wiktionaryResult,
@@ -231,6 +233,7 @@ class SynsetController extends BaseController {
                 synsetList : searchResult.synsetList,
                 subwordSynsetList: subwordSynsetList,
                 substringSynsetList: substringSynsetList,
+                morePartialMatches: morePartialMatches,
                 totalMatches: searchResult.totalMatches + subwordSynsetList.size() + substringSynsetList.size(),
                 completeResult: searchResult.completeResult,
                 baseforms: baseforms,

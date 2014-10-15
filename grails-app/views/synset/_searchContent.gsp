@@ -10,6 +10,10 @@
 
         <g:render template="mainmatches" model="${[synsetList: substringSynsetList, substringMatchMode: true]}"/>
 
+        <g:if test="${morePartialMatches}">
+            <div class="moreSubstringMatches"><g:link action="substring" params="${[q:params.q]}"> ${message(code:'result.ajax.more.substring.matches')}</g:link></div>
+        </g:if>
+
         <g:if test="${totalMatches == 0}">
             <h2><g:message code="result.no.matches"/></h2>
             <g:if test="${baseforms.size() > 0}">
