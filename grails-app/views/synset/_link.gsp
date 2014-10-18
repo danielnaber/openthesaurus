@@ -17,7 +17,7 @@
                     <input type="hidden" id="delete_${linkTypeName}_${link.id}" name="delete_${linkTypeName}_${link.id}" value=""/>
                     <div id="${linkTypeName}_${link.id}">
         
-                        <g:if test="${session.user}">
+                        <g:if test="${editable}">
                           <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
                             align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                         </g:if>
@@ -38,11 +38,11 @@
            </g:if>
         </g:each>
         
-        <g:if test="${nymCount == 0 && (linkTypeName == 'Unterbegriff' || !session.user)}">
+        <g:if test="${nymCount == 0 && (linkTypeName == 'Unterbegriff' || !editable)}">
              <li class="checkboxList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
         </g:if>        
 
-        <g:if test="${session.user && showAddLink}">
+        <g:if test="${editable && showAddLink}">
         <li class="checkboxList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
                 <a href="#" onclick="showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>

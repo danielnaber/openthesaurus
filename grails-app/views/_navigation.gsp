@@ -38,4 +38,10 @@
             </tr>
         </table>
     </div>
+    <g:if test="${session.user && grailsApplication.config.thesaurus.readOnly == 'true'}">
+        <div style="color:white;border-width: 2px; background-color: darkorange;padding:8px">
+            <g:message code="server.read.only"/>
+        </div>
+    </g:if>
 </div>
+
