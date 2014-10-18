@@ -23,6 +23,10 @@ import com.vionto.vithesaurus.tools.IpTools
  */
 abstract class BaseController {
 
+    def readOnlyMode() {
+        return grailsApplication.config.thesaurus.readOnly == 'true'
+    }
+
     /**
      * Used to totally block access.
      */

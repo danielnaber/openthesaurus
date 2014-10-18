@@ -172,7 +172,7 @@
                 </g:if>
 
                 <g:link action="edit" id="${synset.id}">
-                    <g:if test="${session.user}">
+                    <g:if test="${editable}">
                         <span class="changeLink"><g:message code="result.edit"/></span>
                     </g:if>
                     <g:else>

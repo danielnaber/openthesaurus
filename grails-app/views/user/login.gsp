@@ -21,12 +21,16 @@
                 <g:renderErrors bean="${user}" as="list" />
             </div>
         </g:hasErrors>
-
-        <g:form action="login" method="post" name="loginform">
-            <input type="hidden" name="returnUrl" value="${params.returnUrl?.encodeAsHTML()}"/>
-            <div class="dialog">
-                <table>
-                    <tbody>
+    
+        <g:if test="${grailsApplication.config.thesaurus.readOnly == 'true'}">
+            <g:message code="server.read.only.no.login"/>
+        </g:if>
+        <g:else>
+            <g:form action="login" method="post" name="loginform">
+                <input type="hidden" name="returnUrl" value="${params.returnUrl?.encodeAsHTML()}"/>
+                <div class="dialog">
+                    <table>
+                        <tbody>
 
                         <tr class='prop'>
                             <td valign='top' class='name' colspan="2">
@@ -73,10 +77,11 @@
                             </td>
                         </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </g:form>
+                        </tbody>
+                    </table>
+                </div>
+            </g:form>
+        </g:else>
 
     </body>
 </html>

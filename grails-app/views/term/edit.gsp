@@ -60,9 +60,13 @@
             </div>
             </g:hasErrors>
             
-            <g:if test="${!session.user}">
+            <g:if test="${!session.user || readOnlyMode}">
                 <g:set var="disabled" value="disabled='true'"/>
+                <g:set var="editable" value="${false}"/>
             </g:if>
+            <g:else>
+                <g:set var="editable" value="${true}"/>
+            </g:else>
 
             <div style="float:right"><g:render template="/ads/termedit_right"/></div>
 			 
@@ -105,7 +109,7 @@
 	                                    <h2 class="noTopMargin"><g:message code="edit.term.language"/></h2>
 	                                </td>
 	                                <td valign='top' class='value ${hasErrors(bean:term,field:'language','errors')}'>
-	                                    <g:if test="${session.user}">
+	                                    <g:if test="${editable}">
 	                                        <g:select value="${term.language.id}" name="language.id"
 	                                            optionKey="id" from="${Language.list()}" />
 	                                    </g:if>
@@ -122,7 +126,7 @@
                                     <h2 class="noTopMargin"><g:message code="edit.term.word.form"/></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'wordGrammar','errors')}'>
-                                    <g:if test="${session.user}">
+                                    <g:if test="${editable}">
                                         <g:select value="${term.wordGrammar?.id}" name="wordGrammar.id"
                                             optionKey="id" from="${WordGrammar.list()}" />
                                     </g:if>
@@ -176,11 +180,11 @@
                                 <td valign='top' class='name'>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <label><g:managedRadio disabled="${!session.user}" id="wordFormCommon" name="wordForm"
+                                    <label><g:managedRadio disabled="${!editable}" id="wordFormCommon" name="wordForm"
                                         value="common" checked="${true}" /> common word</label>&nbsp;
-                                    <label><g:managedRadio disabled="${!session.user}" id="wordFormAcronym" name="wordForm"
+                                    <label><g:managedRadio disabled="${!editable}" id="wordFormAcronym" name="wordForm"
                                         value="acronym" checked="${term.isAcronym}" /> acronym</label>&nbsp;
-                                    <label><g:managedRadio disabled="${!session.user}" id="wordFormAbbreviation" name="wordForm"
+                                    <label><g:managedRadio disabled="${!editable}" id="wordFormAbbreviation" name="wordForm"
                                         value="abbreviation" checked="${term.isShortForm}" /> abbreviation</label>
                                 </td>
                             </tr>
@@ -194,7 +198,7 @@
                                   
                                 <g:each in="${termLinkInfos}" var="termLinkInfo">
                                     <div id="Antonym_${termLinkInfo.id}" style="margin-bottom: 5px">
-                                        <g:if test="${session.user}">
+                                        <g:if test="${editable}">
                                             <input type="hidden" id="deleteExistingTermLink_Antonym_${termLinkInfo.id}" name="deleteExistingTermLink_Antonym_${termLinkInfo.id}" value=""/>
                                             <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img
                                                     align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
@@ -214,7 +218,7 @@
                                 <span class="metaInfo"><g:message code="edit.term.antonyms.none"/></span>
                               </g:else>
                                   
-                              <g:if test="${session.user}">
+                              <g:if test="${editable}">
                                   <div id="addTermLinkLink" style="margin-top:5px">
                                       <a href="#" onclick="showNewTermLink();return false;"><g:message code="edit.add.antonym"/></a>
                                   </div>
@@ -238,7 +242,7 @@
                                     <g:message code="edit.term.comment2"/>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
-                                    <g:if test="${session.user}">
+                                    <g:if test="${editable}">
                                         <g:textArea style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
@@ -258,7 +262,7 @@
                                     <g:message code="edit.comment.for.change.detail"/>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
-                                    <g:if test="${session.user}">
+                                    <g:if test="${editable}">
                                         <input style="width:300px" id='changeComment' name='changeComment' spellcheck="true" value=""/>
                                     </g:if>
                                 </td>
@@ -267,7 +271,7 @@
                             <tr>
                             	<td></td>
                             	<td>
-					                <g:if test="${session.user}">
+					                <g:if test="${editable}">
 						                <div class="buttons">
 						                    <g:actionSubmit class="save submitButton" 
 						                    	action="update" value="${message(code:'edit.term.submit')}" />

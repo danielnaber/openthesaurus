@@ -99,9 +99,13 @@
             <div class="invisibleSynset">
         </g:if>
 
-        <g:if test="${!session.user}">
+        <g:if test="${!session.user || readOnlyMode}">
             <g:set var="disabled" value="disabled='true'"/>
+            <g:set var="editable" value="${false}"/>
         </g:if>
+        <g:else>
+            <g:set var="editable" value="${true}"/>
+        </g:else>
 
         <g:form controller="synset" method="post" name="editForm">
             <input type="hidden" name="id" value="${synset?.id}" />
@@ -125,7 +129,7 @@
 
                             <div id="termId_${t.id}">
 
-                                <g:if test="${session.user}">
+                                <g:if test="${editable}">
                                     <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
                                             align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                                 </g:if>
@@ -197,7 +201,7 @@
                     </g:each>
 
                     <li class="checkboxList" style="margin-top:10px">
-                        <g:if test="${session.user}">
+                        <g:if test="${editable}">
                             <div id="newTermLink">
                                 <a href="#" onclick="showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
                             </div>
@@ -238,7 +242,7 @@
 
                         <div class='rightColumn value ${hasErrors(bean:synset,field:'synsetLinks','errors')}'>
 
-                        <g:if test="${synset.categoryLinks.size() == 0 && !session.user}">
+                        <g:if test="${synset.categoryLinks.size() == 0 && !editable}">
                             <span class="noMatches"><g:message code="edit.not.set"/></span>
                         </g:if>
                         <ul style="margin-top:0px">
@@ -249,7 +253,7 @@
                                     <input type="hidden" id="delete_catLinkId_${catLink.id}" name="delete_catLinkId_${catLink.id}" value=""/>
                                     <div id="catLinkId_${catLink.id}">
 
-                                        <g:if test="${session.user}">
+                                        <g:if test="${editable}">
                                           <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
                                             align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
                                         </g:if>
@@ -269,7 +273,7 @@
                             </g:if>
 
                               <li class="checkboxList" ${synset.categoryLinks.size() > 0 ? 'style="margin-top:10px"' : ''}>
-                                <g:if test="${session.user}">
+                                <g:if test="${editable}">
                                      <%-- Change or add new category --%>
                                      <div id="newCategoryLink">
                                          <a href="#" onclick="showNewCategory();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.categories'/></a>
@@ -320,7 +324,7 @@
 
                         </g:if>
 
-                        <g:if test="${session.user}">
+                        <g:if test="${editable}">
                             <div class='leftColumn name'>
                                 <h2 class="noTopMargin"><g:message code='edit.delete'/></h2>
                             </div>
@@ -340,7 +344,7 @@
                             <div style="clear: both"></div>
                         </g:if>
 
-                        <g:if test="${session.user}">
+                        <g:if test="${editable}">
                               <div class='leftColumn name'>
                                  <h2 class="noTopMargin" style="margin-bottom: 0px;"><g:message code='edit.comment.for.change'/></h2>
                                  <g:message code='edit.comment.for.change.detail'/>
@@ -367,7 +371,7 @@
                         <div class="rightColumn">
                             <g:set var="linkParams" value="${[controllerName: 'synset',
                                     actionName: 'edit', origId: params.id]}" />
-                            <g:if test="${!session.user}">
+                            <g:if test="${!editable}">
                                   <g:link controller="user" action="login" class="link"
                                         params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" /> <g:message code="edit.login.to.improve"/></g:link>
                             </g:if>

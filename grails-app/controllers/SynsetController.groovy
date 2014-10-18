@@ -641,7 +641,7 @@ class SynsetController extends BaseController {
             long runTime = System.currentTimeMillis() - startTime
             return [ synset : synset, eventListCount : eventListCount, eventList : eventList,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
-                     runTime : runTime ]
+                     readOnlyMode: readOnlyMode(), runTime : runTime ]
         }
     }
 
