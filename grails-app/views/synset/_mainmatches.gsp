@@ -48,6 +48,10 @@
                     <%-- keep in sync with SearchService.groovy: --%>
                     <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
 
+                    <g:set var="commentInfo" value=""/>
+                    <g:if test="${term.userComment}">
+                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker">K</span></g:set>
+                    </g:if>
                     <%
                         long antonymTime = System.currentTimeMillis();
                     %>
@@ -70,11 +74,11 @@
                     <span title="${antonymTitle}">
                         <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
                                 lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
-                            <span class="synsetmatch">${displayTerm}</span>${antonymInfo}${delim}
+                            <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}${delim}
                         </g:if>
                         <g:else>
                             <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                            >${displayTerm}</g:link>${antonymInfo}${delim}
+                            >${displayTerm}</g:link>${commentInfo}${antonymInfo}${delim}
                         </g:else>
                     </span>
 
@@ -167,12 +171,7 @@
                 </g:if>
 
                 <g:link action="edit" id="${synset.id}">
-                    <g:if test="${editable}">
-                        <span class="changeLink"><g:message code="result.edit"/></span>
-                    </g:if>
-                    <g:else>
-                        <span class="changeLink"><g:message code="result.details"/></span>
-                    </g:else>
+                    <span class="changeLink"><g:message code="result.edit"/></span>
                 </g:link>
             </div>
 

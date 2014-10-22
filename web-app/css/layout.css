@@ -637,6 +637,15 @@ strong {
     padding-right: 3px;
 }
 
+.commentMarker {
+    font-size: 12px;
+    margin-left: 2px;
+    color: #fff;
+    background-color: #bbb;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
 .searchResultPopup {
     position: absolute;
     outline: 3px solid white;
