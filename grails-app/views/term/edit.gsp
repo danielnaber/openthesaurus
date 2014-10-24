@@ -255,18 +255,18 @@
                                     </g:else>
                                 </td>
                             </tr>
-                            
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <h2 class="noTopMargin" style="margin-bottom: 0;"><g:message code="edit.comment.for.change"/></h2>
-                                    <g:message code="edit.comment.for.change.detail"/>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
-                                    <g:if test="${editable}">
+
+                            <g:if test="${editable}">
+                                <tr class='prop'>
+                                    <td valign='top' class='name'>
+                                        <h2 class="noTopMargin" style="margin-bottom: 0;"><g:message code="edit.comment.for.change"/></h2>
+                                        <g:message code="edit.comment.for.change.detail"/>
+                                    </td>
+                                    <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
                                         <input style="width:300px" id='changeComment' name='changeComment' spellcheck="true" value=""/>
-                                    </g:if>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </g:if>
                             
                             <tr>
                             	<td></td>
