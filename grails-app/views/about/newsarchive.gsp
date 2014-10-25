@@ -21,6 +21,16 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2014-10-25</span></td>
+            <td valign="top">OpenThesaurus ist auf einen neuen Server umgezogen. Dabei haben
+                wir die Konfiguration so geändert, dass jetzt alle Verbindungen zwischen den
+                Nutzern und openthesaurus.de verschlüsselt sind (wir nutzen also https statt http).
+                Die Umleitung auf die verschlüsselte Verbindung
+                erfolgt automatisch, nur bei der <a href="api">API</a> funktionieren zur besseren
+                Kompatibilität auch noch unverschlüsselte http-Anfragen.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2014-03-14</span></td>
             <td valign="top">Unter <a href="http://openthesaurus.softcatala.org">openthesaurus.softcatala.org</a>
                 gibt es jetzt eine katalanische Version von OpenThesaurus.
