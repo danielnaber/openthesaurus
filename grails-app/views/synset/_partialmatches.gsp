@@ -18,7 +18,7 @@
                         <span class="noMatches"><g:message code='result.matches.partial.nomatch' /></span>
                     </g:if>
                     <g:if test="${partialMatchResult.size() > 8}">
-                        &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="../images/arrow-blue.png" alt="Mehr" />&nbsp;<g:message code="result.substring.more"/></g:link>
+                        &nbsp;&nbsp;<g:link action="substring" params="${[q: params.q]}"><img src="${createLinkTo(dir:'images',file:'arrow-blue.png')}" />&nbsp;<g:message code="result.substring.more"/></g:link>
                     </g:if>
                     </p>
 

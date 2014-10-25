@@ -15,7 +15,8 @@
     
             <h2>Download der Daten</h2>
     
-            <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de"><img align="right" style="margin-left: 15px" src="../images/cc-LGPL-a.png" alt="GNU LGPL Logo"/></a>
+            <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de"><img align="right" style="margin-left: 15px"
+               src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL Logo"/></a>
             <p>Die Wörter aus OpenThesaurus lassen sich hier in verschiedenen Formaten
             herunterladen. Sie stehen unter der
             <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser
