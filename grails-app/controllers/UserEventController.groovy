@@ -40,16 +40,35 @@ class UserEventController extends BaseController {
         if (params.uid) {
             user = ThesaurusUser.get(params.long('uid'))
         }
+        List<ThesaurusUser> hideUsers = []
+        if (params.hideUsers) {
+            String[] users = params.hideUsers.split(",\\s*")
+            for (hideUser in users) {
+                def hideUserObj = ThesaurusUser.findByRealName(hideUser)
+                if (hideUserObj) {
+                    hideUsers.add(hideUserObj)
+                } else {
+                    throw new Exception("Could not find user '${hideUser}'")
+                }
+            }
+        }
+      
         def crit = UserEvent.createCriteria()
         int totalMatches = crit.count {
             if (user) {
                 eq('byUser', user)
+            }
+            if (hideUsers) {
+                not { 'in'('byUser', hideUsers) }
             }
         }
         
         def eventList = UserEvent.withCriteria {
             if (params.uid) {
                 eq('byUser', user)
+            }
+            if (hideUsers) {
+                not { 'in'('byUser', hideUsers) }
             }
             maxResults(params.max)
             firstResult(params.offset)

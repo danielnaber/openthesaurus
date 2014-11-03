@@ -111,6 +111,9 @@
             <g:hiddenField name="offset" value="${params.offset}"/>
             <g:message code="edit.changelog.itemsperpage"/>: <g:select name="max" from="${[10,25,50]}" value="${params.max}"/>
             <g:message code="edit.changelog.jumptopage"/>: <g:textField name="jumpToPage" size="3"/>
+            <g:if test="${!user}">
+                <g:message code="edit.changelog.hideuser"/>: <g:textField name="hideUsers" size="12" value="${params.hideUsers?.encodeAsHTML()}"/>
+            </g:if>
             <g:submitButton name="name" value="${message(code:'edit.changelog.change')}"/>
           </g:form>
 
