@@ -3,8 +3,6 @@
 #helper script to deploy new version by overwriting the old one
 
 rm target/openthesaurus-*.war
-grails war
-scp target/openthesaurus-*.war openthesaurus.de:openthesaurus.war
-echo "Now login to the server and call:"
-echo "  unzip -d tomcat/webapps/ROOT/ openthesaurus.war"
-echo "  ./restart.sh"
+grails war && \
+  scp -i ~/.ssh/ot2014/openthesaurus2014 target/openthesaurus-*.war openthesaurus.de:openthesaurus.war && \
+  ssh -i ~/.ssh/ot2014/openthesaurus2014 openthesaurus.de "unzip -d tomcat/webapps/ROOT/ openthesaurus.war && ./restart.sh"
