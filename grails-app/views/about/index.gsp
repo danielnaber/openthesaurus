@@ -58,6 +58,9 @@
     
     
             <h2>OpenThesaurus auf Android</h2>
+            
+            <p>Leider wurden alle Apps schon länger nicht mehr aktualisiert. Wer Interesse hat, die
+            Apps zu verbessern, kann sich <a href="https://www.openthesaurus.de/jforum/posts/list/249.page">hier im Forum melden</a>.</p>
     
             <ul>
                 <li><a href="https://play.google.com/store/apps/details?id=com.fc.ot">OpenThesaurus für Android</a>.
