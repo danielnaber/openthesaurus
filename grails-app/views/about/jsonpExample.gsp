@@ -4,7 +4,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title>JSON/JSONP Beispiel - OpenThesaurus</title>
-        <g:javascript library="prototype" />
     </head>
     <body>
 
@@ -39,7 +38,7 @@
                         }
                         synonyms += "<br/><br/>";
                     }
-                    $('resultArea').update(synonyms);
+                    $('#resultArea').html(synonyms);
                 }
             </script>
 

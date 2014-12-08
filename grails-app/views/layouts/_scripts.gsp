@@ -1,4 +1,4 @@
-<script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
+<script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
 <script type="text/javascript">
     <!--
     var onChangeInterval = null;
@@ -6,26 +6,26 @@
     var minChars = 2;
     var currentValue = null;
 
-    Event.observe(window.document, "keydown", function(e) {
-        var key = (e.which) ? e.which : e.keyCode;
-        if (key == Event.KEY_ESC) {
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) {  // Escape key
             closePopup();
         }
     });
 
     function closePopup() {
-        $('searchResultArea').hide();
-        $('body').setStyle({backgroundColor: '#F7F7F7'});
-        $('searchResultArea').update("");
+        var searchResultAreaDiv = $('#searchResultArea');
+        searchResultAreaDiv.hide();
+        $('#body').css({backgroundColor: '#F7F7F7'});
+        searchResultAreaDiv.html("");
     }
 
     function doSearchOnKeyUp(event) {
         // also see layout.css - if the transform is not applied (it's not in Opera because
         // it makes fonts fuzzy) we cannot use the popup as it will be misplaced, covering the
         // query box:
-        var isMozilla = $('body').getStyle('-moz-transform');
-        var isWebkit = $('body').getStyle('-webkit-transform');
-        //var isMs = $('body').getStyle('-ms-transform');
+        var bodyDiv = $('#body');
+        var isMozilla = bodyDiv.css('-moz-transform');
+        var isWebkit = bodyDiv.css('-webkit-transform');
         var isMs = false;  // not yet enabled, layout problems with the skew
         var hasTransformEnabled = isMozilla || isWebkit || isMs;
         if ((event.keyCode == 45/*Insert*/ || event.keyCode == 65/*A*/ || event.keyCode == 67/*C*/) && event.ctrlKey) {
@@ -65,43 +65,46 @@
         var searchString = document.searchform.q.value;
         currentValue = searchString;
         if (searchString === '' || searchString.length < minChars) {
-            $('searchResultArea').hide();
-            $('body').setStyle({backgroundColor: '#F7F7F7'});
-            $('searchResultArea').update("");
+            var searchResultAreaDiv = $('#searchResultArea');
+            searchResultAreaDiv.hide();
+            $('#body').css({backgroundColor: '#F7F7F7'});
+            searchResultAreaDiv.html("");
         } else {
-            $('searchResultArea').show();
-            $('body').setStyle({backgroundColor: '#e6e6e6'});
-            //$('searchResultTable').setStyle({opacity: 0.4}); -- too slow in Firefox
+            $('#searchResultArea').show();
+            $('#body').css({backgroundColor: '#e6e6e6'});
             cursorPosition = -1;
             var timeStamp = new Date().getTime();
             loadSynsetSearch();
             runningRequests++;
-            new Ajax.Request(
+            new jQuery.ajax(
                     '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                     {
                         method: 'get',
                         asynchronous: true,
-                        evalScripts: false,
-                        onSuccess: function(response){
-                            if (timeStamp < lastUpdateTimeStamp) {
-                                //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
-                            } else {
-                                $('searchResultArea').update(response.responseText);
-                                lastUpdateTimeStamp = timeStamp;
-                            }
-                        },
-                        onFailure: function(response){$('searchResultArea').update(response.responseText)},
-                        onComplete: function(e){
-                            if (runningRequests > 0) {
-                                runningRequests--;
-                            }
-                            if (runningRequests <= 0) {
-                                loadedSynsetSearch();
-                            }
-                        },
-                        parameters:'q=' + searchString + "&forumLink=false"
+                        data:{
+                            q: searchString,
+                            forumLink: "false"
+                        }
                     }
-            );
+            ).done(function(msg){
+                if (timeStamp < lastUpdateTimeStamp) {
+                    //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                } else {
+                    $('#searchResultArea').html(msg);
+                    lastUpdateTimeStamp = timeStamp;
+                }
+            }
+            ).fail(function(jqXHR, textStatus, errorThrown){
+                $('#searchResultArea').html(jqXHR.responseText);
+            }
+            ).always(function(e){
+                if (runningRequests > 0) {
+                    runningRequests--;
+                }
+                if (runningRequests <= 0) {
+                    loadedSynsetSearch();
+                }
+            });
         }
     }
 

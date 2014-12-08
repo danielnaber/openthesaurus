@@ -4,7 +4,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
-        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
         <script type="text/javascript">
         <!--
             function deleteItem(id, termLinkId) {

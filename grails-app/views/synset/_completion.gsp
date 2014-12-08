@@ -30,20 +30,20 @@ var cursorPosition = -1;
 
 function doSynsetSearchOnKeyUp(event, tmpLinkType, ajaxUrl) {
     switch (event.keyCode) {
-        case Event.KEY_UP:
+        case 38:  // KEY_UP
             if (cursorPosition > 0) {
                 cursorPosition--;
-                $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
+                $('#radioButton' + tmpLinkType + cursorPosition).prop("checked", "checked");
             }
             return;
-        case Event.KEY_DOWN:
-            if ($('radioButton' + tmpLinkType + (cursorPosition + 1))) {
+        case 40:  // KEY_DOWN:
+            if ($('#radioButton' + tmpLinkType + (cursorPosition + 1)).length !== 0) {
                 cursorPosition++;
-                $('radioButton' + tmpLinkType + cursorPosition).checked = true;  
+                $('#radioButton' + tmpLinkType + cursorPosition).prop("checked", "checked");
             }
             return;
-        case Event.KEY_RIGHT:
-        case Event.KEY_LEFT:
+        case 37:  // KEY_LEFT:
+        case 39:  // KEY_RIGHT:
             return;
     }
     linkType = tmpLinkType;
@@ -63,18 +63,25 @@ function onValueChange(ajaxUrl) {
     var searchString = document.editForm["q" + linkType].value;
     currentValue = searchString;
     if (searchString === '' || searchString.length < minChars) {
-        $('synsetLink' + linkType).update("");
+        $('#synsetLink' + linkType).html("");
     } else {
         cursorPosition = -1;
-        new Ajax.Updater('synsetLink' + linkType,
+        loadSearch(linkType);
+        new jQuery.ajax(
           '${createLinkTo(dir:"' + ajaxUrl + '",file:"")}',
           {
-           asynchronous: true,
-           evalScripts: false,
-           onLoaded: function(e){loadedSearch(linkType)},
-           onLoading: function(e){loadSearch(linkType)},
-           parameters:'q=' + searchString + '&linkTypeName=' + linkType
+           data: {
+            q: searchString,
+            linkTypeName: linkType
+           }
           }
-        );
+        ).fail(function(jqXHR, textStatus, errorThrown) {
+            loadedSearch(linkType);
+            $('#synsetLink' + linkType).html(jqXHR.responseText);
+          }
+        ).done(function(msg) {
+            loadedSearch(linkType);
+            $('#synsetLink' + linkType).html(msg);
+          });
     }
 }

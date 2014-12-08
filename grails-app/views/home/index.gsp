@@ -1,6 +1,5 @@
 <!doctype html>
 <%@page import="com.vionto.vithesaurus.*" %>
-<g:javascript library="prototype" />
 <html>
 <head>
     <title><g:message code="homepage.title"/></title>

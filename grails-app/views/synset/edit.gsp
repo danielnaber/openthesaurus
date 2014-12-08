@@ -1,5 +1,4 @@
 <%@page import="com.vionto.vithesaurus.tools.StringTools; com.vionto.vithesaurus.*" %>
-<g:javascript library="prototype" />
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,7 +7,6 @@
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
         </g:if>
-        <script type="text/javascript" src="${createLinkTo(dir:'js/prototype',file:'prototype.js?20130609')}"></script>
         <script type="text/javascript">
         <!--
 

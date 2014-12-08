@@ -124,13 +124,13 @@
                         <ul class="associationList">
                             <g:render template="linkMatches" model="${[links:subSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                             <g:if test="${moreSubSynsets}">
-                                <li id="subSynsetShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').show();$('subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
+                                <li id="subSynsetShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('#subSynset${synset.id}').show();$('#subSynsetShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreSubSynsets}">
                             <ul id="subSynset${synset.id}" class="associationList" style="display: none">
                                 <g:render template="linkMatches" model="${[links:moreSubSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
-                                <li><a href="#" class="moreLessLink" onclick="$('subSynset${synset.id}').hide();$('subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
+                                <li><a href="#" class="moreLessLink" onclick="$('#subSynset${synset.id}').hide();$('#subSynsetShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>
@@ -158,13 +158,13 @@
                         <ul class="associationList">
                             <g:render template="linkMatches" model="${[links:associationSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
                             <g:if test="${moreAssociationSynsets}">
-                                <li id="associationShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('association${synset.id}').show();$('associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
+                                <li id="associationShowLink${synset.id}"><a href="#" class="moreLessLink" onclick="$('#association${synset.id}').show();$('#associationShowLink${synset.id}').hide();return false;"><g:message code="result.link.show.all"/></a></li>
                             </g:if>
                         </ul>
                         <g:if test="${moreAssociationSynsets}">
                             <ul id="association${synset.id}" class="associationList" style="display: none">
                                 <g:render template="linkMatches" model="${[links:moreAssociationSynsets, itemPrefix: 'li', itemSuffix: '/li']}"/>
-                                <li><a href="#" class="moreLessLink" onclick="$('association${synset.id}').hide();$('associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
+                                <li><a href="#" class="moreLessLink" onclick="$('#association${synset.id}').hide();$('#associationShowLink${synset.id}').show();return false;"><g:message code="result.link.show.less"/></a></li>
                             </ul>
                         </g:if>
                     </div>
