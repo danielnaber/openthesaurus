@@ -71,6 +71,12 @@ p {
 
 /* */
 
+.tag {
+  color: white;
+  padding: 4px;
+  border-radius: 6px;
+}
+
 a:link, a:visited {
     text-decoration: none;
     color: #0071bd;

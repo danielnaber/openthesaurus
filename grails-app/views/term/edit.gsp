@@ -119,22 +119,19 @@
 	                            </tr> 
 						    </g:else>
 
-							<%-- 
+                        <%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <h2 class="noTopMargin"><g:message code="edit.term.word.form"/></h2>
+                                    <h2 class="noTopMargin"><g:message code="edit.term.tags"/></h2>
                                 </td>
-                                <td valign='top' class='value ${hasErrors(bean:term,field:'wordGrammar','errors')}'>
-                                    <g:if test="${editable}">
-                                        <g:select value="${term.wordGrammar?.id}" name="wordGrammar.id"
-                                            optionKey="id" from="${WordGrammar.list()}" />
+                                <td valign='top' class='value'>
+                                    <g:each in="${term.tags}">
+                                    </g:each>
+                                    <g:if test="${term.tags.size() == 0}">
+                                        <span class="metaInfo"><g:message code="edit.term.no.tags"/></span>
                                     </g:if>
-                                    <g:else>
-                                        ${term.wordGrammar?.toString()?.encodeAsHTML()}
-                                    </g:else>
                                 </td>
-                            </tr>
-                            --%>
+                            </tr>--%>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
@@ -162,33 +159,6 @@
                                 </td>
                             </tr>
 
-                            <%-- 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <h2 class="noTopMargin">Level</h2>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:term,field:'level','errors')}'>
-                                    <g:select value="${term.level?.id}" name="level.id" 
-                                        optionKey="id" from="${TermLevel.list()}" noSelection="['null':'[none]']" />
-                                </td>
-                            </tr>
-                            --%>
-
-                            <%--
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                </td>
-                                <td valign='top' class='value'>
-                                    <label><g:managedRadio disabled="${!editable}" id="wordFormCommon" name="wordForm"
-                                        value="common" checked="${true}" /> common word</label>&nbsp;
-                                    <label><g:managedRadio disabled="${!editable}" id="wordFormAcronym" name="wordForm"
-                                        value="acronym" checked="${term.isAcronym}" /> acronym</label>&nbsp;
-                                    <label><g:managedRadio disabled="${!editable}" id="wordFormAbbreviation" name="wordForm"
-                                        value="abbreviation" checked="${term.isShortForm}" /> abbreviation</label>
-                                </td>
-                            </tr>
-                            --%> 
-                            
                           <tr class='prop'>
                             <td valign="top"><h2 class="noTopMargin"><g:message code="edit.term.antonym"/></h2></td>
                             <td valign="top">

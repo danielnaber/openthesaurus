@@ -44,7 +44,7 @@ class Term implements Comparable, Cloneable {
 
     static belongsTo = [synset:Synset]
     
-    static hasMany = [termLinks:TermLink]
+    static hasMany = [termLinks:TermLink, tags:Tag]
 
     static constraints = {
         word(matches:TERM_REGEXP,minSize:1,
