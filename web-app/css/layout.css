@@ -75,6 +75,13 @@ p {
   color: white;
   padding: 2px 4px 2px 4px;
   border-radius: 6px;
+  font-weight: normal;
+}
+
+.selectedTag {
+  border-color: yellow;
+  border-width: 5px;
+  border-style: solid;
 }
 
 a:link, a:visited {

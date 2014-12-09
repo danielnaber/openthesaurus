@@ -1,4 +1,5 @@
 import com.vionto.vithesaurus.Tag
+import com.vionto.vithesaurus.Term
 import groovy.sql.Sql
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -21,7 +22,15 @@ class TagController extends BaseController {
         def sql = new Sql(dataSource)
         sql.eachRow("select count(*) as mycount, tag.name from term_tag, tag where tag_id = tag.id group by tag_id order by mycount desc",
                 { row -> nameToCount.put(row.name, row.mycount) })
-        [tags: list, tagInstanceTotal: Tag.count(), nameToCount:nameToCount]
+        List taggedTerms = []
+        if (params.tag) {
+            Tag wantedTag = Tag.findByName(params.tag)
+            if (!wantedTag) {
+                throw new Exception("Tag '${params.tag}' not found")
+            }
+            taggedTerms = Term.findAll("from Term where ? in elements(tags) order by word", [wantedTag])  // TODO:params
+        }
+        [tags: list, tagInstanceTotal: Tag.count(), nameToCount:nameToCount, taggedTerms: taggedTerms]
     }
 
     def detailList(Integer max) {

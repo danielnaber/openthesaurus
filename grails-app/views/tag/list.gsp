@@ -21,14 +21,32 @@
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
 
-			<div style="line-height: 20px;">
-				<g:each in="${tags}" status="i" var="tag">
+			<div style="line-height: 24px;">
+				<g:each in="${tags}" var="tag">
 					<g:set var="count" value="${nameToCount.get(tag.name)}"/>
 					<g:if test="${count}">
-						<span class="tag" style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()} (${count})</span>
+						<g:if test="${params.tag == tag.name}">
+							<span class="tag selectedTag"
+									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()}&nbsp;(${count})</span>
+						</g:if>
+						<g:else>
+							<g:link params="${[tag:tag.name]}"><span class="tag"
+									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()}&nbsp;(${count})</span></g:link>
+						</g:else>
 					</g:if>
 				</g:each>
 			</div>
+
+			<g:if test="${taggedTerms}">
+				<h2><g:message code="tag.found" args="${[params.tag]}"/></h2>
+
+				<ul>
+					<g:each in="${taggedTerms}" var="term">
+						<li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.encodeAsHTML()}</g:link></li>
+					</g:each>
+				</ul>
+			</g:if>
+
 		</div>
 	</div>
 	</body>
