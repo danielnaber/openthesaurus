@@ -7,9 +7,10 @@
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
         <g:render template="/script"/>
-        <g:layoutHead />
         <g:render template="/layouts/scripts"/>
+        <g:layoutHead />
     </head>
     <body>
 

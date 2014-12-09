@@ -1,4 +1,3 @@
-<script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
 <script type="text/javascript">
     <!--
     var onChangeInterval = null;
