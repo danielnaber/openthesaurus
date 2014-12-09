@@ -9,7 +9,7 @@
 	<body>
 
 		<div class="nav">
-			<span class="menuButton"><g:link class="create" action="list">All tags</g:link></span>
+			<span class="menuButton"><g:link class="create" action="detailList">All tags</g:link></span>
 		</div>
 
 		<hr/>

@@ -1,9 +1,12 @@
 import com.vionto.vithesaurus.Tag
+import groovy.sql.Sql
 import org.springframework.dao.DataIntegrityViolationException
 
 class TagController extends BaseController {
 
-    def beforeInterceptor = [action: this.&adminAuth]
+    def beforeInterceptor = [action: this.&adminAuth, except: ['list']]
+
+    def dataSource       // will be injected
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -11,7 +14,17 @@ class TagController extends BaseController {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
+    def list() {
+        def list = Tag.findAll()
+        list.sort()
+        LinkedHashMap nameToCount = new LinkedHashMap()
+        def sql = new Sql(dataSource)
+        sql.eachRow("select count(*) as mycount, tag.name from term_tag, tag where tag_id = tag.id group by tag_id order by mycount desc",
+                { row -> nameToCount.put(row.name, row.mycount) })
+        [tags: list, tagInstanceTotal: Tag.count(), nameToCount:nameToCount]
+    }
+
+    def detailList(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [tagInstanceList: Tag.list(params), tagInstanceTotal: Tag.count()]
     }

@@ -16,6 +16,7 @@
                     <%-- FIXME
                     <li><g:link controller="term" action="list"><g:message code="a_to_z"/></g:link></li>
                     --%>
+                    <li><g:link controller="tag" action="list"><g:message code="tag.link"/></g:link></li>
                     <li><g:link controller="association" action="list"><g:message code="association.link"/></g:link></li>
                     <li><g:link controller="term" action="antonyms"><g:message code="antonyms.link"/></g:link></li>
                     <li><g:link controller="synset" action="variation" id="at"><g:message code="austrian.words"/></g:link></li>
