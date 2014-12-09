@@ -282,7 +282,7 @@ class SynsetController extends BaseController {
                 def server = serverUrl.protocol + "://" + serverUrl.host + ":" + serverUrl.port
                 String url = server + createLinkTo(dir: 'synonyme') + "/search?" + paramsString
                 String urlContent = new URL(url).text
-                render "${params.callback}(${urlContent})"
+                render(text: "${params.callback}(${urlContent})", encoding: "utf-8")
             } else {
                 renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
             }
