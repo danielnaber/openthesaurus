@@ -55,7 +55,8 @@ class TermController extends BaseController {
             redirect(action:list)
         } else {
             List termLinkInfos = term.termLinkInfos()
-            return [ term : term, id: term.id, termLinkInfos: termLinkInfos, readOnlyMode: readOnlyMode() ]
+            List<Tag> allTags = Tag.findAll().sort()
+            return [ term : term, id: term.id, termLinkInfos: termLinkInfos, allTags: allTags, readOnlyMode: readOnlyMode() ]
         }
     }
 
@@ -70,6 +71,21 @@ class TermController extends BaseController {
                 render(view:'edit',model:[term:term, termLinkInfos:termLinkInfos, id:term.id],
                         contentType:"text/html", encoding:"UTF-8")
                 return
+            }
+            String[] tags = params.tags.split(",\\s*")
+            term.tags.toList().each { term.removeFromTags(it) }
+            for (tag in tags) {
+                Tag existingTag = Tag.findByName(tag)
+                if (existingTag) {
+                    term.addToTags(existingTag)
+                } else if (tag) {
+                    Tag newTag = new Tag()
+                    newTag.name = tag
+                    newTag.created = new Date()
+                    newTag.createdBy = session.user.realName
+                    newTag.save(flush: true, failOnError: true)
+                    term.addToTags(newTag)
+                }
             }
             saveAntonym(params, term)
             // create a term just for validation (we cannot assign the new 

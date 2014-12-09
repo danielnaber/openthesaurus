@@ -73,7 +73,7 @@ p {
 
 .tag {
   color: white;
-  padding: 4px;
+  padding: 2px 4px 2px 4px;
   border-radius: 6px;
 }
 
@@ -235,6 +235,11 @@ h3 {
   margin-left: 19px;
   margin-top: 10px;
   list-style-image: url(../images/arrow-blue.png)
+}
+
+.tagit {
+  margin-left: 0 !important;
+  margin-top: 0 !important;;
 }
 
 #body ul li {

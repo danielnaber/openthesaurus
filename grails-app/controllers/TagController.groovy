@@ -22,11 +22,12 @@ class TagController extends BaseController {
 
     def save() {
         def tagInstance = new Tag(params)
+        tagInstance.created = new Date()
+        tagInstance.createdBy = session.user.realName
         if (!tagInstance.save(flush: true)) {
             render(view: "create", model: [tagInstance: tagInstance])
             return
         }
-
         flash.message = message(code: 'default.created.message', args: [message(code: 'tag.label', default: 'Tag'), tagInstance.id])
         redirect(action: "show", id: tagInstance.id)
     }
@@ -38,7 +39,6 @@ class TagController extends BaseController {
             redirect(action: "list")
             return
         }
-
         [tagInstance: tagInstance]
     }
 
@@ -49,7 +49,6 @@ class TagController extends BaseController {
             redirect(action: "list")
             return
         }
-
         [tagInstance: tagInstance]
     }
 
@@ -89,7 +88,6 @@ class TagController extends BaseController {
             redirect(action: "list")
             return
         }
-
         try {
             tagInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'tag.label', default: 'Tag'), id])

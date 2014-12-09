@@ -31,6 +31,8 @@
 						<g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}" />
 						<g:sortableColumn property="shortName" title="${message(code: 'tag.shortName.label', default: 'Short Name')}" />
 						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Color')}" />
+						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Created')}" />
+						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Created By')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -41,6 +43,8 @@
 							<span class="tag" style="background-color: ${fieldValue(bean: tagInstance, field: "color")}">${fieldValue(bean: tagInstance, field: "shortName")}</span>
 						</td>
 						<td>${fieldValue(bean: tagInstance, field: "color")}</td>
+						<td><g:formatDate date="${tagInstance.created}"/></td>
+						<td>${fieldValue(bean: tagInstance, field: "createdBy")}</td>
 					</tr>
 				</g:each>
 				</tbody>

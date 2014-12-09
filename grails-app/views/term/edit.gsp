@@ -4,8 +4,45 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-ui.min.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'tag-it.min.js')}"></script>
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery-ui.css')}" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery.tagit.css')}" />
+        <g:set var="tagStr" value=""/>
+        <g:each in="${term.tags}" var="tag" status="i">
+            <g:if test="${i == 0}">
+                <g:set var="tagStr" value="${tag.name}"/>
+            </g:if>
+            <g:else>
+                <g:set var="tagStr" value="${tagStr + "," + tag.name}"/>
+            </g:else>
+        </g:each>
         <script type="text/javascript">
         <!--
+            $(document).ready(function() {
+                $("#tags").tagit(
+                    {
+                        readOnly: ${!session.user || readOnlyMode},
+                        singleField: true,
+                        removeConfirmation: true,
+                        autocomplete: {delay: 0, minLength: 1},
+                        availableTags: [
+                            <g:each in="${allTags}" var="tag" status="i">
+                                <g:if test="${i < allTags.size()-1}">
+                                    "${tag.name}",
+                                </g:if>
+                                <g:else>
+                                    "${tag.name}"
+                                </g:else>
+                            </g:each>
+                            ],
+                        caseSensitive: false,
+                        placeholderText: "Add tags here",
+                        allowSpaces: true
+                    }
+                );
+            });
+
             function deleteItem(id, termLinkId) {
                 var hiddenFieldName = 'deleteExistingTermLink_' + id + '_' + termLinkId;
                 var deleted = document.getElementById(hiddenFieldName).value != "";
@@ -119,19 +156,14 @@
 	                            </tr> 
 						    </g:else>
 
-                        <%--
                             <tr class='prop'>
                                 <td valign='top' class='name'>
                                     <h2 class="noTopMargin"><g:message code="edit.term.tags"/></h2>
                                 </td>
-                                <td valign='top' class='value'>
-                                    <g:each in="${term.tags}">
-                                    </g:each>
-                                    <g:if test="${term.tags.size() == 0}">
-                                        <span class="metaInfo"><g:message code="edit.term.no.tags"/></span>
-                                    </g:if>
+                                <td valign='top' class='value' style="width:400px">
+                                    <input id="tags" name="tags" type="text" value="${tagStr.encodeAsHTML()}"/>
                                 </td>
-                            </tr>--%>
+                            </tr>
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>

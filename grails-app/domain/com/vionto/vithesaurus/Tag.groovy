@@ -17,16 +17,26 @@
  */
 package com.vionto.vithesaurus
 
-class Tag {
+class Tag implements Comparable<Tag> {
 
     String name
     String shortName
     String color
+    Date created
+    String createdBy
 
     static constraints = {
         name(unique:true)
-        shortName(unique:true)
+        shortName(unique:true, nullable: true)
         color(nullable:true)
     }
 
+    String getBackgroundColor() {
+        return color ? color : "#aaaaaa"
+    }
+
+    @Override
+    int compareTo(Tag other) {
+        return created.getTime() - other.created.getTime()
+    }
 }

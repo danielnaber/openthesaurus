@@ -140,6 +140,10 @@
 
                                 <strong>${t.toString()?.encodeAsHTML()}</strong>
 
+                                <g:each in="${t.tags.sort()}" var="tag">
+                                    <span class="tag" style="background-color:${tag.getBackgroundColor()}" title="${tag.shortName ? tag.name.encodeAsHTML() : ''}">${tag.shortName ? tag.shortName.encodeAsHTML() : tag.name.encodeAsHTML()}</span>
+                                </g:each>
+
                                 <g:if test="${t.isAcronym}">
                                     <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
                                 </g:if>
