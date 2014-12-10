@@ -121,12 +121,9 @@ class Term implements Comparable, Cloneable {
     }
 
     /**
-     * A String representation with all important properties.
+     * A String representation with all important properties (also used for diffing items).
      */
     String toDetailedString() {
-        //return "${word} || abbrev=${isShortForm} | acronym=${isAcronym} | " +
-        //    "language=${language.shortForm} | form=${wordGrammar} | " +
-        //    "comment=${userComment}"
         StringBuilder sb = new StringBuilder()
         sb.append(word)
         if (level) {
@@ -136,6 +133,12 @@ class Term implements Comparable, Cloneable {
         if (userComment) {
           sb.append(" || comment=")
           sb.append(userComment)
+        }
+        if (tags) {
+            List sortedTags = new ArrayList(tags)
+            Collections.sort(sortedTags)
+            sb.append(" || tags=")
+            sb.append(sortedTags.join("|"))
         }
         return sb.toString()
     }
@@ -167,7 +170,17 @@ class Term implements Comparable, Cloneable {
     }
     
     Object clone() {
-        return super.clone()
+        def clone = super.clone()
+        clone.id = null
+        clone.tags = []
+        def tagsToAdd = []
+        for (tag in tags) {
+            tagsToAdd.add(Tag.get(tag.id))
+        }
+        for (tag in tagsToAdd) {
+            clone.addToTags(tag)
+        }
+        return clone
     }
 
     /**
