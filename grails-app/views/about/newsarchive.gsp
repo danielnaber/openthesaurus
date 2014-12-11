@@ -21,6 +21,12 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2014-12-10</span></td>
+            <td valign="top">Wörter können jetzt mit beliebigen Tags versehen werden. Hier findet man
+                <g:link controller="tag">die Liste der bisher benutzten Tags</g:link>.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2014-10-25</span></td>
             <td valign="top">OpenThesaurus ist auf einen neuen Server umgezogen. Dabei haben
                 wir die Konfiguration so geändert, dass jetzt alle Verbindungen zwischen den
