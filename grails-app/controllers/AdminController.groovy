@@ -18,6 +18,8 @@
 import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.StringTools
 
+import java.util.regex.Pattern
+
 class AdminController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
@@ -79,6 +81,61 @@ class AdminController extends BaseController {
             count++
         }
         render "<br>Ran over ${count} terms."
+    }
+
+    def tagging() {
+        List<Tag> allTags = Tag.findAll().sort()
+        [allTags: allTags]
+    }
+
+    def prepareTagging() {
+        Tag newTag = getTag(true)
+        List<Term> terms = getTerms()
+        Map termToNew = new HashMap()
+        for (term in terms) {
+            termToNew.put(term.word, applyPattern(term.word, params.pattern))
+        }
+        [terms: terms, termToNew: termToNew, newTag: newTag, pattern: params.pattern]
+    }
+
+    def doTagging() {
+        Tag newTag = getTag(false)
+        List<Term> terms = getTerms()
+        for (term in terms) {
+            term.word = applyPattern(term.word, params.pattern)
+            term.addToTags(newTag)
+            term.save(failOnError: true)
+        }
+        flash.message = "Tagged ${terms.size()} terms"
+        redirect(action: 'tagging')
+    }
+
+    private Tag getTag(boolean allowCreation) {
+        if (params.tags.contains(",")) {
+            throw new Exception("Words can only be tagged with one tag: ${params.tags}")
+        }
+        String tagName = params.tags
+        Tag newTag = Tag.findByName(tagName)
+        if (!newTag) {
+            if (allowCreation) {
+                newTag = new Tag()
+                newTag.name = tagName
+                newTag.created = new Date()
+                newTag.createdBy = session.user.userId
+                newTag.save(failOnError: true)
+            } else {
+                throw new Exception("Unknown tag '${params.tags}'")
+            }
+        }
+        return newTag
+    }
+
+    private List<Term> getTerms() {
+        return Term.findAllByWordLike("%" + params.pattern + "%")
+    }
+
+    private applyPattern(String word, String pattern) {
+        return word.replaceAll(Pattern.quote(pattern), "").replaceAll("  +", " ").trim();
     }
 
 }

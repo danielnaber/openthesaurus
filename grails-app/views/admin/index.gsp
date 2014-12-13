@@ -13,6 +13,7 @@
         <p>
         Manage:
         <g:link controller="tag" action="detailList">Tags</g:link> |
+        <g:link action="tagging">Tagging</g:link> |
         <g:link controller="test">Simple self-test</g:link> |
         <g:link controller="user" action="list">Users</g:link> |
         <g:link controller="language" action="list">Languages</g:link> |

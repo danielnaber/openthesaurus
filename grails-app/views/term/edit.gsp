@@ -4,10 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-ui.min.js')}"></script>
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'tag-it.min.js')}"></script>
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery-ui.css')}" />
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery.tagit.css')}" />
+        <g:render template="/taggingIncludes"/>
         <g:set var="tagStr" value=""/>
         <g:each in="${term.tags}" var="tag" status="i">
             <g:if test="${i == 0}">
@@ -19,29 +16,6 @@
         </g:each>
         <script type="text/javascript">
         <!--
-            $(document).ready(function() {
-                $("#tags").tagit(
-                    {
-                        readOnly: ${!session.user || readOnlyMode},
-                        singleField: true,
-                        removeConfirmation: true,
-                        autocomplete: {delay: 0, minLength: 1},
-                        availableTags: [
-                            <g:each in="${allTags}" var="tag" status="i">
-                                <g:if test="${i < allTags.size()-1}">
-                                    "${tag.name}",
-                                </g:if>
-                                <g:else>
-                                    "${tag.name}"
-                                </g:else>
-                            </g:each>
-                            ],
-                        caseSensitive: false,
-                        placeholderText: "Add tags here",
-                        allowSpaces: true
-                    }
-                );
-            });
 
             function deleteItem(id, termLinkId) {
                 var hiddenFieldName = 'deleteExistingTermLink_' + id + '_' + termLinkId;
