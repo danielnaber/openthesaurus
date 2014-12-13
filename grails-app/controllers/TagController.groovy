@@ -18,10 +18,10 @@ class TagController extends BaseController {
     def list() {
         def list = Tag.findAll()
         list.sort()
-        LinkedHashMap nameToCount = new LinkedHashMap()
+        LinkedHashMap tagToCount = new LinkedHashMap()
         def sql = new Sql(dataSource)
-        sql.eachRow("select count(*) as mycount, tag.name from term_tag, tag where tag_id = tag.id group by tag_id order by mycount desc",
-                { row -> nameToCount.put(row.name, row.mycount) })
+        sql.eachRow("select count(*) as mycount, tag.id from term_tag, tag where tag_id = tag.id group by tag_id order by mycount desc",
+                { row -> tagToCount.put(Tag.get(row.id), row.mycount) })
         List taggedTerms = []
         if (params.tag) {
             Tag wantedTag = Tag.findByName(params.tag)
@@ -35,7 +35,7 @@ class TagController extends BaseController {
                 }
             }
         }
-        [tags: list, tagInstanceTotal: Tag.count(), nameToCount:nameToCount, taggedTerms: taggedTerms]
+        [tags: list, tagInstanceTotal: Tag.count(), tagToCount: tagToCount, taggedTerms: taggedTerms]
     }
 
     def detailList(Integer max) {

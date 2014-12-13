@@ -22,9 +22,10 @@
 			</g:if>
 
 			<div style="line-height: 24px;">
-				<g:each in="${tags}" var="tag">
-					<g:set var="count" value="${nameToCount.get(tag.name)}"/>
+				<g:each in="${tagToCount}" var="item">
+					<g:set var="count" value="${item.value}"/>
 					<g:if test="${count}">
+						<g:set var="tag" value="${item.key}"/>
 						<g:if test="${params.tag == tag.name}">
 							<span class="tag selectedTag"
 									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()}&nbsp;(${count})</span>
