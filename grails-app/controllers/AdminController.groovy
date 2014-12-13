@@ -135,7 +135,7 @@ class AdminController extends BaseController {
     }
 
     private applyPattern(String word, String pattern) {
-        return word.replaceAll(Pattern.quote(pattern), "").replaceAll("  +", " ").trim();
+        return word.replaceAll(pattern, "").replaceAll("  +", " ").trim();
     }
 
 }

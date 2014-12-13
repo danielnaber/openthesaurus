@@ -16,7 +16,8 @@
 </g:if>
 
 <g:form action="prepareTagging" method="get" style="width:400px">
-    Replace <input name="pattern"/> with tag:<br/>
+    In all words that match regular expression <input name="pattern"/>, remove
+    the text matched by the regular expression and add tag:<br/>
     <input id="tags" name="tags" type="text" value=""/><br/>
     <input type="submit" value="Continue...">
 </g:form>
