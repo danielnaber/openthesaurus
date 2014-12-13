@@ -33,6 +33,10 @@ class TagController extends BaseController {
                 tags {
                     eq('id', wantedTag.id)
                 }
+                synset {
+                    eq('isVisible', true)
+                }
+                order("word", "asc")
             }
         }
         [tags: list, tagInstanceTotal: Tag.count(), tagToCount: tagToCount, taggedTerms: taggedTerms]
