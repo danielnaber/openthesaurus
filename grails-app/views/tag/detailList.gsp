@@ -28,6 +28,7 @@
 			<table>
 				<thead>
 					<tr>
+						<th></th>
 						<g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}" />
 						<g:sortableColumn property="shortName" title="${message(code: 'tag.shortName.label', default: 'Short Name')}" />
 						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Color')}" />
@@ -36,15 +37,16 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${tagInstanceList}" status="i" var="tagInstance">
+				<g:each in="${tagInstanceList}" status="i" var="tag">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${tagInstance.id}">${fieldValue(bean: tagInstance, field: "name")}</g:link></td>
+						<td><g:link controller="tag" params="${[tag: tag.name]}">Show</g:link></td>
+						<td><g:link action="edit" id="${tag.id}">${fieldValue(bean: tag, field: "name")}</g:link></td>
 						<td>
-							<span class="tag" style="background-color: ${fieldValue(bean: tagInstance, field: "color")}">${fieldValue(bean: tagInstance, field: "shortName")}</span>
+							<span class="tag" style="background-color: ${fieldValue(bean: tag, field: "color")}">${fieldValue(bean: tag, field: "shortName")}</span>
 						</td>
-						<td>${fieldValue(bean: tagInstance, field: "color")}</td>
-						<td><g:formatDate date="${tagInstance.created}"/></td>
-						<td>${fieldValue(bean: tagInstance, field: "createdBy")}</td>
+						<td>${fieldValue(bean: tag, field: "color")}</td>
+						<td><g:formatDate date="${tag.created}"/></td>
+						<td>${fieldValue(bean: tag, field: "createdBy")}</td>
 					</tr>
 				</g:each>
 				</tbody>

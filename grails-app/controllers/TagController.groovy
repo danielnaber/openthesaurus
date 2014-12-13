@@ -60,17 +60,7 @@ class TagController extends BaseController {
             return
         }
         flash.message = message(code: 'default.created.message', args: [message(code: 'tag.label', default: 'Tag'), tagInstance.id])
-        redirect(action: "show", id: tagInstance.id)
-    }
-
-    def show(Long id) {
-        def tagInstance = Tag.get(id)
-        if (!tagInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
-            redirect(action: "list")
-            return
-        }
-        [tagInstance: tagInstance]
+        redirect(action: "detailList", id: tagInstance.id)
     }
 
     def edit(Long id) {
@@ -109,7 +99,7 @@ class TagController extends BaseController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'tag.label', default: 'Tag'), tagInstance.id])
-        redirect(action: "show", id: tagInstance.id)
+        redirect(action: "detailList", id: tagInstance.id)
     }
 
     def delete(Long id) {
