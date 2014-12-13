@@ -28,7 +28,12 @@ class TagController extends BaseController {
             if (!wantedTag) {
                 throw new Exception("Tag '${params.tag}' not found")
             }
-            taggedTerms = Term.findAll("from Term where ? in elements(tags) order by word", [wantedTag])  // TODO:params
+            def c = Term.createCriteria()
+            taggedTerms = c.list {
+                tags {
+                    eq('id', wantedTag.id)
+                }
+            }
         }
         [tags: list, tagInstanceTotal: Tag.count(), nameToCount:nameToCount, taggedTerms: taggedTerms]
     }
