@@ -131,7 +131,14 @@ class AdminController extends BaseController {
     }
 
     private List<Term> getTerms() {
-        return Term.findAllByWordLike("%" + params.pattern + "%")
+        def c = Term.createCriteria()
+        List result = c.list {
+            like('word', "%" + params.pattern + "%")
+            synset {
+                eq('isVisible', true)
+            }
+        }
+        return result
     }
 
     private applyPattern(String word, String pattern) {
