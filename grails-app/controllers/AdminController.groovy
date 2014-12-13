@@ -93,7 +93,7 @@ class AdminController extends BaseController {
         List<Term> terms = getTerms()
         Map termToNew = new HashMap()
         for (term in terms) {
-            termToNew.put(term.word, applyPattern(term.word, params.pattern))
+            termToNew.put(term, applyPattern(term.word, params.pattern))
         }
         [terms: terms, termToNew: termToNew, newTag: newTag, pattern: params.pattern]
     }

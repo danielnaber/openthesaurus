@@ -15,7 +15,7 @@ Tag these words with: <span class="tag" style="background-color: ${newTag.getBac
 
 <ul>
 <g:each in="${termToNew}" var="entry">
-    <li>${entry.key.encodeAsHTML()} -&gt; <tt style="background-color: #dddddd">${entry.value.encodeAsHTML().replace(' ', '&nbsp;')}</tt></li>
+    <li><g:link controller="synset" action="edit" id="${entry.key.synset.id}">${entry.key.word.encodeAsHTML()}</g:link> -&gt; <tt style="background-color: #dddddd">${entry.value.encodeAsHTML().replace(' ', '&nbsp;')}</tt></li>
 </g:each>
 </ul>
 
