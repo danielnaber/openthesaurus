@@ -46,6 +46,11 @@
                   </tr>
 
                   <tr class="prop2">
+                      <td valign="top" align="right" class="statName"><g:link controller="tag"><g:message code="statistics.tags" /></g:link></td>
+                      <td valign="top" class="value"><g:decimal number="${tagCount}" /></td>
+                  </tr>
+
+                  <tr class="prop">
                       <td valign="top" align="right" class="statName"><g:message code="statistics.changes_last_7_days" /></td>
                       <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
                   </tr>

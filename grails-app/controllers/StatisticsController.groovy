@@ -58,8 +58,9 @@ class StatisticsController extends BaseController {
           }
           AssociationController associationController = new AssociationController()
           int associationCount = associationController.getAssociationCount()[0]
+          int tagCount = getTermTags(conn)
           [ latestChangesAllSections: latestChangesAllSections,
-            topUsers: topUsers, associationCount: associationCount ]
+            topUsers: topUsers, associationCount: associationCount, tagCount: tagCount ]
         } finally {
           if (resultSet != null) {
             resultSet.close()
@@ -70,6 +71,20 @@ class StatisticsController extends BaseController {
           if (conn != null) {
             conn.close()
           }
+        }
+    }
+
+    private int getTermTags(Connection conn) {
+        PreparedStatement ps
+        ResultSet resultSet
+        try {
+          ps = conn.prepareStatement("SELECT COUNT(*) AS count FROM term_tag")  //well, we also count deleted synsets...
+          resultSet = ps.executeQuery()
+          resultSet.next()
+          return resultSet.getInt("count")
+        } finally {
+          if (resultSet != null) resultSet.close()
+          if (ps != null) ps.close()
         }
     }
 
