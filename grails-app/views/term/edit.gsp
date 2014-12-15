@@ -6,7 +6,7 @@
         <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
         <g:render template="/taggingIncludes"/>
         <g:set var="tagStr" value=""/>
-        <g:each in="${term.tags}" var="tag" status="i">
+        <g:each in="${term.tags?.sort()}" var="tag" status="i">
             <g:if test="${i == 0}">
                 <g:set var="tagStr" value="${tag.name}"/>
             </g:if>
