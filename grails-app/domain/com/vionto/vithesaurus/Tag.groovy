@@ -37,9 +37,8 @@ class Tag implements Comparable<Tag> {
 
     @Override
     int compareTo(Tag other) {
-        return created.getTime() - other.created.getTime()
+        return name.compareTo(other.name)
     }
-
 
     @Override
     public String toString() {
