@@ -24,15 +24,14 @@
             <div class="result">
                 <g:set var="counter" value="${0}"/>
                 <g:each in="${synset?.sortedTerms()}" var="term">
+                    <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
                     <g:if test="${term.level}">
-                        <g:set var="displayTerm" value="${term.toString().encodeAsHTML() + ' (' + term.level?.shortLevelName.encodeAsHTML() + ')'}"/>
+                        <g:set var="displayTerm" value="${displayTerm + ' (' + term.level?.shortLevelName.encodeAsHTML() + ')'}"/>
                         <%
-                            displayTerm = displayTerm.replace(" (" + term.level?.shortLevelName.encodeAsHTML() + ")", " <span class='wordLevel'>(" + term.level?.shortLevelName.encodeAsHTML() + ")</span>");
+                            displayTerm = displayTerm.replace(" (" + term.level?.shortLevelName.encodeAsHTML() + ")",
+                              " <span class='wordLevel' title='${term.level.levelName}'>(" + term.level?.shortLevelName.encodeAsHTML() + ")</span>");
                         %>
                     </g:if>
-                    <g:else>
-                        <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
-                    </g:else>
 
                     <g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
                         <g:set var="delim" />
