@@ -28,11 +28,11 @@
 						<g:set var="tag" value="${item.key}"/>
 						<g:if test="${params.tag == tag.name}">
 							<span class="tag selectedTag"
-									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()}&nbsp;(${count})</span>
+									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML().replace(' ', '&nbsp;')}&nbsp;(${count})</span>
 						</g:if>
 						<g:else>
 							<g:link params="${[tag:tag.name]}"><span class="tag"
-									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML()}&nbsp;(${count})</span></g:link>
+									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML().replace(' ', '&nbsp;')}&nbsp;(${count})</span></g:link>
 						</g:else>
 					</g:if>
 				</g:each>
