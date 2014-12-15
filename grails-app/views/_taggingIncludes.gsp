@@ -9,24 +9,24 @@
         $(".tags").tagit(
             {
                 readOnly: ${!session.user || readOnlyMode},
-                        tagLimit: ${tagLimit ? tagLimit : 10},
-                        singleField: true,
-                        removeConfirmation: true,
-                        autocomplete: {delay: 0, minLength: 1},
-                        availableTags: [
-                            <g:set var="allTags" value="${Tag.findAll().sort()}"/>
-                            <g:each in="${allTags}" var="tag" status="i">
-                                <g:if test="${i < allTags.size()-1}">
-                                    "${tag.name}",
-                                </g:if>
-                                <g:else>
-                                    "${tag.name}"
-                                </g:else>
-                            </g:each>
-                        ],
-                        caseSensitive: false,
-                        placeholderText: "${placeholderText ? placeholderText : message(code:'tag.add.tags.here')}",
-                        allowSpaces: true
+                tagLimit: ${tagLimit ? tagLimit : 10},
+                singleField: true,
+                removeConfirmation: true,
+                autocomplete: {delay: 0, minLength: 1},
+                availableTags: [
+                    <g:set var="allTags" value="${Tag.findAll().sort()}"/>
+                    <g:each in="${allTags}" var="tag" status="i">
+                        <g:if test="${i < allTags.size()-1}">
+                            "${tag.name}",
+                        </g:if>
+                        <g:else>
+                            "${tag.name}"
+                        </g:else>
+                    </g:each>
+                ],
+                caseSensitive: false,
+                placeholderText: "${placeholderText ? placeholderText : message(code:'tag.add.tags.here')}",
+                allowSpaces: true
             }
         );
     });
