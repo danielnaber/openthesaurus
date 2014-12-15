@@ -25,11 +25,22 @@
                 <g:set var="counter" value="${0}"/>
                 <g:each in="${synset?.sortedTerms()}" var="term">
                     <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
+                    <g:set var="infos" value="${[]}"/>
                     <g:if test="${term.level}">
-                        <g:set var="displayTerm" value="${displayTerm + ' (' + term.level?.shortLevelName.encodeAsHTML() + ')'}"/>
                         <%
-                            displayTerm = displayTerm.replace(" (" + term.level?.shortLevelName.encodeAsHTML() + ")",
-                              " <span class='wordLevel' title='${term.level.levelName}'>(" + term.level?.shortLevelName.encodeAsHTML() + ")</span>");
+                        infos.add("<span title='${term.level.levelName}'>" + term.level?.shortLevelName.encodeAsHTML() + "</span>");
+                        %>
+                    </g:if>
+                    <g:if test="${term.tags}">
+                        <g:each in="${term.tags.sort()}" var="tag">
+                            <%
+                            infos.add("<span title='${tag.name}'>${tag.shortName ? tag.shortName : tag.name}</span>");
+                            %>
+                        </g:each>
+                    </g:if>
+                    <g:if test="${infos.size() > 0}">
+                        <%
+                        displayTerm = "${displayTerm} <span class='wordLevel'>(${infos.join(', ')})</span>";
                         %>
                     </g:if>
 
