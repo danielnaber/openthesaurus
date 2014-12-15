@@ -29,7 +29,7 @@ class TermLevel {
   static constraints = {
     levelName(unique:true)
     shortLevelName(unique:true)
-      sortValue(nullable: true)
+    sortValue(nullable: true)
   }
 
   String toString() {
