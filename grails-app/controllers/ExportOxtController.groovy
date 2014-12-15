@@ -28,7 +28,7 @@ import java.util.zip.ZipOutputStream
 import org.apache.commons.io.FileUtils
 
 /**
- * Exports concepts to an OpenOffice.org OXT file.
+ * Exports concepts to a LibreOffice/OpenOffice.org OXT file.
  */
 class ExportOxtController extends BaseController {
 
@@ -126,11 +126,9 @@ class ExportOxtController extends BaseController {
           List sortedTerms = synset.terms.sort()
           indexPos = dataWrite("-", bw, indexPos)
           // synonyms:
-          for (sortedTerm in sortedTerms) {
+          for (Term sortedTerm in sortedTerms) {
             String wordWithLevel = makeVariation(sortedTerm.word, variation)
-            if (sortedTerm.level) {
-              wordWithLevel = "${wordWithLevel} (${sortedTerm.level.shortLevelName})"
-            }
+            wordWithLevel = addLevelAndTags(wordWithLevel, sortedTerm)
             indexPos = dataWrite("|" + wordWithLevel, bw, indexPos)
           }
           // super terms:
@@ -140,9 +138,7 @@ class ExportOxtController extends BaseController {
               List superSortedTerms = superSynset.terms.sort()
               for (superTerm in superSortedTerms) {
                 String superWordWithLevel = makeVariation(superTerm.word, variation)
-                if (superTerm.level) {
-                  superWordWithLevel = "${superWordWithLevel} (${superTerm.level.shortLevelName})"
-                }
+                superWordWithLevel = addLevelAndTags(superWordWithLevel, superTerm)
                 superWordWithLevel = "${superWordWithLevel} (${SUPER_TERM})"
                 indexPos = dataWrite("|" + superWordWithLevel, bw, indexPos)
               }
@@ -179,6 +175,22 @@ class ExportOxtController extends BaseController {
       createZip(tmpFile, tmpFileIdx, variation)
       tmpFile.delete()
       tmpFileIdx.delete()
+  }
+
+  private String addLevelAndTags(String str, Term term) {
+    List info = []
+    if (term.level) {
+      info.add(term.level.shortLevelName)
+    }
+    if (term.tags) {
+      for (tag in term.tags.sort()) {
+        info.add(tag.shortName ? tag.shortName : tag.name)
+      }
+    }
+    if (info.size() > 0) {
+      str = "${str} (${info.join(', ')})"
+    }
+    return str
   }
 
   private String makeVariation(String str, String variation, boolean normalize = false) {
