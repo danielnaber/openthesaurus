@@ -21,6 +21,13 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2014-12-15</span></td>
+            <td valign="top">Es gibt jetzt eine
+                <g:link controller="search">erweiterte Suche</g:link> bei der die Suche nach
+                Wort-Teilen mit anderen Worteigenschaften wie Kategorie und Tag kombiniert werden kann.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2014-12-10</span></td>
             <td valign="top">Wörter können jetzt mit beliebigen Tags versehen werden. Hier findet man
                 <g:link controller="tag">die Liste der bisher benutzten Tags</g:link>.
