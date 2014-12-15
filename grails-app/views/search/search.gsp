@@ -25,6 +25,12 @@
         <li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.word}</g:link></li>
       </g:each>
     </ul>
+
+    <div class="paginateButtons">
+      <g:paginate maxsteps="5" max="20" total="${totalMatches}"
+                  params="${[contains:params.contains, startsWith:params.startsWith, endsWith:params.endsWith, level:params.level, category:params.category, tags:params.tags]}" />
+    </div>
+
   </div>
 
   <div style="clear: both"></div>

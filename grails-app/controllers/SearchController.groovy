@@ -19,6 +19,7 @@ import com.vionto.vithesaurus.Category
 import com.vionto.vithesaurus.Tag
 import com.vionto.vithesaurus.Term
 import com.vionto.vithesaurus.TermLevel
+import grails.gorm.DetachedCriteria
 
 class SearchController {
 
@@ -39,8 +40,8 @@ class SearchController {
             wantedTags.add(tag)
         }
         List<Long> hiddenSynsetIds = getHiddenSynsetIds()
-        def c = Term.createCriteria()
-        def result = c {
+        def detached = new DetachedCriteria(Term)
+        def c = detached.build {
             if (params.contains) {
                 ilike('word', "%" + params.contains + "%")
             }
@@ -64,7 +65,7 @@ class SearchController {
                 // TODO: semantics isn't clean yet...
                 for (Tag tag : wantedTags) {
                     tags {
-                            eq('id', tag.id)
+                        eq('id', tag.id)
                     }
                 }
             }
@@ -76,9 +77,10 @@ class SearchController {
             }
             order('word', 'asc')
         }
-        // TODO: paging
-        int totalMatches = result.size()
-        [result: result, totalMatches: totalMatches]
+        int offset = params.offset ? Integer.parseInt(params.offset) : 0
+        def limitedResult = c.list(offset: offset,  max: 20)
+        int totalMatches = c.count()
+        [result: limitedResult, totalMatches: totalMatches]
     }
 
     private List<Long> getHiddenSynsetIds() {
