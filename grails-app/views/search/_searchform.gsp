@@ -8,7 +8,6 @@
         <table>
             <tr>
                 <td><g:message code="powersearch.word.contains" /></td>
-                <!--<td><input name="contains" value="${params.contains}" autofocus/></td>-->
                 <td><g:textField name="contains" value="${params.contains}" autofocus=""/></td>
             </tr>
             <tr>
