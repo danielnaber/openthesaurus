@@ -34,6 +34,7 @@ class SearchController {
         for (String tagName : tagNames) {
             wantedTags.add(Tag.findByName(tagName))
         }
+        List<Long> hiddenSynsetIds = getHiddenSynsetIds()
         def c = Term.createCriteria()
         def result = c {
             if (params.contains) {
@@ -57,7 +58,7 @@ class SearchController {
             }
             if (wantedTags.size() > 0) {
                 // TODO: semantics isn't clean yet...
-                for (Tag tag  : wantedTags) {
+                for (Tag tag : wantedTags) {
                     tags {
                             eq('id', tag.id)
                     }
@@ -65,12 +66,26 @@ class SearchController {
             }
             synset {
                 eq('isVisible', true)
+                not {
+                    inList('id', hiddenSynsetIds)
+                }
             }
             order('word', 'asc')
         }
         // TODO: paging
-        // TODO: filter hidden...
         int totalMatches = result.size()
         [result: result, totalMatches: totalMatches]
     }
+
+    private List<Long> getHiddenSynsetIds() {
+        List<Long> hiddenSynsets = []
+        if (grailsApplication.config.thesaurus.hiddenSynsets) {
+            String[] hiddenSynsetStrings = grailsApplication.config.thesaurus.hiddenSynsets.split(",\\s*")
+            for (String id : hiddenSynsetStrings) {
+                hiddenSynsets.add(Long.parseLong(id))
+            }
+        }
+        return hiddenSynsets
+    }
+
 }
