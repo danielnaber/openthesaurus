@@ -17,7 +17,7 @@
     <g:render template="searchform"/>
   </div>
 
-  <div style="float:left; max-width: 330px">
+  <div style="float:left; max-width: 355px">
     <h2><g:message code="powersearch.results.headline" args="${[totalMatches]}" /></h2>
 
     <ul>
@@ -27,7 +27,7 @@
     </ul>
 
     <div class="paginateButtons">
-      <g:paginate maxsteps="5" max="20" total="${totalMatches}"
+      <g:paginate prev="&lt;" next="&gt;" maxsteps="4" max="20" total="${totalMatches}"
                   params="${[contains:params.contains, startsWith:params.startsWith, endsWith:params.endsWith, level:params.level, category:params.category, tags:params.tags]}" />
     </div>
 
