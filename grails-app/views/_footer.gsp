@@ -8,6 +8,7 @@
       <img style="width:100%;height:2px;margin-bottom:23px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
 
       <ul style="float: left; margin-right: 60px">
+          <li><g:link controller="search" action="index"><g:message code="powersearch.headline"/></g:link></li>
           <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
           <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
           <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>

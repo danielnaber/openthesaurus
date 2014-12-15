@@ -5,6 +5,7 @@
   <meta name="layout" content="main" />
   <g:set var="preventSearchFocus" value="true" scope="request" />
   <title><g:message code="powersearch.title" /></title>
+  <g:render template="/taggingIncludes" model="${[tagLimit: 1, placeholderText: message(code: 'powersearch.tag.placeholder')]}"/>
 </head>
 <body>
 

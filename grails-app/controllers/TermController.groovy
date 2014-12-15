@@ -55,8 +55,7 @@ class TermController extends BaseController {
             redirect(action:list)
         } else {
             List termLinkInfos = term.termLinkInfos()
-            List<Tag> allTags = Tag.findAll().sort()
-            return [ term : term, id: term.id, termLinkInfos: termLinkInfos, allTags: allTags, readOnlyMode: readOnlyMode() ]
+            return [ term : term, id: term.id, termLinkInfos: termLinkInfos, readOnlyMode: readOnlyMode() ]
         }
     }
 

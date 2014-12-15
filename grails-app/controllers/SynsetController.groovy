@@ -576,11 +576,10 @@ class SynsetController extends BaseController {
             tools.buildMetaInformation(eventList, diffs, typeNames)
             boolean showOrigSource =
                 grailsApplication.config.thesaurus.showOriginalSource == "true"
-            List<Tag> allTags = Tag.findAll().sort()
             long runTime = System.currentTimeMillis() - startTime
             return [ synset : synset, eventListCount : eventListCount, eventList : eventList,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
-                     readOnlyMode: readOnlyMode(), runTime : runTime, allTags: allTags ]
+                     readOnlyMode: readOnlyMode(), runTime : runTime ]
         }
     }
 

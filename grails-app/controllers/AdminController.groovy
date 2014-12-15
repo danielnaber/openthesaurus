@@ -84,8 +84,7 @@ class AdminController extends BaseController {
     }
 
     def tagging() {
-        List<Tag> allTags = Tag.findAll().sort()
-        [allTags: allTags]
+        []
     }
 
     def prepareTagging() {

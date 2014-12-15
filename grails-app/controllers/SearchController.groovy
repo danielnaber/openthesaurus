@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import com.vionto.vithesaurus.Category
+import com.vionto.vithesaurus.Tag
 import com.vionto.vithesaurus.Term
 import com.vionto.vithesaurus.TermLevel
 
@@ -26,9 +27,14 @@ class SearchController {
     }
 
     def search() {
-        def c = Term.createCriteria()
         TermLevel level = params.level ? TermLevel.findByLevelName(params.level) : null
         Category category = params.category ? Category.findByCategoryName(params.category) : null
+        String[] tagNames = params.tags ? params.tags.split(",\\s*") : []
+        List<Tag> wantedTags = []
+        for (String tagName : tagNames) {
+            wantedTags.add(Tag.findByName(tagName))
+        }
+        def c = Term.createCriteria()
         def result = c {
             if (params.contains) {
                 ilike('word', "%" + params.contains + "%")
@@ -49,11 +55,19 @@ class SearchController {
                     }
                 }
             }
+            if (wantedTags.size() > 0) {
+                // TODO: semantics isn't clean yet...
+                for (Tag tag  : wantedTags) {
+                    tags {
+                            eq('id', tag.id)
+                    }
+                }
+            }
             synset {
                 eq('isVisible', true)
             }
+            order('word', 'asc')
         }
-        // TODO: link it
         // TODO: paging
         // TODO: filter hidden...
         int totalMatches = result.size()

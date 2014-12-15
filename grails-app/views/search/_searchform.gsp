@@ -1,4 +1,5 @@
 <%@page import="com.vionto.vithesaurus.*" %>
+
 <g:form action="search" method="get">
 
     <p><g:message code="powersearch.intro" /></p>
@@ -25,6 +26,12 @@
             <tr>
                 <td><g:message code="powersearch.category" /></td>
                 <td><g:select name="category" from="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}" noSelection="['null':'-']" value="${params.category}"></g:select></td>
+            </tr>
+            <tr>
+                <td><g:message code="powersearch.tag" /></td>
+                <td>
+                    <input class="tags" name="tags" value="${params.tags}"/>
+                </td>
             </tr>
             <tr>
                 <td></td>

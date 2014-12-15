@@ -1,3 +1,4 @@
+<%@ page import="com.vionto.vithesaurus.Tag" %>
 <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-ui.min.js')}"></script>
 <script type="text/javascript" src="${createLinkTo(dir:'js',file:'tag-it.min.js')}"></script>
 <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery-ui.css')}" />
@@ -8,10 +9,12 @@
         $(".tags").tagit(
             {
                 readOnly: ${!session.user || readOnlyMode},
+                        tagLimit: ${tagLimit ? tagLimit : 10},
                         singleField: true,
                         removeConfirmation: true,
                         autocomplete: {delay: 0, minLength: 1},
                         availableTags: [
+                            <g:set var="allTags" value="${Tag.findAll().sort()}"/>
                             <g:each in="${allTags}" var="tag" status="i">
                                 <g:if test="${i < allTags.size()-1}">
                                     "${tag.name}",
@@ -22,7 +25,7 @@
                             </g:each>
                         ],
                         caseSensitive: false,
-                        placeholderText: "${message(code:'tag.add.tags.here')}",
+                        placeholderText: "${placeholderText ? placeholderText : message(code:'tag.add.tags.here')}",
                         allowSpaces: true
             }
         );
