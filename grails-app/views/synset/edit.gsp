@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()]}"/></title>
-        <g:render template="/taggingIncludes"/>
+        <g:render template="/taggingIncludes" model="${[readOnly: !session.user || readOnlyMode]}"/>
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
         </g:if>

@@ -5,7 +5,7 @@
   <meta name="layout" content="main" />
   <g:set var="preventSearchFocus" value="true" scope="request" />
   <title><g:message code="powersearch.title" /></title>
-  <g:render template="/taggingIncludes" model="${[tagLimit: 1, placeholderText: message(code: 'powersearch.tag.placeholder')]}"/>
+  <g:render template="/taggingIncludes" model="${[readOnly: false, tagLimit: 1, placeholderText: message(code: 'powersearch.tag.placeholder')]}"/>
 </head>
 <body>
 
@@ -13,15 +13,21 @@
 
   <h2><g:message code="powersearch.headline" /></h2>
 
-  <g:render template="searchform"/>
+  <div style="float:left;margin-right: 35px">
+    <g:render template="searchform"/>
+  </div>
 
-  <h2><g:message code="powersearch.results.headline" args="${[totalMatches]}" /></h2>
+  <div style="float:left; max-width: 330px">
+    <h2><g:message code="powersearch.results.headline" args="${[totalMatches]}" /></h2>
 
-  <ul>
-    <g:each in="${result}" var="term">
-      <li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.word}</g:link></li>
-    </g:each>
-  </ul>
+    <ul>
+      <g:each in="${result}" var="term">
+        <li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.word}</g:link></li>
+      </g:each>
+    </ul>
+  </div>
+
+  <div style="clear: both"></div>
 
 </body>
 </html>

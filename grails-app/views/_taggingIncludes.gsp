@@ -8,7 +8,7 @@
     $(document).ready(function() {
         $(".tags").tagit(
             {
-                readOnly: ${!session.user || readOnlyMode},
+                readOnly: ${readOnly},
                 tagLimit: ${tagLimit ? tagLimit : 10},
                 singleField: true,
                 removeConfirmation: true,

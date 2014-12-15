@@ -3,7 +3,7 @@
 <head>
     <title>Tag Words - OpenThesaurus</title>
     <meta name="layout" content="main" />
-    <g:render template="/taggingIncludes"/>
+    <g:render template="/taggingIncludes" model="${[readOnly: false]}"/>
 </head>
 <body>
 

@@ -32,7 +32,11 @@ class SearchController {
         String[] tagNames = params.tags ? params.tags.split(",\\s*") : []
         List<Tag> wantedTags = []
         for (String tagName : tagNames) {
-            wantedTags.add(Tag.findByName(tagName))
+            def tag = Tag.findByName(tagName)
+            if (tag == null) {
+                throw new Exception("Unknown tag: '${tagName}'")
+            }
+            wantedTags.add(tag)
         }
         List<Long> hiddenSynsetIds = getHiddenSynsetIds()
         def c = Term.createCriteria()

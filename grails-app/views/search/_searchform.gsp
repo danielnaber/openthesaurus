@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td><g:message code="powersearch.tag" /></td>
-                <td>
+                <td style="width:220px">
                     <input class="tags" name="tags" value="${params.tags}"/>
                 </td>
             </tr>

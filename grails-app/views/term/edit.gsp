@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="edit.term.title" args="${[term.toString()]}"/></title>
-        <g:render template="/taggingIncludes"/>
+        <g:render template="/taggingIncludes" model="${[readOnly: !session.user || readOnlyMode]}"/>
         <g:set var="tagStr" value=""/>
         <g:each in="${term.tags?.sort()}" var="tag" status="i">
             <g:if test="${i == 0}">
