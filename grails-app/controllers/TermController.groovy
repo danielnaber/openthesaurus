@@ -72,21 +72,9 @@ class TermController extends BaseController {
                         contentType:"text/html", encoding:"UTF-8")
                 return
             }
-            String[] tags = params.tags.split(",\\s*")
             term.tags.toList().each { term.removeFromTags(it) }
-            for (tag in tags) {
-                Tag existingTag = Tag.findByName(tag)
-                if (existingTag) {
-                    term.addToTags(existingTag)
-                } else if (tag) {
-                    Tag newTag = new Tag()
-                    newTag.name = tag
-                    newTag.created = new Date()
-                    newTag.createdBy = session.user.realName
-                    newTag.save(flush: true, failOnError: true)
-                    term.addToTags(newTag)
-                }
-            }
+            String[] tags = params.tags.split(",\\s*")
+            term.addTags(tags)
             saveAntonym(params, term)
             // create a term just for validation (we cannot assign the new 
             // properties to variable 'term' as it will then be saved even

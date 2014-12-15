@@ -252,6 +252,22 @@ class Term implements Comparable, Cloneable {
         }
     }
 
+    void addTags(String... tagNames) {
+        for (tag in tagNames) {
+            Tag existingTag = Tag.findByName(tag)
+            if (existingTag) {
+                addToTags(existingTag)
+            } else if (tag) {
+                Tag newTag = new Tag()
+                newTag.name = tag
+                newTag.created = new Date()
+                newTag.createdBy = session.user.realName
+                newTag.save(flush: true, failOnError: true)
+                addToTags(newTag)
+            }
+        }
+    }
+
     static int countVisibleTerms() {
         def c = createCriteria()
         int count = c.count {

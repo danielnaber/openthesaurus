@@ -576,10 +576,11 @@ class SynsetController extends BaseController {
             tools.buildMetaInformation(eventList, diffs, typeNames)
             boolean showOrigSource =
                 grailsApplication.config.thesaurus.showOriginalSource == "true"
+            List<Tag> allTags = Tag.findAll().sort()
             long runTime = System.currentTimeMillis() - startTime
             return [ synset : synset, eventListCount : eventListCount, eventList : eventList,
                      diffs: diffs, typeNames : typeNames, showOrigSource : showOrigSource,
-                     readOnlyMode: readOnlyMode(), runTime : runTime ]
+                     readOnlyMode: readOnlyMode(), runTime : runTime, allTags: allTags ]
         }
     }
 
@@ -767,6 +768,10 @@ class SynsetController extends BaseController {
             }
             if (params['wordGrammar.id_' + newTermCount] && params['wordGrammar.id_' + newTermCount] != "null") {
                 newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_' + newTermCount])
+            }
+            if (params['tags_' + newTermCount]) {
+                String[] tags = params['tags_' + newTermCount].split(",\\s*")
+                newTerm.addTags(tags)
             }
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), null, newTerm, params.changeComment)
             if (synset.containsWord(params['word_' + newTermCount])) {

@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()]}"/></title>
+        <g:render template="/taggingIncludes"/>
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
         </g:if>
@@ -140,7 +141,7 @@
 
                                 <strong>${t.toString()?.encodeAsHTML()}</strong>
 
-                                <g:each in="${t.tags.sort()}" var="tag">
+                                <g:each in="${t.tags?.sort()}" var="tag">
                                     <g:link controller="tag" params="${[tag: tag.name]}"><span class="tag" style="background-color:${tag.getBackgroundColor()}"
                                           title="${tag.shortName ? tag.name.encodeAsHTML() : ''}">${tag.shortName ? tag.shortName.encodeAsHTML() : tag.name.encodeAsHTML()}</span></g:link>
                                 </g:each>
@@ -212,23 +213,38 @@
                             <% int i = 0; %>
                             <div id="newTerm" style="display:none">
                                 <g:while test="${i < Integer.parseInt(grailsApplication.config.thesaurus.maxNewTerms)}">
-                                    <g:message code="edit.term.term"/>: <input onkeypress="return avoidSubmitOnReturn(event);"
-                                                                               class="termInput" spellcheck="true" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
-                                    <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
-                                        <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
-                                    </g:if>
-                                    <g:else>
-                                        <g:select class="submitButton" name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
-                                    </g:else>
-                                    <!--<g:message code="edit.term.level"/>: --><g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
-                                    <g:if test="${i == 0}">
-                                        <a href="#" onclick="toggleId('languageLevelHelp');return false;">[?]</a>
-                                        <div id="languageLevelHelp" style="display: none">
-                                            <g:render template="languageLevelHelp" />
-                                        </div>
-                                    </g:if>
-                                    <% i++ %>
-                                    <br />
+                                    <table>
+                                        <tr>
+                                            <td style="vertical-align: top"><g:message code="edit.term.term"/>:</td>
+                                            <td style="vertical-align: top">
+                                                <input onkeypress="return avoidSubmitOnReturn(event);"
+                                                       class="termInput" spellcheck="true" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                                <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
+                                                    <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
+                                                </g:if>
+                                                <g:else>
+                                                    <g:select class="submitButton" name="language.id_${i}" optionKey="id" from="${Language.list()}" />&nbsp;
+                                                </g:else>
+                                                <g:select class="submitButton" name="level.id_${i}" optionKey="id" noSelection="['null':'-']" from="${TermLevel.list()}" />&nbsp;
+                                            </td>
+                                            <td>
+                                                <g:if test="${i == 0}">
+                                                    <a href="#" onclick="toggleId('languageLevelHelp');return false;">[?]</a>
+                                                    <div id="languageLevelHelp" style="display: none;position: absolute">
+                                                        <g:render template="languageLevelHelp" />
+                                                    </div>
+                                                </g:if>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="width:350px">
+                                                <input class="tags" name="tags_${i}" type="text" value=""/>
+                                            </td>
+                                        </tr>
+                                        <% i++ %>
+                                    </table>
+                                    <br/>
                                 </g:while>
                             </div>
                         </g:if>

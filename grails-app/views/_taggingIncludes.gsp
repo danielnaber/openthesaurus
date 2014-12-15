@@ -5,7 +5,7 @@
 <script type="text/javascript">
 <!--
     $(document).ready(function() {
-        $("#tags").tagit(
+        $(".tags").tagit(
             {
                 readOnly: ${!session.user || readOnlyMode},
                         singleField: true,

@@ -135,7 +135,7 @@
                                     <h2 class="noTopMargin"><g:message code="edit.term.tags"/></h2>
                                 </td>
                                 <td valign='top' class='value' style="width:400px">
-                                    <input id="tags" name="tags" type="text" value="${tagStr.encodeAsHTML()}"/>
+                                    <input class="tags" name="tags" type="text" value="${tagStr.encodeAsHTML()}"/>
                                 </td>
                             </tr>
 
