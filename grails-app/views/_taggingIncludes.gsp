@@ -22,7 +22,7 @@
                             </g:each>
                         ],
                         caseSensitive: false,
-                        placeholderText: "Add tags here",
+                        placeholderText: "${message(code:'tag.add.tags.here')}",
                         allowSpaces: true
             }
         );
