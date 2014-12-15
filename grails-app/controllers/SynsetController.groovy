@@ -531,18 +531,19 @@ class SynsetController extends BaseController {
     def variation = {
       String limit = ""
       if (params.id == 'ch') {
-        limit = "schweiz."
+        limit = "schweizerisch"
       } else if (params.id == 'at') {
-        limit = "österr."
+        limit = "österreichisch"
       } else {
         throw new Exception("Unknown variation '${params.id}'")
       }
       String headline = message(code:'variation.headline.' + params.id)
       String title = message(code:'variation.title.' + params.id)
       String intro = message(code:'variation.intro.' + params.id)
-      def termList = Term.withCriteria {
-          or {
-            ilike('word', "%" + limit + "%")
+      def c = Term.createCriteria()
+      def termList = c.list {
+          tags {
+              eq('name', limit)
           }
           synset {
               eq('isVisible', true)

@@ -21,7 +21,7 @@
 
           <ul>
               <g:each in="${termList}" var="term">
-                  <li><g:link action="search" params="${[q: term.normalizedWord]}"
+                  <li><g:link action="search" params="${[q: term.word]}"
                       >${term.encodeAsHTML()}</g:link>
                       <%
                       int i = 0
