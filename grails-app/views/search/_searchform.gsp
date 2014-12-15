@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <td><g:message code="powersearch.level" /></td>
-                <td><g:select name="level" from="${TermLevel.list().sort()}" optionKey="levelName" noSelection="['null':'-']" value="${params.level}"></g:select></td>
+                <td><g:select name="level" from="${TermLevel.list()}" optionKey="levelName" noSelection="['null':'-']" value="${params.level}"></g:select></td>
             </tr>
             <tr>
                 <td><g:message code="powersearch.category" /></td>
