@@ -4,7 +4,11 @@
 <div id="powerSearchResult">
     <ul>
       <g:each in="${result}" var="term">
-        <li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.word}</g:link></li>
+        <li>
+            <g:link controller="synset" action="edit" id="${term.synset.id}">${term.word}</g:link>
+            <g:if test="${term.level}"><span class="termMetaInfo" title="${term.level.levelName.encodeAsHTML()}">${term.level.shortLevelName.encodeAsHTML()}</span></g:if>
+            <g:render template="/tag/termTags" model="${[term: term]}"/>
+        </li>
       </g:each>
     </ul>
 

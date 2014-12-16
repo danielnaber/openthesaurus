@@ -141,10 +141,7 @@
 
                                 <strong>${t.toString()?.encodeAsHTML()}</strong>
 
-                                <g:each in="${t.tags?.sort()}" var="tag">
-                                    <g:link controller="tag" params="${[tag: tag.name]}"><span class="tag" style="background-color:${tag.getBackgroundColor()}"
-                                          title="${tag.shortName ? tag.name.encodeAsHTML() : ''}">${tag.shortName ? tag.shortName.encodeAsHTML() : tag.name.encodeAsHTML()}</span></g:link>
-                                </g:each>
+                                <g:render template="/tag/termTags" model="${[term: t]}"/>
 
                                 <g:if test="${t.isAcronym}">
                                     <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
