@@ -1,6 +1,6 @@
 <%@page import="com.vionto.vithesaurus.*" %>
 
-<g:form action="search" method="get">
+<form id="powerSearchForm" action="search" method="get">
 
     <p><g:message code="powersearch.intro" /></p>
 
@@ -39,4 +39,4 @@
         </table>
     </div>
 
-</g:form>
+</form>
