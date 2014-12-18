@@ -252,7 +252,7 @@ class Term implements Comparable, Cloneable {
         }
     }
 
-    void addTags(String... tagNames) {
+    void addTags(def session, String... tagNames) {
         for (tag in tagNames) {
             Tag existingTag = Tag.findByName(tag)
             if (existingTag) {

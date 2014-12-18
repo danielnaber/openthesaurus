@@ -73,7 +73,7 @@ class TermController extends BaseController {
             }
             term.tags.toList().each { term.removeFromTags(it) }
             String[] tags = params.tags.split(",\\s*")
-            term.addTags(tags)
+            term.addTags(session, tags)
             saveAntonym(params, term)
             // create a term just for validation (we cannot assign the new 
             // properties to variable 'term' as it will then be saved even

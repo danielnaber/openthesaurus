@@ -770,7 +770,7 @@ class SynsetController extends BaseController {
             }
             if (params['tags_' + newTermCount]) {
                 String[] tags = params['tags_' + newTermCount].split(",\\s*")
-                newTerm.addTags(tags)
+                newTerm.addTags(session, tags)
             }
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request), null, newTerm, params.changeComment)
             if (synset.containsWord(params['word_' + newTermCount])) {
