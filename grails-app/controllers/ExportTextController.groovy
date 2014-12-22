@@ -69,8 +69,17 @@ class ExportTextController extends BaseController {
         }
         int i = 0
         for (term in synset.terms) {
+          List infos = []
           if (term.level) {
-            out.write(term.word + " (" + term.level + ")")
+            infos.add(term.level.shortLevelName)
+          }
+          if (term.tags) {
+            for (tag in term.tags.sort()) {
+              infos.add(tag.shortName ? tag.shortName : tag.name)
+            }
+          }
+          if (infos.size() > 0) {
+            out.write(term.word + " (" + infos.join(", ") + ")")
           } else {
             out.write(term.word)
           }
