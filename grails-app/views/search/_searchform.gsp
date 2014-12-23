@@ -44,7 +44,12 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input class="submitButton" type="submit" value="${message(code:'powersearch.submit')}"/></td>
+                <td>
+                    <input class="submitButton" type="submit" value="${message(code:'powersearch.submit')}"/>
+                    <span id="powerSearchSpinner" style="display:none;">
+                        <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" width="16" height="16" />
+                    </span>
+                </td>
             </tr>
         </table>
     </div>

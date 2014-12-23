@@ -10,12 +10,14 @@
     $(document).ready(function() {
       var form = $('#powerSearchForm');
       form.submit(function() {
+          $('#powerSearchSpinner').show();
           new jQuery.ajax($(this).attr('action'),
               {
                 data: $(this).serialize()
               }).
             done(function(msg){ $('#powerSearchResult').html(msg); }).
-            fail(function(jqXHR, textStatus, errorThrown){ $('#powerSearchResult').html(jqXHR.responseText); });
+            fail(function(jqXHR, textStatus, errorThrown){ $('#powerSearchResult').html(jqXHR.responseText); }).
+            always(function(){ $('#powerSearchSpinner').hide(); });
           form.find('input[name="submitted"]').val('1');  // to trigger search on back-button
           return false;
       });
