@@ -16,11 +16,10 @@
               }).
             done(function(msg){ $('#powerSearchResult').html(msg); }).
             fail(function(jqXHR, textStatus, errorThrown){ $('#powerSearchResult').html(jqXHR.responseText); });
+          form.find('input[name="submitted"]').val('1');  // to trigger search on back-button
           return false;
       });
-      if (form.find('input[name="contains"]').val() || form.find('input[name="startsWith"]').val() ||
-          form.find('input[name="endsWith"]').val() || form.find('select[name="level"]').val() !== 'null' ||
-          form.find('select[name="category"]').val() !== 'null' || form.find('input[name="tags"]').val()) {
+      if (form.find('input[name="submitted"]').val() == "1") {
         // useful to keep the back button working (except the current page status):
         form.submit();
       }

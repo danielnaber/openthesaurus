@@ -1,6 +1,7 @@
 <%@page import="com.vionto.vithesaurus.*" %>
 
 <form id="powerSearchForm" action="search" method="get">
+    <input type="hidden" name="submitted" value="0"/>
 
     <p><g:message code="powersearch.intro" /></p>
 
