@@ -56,6 +56,9 @@ class SearchController {
             if (params.endsWith) {
                 ilike('word', "%" + params.endsWith)
             }
+            if (params.commentContains) {
+                ilike('userComment', "%" + params.commentContains + "%")
+            }
             or {
                 for (level in levels) {
                     eq('level', level)

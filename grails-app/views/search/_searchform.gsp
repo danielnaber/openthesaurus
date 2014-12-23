@@ -20,6 +20,10 @@
                 <td><g:textField name="endsWith" value="${params.endsWith}"/></td>
             </tr>
             <tr>
+                <td><g:message code="powersearch.comment.contains" /></td>
+                <td><g:textField name="commentContains" value="${params.endsWith}"/></td>
+            </tr>
+            <tr>
                 <td style="vertical-align: top"><g:message code="powersearch.level" /></td>
                 <td>
                     <label><input type="checkbox" name="noLevel" value="1" checked/>&nbsp;<span class="metaInfo"><g:message code="edit.term.level.none"/></span></label><br/>
