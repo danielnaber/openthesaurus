@@ -14,7 +14,8 @@
 
     <div class="paginateButtons">
       <g:paginate prev="&lt;" next="&gt;" maxsteps="4" max="20" total="${totalMatches}"
-                  params="${[contains:params.contains, startsWith:params.startsWith, endsWith:params.endsWith, level:params.level, category:params.category, tags:params.tags]}" />
+                  params="${[contains:params.contains, startsWith:params.startsWith, endsWith:params.endsWith,
+                             level:params.level, category:params.category, tags:params.tags, noLevel:params.noLevel]}" />
     </div>
 </div>
 

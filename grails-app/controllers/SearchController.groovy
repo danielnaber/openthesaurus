@@ -28,7 +28,12 @@ class SearchController {
     }
 
     def search() {
-        TermLevel level = params.level ? TermLevel.findByLevelName(params.level) : null
+        List levels = []
+        if (params.level) {
+            for (levelId in params.level) {
+                levels.add(TermLevel.get(levelId))
+            }
+        }
         Category category = params.category ? Category.findByCategoryName(params.category) : null
         String[] tagNames = params.tags ? params.tags.split(",\\s*") : []
         List<Tag> wantedTags = []
@@ -51,8 +56,13 @@ class SearchController {
             if (params.endsWith) {
                 ilike('word', "%" + params.endsWith)
             }
-            if (level) {
-                eq('level', level)
+            or {
+                for (level in levels) {
+                    eq('level', level)
+                }
+                if (params.noLevel) {
+                    isNull('level')
+                }
             }
             if (category) {
                 synset {

@@ -19,8 +19,13 @@
                 <td><g:textField name="endsWith" value="${params.endsWith}"/></td>
             </tr>
             <tr>
-                <td><g:message code="powersearch.level" /></td>
-                <td><g:select name="level" from="${TermLevel.list()}" optionKey="levelName" noSelection="['null':'-']" value="${params.level}"></g:select></td>
+                <td style="vertical-align: top"><g:message code="powersearch.level" /></td>
+                <td>
+                    <label><input type="checkbox" name="noLevel" value="1" checked/>&nbsp;<span class="metaInfo"><g:message code="edit.term.level.none"/></span></label><br/>
+                    <g:each in="${TermLevel.list()}" var="level">
+                        <label><input type="checkbox" name="level" value="${level.id}" checked/>&nbsp;${level.levelName.encodeAsHTML()}</label><br/>
+                    </g:each>
+                </td>
             </tr>
             <tr>
                 <td><g:message code="powersearch.category" /></td>
