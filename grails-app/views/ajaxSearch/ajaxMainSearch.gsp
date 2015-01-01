@@ -47,9 +47,7 @@
                        %>
                        <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
                            ${directMatchingTerm}
-                           <g:if test="${term.level}">
-                             <span class="metaInfo">(${term.level.shortLevelName})</span>
-                           </g:if>
+                           <g:render template="metaInfo" model="${[term:term]}"/>
                        </g:link>
                        <g:set var="firstVal" value="${false}"/>
                    </g:each>
@@ -93,9 +91,7 @@
                         %>
                         <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
                             ${matchingTerm}
-                            <g:if test="${term.level}">
-                                <span class="metaInfo">(${term.level.shortLevelName})</span>
-                            </g:if>
+                            <g:render template="metaInfo" model="${[term:term]}"/>
                         </g:link>
                         <g:set var="firstVal" value="${false}"/>
                     </g:each>
