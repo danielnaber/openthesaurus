@@ -1,10 +1,15 @@
 <g:set var="metaInfos" value="${[]}"/>
 <g:if test="${term.level}">
-    <% metaInfos.add(term.level.shortLevelName) %>
+    <% metaInfos.add("<span title='${term.level.levelName.encodeAsHTML()}'>" + term.level.shortLevelName.encodeAsHTML() + "</span>") %>
 </g:if>
 <g:if test="${term.tags}">
     <g:each in="${term.tags.sort()}" var="tag">
-        <% metaInfos.add(tag.shortName ? tag.shortName : tag.name) %>
+        <g:if test="${tag.shortName}">
+            <% metaInfos.add("<span title='" + tag.name.encodeAsHTML() + "'>" + tag.shortName.encodeAsHTML() + "</span>") %>
+        </g:if>
+        <g:else>
+            <% metaInfos.add(tag.name.encodeAsHTML()) %>
+        </g:else>
     </g:each>
 </g:if>
 <g:if test="${metaInfos.size() > 0}">
