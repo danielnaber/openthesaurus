@@ -54,6 +54,15 @@
                   </tr>
               </table>
           </div>
+          <div class="iconLink">
+              <table>
+                  <tr>
+                      <td><a href="https://github.com/danielnaber/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="30" height="30" alt="Github-Icon"/></a></td>
+                      <td>&nbsp;</td>
+                      <td><g:message code="footer.github"/></td>
+                  </tr>
+              </table>
+          </div>
 
       </div>
 
