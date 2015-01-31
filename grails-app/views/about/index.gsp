@@ -28,13 +28,15 @@
     
     
             <h2>Lizenz</h2>
-    
+
+            <img src="../images/cc-LGPL-a.png" alt="GNU LGPL" style="margin-left:10px;float:right"/>
+
             <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
               <a rel="license" href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
               Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
               können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
               und openthesaurus.de mit Link als die Quelle angegeben wird.</p>
-    
+
             <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
               er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
               Auf diesem Server (www.openthesaurus.de) läuft Version <g:meta name="app.version"/>.
