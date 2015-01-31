@@ -15,7 +15,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * A set of terms and other meta information. This makes
@@ -299,8 +301,16 @@ class Synset implements Cloneable {
         }
         List enhancedTerms = []
         for (term in terms) {
+          List metaInfos = []
           if (term.level && addLevel) {
-              enhancedTerms.add(term.word + " (" + term.level.shortLevelName + ")")
+              metaInfos.add(term.level.shortLevelName)
+          }
+          List tags = term.tags.sort()
+          for (tag in tags) {
+              metaInfos.add(tag.shortName ? tag.shortName : tag.name)
+          }
+          if (metaInfos.size() > 0) {
+              enhancedTerms.add(term.word + " (" + StringUtils.join(metaInfos, ", ") + ")")
           } else {
               enhancedTerms.add(term.word)
           }
