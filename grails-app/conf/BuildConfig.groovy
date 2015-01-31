@@ -41,6 +41,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10.16"
         runtime ":jquery:1.7.1"
         runtime ":resources:1.2.8"
+        compile ":feeds:1.6"
         compile ':scaffolding:1.0.0'
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
