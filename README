@@ -76,7 +76,7 @@ Please refer to the container's documentation on how to do that.
 BUILDING
 
 If you want to build OpenThesaurus on your own you will need
-Grails 2.2.4 (http://www.grails.org).
+Grails 2.3.11 (http://www.grails.org).
 
 For development, your database needs to be configured in
 grails-app/conf/datasource-dev.properties. Use "grails run-app"
