@@ -96,7 +96,7 @@ class TreeController extends BaseController {
             sb.append("<tt><a href=\"${createLink(controller:'tree', id:subSynset.id)}#target\">[+]</a></tt> ")
           }
           sb.append("<a href=\"${createLink(controller:'synset', action:'edit', id:subSynset.id)}\">"
-              + subSynset.toShortString().encodeAsHTML() + "</a>")
+              + subSynset.toShortStringWithShortLevel(3, true).encodeAsHTML() + "</a>")
           sb.append("</li>\n")
         }
       }
