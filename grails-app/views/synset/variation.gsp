@@ -22,7 +22,7 @@
           <ul>
               <g:each in="${termList}" var="term">
                   <li><g:link action="search" params="${[q: term.word]}"
-                      >${term.encodeAsHTML()}</g:link>
+                      >${term.encodeAsHTML()} <g:render template="/ajaxSearch/metaInfo" model="${[term:term]}"/></g:link>
                       <%
                       int i = 0
                       %>
@@ -43,6 +43,10 @@
                   </li>
               </g:each>
           </ul>
-			            
+
+          <div class="paginateButtons">
+              <g:paginate total="${matchCount}" id="${params.id}" />
+          </div>
+
     </body>
 </html>

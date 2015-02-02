@@ -540,8 +540,15 @@ class SynsetController extends BaseController {
       String headline = message(code:'variation.headline.' + params.id)
       String title = message(code:'variation.title.' + params.id)
       String intro = message(code:'variation.intro.' + params.id)
-      def c = Term.createCriteria()
-      def termList = c.list {
+      def matchCount = Term.createCriteria().count {
+          tags {
+              eq('name', limit)
+          }
+          synset {
+              eq('isVisible', true)
+          }
+      }
+      def termList = Term.createCriteria().list {
           tags {
               eq('name', limit)
           }
@@ -549,9 +556,11 @@ class SynsetController extends BaseController {
               eq('isVisible', true)
           }
           order('word', 'asc')
+          firstResult(params.offset ? params.offset.toInteger() : 0)
+          maxResults(20)
       }
       [headline: headline, title: title, intro: intro,
-       termList: termList]
+       termList: termList, matchCount: matchCount]
     }
 
     def edit = {
