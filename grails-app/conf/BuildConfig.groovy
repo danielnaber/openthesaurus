@@ -43,6 +43,7 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.2.8"
         compile ":feeds:1.6"
         compile ':scaffolding:1.0.0'
+        compile ":mail:1.0.7"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
