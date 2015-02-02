@@ -12,23 +12,17 @@
 
         <h2><g:message code="antonyms.headline" /> (${matchCount})</h2>
 
-        <div class="list">
-            <table>
-                <tbody>
-                <g:each in="${termLinks}" var="termLink">
-                    <tr>
-                        <td style="padding: 2px">
-                          <g:link controller="term" action="edit" id="${termLink.term.id}">${termLink.term.encodeAsHTML()}
-                              <g:render template="/ajaxSearch/metaInfo" model="${[term:termLink.term]}"/></g:link>
-                          ~
-                          <g:link controller="term" action="edit" id="${termLink.targetTerm.id}">${termLink.targetTerm.encodeAsHTML()}
-                              <g:render template="/ajaxSearch/metaInfo" model="${[term:termLink.targetTerm]}"/></g:link>
-                        </td>
-                    </tr>
-                </g:each>
-                </tbody>
-            </table>
-        </div>
+        <ul>
+            <g:each in="${termLinks}" var="termLink">
+                <li>
+                  <g:link controller="term" action="edit" id="${termLink.term.id}">${termLink.term.encodeAsHTML()}
+                      <g:render template="/ajaxSearch/metaInfo" model="${[term:termLink.term]}"/></g:link>
+                  ~
+                  <g:link controller="term" action="edit" id="${termLink.targetTerm.id}">${termLink.targetTerm.encodeAsHTML()}
+                      <g:render template="/ajaxSearch/metaInfo" model="${[term:termLink.targetTerm]}"/></g:link>
+                </li>
+            </g:each>
+        </ul>
 
         <div class="paginateButtons">
             <g:paginate total="${matchCount}"/>
