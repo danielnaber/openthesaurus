@@ -206,7 +206,6 @@ class TermController extends BaseController {
         }
         def matchCount = matchCountResult.get(0)
         def matches = Term.withCriteria {
-          // TODO: avoid the duplication for count and match
           synset {
             eq('isVisible', true)
           }
@@ -226,9 +225,6 @@ class TermController extends BaseController {
           order("word", "asc")
           maxResults(params.max)
           firstResult(params.offset)
-          projections {
-            distinct("word")
-          }
         }
         if (params.levelId) {
           TermLevel termLevel = TermLevel.get(params.levelId)

@@ -20,7 +20,8 @@
 
         <ul>
             <g:each in="${matches}" status="i" var="term">
-                <li><g:link controller="synset" action="search" params="${['q': term]}">${term.encodeAsHTML()}</g:link></li>
+                <li><g:link controller="synset" action="search" params="${['q': term]}">${term.encodeAsHTML()}
+                    <g:render template="/ajaxSearch/metaInfo" model="${[term:term]}"/></g:link></li>
             </g:each>
         </ul>
         <div class="paginateButtons">
