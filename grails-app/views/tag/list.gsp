@@ -43,7 +43,8 @@
 
 				<ul>
 					<g:each in="${taggedTerms}" var="term">
-						<li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.encodeAsHTML()}</g:link></li>
+						<li><g:link controller="synset" action="edit" id="${term.synset.id}">${term.encodeAsHTML()}
+                            <g:render template="/ajaxSearch/metaInfo" model="${[term:term]}"/></g:link></li>
 					</g:each>
 				</ul>
 			</g:if>
