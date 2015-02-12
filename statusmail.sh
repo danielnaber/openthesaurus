@@ -26,6 +26,9 @@ grep -c "Search(ms):xml" $LOG >>$OUT
 echo -n "API Searches (JSON): " >>$OUT
 grep -c "Search(ms):jso" $LOG >>$OUT
 
+echo -n "Blocked API requests: " >>$OUT
+grep -c "Too many requests from" $LOG >>$OUT
+
 echo "" >>$OUT
 
 echo -n "Errors: " >>$OUT
