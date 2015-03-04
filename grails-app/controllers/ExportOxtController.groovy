@@ -184,7 +184,9 @@ class ExportOxtController extends BaseController {
     }
     if (term.tags) {
       for (tag in term.tags.sort()) {
-        info.add(tag.shortName ? tag.shortName : tag.name)
+        if (!tag.isInternal()) {
+          info.add(tag.shortName ? tag.shortName : tag.name)
+        }
       }
     }
     if (info.size() > 0) {

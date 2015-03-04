@@ -32,7 +32,20 @@ class Tag implements Comparable<Tag> {
     }
 
     String getBackgroundColor() {
-        return color ? color : "#aaaaaa"
+        if (color) {
+            return color
+        } else {
+            if (isInternal()) {
+                return "#f2a929"
+            } else {
+                return "#aaaaaa"
+            }
+        }
+    }
+
+    /** Whether this is an internal tag that's only to be displayed to logged-in users. */
+    boolean isInternal() {
+        return name.startsWith(":")
     }
 
     @Override

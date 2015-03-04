@@ -75,7 +75,9 @@ class ExportTextController extends BaseController {
           }
           if (term.tags) {
             for (tag in term.tags.sort()) {
-              infos.add(tag.shortName ? tag.shortName : tag.name)
+              if (!tag.isInternal()) {
+                infos.add(tag.shortName ? tag.shortName : tag.name)
+              }
             }
           }
           if (infos.size() > 0) {

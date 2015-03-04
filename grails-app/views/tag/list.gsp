@@ -23,8 +23,9 @@
 
 			<div style="line-height: 24px;">
 				<g:each in="${tagToCount}" var="item">
-					<g:set var="count" value="${item.value}"/>
-					<g:if test="${count}">
+                    <g:set var="showTag" value="${!item.key.isInternal() || session.user}"/>
+                    <g:set var="count" value="${item.value}"/>
+					<g:if test="${showTag && count > 0}">
 						<g:set var="tag" value="${item.key}"/>
 						<g:if test="${params.tag == tag.name}">
 							<span class="tag selectedTag"
