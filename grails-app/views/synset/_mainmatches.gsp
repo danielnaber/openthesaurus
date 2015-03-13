@@ -34,7 +34,13 @@
                     <g:if test="${term.tags}">
                         <g:each in="${term.tags.sort()}" var="tag">
                             <%
-                            infos.add("<span title='${tag.name}'>${tag.shortName ? tag.shortName : tag.name}</span>");
+                            if (!tag.isInternal() || session.user) {
+                                String title = tag.name;
+                                if (tag.isInternal()) {
+                                    title = message(code:'tag.internal.tooltip');
+                                }
+                                infos.add("<span title='${title}'>${tag.shortName ? tag.shortName : tag.name}</span>");
+                            }
                             %>
                         </g:each>
                     </g:if>
