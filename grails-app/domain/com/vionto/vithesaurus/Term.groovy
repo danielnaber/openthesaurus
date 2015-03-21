@@ -25,6 +25,8 @@ import org.hibernate.ObjectNotFoundException;
  */
 class Term implements Comparable, Cloneable {
 
+    def grailsApplication
+
     Synset synset           // synset to which this term belongs
     String word
     String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses and their content removed)
@@ -67,6 +69,9 @@ class Term implements Comparable, Cloneable {
 
     static mapping = {
     }
+
+    static Tag specialTag
+    static boolean specialTagIsSet
 
     Term() {
         // needed for test cases
@@ -148,27 +153,49 @@ class Term implements Comparable, Cloneable {
      * then by term (alphabetically) as a final criterion.
      */
     int compareTo(Object other) {
-        if (other.language == language) {
-            int sortValue = level?.sortValue ? level.sortValue : 0
-            int otherSortValue = other.level?.sortValue ? other.level.sortValue : 0
-            if (sortValue == otherSortValue) {
-                String normalizedWord = StringTools.normalizeForSort(word)
-                String otherNormalizedWord = StringTools.normalizeForSort(other.word)
-                int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
-                if (compare == 0) {
-                    // force stable order on words that only differ in case
-                    return word.compareTo(other.word)
-                } else {
-                    return compare
-                }
-            } else {
-                return sortValue - otherSortValue
+        if (!specialTagIsSet) {
+            def topSortTag = grailsApplication.config.thesaurus.topSortTag
+            if (topSortTag) {
+                specialTag = Tag.findByName(topSortTag)
             }
+            specialTagIsSet = true  // only init once for better performance
+        }
+        if (other.language == language) {
+            if (specialTag) {
+                def term1prefer = tags?.contains(specialTag)
+                def term2prefer = other.tags?.contains(specialTag)
+                if (term1prefer && !term2prefer) {
+                    return -1
+                } else if (!term1prefer && term2prefer) {
+                    return 1
+                } else if (term1prefer && term2prefer) {
+                    return word.compareTo(other.word)
+                }
+            }
+            return compareByLevelAndName(this, other)
         } else {
             return language.id - other.language.id
         }
     }
-    
+
+    def compareByLevelAndName(Term term1, Term term2) {
+        int sortValue = term1.level?.sortValue ? term1.level.sortValue : 0
+        int otherSortValue = term2.level?.sortValue ? term2.level.sortValue : 0
+        if (sortValue == otherSortValue) {
+            String normalizedWord = StringTools.normalizeForSort(term1.word)
+            String otherNormalizedWord = StringTools.normalizeForSort(term2.word)
+            int compare = normalizedWord.compareToIgnoreCase(otherNormalizedWord)
+            if (compare == 0) {
+                // force stable order on words that only differ in case
+                return term1.word.compareTo(term2.word)
+            } else {
+                return compare
+            }
+        } else {
+            return sortValue - otherSortValue
+        }
+    }
+
     Object clone() {
         def clone = super.clone()
         clone.id = null

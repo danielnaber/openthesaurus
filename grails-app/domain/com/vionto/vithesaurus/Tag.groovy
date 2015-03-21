@@ -57,4 +57,18 @@ class Tag implements Comparable<Tag> {
     public String toString() {
         return name;
     }
+
+    @Override
+    boolean equals(Object other) {
+        if (other instanceof Tag) {
+            return other.name == name
+        } else {
+            return false
+        }
+    }
+
+    @Override
+    int hashCode() {
+        return name.hashCode()
+    }
 }
