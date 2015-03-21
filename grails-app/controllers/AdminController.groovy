@@ -18,8 +18,6 @@
 import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.StringTools
 
-import java.util.regex.Pattern
-
 class AdminController extends BaseController {
     
     def beforeInterceptor = [action: this.&adminAuth]
@@ -34,22 +32,7 @@ class AdminController extends BaseController {
     }
 
     def checkNormalizedTermIntegrity = {
-        List terms = Term.list()
-        int count = 0
-        for (term in terms) {
-            if (!term.synset.isVisible) {
-                continue
-            }
-            String normalizedWord = StringTools.normalize(term.word)
-            if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
-                render "Error1: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord}</a><br />"
-            }
-            String normalizedWord2 = StringTools.normalize2(term.word)
-            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2 && normalizedWord2 != normalizedWord) {
-                render "Error2: <a href='../term/edit/${term.id}'>${term.word} | ${term.normalizedWord2}</a><br />"
-            }
-            count++
-        }
+        int count = runTermIntegrityCheck(false)
         render "<br>Checked ${count} terms."
         render "<form action='updateNormalizedTerms' method='post'>"
         render "  <input type='submit' value='Update Normalized Fields'/>"
@@ -60,27 +43,48 @@ class AdminController extends BaseController {
         if (request.method != 'POST') {
             throw new Exception("Please call using method=POST")
         }
+        int count = runTermIntegrityCheck(true)
+        render "<br>Ran over ${count} terms."
+    }
+
+    private int runTermIntegrityCheck(boolean doUpdate) {
         List terms = Term.list()
         int count = 0
+        int found = 0
         for (term in terms) {
             if (!term.synset.isVisible) {
                 continue
             }
             String normalizedWord = StringTools.normalize(term.word)
+            if (normalizedWord == term.word) {
+                normalizedWord = null
+            }
             if (normalizedWord != term.word && normalizedWord != term.normalizedWord) {
-                term.normalizedWord = normalizedWord
-                term.save(failOnError: true)
-                render "Updated1: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord}</a><br />"
+                render "${found}. Error1: <a href='../term/edit/${term.id}'>'${term.normalizedWord}' should be '${normalizedWord}'</a><br />"
+                found++
+                if (doUpdate) {
+                    log.info("Setting normalizedWord '${term.normalizedWord}' to '${normalizedWord}'")
+                    term.normalizedWord = normalizedWord
+                    term.save(failOnError: true)
+                }
             }
             String normalizedWord2 = StringTools.normalize2(term.word)
-            if (normalizedWord2 != term.word && normalizedWord2 != term.normalizedWord2 && normalizedWord2 != normalizedWord) {
-                term.normalizedWord2 = normalizedWord2
-                term.save(failOnError: true)
-                render "Updated2: <a href='../synonyme/edit/${term.synset.id}'>${term.word} | ${term.normalizedWord2}</a><br />"
+            if (normalizedWord2 == term.word || normalizedWord2 == normalizedWord) {
+                normalizedWord2 = null
+            }
+            if (normalizedWord2 != term.normalizedWord2) {
+                render "${found}. Error2: <a href='../term/edit/${term.id}'>'${term.normalizedWord2}' should be '${normalizedWord2}'</a><br />"
+                found++
+                if (doUpdate) {
+                    log.info("Setting normalizedWord2 '${term.normalizedWord2}' to '${normalizedWord2}'")
+                    term.normalizedWord2 = normalizedWord2
+                    term.save(failOnError: true)
+                }
             }
             count++
+            //if (found > 10) { break }
         }
-        render "<br>Ran over ${count} terms."
+        count
     }
 
     def tagging() {
