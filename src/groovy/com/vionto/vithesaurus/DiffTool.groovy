@@ -29,7 +29,7 @@ class DiffTool {
                                  "userEvents", "sortedSynsetLinks", "mapping",
                                  "tERM_REGEXP", "pREFERRED_TERM_LANGS", "uRI_PREFIX",
                                  "TERM_REGEXP", "PREFERRED_TERM_LANGS", "URI_PREFIX",
-                                 "gormDynamicFinders"]
+                                 "gormDynamicFinders", "async"]
 
     /**
      * Compares two objects by comparing their properties and returns

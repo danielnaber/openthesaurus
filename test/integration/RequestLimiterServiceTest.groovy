@@ -22,7 +22,7 @@ class RequestLimiterServiceTest extends GroovyTestCase {
 
     def requestLimiterService
 
-    def testRequestLimiterService() {
+    void testRequestLimiterService() {
         init()
         def request1 = new MockHttpServletRequest()
         request1.addHeader("X-Forwarded-For", "1.1.1.1")

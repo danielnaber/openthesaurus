@@ -26,7 +26,7 @@ class MemoryDatabaseCreationServiceTest extends GrailsUnitTestCase {
     def dataSource
     def memoryDatabaseCreationService
 
-    def testMemoryDatabaseCreation() {
+    void testMemoryDatabaseCreation() {
         fillDatabase()
         memoryDatabaseCreationService.createMemoryDatabase("-1")
         assertMemoryDatabaseContent()

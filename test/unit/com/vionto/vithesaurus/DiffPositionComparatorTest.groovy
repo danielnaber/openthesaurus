@@ -19,7 +19,7 @@ package com.vionto.vithesaurus
 
 class DiffPositionComparatorTest extends GroovyTestCase {
 
-    def testComparator() {
+    void testComparator() {
         String query = 'hallo'
         SimilarMatch match1 = new SimilarMatch(term: 'halloX', dist: 2)
         SimilarMatch match2 = new SimilarMatch(term: 'halX', dist: 2)

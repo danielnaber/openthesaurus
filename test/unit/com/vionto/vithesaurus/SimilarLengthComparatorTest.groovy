@@ -19,7 +19,7 @@ package com.vionto.vithesaurus
 
 class SimilarLengthComparatorTest extends GroovyTestCase {
 
-    def testComparator() {
+    void testComparator() {
         String query = 'hallo'
         SimilarMatch match1 = new SimilarMatch(term: 'hallooo', dist: 2)
         SimilarMatch match2 = new SimilarMatch(term: 'hallx', dist: 1)
