@@ -98,10 +98,14 @@ class TermController extends BaseController {
             String normalizedWord = StringTools.normalize(params.word)
             if (normalizedWord != params.word) {
                 term.normalizedWord = normalizedWord
+            } else {
+                term.normalizedWord = null
             }
             String normalizedWord2 = StringTools.normalize2(params.word)
             if (normalizedWord2 != params.word) {
                 term.normalizedWord2 = normalizedWord2
+            } else {
+                term.normalizedWord2 = null
             }
             term.isShortForm = params.wordForm == "abbreviation" ? true : false
             term.isAcronym = params.wordForm == "acronym" ? true : false
