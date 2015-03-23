@@ -22,7 +22,11 @@
 			</g:if>
 
 			<div style="line-height: 24px;">
-				<g:each in="${tagToCount}" var="item">
+                <g:set var="tagLimitIfSearch" value="${taggedTerms ? 15 : Integer.MAX_VALUE}"/>
+                <g:if test="${tagLimitIfSearch == Integer.MAX_VALUE}">
+                    <span id="moreTags">
+                </g:if>
+				<g:each in="${tagToCount}" var="item" status="i">
                     <g:set var="showTag" value="${!item.key.isInternal() || session.user}"/>
                     <g:set var="count" value="${item.value}"/>
 					<g:if test="${showTag && count > 0}">
@@ -37,8 +41,13 @@
 									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML().replace(' ', '&nbsp;')}&nbsp;(${count})</span></g:link>
 						</g:else>
 					</g:if>
+                    <g:if test="${i == tagLimitIfSearch}">
+                        <span id="moreTagsLink"><a href="#" onclick="$('#moreTags').show();$('#moreTagsLink').hide()"><g:message code="tag.more.tags"/></a></span>
+                        <span id="moreTags" style="display: none">
+                    </g:if>
 				</g:each>
-			</div>
+            </div>
+			</span><!-- end id=moreTags -->
 
 			<g:if test="${taggedTerms}">
 				<h2><g:message code="tag.found" args="${[params.tag]}"/></h2>
