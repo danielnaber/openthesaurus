@@ -34,20 +34,6 @@ class CategoryLink implements Comparable {
         this.category = category
     }
     
-    /**
-     * Save and log to logging system (not to database).
-     * Returns true if save was successful.
-     */
-    def saveAndLog() {
-        def saved = save()
-        if (saved) {
-            log.info("linking synset '${synset.id}' to category ${category.id}")
-        } else {
-            log.info("could not link synset '${synset.id}' to category ${category.id}")
-        }
-        return saved
-    }
-
     /** Sort by category name. */
     int compareTo(Object other) {
         return category.compareTo(other.category)
