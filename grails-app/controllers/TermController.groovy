@@ -79,8 +79,6 @@ class TermController extends BaseController {
             // properties to variable 'term' as it will then be saved even
             // if it's invalid -- see http://jira.codehaus.org/browse/GRAILS-2480):
             Term updatedTerm = new Term(term.word, term.language, term.synset)
-            updatedTerm.isShortForm = params.wordForm == "abbreviation" ? true : false
-            updatedTerm.isAcronym = params.wordForm == "acronym" ? true : false
             if (!updatedTerm.validate()) {
                 render(view:'edit',model:[term:updatedTerm, id:term.id],
                         contentType:"text/html", encoding:"UTF-8")
@@ -107,8 +105,6 @@ class TermController extends BaseController {
             } else {
                 term.normalizedWord2 = null
             }
-            term.isShortForm = params.wordForm == "abbreviation" ? true : false
-            term.isAcronym = params.wordForm == "acronym" ? true : false
             LogInfo logInfo = new LogInfo(session, IpTools.getRealIpAddress(request),
                     termBackup, term, params.changeComment)
             if (!term.hasErrors() && term.saveAndLog(logInfo)) {

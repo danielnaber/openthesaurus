@@ -24,10 +24,6 @@ package com.vionto.vithesaurus;
  */
 class TermLinkType {
   
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'link_type_seq']
-    }
-
     /** E.g. "antonym" */
     String linkName
     /** E.g. "antonym" */

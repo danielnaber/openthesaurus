@@ -31,11 +31,8 @@ class Term implements Comparable, Cloneable {
     String word
     String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses and their content removed)
     String normalizedWord2	// normalized version of 'word' for searches (e.g. parentheses around words removed)
-    boolean isShortForm     // is the word an abbreviation?
-    boolean isAcronym       // is the word an acronym (e.g. AIDS)
     Language language
     TermLevel level             // language level like "colloquial"
-    WordGrammar wordGrammar     // base form, plural form, etc.
     String userComment
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
 
@@ -61,13 +58,9 @@ class Term implements Comparable, Cloneable {
         )
         level(nullable:true)
         userComment(nullable:true, size: 0..255)
-        wordGrammar(nullable:true)
         normalizedWord(nullable:true)
         normalizedWord2(nullable:true)
         originalId(nullable:true)
-    }
-
-    static mapping = {
     }
 
     static Tag specialTag

@@ -143,17 +143,8 @@
 
                                 <g:render template="/tag/termTags" model="${[term: t]}"/>
 
-                                <g:if test="${t.isAcronym}">
-                                    <span class="termMetaInfo">[<g:message code='edit.acronym'/>]</span>
-                                </g:if>
-                                <g:if test="${t.isShortForm}">
-                                    <span class="termMetaInfo">[<g:message code='edit.shortform'/>]</span>
-                                </g:if>
                                 <g:if test="${t.level}">
                                     <span class="termMetaInfo">${t.level.toString()?.encodeAsHTML()}</span>
-                                </g:if>
-                                <g:if test="${t.wordGrammar && t.wordGrammar.form != 'undefined'}">
-                                    <span class="termMetaInfo">[${t.wordGrammar.toString()?.encodeAsHTML()}]</span>
                                 </g:if>
                                 <g:set var="termCount" value="${t.listHomonyms().size()}"/>
 
@@ -279,9 +270,6 @@
 
                                         ${catLink.category}
                                         <g:link controller="term" action="list" params="${[categoryId:catLink.category.id]}"><g:message code="edit.show.category.terms"/></g:link>
-                                        <g:if test="${catLink.category.categoryType}">
-                                               <span class="termMetaInfo">[${catLink.category.categoryType}]</span>
-                                        </g:if>
                                     </div>
                                   </li>
                               </g:each>
@@ -301,11 +289,7 @@
                                              <select class="submitButton" name="category.id_${i}" id="category.id_${i}" >
                                                 <option value="null"><g:message code='edit.no.further.category'/></option>
                                                 <g:each var="category" in="${Category.findAllByIsDisabled(false, [sort:'categoryName'])}">
-                                                    <option value="${category.id}">${category.toString()?.encodeAsHTML()}
-                                                        <g:if test="${category.categoryType}">
-                                                            [${category.categoryType}]
-                                                        </g:if>
-                                                    </option>
+                                                    <option value="${category.id}">${category.toString()?.encodeAsHTML()}</option>
                                                 </g:each>
                                              </select>
                                              <br />

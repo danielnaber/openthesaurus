@@ -47,10 +47,6 @@ class ThesaurusUser {
         salt(nullable:true)  // null for old users
     }
 
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'thesaurus_user_seq']
-    }
-
     ThesaurusUser() {
         this.creationDate = new Date()
         blocked = false

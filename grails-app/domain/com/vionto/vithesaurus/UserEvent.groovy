@@ -44,7 +44,6 @@ class UserEvent {
     }
 
     static mapping = {
-        //id generator:'sequence', params:[sequence:'user_event_seq']
         oldValue(type:'text')
         newValue(type:'text')
     }

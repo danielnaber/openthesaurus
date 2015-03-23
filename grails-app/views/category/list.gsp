@@ -29,13 +29,7 @@
                         
                    	        <g:sortableColumn property="categoryName" title="Category Name" />
                         
-                            <g:sortableColumn property="uri" title="Uri" />
-
                             <g:sortableColumn property="isDisabled" title="isDisabled" />
-
-                            <g:sortableColumn property="isOriginal" title="fromLargeCategorySet" />
-
-                            <g:sortableColumn property="categoryType" title="Category Type" />
 
                         </tr>
                     </thead>
@@ -47,14 +41,8 @@
                         
                             <td><g:link action="show" id="${category.id}">${category.categoryName?.toString()?.encodeAsHTML()}</g:link></td>
                         
-                            <td>${category.uri?.toString()?.encodeAsHTML()}</td>
-
                             <td>${category.isDisabled || category.isDisabled == null ? "yes" : "no"}</td>
 
-                            <td>${category.isOriginal || category.isOriginal == null ? "yes" : "no"}</td>
-
-                            <td>${category.categoryType}</td>
-                        
                         </tr>
                     </g:each>
                     </tbody>

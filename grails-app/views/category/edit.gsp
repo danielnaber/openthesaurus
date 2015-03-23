@@ -38,15 +38,6 @@
                             
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <label for='uri'>Uri:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:category,field:'uri','errors')}'>
-                                    <input type="text" id='uri' name='uri' value="${fieldValue(bean:category,field:'uri')}"/>
-                                </td>
-                            </tr>
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
                                     <label for='isDisabled'>Is Disabled:</label>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:category,field:'isDisabled','errors')}'>
@@ -54,27 +45,6 @@
                                 </td>
                             </tr>
 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='isDisabled'>From Large Category Set:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:category,field:'isOriginal','errors')}'>
-                                    <g:checkBox name="isOriginal" value="${category.isOriginal || category.isOriginal == null}"/>
-                                </td>
-                            </tr>
-                            
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='isDisabled'>Category Type:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:category,field:'isDisabled','errors')}'>
-								    <g:select name="categoryType.id" from="${Category.findAllByIsOriginal(false).sort()}" optionKey="id"
-								        value="${category.categoryType?.id}" optionValue="${detailedString}"
-								        noSelection="['null':'(none)']" style="width:120px" />
-                                </td>
-                            </tr>
-                        
-                        
                         </tbody>
                     </table>
                 </div>

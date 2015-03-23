@@ -26,26 +26,14 @@ class Category implements Comparable, Cloneable {
 
     /** User-visible name */
     String categoryName
-    /** Unique URI */
-    String uri
-    /** Is from the larger set of categories (should thus have a categoryType) */
-    boolean isOriginal
     /** If true, cannot be selected when creating new synsets */
     Boolean isDisabled
-    /** Mapping to a simplified category */
-    Category categoryType
-    
+
     static constraints = {
         categoryName(unique:true)
-        uri(nullable:true,unique:true)
         isDisabled(nullable:true)   // required to make automatic DB update work
-        categoryType(nullable:true)
     }
-    
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'category_seq']
-    }
-   
+
     Category() {
     }
     

@@ -35,29 +35,11 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">Uri:</td>
-                            
-                            <td valign="top" class="value">${category.uri}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name">Is Disabled:</td>
                             <td valign="top" class="value">${category.isDisabled || category.isDisabled == null ? "yes" : "no"}
                                 <span class="metaInfo">(disabled categories cannot be used when creating new concepts)</span></td>
                         </tr>
 
-                        <tr class="prop">
-                            <td valign="top" class="name">From Large Category Set:</td>
-                            <td valign="top" class="value">${category.isOriginal || category.isOriginal == null ? "yes" : "no"}
-                                <span class="metaInfo">(if 'no', this category will be displayed on top in the "-source-" selection for filtering)</span></td>
-                        </tr>
-
-                        <tr class="prop">
-                            <td valign="top" class="name">Category Type:</td>
-                            <td valign="top" class="value">${category.categoryType}</td>
-                        </tr>
-                    
                     </tbody>
                 </table>
             </div>

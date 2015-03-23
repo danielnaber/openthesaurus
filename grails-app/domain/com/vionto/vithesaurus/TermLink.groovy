@@ -27,10 +27,6 @@ class TermLink {
 
     static belongsTo = [term:Term]
 
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'synset_link_seq']
-    }
-
     TermLink() {
     }
 

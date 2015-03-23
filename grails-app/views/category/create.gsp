@@ -34,28 +34,6 @@
                                 </td>
                             </tr> 
                         
-                            <!-- 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='uri'>Uri:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:category,field:'uri','errors')}'>
-                                    <input type="text" id='uri' name='uri' value="${fieldValue(bean:category,field:'uri')}"/>
-                                </td>
-                            </tr>
-                             --> 
-                        
-                            <!-- 
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <label for='nameTranslation'>Name Translation:</label>
-                                </td>
-                                <td valign='top' class='value ${hasErrors(bean:category,field:'nameTranslation','errors')}'>
-                                    
-                                </td>
-                            </tr>
-                             --> 
-                        
                         </tbody>
                     </table>
                 </div>

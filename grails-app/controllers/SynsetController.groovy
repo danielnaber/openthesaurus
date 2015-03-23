@@ -769,13 +769,8 @@ class SynsetController extends BaseController {
             }
             def language = Language.get(params['language.id_' + newTermCount])
             Term newTerm = new Term(params['word_' + newTermCount], language, synset)
-            newTerm.isShortForm = params['wordForm_' + newTermCount] == "abbreviation" ? true : false
-            newTerm.isAcronym = params['wordForm_' + newTermCount] == "acronym" ? true : false
             if (params['level.id_' + newTermCount] && params['level.id_' + newTermCount] != "null") {
                 newTerm.level = TermLevel.get(params['level.id_' + newTermCount])
-            }
-            if (params['wordGrammar.id_' + newTermCount] && params['wordGrammar.id_' + newTermCount] != "null") {
-                newTerm.wordGrammar = WordGrammar.get(params['wordGrammar.id_' + newTermCount])
             }
             if (params['tags_' + newTermCount]) {
                 String[] tags = params['tags_' + newTermCount].split(",\\s*")
@@ -868,22 +863,12 @@ class SynsetController extends BaseController {
         List termsToCreate = []
         int numTerms = Integer.parseInt(params.numTerms)
         // iterate over all terms to be added to the new synset:
-        Map preferredTerms = [:]        // maps language -> preferred term
         for (i in 0..numTerms-1) {
             String word = params["word_"+i]
             Language language = Language.get(params["language.id_"+i])
             Term term = new Term(word, language, synset)
-            term.isShortForm = params["wordForm_"+i] == "abbreviation" ? true : false
-            term.isAcronym = params["wordForm_"+i] == "acronym" ? true : false
             if (params["level.id_"+i] && params["level.id_"+i] != 'null') {
                 term.level = Level.get(params["level.id_"+i])
-            }
-            if (params["wordGrammar.id_"+i] && params["wordGrammar.id_"+i] != 'null') {
-                term.wordGrammar = WordGrammar.get(params["wordGrammar.id_"+i])
-            }
-            if (preferredTerms.get(language) == null) {
-                // make first term per language the preferred term
-                preferredTerms.put(language, term)
             }
             termsToCreate.add(term)
             searchTerms += term
@@ -937,7 +922,7 @@ class SynsetController extends BaseController {
             redirect(action:edit,id:synset.id)
         }
         else {
-            render(view:'multiSearch',model:[synset:synset,
+            render(view:'multiSearch', model:[synset:synset,
                    searchTerms:getTermsFromTextArea(searchTerms)],
                    contentType:"text/html", encoding:"UTF-8")
         }

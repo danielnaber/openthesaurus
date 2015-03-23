@@ -27,10 +27,6 @@ class Language {
   /** If disabled == true, cannot be selected when creating new synsets or terms */
   Boolean isDisabled
 
-  static mapping = {
-      //id generator:'sequence', params:[sequence:'language_seq']
-  }
-
   Language() {
   }
   

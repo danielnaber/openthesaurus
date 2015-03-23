@@ -26,16 +26,8 @@ import org.apache.commons.lang.StringUtils;
 class Synset implements Cloneable {
 
     boolean isVisible
-    String originalURI      // used to track the original source and its ID
-    String userComment
-    Integer importStatus    // != null -> automatically imported
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
     // NOTE: keep clone() in sync when adding properties!
-
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'synset_seq']
-        userComment(type:'text')
-    }
 
     static hasMany = [terms:Term,
                       synsetLinks:SynsetLink,
@@ -43,14 +35,8 @@ class Synset implements Cloneable {
                       userEvents:UserEvent]
 
     static constraints = {
-        userComment(nullable:true)
-        originalURI(nullable:true)
-        importStatus(nullable:true)
         originalId(nullable:true)
     }
-
-    // prepended to get a display "id":
-    final static String URI_PREFIX = ""
 
     /**
      * Create a new empty but visible synset.
@@ -275,9 +261,6 @@ class Synset implements Cloneable {
           sb.append(" || visible")
         } else {
           sb.append(" || INVISIBLE")
-        }
-        if (userComment) {
-          sb.append(" || comment=${userComment}")
         }
 
         int categoryLinkCount = 0

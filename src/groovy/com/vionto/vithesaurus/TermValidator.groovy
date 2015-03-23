@@ -48,9 +48,6 @@ class TermValidator {
      * @throws IllegalArgumentException
      */
     private void validateWordForm() {
-        if (term.isShortForm && term.isAcronym) {
-            throw new IllegalArgumentException("[$word] Should not be both: shortform and acronym")
-        }
     }
 
     /**

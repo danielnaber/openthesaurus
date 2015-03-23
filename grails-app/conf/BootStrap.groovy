@@ -28,17 +28,7 @@ class BootStrap {
            log.info("Creating language 'de'")
            new Language("German", "de").save()
        }
-       // create word forms:
-       if (!WordGrammar.findByForm("undefined")) {
-           new WordGrammar(form:"undefined").save()
-       }
-       if (!WordGrammar.findByForm("base form")) {
-           new WordGrammar(form:"base form").save()
-       }
-       if (!WordGrammar.findByForm("plural")) {
-         new WordGrammar(form:"plural").save()
-       }
-       
+
        //
        // the following items have been added for OpenThesaurus: 
        //

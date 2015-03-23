@@ -21,7 +21,6 @@
         <g:link controller="termLevel" action="list">Term Level</g:link> |
         <g:link controller="linkType" action="list">Synset Link Types</g:link> |
         <g:link controller="termLinkType" action="list">Term Link Types</g:link> |
-        <g:link controller="wordGrammar" action="list">Grammar Forms</g:link> |
         <g:link controller="thesaurusConfigurationEntry" action="list">Configuration</g:link> |
         <g:link controller="synset" action="createMemoryDatabase">createMemoryDatabase</g:link>
         </p>

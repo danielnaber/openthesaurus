@@ -24,10 +24,6 @@ class SynsetLink implements Comparable {
 
     static belongsTo = [synset:Synset]
 
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'synset_link_seq']
-    }
-
     Synset targetSynset
     LinkType linkType
 
@@ -59,7 +55,7 @@ class SynsetLink implements Comparable {
     }
 
     /**
-     * A stable sort order: order by link type (e.g. "hypernym"), then by preferred term
+     * A stable sort order: order by link type (e.g. "hypernym"), then by synset id
      */
     int compareTo(Object other) {
         if (other.linkType.linkName == linkType.linkName) {

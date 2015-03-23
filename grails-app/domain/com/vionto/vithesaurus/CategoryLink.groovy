@@ -26,10 +26,6 @@ class CategoryLink implements Comparable {
     
     static belongsTo = [synset:Synset]
 
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'category_link_seq']
-    }
-
     CategoryLink() {
     }
     

@@ -26,7 +26,7 @@ class UserSynsetEvent extends UserEvent {
         // should not be used 
     }
 
-    // changes inside a snyset
+    // changes inside a synset
     UserSynsetEvent(Synset synset, LogInfo logInfo) {
         this(synset, null, logInfo)
     }

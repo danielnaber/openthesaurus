@@ -24,10 +24,6 @@ package com.vionto.vithesaurus;
  */
 class LinkType {
   
-    static mapping = {
-        //id generator:'sequence', params:[sequence:'link_type_seq']
-    }
-
     /** E.g. "synonym" */
     String linkName
     /** E.g. "more specific synset" if linkName is "more generic synset" */
