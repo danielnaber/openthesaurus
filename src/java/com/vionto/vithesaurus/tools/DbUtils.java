@@ -17,40 +17,19 @@
  */
 package com.vionto.vithesaurus.tools;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  * Database utils.
  */
-public class DbUtils {
+public final class DbUtils {
 
   private DbUtils() {
   }
 
-  public static void closeQuietly(Connection connection) {
+  public static void closeQuietly(AutoCloseable connection) {
     if (connection != null) {
       try {
         connection.close();
-      } catch (SQLException ignore) {}
-    }
-  }
-
-  public static void closeQuietly(Statement statement) {
-    if (statement != null) {
-      try {
-        statement.close();
-      } catch (SQLException ignore) {}
-    }
-  }
-
-  public static void closeQuietly(ResultSet resultSet) {
-    if (resultSet != null) {
-      try {
-        resultSet.close();
-      } catch (SQLException ignore) {}
+      } catch (Exception ignore) {}
     }
   }
 
