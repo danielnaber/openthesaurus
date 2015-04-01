@@ -656,10 +656,7 @@ strong {
 }
 
 .commentMarker {
-    font-size: 12px;
     margin-left: 2px;
-    color: #fff;
-    background-color: #bbb;
     padding-left: 3px;
     padding-right: 3px;
 }
