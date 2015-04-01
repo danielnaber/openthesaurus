@@ -31,6 +31,24 @@ class AdminController extends BaseController {
         [latestUsers: latestUsers, resultLimit: resultLimit]
     }
 
+    def listUnusedTags() {
+        def list = Tag.findAll()
+        list.sort()
+        LinkedHashMap tagToCount = new LinkedHashMap()
+        List tagList = Tag.findAll()
+        for (Tag tag : tagList) {
+            def count = Term.createCriteria().count {
+                tags {
+                    eq('name', tag.name)
+                }
+            }
+            if (count == 0) {
+                tagToCount.put(tag, 0)
+            }
+        }
+        [tagToCount: tagToCount]
+    }
+
     def checkNormalizedTermIntegrity = {
         int count = runTermIntegrityCheck(false)
         render "<br>Checked ${count} terms."
