@@ -100,7 +100,7 @@ class TermController extends BaseController {
                 term.normalizedWord = null
             }
             String normalizedWord2 = StringTools.normalize2(params.word)
-            if (normalizedWord2 != params.word) {
+            if (normalizedWord2 != params.word && normalizedWord2 != normalizedWord) {
                 term.normalizedWord2 = normalizedWord2
             } else {
                 term.normalizedWord2 = null
