@@ -28,9 +28,9 @@
 			<table>
 				<thead>
 					<tr>
-						<th></th>
 						<g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}" />
 						<g:sortableColumn property="shortName" title="${message(code: 'tag.shortName.label', default: 'Short Name')}" />
+                        <th></th>
 						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Color')}" />
 						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Created')}" />
 						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Created By')}" />
@@ -39,13 +39,17 @@
 				<tbody>
 				<g:each in="${tagInstanceList}" status="i" var="tag">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link controller="tag" params="${[tag: tag.name]}">Show</g:link></td>
-						<td><g:link action="edit" id="${tag.id}">${fieldValue(bean: tag, field: "name")}</g:link></td>
 						<td>
-							<span class="tag" style="background-color: ${fieldValue(bean: tag, field: "color")}">${fieldValue(bean: tag, field: "shortName")}</span>
+                            <g:link action="edit" id="${tag.id}"><span class="tag" style="background-color: ${tag.backgroundColor}">${tag.name}</span></g:link>
 						</td>
+						<td>
+                            <g:if test="${tag.shortName}">
+                                <span class="tag" style="background-color: ${tag.backgroundColor}">${tag.shortName}</span>
+                            </g:if>
+						</td>
+                        <td><g:link controller="tag" params="${[tag: tag.name]}">List</g:link></td>
 						<td>${fieldValue(bean: tag, field: "color")}</td>
-						<td><g:formatDate date="${tag.created}"/></td>
+						<td><g:formatDate format="yyyy-MM-dd HH:mm" date="${tag.created}"/></td>
 						<td>${fieldValue(bean: tag, field: "createdBy")}</td>
 					</tr>
 				</g:each>
