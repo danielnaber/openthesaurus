@@ -290,7 +290,9 @@ class Synset implements Cloneable {
           }
           List tags = term.tags.sort()
           for (tag in tags) {
-              metaInfos.add(tag.shortName ? tag.shortName : tag.name)
+              if (!tag.isInternal()) {
+                  metaInfos.add(tag.shortName ? tag.shortName : tag.name)
+              }
           }
           if (metaInfos.size() > 0) {
               enhancedTerms.add(term.word + " (" + StringUtils.join(metaInfos, ", ") + ")")
