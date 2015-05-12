@@ -73,6 +73,9 @@ echo -n "Memory database updates: " >>$OUT
 grep -c "Finished creating in-memory database" $LOG >>$OUT
 
 
+echo "" >>$OUT
+echo "Private messages sent: " >>$OUT
+grep "Sending private email from" $LOG >>$OUT
 
 echo "" >>$OUT
 echo "Registrations:" >>$OUT
