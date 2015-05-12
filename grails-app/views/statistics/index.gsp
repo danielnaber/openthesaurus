@@ -5,6 +5,7 @@
         <meta name="layout" content="main" />
         <title><g:message code="statistics.title" /></title>
         <meta name="description" content="${message(code:'statistics.description')}" />
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
     </head>
     <body>
 
@@ -65,12 +66,20 @@
 
               <table width="315" class="statsTable">
                   <tr>
-                      <td colspan="2"><h2><g:message code="statistics.top.users" /></h2></td>
+                      <td colspan="3"><h2><g:message code="statistics.top.users" /></h2></td>
                   </tr>
                   <g:each in="${topUsers}" var="topUser" status="i">
-                      <g:set var="cssClass" value="${i % 2 == 0 ? 'prop' : 'prop2'}"/>
-                      <tr class="${cssClass}">
-                          <td align="right" class="statName">
+                      <tr>
+                          <td class="value"><g:decimal number="${topUser.actions}"/></td>
+                          <td>
+                              <g:if test="${topUser.displayName}">
+                                  <g:link controller="user" action="profile" params="${[uid: topUser.userId]}"><g:render template="/identicon" model="${[user: topUser.userId, count: i]}"/></g:link>
+                              </g:if>
+                              <g:else>
+                                  <g:render template="/identicon" model="${[user: topUser.userId, count: i]}"/>
+                              </g:else>
+                          </td>
+                          <td class="statName">
                               <g:if test="${topUser.displayName}">
                                   <g:link controller="user" action="profile" params="${[uid: topUser.userId]}">${topUser.displayName.encodeAsHTML()}</g:link>
                               </g:if>
@@ -78,19 +87,8 @@
                                   <span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
                               </g:else>
                           </td>
-                          <td class="value"><g:decimal number="${topUser.actions}"/></td>
                       </tr>
                   </g:each>
-                  <g:if test="${!session.user}">
-                      <tr>
-                          <td colspan="2">
-                              <div style="margin-top: 10px">
-                                  <g:link controller="user" action="login" class="link"
-                                          params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" />&nbsp;<g:message code="statistics.register" /></g:link>
-                              </div>
-                          </td>
-                      </tr>
-                  </g:if>
                   <tr>
                       <td width="185"></td>
                       <td></td>

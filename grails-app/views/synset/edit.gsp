@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
         <g:render template="/taggingIncludes" model="${[readOnly: !session.user || readOnlyMode]}"/>
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
@@ -394,7 +395,7 @@
               <table>
                   <tr>
                       <th><g:message code='edit.changelog.date'/></th>
-                      <th style="min-width: 55px"><g:message code='edit.changelog.user'/></th>
+                      <th style="min-width: 55px"><g:message code='changelist.column.user'/></th>
                       <th><g:message code='edit.changelog.change'/></th>
                   </tr>
                   <g:each var='event' in='${eventList}' status='i'>
@@ -403,8 +404,9 @@
                               <g:formatDate format="yyyy-MM-dd" date="${event.creationDate}"/>
                               <span class="metaInfo"><g:formatDate format="HH:mm" date="${event.creationDate}"/></span>
                           </td>
-                          <td valign="top">
+                          <td valign="top" align="center">
                               <g:link controller="user" action="profile" params="${[uid:event.byUser.id]}">
+                                  <g:render template="/identicon" model="${[user: event.byUser, count: i]}"/>
                                   <g:if test="${event.byUser.realName}">
                                       ${event.byUser.realName.encodeAsHTML()}
                                   </g:if>

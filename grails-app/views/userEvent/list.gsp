@@ -6,6 +6,7 @@
         <title><g:message code="changelist.title"/></title>
         <meta name="robots" content="noindex, nofollow" />
         <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
     </head>
     <body>
 
@@ -67,9 +68,10 @@
                               </g:if>
                           </td>
 
-                          <td valign="top">
+                          <td valign="top" align="center" rowspan="2">
                               <g:if test="${newEntry}">
                                   <g:link controller="userEvent" action="list" params="${[uid:userEvent.byUser.id]}">
+                                      <g:render template="/identicon" model="${[user: userEvent.byUser, count: i]}"/>
                                       <g:if test="${userEvent.byUser.realName}">
                                           ${userEvent.byUser.realName.encodeAsHTML()}
                                       </g:if>
@@ -85,7 +87,6 @@
 
                       </tr>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                          <td></td>
                           <td></td>
                           <td>${diffs.get(userEvent)
                                   .replaceAll("&lt;br/&gt;", "<br/>")
