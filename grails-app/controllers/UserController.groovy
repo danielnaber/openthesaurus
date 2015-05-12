@@ -29,7 +29,10 @@ class UserController extends BaseController {
     public static final  String DEFAULT_SALT = "hi234z2ejgrr97otw4ujzt4wt7jtsr4975FERedefef"  // only for old users before per-user-salt was introduced
     
     public static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
-    
+
+    private static int MAX_MAIL_SIZE = 100_000
+    private static int MAX_MAILS_PER_DAY = 25
+
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
                                       'lostPassword', 'requestPasswordReset', 'confirmPasswordReset',
@@ -51,6 +54,53 @@ class UserController extends BaseController {
       }
       String visibleName = user.realName ? user.realName : "#" + user.id
       [user:user, visibleName:visibleName]
+    }
+    
+    def prepareMessage = {
+        ThesaurusUser receiver = ThesaurusUser.get(params.uid)
+        if (!receiver) {
+            throw new Exception("No user for id '${params.uid.encodeAsHTML()}'")
+        }
+        [receiver: receiver]
+    }
+
+    def sendMessage = {
+        ThesaurusUser sender = session.user
+        ThesaurusUser receiver = ThesaurusUser.get(params.receiverId)
+        if (!receiver) {
+            throw new Exception("No user for id '${params.receiverId.encodeAsHTML()}'")
+        }
+        validateSending(sender)
+        def pMessage = new PersonalMessage(sender.userId, receiver.userId)
+        boolean saved = pMessage.save(flush: true)
+        if (!saved) {
+            throw new Exception("Could not save message meta data: " + pMessage.errors)
+        }
+        log.info("Sending private email from ${sender} to ${receiver}, ${params.message.length()} bytes")
+        sendMail {
+            from sender.userId
+            to receiver.userId
+            subject message(code:'user.message.subject.prefix') + " " + params.subject
+            body message(code:'user.message.message.prefix') + params.message
+        }
+        flash.message = message(code:'user.prepare.message.sent')
+        redirect(action: 'profile', params: [uid: receiver.id])
+    }
+
+    private void validateSending(ThesaurusUser sender) {
+        if (params.message.length() > MAX_MAIL_SIZE) {
+            throw new Exception("Message too large: ${params.message.length()} > ${MAX_MAIL_SIZE} characters")
+        }
+        Date thresholdDate = new Date(System.currentTimeMillis() - 60*60*24 * 1000)
+        def mailsSent = PersonalMessage.createCriteria().count {
+            eq('fromAddress', sender.userId)
+            gt('date', thresholdDate)
+        }
+        if (mailsSent <= MAX_MAILS_PER_DAY) {
+            log.info("Limit check: mails sent by ${sender.userId} since ${thresholdDate}: " + mailsSent)
+        } else {
+            throw new Exception("Sorry, you cannot send more than ${MAX_MAILS_PER_DAY} mails per day")
+        }
     }
 
     def register = {

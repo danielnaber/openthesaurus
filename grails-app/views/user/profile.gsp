@@ -49,6 +49,10 @@
                         <tr class='prop'>
                             <td valign='top' class='name' colspan="2">
                                 <g:link controller="userEvent" action="list" params="${[uid: user.id]}"><g:message code="user.edit.edits"/></g:link>
+                                <g:if test="${session.user}">
+                                    <br/>
+                                    <g:link action="prepareMessage" params="${[uid: user.id]}"><g:message code="user.send.message"/></g:link>
+                                </g:if>
                             </td>
                         </tr>
 
