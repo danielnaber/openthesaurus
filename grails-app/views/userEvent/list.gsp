@@ -19,10 +19,10 @@
 
           <g:if test="${user}">
             <g:if test="${user.realName}">
-                <h3><g:message code="edit.changelog.user"/> ${user.realName.encodeAsHTML()} (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
+                <h3><g:message code="edit.changelog.user"/> <g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName.encodeAsHTML()}</g:link> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
             </g:if>
             <g:else>
-                <h3><g:message code="edit.changelog.user"/> <span class="anonUserId">#${user.id}</span> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
+                <h3><g:message code="edit.changelog.user"/> <g:link controller="user" action="profile" params="${[uid:user.id]}"><span class="anonUserId">#${user.id}</span></g:link> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
             </g:else>
           </g:if>
 
