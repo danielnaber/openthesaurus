@@ -31,7 +31,8 @@ class UserController extends BaseController {
     public static final int LOGIN_COOKIE_AGE = (60*60*24*365)/2   // half a year
 
     private static int MAX_MAIL_SIZE = 100_000
-    private static int MAX_MAILS_PER_DAY = 25
+    private static int MAX_MAILS_PER_DAY_PER_USER = 25
+    private static int MAX_MAILS_PER_HOUR_TOTAL = 50
 
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
@@ -91,15 +92,26 @@ class UserController extends BaseController {
         if (params.message.length() > MAX_MAIL_SIZE) {
             throw new Exception("Message too large: ${params.message.length()} > ${MAX_MAIL_SIZE} characters")
         }
-        Date thresholdDate = new Date(System.currentTimeMillis() - 60*60*24 * 1000)
-        def mailsSent = PersonalMessage.createCriteria().count {
+        Date last24Hours = new Date(System.currentTimeMillis() - 60*60*24 * 1000)
+        def mailsSentByUser = PersonalMessage.createCriteria().count {
             eq('fromAddress', sender.userId)
-            gt('date', thresholdDate)
+            gt('date', last24Hours)
         }
-        if (mailsSent <= MAX_MAILS_PER_DAY) {
-            log.info("Limit check: mails sent by ${sender.userId} since ${thresholdDate}: " + mailsSent)
+        MAX_MAILS_PER_HOUR_TOTAL
+        if (mailsSentByUser <= MAX_MAILS_PER_DAY_PER_USER) {
+            log.info("Per user limit check: mails sent by ${sender.userId} since ${last24Hours}: " + mailsSentByUser)
         } else {
-            throw new Exception("Sorry, you cannot send more than ${MAX_MAILS_PER_DAY} mails per day")
+            throw new Exception("Sorry, you cannot send more than ${MAX_MAILS_PER_DAY_PER_USER} mails per day")
+        }
+        // make sure nobody can flood users with spam, not even when creating a new account:
+        Date lastHour = new Date(System.currentTimeMillis() - 60*60*1 * 1000)
+        def mailsSentGlobally = PersonalMessage.createCriteria().count {
+            gt('date', lastHour)
+        }
+        if (mailsSentGlobally <= MAX_MAILS_PER_HOUR_TOTAL) {
+            log.info("Global limit check: mails sent since ${lastHour}: " + mailsSentGlobally)
+        } else {
+            throw new Exception("Sorry, the email limit has been reached")
         }
     }
 
