@@ -15,7 +15,16 @@
         <h2><g:message code="news.archive.headline" /></h2>
         
         <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
-        
+            
+        <tr class="newsYearDelimiter">
+            <td>2015</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2015-05-13</span></td>
+            <td valign="top">Nutzern kann jetzt auf ihrer Profilseite eine private Nachricht geschickt werden.</td>
+        </tr>
+
         <tr class="newsYearDelimiter">
             <td>2014</td>
             <td></td>
