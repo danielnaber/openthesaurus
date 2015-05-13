@@ -20,11 +20,15 @@
 
           <g:if test="${user}">
             <g:if test="${user.realName}">
-                <h3><g:message code="edit.changelog.user"/> <g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName.encodeAsHTML()}</g:link> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
+                <g:set var="userName" value="${user.realName.encodeAsHTML()}"/>
             </g:if>
             <g:else>
-                <h3><g:message code="edit.changelog.user"/> <g:link controller="user" action="profile" params="${[uid:user.id]}"><span class="anonUserId">#${user.id}</span></g:link> (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)</h3>
+                <g:set var="userName"><span class="anonUserId">#${user.id}</span></g:set>
             </g:else>
+            <h3><g:message code="edit.changelog.user"/> <g:link controller="user" action="profile" params="${[uid:user.id]}">${userName}</g:link>
+                (<g:decimal number="${totalMatches}"/> <g:message code="edit.changelog.hits"/>)
+                &mdash; <g:link action="list"><g:message code="edit.changelog.reset.filter"/></g:link>
+            </h3>
           </g:if>
 
           <g:render template="navigation"/>
@@ -70,7 +74,7 @@
 
                           <td valign="top" align="center" rowspan="2">
                               <g:if test="${newEntry}">
-                                  <g:link controller="userEvent" action="list" params="${[uid:userEvent.byUser.id]}">
+                                  <g:link controller="user" action="profile" params="${[uid:userEvent.byUser.id]}">
                                       <g:render template="/identicon" model="${[user: userEvent.byUser, count: i]}"/>
                                       <g:if test="${userEvent.byUser.realName}">
                                           ${userEvent.byUser.realName.encodeAsHTML()}
