@@ -5,12 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="user.edit.title" args="${[visibleName]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
     </head>
     <body>
 
         <div class="body">
 
             <hr/>
+
+            <div style="float: left; margin-right: 10px">
+                <g:render template="/identicon" model="${[user: user, count: 0]}"/>
+            </div>
 
             <h2><g:message code="user.edit.headline" args="${[visibleName]}"/></h2>
 
@@ -76,7 +81,7 @@
                             </tr>
                         </g:if>
 
-                        <g:if test="${session.user}">
+                        <g:if test="${session.user && session.user.id == Long.parseLong(params.uid)}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
                                     <br/><br/><br/>

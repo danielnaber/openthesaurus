@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code="user.edit.title" args="${[user.userId]}"/></title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
     </head>
     <body>
 
@@ -11,6 +12,10 @@
 
             <hr/>
 
+            <div style="float: left; margin-right: 10px">
+                <g:render template="/identicon" model="${[user: user, count: 0]}"/>
+            </div>
+            
             <h2><g:message code="user.edit.headline" args="${[user.userId]}"/></h2>
 
             <g:if test="${flash.message}">
