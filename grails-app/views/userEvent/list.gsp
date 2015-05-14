@@ -6,7 +6,7 @@
         <title><g:message code="changelist.title"/></title>
         <meta name="robots" content="noindex, nofollow" />
         <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
     </head>
     <body>
 

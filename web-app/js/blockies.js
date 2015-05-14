@@ -19,7 +19,7 @@
 	function createColor() {
 		var h = Math.floor(rand() * 360);
 		var s = ((rand() * 50) + 50) + '%';
-		var l = ((rand() * 60) + 20) + '%';
+		var l = ((rand() * 60) + 35) + '%';
 
 		var color = 'hsl(' + h + ',' + s + ',' + l + ')';
 		return color;

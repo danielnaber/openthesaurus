@@ -5,7 +5,7 @@
         <meta name="layout" content="main" />
         <title><g:message code="statistics.title" /></title>
         <meta name="description" content="${message(code:'statistics.description')}" />
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
     </head>
     <body>
 

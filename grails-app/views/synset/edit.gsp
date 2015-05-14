@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title><g:message code='edit.title' args="${[synset.toShortString()]}"/></title>
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.min.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
         <g:render template="/taggingIncludes" model="${[readOnly: !session.user || readOnlyMode]}"/>
         <g:if test="${synset?.isVisible == false || params.offset}">
           <meta name="robots" content="noindex" />
