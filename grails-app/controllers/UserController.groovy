@@ -183,22 +183,22 @@ class UserController extends BaseController {
       [email: params.userId]
     }
 
-    def changePassword = {
+    def editProfile = {
       ThesaurusUser user = session.user
       [user:user]
     }
 
-    def doChangePassword = {
+    def saveProfile = {
       ThesaurusUser origUser = session.user
       ThesaurusUser user = ThesaurusUser.get(origUser.id)
       checkPasswords(user)
       if (user.errors.allErrors.size() > 0) {
         flash.message = user.errors.allErrors[0].defaultMessage
-        render(view:'changePassword', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        render(view:'editProfile', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
       savePassword(user, params.password1)
-      flash.message = message(code:'user.change.password.changed')
+      flash.message = message(code:'user.change.profile.changed')
       redirect(action: 'edit')
     }
 

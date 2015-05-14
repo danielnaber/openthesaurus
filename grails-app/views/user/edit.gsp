@@ -55,7 +55,7 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
-                                    <g:link action="changePassword"><g:message code="user.edit.password"/></g:link>
+                                    <g:link action="editProfile"><g:message code="user.edit.profile"/></g:link>
                                 </td>
                             </tr>
 

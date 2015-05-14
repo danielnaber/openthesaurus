@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <g:set var="preventSearchFocus" value="true" scope="request" />
         <meta name="layout" content="main" />
-        <title><g:message code="user.change.password.title"/></title>
+        <title><g:message code="user.change.profile.title"/></title>
     </head>
     <body>
 
@@ -12,7 +12,7 @@
 
             <hr/>
 
-            <h2><g:message code="user.change.password.headline"/></h2>
+            <h2><g:message code="user.change.profile.headline"/></h2>
 
             <g:if test="${flash.message}">
               <div class="message">${flash.message}</div>
@@ -43,16 +43,16 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <g:message code="user.change.password.password"/>
+                                    <g:message code="user.change.profile.password"/>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <g:passwordField name="password1" autofocus="" />
+                                    <g:passwordField name="password1" autofocus="" /> <span class="metaInfo"><g:message code="user.change.profile.password.hint"/></span>
                                 </td>
                             </tr> 
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <g:message code="user.change.password.password.repeat"/>
+                                    <g:message code="user.change.profile.password.repeat"/>
                                 </td>
                                 <td valign='top' class='value'>
                                     <g:passwordField name="password2"/>
@@ -63,7 +63,9 @@
                                 <td></td>
                                 <td >
                                     <div class="buttons">
-                                        <span class="button"><g:actionSubmit action="doChangePassword" class="submitButton" value="${message(code:'user.change.password.submit')}" /></span>
+                                        <span class="button"><g:actionSubmit action="saveProfile" class="submitButton" value="${message(code:'user.change.profile.submit')}" /></span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <g:link action="edit"><g:message code="user.change.profile.cancel"/></g:link>
                                     </div>
                                 </td>
                             </tr>
