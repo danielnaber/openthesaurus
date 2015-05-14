@@ -4,7 +4,7 @@
         seed: '${user instanceof Integer ? user : user.id}',
         bgcolor: '#F7F7F7',
         size: 6,
-        scale: 5
+        scale: 4
     });
     document.getElementById("identicon${count}").appendChild(icon);
 </script>
