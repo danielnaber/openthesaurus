@@ -34,12 +34,12 @@
                             </tr>
                             <tr>
                                 <td><g:message code="user.prepare.message.subject"/></td>
-                                <td><input type="text" name="subject" /></td>
+                                <td><input type="text" name="subject" autofocus /></td>
                             </tr>
     
                             <tr>
                                 <td valign='top' class='name' colspan="2">
-                                    <textarea name="message" autofocus rows="15" cols="60"></textarea>
+                                    <textarea name="message" rows="15" cols="60"></textarea>
                                 </td>
                             </tr>
                             <tr>

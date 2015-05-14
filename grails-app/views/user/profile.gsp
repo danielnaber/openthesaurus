@@ -42,19 +42,26 @@
                                 <g:message code="user.edit.event.count"/>
                             </td>
                             <td valign='top' class='value'>
-                                <g:decimal number="${UserEvent.countByByUser(user)}"/>
+                                <g:link controller="userEvent" action="list" params="${[uid: user.id]}"><g:decimal number="${UserEvent.countByByUser(user)}"/></g:link>
                             </td>
                         </tr>
 
-                        <tr class='prop'>
-                            <td valign='top' class='name' colspan="2">
-                                <g:link controller="userEvent" action="list" params="${[uid: user.id]}"><g:message code="user.edit.edits"/></g:link>
-                                <g:if test="${session.user}">
-                                    <br/>
-                                    <g:link action="prepareMessage" params="${[uid: user.id]}"><g:message code="user.send.message"/></g:link>
-                                </g:if>
-                            </td>
-                        </tr>
+                        <g:if test="${session.user}">
+                            <tr class='prop'>
+                                <td valign='top' class='name' colspan="2">
+                                        <g:link action="prepareMessage" params="${[uid: user.id]}"><g:message code="user.send.message"/></g:link>
+                                </td>
+                            </tr>
+                        </g:if>
+
+                        <g:if test="${session.user}">
+                            <tr class='prop'>
+                                <td valign='top' class='name' colspan="2">
+                                    <br/><br/><br/>
+                                    <g:link action="edit" params="${[uid: user.id]}"><g:message code="user.edit.back.to.private.profile"/></g:link>
+                                </td>
+                            </tr>
+                        </g:if>
 
                     </tbody>
                 </table>
