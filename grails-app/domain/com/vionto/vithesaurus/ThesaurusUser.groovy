@@ -31,6 +31,8 @@ class ThesaurusUser {
     Date confirmationDate	// null until the account has been confirmed by following the email link
     String confirmationCode	// random code generated and sent to user on registration
     String salt
+    String publicIntro
+    String url
     boolean blocked		// used to completely block a user from logging in
     
     final static USER_PERM = "user"
@@ -44,6 +46,8 @@ class ThesaurusUser {
         lastLoginDate(nullable:true)
         confirmationDate(nullable:true)
         confirmationCode(nullable:true)
+        publicIntro(nullable:true, length:0..1000)
+        url(nullable:true, length:0..1000)
         salt(nullable:true)  // null for old users
     }
 

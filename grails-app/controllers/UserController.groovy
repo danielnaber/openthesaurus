@@ -189,15 +189,20 @@ class UserController extends BaseController {
     }
 
     def saveProfile = {
-      ThesaurusUser origUser = session.user
-      ThesaurusUser user = ThesaurusUser.get(origUser.id)
-      checkPasswords(user)
-      if (user.errors.allErrors.size() > 0) {
-        flash.message = user.errors.allErrors[0].defaultMessage
-        render(view:'editProfile', model:[user:user], contentType:"text/html", encoding:"UTF-8")
-        return
+      ThesaurusUser user = ThesaurusUser.get(session.user.id)
+      if (params.password1 && params.password2) {
+        checkPasswords(user)
+        if (user.errors.allErrors.size() > 0) {
+          flash.message = user.errors.allErrors[0].defaultMessage
+          render(view:'editProfile', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+          return
+        }
+        savePassword(user, params.password1)
       }
-      savePassword(user, params.password1)
+      user.publicIntro = params.publicIntro
+      user.url = params.url 
+      user.save(flush: true) 
+      session.user = user
       flash.message = message(code:'user.change.profile.changed')
       redirect(action: 'edit')
     }

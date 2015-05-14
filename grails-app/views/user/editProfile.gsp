@@ -55,7 +55,25 @@
                                     <g:message code="user.change.profile.password.repeat"/>
                                 </td>
                                 <td valign='top' class='value'>
-                                    <g:passwordField name="password2"/>
+                                    <g:passwordField name="password2"/> <span class="metaInfo"><g:message code="user.change.profile.password.hint"/></span>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <g:message code="user.change.profile.website"/>
+                                </td>
+                                <td valign='top' class='value'>
+                                    <input type="text" name="url" value="${user.url.encodeAsHTML()}"/>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <g:message code="user.change.profile.description"/>
+                                </td>
+                                <td valign='top' class='value'>
+                                    <textarea maxlength="1000" name="publicIntro" rows="5" cols="50" placeholder="${message(code:'user.change.profile.description.hint')}">${user.publicIntro.encodeAsHTML()}</textarea>
                                 </td>
                             </tr>
 

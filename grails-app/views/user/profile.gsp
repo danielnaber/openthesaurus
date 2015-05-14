@@ -46,6 +46,28 @@
                             </td>
                         </tr>
 
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                                <g:message code="user.change.profile.website"/>
+                            </td>
+                            <td valign='top' class='value'>
+                                <g:if test="${user.url}">
+                                    <a href="${user.url.encodeAsHTML()}" rel="nofollow">${user.url.encodeAsHTML()}</a>
+                                </g:if>
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                                <g:message code="user.change.profile.description"/>
+                            </td>
+                            <td valign='top' class='value'>
+                                <g:if test="${user.publicIntro}">
+                                    ${user.publicIntro.encodeAsHTML()}
+                                </g:if>
+                            </td>
+                        </tr>
+
                         <g:if test="${session.user}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
@@ -58,7 +80,7 @@
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
                                     <br/><br/><br/>
-                                    <g:link action="edit" params="${[uid: user.id]}"><g:message code="user.edit.back.to.private.profile"/></g:link>
+                                    <g:link action="editProfile"><g:message code="user.edit.profile"/></g:link> &mdash; <g:link action="edit" params="${[uid: user.id]}"><g:message code="user.edit.back.to.private.profile"/></g:link>
                                 </td>
                             </tr>
                         </g:if>

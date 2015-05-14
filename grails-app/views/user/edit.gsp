@@ -48,8 +48,33 @@
                             </tr> 
 
                             <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <g:message code="user.edit.event.count"/>
+                                </td>
                                 <td valign='top' class='name' colspan="2">
-                                    <g:link controller="userEvent" action="list" params="${[uid: user.id]}"><g:message code="user.edit.my.edits" args="${[eventCount]}"/></g:link>
+                                    <g:link controller="userEvent" action="list" params="${[uid: user.id]}">${eventCount}</g:link>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <g:message code="user.change.profile.website"/>
+                                </td>
+                                <td valign='top' class='name'>
+                                    <g:if test="${user.url}">
+                                        <a href="${user.url.encodeAsHTML()}" rel="nofollow">${user.url.encodeAsHTML()}</a>
+                                    </g:if>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
+                                    <g:message code="user.change.profile.description"/>
+                                </td>
+                                <td valign='top' class='name'>
+                                    <g:if test="${user.publicIntro}">
+                                        ${user.publicIntro.encodeAsHTML()}
+                                    </g:if>
                                 </td>
                             </tr>
 
@@ -68,11 +93,6 @@
                         </tbody>
                     </table>
                 </div>
-                <%--
-                <div class="buttons">
-                    <span class="button"><g:actionSubmit class="save" value="Update" /></span>
-                </div>
-                --%>
             </g:form>
         </div>
     </body>
