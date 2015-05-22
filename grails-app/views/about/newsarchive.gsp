@@ -21,6 +21,13 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2015-05-20</span></td>
+            <td valign="top">
+                Stefan Fischer hat eine OpenThesaurus-App für Android entwickelt. Kostenlos erhältlich
+                bei <a href="https://play.google.com/store/apps/details?id=sfischer13.openthesaurus">Google Play</a>.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2015-05-13</span></td>
             <td valign="top">Nutzern kann jetzt auf ihrer Profilseite eine private Nachricht geschickt werden.
                 Außerdem hat jeder Nutzer jetzt einen Avatar (zu sehen u.&nbsp;a. auf der <g:link controller="statistics">Statistik-Seite</g:link>)

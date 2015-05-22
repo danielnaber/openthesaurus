@@ -60,9 +60,14 @@
     
     
             <h2>OpenThesaurus auf Android</h2>
-            
-            <p>Leider wurden alle Apps schon länger nicht mehr aktualisiert. Wer Interesse hat, die
-            Apps zu verbessern, kann sich <a href="https://www.openthesaurus.de/jforum/posts/list/249.page">hier im Forum melden</a>.</p>
+
+            <ul>
+                <li><a href="https://play.google.com/store/apps/details?id=sfischer13.openthesaurus">OpenThesaurus Synonymsuche</a>.
+                Lizenz: Apache License 2.0, <a href="https://github.com/sfischer13/robot-openthesaurus">Sourcecode</a></li>
+            </ul>
+
+            <p style="margin-top: 10px">Die folgenden Apps wurden schon länger nicht mehr aktualisiert, sollten aber
+            weiterhin funktionieren:</p>
     
             <ul>
                 <li><a href="https://play.google.com/store/apps/details?id=com.fc.ot">OpenThesaurus für Android</a>.
