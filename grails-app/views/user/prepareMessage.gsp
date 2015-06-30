@@ -25,7 +25,7 @@
                         <tbody>
                         
                             <tr>
-                                <td><g:message code="user.prepare.message.from"/></td>
+                                <td width="10%"><g:message code="user.prepare.message.from"/></td>
                                 <td>${session.user.userId.encodeAsHTML()}</td>
                             </tr>
                             <tr>
@@ -41,6 +41,9 @@
                                 <td valign='top' class='name' colspan="2">
                                     <textarea name="message" rows="15" cols="60"></textarea>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><g:message code="user.prepare.message.privacy.hint"/></td>
                             </tr>
                             <tr>
                                 <td valign='top' class='name' colspan="2">
