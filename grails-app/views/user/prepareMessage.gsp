@@ -36,6 +36,10 @@
                                 <td><g:message code="user.prepare.message.subject"/></td>
                                 <td><input type="text" name="subject" autofocus /></td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td><label><input type="checkbox" name="cc" /> <g:message code="user.prepare.message.cc"/></label></td>
+                            </tr>
     
                             <tr>
                                 <td valign='top' class='name' colspan="2">

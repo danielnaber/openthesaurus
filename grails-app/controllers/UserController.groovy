@@ -81,6 +81,9 @@ class UserController extends BaseController {
         sendMail {
             from sender.userId
             to receiver.userId
+            if (params.cc) {
+                cc sender.userId
+            }
             subject message(code:'user.message.subject.prefix') + " " + params.subject
             body message(code:'user.message.message.prefix') + params.message
         }
