@@ -53,6 +53,11 @@ class AjaxSearchController extends BaseController {
                 // search works on the terms, not on the synsets.
                 // TODO: this still doesn't guarantee we get all matches - increasing the value leads to performance problems
                 def substringTermMatches = searchService.searchPartialResult(query, 0, 6)
+                // TODO: this works but highlighting does not (query: 'ähneln' vs. 'sich ähneln'):
+                //if (query.startsWith("sich ") || query.startsWith("etwas ")) {
+                //    String simplifiedQuery = query.replaceAll("^(sich|etwas) ", "")
+                //    substringTermMatches.addAll(searchService.searchPartialResult(simplifiedQuery, 0, 6))
+                //}
                 Pattern boundaryPattern = Pattern.compile(".*\\b" + Pattern.quote(params.q) + "\\b.*")
                 for (substringMatch in substringTermMatches) {
                     def substringMatches = searchService.searchSynsets(substringMatch.term, 10, 0, false)
