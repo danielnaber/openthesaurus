@@ -96,6 +96,13 @@
                             <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
                             >${displayTerm}</g:link>${commentInfo}${antonymInfo}${delim}
                         </g:else>
+                        <%-- 
+                        <!-- Audio test: -->
+                        <audio id="audio" src="https://upload.wikimedia.org/wikipedia/commons/5/59/De-Brote.ogg"></audio>-->
+                        <audio id="audio" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/De-Ich_freue_mich_auf_unser_Wiedersehen.ogg"></audio>
+                        <a href="javascript:document.getElementById('audio').play()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/15px-Loudspeaker.svg.png"></a>
+                        <!-- TODO: error handling see https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video -->
+                        --%>
                     </span>
 
                     <g:set var="counter" value="${counter + 1}"/>
