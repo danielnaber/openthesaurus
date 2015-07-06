@@ -54,7 +54,6 @@ class SearchService {
       // => there's a bug(?) so that the synsets are incomplete,
       // i.e. the terms are missing unless they match "ilike('word', query)",
       // see http://jira.codehaus.org/browse/GRAILS-2793
-      // TODO: use HQL or SQL so we can make use of Oracle's lowercase index
       def termList = Term.withCriteria {
           or {
             eq('word', query)
