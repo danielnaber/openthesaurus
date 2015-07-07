@@ -10,8 +10,13 @@
           
         <h2>Admin Page</h2>
 
+        <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+        </g:if>
+    
         <p>
         Manage:
+        <g:link action="prepareAudioImport">Import Audio</g:link> |
         <g:link controller="tag" action="detailList">Tags</g:link> |
         <g:link action="tagging">Tagging</g:link> |
         <g:link action="listUnusedTags">Unused Tags</g:link> |

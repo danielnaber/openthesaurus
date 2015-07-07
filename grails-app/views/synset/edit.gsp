@@ -142,6 +142,8 @@
 
                                 <strong>${t.toString()?.encodeAsHTML()}</strong>
 
+                                <g:render template="audio" model="${[term:t]}"/>
+
                                 <g:render template="/tag/termTags" model="${[term: t]}"/>
 
                                 <g:if test="${t.level}">

@@ -17,6 +17,7 @@
  */ 
 import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.StringTools
+import org.apache.commons.codec.digest.DigestUtils
 
 class AdminController extends BaseController {
     
@@ -29,6 +30,44 @@ class AdminController extends BaseController {
           maxResults(resultLimit)
         }
         [latestUsers: latestUsers, resultLimit: resultLimit]
+    }
+    
+    def prepareAudioImport() {
+        []
+    }
+
+    def importAudio() {
+        int count = 0
+        Scanner sc = new Scanner(new File(params.path))
+        Audio.executeUpdate('delete from Audio')
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine()
+            String[] parts = line.split("\\|")
+            String word
+            String urlSuffix
+            if (parts.length == 1) {
+                word = parts[0].replaceFirst("^De-", "").replaceFirst("\\.ogg", "").replaceFirst("_", " ")
+                urlSuffix = parts[0]
+            } else if (parts.length == 2) {
+                word = parts[1]
+                urlSuffix = parts[0]
+            } else {
+                log.warn("Could not parse line: " + line)
+                continue
+            }
+            String md5sum = DigestUtils.md5Hex(urlSuffix.replace(' ', '_'))
+            String md5path = md5sum.substring(0, 1) + "/" + md5sum.substring(0, 2) + "/"  //  e.g. "5/5e/"
+            String url = "https://upload.wikimedia.org/wikipedia/commons/" + md5path + urlSuffix
+            // TODO: extract author and license:
+            Audio audio = new Audio(word: word, url: url, author: "-", license: "-")
+            audio.save(failOnError: true)
+            count++
+            if (count % 100 == 0) {
+                log.info("Audio import ${count}...")
+            }
+        }
+        flash.message = "Imported ${count} terms"
+        redirect(action: 'index')
     }
 
     def listUnusedTags() {
