@@ -42,7 +42,6 @@ import java.util.regex.Pattern;
 public class WikipediaSynonymExtractor {
     
     private static final int MAX_CHARS = 150;
-
     private static final Pattern BOLD_PATTERN = Pattern.compile("''''?'?(.*?)''''?'?");
 
     private Connection connection;
@@ -52,13 +51,13 @@ public class WikipediaSynonymExtractor {
     
     private void parse(File file) throws XMLStreamException, IOException, SQLException {
         connection = DriverManager.getConnection("jdbc:mysql://localhost/vithesaurus?user=root&password=");
-        final XMLInputFactory factory = XMLInputFactory.newInstance();
-        final FileInputStream fis = new FileInputStream(file);
-        final XMLStreamReader parser = factory.createXMLStreamReader(fis);
-        final List<String> synonyms = new ArrayList<String>();
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        FileInputStream fis = new FileInputStream(file);
+        XMLStreamReader parser = factory.createXMLStreamReader(fis);
+        List<String> synonyms = new ArrayList<String>();
         String text = null;
         while (true) {
-            final int event = parser.next();
+            int event = parser.next();
             if (event == XMLStreamConstants.END_DOCUMENT) {
                 parser.close();
                 break;
@@ -68,8 +67,8 @@ public class WikipediaSynonymExtractor {
                     parser.next();
                     if (parser.hasText()) {
                         text = parser.getText();
-                        final String shortText = text.substring(0, Math.min(MAX_CHARS, text.length())); 
-                        final Matcher matcher = BOLD_PATTERN.matcher(shortText);
+                        String shortText = text.substring(0, Math.min(MAX_CHARS, text.length())); 
+                        Matcher matcher = BOLD_PATTERN.matcher(shortText);
                         int pos = 0;
                         while (matcher.find(pos)) {
                             synonyms.add(matcher.group(1));
@@ -95,27 +94,23 @@ public class WikipediaSynonymExtractor {
     }
 
     private void findSynonyms(List<String> synonyms) throws SQLException, UnsupportedEncodingException {
-        final PreparedStatement preparedStatement = connection.prepareStatement(
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT DISTINCT synset.id FROM term, synset, term term2 WHERE synset.is_visible = 1 AND synset.id " +
-                "   = term.synset_id AND term.synset_id AND term2.synset_id = synset.id AND term2.word = ?");
-        try {
-            final Map<Integer,Integer> synsetIdToCount = new HashMap<Integer, Integer>();
+                        "   = term.synset_id AND term.synset_id AND term2.synset_id = synset.id AND term2.word = ?")) {
+            Map<Integer, Integer> synsetIdToCount = new HashMap<Integer, Integer>();
             for (String synonym : synonyms) {
                 preparedStatement.setString(1, synonym);
-                final ResultSet resultSet = preparedStatement.executeQuery();
                 //System.out.println(synonym);
-                try {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
                         //System.out.println(" " + resultSet.getInt("id"));
-                        final Integer key = resultSet.getInt("id");
+                        Integer key = resultSet.getInt("id");
                         if (synsetIdToCount.containsKey(key)) {
                             synsetIdToCount.put(key, synsetIdToCount.get(key) + 1);
                         } else {
                             synsetIdToCount.put(key, 1);
                         }
                     }
-                } finally {
-                    resultSet.close();
                 }
             }
             boolean foundAll = false;
@@ -132,18 +127,16 @@ public class WikipediaSynonymExtractor {
                         URLEncoder.encode(synonyms.get(0), "utf-8")
                         + "\">W</a>] <a href=\"http://www.openthesaurus.de/synset/create?term=" +
                         URLEncoder.encode(StringUtils.join(synonyms, "\n"), "utf-8") + "\">"
-                    + StringUtils.join(synonyms, ", ") + "</a><br/>");
+                        + StringUtils.join(synonyms, ", ") + "</a><br/>");
             } else if (!foundAll) {
                 //System.out.println("DID NOT find all synonyms: " + synonyms);
             }
-        } finally {
-            preparedStatement.close();
         }
     }
 
 
     public static void main(String[] args) throws XMLStreamException, IOException, SQLException {
-        final WikipediaSynonymExtractor extractor = new WikipediaSynonymExtractor();
+        WikipediaSynonymExtractor extractor = new WikipediaSynonymExtractor();
         extractor.parse(new File("/media/data/data/corpus/wikipedia/dewiki-20100815-pages-articles.xml"));
     }
 }

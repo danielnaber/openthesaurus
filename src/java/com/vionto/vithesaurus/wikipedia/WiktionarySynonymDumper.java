@@ -28,6 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.commons.lang.StringUtils;
 import org.xml.sax.SAXException;
 
 /**
@@ -54,10 +55,10 @@ public class WiktionarySynonymDumper {
   private WiktionarySynonymDumper() {
   }
 
-  private void run(final InputStream is) throws IOException, SAXException, ParserConfigurationException {
-    final WiktionaryPageHandler handler = new WiktionaryPageHandler();
-    final SAXParserFactory factory = SAXParserFactory.newInstance();
-    final SAXParser saxParser = factory.newSAXParser();
+  private void run(InputStream is) throws IOException, SAXException, ParserConfigurationException {
+    WiktionaryPageHandler handler = new WiktionaryPageHandler();
+    SAXParserFactory factory = SAXParserFactory.newInstance();
+    SAXParser saxParser = factory.newSAXParser();
     saxParser.getXMLReader().setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);  
     System.out.println("SET NAMES utf8;");
     System.out.println("DROP TABLE IF EXISTS wiktionary;");
@@ -72,13 +73,13 @@ public class WiktionarySynonymDumper {
     System.err.println("Skipped: " + handler.skipped);
   }
 
-  public static void main(final String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
     if (args.length != 1) {
-      System.out.println("Usage: WiktionaryDumper <xmldump>");
+      System.out.println("Usage: WiktionarySynonymDumper <xmldump>");
       System.out.println("   <xmldump> is an unzipped XML dump from http://dumps.wikimedia.org/dewiktionary/, e.g. 'dewiktionary-20140725-pages-articles.xml.bz2'");
       System.exit(1);
     }
-    final WiktionarySynonymDumper prg = new WiktionarySynonymDumper();
+    WiktionarySynonymDumper prg = new WiktionarySynonymDumper();
     prg.run(new FileInputStream(args[0]));
   }
 
@@ -98,11 +99,11 @@ public class WiktionarySynonymDumper {
           if (text.indexOf(LANGUAGE_STRING) == -1) {
             skipped++;
           } else {
-            final String cleanedText = clean(text.toString());
-            final List<String> meaningsList = getSection(cleanedText, MEANINGS_PREFIX);
-            final String meanings = join(meaningsList, " ");
-            final List<String> synonymsList = getSection(cleanedText, SYNONYMS_PREFIX);
-            final String synonyms = join(synonymsList, " ");
+            String cleanedText = clean(text.toString());
+            List<String> meaningsList = getSection(cleanedText, MEANINGS_PREFIX);
+            String meanings = StringUtils.join(meaningsList, " ");
+            List<String> synonymsList = getSection(cleanedText, SYNONYMS_PREFIX);
+            String synonyms = StringUtils.join(synonymsList, " ");
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
             exported++;
@@ -114,32 +115,23 @@ public class WiktionarySynonymDumper {
       position = UNDEF;
     }
     
-    private List<String> getSection(final String text, final String prefix) {
-      final List<String> terms = new ArrayList<String>();
-      final Scanner scanner = new Scanner(text);
-      boolean inSynonymList = false;
-      while (scanner.hasNextLine()) {
-        final String line = scanner.nextLine();
-        if (line.trim().startsWith(prefix)) {
-          inSynonymList = true;
-        } else if (inSynonymList && line.trim().startsWith(SECTION_PREFIX)) {
-          // next section starts
-          break;
-        } else if (inSynonymList) {
-          terms.add(line);
+    private List<String> getSection(String text, String prefix) {
+      List<String> terms = new ArrayList<>();
+      try (Scanner scanner = new Scanner(text)) {
+        boolean inSynonymList = false;
+        while (scanner.hasNextLine()) {
+          String line = scanner.nextLine();
+          if (line.trim().startsWith(prefix)) {
+            inSynonymList = true;
+          } else if (inSynonymList && line.trim().startsWith(SECTION_PREFIX)) {
+            // next section starts
+            break;
+          } else if (inSynonymList) {
+            terms.add(line);
+          }
         }
       }
-      scanner.close();
       return terms;
-    }
-
-    private String join(final List<String> list, final String delimiter) {
-      final StringBuilder sb = new StringBuilder();
-      for (String element : list) {
-        sb.append(element);
-        sb.append(delimiter);
-      }
-      return sb.toString();
     }
 
   }
