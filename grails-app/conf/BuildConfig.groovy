@@ -2,8 +2,8 @@ grails.servlet.version = "2.5" // Change depending on target container complianc
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.target.level = 1.6
-grails.project.source.level = 1.6
+grails.project.target.level = 1.7
+grails.project.source.level = 1.7
 grails.project.dependency.resolver = "maven"
 
 grails.project.dependency.resolution = {
@@ -33,6 +33,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
+        compile 'org.apache.commons:commons-compress:1.9'
         runtime 'mysql:mysql-connector-java:5.1.30'
         runtime 'commons-codec:commons-codec:1.10'
         test "net.sourceforge.htmlunit:htmlunit:2.10"  // 2.11 didn't work...
