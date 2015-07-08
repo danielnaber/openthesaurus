@@ -27,8 +27,6 @@ import java.util.regex.Pattern;
 
 public class WikimediaDumpHandler extends DefaultHandler {
 
-  /** String required in a document, other documents will be ignored. */
-  protected static final String LANGUAGE_STRING = "{{Sprache|Deutsch}}";
   private static final Pattern XML_COMMENT_PATTERN = Pattern.compile("<!--.*?-->", Pattern.DOTALL);
   
   protected static final int UNDEF = 0;

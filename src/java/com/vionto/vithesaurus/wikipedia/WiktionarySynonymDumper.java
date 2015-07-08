@@ -43,6 +43,9 @@ import org.xml.sax.SAXException;
  */
 public class WiktionarySynonymDumper {
 
+  /** String required in a document, other documents will be ignored. */
+  private static final String LANGUAGE_STRING = "{{Sprache|Deutsch}}";
+
   /** Lines starting with this string indicate the "meanings" section in a Wiktionary page. */
   private static final String MEANINGS_PREFIX = "{{Bedeutungen}}";
 
