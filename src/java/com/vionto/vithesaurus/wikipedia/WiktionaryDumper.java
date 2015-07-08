@@ -37,7 +37,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Loads links from a Wiktionary XML dump and builds an SQL dump (for MySQL).
- * Contains some filtering that's specific the German.
+ * Contains some filtering that's specific to German.
  * 
  * Get the XML dump from http://download.wikimedia.org/dewiktionary/latest/,
  * the filename is something like "XXwiktionary-YYYYMMDD-pages-articles.xml.bz2",
