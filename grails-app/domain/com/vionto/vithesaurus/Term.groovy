@@ -57,7 +57,7 @@ class Term implements Comparable, Cloneable {
             }
         )
         level(nullable:true)
-        userComment(nullable:true, size: 0..255)
+        userComment(nullable:true, size: 0..400)
         normalizedWord(nullable:true)
         normalizedWord2(nullable:true)
         originalId(nullable:true)

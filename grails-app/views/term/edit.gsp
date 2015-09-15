@@ -218,7 +218,7 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${editable}">
-                                        <g:textArea style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
+                                        <g:textArea maxlength="400" style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
                                     </g:if>
                                     <g:else>
 										<g:if test="${term.userComment}">
