@@ -17,6 +17,21 @@
         <script type="text/javascript">
         <!--
 
+            $( document ).ready(function() {
+                updateRemainingChars();
+                $('#userComment').on("propertychange input textInput", function () {
+                    updateRemainingChars();
+                });
+            });
+        
+            function updateRemainingChars() {
+                var left = 400 - $('#userComment').val().length;
+                if (left < 0) {
+                    left = 0;
+                }
+                $('#userCommentCharCounter').text(left);
+            }
+        
             function deleteItem(id, termLinkId) {
                 var hiddenFieldName = 'deleteExistingTermLink_' + id + '_' + termLinkId;
                 var deleted = document.getElementById(hiddenFieldName).value != "";
@@ -219,6 +234,7 @@
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${editable}">
                                         <g:textArea maxlength="400" style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
+                                        <p class="metaInfo"><g:message code="edit.term.remaining" /> <span id="userCommentCharCounter"></span></p>
                                     </g:if>
                                     <g:else>
 										<g:if test="${term.userComment}">
