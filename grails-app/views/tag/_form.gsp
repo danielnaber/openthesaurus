@@ -18,15 +18,17 @@
 		</div>
 	</td>
 </tr>
-<tr>
-	<td><label for="color">Color</label></td>
-	<td>
-		<div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'color', 'error')} ">
-			<input id="color" type='color' name="color" value="${tagInstance?.color}" />
-			<br/><br/>
-		</div>
-	</td>
-</tr>
+<g:if test="${!tagInstance.isInternal()}">
+	<tr>
+		<td><label for="color">Color</label></td>
+		<td>
+			<div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'color', 'error')} ">
+				<input id="color" type='color' name="color" value="${tagInstance?.color}" />
+				<br/><br/>
+			</div>
+		</td>
+	</tr>
+</g:if>
 <tr>
 	<td><label for="color">IsVisible</label></td>
 	<td>
