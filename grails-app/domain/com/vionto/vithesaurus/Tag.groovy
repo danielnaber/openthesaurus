@@ -24,11 +24,13 @@ class Tag implements Comparable<Tag> {
     String color
     Date created
     String createdBy
+    Boolean isVisible
 
     static constraints = {
         name(unique:true)
         shortName(unique:true, nullable: true)
         color(nullable:true)
+        isVisible(nullable:true)
     }
 
     String getBackgroundColor() {
@@ -46,6 +48,10 @@ class Tag implements Comparable<Tag> {
     /** Whether this is an internal tag that's only to be displayed to logged-in users. */
     boolean isInternal() {
         return name.startsWith(":")
+    }
+    
+    boolean isVisible() {
+        return isVisible == null || isVisible == true
     }
 
     @Override

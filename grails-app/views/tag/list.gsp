@@ -27,7 +27,7 @@
                     <span id="moreTags">
                 </g:if>
 				<g:each in="${tagToCount}" var="item" status="i">
-                    <g:set var="showTag" value="${!item.key.isInternal() || session.user}"/>
+                    <g:set var="showTag" value="${(!item.key.isInternal() || session.user) && item.key.isVisible()}"/>
                     <g:set var="count" value="${item.value}"/>
 					<g:if test="${showTag && count > 0}">
 						<g:set var="tag" value="${item.key}"/>

@@ -27,5 +27,13 @@
 		</div>
 	</td>
 </tr>
+<tr>
+	<td><label for="color">IsVisible</label></td>
+	<td>
+		<div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'isVisible', 'error')} ">
+			<g:checkBox id="isVisible" name="isVisible" value="${tagInstance?.isVisible()}" />
+		</div>
+	</td>
+</tr>
 </table>
 </div>

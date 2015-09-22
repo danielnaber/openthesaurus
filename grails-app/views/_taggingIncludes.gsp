@@ -16,12 +16,14 @@
                 availableTags: [
                     <g:set var="allTags" value="${Tag.findAll().sort()}"/>
                     <g:each in="${allTags}" var="tag" status="i">
-                        <g:if test="${i < allTags.size()-1}">
-                            "${tag.name}",
+                        <g:if test="${tag.isVisible()}">
+                            <g:if test="${i < allTags.size()-1}">
+                                "${tag.name}",
+                            </g:if>
+                            <g:else>
+                                "${tag.name}"
+                            </g:else>
                         </g:if>
-                        <g:else>
-                            "${tag.name}"
-                        </g:else>
                     </g:each>
                 ],
                 caseSensitive: false,
