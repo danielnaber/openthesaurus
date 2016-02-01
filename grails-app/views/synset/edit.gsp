@@ -387,6 +387,26 @@
 
         </g:form>
 
+        <g:if test="${editable && synset.isVisible}">
+            <g:form controller="merge" method="get" name="mergeForm">
+                <input type="hidden" name="synset1" value="${synset?.id}" />
+                <div class='leftColumn name'>
+                    <h2 class="noTopMargin"><g:message code='edit.merge'/></h2>
+                </div>
+                <div class="rightColumn">
+                    <div class="buttons">
+                        <a href="javascript:toggleId('mergeArea')">${message(code:'edit.merge.link')}</a>
+                        <div id="mergeArea" style="margin-top:12px; display:none">
+                            <g:message code="edit.merge.id"/><br>
+                            <input type="text" name="synset2"/>
+                            <g:actionSubmit action="index" class="hide mergeArea" value="${message(code:'edit.merge.continue')}" />
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </g:form>
+        </g:if>
+
         <g:if test="${eventList}">
             <!-- is not always set, e.g. after error -->
             <div class="colspanlist">
