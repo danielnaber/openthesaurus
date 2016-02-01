@@ -33,8 +33,8 @@ class MergeController extends BaseController {
 
     def index = {
         def userActions = UserEvent.countByByUser(session.user)
-        if (userActions < Integer.parseInt(grailsApplication.config.minUserActionsForMerge)) {
-            [warning: true, minActions: grailsApplication.config.minUserActionsForMerge]
+        if (userActions < Integer.parseInt(grailsApplication.config.thesaurus.minUserActionsForMerge)) {
+            [warning: true, minActions: grailsApplication.config.thesaurus.minUserActionsForMerge]
         } else {
             Synset s1 = Synset.get(params.synset1)
             Synset s2 = Synset.get(params.synset2)
