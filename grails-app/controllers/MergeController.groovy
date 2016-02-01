@@ -22,6 +22,7 @@ import com.vionto.vithesaurus.Synset
 import com.vionto.vithesaurus.SynsetLink
 import com.vionto.vithesaurus.Term
 import com.vionto.vithesaurus.TermLink
+import com.vionto.vithesaurus.UserEvent
 import com.vionto.vithesaurus.tools.IpTools
 
 class MergeController extends BaseController {
@@ -31,9 +32,14 @@ class MergeController extends BaseController {
     static def allowedMethods = [doMerge:'POST']
 
     def index = {
-        Synset s1 = Synset.get(params.synset1)
-        Synset s2 = Synset.get(params.synset2)
-        [synset1: s1, synset2: s2]
+        def userActions = UserEvent.countByByUser(session.user)
+        if (userActions < Integer.parseInt(grailsApplication.config.minUserActionsForMerge)) {
+            [warning: true, minActions: grailsApplication.config.minUserActionsForMerge]
+        } else {
+            Synset s1 = Synset.get(params.synset1)
+            Synset s2 = Synset.get(params.synset2)
+            [synset1: s1, synset2: s2]
+        }
     }
 
     def doMerge = {
