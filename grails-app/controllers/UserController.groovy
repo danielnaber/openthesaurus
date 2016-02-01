@@ -71,6 +71,9 @@ class UserController extends BaseController {
         if (!receiver) {
             throw new Exception("No user for id '${params.receiverId.encodeAsHTML()}'")
         }
+        if (!receiver.acceptsMessages) {
+            throw new Exception("User id '${params.receiverId.encodeAsHTML()}' doesn't accept private messages")
+        }
         validateSending(sender)
         def pMessage = new PersonalMessage(sender.userId, receiver.userId)
         boolean saved = pMessage.save(flush: true)
@@ -203,7 +206,8 @@ class UserController extends BaseController {
         savePassword(user, params.password1)
       }
       user.publicIntro = params.publicIntro
-      user.url = params.url 
+      user.url = params.url
+      user.acceptsMessages = "on" == params.acceptsMessages
       user.save(flush: true) 
       session.user = user
       flash.message = message(code:'user.change.profile.changed')

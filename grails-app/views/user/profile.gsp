@@ -1,4 +1,5 @@
 <%@ page import="com.vionto.vithesaurus.UserEvent" %>
+<%@ page import="com.vionto.vithesaurus.ThesaurusUser" %>
   
 <html>
     <head>
@@ -76,7 +77,12 @@
                         <g:if test="${session.user}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
+                                    <g:if test="${ThesaurusUser.get(params.uid).acceptsMessages}">
                                         <g:link action="prepareMessage" params="${[uid: user.id]}"><g:message code="user.send.message"/></g:link>
+                                    </g:if>
+                                    <g:else>
+                                        <g:message code="user.send.message.disabled"/>
+                                    </g:else>
                                 </td>
                             </tr>
                         </g:if>

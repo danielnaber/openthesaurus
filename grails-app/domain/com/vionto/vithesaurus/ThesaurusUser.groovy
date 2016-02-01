@@ -34,6 +34,7 @@ class ThesaurusUser {
     String publicIntro
     String url
     boolean blocked		// used to completely block a user from logging in
+    boolean acceptsMessages
     
     final static USER_PERM = "user"
     final static ADMIN_PERM = "admin"
@@ -54,6 +55,7 @@ class ThesaurusUser {
     ThesaurusUser() {
         this.creationDate = new Date()
         blocked = false
+        acceptsMessages = true
     }
     
     ThesaurusUser(String userId, String hashedPassword, String salt, String permission) {
@@ -62,6 +64,7 @@ class ThesaurusUser {
         this.salt = salt
         this.permission = permission
         this.creationDate = new Date()
+        this.acceptsMessages = true
     }
 
     /** Return true if user has at least user permissions.

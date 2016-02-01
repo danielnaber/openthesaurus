@@ -63,6 +63,20 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
+                                    <g:message code="user.edit.accepting.messages"/>
+                                </td>
+                                <td valign='top' class='name' colspan="2">
+                                    <g:if test="${user.acceptsMessages}">
+                                        <g:message code="user.edit.accepting.messages.yes"/>
+                                    </g:if>
+                                    <g:else>
+                                        <g:message code="user.edit.accepting.messages.no"/>
+                                    </g:else>
+                                </td>
+                            </tr>
+
+                            <tr class='prop'>
+                                <td valign='top' class='name'>
                                     <g:message code="user.change.profile.website"/>
                                 </td>
                                 <td valign='top' class='name'>
