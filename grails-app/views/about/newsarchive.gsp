@@ -17,6 +17,18 @@
         <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
             
         <tr class="newsYearDelimiter">
+            <td>2016</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2016-02-01</span></td>
+            <td valign="top">
+                Nutzer können zwei Synonymgruppen jetzt zu einer zusammenführen (dieses Feature ist
+                nur für erfahrene Nutzer mit mehr als 50 Änderungen freigeschaltet).
+            </td>
+        </tr>
+
+        <tr class="newsYearDelimiter">
             <td>2015</td>
             <td></td>
         </tr>
