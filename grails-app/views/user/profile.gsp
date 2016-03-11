@@ -96,6 +96,24 @@
                             </tr>
                         </g:if>
 
+                        <g:if test="${session.user && session.user.userId.toString() == 'admin'}">
+                            <tr class='prop'>
+                                <td valign='top' class='name' colspan="2">
+                                    <g:form action="saveBlockState" method="post">
+                                        <input type="hidden" name="uid" value="${user.id}"/>
+                                        <g:if test="${user.blocked}">
+                                                <input type="hidden" name="blocked" value="false"/>
+                                                <input type="submit" value="Unblock user"/>
+                                        </g:if>
+                                        <g:else>
+                                                <input type="hidden" name="blocked" value="true"/>
+                                                <input type="submit" value="Block user"/>
+                                        </g:else>
+                                    </g:form>
+                                </td>
+                            </tr>
+                        </g:if>
+
                     </tbody>
                 </table>
             </div>

@@ -564,22 +564,21 @@ class UserController extends BaseController {
         return ['user':user]
     }
 
-    def save = {
+    def saveBlockState = {
         if (!isAdmin()) {
             render "Access denied"
             return
         }
-        //TODO: make this work again
-        /*ThesaurusUser user = new ThesaurusUser(params)
-        user.password = md5sum(params.password)
+        ThesaurusUser user = ThesaurusUser.get(params.uid)
+        user.blocked = params.blocked == 'true'
         if(!user.hasErrors() && user.save()) {
-            flash.message = "User ${user.id} created"
-            log.info("User ${user.userId} created")
-            redirect(action:edit,id:user.id)
+            def msg = "User ${user.id} blocked: ${user.blocked}"
+            flash.message = msg
+            log.info(msg)
+            redirect(action: profile, params: [uid: user.id])
+        } else {
+            throw new Exception("Could not save user: ${user.errors}")
         }
-        else {
-            render(view:'create',model:[user:user])
-        }*/
     }
 
     public static String md5sum(String str, String salt) {
