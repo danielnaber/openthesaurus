@@ -66,8 +66,8 @@
           <g:each in="${latestUsers}" status="i" var="user">
               <tr>
                   <td valign="top">
-                    <a style="font-weight: normal" href="mailto:${user.userId.encodeAsURL()}">${user.userId.encodeAsHTML()}</a><br/>
-                    ${user.realName?.encodeAsHTML()}
+                    <g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName?.encodeAsHTML()}</g:link><br/>
+                    <a style="font-weight: normal" href="mailto:${user.userId.encodeAsURL()}">${user.userId.encodeAsHTML()}</a>
                   </td>
                   <td valign="top">${user.permission?.encodeAsHTML()}</td>
                   <td valign="top"><g:formatDate format="yyyy-MM-dd" date="${user.creationDate}"/> <span class="metaInfo"><g:formatDate format="HH:mm" date="${user.creationDate}"/></span></td>
