@@ -254,7 +254,7 @@
                                         <g:message code="edit.comment.for.change.detail"/>
                                     </td>
                                     <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
-                                        <input style="width:300px" id='changeComment' name='changeComment' spellcheck="true" value=""/>
+                                        <textarea rows="2" cols="50" maxlength="400" id='changeComment' name='changeComment' spellcheck="true"></textarea>
                                     </td>
                                 </tr>
                             </g:if>

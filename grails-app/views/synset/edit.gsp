@@ -353,8 +353,8 @@
                                  <g:message code='edit.comment.for.change.detail'/>
                               </div>
                               <div class='rightColumn value'>
-                                  <input ${disabled} onkeypress="return avoidSubmitOnReturn(event);" size="40"
-                                       id="changeComment" spellcheck="true" type="text" name="changeComment" value="" />
+                                  <textarea ${disabled} rows="2" cols="50" maxlength="400"
+                                       id="changeComment" spellcheck="true" name="changeComment"></textarea>
                               </div>
                               <div style="clear: both"></div>
 
