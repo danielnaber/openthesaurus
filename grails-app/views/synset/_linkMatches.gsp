@@ -9,10 +9,10 @@
                     &middot;
                 </g:if>
                 <g:if test="${term.level}">
-                    <a href="${term.word.encodeAsURL()}">${term.word.encodeAsHTML()} (${term.level.shortLevelName.encodeAsHTML()})</a>
+                    <a href="${term.word.replace('/', '___').encodeAsURL()}">${term.word.encodeAsHTML()} (${term.level.shortLevelName.encodeAsHTML()})</a>
                 </g:if>
                 <g:else>
-                    <a href="${term.word.encodeAsURL()}">${term.word.encodeAsHTML()}</a>
+                    <a href="${term.word.replace('/', '___').encodeAsURL()}">${term.word.encodeAsHTML()}</a>
                 </g:else>
             </g:if>
             <g:elseif test="${termCount == 3}">

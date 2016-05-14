@@ -45,7 +45,7 @@
                            directMatchingTerm = '<span class="synsetmatchDirect">' + directMatchingTerm + '</span>'
                        }
                        %>
-                       <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                       <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().replace('/', '___').encodeAsURL()}">
                            ${directMatchingTerm}
                            <g:render template="metaInfo" model="${[term:term]}"/>
                        </g:link>
