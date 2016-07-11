@@ -54,7 +54,7 @@
                         <g:set var="delim" />
                     </g:if>
                     <g:else>
-                        <g:set var="delim"><span class="d">&nbsp;&middot;</span></g:set>
+                        <g:set var="delim"><span class="d">&middot;</span></g:set>
                     </g:else>
 
                     <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
