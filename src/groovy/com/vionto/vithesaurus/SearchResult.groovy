@@ -14,5 +14,9 @@ class SearchResult {
       this.synsetList = synsetList
       this.completeResult = completeResult
   }
+    
+    public String toString() {
+        return synsetList
+    }
 
 }
