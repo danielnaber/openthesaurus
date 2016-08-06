@@ -76,8 +76,8 @@ public class StringTools {
    * with <br>
    * <code>&amp;lt;, &amp;gt;, &amp;amp;</code><br>
    */
-  public static String replaceHtmlMarkupChars(final String string) {
-    return string.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  public static String replaceHtmlMarkupChars(final String str) {
+    return str.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   }
 
   /**
