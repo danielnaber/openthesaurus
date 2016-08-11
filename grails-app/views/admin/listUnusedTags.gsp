@@ -19,12 +19,17 @@
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
 
-            <p>Tags not attached to a term:</p>
+            <p>Tags not attached to any term:</p>
 
 			<div style="line-height: 24px;">
                 <ul>
                     <g:each in="${tagToCount}" var="tag" status="i">
-                        <li>${tag.key}
+						<g:if test="${Tag.findByName(tag.key).isVisible}">
+							<li>${tag.key}</li>
+						</g:if>
+						<g:else>
+							<li style="color: #888;">${tag.key} (not visible)</li>
+						</g:else>
                     </g:each>
                 </ul>
             </div>
