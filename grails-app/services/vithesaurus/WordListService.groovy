@@ -38,17 +38,17 @@ class WordListService {
   }
 
   def refreshWordList() {
-    wordToLookup = loadListFromUrl("http://www.korrekturen.de/data/lemmata/wortliste.txt", false)
+    wordToLookup = loadListFromUrl("https://www.korrekturen.de/data/lemmata/wortliste.txt", false)
     log.info("Done refreshing word list - list now contains ${wordToLookup.size()} items - ${getSomeKeys(wordToLookup)}...")
   }
 
   def refreshGenderList() {
-    wordToGenderLookup = loadListFromUrl("http://www.korrekturen.de/data/lemmata/genus.txt", false)
+    wordToGenderLookup = loadListFromUrl("https://www.korrekturen.de/data/lemmata/genus.txt", false)
     log.info("Done refreshing gender list - list now contains ${wordToGenderLookup.size()} items - ${getSomeKeys(wordToGenderLookup)}...")
   }
 
   def refreshCommonMistakesList() {
-    wordToMistakeLookup = loadListFromUrl("http://www.korrekturen.de/data/lemmata/fehler.txt", true)
+    wordToMistakeLookup = loadListFromUrl("https://www.korrekturen.de/data/lemmata/fehler.txt", true)
     log.info("Done refreshing common mistakes list - list now contains ${wordToMistakeLookup.size()} items - ${getSomeKeys(wordToMistakeLookup)}...")
   }
 
@@ -102,7 +102,8 @@ class WordListService {
   }
 
   String sanityCheckUrl(String url) {
-    if (url.length() < 250 && url.trim().startsWith("http://www.korrekturen.de") || url.trim().startsWith("http://korrekturen.de")) {
+    if (url.length() < 250 && (url.trim().startsWith("http://www.korrekturen.de") || url.trim().startsWith("http://korrekturen.de") ||
+            url.trim().startsWith("https://www.korrekturen.de") || url.trim().startsWith("https://korrekturen.de"))) {
       return url
     }
     throw new Exception("Unexpected URL or URL length: ${url}")
