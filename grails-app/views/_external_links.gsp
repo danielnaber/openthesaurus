@@ -1,4 +1,5 @@
 
+<g:set var="utf8Query" value="${URLEncoder.encode(q, 'utf8')}"/>
 <g:set var="latin1Query" value="${URLEncoder.encode(q, 'latin1')}"/>
 
 <%--
@@ -9,7 +10,7 @@
 <p style="line-height: 175%">
 
     <g:if test="${q.split(" ").length <= 2}">
-        <a href="http://www.canoo.net/services/Controller?input=${latin1Query}&amp;service=inflection">Wortformen von Canoo.net</a>
+        <a href="https://www.korrekturen.de/flexion/suche.php?q=${utf8Query}&amp;cc=off">Wortformen von korrekturen.de</a>
         <span class="d">&middot;</span>
     </g:if>
 
