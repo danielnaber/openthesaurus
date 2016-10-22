@@ -10,7 +10,7 @@
 <p style="line-height: 175%">
 
     <g:if test="${q.split(" ").length <= 2}">
-        <a href="https://www.korrekturen.de/flexion/suche.php?q=${utf8Query}&amp;cc=off">Wortformen von korrekturen.de</a>
+        <a href="https://www.korrekturen.de/flexion/suche.php?q=${utf8Query}">Wortformen von korrekturen.de</a>
         <span class="d">&middot;</span>
     </g:if>
 
