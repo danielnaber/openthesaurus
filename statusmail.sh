@@ -72,7 +72,6 @@ grep -c "Writing data export for OXT" $LOG >>$OUT
 echo -n "Memory database updates: " >>$OUT          
 grep -c "Finished creating in-memory database" $LOG >>$OUT
 
-
 echo "" >>$OUT
 echo "Private messages sent: " >>$OUT
 grep "Sending private email from" $LOG >>$OUT
@@ -82,8 +81,8 @@ echo "Registrations:" >>$OUT
 grep "Sent registration mail " $LOG >>$OUT
 
 echo "" >>$OUT
-echo "Top 15 Similarities:" >>$OUT
-grep " Similar to " $LOG | sed 's/.*Similar to /Similar to /' | sort | uniq -c | sort -r -n | head -n 15 >>$OUT
+echo "Top 5 Similarities:" >>$OUT
+grep " Similar to " $LOG | sed 's/.*Similar to /Similar to /' | sort | uniq -c | sort -r -n | head -n 5 >>$OUT
 
 #echo "" >>$OUT
 #echo "Similarities (max. 100):" >>$OUT
@@ -97,4 +96,8 @@ echo "" >>$OUT
 echo "Errors": >>$OUT
 grep "ERROR" $LOG >>$OUT
 
-head -n 1000 $OUT | mail -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
+echo "" >>$OUT
+echo "Apache Errors (max. 10)": >>$OUT
+tail -n 10 apache_errors.log >>$OUT
+
+head -n 1000 $OUT | mail -a 'From: feedback@openthesaurus.de' -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
