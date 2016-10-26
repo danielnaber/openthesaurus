@@ -93,11 +93,12 @@ echo "Warnings (without empty queries):" >>$OUT
 grep "WARN" $LOG | grep -v "No query specified for search" >>$OUT
 
 echo "" >>$OUT
-echo "Errors": >>$OUT
-grep "ERROR" $LOG >>$OUT
+echo "Errors (max. 100)": >>$OUT
+grep "ERROR" $LOG | head -n 100 >>$OUT
 
 echo "" >>$OUT
-echo "Apache Errors (max. 10)": >>$OUT
-tail -n 10 apache_errors.log >>$OUT
+echo "Apache Errors (max. 30)": >>$OUT
+echo "Total Apache errors: `wc -l apache_errors.log`" >>$OUT
+tail -n 30 apache_errors.log >>$OUT
 
 head -n 1000 $OUT | mail -a 'From: feedback@openthesaurus.de' -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
