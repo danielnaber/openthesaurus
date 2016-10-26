@@ -101,4 +101,5 @@ echo "Apache Errors (max. 30)": >>$OUT
 echo "Total Apache errors: `wc -l apache_errors.log`" >>$OUT
 tail -n 30 apache_errors.log >>$OUT
 
-head -n 1000 $OUT | mail -a 'From: feedback@openthesaurus.de' -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" feedback@openthesaurus.de
+PART1=feedback
+head -n 1000 $OUT | mail -a "From: $PART1@openthesaurus.de" -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" $PART1@openthesaurus.de
