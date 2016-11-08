@@ -81,8 +81,7 @@
                         method: 'get',
                         asynchronous: true,
                         data:{
-                            q: searchString,
-                            forumLink: "false"
+                            q: searchString
                         }
                     }
             ).done(function(msg){

@@ -117,9 +117,4 @@
           </g:link>
         </td>
       </tr>
-      <g:if test="${params.forumLink != 'false'}">
-        <tr>
-          <td colspan="3"><g:render template="/synset/forumlink" /></td>
-        </tr>
-      </g:if>
     </table>
