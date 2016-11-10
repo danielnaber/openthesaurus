@@ -40,7 +40,7 @@
             <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
               er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
               Auf diesem Server (www.openthesaurus.de) läuft Version <g:meta name="app.version"/>.
-              Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README">README</a>
+              Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README.md">README</a>
               und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">im Forum</a> beschrieben.
             </p>
     
