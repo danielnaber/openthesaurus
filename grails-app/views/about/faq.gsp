@@ -59,8 +59,9 @@
                     <a name="textverarbeitungen">In welche Textverarbeitungen kann ich OpenThesaurus direkt integrieren?</a>
                 </div>
                 <div class="answer">
-                OpenThesaurus funktioniert mit <a href="http://www.openoffice.org">OpenOffice.org</a> /
-                    <a href="http://www.documentfoundation.org/download/">LibreOffice</a> und
+                OpenThesaurus funktioniert mit
+                    <a href="http://www.libreoffice.org">LibreOffice</a> /
+                    <a href="http://www.openoffice.org">OpenOffice.org</a> und
                     <a href="http://www.papyrus.de">Papyrus</a> und wird dort bereits mitgeliefert.
                 </div>
             </div>
