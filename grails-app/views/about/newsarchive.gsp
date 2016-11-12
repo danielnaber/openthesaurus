@@ -21,6 +21,15 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2016-11-12</span></td>
+            <td valign="top">
+                Das Forum wurde geschlossen, Ideen oder Fehlerberichte können weiterhin
+                <g:link action="imprint">per E-Mail</g:link> oder
+                <a href="https://github.com/danielnaber/openthesaurus/issues">auf github</a> 
+                berichtet werden.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2016-02-01</span></td>
             <td valign="top">
                 Nutzer können zwei Synonymgruppen jetzt zu einer zusammenführen (dieses Feature ist
