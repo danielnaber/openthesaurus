@@ -122,5 +122,8 @@
             <g:submitButton name="name" value="${message(code:'edit.changelog.change')}"/>
           </g:form>
 
+          <br/>
+          <a href="${createLinkTo(dir:'feed')}"><g:message code="changelist.feed"/></a>
+
     </body>
 </html>
