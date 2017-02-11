@@ -34,6 +34,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         compile 'org.apache.commons:commons-compress:1.9'
+        //runtime 'com.google.guava:guava:21.0'
         runtime 'mysql:mysql-connector-java:5.1.30'
         runtime 'commons-codec:commons-codec:1.10'
         test "net.sourceforge.htmlunit:htmlunit:2.10"  // 2.11 didn't work...
