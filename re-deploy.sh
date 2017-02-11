@@ -4,5 +4,5 @@
 
 rm target/openthesaurus-*.war
 grails war && \
-  scp -i ~/.ssh/ot2014/openthesaurus2014 target/openthesaurus-*.war openthesaurus.de:openthesaurus.war && \
-  ssh -i ~/.ssh/ot2014/openthesaurus2014 openthesaurus.de "unzip -d tomcat/webapps/ROOT/ openthesaurus.war && ./restart.sh"
+  scp -i ~/.ssh/ot2017 target/openthesaurus-*.war root@83.169.2.105:/home/openthesaurus/openthesaurus.war && \
+  ssh -i ~/.ssh/ot2017 root@83.169.2.105 "unzip -d /home/openthesaurus/tomcat/webapps/ROOT/ /home/openthesaurus/openthesaurus.war && /etc/init.d/tomcat8 restart"
