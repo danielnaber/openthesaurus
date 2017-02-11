@@ -132,7 +132,7 @@ class SynsetController extends BaseController {
             try {
               sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
             } catch (TooManyRequestsException e) {
-              log.info("Too many requests from ${e.getIpAddress()}, blocking request")
+              log.info("Too many API requests from ${e.getIpAddress()}, blocking request " + params + ", user agent: " + request.getHeader("User-Agent"))
               render(status: 429/*too many requests*/, text: "Too many requests from your IP address (${e.getIpAddress()}) - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
               return
             }
