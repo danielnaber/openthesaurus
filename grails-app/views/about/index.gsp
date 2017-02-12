@@ -82,7 +82,7 @@
             <h2>OpenThesaurus in anderen Sprachen</h2>
     
             <ul>
-                <li><a href="http://www.openthesaurus.gr/">Griechisch</a></li>
+                <!--<li><a href="http://www.openthesaurus.gr/">Griechisch</a></li>-->
                 <li><a href="http://openthesaurus.softcatala.org">Katalanisch</a></li>
                 <!--<li><a href="http://openthesaurus.caixamagica.pt/">Portugiesisch</a></li>-->
                 <li><a href="http://www.tezaver.si/">Slowenisch</a></li>
