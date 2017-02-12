@@ -32,23 +32,24 @@ import com.vionto.vithesaurus.tools.StringTools
 import com.vionto.vithesaurus.WordLevelComparator
 import com.vionto.vithesaurus.SearchResult
 
-//import com.google.common.cache.Cache;
-//import com.google.common.cache.CacheBuilder;
-//import java.util.concurrent.TimeUnit
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import java.util.concurrent.TimeUnit
 
 class SearchService {
 
   static transactional = false
 
   def dataSource
+    
+  int cacheLookupCount = 0
 
   // The maximum for the search query. Avoids out of memory
   private static final int UPPER_BOUND = 1000
   private static final int MAX_SIMILARITY_DISTANCE = 3
 
-  // TODO: commented out because "Unexpected problem transforming call sites", see http://stackoverflow.com/questions/29418419 ?
-  //private final Cache<String, List<SimilarMatch>> simCache = 
-  //        CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
+  private final Cache<String, List<SimilarMatch>> simCache = 
+          CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
 
   /**
    * Hibernate-based search implementation. Note that the number
@@ -190,10 +191,15 @@ class SearchService {
   }
 
   def searchSimilarTerms(String query, Connection conn) {
-    //def cachedResult = simCache.getIfPresent(query)
-    //if (cachedResult != null) {
-    //  return cachedResult  
-    //}
+    // Levenshtein calculation is slow, so use a cached result if available:
+    def cachedResult = simCache.getIfPresent(query)
+    cacheLookupCount++
+    if (cacheLookupCount % 100 == 0) {
+        log.info("simCacheLookupCount: " + cacheLookupCount + ", similarity cache hit rate: " + simCache.stats().hitRate())
+    }
+    if (cachedResult != null) {
+      return cachedResult  
+    }
     String sql = """SELECT word, lookup, lookup2 FROM memwords WHERE (
               (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
               OR
@@ -238,7 +244,7 @@ class SearchService {
         DbUtils.closeQuietly(resultSet)
         DbUtils.closeQuietly(ps)
     }
-    //simCache.put(query, matches)
+    simCache.put(query, matches)
     return matches
   }
 
