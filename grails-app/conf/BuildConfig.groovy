@@ -41,13 +41,11 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.18"
-        runtime ':database-migration:1.4.0'
-        runtime ":jquery:1.11.1"
+        runtime ":hibernate:3.6.10.16"
+        runtime ":jquery:1.7.1"
+        runtime ":resources:1.2.8"
         compile ":feeds:1.6"
-        compile ':scaffolding:2.1.2'
-        compile ':cache:1.1.8'
-        compile ':asset-pipeline:2.5.7'
+        compile ':scaffolding:1.0.0'
         compile ":mail:1.0.7"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
@@ -55,7 +53,7 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:7.0.52.1"
+        build ":tomcat:7.0.54"
         
         test(":webtest:3.0.1") {
             excludes 'htmlunit'

@@ -34,10 +34,6 @@ class UserEvent {
 
     static belongsTo = [synset:Synset]
 
-    static hasMany = [
-            propertyDiffs: PropertyDifference
-    ]
-    
     static constraints = {
         changeDesc(maxSize:4000)
         otherSynset(nullable:true)
