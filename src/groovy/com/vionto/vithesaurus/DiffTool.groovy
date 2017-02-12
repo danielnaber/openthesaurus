@@ -93,14 +93,6 @@ class DiffTool {
 }
 
 /**
- * Differences between two properties.
- */
-abstract class PropertyDifference {
-    String propertyName
-    String propertyValue1
-}
-
-/**
  * Information about a property that exists in one object but
  * not in the other object to which it was compared.
  */
