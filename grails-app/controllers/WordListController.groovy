@@ -20,7 +20,12 @@ class WordListController extends BaseController {
     
     def index = {
         if(!params.max) params.max = 10
-        []
+        def categories = com.vionto.vithesaurus.Category.withCriteria { eq('isDisabled', false) }.sort()
+        int categoriesLen = categories.size()
+        int categoriesLenHalf = categories.size() / 2
+        def categories1 = categories.subList(0, categoriesLenHalf)
+        def categories2 = categories.subList(categoriesLenHalf, categoriesLen)
+        [categories1: categories1, categories2: categories2]
     }
 
 }
