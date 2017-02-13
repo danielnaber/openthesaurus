@@ -9,7 +9,7 @@ class PropertyDifference {
     String propertyValue1
 
     static constraints = {
-        propertyName(nullable:true)
-        propertyValue1(nullable:true)
+        propertyName(nullable:true, size: 0..5000)
+        propertyValue1(nullable:true, size: 0..5000)
     }
 }
