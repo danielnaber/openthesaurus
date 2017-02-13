@@ -241,14 +241,14 @@ class SearchService {
         // Pool sizes tested on my local machine: 1 -> 170ms, 2 -> 130ms, 3 -> 122ms
         matches = withPool(2) {
             words.collectParallel {
-                    int dist = StringUtils.getLevenshteinDistance(it[0], lowercaseQuery, MAX_SIMILARITY_DISTANCE)
-                    if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
-                        return new SimilarMatch(term:it[3], dist:dist)
-                    } else {
-                        def res1 = maybeAddMatchesFor(it[1], lowercaseQuery, it[3])
-                        def res2 = maybeAddMatchesFor(it[2], lowercaseQuery, it[3])
-                        return [res1, res2]
-                    }
+                int dist = StringUtils.getLevenshteinDistance(it[0], lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+                if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
+                    return new SimilarMatch(term:it[3], dist:dist)
+                } else {
+                    def res1 = maybeAddMatchesFor(it[1], lowercaseQuery, it[3])
+                    def res2 = maybeAddMatchesFor(it[2], lowercaseQuery, it[3])
+                    return [res1, res2]
+                }
             }
         }
         matches = matches.flatten().grep{ it != null }
