@@ -50,6 +50,8 @@ class SearchService {
 
   private final Cache<String, List<SimilarMatch>> simCache = 
           CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
+  private final Cache<String, List<PartialMatch>> substringCache = 
+          CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
 
   /**
    * Hibernate-based search implementation. Note that the number
@@ -195,7 +197,8 @@ class SearchService {
     def cachedResult = simCache.getIfPresent(query)
     cacheLookupCount++
     if (cacheLookupCount % 100 == 0) {
-        log.info("simCacheLookupCount: " + cacheLookupCount + ", similarity cache hit rate: " + simCache.stats().hitRate())
+        log.info("simCacheLookupCount: " + cacheLookupCount + ", similarity cache hit rate: " + simCache.stats().hitRate() +
+                 ", substring cache hit rate: " + substringCache.stats().hitRate())
     }
     if (cachedResult != null) {
       return cachedResult  
@@ -271,7 +274,13 @@ class SearchService {
 
   /** Substring matches */
   List searchPartialResult(String term, int fromPos, int maxNum) {
-    return searchPartialResultInternal(term, "%" + term + "%", true, fromPos, maxNum)
+    def cachedResult = substringCache.getIfPresent(term)
+    if (cachedResult != null) {
+      return cachedResult
+    }
+    def result = searchPartialResultInternal(term, "%" + term + "%", true, fromPos, maxNum)
+    substringCache.put(term, result)
+    return result
   }
 
   /** Words that start with a given term */
