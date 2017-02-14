@@ -32,8 +32,6 @@ import com.vionto.vithesaurus.tools.StringTools
 import com.vionto.vithesaurus.WordLevelComparator
 import com.vionto.vithesaurus.SearchResult
 
-import static groovyx.gpars.GParsPool.*
-
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import java.util.concurrent.TimeUnit
@@ -224,36 +222,23 @@ class SearchService {
         ps.setInt(5, minLength)
         ps.setInt(6, maxLength)
         resultSet = ps.executeQuery()
-        //long startTime = System.currentTimeMillis()
         // TODO: add some typical cases to be found without levenshtein (s <-> ß, ...)
         String lowercaseQuery = query.toLowerCase()
-        List<List<String>> words = []
         while (resultSet.next()) {
-            String lowercaseDbTerm = resultSet.getString("word").toLowerCase()
-            if (lowercaseDbTerm.equals(lowercaseQuery)) {
-                continue
-            }
+          String lowercaseDbTerm = resultSet.getString("word").toLowerCase()
+          if (lowercaseDbTerm.equals(lowercaseQuery)) {
+            continue
+          }
+          int dist = StringUtils.getLevenshteinDistance(lowercaseDbTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+          if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
+            matches.add(new SimilarMatch(term:resultSet.getString("word"), dist:dist))
+          } else {
             String lookupTerm = resultSet.getString("lookup")
+            maybeAddMatchesFor(lookupTerm, lowercaseQuery, matches, resultSet)
             String lookupTerm2 = resultSet.getString("lookup2")
-            words.add([lowercaseDbTerm, lookupTerm, lookupTerm2, resultSet.getString("word")])
+            maybeAddMatchesFor(lookupTerm2, lowercaseQuery, matches, resultSet)
+          }
         }
-        // Levenshtein is slow, speed this up by using multiply threads.
-        // Pool sizes tested on my local machine: 1 -> 170ms, 2 -> 130ms, 3 -> 122ms
-        matches = withPool(2) {
-            words.collectParallel {
-                int dist = StringUtils.getLevenshteinDistance(it[0], lowercaseQuery, MAX_SIMILARITY_DISTANCE)
-                if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
-                    return new SimilarMatch(term:it[3], dist:dist)
-                } else {
-                    def res1 = maybeAddMatchesFor(it[1], lowercaseQuery, it[3])
-                    def res2 = maybeAddMatchesFor(it[2], lowercaseQuery, it[3])
-                    return [res1, res2]
-                }
-            }
-        }
-        matches = matches.flatten().grep{ it != null }
-        //long endTime = System.currentTimeMillis()
-        //println (endTime-startTime) + "ms"
         Collections.sort(matches)		// makes sure lowest distances come first
     } finally {
         DbUtils.closeQuietly(resultSet)
@@ -263,15 +248,15 @@ class SearchService {
     return matches
   }
 
-    private SimilarMatch maybeAddMatchesFor(String lookupTerm, String lowercaseQuery, String word) {
+    private void maybeAddMatchesFor(String lookupTerm, String lowercaseQuery, List matches, ResultSet resultSet) {
+        int dist
         if (lookupTerm) {
             String lowercaseLookupTerm = lookupTerm.toLowerCase()
-            int dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
+            dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
             if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
-                return new SimilarMatch(term: word, dist: dist)
+                matches.add(new SimilarMatch(term: resultSet.getString("word"), dist: dist))
             }
         }
-        return null
     }
 
   /** Substring matches */
