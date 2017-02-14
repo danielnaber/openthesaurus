@@ -200,12 +200,22 @@ class SearchService {
     if (cachedResult != null) {
       return cachedResult  
     }
+    String firstChar = query.length() > 0 ? query.charAt(0) : ""
+    String like = ""
+    if (!firstChar.isEmpty() && firstChar.matches("[a-zA-ZöäüßÖÄÜ]")) {
+        // this improves performance quite a bit, as Levenshtein below is slow...
+        String likePart = "'" + firstChar + "%'"
+        like = " (word LIKE ${likePart} OR lookup LIKE ${likePart} OR lookup2 LIKE ${likePart}) AND "
+    }
     String sql = """SELECT word, lookup, lookup2 FROM memwords WHERE (
-              (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
-              OR
-              (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?)
-              OR
-              (CHAR_LENGTH(lookup2) >= ? AND CHAR_LENGTH(lookup2) <= ?))
+              """ + like + """
+              (
+                (CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
+                OR
+                (CHAR_LENGTH(lookup) >= ? AND CHAR_LENGTH(lookup) <= ?)
+                OR
+                (CHAR_LENGTH(lookup2) >= ? AND CHAR_LENGTH(lookup2) <= ?))
+              )
               ORDER BY word"""
     PreparedStatement ps = null
     ResultSet resultSet = null
