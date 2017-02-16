@@ -50,7 +50,7 @@ class SearchService {
 
   private final Cache<String, List<SimilarMatch>> simCache = 
           CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
-  private final Cache<String, List<PartialMatch>> substringCache = 
+  private final Cache<SubstringQuery, List<PartialMatch>> substringCache = 
           CacheBuilder.newBuilder().maximumSize(5000).recordStats().expireAfterAccess(15, TimeUnit.MINUTES).build();
 
   /**
@@ -274,12 +274,13 @@ class SearchService {
 
   /** Substring matches */
   List searchPartialResult(String term, int fromPos, int maxNum) {
-    def cachedResult = substringCache.getIfPresent(term)
+    def substringQuery = new SubstringQuery(term, fromPos, maxNum)
+    def cachedResult = substringCache.getIfPresent(substringQuery)
     if (cachedResult != null) {
       return cachedResult
     }
     def result = searchPartialResultInternal(term, "%" + term + "%", true, fromPos, maxNum)
-    substringCache.put(term, result)
+    substringCache.put(substringQuery, result)
     return result
   }
 
@@ -333,6 +334,35 @@ class SearchService {
       DbUtils.closeQuietly(conn)
     }
     return matches
+  }
+
+  class SubstringQuery {
+    String query;
+    int from;
+    int max;
+    SubstringQuery(String query, int from, int max) {
+      this.query = query;  
+      this.from = from;  
+      this.max = max;  
+    }
+
+    boolean equals(o) {
+      if (this.is(o)) return true
+      if (getClass() != o.class) return false
+      SubstringQuery that = (SubstringQuery) o
+      if (from != that.from) return false
+      if (max != that.max) return false
+      if (query != that.query) return false
+      return true
+    }
+
+    int hashCode() {
+        int result
+        result = (query != null ? query.hashCode() : 0)
+        result = 31 * result + from
+        result = 31 * result + max
+        return result
+    }
   }
 
 }
