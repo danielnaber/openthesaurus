@@ -72,6 +72,14 @@
                 <g:render template="/ads/resultpage_results2"/>
             </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
+        
+        <g:if test="${params.ad == '1'}">
+            <div style="margin-top:20px; text-align: center">
+                <a rel="nofollow" href="https://languagetool.org"><img align="top" src="${resource(dir:'images',file:'ad180x150.png')}" alt="ad space"/></a>
+                <br><span style="color:#999999">Anzeige</span>
+                <hr style="margin-top:20px" />
+            </div>
+        </g:if>
 
         <g:render template="wiktionary"/>
 
