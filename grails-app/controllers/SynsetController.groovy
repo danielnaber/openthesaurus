@@ -557,7 +557,7 @@ class SynsetController extends BaseController {
           }
           order('word', 'asc')
           firstResult(params.offset ? params.offset.toInteger() : 0)
-          maxResults(20)
+          maxResults(params.max ? params.max.toInteger() : 20)
       }
       [headline: headline, title: title, intro: intro,
        termList: termList, matchCount: matchCount]
