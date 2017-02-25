@@ -45,7 +45,7 @@
           </ul>
 
           <div class="paginateButtons">
-              <g:paginate total="${matchCount}" id="${params.id}" />
+              <g:paginate max="20" total="${matchCount}" id="${params.id}" />
           </div>
 
     </body>
