@@ -66,4 +66,8 @@ class AboutController extends BaseController {
         []
     }
 
+    def werbung = {
+        []
+    }
+
 }
