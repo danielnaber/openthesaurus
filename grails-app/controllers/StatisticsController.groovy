@@ -36,42 +36,51 @@ class StatisticsController extends BaseController {
         }
         // per-user statistics (i.e. top users):
         Connection conn
-        PreparedStatement ps
-        ResultSet resultSet
         try {
           conn = dataSource.getConnection()
-          String sql = """SELECT user_event.by_user_id AS id, real_name, count(*) AS ct 
+          List topUsers = getTopUsers(conn, 365)
+          List allTimeTopUsers = getTopUsers(conn, 365*100)
+          AssociationController associationController = new AssociationController()
+          int associationCount = associationController.getAssociationCount()[0]
+          int tagCount = getTermTags(conn)
+          [ latestChangesAllSections: latestChangesAllSections,
+            topUsers: topUsers, allTimeTopUsers: allTimeTopUsers, associationCount: associationCount, tagCount: tagCount ]
+        } finally {
+          if (conn != null) {
+            conn.close()
+          }
+        }
+    }
+
+    private List getTopUsers(Connection conn, int lastDays) {
+        String sql = """SELECT user_event.by_user_id AS id, real_name, count(*) AS ct 
             FROM user_event, thesaurus_user
             WHERE
             thesaurus_user.id = user_event.by_user_id AND
             user_event.creation_date >= DATE_SUB(NOW(), INTERVAL ? DAY)
             GROUP BY by_user_id
             ORDER BY ct DESC
-            LIMIT ?"""
-          List topUsers = []
-          ps = conn.prepareStatement(sql)
-          ps.setInt(1, 365)	// days
-          ps.setInt(2, 10)	// max matches
-          resultSet = ps.executeQuery()
-          while (resultSet.next()) {
-            topUsers.add(new TopUser(displayName:resultSet.getString("real_name"), actions:resultSet.getInt("ct"), userId: resultSet.getInt("id")))
-          }
-          AssociationController associationController = new AssociationController()
-          int associationCount = associationController.getAssociationCount()[0]
-          int tagCount = getTermTags(conn)
-          [ latestChangesAllSections: latestChangesAllSections,
-            topUsers: topUsers, associationCount: associationCount, tagCount: tagCount ]
+            LIMIT ?"""                                                                                                                          
+        List topUsers = []
+        PreparedStatement ps
+        ResultSet resultSet
+        try {
+            ps = conn.prepareStatement(sql)
+            ps.setInt(1, lastDays)
+            ps.setInt(2, 10)    // max matches
+            resultSet = ps.executeQuery()
+            while (resultSet.next()) {
+                topUsers.add(new TopUser(displayName: resultSet.getString("real_name"), actions: resultSet.getInt("ct"), userId: resultSet.getInt("id")))
+            }
         } finally {
-          if (resultSet != null) {
-            resultSet.close()
-          }
-          if (ps != null) {
-            ps.close()
-          }
-          if (conn != null) {
-            conn.close()
-          }
+            if (resultSet != null) {
+                resultSet.close()
+            }
+            if (ps != null) {
+                ps.close()
+            }
         }
+        return topUsers
     }
 
     private int getTermTags(Connection conn) {

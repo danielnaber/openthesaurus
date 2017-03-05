@@ -96,10 +96,51 @@
               </table>
 
           </div>
-    
+
           <div style="clear: both"></div>
 
-        <g:render template="/ads/statistics_bottom"/>
+<g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
+    
+          <div style="float:left" class="statistics">
+
+              <table width="315" class="statsTable">
+                  <tr>
+                      <td colspan="3"><h2>Beiträge der aktivsten User</h2></td>
+                  </tr>
+                  <g:each in="${allTimeTopUsers}" var="topUser" status="i">
+                      <tr>
+                          <td class="value"><g:decimal number="${topUser.actions}"/></td>
+                          <td>
+                              <g:if test="${topUser.displayName}">
+                                  <g:link controller="user" action="profile" params="${[uid: topUser.userId]}"><g:render template="/identicon" model="${[user: topUser.userId, count: i+100]}"/></g:link>
+                              </g:if>
+                              <g:else>
+                                  <g:render template="/identicon" model="${[user: topUser.userId, count: i+100]}"/>
+                              </g:else>
+                          </td>
+                          <td class="statName">
+                              <g:if test="${topUser.displayName}">
+                                  <g:link controller="user" action="profile" params="${[uid: topUser.userId]}">${topUser.displayName.encodeAsHTML()}</g:link>
+                              </g:if>
+                              <g:else>
+                                  <span class="metaInfo"><g:message code="statistics.anonymous.user" /></span>
+                              </g:else>
+                          </td>
+                      </tr>
+                  </g:each>
+                  <tr>
+                      <td width="185"></td>
+                      <td></td>
+                  </tr>
+              </table>
+
+          </div>
+
+</g:if>
+
+    <div style="clear: both"></div>
+
+    <g:render template="/ads/statistics_bottom"/>
         
     </body>
 </html>
