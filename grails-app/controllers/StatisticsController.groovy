@@ -20,6 +20,7 @@ import com.vionto.vithesaurus.*
 import java.sql.Connection
 import java.sql.ResultSet
 import java.sql.PreparedStatement
+import java.text.SimpleDateFormat
 
 class StatisticsController extends BaseController {
 
@@ -57,7 +58,7 @@ class StatisticsController extends BaseController {
             FROM user_event, thesaurus_user
             WHERE
             thesaurus_user.id = user_event.by_user_id AND
-            user_event.creation_date >= DATE_SUB(NOW(), INTERVAL ? DAY)
+            user_event.creation_date >= DATE_SUB(?, INTERVAL ? DAY)
             GROUP BY by_user_id
             ORDER BY ct DESC
             LIMIT ?"""                                                                                                                          
@@ -66,8 +67,11 @@ class StatisticsController extends BaseController {
         ResultSet resultSet
         try {
             ps = conn.prepareStatement(sql)
-            ps.setInt(1, lastDays)
-            ps.setInt(2, 10)    // max matches
+            // this should enable caching of the result in MySQL, unlike when using NOW():
+            String today = new SimpleDateFormat("yyyy-MM-dd 00:00:00").format(new Date())
+            ps.setString(1, today)
+            ps.setInt(2, lastDays)
+            ps.setInt(3, 10)    // max matches
             resultSet = ps.executeQuery()
             while (resultSet.next()) {
                 topUsers.add(new TopUser(displayName: resultSet.getString("real_name"), actions: resultSet.getInt("ct"), userId: resultSet.getInt("id")))
