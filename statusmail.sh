@@ -9,35 +9,38 @@ LOG=/tmp/openthesaurus-log.txt
 rm $OUT
 rm $LOG
 
-tail -n 250000 /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | grep "$DATE" >$LOG
+tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep "$DATE" >$LOG
 
 echo "From " >>$OUT
-grep -h $DATE /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | head -n1 >>$OUT
+grep -h "^\[$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
 echo "To " >>$OUT
-grep -h $DATE /home/dnaber/tomcat/logs/catalina.out.bak2 /home/dnaber/tomcat/logs/catalina.out.bak /home/dnaber/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+grep -h "^\[$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
 
 echo "" >>$OUT
-echo -n "Web Searches: " >>$OUT
+echo -n "Web Searches:           " >>$OUT
 grep -c "Search(ms):htm" $LOG >>$OUT
 
-echo -n "API Searches (XML): " >>$OUT
+echo -n "API Searches (XML):     " >>$OUT
 grep -c "Search(ms):xml" $LOG >>$OUT
 
-echo -n "API Searches (JSON): " >>$OUT
+echo -n "API Searches (JSON):    " >>$OUT
 grep -c "Search(ms):jso" $LOG >>$OUT
 
-echo -n "Blocked API requests: " >>$OUT
+echo -n "Blocked API requests:   " >>$OUT
 grep -c "Too many requests from" $LOG >>$OUT
+
+echo -n "Blocked by mod_evasive: " >>$OUT
+grep "client denied by server configuration" /var/log/apache2/openthesaurus_ssl_error.log | grep -c "evasive" >>$OUT
 
 echo "" >>$OUT
 
-echo -n "Errors: " >>$OUT
+echo -n "Errors:                       " >>$OUT
 grep -c "ERR" $LOG >>$OUT
 
-echo -n "Warnings (without empty queries): " >>$OUT
+echo -n "Warnings (w/o empty queries): " >>$OUT
 grep "WARN" $LOG | grep -c -v "No query specified for search" >>$OUT
 
-echo -n "Empty query warnings: " >>$OUT
+echo -n "Empty query warnings:         " >>$OUT
 grep -c "No query specified for search" $LOG >>$OUT
 
 echo "" >>$OUT
@@ -45,10 +48,10 @@ echo "" >>$OUT
 echo -n "Successful Logins: " >>$OUT
 grep -c "login successful" $LOG >>$OUT
 
-echo -n "Failed Logins: " >>$OUT
+echo -n "Failed Logins:     " >>$OUT
 grep -c "login failed for user" $LOG >>$OUT
 
-echo -n "Access denied: " >>$OUT
+echo -n "Access denied:     " >>$OUT
 grep -c "Access denied" $LOG >>$OUT
 
 echo "" >>$OUT
