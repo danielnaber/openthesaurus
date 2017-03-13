@@ -32,6 +32,12 @@ grep -c "Too many requests from" $LOG >>$OUT
 echo -n "Blocked by mod_evasive: " >>$OUT
 grep "client denied by server configuration" /var/log/apache2/openthesaurus_ssl_error.log | grep -c "evasive" >>$OUT
 
+echo -n "Unable to cr. worker t: " >>$OUT
+grep -c "unable to create worker thread" /var/log/apache2/error.log >>$OUT
+
+echo -n "error.log entries:      " >>$OUT
+grep -c "`date +"%b %d"`" /var/log/apache2/error.log >>$OUT
+
 echo "" >>$OUT
 
 echo -n "Errors:                       " >>$OUT
