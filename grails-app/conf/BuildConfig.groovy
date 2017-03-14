@@ -41,13 +41,13 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.14"
+        runtime ":hibernate:3.6.10.18"
         runtime ':database-migration:1.4.0'
-        runtime ":jquery:1.11.0.2"
+        runtime ":jquery:1.11.1"
         compile ":feeds:1.6"
-        compile ':scaffolding:2.1.0'
+        compile ':scaffolding:2.1.2'
         compile ':cache:1.1.8'
-        compile ':asset-pipeline:1.8.3'
+        compile ':asset-pipeline:2.5.7'
         compile ":mail:1.0.7"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
