@@ -759,3 +759,20 @@ strong {
         display: none !important;
     }
 }
+
+@media (min-width: 801px) {
+    #desktopAd {
+      margin-bottom: -12px;
+    }
+    #mobileAd {
+      display: none !important;
+    }
+}
+@media (max-width: 801px) {
+  #desktopAd {
+    display: none !important;
+  }
+  #mobileAd {
+    margin-bottom: -12px;
+  }
+}
