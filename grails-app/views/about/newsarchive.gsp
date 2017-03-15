@@ -17,6 +17,20 @@
         <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
             
         <tr class="newsYearDelimiter">
+            <td>2017</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2017-03-05</span></td>
+            <td valign="top">
+                Auf
+                <g:link controller="statistics" action="index">der Statistik-Seite</g:link> findet
+                sich jetzt die Top Ten der aktivsten User, getrennt nach den letzten 365 Tagen
+                und insgesamt.
+            </td>
+        </tr>
+
+        <tr class="newsYearDelimiter">
             <td>2016</td>
             <td></td>
         </tr>
@@ -25,7 +39,7 @@
             <td valign="top">
                 Das Forum wurde geschlossen, Ideen oder Fehlerberichte können weiterhin
                 <g:link action="imprint">per E-Mail</g:link> oder
-                <a href="https://github.com/danielnaber/openthesaurus/issues">auf github</a> 
+                <a href="https://github.com/danielnaber/openthesaurus/issues">auf github</a>
                 berichtet werden.
             </td>
         </tr>
