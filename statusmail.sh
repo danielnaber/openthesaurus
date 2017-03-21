@@ -40,6 +40,11 @@ grep -c "`date +"%b %d"`" /var/log/apache2/error.log >>$OUT
 
 echo "" >>$OUT
 
+echo "Top 5 limit abusers:" >>$OUT
+grep "Too many " $LOG | cut -c 47-89 | sort | uniq -c | sort -r -n | head -n 5 >>$OUT
+
+echo "" >>$OUT
+
 echo -n "Errors:                       " >>$OUT
 grep -c "ERR" $LOG >>$OUT
 
