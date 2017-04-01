@@ -12,6 +12,8 @@
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
             <h2>JSON/JSONP Beispiel</h2>
+            
+            <h2 style="color:darkred">*** Diesen Aufruf bitte nicht mehr verwenden ***</h2>
 
             <p>Diese Seite fragt OpenThesaurus über die JSON-<g:link action="api">API</g:link> an und zeigt das Ergebnis unten an.
             Siehe "myCallback" im Quelltext dieser Seite für den Source-Code.</p>
