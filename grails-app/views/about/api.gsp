@@ -95,7 +95,7 @@
             <ul class="apioptions">
                 <li><span class="apioption">format=text/xml</span> oder <span class="apioption">format=application/json</span>: Aktiviert den API-Modus, so dass
                 die Antwort als XML bzw. JSON zurückgeliefert wird.</li>
-                <li><span class="apioption">callback</span>: siehe <a href="#jsonp">JSONP</a></li>
+                <!--<li><span class="apioption">callback</span>: siehe <a href="#jsonp">JSONP</a></li>-->
                 <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
                 ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
                 Tippfehlers machen zu können. Beispielanfrage:
