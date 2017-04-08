@@ -161,7 +161,7 @@
 
             <h2><a name="limits">Anfrage-Limitierung</a></h2>
 
-            <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung (HTTP-Code 500).
+            <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung.
             Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
             Erhöhung des Limits bitten. Zusätzlich zur direkten Abfrage stehen weiterhin
             <g:link action="download">Downloads</g:link> der Datenbank zur Verfügung. Statt Massenabfragen
