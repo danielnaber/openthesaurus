@@ -13,60 +13,56 @@
 
           <h1 style="margin-left: 4px"><g:message code="statistics.headline" /></h1>
     
-          <div style="float:left; margin-right: 30px" class="statistics">
 
-              <table width="315" class="statsTable">
+          <table width="315" class="statsTable">
+              <tr class="prop">
+                  <td width="215" valign="top" align="right" class="statName"><g:message code="statistics.synsets" /></td>
+                  <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisible(true)}" /></td>
+              </tr>
 
-                  <tr>
-                      <td><h2><g:message code="statistics.general" /></h2></td>
-                  </tr>
+              <tr class="prop2">
+                  <td valign="top" align="right" class="statName"><g:message code="statistics.terms" /></td>
+                  <td valign="top" class="value"><g:decimal number="${Term.countVisibleTerms()}" /></td>
+              </tr>
 
-                  <tr class="prop">
-                      <td width="215" valign="top" align="right" class="statName"><g:message code="statistics.synsets" /></td>
-                      <td valign="top" class="value"><g:decimal number="${Synset.countByIsVisible(true)}" /></td>
-                  </tr>
+              <tr class="prop">
+                  <td valign="top" align="right" class="statName"><g:message code="statistics.terms.unique" /></td>
+                  <td valign="top" class="value"><g:decimal number="${Term.countVisibleUniqueTerms()}" /></td>
+              </tr>
 
-                  <tr class="prop2">
-                      <td valign="top" align="right" class="statName"><g:message code="statistics.terms" /></td>
-                      <td valign="top" class="value"><g:decimal number="${Term.countVisibleTerms()}" /></td>
-                  </tr>
+              <tr class="prop2">
+                  <td valign="top" align="right" class="statName"><g:link controller="association" action="list"><g:message code="statistics.associations" /></g:link></td>
+                  <td valign="top" class="value"><g:decimal number="${associationCount}" /></td>
+              </tr>
 
-                  <tr class="prop">
-                      <td valign="top" align="right" class="statName"><g:message code="statistics.terms.unique" /></td>
-                      <td valign="top" class="value"><g:decimal number="${Term.countVisibleUniqueTerms()}" /></td>
-                  </tr>
+              <tr class="prop">
+                  <td valign="top" align="right" class="statName"><g:link controller="term" action="antonyms"><g:message code="statistics.antonyms" /></g:link></td>
+                  <td valign="top" class="value"><g:decimal number="${TermLink.countByLinkType(TermLinkType.findByLinkName('Antonym'))}" /></td>
+              </tr>
 
-                  <tr class="prop2">
-                      <td valign="top" align="right" class="statName"><g:link controller="association" action="list"><g:message code="statistics.associations" /></g:link></td>
-                      <td valign="top" class="value"><g:decimal number="${associationCount}" /></td>
-                  </tr>
+              <tr class="prop2">
+                  <td valign="top" align="right" class="statName"><g:link controller="tag"><g:message code="statistics.tags" /></g:link></td>
+                  <td valign="top" class="value"><g:decimal number="${tagCount}" /></td>
+              </tr>
 
-                  <tr class="prop">
-                      <td valign="top" align="right" class="statName"><g:link controller="term" action="antonyms"><g:message code="statistics.antonyms" /></g:link></td>
-                      <td valign="top" class="value"><g:decimal number="${TermLink.countByLinkType(TermLinkType.findByLinkName('Antonym'))}" /></td>
-                  </tr>
+              <tr class="prop">
+                  <td valign="top" align="right" class="statName"><g:message code="statistics.changes_last_7_days" /></td>
+                  <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
+              </tr>
+              <tr>
+                  <td colspan="2" align="right" class="metaInfo">Stand: <g:formatDate format="dd.MM.yyyy HH:mm" /></td>
+              </tr>
+          </table>
 
-                  <tr class="prop2">
-                      <td valign="top" align="right" class="statName"><g:link controller="tag"><g:message code="statistics.tags" /></g:link></td>
-                      <td valign="top" class="value"><g:decimal number="${tagCount}" /></td>
-                  </tr>
-
-                  <tr class="prop">
-                      <td valign="top" align="right" class="statName"><g:message code="statistics.changes_last_7_days" /></td>
-                      <td valign="top" class="value"><g:decimal number="${latestChangesAllSections}" /></td>
-                  </tr>
-                  <tr>
-                      <td colspan="2" align="right" class="metaInfo">Stand: <g:formatDate format="dd.MM.yyyy HH:mm" /></td>
-                  </tr>
-              </table>
-
-          </div>
-
+    
           <div style="float:left" class="statistics">
 
               <table width="315" class="statsTable">
                   <tr>
-                      <td colspan="3"><h2><g:message code="statistics.top.users" /></h2></td>
+                      <td colspan="3">
+                          <h2><g:message code="statistics.top.users" /></h2>
+                          letzte 365 Tage
+                      </td>
                   </tr>
                   <g:each in="${topUsers}" var="topUser" status="i">
                       <tr>
@@ -97,15 +93,15 @@
 
           </div>
 
-          <div style="clear: both"></div>
-
-<g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
     
           <div style="float:left" class="statistics">
 
               <table width="315" class="statsTable">
                   <tr>
-                      <td colspan="3"><h2>Beiträge der aktivsten User</h2></td>
+                      <td colspan="3">
+                          <h2><g:message code="statistics.top.users" /></h2>
+                          <br>
+                      </td>
                   </tr>
                   <g:each in="${allTimeTopUsers}" var="topUser" status="i">
                       <tr>
@@ -136,9 +132,7 @@
 
           </div>
 
-</g:if>
-
-    <div style="clear: both"></div>
+          <div style="clear: both"></div>
 
     <g:render template="/ads/statistics_bottom"/>
         
