@@ -579,6 +579,13 @@ class SynsetController extends BaseController {
             def eventListCount = UserEvent.countBySynset(synset)
             def eventList = UserEvent.findAllBySynset(synset,
                     [order:'desc', sort:'creationDate', offset: params.offset, max: params.max])
+            if (grailsApplication.config.thesaurus.hiddenEventIds) {
+                List hiddenEventIds = []
+                hiddenEventIds = grailsApplication.config.thesaurus.hiddenEventIds.split(",\\s*")
+                eventList = eventList.findAll({
+                    !hiddenEventIds.contains(Long.toString(it.id))
+                })
+            }
             def diffs = [:]
             def typeNames = [:]
             UserEventTools tools = new UserEventTools()

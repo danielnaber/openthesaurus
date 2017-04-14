@@ -425,6 +425,9 @@
                           <td valign="top" width="110">
                               <g:formatDate format="yyyy-MM-dd" date="${event.creationDate}"/>
                               <span class="metaInfo"><g:formatDate format="HH:mm" date="${event.creationDate}"/></span>
+                              <g:if test="${session.user && session.user.userId.toString() == 'admin'}">
+                                  <span class="metaInfo">${event.id}</span>
+                              </g:if>
                           </td>
                           <td valign="top" align="center">
                               <g:link controller="user" action="profile" params="${[uid:event.byUser.id]}">
