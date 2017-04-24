@@ -34,20 +34,21 @@
                 <h3>Kategorie: Werbung</h3>
 
                 <ul>
-                    <li>Criteo (<a href="http://www.criteo.com/de/privacy/full-privacy-text/">Datenschutz</a>): Zweck der Criteo Cookies ist
-                    das Targeting/Retargeting der Nutzer unserer Website, um 
-                    bei ihrer zukünftigen Navigation personalisierte Werbeanzeigen anzuzeigen.</li>
+                    <li>Yieldlove GmbH, Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“) vermarktet
+                    Online-Werbeflächen auf unseren Angeboten openthesaurus.de und der mobilen
+                    Website von openthesaurus. Um die Werbeauslieferung auf den Webseiten zu
+                    optimieren, werden durch Yieldlove Cookies eingesetzt.
+                    Alle Informationen dazu, wie Yieldlove Daten verarbeitet und welche Daten
+                    betroffen sind, erhalten Sie in der Privacy Policy von Yieldlove. Zudem
+                    können Sie unter dem angegebenen Link dem Einsatz von Cookies durch
+                    Yieldlove für die Zukunft widersprechen (Opt-out):
+                    <a href="http://www.yieldlove.com/cookie.php">http://www.yieldlove.com/cookie.php</a></li>
                 </ul>
                 
                 <br>
-                <p>Die Nutzer können ihre Wahl auch über die folgenden Plattformen treffen:
-                <a href="http://youronlinechoices.eu/de/">IAB Opt-Out Plattform</a>,
-                <a href="https://www.networkadvertising.org/choices/">Network Advertising Initiative Opt-Out Plattform</a>,
-                <a href="http://www.aboutads.info/choices/">Digital Advertising Alliance Plattform</a>, die Optionen anbieten,
-                um eine Entscheidung für alle Unternehmen, die auf dieser Plattform registriert sind, zu treffen. 
                 
-                <p>Bitte beachten Sie, dass Sie nach einer eventuellen Deaktivierung der Anzeige personalisierter Werbeanzeigen von Criteo und 
-                anderen Werbepartnern weiterhin Werbeanzeigen erhalten werden, die jedoch weniger passgenau auf Ihre Interessen/Ihr SurfVerhalten abgestimmt sind.
+                <p>Bitte beachten Sie, dass Sie nach einer eventuellen Deaktivierung der Anzeige personalisierter Werbeanzeigen von Yieldlove und 
+                anderen Werbepartnern weiterhin Werbeanzeigen erhalten können, die jedoch weniger passgenau auf Ihre Interessen/Ihr Surfverhalten abgestimmt sind.
                 
                 <h3>Kategorie: Web-Analytics</h3>
     
