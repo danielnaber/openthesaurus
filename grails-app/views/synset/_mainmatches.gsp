@@ -77,9 +77,9 @@
                     <g:if test="${termLinkInfos.size() > 0}">
                         <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
                         <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
-                            <g:set var="antonymInfo"><a href="${termLinkInfo.term2.word.encodeAsURL()}"><span class="antonymMarker"><img src="${createLinkTo(dir:'images', file:'lightning.png')}"/></span></a></g:set>
                             <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute"
-                                args="${[termLinkInfo.term2.word, termLinkInfo.term2.synset.toShortStringWithShortLevel(20, true)]}"/></g:set>
+                                                                 args="${[termLinkInfo.term2.word, termLinkInfo.term2.synset.toShortStringWithShortLevel(20, true)]}"/></g:set>
+                            <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><a href="${termLinkInfo.term2.word.encodeAsURL()}"><img src="${createLinkTo(dir:'images', file:'lightning.png')}"/></a></span></g:set>
                         </g:if>
                     </g:if>
                     <%
@@ -87,7 +87,7 @@
                     %>
                     <!-- time for antonyms: ${antonymTotalTime}ms -->
 
-                    <span title="${antonymTitle}">
+                    <span>
                         <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
                                 lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
                             <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}

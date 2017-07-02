@@ -115,5 +115,41 @@
         document.getElementById('spinner').style.visibility='hidden';
     }
 
+    $(document).ready(function() {
+
+        var markers = $('.antonymMarker, .commentMarker');
+        markers.each(function(){
+            $(this).data('title', $(this).attr('title'));
+            $(this).removeAttr('title');
+        });
+
+        markers.mouseover(function() {
+            markers.next('.tooltip').remove();
+            if($(this).data('title') != ""){
+                $(this).after('<span class="tooltip">' + $(this).data('title') + '</span>');
+            }
+            var width = $(document).width();
+            var left = $(this).position().left + $(this).width() + 4;
+            if (left + 200 > width) {
+                left = width - 200;
+            }
+            var top = $(this).position().top + 18;
+            $(this).next().css('left',left);
+            $(this).next().css('top',top);
+        });
+
+        markers.click(function(){
+            $(this).mouseover();
+            $(this).next().animate({opacity: 0.9},{duration: 4000, complete: function(){
+                $(this).fadeOut(500);
+            }});
+        });
+
+        markers.mouseout(function(){
+            $(this).next('.tooltip').remove();
+        });
+
+    });
+
     // -->
 </script>
