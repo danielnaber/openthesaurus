@@ -89,14 +89,6 @@
             </ul>
     
     
-            <h2>Technik &amp; Design</h2>
-        
-            <p>Die Website ist mit <a href="https://www.grails.org">Grails</a> umgesetzt und nutzt MySQL
-                als Datenbank.
-                Das Design stammt von <!--<a href="http://www.sabinesieg.de">-->Sabine Sieg.<!--</a>-->
-            </p>
-    
-    
             <h2>Papers über OpenThesaurus</h2>
     
             <p>In diesen Papers wird noch eine alte PHP-basierte Version beschrieben.</p>
