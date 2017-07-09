@@ -107,11 +107,21 @@ echo "Warnings (without empty queries):" >>$OUT
 grep "WARN" $LOG | grep -v "No query specified for search" >>$OUT
 
 echo "" >>$OUT
-echo "Errors (max. 100)": >>$OUT
+echo -n "Client-side errors: " >>$OUT
+grep -c "client message:" $LOG >>$OUT
+echo "Client-side errors (max. 20):" >>$OUT
+grep "client message:" $LOG | head -n 20 >>$OUT
+
+echo "" >>$OUT
+echo "Top client-side errors: " >>$OUT
+grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
+
+echo "" >>$OUT
+echo "Errors (max. 100):" >>$OUT
 grep "ERROR" $LOG | head -n 100 >>$OUT
 
 echo "" >>$OUT
-echo "Apache Errors (max. 30)": >>$OUT
+echo "Apache Errors (max. 30):" >>$OUT
 echo "Total Apache errors: `wc -l apache_errors.log`" >>$OUT
 tail -n 30 apache_errors.log >>$OUT
 
