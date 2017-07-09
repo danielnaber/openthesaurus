@@ -151,5 +151,10 @@
 
     });
 
+    window.onerror = function (msg, url, line) {
+        var message = "Error in " + url + " on line " + line + ": " + msg;
+        $.post("/about/logMessage", { "msg": message });
+    };
+
     // -->
 </script>
