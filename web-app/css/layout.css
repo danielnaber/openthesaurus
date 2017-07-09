@@ -116,18 +116,18 @@ h1 {
   text-transform: uppercase;
   font-weight: bold;
   color: #707070;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .superordinateTerms a {
   color: #707070;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: normal;
 }
 
 .superordinateTerms {
   color: #707070;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: normal;
 }
 
@@ -138,18 +138,18 @@ h1 {
   text-transform: uppercase;
   font-weight: bold;
   color: #707070;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .categoryTerm a {
   color: #707070;
   font-weight: normal;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .categoryTerm {
   color: #707070;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .tree {
@@ -343,7 +343,7 @@ h3 {
 }
 
 .message {
-  background: #a7ccee url(../images/skin/information.png) no-repeat 10px 11px;
+  background: #a7ccee url(../images/skin/information.png) no-repeat 10px 12px;
   padding: 10px 10px 10px 30px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -351,7 +351,7 @@ h3 {
 }
 
 .error, .errors {
-  background: #ff9696 url(../images/skin/exclamation.png) no-repeat 10px 11px;
+  background: #ff9696 url(../images/skin/exclamation.png) no-repeat 10px 12px;
   padding: 10px 10px 10px 30px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -367,7 +367,7 @@ h3 {
 }
 
 .warning {
-  background: #ffba3f url(../images/skin/exclamation.png) no-repeat 10px 11px;
+  background: #ffba3f url(../images/skin/exclamation.png) no-repeat 10px 12px;
   padding: 10px 10px 10px 30px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -632,7 +632,7 @@ strong {
 }
 
 .associationList li {
-    font-size: 11px;
+    font-size: 12px;
     list-style: square;
 }
 
