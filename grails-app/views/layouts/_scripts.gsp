@@ -151,9 +151,15 @@
 
     });
 
+    var lastErrorLogToServer = null;
     window.onerror = function (msg, url, line) {
+        // don't report more than once a minute:
+        if (lastErrorLogToServer && new Date() - lastErrorLogToServer < 1000 * 60) {
+            return;
+        }
         var message = "Error in " + url + " on line " + line + ": " + msg;
         $.post("/about/logMessage", { "msg": message });
+        lastErrorLogToServer = new Date();
     };
 
     // -->
