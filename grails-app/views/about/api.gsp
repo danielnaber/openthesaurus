@@ -89,10 +89,10 @@
                 aber mit <tt>startsWithFromResults</tt> und <tt>startsWithMaxResults</tt>.</li>
 
                 <li><span class="apioption">supersynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
-                (optionalen) Oberbegriffe mitgeliefert werden <em> - funktioniert nur für XML</em>.</li>
+                (optionalen) Oberbegriffe mitgeliefert werden.</li>
 
                 <li><span class="apioption">subsynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
-                (optionalen) Unterbegriffe mitgeliefert werden <em> - funktioniert nur für XML</em>.</li>
+                (optionalen) Unterbegriffe mitgeliefert werden.</li>
 
                 <!--
                 <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>,

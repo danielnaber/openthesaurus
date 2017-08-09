@@ -426,15 +426,54 @@ class SynsetController extends BaseController {
                             categoryNames.add(catLink.category.categoryName)
                         }
                     }
-                    element id: s.id, categories: categoryNames, terms: array {
-                        for (t in s.sortedTerms()) {
-                            if (t.level) {
-                                element term: t.word, level: t.level.levelName
-                            } else {
-                                element term: t.word
-                            }
+                    List terms = []
+                    for (t in s.sortedTerms()) {
+                        if (t.level) {
+                            terms.add([term: t.word, level: t.level.levelName])
+                        } else {
+                            terms.add([term: t.word])
                         }
                     }
+                    Map res = [
+                               'id': s.id,
+                               'categories': categoryNames,
+                               'terms': terms
+                              ]
+                    if (params.supersynsets == 'true' || params.mode == 'all') {
+                        List superSynsets = []
+                        for (link in s.sortedSynsetLinks()) {
+                            if (link.linkType.linkName == 'Oberbegriff') {
+                                List superTerms = []
+                                for (t in link.targetSynset.sortedTerms()) {
+                                    if (t.level) {
+                                        superTerms.add([term:t.word, level:t.level.levelName])
+                                    } else {
+                                        superTerms.add([term:t.word])
+                                    }
+                                }
+                                superSynsets.add(superTerms)
+                            }
+                        }
+                        res.put('supersynsets', superSynsets)
+                    }
+                    if (params.subsynsets == 'true' || params.mode == 'all') {
+                        List subSynsets = []
+                        for (link in s.sortedSynsetLinks()) {
+                            if (link.linkType.linkName == 'Unterbegriff') {
+                                List subTerms = []
+                                for (t in link.targetSynset.sortedTerms()) {
+                                    if (t.level) {
+                                        subTerms.add([term:t.word, level:t.level.levelName])
+                                    } else {
+                                        subTerms.add([term:t.word])
+                                    }
+                                }
+                                subSynsets.add(subTerms)
+                            }
+                        }
+                        res.put('subsynsets', subSynsets)
+                    }
+                    element res
                 }
             }
 

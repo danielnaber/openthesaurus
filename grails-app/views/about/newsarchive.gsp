@@ -21,6 +21,14 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2017-08-09</span></td>
+            <td valign="top">
+                Unsere
+                <g:link controller="about" action="api">API</g:link> kann jetzt auch im JSON-Modus
+                Ober- und Unterbegriffe ausliefern.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2017-03-05</span></td>
             <td valign="top">
                 Auf
