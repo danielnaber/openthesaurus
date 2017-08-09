@@ -65,7 +65,7 @@
                 <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
                 ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
                 Tippfehlers machen zu können. Beispielanfrage:
-                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Umstant&amp;format=text/xml&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Umstant</strong>&amp;format=text/xml&amp;similar=true</a></pre>
+                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Umstant&amp;format=application/json&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Umstant</strong>&amp;format=application/json&amp;similar=true</a></pre>
                     In der Antwort gibt <tt>distance</tt> den Levenshtein-Abstand zum Suchwort an (Wörter in Klammern werden dabei ignoriert).
                 Die Wörter sind bereits nach diesem Abstand sortiert. Es werden nur Wörter vorgeschlagen, die auch
                 in OpenThesaurus vorhanden sind.
@@ -73,7 +73,7 @@
 
                 <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
                 zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
-                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Hand&amp;format=text/xml&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Hand</strong>&amp;format=text/xml&amp;substring=true</a></pre>
+                    <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=Hand&amp;format=application/json&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}${createLinkTo(dir:'synonyme')}/<br/>search?q=<strong>Hand</strong>&amp;format=application/json&amp;substring=true</a></pre>
                 </li>
 
                 <li><span class="apioption">substringFromResults</span>: Gibt an, ab welchem Eintrag die Teilwort-Treffer
