@@ -10,6 +10,7 @@
   <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch')}" />
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="flattr:id" content="62lgqk">
   <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
   <g:render template="/script"/>
   <g:layoutHead />
