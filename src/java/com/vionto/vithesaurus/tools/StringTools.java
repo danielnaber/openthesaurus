@@ -55,6 +55,10 @@ public class StringTools {
     return cleanWord(word).replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
   }
 
+  public static String normalizeParenthesis(String word) {
+    return word.replaceAll("\\(.*?\\)", "").replaceAll("\\s+", " ").trim();
+  }
+
   /**
    * Normalize the word for the 'normalizedWord2' field.
    */
