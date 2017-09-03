@@ -177,13 +177,15 @@ class UserController extends BaseController {
           }
         }
         String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration?userId=${user.id}&code=${user.confirmationCode}"
+        String bccMail = message(code:'footer.email.beforeAt') + "@" + message(code:'footer.email.afterAt')
         sendMail {
           from message(code:'user.register.email.from')
           to params.userId
+          bcc bccMail
           subject message(code:'user.register.email.subject')     
           body message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text') 
         }
-        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}")
+        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}, BCC to ${bccMail}")
       } else {
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
