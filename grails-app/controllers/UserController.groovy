@@ -53,6 +53,9 @@ class UserController extends BaseController {
       if (!user) {
           throw new Exception("No user for id '${params.uid.encodeAsHTML()}'")
       }
+      if (user.blocked) {
+          throw new Exception("No user for id '${params.uid.encodeAsHTML()}'")
+      }
       String visibleName = user.realName ? user.realName : "#" + user.id
       [user:user, visibleName:visibleName]
     }
