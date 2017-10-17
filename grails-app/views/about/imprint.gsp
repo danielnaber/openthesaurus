@@ -42,7 +42,7 @@
                     betroffen sind, erhalten Sie in der Privacy Policy von Yieldlove. Zudem
                     können Sie unter dem angegebenen Link dem Einsatz von Cookies durch
                     Yieldlove für die Zukunft widersprechen (Opt-out):
-                    <a href="http://www.yieldlove.com/cookie.php">http://www.yieldlove.com/cookie.php</a></li>
+                    <a href="http://www.yieldlove.com/cookie-policy">http://www.yieldlove.com/cookie-policy</a></li>
                 </ul>
                 
                 <br>
