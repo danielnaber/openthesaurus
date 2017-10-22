@@ -63,7 +63,18 @@ public class WikimediaDumpHandler extends DefaultHandler {
 
   protected String clean(String str) {
     final Matcher matcher = XML_COMMENT_PATTERN.matcher(str);
-    return matcher.replaceAll("");
+    String clean = matcher.replaceAll("").
+                   replaceAll("\u200A", "");   // hair space, breaks MySQL import
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < clean.length(); i++) {
+      char c = clean.charAt(i);
+      if ((int)c > 50000) {
+        // skip, MySQL won't accept all Unicode chars from Wiktionary (but the 50,000 limit is a guess)
+      } else {
+       sb.append(c); 
+      }
+    }
+    return sb.toString();
   }
 
   protected String escape(String str) {

@@ -70,7 +70,7 @@ public class WiktionarySynonymDumper {
         "`meanings` text, " + 
         "`synonyms` text, " +
         "KEY `headword` (`headword`)" +
-        ") ENGINE = MYISAM;");
+        ") ENGINE = MYISAM, CHARACTER SET utf8;");
     saxParser.parse(is, handler);
     System.err.println("Exported: " + handler.exported);
     System.err.println("Skipped: " + handler.skipped);
@@ -109,6 +109,16 @@ public class WiktionarySynonymDumper {
             String synonyms = StringUtils.join(synonymsList, " ");
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
+            /*if (title.toString().equals("Wasser")) {
+              for (int i = 0; i < meanings.length(); i++) {
+                if ((int)meanings.charAt(i) > 255) {
+                  System.err.println(meanings.charAt(i) + " - " + (int)meanings.charAt(i) + " <=====");
+                } else {
+                  System.err.println(meanings.charAt(i) + " - " + (int)meanings.charAt(i));
+                }
+              }
+              System.exit(1);
+            }*/
             exported++;
           }
         }
