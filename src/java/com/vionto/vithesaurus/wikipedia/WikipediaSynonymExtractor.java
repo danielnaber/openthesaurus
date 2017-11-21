@@ -96,7 +96,7 @@ public class WikipediaSynonymExtractor {
     private void findSynonyms(List<String> synonyms) throws SQLException, UnsupportedEncodingException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT DISTINCT synset.id FROM term, synset, term term2 WHERE synset.is_visible = 1 AND synset.id " +
-                        "   = term.synset_id AND term.synset_id AND term2.synset_id = synset.id AND term2.word = ?")) {
+                        " = term.synset_id AND term2.synset_id = synset.id AND term2.word = ?")) {
             Map<Integer, Integer> synsetIdToCount = new HashMap<Integer, Integer>();
             for (String synonym : synonyms) {
                 preparedStatement.setString(1, synonym);
