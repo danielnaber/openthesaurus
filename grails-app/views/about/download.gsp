@@ -18,9 +18,9 @@
             <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de"><img align="right" style="margin-left: 15px"
                src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL Logo"/></a>
             <p>Die Wörter aus OpenThesaurus lassen sich hier in verschiedenen Formaten
-            herunterladen. Sie stehen unter der
-            <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser
-            General Public License</a> zur Verfügung.
+            herunterladen. Sie stehen unter der <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.de">Creative Commons Attribution-ShareAlike 4.0</a>
+            oder <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser
+            General Public License</a> zur Verfügung (Sie können wählen, welche Lizenz für Sie gilt).
             <!-- text from about/index: -->
             Das bedeutet vereinfacht gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet
             werden können, solange die weiterverbreiteten Daten ebenfalls für den User klar erkennbar unter der

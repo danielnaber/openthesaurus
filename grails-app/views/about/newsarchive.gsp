@@ -21,6 +21,13 @@
             <td></td>
         </tr>
         <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2017-12-10</span></td>
+            <td valign="top">
+                Die OpenThesaurus-Daten können jetzt wahlweise auch unter den Bedingungen der
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.de">Creative Commons Attribution-ShareAlike 4.0</a>-Lizenz genutzt werden.
+            </td>
+        </tr>
+        <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2017-08-09</span></td>
             <td valign="top">
                 Unsere

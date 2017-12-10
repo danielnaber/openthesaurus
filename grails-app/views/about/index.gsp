@@ -31,9 +31,13 @@
 
             <img src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL" style="margin-left:10px;float:right"/>
 
-            <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> unter der
-              <a rel="license" href="https://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a> zur Verfügung.
-              Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
+            <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> 
+              wahlweise unter einer dieser beiden Lizenzen zur Verfügung:
+              <ul>
+                <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.de"> Creative Commons Attribution-ShareAlike 4.0</a></li>
+                <li><a rel="license" href="https://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser General Public License (LGPL)</a></li>
+              </ul>
+              <p style="margin-top: 8px">Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
               können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
               und openthesaurus.de mit Link als die Quelle angegeben wird.</p>
 
