@@ -29,9 +29,15 @@
             abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
             unterstützt. Nicht unterstützt wird die Wikipedia/Wiktionary-Suche.</p>
 
-            <p><strong>Hinweis: wer die API über reines Testen hinaus benutzt, sollte sich bitte vorher bei
+            <p><strong>Hinweis: Die Nutzung der API ist kostenlos, aber wir erwarten einen Link auf
+            www.openthesaurus.de (ohne <tt>nofollow</tt>-Attribut). Sollten die Daten nur im Hintergrund benutzt
+            werden (z.B. zur Erweiterung einer Suchanfrage o.ä.) reicht auch ein Hinweis im Impressum. Ansonsten
+            sollte der Link für die Nutzer gut sichtbar auf der Seite angezeigt werden, auf der auch die Daten
+            zum Einsatz kommen.</strong></p>
+
+            <p>Wer die API über reines Testen hinaus benutzt, sollte sich bitte vorher bei
                 <i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
-                um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</strong></p>
+                um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</p>
 
             <h2><a name="json">Suchanfrage für JSON</a></h2>
 
