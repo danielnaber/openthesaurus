@@ -15,8 +15,10 @@
     
             <h2>Download der Daten</h2>
     
-            <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de"><img align="right" style="margin-left: 15px"
+            <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de"><img align="right" style="margin-left: 15px;height:50px"
                src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL Logo"/></a>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.de"><img align="right" style="margin-left: 15px;height:50px"
+               src="${createLinkTo(dir:'images',file:'cc-by-sa.png')}" alt="Creative Commons BY-SA Logo"/></a>
             <p>Die Wörter aus OpenThesaurus lassen sich hier in verschiedenen Formaten
             herunterladen. Sie stehen unter der <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.de">Creative Commons Attribution-ShareAlike 4.0</a>
             oder <a href="http://creativecommons.org/licenses/LGPL/2.1/deed.de">GNU Lesser

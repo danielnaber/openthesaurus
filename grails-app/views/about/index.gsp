@@ -29,7 +29,8 @@
     
             <h2>Lizenz</h2>
 
-            <img src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL" style="margin-left:10px;float:right"/>
+            <img src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL" style="margin-left:10px;float:right;height:50px"/>
+            <img align="right" src="${createLinkTo(dir:'images',file:'cc-by-sa.png')}" alt="Creative Commons BY-SA Logo" style="margin-left: 15px;height:50px"/>
 
             <p>Die <strong>Daten</strong> von OpenThesaurus stehen via <a href="api">API</a> und <a href="download">Download</a> 
               wahlweise unter einer dieser beiden Lizenzen zur Verfügung:
