@@ -10,6 +10,8 @@ import java.util.concurrent.CopyOnWriteArrayList
 class RequestLimiterService {
 
   static transactional = false
+  
+  def grailsApplication
 
   private static final int API_REQUEST_QUEUE_SIZE = 500
   private static final String REQUEST_LIMIT_MAX_AGE_SECONDS = "requestLimitMaxAgeSeconds"
@@ -29,6 +31,19 @@ class RequestLimiterService {
       apiRequestEvents.remove(0)
     }
     String ip = IpTools.getRealIpAddress(request)
+    if (grailsApplication.config.thesaurus.internalHttpPassword && request.getParameter("internalHttpPassword")) {
+      if (grailsApplication.config.thesaurus.internalHttpPassword == request.getParameter("internalHttpPassword")) {
+        // an internal request that carries the original IP as a parameter:
+        if (request.getParameter("sourceIp")) {
+          ip = request.getParameter("sourceIp")
+        } else {
+          throw new RuntimeException("Parameter 'sourceIp' needs to be set if 'internalHttpPassword' is set")
+        }
+      } else {
+        throw new RuntimeException("Invalid internal password")
+      }
+    }
+    
     apiRequestEvents.add(new ApiRequestEvent(ip, new Date()))
 
     int maxAgeSeconds = 60
@@ -69,7 +84,7 @@ class RequestLimiterService {
       sleepTimeInfo = "+" + sleepTime + "ms"
     }
     if (ApiRequestEvent.limitReached(ip, apiRequestEvents, maxAgeSeconds, maxRequests)) {
-      throw new TooManyRequestsException(IpTools.getRealIpAddress(request))
+      throw new TooManyRequestsException(ip)
     }
     return sleepTimeInfo
   }

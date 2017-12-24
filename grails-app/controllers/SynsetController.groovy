@@ -277,6 +277,8 @@ class SynsetController extends BaseController {
                         paramsList.add(param + "=" + URLEncoder.encode(params[param], "utf-8"))
                     }
                 }
+                paramsList.add("internalHttpPassword=" + grailsApplication.config.thesaurus.internalHttpPassword)
+                paramsList.add("sourceIp=" + IpTools.getRealIpAddress(request))
                 def paramsString = StringUtils.join(paramsList, "&")
                 def serverUrl = new URL(grailsApplication.config.thesaurus.serverURL)
                 def server = serverUrl.protocol + "://" + serverUrl.host + ":" + serverUrl.port
