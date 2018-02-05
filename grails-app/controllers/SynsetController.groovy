@@ -129,6 +129,7 @@ class SynsetController extends BaseController {
           long partialMatchStartTime = System.currentTimeMillis()
           String sleepTimeInfo = ""
           if (apiRequest) {
+            response.setHeader("Access-Control-Allow-Origin", "*")
             try {
               sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
             } catch (TooManyRequestsException e) {
