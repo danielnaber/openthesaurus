@@ -40,7 +40,7 @@
               </ul>
               <p style="margin-top: 8px">Das bedeutet einfach gesagt, dass die Daten kostenlos genutzt, verarbeitet, geändert und weiterverbreitet werden
               können, solange die weiterverbreiteten Daten ebenfalls für den User deutlich erkennbar unter der LGPL stehen
-              und openthesaurus.de mit Link als die Quelle angegeben wird.</p>
+              und openthesaurus.de mit einem vollwertigen Link (kein <tt>rel="nofollow"</tt>) als Quelle angegeben wird.</p>
 
             <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
               er steht unter der <a href="https://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
