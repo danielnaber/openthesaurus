@@ -26,7 +26,30 @@
             den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen
             und neue hinzufügen. Details dazu finden sich in der <a href="faq">FAQ</a>.</p>
     
-    
+            
+            <a name="searchEngine"></a>
+            <h2>Als Suchmaschine hinzufügen</h2>
+            
+            <h3>Firefox</h3>
+            
+            <ul>
+                <li><a href="https://addons.mozilla.org/de/firefox/addon/openthesaurus/">Auf dieser Seite</a> "Zu Firefox hinzufügen" klicken</li>
+                <li>Im Firefox unter Einstellungen → Suche → Ein-Klick-Suchmaschinen das "Schlüsselwort" für
+                OpenThesaurus zum Beispiel auf <tt>ot</tt> setzen, fertig! Mit "ot fahrrad" kann jetzt bei OpenThesaurus nach "fahrrad" gesucht werden.</li>
+            </ul>
+            
+            <h3>Chrome</h3>
+
+            <ul>
+                <li>Die Chrome-Einstellungen öffnen (im Menü mit den drei Punkten, rechts oben im Fenster)</li>
+                <li>Runterscrollen bis zu "Suchmaschine", dort auf "Suchmaschinen verwalten" klicken</li>
+                <li>Unter "Andere Suchmaschinen" sollte OpenThesaurus bereits erkannt worden sein.
+                    Rechts befinden sich drei Punkte, dort "Bearbeiten" wählen.</li>
+                <li>Bei "Suchkürzel" jetzt zum Beispiel <tt>ot</tt> eintragen, fertig!
+                    Mit "ot fahrrad" kann jetzt bei OpenThesaurus nach "fahrrad" gesucht werden.</li>
+            </ul>
+            
+            
             <h2>Lizenz</h2>
 
             <img src="${createLinkTo(dir:'images',file:'cc-LGPL-a.png')}" alt="GNU LGPL" style="margin-left:10px;float:right;height:50px"/>
