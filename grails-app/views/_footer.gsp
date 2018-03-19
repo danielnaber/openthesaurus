@@ -34,13 +34,7 @@
                       </td>
                       <td>&nbsp;</td>
                       <td>
-                          <script type="text/javascript">
-                              <!--
-                              var firstPart = "<g:message code="footer.email.beforeAt"/>";
-                              var lastPart = "<g:message code="footer.email.afterAt"/>";
-                              document.write("<a class=\"lightlink\" href='mail" + "to:" + firstPart + "@" + lastPart + "'><g:message code="footer.email"/><" + "/a>");
-                              // -->
-                          </script>
+                          <g:render template="/email" model="${['message': message(code: 'footer.email')]}"/>
                       </td>
                   </tr>
               </table>
