@@ -17,6 +17,9 @@
     
                 <h2>Datenschutzerklärung</h2>
                 
+                <p>Die Verarbeitung personenbezogener Daten auf dieser Website erfolgt im Einklang mit
+                der europäischen Datenschutz-Grundverordnung (DSGVO) und dem Bundesdatenschutzgesetz (BDSG) (2018).</p>
+                
                 <p>Die Nutzung unserer Website erfolgt standardmäßig anonym. 
                 Unser Webserver ist so konfiguriert, dass IP-Adressen so gekürzt werden, dass sie nicht mehr 
                 zur Identifikation benutzt werden (z.&thinsp;B. wird 192.168.0.0 gespeichert statt 192.168.2.3).
