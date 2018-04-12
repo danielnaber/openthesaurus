@@ -146,6 +146,12 @@ class UserController extends BaseController {
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
         return
       }
+      if (!params.acceptPrivacyPolicy) {
+        log.warn("Registration: user didn't accept privacy policy: '${params.userId}'")
+        user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.privacy.policy'))
+        render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+        return
+      }
       if (!params.visibleName || params.visibleName.trim().isEmpty()) {
         log.warn("Registration: user entered invalid visible name: '${params.visibleName}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.visible.name'))

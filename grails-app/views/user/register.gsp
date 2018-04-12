@@ -78,7 +78,20 @@
                                 <table>
                                     <tr>
                                         <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}" required="true" /></td>
-                                        <td valign="top"><label for="acceptLicense"><g:message code="user.register.form.accept.license"/></label></td>
+                                        <td valign="top"><label for="acceptLicense"><g:message code="user.register.form.accept.license1"/></label></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
+                            </td>
+                            <td valign='top' class='value'>
+                                <table>
+                                    <tr>
+                                        <td valign="top"><g:checkBox name="acceptPrivacyPolicy" checked="${params.acceptLicense == 'on'}" required="true" /></td>
+                                        <td valign="top"><label for="acceptPrivacyPolicy"><g:message code="user.register.form.accept.license2"/></label></td>
                                     </tr>
                                 </table>
                             </td>
