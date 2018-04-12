@@ -15,7 +15,8 @@
 
             <h2><g:message code="newsletter.headline"/></h2>
 
-            <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus:</p>
+            <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus.
+            Wenn Sie den Newsletter abonnieren, stimmen Sie unserer <g:link action="imprint">Datenschutzerklärung</g:link> zu:</p>
 
             <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
                 <table>
