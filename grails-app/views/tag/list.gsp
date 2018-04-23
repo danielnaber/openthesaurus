@@ -9,7 +9,9 @@
 	<body>
 	<div class="body">
 
-		<hr/>
+		<main class="main">
+			<div class="container">
+				<section class="main-content content-page">
 
 		<p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
@@ -61,6 +63,10 @@
 			</g:if>
 
 		</div>
+
+		</section>
 	</div>
+	</main>
+
 	</body>
 </html>

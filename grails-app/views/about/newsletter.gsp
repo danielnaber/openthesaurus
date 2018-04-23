@@ -7,41 +7,34 @@
     </head>
     <body>
 
-        <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
-        <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
-            
-        <div class="dialog">
+                <h2><g:message code="newsletter.headline"/></h2>
 
-            <h2><g:message code="newsletter.headline"/></h2>
+                <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus.
+                Wenn Sie den Newsletter abonnieren, stimmen Sie unserer <g:link action="imprint">Datenschutzerklärung</g:link> zu:</p>
 
-            <p>Unser Newsletter informiert in unregelmäßigen Abständen (alle paar Wochen oder Monate) über Neuigkeiten auf OpenThesaurus.
-            Wenn Sie den Newsletter abonnieren, stimmen Sie unserer <g:link action="imprint">Datenschutzerklärung</g:link> zu:</p>
-
-            <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
-                <table>
-                    <tbody>
+                <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
+                    <table>
+                        <tbody>
                         <tr>
                             <td><g:message code="user.login.form.username"/></td>
-                            <td><input autofocus placeholder="${message(code:'user.register.email.placeholder')}" 
+                            <td><input autofocus placeholder="${message(code:'user.register.email.placeholder')}"
                                        id="text2567502" name="email" value="" type="text" size="30"/></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><button class="submitButton" type="submit">Newsletter abonnieren</button></td>
                         </tr>
-                    </tbody>
-                </table>
-            </form>
-            
+                        </tbody>
+                    </table>
+                </form>
+
+            </section>
         </div>
-
-        </g:if>
-        <g:else>
+    </main>
     
-            (Nothing here yet)
-    
-        </g:else>
-
     </body>
 </html>

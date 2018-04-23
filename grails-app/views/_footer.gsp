@@ -1,75 +1,29 @@
-<div id="foot">
-    
-  <div class="footerColumn" style="margin-top: 44px; margin-right: 37px;">
-      <div class="claim" style="margin-bottom: 23px">
-          <g:message code="homepage.tagline"/>
-      </div>
-
-      <img style="width:100%;height:2px;margin-bottom:23px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>
-
-      <ul style="float: left; margin-right: 60px">
-          <li><g:link controller="search" action="index"><g:message code="powersearch.headline"/></g:link></li>
-          <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
-          <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
-          <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
-          <li><g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link></li>
-          <li><g:link controller="statistics"><g:message code="statistics"/></g:link></li>
-          <li><g:link controller="about" action="newsletter"><g:message code="homepage.mailing_list"/></g:link></li>
-          <li><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
-      </ul>
-
-      <div>
-          
-          <div class="iconLink">
-              <table>
-                  <tr>
-                      <td>
-                          <script type="text/javascript">
-                              <!--
-                              var firstPart = "<g:message code="footer.email.beforeAt"/>";
-                              var lastPart = "<g:message code="footer.email.afterAt"/>";
-                              document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"30\" height=\"30\" alt=\"Contact-Icon\"/><" + "/a>");
-                              // -->
-                          </script>
-                      </td>
-                      <td>&nbsp;</td>
-                      <td>
-                          <g:render template="/email" model="${['message': message(code: 'footer.email')]}"/>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-          <div class="iconLink">
-              <table>
-                  <tr>
-                      <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" width="30" height="30" alt="Twitter-Icon"/></a></td>
-                      <td>&nbsp;</td>
-                      <td><g:message code="footer.twitter"/></td>
-                  </tr>
-              </table>
-          </div>
-          <div class="iconLink">
-              <table>
-                  <tr>
-                      <td><a href="https://github.com/danielnaber/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="30" height="30" alt="Github-Icon"/></a></td>
-                      <td>&nbsp;</td>
-                      <td><g:message code="footer.github"/></td>
-                  </tr>
-              </table>
-          </div>
-
-      </div>
-
-  </div>
-    
-  <div class="footerColumn">
-
-      <g:render template="/ads/footer"/>
-
-      <!--<img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>-->
-
-      <g:render template="/ads/footer2"/>
-      
-  </div>
-
-</div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-col footer-about">
+                <strong>OpenThesaurus</strong> ist ein freies deutsches Wörterbuch für Synonyme, bei dem jeder mitmachen kann.
+                <div class="footer-social">
+                    <span class="footer-social-item"><a href="https://twitter.com/openthesaurus"><i class="fa fa-twitter"></i></a></span>
+                    <span class="footer-social-item"><a href="https://github.com/danielnaber/openthesaurus"><i class="fa fa-github"></i></a></span>
+                </div>
+            </div>
+            <nav class="footer-col footer-menu">
+                <g:link class="footer-menu-item" controller="search" action="index"><g:message code="powersearch.headline"/></g:link>
+                <g:link class="footer-menu-item" controller="about" action="download"><g:message code="homepage.download"/></g:link>
+                <g:link class="footer-menu-item" controller="userEvent" action="list"><g:message code="changelog"/></g:link>
+                <g:link class="footer-menu-item" controller="about" action="faq"><g:message code="homepage.faq"/></g:link>
+                <g:link class="footer-menu-item" controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link>
+                <g:link class="footer-menu-item" controller="statistics"><g:message code="statistics"/></g:link>
+                <g:link class="footer-menu-item" controller="about" action="newsletter"><g:message code="homepage.mailing_list"/></g:link>
+                <g:link class="footer-menu-item" controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link>
+            </nav>
+            <div class="footer-col footer-partner">
+                <p><strong>Partner Website</strong></p>
+                <p>
+                    <a href="https://languagetool.org/de/" class="link-underline">LanguageTool</a> - kostenlose Stil- und Grammatik­prüfung für Deutsch, Englisch und weitere Sprachen
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

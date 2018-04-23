@@ -1,46 +1,43 @@
 <%@page import="com.vionto.vithesaurus.*" %>
 <%@page import="com.vionto.vithesaurus.tools.*" %>
-<div id="search">
 
-  <%-- move the logo/search block a bit to the left, looks like as if it is better centered: --%>
-  <div style="margin-right: 30px;">
-    
-  <g:if test="${homepage}">
-    <div class="logo"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></div>
-  </g:if>
-  <g:else>
-    <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
-  </g:else>
+<div class="search-form">
 
-  <p class="claim"><g:message code="homepage.claim"/></p>
-  <p class="mobileClaim"><a href="${createLinkTo(dir:'/',file:'')}"><g:message code="homepage.claim.mobile"/></a></p>
+        <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
+        <span id="spinner" style="visibility:hidden;position:absolute;left:227px;top:99px">
+            <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" width="32" height="32" alt="Loading" />
+        </span>
+        
+        <div class="container">
+            <div class="main-logo">
+                <g:if test="${homepage}">
+                    <img src="${createLinkTo(dir:'images',file:'logo.png')}?2018" alt="OpenThesaurus - Synonyme und Assoziationen">
+                </g:if>
+                <g:else>
+                    <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img src="${createLinkTo(dir:'images',file:'logo.png')}?2018" alt="OpenThesaurus - Synonyme und Assoziationen"></a></div>
+                </g:else>
+            </div>
+            <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;"
+                  name="searchform" class="main-search">
+                <button id="clear-search" type="button" class="button button-clearsearch"><i class="fa fa-close"></i></button>
 
-  <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
+                <g:set var="autofocus" value=''/>
+                <g:if test="${homepage && preventSearchFocus != 'true'}">
+                    <g:set var="autofocus" value='autofocus'/>
+                </g:if>
+                <g:if test="${params && params.q}">
+                    <input ${autofocus} ${directSearchAttributes} onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="${StringTools.slashUnescape(params.q.encodeAsHTML())}" class="main-search-input">
+                </g:if>
+                <g:else>
+                    <input ${autofocus} ${directSearchAttributes} onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" placeholder="${message(code:'homepage.search.default.term')}" class="main-search-input">
+                </g:else>
 
-    <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
-    <span id="spinner" style="visibility:hidden;position:absolute;left:227px;top:99px">
-      <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" width="32" height="32" alt="Loading" />
-    </span>
+                <button class="main-search-button" type="submit">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
 
-    <g:set var="autofocus" value=''/>
-    <g:if test="${homepage && preventSearchFocus != 'true'}">
-        <g:set var="autofocus" value='autofocus'/>
-    </g:if>
-    <g:if test="${params && params.q}">
-      <input ${autofocus} ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" value="${StringTools.slashUnescape(params.q.encodeAsHTML())}" /><input style="border-width:0px" type="image" title="${message(code:'homepage.search.button.title')}" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
-    </g:if>
-    <g:else>
-      <input ${autofocus} ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" placeholder="${message(code:'homepage.search.default.term')}" /><input style="border-width:0px" type="image" title="${message(code:'homepage.search.button.title')}" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
-    </g:else>
-
-  </form>
-
-  </div>
-    
 </div>
 
 <g:if test="${preventSearchFocus != 'true'}">
@@ -52,6 +49,11 @@
           document.searchform.q.focus();
           document.searchform.q.select();
         }
+        $('#clear-search').click(function() {
+            document.searchform.q.value = "";
+            document.searchform.q.focus();
+            $('#searchResultArea').hide();
+        });
     });
     // -->
     </script>

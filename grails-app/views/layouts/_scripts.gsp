@@ -14,7 +14,7 @@
     function closePopup() {
         var searchResultAreaDiv = $('#searchResultArea');
         searchResultAreaDiv.hide();
-        $('#body').css({backgroundColor: '#F7F7F7'});
+        //$('#body').css({backgroundColor: '#F7F7F7'});
         searchResultAreaDiv.html("");
     }
 
@@ -66,11 +66,11 @@
         if (searchString === '' || searchString.length < minChars) {
             var searchResultAreaDiv = $('#searchResultArea');
             searchResultAreaDiv.hide();
-            $('#body').css({backgroundColor: '#F7F7F7'});
+            //$('#body').css({backgroundColor: '#F7F7F7'});
             searchResultAreaDiv.html("");
         } else {
             $('#searchResultArea').show();
-            $('#body').css({backgroundColor: '#e6e6e6'});
+            //$('#body').css({backgroundColor: '#e6e6e6'});
             cursorPosition = -1;
             var timeStamp = new Date().getTime();
             loadSynsetSearch();
@@ -158,7 +158,7 @@
             return;
         }
         var message = "Error in " + url + " on line " + line + ": " + msg;
-        $.post("/about/logMessage", { "msg": message });
+        $.post("${createLinkTo(dir:'about',file:'logMessage')}", { "msg": message });
         lastErrorLogToServer = new Date();
     };
 
