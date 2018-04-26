@@ -19,6 +19,8 @@
     }
 
     function doSearchOnKeyUp(event) {
+        //console.log("doSearchOnKeyUp", event);
+        //console.log("event.ctrlKey", event.ctrlKey);
         // also see layout.css - if the transform is not applied (it's not in Opera because
         // it makes fonts fuzzy) we cannot use the popup as it will be misplaced, covering the
         // query box:
@@ -27,6 +29,10 @@
         var isWebkit = bodyDiv.css('-webkit-transform');
         var isMs = false;  // not yet enabled, layout problems with the skew
         var hasTransformEnabled = isMozilla || isWebkit || isMs;
+        if (event.keyCode == 9) {
+            // Tab - happens when user switches back to browser window with Alt-Tab
+            return;
+        }
         if ((event.keyCode == 45/*Insert*/ || event.keyCode == 65/*A*/ || event.keyCode == 67/*C*/) && event.ctrlKey) {
             // opening the popup makes no sense for these key combinations
             return;
