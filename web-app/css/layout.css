@@ -226,3 +226,8 @@ p, li {
   border-width: 5px;
   border-style: solid;
 }
+
+.word-match {
+  background: #fcffd0;
+  color: black;
+}
