@@ -16,108 +16,254 @@
     </head>
     <body>
 
-    <hr style="margin-top:7px;margin-bottom:0"/>
+    <main class="main">
 
-    <div class="resultColumn" style="margin-right:37px">
-        <g:render template="mainmatches"/>
-
-        <g:set var="cleanTerm" value="${params.q.trim()}" />
-        <g:if test="${totalMatches == 0}">
-            <g:render template="addterm" model="${[term:cleanTerm]}" />
-        </g:if>
-
-        <hr style="margin-top:20px" />
-
-        <g:render template="partialmatches"/>
-
-        <hr style="margin-top:20px" />
-
-        <h2><g:message code='result.matches.no.like' /></h2>
-
-        <g:render template="addterm" model="${[term:cleanTerm]}" />
-
-        <g:render template="forumlink" />
-    </div>
-
-    <div class="resultColumn">
-        <%-- this is specific to German OpenThesaurus, but it doesn't harm for other languages --%>
-            <g:if test="${remoteWordLookup || remoteGenderLookup || remoteMistakeLookup}">
-                <div style="margin-top: 20px">
-            </g:if>
-            <g:if test="${remoteWordLookup}">
-                <div style="margin-bottom: 5px">
-                    <a href="${remoteWordLookup.url.encodeAsHTML()}">Tipps zur Rechtschreibung von '${params.q.trim().encodeAsHTML()}'
-                        <br/>auf korrekturen.de</a>
+        <div class="container">
+            <section class="main-content matches-page">
+                <div class="main-content-col">
+                    <div class="main-content-section">
+                        <div class="main-content-section-block wordtags wordtags-big">
+                            <span class="word word-dot"><a href="#">Erprobung</a></span>
+                            <span class="word word-dot"><a href="#">Probe</a></span>
+                            <span class="word word-dot"><a href="#">Prüfung</a></span>
+                            <span class="word word-dot"><a href="#">Test</a></span>
+                            <span class="word word-dot"><a href="#">Versuch</a></span>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                OBERBEGRIFFE:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Aktion</span>
+                                <span class="word word-dot">Handlung</span>
+                                <span class="word word-dot">Operation</span>
+                            </div>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                UNTERBEGRIFFE:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Scherversuch</span>
+                                <span class="word word-dot">Schubversuch</span>
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Bewährungsprobe</span>
+                                <span class="word word-dot">Feuerprobe</span>
+                                <span class="word word-dot">Feuertaufe</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Festigkeitsprüfung</span>
+                                <span class="word word-dot">Zerreißversuch</span>
+                                <span class="word word-dot">Zugprüfung</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-link">
+                                <a href="#">Alle anzeigen</a>
+                            </div>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                ASSOZIATIONEN:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">verbocken</span>
+                                <span class="word word-dot">verderben</span>
+                                <span class="word word-dot">verpfuschen</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">abgucken</span>
+                                <span class="word word-dot">abkupfern</span>
+                                <span class="word word-dot">abschreiben</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">in den Sand setzen (ugs.)</span>
+                                <span class="word word-dot">in den Teich setzen (ugs.)</span>
+                                <span class="word word-dot">verbocken (ugs.)</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-link">
+                                <a href="#">Ändern</a>
+                            </div>
+                        </div>
+                        <div class="main-content-section-block wordtags wordtags-big">
+                            <span class="word word-dot"><a href="#">Klassenarbeit</a></span>
+                            <span class="word word-dot"><a href="#">Klausur</a></span>
+                            <span class="word word-dot"><a href="#">Leistungsüberprüfung (Amtsdeutsch)</a></span>
+                            <span class="word word-dot"><a href="#">Lernerfolgskontrolle (Amtsdeutsch)</a></span>
+                            <span class="word word-dot"><a href="#">Prüfung</a></span>
+                            <span class="word word-dot"><a href="#">Schularbeit</a> (österr.)</span>
+                            <span class="word word-dot"><a href="#">Schulaufgabe</a> (bair.)</span>
+                            <span class="word word-dot"><a href="#">Test</a></span>
+                            <span class="word word-dot"><a href="#">Arbeit</a> (ugs.)</span>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                OBERBEGRIFFE:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Aktion</span>
+                                <span class="word word-dot">Handlung</span>
+                                <span class="word word-dot">Operation</span>
+                            </div>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                UNTERBEGRIFFE:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Scherversuch</span>
+                                <span class="word word-dot">Schubversuch</span>
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Bewährungsprobe</span>
+                                <span class="word word-dot">Feuerprobe</span>
+                                <span class="word word-dot">Feuertaufe</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">Festigkeitsprüfung</span>
+                                <span class="word word-dot">Zerreißversuch</span>
+                                <span class="word word-dot">Zugprüfung</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-link">
+                                <a href="#">Alle anzeigen</a>
+                            </div>
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                ASSOZIATIONEN:
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">verbocken</span>
+                                <span class="word word-dot">verderben</span>
+                                <span class="word word-dot">verpfuschen</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">abgucken</span>
+                                <span class="word word-dot">abkupfern</span>
+                                <span class="word word-dot">abschreiben</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-line">
+                                <span class="word word-dot">in den Sand setzen (ugs.)</span>
+                                <span class="word word-dot">in den Teich setzen (ugs.)</span>
+                                <span class="word word-dot">verbocken (ugs.)</span>
+                                ...
+                            </div>
+                            <div class="main-content-section-block-link">
+                                <a href="#">Ändern</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-content-section">
+                        <div class="main-content-section-heading">
+                            Teilwort-Treffer und ähnliche Wörter
+                        </div>
+                        <div class="main-content-section-block wordtags">
+                            <span class="word word-dot"><a href="#">Klassenarbeit</a></span>
+                            <span class="word word-dot"><a href="#">Klausur</a></span>
+                            <span class="word word-dot"><a href="#">Leistungsüberprüfung (Amtsdeutsch)</a></span>
+                            <span class="word word-dot"><a href="#">Lernerfolgskontrolle (Amtsdeutsch)</a></span>
+                            <span class="word word-dot"><a href="#">Prüfung</a></span>
+                            <span class="word word-dot"><a href="#">Schularbeit</a> (österr.)</span>
+                            <span class="word word-dot"><a href="#">Schulaufgabe</a> (bair.)</span>
+                            <span class="word word-dot"><a href="#">Test</a></span>
+                            <span class="word word-dot"><a href="#">Arbeit</a> (ugs.)</span>
+                        </div>
+                    </div>
+                    <div class="main-content-section">
+                        <div class="main-content-section-heading">
+                            Nicht das Richtige dabei?
+                        </div>
+                        <div class="main-content-section-block nowrap">
+                            <button type="button" class="button button-icon button-addsynonym">
+                                <i class="fa fa-plus-circle"></i>
+                            </button>
+                            <span>Eine weitere Bedeutung von 'test' zu OpenThesaurus hinzufügen</span>
+                        </div>
+                    </div>
                 </div>
-            </g:if>
-            <g:if test="${remoteGenderLookup}">
-                <div style="margin-bottom: 5px">
-                    <g:if test="${remoteGenderLookup.metaInfo.contains(' / ')}">
-                        Je nach Bedeutung heißt es ${remoteGenderLookup.metaInfo.encodeAsHTML().replaceAll("&lt;i&gt;", "<i>").replaceAll("&lt;/i&gt;", "</i>")}
-                        ${remoteGenderLookup.term.encodeAsHTML()}.<br/>Details auf <a href="${remoteGenderLookup.url.encodeAsHTML()}">korrekturen.de</a>.
-                    </g:if>
-                    <g:else>
-                        Der Artikel von ${remoteGenderLookup.term.encodeAsHTML()} ist: ${remoteGenderLookup.metaInfo.encodeAsHTML().replaceAll("&lt;i&gt;", "<i>").replaceAll("&lt;/i&gt;", "</i>")}
-                        <br/>Mehr auf <a href="${remoteGenderLookup.url.encodeAsHTML()}">korrekturen.de</a>.
-                    </g:else>
+                <div class="main-content-col">
+                    <div class="main-content-section matches-banner">
+                        <div class="page-matches-banner">
+                            banner here
+                        </div>
+                    </div>
+                    <div class="main-content-section">
+                        <div class="main-content-section-heading">
+                            Wiktionary
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                Bedeutungen:
+                            </div>
+                            1. Prüfung einer Eigenschaft oder Fähigkeit (in schriftlicher, mündlicher oder sonstiger Form)
+                        </div>
+                        <div class="main-content-section-block">
+                            <div class="main-content-section-block-heading">
+                                Synonyme:
+                            </div>
+                            1. Erprobung, Feldversuch, Prüfung, Versuch
+                        </div>
+                        <div class="main-content-section-note">
+                            <div class="main-content-section-note-item">
+                                Quelle: Wiktionary-Seite zu 'Test' [Autoren]
+                            </div>
+                            <div class="main-content-section-note-item">
+                                Lizenz: Creative Commons Attribution-ShareAlike
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-content-section">
+                        <div class="main-content-section-heading">
+                            Wikipedia-Links
+                        </div>
+                        <div class="main-content-section-block wordtags wordtags-big">
+                            <span class="word word-dot"><a href="#">Test (Begriffsklärung)</a></span>
+                            <span class="word word-dot"><a href="#">Experiment</a></span>
+                            <span class="word word-dot"><a href="#">Prüfen</a></span>
+                            <span class="word word-dot"><a href="#">Beweis (Logik)</a></span>
+                            <span class="word word-dot"><a href="#">Qualität</a></span>
+                            <span class="word word-dot"><a href="#">Simulation</a></span>
+                            <span class="word word-dot"><a href="#">Primzahltest</a></span>
+                            <span class="word word-dot"><a href="#">Statistischer Test</a></span>
+                            <span class="word word-dot"><a href="#">Schwangerschaftstest</a></span>
+                            <span class="word word-dot"><a href="#">Medizin</a></span>
+                            <span class="word word-dot"><a href="#">Blutbild</a></span>
+                            <span class="word word-dot"><a href="#">Motodiagnostik</a></span>
+                            <span class="word word-dot"><a href="#">Psychologischer Test</a></span>
+                            <span class="word word-dot"><a href="#">Psychologie</a></span>
+                            <span class="word word-dot"><a href="#">Online-Assessment</a></span>
+                        </div>
+                        <div class="main-content-section-note">
+                            <div class="main-content-section-note-item">
+                                Quelle: Wiktionary-Seite zu 'Test' [Autoren]
+                            </div>
+                            <div class="main-content-section-note-item">
+                                Lizenz: Creative Commons Attribution-ShareAlike
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-content-section">
+                        <div class="main-content-section-heading">
+                            „test“ suchen mit:
+                        </div>
+                        <div class="main-content-section-block wordtags wordtags-big">
+                            <span class="word word-dot"><a href="#">Wortformen von korrekturen.de</a></span>
+                            <span class="word word-dot"><a href="#">Beolingus Deutsch-Englisch</a></span>
+                        </div>
+                    </div>
                 </div>
-            </g:if>
-            <g:if test="${remoteMistakeLookup}">
-                <div style="margin-bottom: 5px">
-                    <a href="${remoteMistakeLookup.url.encodeAsHTML()}">Tipps zu typischen Fehlern mit '${params.q.trim().encodeAsHTML()}'
-                        <br/>auf korrekturen.de</a>
-                </div>
-            </g:if>
-            <g:if test="${remoteWordLookup || remoteGenderLookup || remoteMistakeLookup}">
-                <hr style="margin-top:20px" />
-                </div>
-            </g:if>
-            <g:else>
-                <g:render template="/ads/resultpage_results2"/>
-            </g:else>
-        <%-- end of part that's specific to German OpenThesaurus --%>
-        
-        <g:if test="${!session.user}">
-            <div style="margin-top:20px; text-align: center">
-                <!-- Yieldlove AdTag - openthesaurus.de - responsive -->
-                <script type='text/javascript'>
-                    googletag.cmd.push(function() {
-                        if (window.innerWidth >= 799) {
-                            googletag.defineSlot('/53015287/openthesaurus.de_d_300x250_1', [300, 250], 'div-gpt-ad-1407836274301-0').addService(googletag.pubads());
-                        }
-                        if (window.innerWidth < 799) {
-                            googletag.defineSlot('/53015287/openthesaurus.de_m_300x250_1', [300, 250], 'div-gpt-ad-1407836274301-0').addService(googletag.pubads());
-                        }
-                        googletag.pubads().enableSingleRequest();
-                        googletag.enableServices();
-                    });
-                </script>
-                <div id='div-gpt-ad-1407836274301-0'>
-                    <script type='text/javascript'>
-                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1407836274301-0'); });
-                    </script>
-                </div>
-                <span style="color:#999999">Anzeige</span>
-            </div>
-            <hr>
-        </g:if>
+            </section>
+        </div>
 
-        <g:render template="wiktionary"/>
+    </main>
 
-        <hr style="margin-top:20px" />
-
-        <g:render template="wikipedia"/>
-
-        <g:render template="/ads/resultpage_results"/>
-
-        <hr style="margin-top:20px" />
-
-        <h2><g:message code="result.external.search" args="${[params.q]}"/></h2>
-
-        <g:render template="/external_links" model="${[q:params.q]}"/>
-    </div>
-    
-    <div style="clear: both"></div>
-    
     </body>
 </html>

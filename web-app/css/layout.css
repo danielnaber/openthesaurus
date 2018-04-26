@@ -166,8 +166,9 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 }
 
 .newsYear {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+  margin-top: 30px;
 }
 .newsdate {
   font-weight: bold;
@@ -200,6 +201,10 @@ h2 {
 
 .content-page {
   padding: 25px 40px;
+  margin-bottom: 60px;
+}
+
+.matches-page {
   margin-bottom: 60px;
 }
 
