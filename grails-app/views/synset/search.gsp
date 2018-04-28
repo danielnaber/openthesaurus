@@ -8,6 +8,11 @@
         <g:if test="${descriptionText}">
           <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
         </g:if>
+        <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+        <script>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+        </script>
 
     </head>
     <body>
@@ -72,7 +77,32 @@
                 <g:render template="/ads/resultpage_results2"/>
             </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
-        
+
+        <g:if test="${!session.user}">
+            <div style="margin-top:20px; text-align: center">
+                <!-- Yieldlove AdTag - openthesaurus.de - responsive -->
+                <script type='text/javascript'>
+                    googletag.cmd.push(function() {
+                        if (window.innerWidth >= 799) {
+                            googletag.defineSlot('/53015287/openthesaurus.de_d_300x250_1', [300, 250], 'div-gpt-ad-1407836274301-0').addService(googletag.pubads());
+                        }
+                        if (window.innerWidth < 799) {
+                            googletag.defineSlot('/53015287/openthesaurus.de_m_300x250_1', [300, 250], 'div-gpt-ad-1407836274301-0').addService(googletag.pubads());
+                        }
+                        googletag.pubads().enableSingleRequest();
+                        googletag.enableServices();
+                    });
+                </script>
+                <div id='div-gpt-ad-1407836274301-0'>
+                    <script type='text/javascript'>
+                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1407836274301-0'); });
+                    </script>
+                </div>
+                <span style="color:#999999">Anzeige</span>
+            </div>
+            <hr>
+        </g:if>
+                
         <g:if test="${params.ad == '1'}">
             <div style="margin-top:20px; text-align: center">
                 <a rel="nofollow" href="https://languagetool.org"><img align="top" src="${resource(dir:'images/ads',file:'ad180x150.png')}" alt="ad space"/></a>
