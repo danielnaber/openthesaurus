@@ -795,3 +795,19 @@ strong {
   -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
+
+.cc_container {
+}
+.cc_container .cc_btn {
+  background-color: #034989 !important;
+  color: white !important;
+}
+
+.cc_container {
+  background: #0362B9 !important;
+  color: #fdfdfd !important;
+}
+
+.cc_container a {
+  color: #51c5ff !important;
+}

@@ -3,12 +3,13 @@
     <head>
         <title><g:layoutTitle default="OpenThesaurus" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20170701" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20180523" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="flattr:id" content="62lgqk">
         <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
         <g:layoutHead />

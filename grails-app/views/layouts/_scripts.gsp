@@ -162,5 +162,15 @@
         lastErrorLogToServer = new Date();
     };
 
-    // -->
+    <!-- Start Cookie Plugin -->
+    window.cookieconsent_options = {
+        message: "Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können und für Werbung.",
+        dismiss: "Okay",
+        learnMore: "Datenschutzerklärung",
+        link: '/about/imprint',
+        theme: 'dark-bottom'
+    };
+    <!-- Ende Cookie Plugin -->
+
+// -->
 </script>
