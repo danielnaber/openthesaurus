@@ -169,7 +169,7 @@
                 Unternehmen im Auftrag der Yieldlove GmbH:
                 
                 
-                <b>4w Marketplace</b>
+                <p><b>4w Marketplace</b>
 
                 <p>4w Marketplace (www.4wmarketplace.com) setzt Technologien ein, um Ihnen für Sie relevante Werbeanzeigen zu
                 präsentieren. Anbieter von 4w Marketplace ist 4w 4w Marketplace mit Sitz in Fisciano (Salerno) – 84084 in 
