@@ -97,9 +97,13 @@
                 
                 <h2>Werbung</h2>
 
-                Wir spielen Werbung aus mit Unterstützung der Yieldlove GmbH, Kehrwieder 9, 20457 Hamburg. Die folgenden
-                Informationen beziehen sich darauf.
-                
+                <p>openthesaurus.de enthält nutzungsbasierte Online-Werbung von Drittanbietern. Diese wird über unseren Werbevermarkter Yieldlove GmbH,
+                Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“) ausgespielt. Um die Werbeauslieferung zu optimieren, werden von Yieldlove 
+                und deren Partnern Cookies eingesetzt.
+
+                <p>Informationen dazu, wie Yieldlove Daten verarbeitet und welche Daten betroffen sind, erhalten Sie auch in der Privacy 
+                Policy von Yieldlove: <a href="http://www.yieldlove.com/privacy">www.yieldlove.com/privacy</a>.
+
                 <h3>COOKIES</h3>
 
                 <p>Was sind Cookies?
@@ -310,7 +314,7 @@
                 eingebettete Elemente wie Texte, Dokumente, Bilder oder Filmclips enthalten, die von einer anderen Partei gespeichert, 
                 aber auf oder in yieldloves Banner angezeigt werden.
 
-                <p>Sollten Sie auf dieser Website Cookies finden, die in diese Kategorie fallen, die wir oben nicht erwähnt haben, 
+                <p>Sollten Sie auf dieser Website Cookies finden, die in diese Kategorie fallen, die oben nicht erwähnt sind, 
                 teilen Sie uns oder yieldlove dies bitte umgehend mit oder kontaktieren Sie direkt diesen Drittanbieter und fragen Sie, welche Cookies 
                 platziert wurden, was der Grund dafür war, wie lange der Cookie bestehen bleibt und auf welche Weise Ihre Privatsphäre 
                 geschützt wird.
@@ -319,9 +323,9 @@
                 <h3>IHRE RECHTE IN BEZUG AUF IHRE DATEN</h3>
 
                 <p>Yieldlove betrachtet die Daten der Werbebanner nicht als personenbezogene Daten gemäß geltendem Recht. Ebenso 
-                sammeln oder verarbeiten wir keine sensiblen persönlichen Daten wie Daten über Rasse oder ethnische Herkunft,
+                sammelt oder verarbeitet yieldlove keine sensiblen persönlichen Daten wie Daten über Rasse oder ethnische Herkunft,
                 politische Meinungen, religiöse oder philosophische Überzeugungen, Gewerkschaftsmitgliedschaft, Gesundheit oder 
-                Sexualleben. Darüber hinaus sammeln wir wissentlich auch keine Daten von Kindern unter 12 Jahren.
+                Sexualleben. Darüber hinaus sammelt yieldlove wissentlich auch keine Daten von Kindern unter 12 Jahren.
 
                 <p>Wenn Sie die von yieldlove zur Verfügung gestellten Werbebannerdaten korrigieren, aktualisieren oder löschen 
                 möchten oder wenn Sie die personenbezogenen Daten, die Sie yieldlove über das Kontaktformular auf yieldloves Homepage 
