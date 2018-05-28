@@ -24,6 +24,8 @@
                 <p>Die Nutzung unserer Website erfolgt standardmäßig anonym. 
                 Unser Webserver ist so konfiguriert, dass IP-Adressen so gekürzt werden, dass sie nicht mehr 
                 zur Identifikation benutzt werden (z.&thinsp;B. wird 192.168.0.0 gespeichert statt 192.168.2.3).
+                Um uns gegen Missbrauch unseres Dienstes zu schützen, können im Ausnahmefall IP-Adressen
+                vollständig gespeichert werden, jedoch nicht für mehr als 7 Tage.
                 Die Fälle in denen wir trotzdem personenbezogene Daten von Ihnen speichern, sind im Folgenden
                 beschrieben.</p>
                 
