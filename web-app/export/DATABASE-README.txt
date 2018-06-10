@@ -32,6 +32,3 @@ term_link: similar to synset_link, but represents a connection between terms
 
 category: each synset can be in any number of categories. Use category_link for
   connecting 'synset' and 'category' tables.
-
-word_grammar: optional term information, referenced from term.word_grammar_id
-  (not used for openthesaurus.de)
