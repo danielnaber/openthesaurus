@@ -87,6 +87,7 @@
             </ul>
     
     
+    <!--
             <h2>OpenThesaurus auf Android</h2>
 
             <ul>
@@ -98,13 +99,11 @@
             weiterhin funktionieren:</p>
     
             <ul>
-                <!--<li><a href="https://play.google.com/store/apps/details?id=com.fc.ot">OpenThesaurus für Android</a>.
-                  Lizenz: GPLv3, <a href="http://code.google.com/p/openthesaurusforandroid/">Sourcecode</a></li> cannot find source anymore -->
                 <li><a href="https://play.google.com/store/apps/details?id=de.ad.openthesaurus">OpenThesaurus.de</a>.
                   Lizenz: GPLv3, <a href="https://github.com/a11n/openthesaurus-de">Sourcecode</a></li>
                 <li><a href="https://play.google.com/store/apps/details?id=de.offlinethesaurus">Offline Thesaurus (Synonyme)</a>.
                   Lizenz: GPLv3, <a href="https://github.com/vfichtner/offline-openthesaurus-de">Sourcecode</a></li>
-            </ul>
+            </ul>-->
     
     
             <h2>OpenThesaurus in anderen Sprachen</h2>
