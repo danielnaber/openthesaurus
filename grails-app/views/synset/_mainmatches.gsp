@@ -50,7 +50,7 @@
     
                     <g:set var="commentInfo" value=""/>
                     <g:if test="${term.userComment}">
-                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon.png')}"></span></g:set>
+                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img style="margin-left: 4px" src="${createLinkTo(dir:'images', file:'balloon.png')}"></span></g:set>
                     </g:if>
                     <%
                         long antonymTime = System.currentTimeMillis();

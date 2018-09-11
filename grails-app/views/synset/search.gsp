@@ -28,30 +28,19 @@
                         
                     </div>
                     <div class="main-content-section">
-                        <div class="main-content-section-heading">
-                            Teilwort-Treffer und ähnliche Wörter
-                        </div>
-                        <div class="main-content-section-block wordtags">
-                            <span class="word word-dot"><a href="#">Klassenarbeit</a></span>
-                            <span class="word word-dot"><a href="#">Klausur</a></span>
-                            <span class="word word-dot"><a href="#">Leistungsüberprüfung (Amtsdeutsch)</a></span>
-                            <span class="word word-dot"><a href="#">Lernerfolgskontrolle (Amtsdeutsch)</a></span>
-                            <span class="word word-dot"><a href="#">Prüfung</a></span>
-                            <span class="word word-dot"><a href="#">Schularbeit</a> (österr.)</span>
-                            <span class="word word-dot"><a href="#">Schulaufgabe</a> (bair.)</span>
-                            <span class="word word-dot"><a href="#">Test</a></span>
-                            <span class="word word-dot"><a href="#">Arbeit</a> (ugs.)</span>
-                        </div>
+                        <g:render template="partialmatches"/>
                     </div>
                     <div class="main-content-section">
                         <div class="main-content-section-heading">
-                            Nicht das Richtige dabei?
+                            <g:message code="result.matches.no.like"/>
                         </div>
                         <div class="main-content-section-block nowrap">
                             <button type="button" class="button button-icon button-addsynonym">
                                 <i class="fa fa-plus-circle"></i>
                             </button>
-                            <span>Eine weitere Bedeutung von 'test' zu OpenThesaurus hinzufügen</span>
+                            <span>
+                                <g:message code="result.create.another.synset" args="${[params.q]}"/>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -63,13 +52,13 @@
                     </div>
                     <div class="main-content-section">
                         <div class="main-content-section-heading">
-                            Wiktionary
+                            <g:message code="result.wiktionary.headline"/>
                         </div>
                         <div class="main-content-section-block">
                             <div class="main-content-section-block-heading">
                                 Bedeutungen:
                             </div>
-                            1. Prüfung einer Eigenschaft oder Fähigkeit (in schriftlicher, mündlicher oder sonstiger Form)
+                            1. TODO Prüfung einer Eigenschaft oder Fähigkeit (in schriftlicher, mündlicher oder sonstiger Form)
                         </div>
                         <div class="main-content-section-block">
                             <div class="main-content-section-block-heading">
@@ -87,38 +76,11 @@
                         </div>
                     </div>
                     <div class="main-content-section">
-                        <div class="main-content-section-heading">
-                            Wikipedia-Links
-                        </div>
-                        <div class="main-content-section-block wordtags wordtags-big">
-                            <span class="word word-dot"><a href="#">Test (Begriffsklärung)</a></span>
-                            <span class="word word-dot"><a href="#">Experiment</a></span>
-                            <span class="word word-dot"><a href="#">Prüfen</a></span>
-                            <span class="word word-dot"><a href="#">Beweis (Logik)</a></span>
-                            <span class="word word-dot"><a href="#">Qualität</a></span>
-                            <span class="word word-dot"><a href="#">Simulation</a></span>
-                            <span class="word word-dot"><a href="#">Primzahltest</a></span>
-                            <span class="word word-dot"><a href="#">Statistischer Test</a></span>
-                            <span class="word word-dot"><a href="#">Schwangerschaftstest</a></span>
-                            <span class="word word-dot"><a href="#">Medizin</a></span>
-                            <span class="word word-dot"><a href="#">Blutbild</a></span>
-                            <span class="word word-dot"><a href="#">Motodiagnostik</a></span>
-                            <span class="word word-dot"><a href="#">Psychologischer Test</a></span>
-                            <span class="word word-dot"><a href="#">Psychologie</a></span>
-                            <span class="word word-dot"><a href="#">Online-Assessment</a></span>
-                        </div>
-                        <div class="main-content-section-note">
-                            <div class="main-content-section-note-item">
-                                Quelle: Wiktionary-Seite zu 'Test' [Autoren]
-                            </div>
-                            <div class="main-content-section-note-item">
-                                Lizenz: Creative Commons Attribution-ShareAlike
-                            </div>
-                        </div>
+                        <g:render template="wikipedia"/>
                     </div>
                     <div class="main-content-section">
                         <div class="main-content-section-heading">
-                            „test“ suchen mit:
+                            <g:message code="result.external.search" args="${[params.q]}"/>
                         </div>
                         <g:set var="utf8Query" value="${java.net.URLEncoder.encode(params.q, 'utf8')}"/>
                         <g:set var="latin1Query" value="${java.net.URLEncoder.encode(params.q, 'latin1')}"/>

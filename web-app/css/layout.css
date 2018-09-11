@@ -69,7 +69,7 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 /*h2 {margin-bottom: 15px; font-weight: 600; flex-basis: 100%;}*/
 .main-content-section a {color: #0a69d8;}
 .main-content-section a:hover {color: #1e55a8;}
-.main-content-section-note {line-height: 23px; color: #ced5db;}
+.main-content-section-note {line-height: 23px; color: #aab1b7;}
 .main-content.main-page .main-content-section {padding: 20px;}
 .main-content-section-block {display: flex; flex-wrap: wrap; align-items: center; width: 100%; margin: 0 0 25px; line-height: 25px;}
 .main-content-section-block:last-child {margin: 0;}
@@ -288,4 +288,8 @@ p, li {
 .faqitem .answer ul {
   margin-top: 5px;
   margin-bottom: 10px;
+}
+
+.main-content-section-note-item a {
+  color: #aab1b7;
 }

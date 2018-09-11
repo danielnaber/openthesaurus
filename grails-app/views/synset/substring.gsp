@@ -8,7 +8,9 @@
     </head>
     <body>
 
-          <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
           <h2><g:message code="substring.headline" args="${[totalMatches, params.q]}"/></h2>
 
@@ -41,6 +43,10 @@
                   <g:paginate total="${totalMatches}" params="${[q: params.q]}" />
               </div>
           </g:if>
+
+            </section>
+        </div>
+    </main>
 
     </body>
 </html>
