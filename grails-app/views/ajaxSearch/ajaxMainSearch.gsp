@@ -62,13 +62,13 @@
     </g:else>
 
     <div class="main-content-section nowrap">
-        <button type="button" class="button button-icon button-addsynonym">
-            <i class="fa fa-plus-circle"></i>
-        </button>
-        <span>
-            <g:link controller="synset" action="create" params="[term : params.q]">
+        <g:link controller="synset" action="create" params="[term : params.q]">
+            <button type="button" class="button button-icon button-addsynonym">
+                <i class="fa fa-plus-circle"></i>
+            </button>
+            <span>
                 <g:message code="result.create.synset" args="${[params.q]}" />
-            </g:link>
-        </span>
+            </span>
+        </g:link>
     </div>
 </section>

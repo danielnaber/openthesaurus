@@ -1,7 +1,7 @@
 /* RESETS */
 body {margin: 0; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 400; background-color: #eef0f3; color: #536677;}
 a, a:hover, a:focus {text-decoration: none;}
-button, input {background: transparent; border: none; outline: none;}
+/*button, input {background: transparent; border: none; outline: none;}*/
 img {max-width: 100%; max-height: 100%;}
 * {box-sizing: border-box;}
 
@@ -14,10 +14,8 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 .button-icon:hover {color: #0a69d8;}
 .uppcase {text-transform: uppercase;}
 .word {}
-.word-dot {position: relative; padding-right: 16px;}
-.word-dot:after {content: '\00B7'; position: absolute; right: 6px;}
-.word-dot:last-child {padding-right: 8px;}
-.word-dot:last-child:after {content: none;}
+/*.word-dot {position: relative; padding-right: 16px;}*/
+/*.word-dot:after {content: '\00B7'; position: absolute; right: 6px;}*/
 
 /* HEADER */
 .header {background-color: #0a69d8; color: #fff; position: relative;}
@@ -230,4 +228,64 @@ p, li {
 .word-match {
   background: #fcffd0;
   color: black;
+}
+
+.statsTable td {
+  padding: 6px;
+}
+
+.paginateButtons {
+  margin-top: 10px;
+  border-top: 0;
+  color: #666;
+  font-size: 100%;
+  overflow: hidden;
+  padding: 10px 3px;
+}
+.paginateButtons a {
+  background: #eee;
+  color: #666;
+  margin: 0 3px;
+  padding: 2px 6px;
+  border: 1px solid #dddddd;
+}
+.paginateButtons span {
+  margin-right: 3px;
+  padding: 2px 6px;
+  border: 1px solid #dddddd;
+}
+
+.paginateButtons .currentStep {
+  color: white;
+  background-color: #0071BD;
+}
+
+#clear-search {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.main-search-button {
+  border: none;
+  outline: none;
+}
+.button-addsynonym {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* FAQ */
+.faqitem .question {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+.faqitem .answer {
+}
+.faqitem .answer ul {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }

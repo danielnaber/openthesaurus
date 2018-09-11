@@ -6,9 +6,12 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
-        <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
+
+            <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
         <h2><g:message code="antonyms.headline" /> (${matchCount})</h2>
 
@@ -28,5 +31,9 @@
             <g:paginate total="${matchCount}"/>
         </div>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>

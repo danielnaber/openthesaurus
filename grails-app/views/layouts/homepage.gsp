@@ -36,8 +36,6 @@
                 </noscript>
             </g:if>
     
-            <g:render template="/loggedin"/>
-    
             <g:layoutBody />
             
             <div id="searchResultArea" class="searchResultPopup" style="display: none"></div>

@@ -8,7 +8,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
         <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
@@ -47,5 +49,9 @@
         <br/><br/>
         <g:link action="synsets" params="${[time:System.currentTimeMillis()]}"><g:message code="random.reload" /></g:link>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>

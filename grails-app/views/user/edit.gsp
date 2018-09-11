@@ -8,9 +8,9 @@
     </head>
     <body>
 
-        <div class="body">
-
-            <hr/>
+            <main class="main">
+                <div class="container">
+                    <section class="main-content content-page">
 
             <div style="float: left; margin-right: 10px">
                 <g:render template="/identicon" model="${[user: user, count: 0]}"/>
@@ -113,6 +113,10 @@
                     </table>
                 </div>
             </g:form>
+    
+        </section>
         </div>
+        </main>
+    
     </body>
 </html>

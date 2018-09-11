@@ -7,7 +7,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
         <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
@@ -28,5 +30,9 @@
             <g:paginate total="${matchCount}" params="${[max: params.max, offset:params.offset, categoryId:params.categoryId]}"/>
         </div>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>

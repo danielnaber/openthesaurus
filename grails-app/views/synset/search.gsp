@@ -1,4 +1,5 @@
 <%@page import="com.vionto.vithesaurus.*" %>
+<g:set var="cleanTerm" value="${params.q.trim()}" />
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -119,9 +120,12 @@
                         <div class="main-content-section-heading">
                             „test“ suchen mit:
                         </div>
+                        <g:set var="utf8Query" value="${java.net.URLEncoder.encode(params.q, 'utf8')}"/>
+                        <g:set var="latin1Query" value="${java.net.URLEncoder.encode(params.q, 'latin1')}"/>
                         <div class="main-content-section-block wordtags wordtags-big">
-                            <span class="word word-dot"><a href="#">Wortformen von korrekturen.de</a></span>
-                            <span class="word word-dot"><a href="#">Beolingus Deutsch-Englisch</a></span>
+                            <span class="word word-dot"><a href="https://www.korrekturen.de/flexion/suche.php?q=${utf8Query}">Wortformen von korrekturen.de</a></span>
+                            &nbsp;&middot;&nbsp;
+                            <span class="word word-dot"><a href="http://dict.tu-chemnitz.de/dings.cgi?lang=de&amp;noframes=1&amp;service=&amp;query=${latin1Query}&amp;optword=1&amp;optcase=1&amp;opterrors=0&amp;optpro=0&amp;style=&amp;dlink=self">Beolingus Deutsch-Englisch</a></span>
                         </div>
                     </div>
                 </div>

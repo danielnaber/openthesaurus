@@ -12,7 +12,10 @@
     </head>
     <body>
 
-          <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
+
 
           <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
@@ -55,5 +58,9 @@
 
           <g:render template="/ads/tree_bottom"/>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>

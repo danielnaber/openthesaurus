@@ -38,7 +38,7 @@
                         <g:set var="delim" />
                     </g:if>
                     <g:else>
-                        <g:set var="delim"><span class="d">&middot;</span></g:set>
+                        <g:set var="delim"><span class="d">&nbsp;&middot;&nbsp;</span></g:set>
                     </g:else>
     
                     <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
@@ -77,7 +77,7 @@
                         </g:if>
                         <g:else>
                             <span class="word word-dot"><g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                            >${displayTerm}</g:link>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/></span>${delim}
+                            >${displayTerm}</g:link>${commentInfo}${antonymInfo}<!--<g:render template="audio" model="${[term:term]}"/>--></span>${delim}
                         </g:else>
                     </span>
     

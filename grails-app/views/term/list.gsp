@@ -7,7 +7,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
         <h2><g:message code="a_to_z.headline" /></h2>
 
@@ -32,6 +34,10 @@
           <%-- FIXME: count terms! --%>
             <g:paginate total="${Synset.countByIsVisible(true)}" />
         </div>
+
+            </section>
+        </div>
+    </main>
 
     </body>
 </html>

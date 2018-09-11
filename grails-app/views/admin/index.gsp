@@ -6,7 +6,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
           
         <h2>Admin Page</h2>
 
@@ -82,6 +84,10 @@
           </tr>
           </table>
         </div>
-		
+
+            </section>
+        </div>
+    </main>
+
     </body>
 </html>

@@ -25,7 +25,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td valign="top" width="90"><span class="newsdate">2018-04-25</span></td>
+                                <td valign="top" width="90"><span class="newsdate">2018-09-11</span></td>
                                 <td valign="top">
                                     openthesaurus.de hat ein neues Design.
                                 </td>

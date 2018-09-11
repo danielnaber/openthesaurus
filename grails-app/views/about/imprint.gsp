@@ -8,7 +8,9 @@
     </head>
     <body>
 
-            <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
             <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
                     
@@ -131,5 +133,9 @@
         
             </g:else>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>

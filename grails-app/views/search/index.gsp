@@ -30,7 +30,9 @@
 </head>
 <body>
 
-<hr/>
+<main class="main">
+  <div class="container">
+    <section class="main-content content-page">
 
 <noscript class="warning">
     <g:message code="powersearch.noscript"/>
@@ -47,6 +49,10 @@
   </div>
 
   <div style="clear: both"></div>
+
+    </section>
+  </div>
+</main>
 
 </body>
 </html>

@@ -8,7 +8,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
         <h2><g:message code="user.login.headline"/></h2>
 
@@ -82,6 +84,10 @@
                 </div>
             </g:form>
         </g:else>
+
+            </section>
+        </div>
+    </main>
 
     </body>
 </html>

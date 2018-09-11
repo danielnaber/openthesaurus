@@ -10,7 +10,9 @@
     </head>
     <body>
 
-        <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
           <h2><g:message code="changelist.headline"/></h2>
 
@@ -65,7 +67,7 @@
                       <g:set var="prevUserId" value="${userEvent.byUser.id}"/>
                       <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" style="${newEntry ? 'border-top-width: 1px; border-top-style: solid; border-top-color: #aaa;' : ''}">
 
-                          <td valign="top">
+                          <td valign="top" style="width:150px">
                               <g:if test="${newEntry}">
                                   <g:formatDate format="yyyy-MM-dd" date="${userEvent.creationDate}"/>
                                   <span class="metaInfo"><g:formatDate format="HH:mm" date="${userEvent.creationDate}"/></span>
@@ -125,5 +127,9 @@
           <br/>
           <a href="${createLinkTo(dir:'feed')}"><g:message code="changelist.feed"/></a>
 
+            </section>
+        </div>
+    </main>
+    
     </body>
 </html>
