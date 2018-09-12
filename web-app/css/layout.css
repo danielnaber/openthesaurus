@@ -300,3 +300,17 @@ p, li {
   margin-left: 5px;
   margin-right: 4px;
 }
+
+.tooltip {
+  position: absolute;
+  color: black;
+  background-color: #eeeeee;
+  border: 1px solid #aaaaca;
+  font-size: smaller;
+  padding:4px;
+  min-width: 100px;
+  max-width: 300px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
