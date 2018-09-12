@@ -14,11 +14,15 @@
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
   <meta name="flattr:id" content="62lgqk">
   <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
+  <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
   <g:render template="/script"/>
   <g:layoutHead />
   <g:render template="/layouts/scripts"/>
 </head>
 <body>
+
+    <div id="searchResultArea" class="searchResultPopup" style="display: none">
+    </div>
 
     <g:render template="/navigation"/>
 
@@ -36,10 +40,10 @@
                 </noscript>
             </g:if>
     
+            <g:render template="/loggedin"/>
+    
             <g:layoutBody />
-            
-            <div id="searchResultArea" class="searchResultPopup" style="display: none"></div>
-
+    
         </div>
     
     </div>

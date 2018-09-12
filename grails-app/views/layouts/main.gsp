@@ -11,8 +11,7 @@
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <meta name="flattr:id" content="62lgqk">
         <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="${createLinkTo(dir:'js',file:'main.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
         <g:layoutHead />

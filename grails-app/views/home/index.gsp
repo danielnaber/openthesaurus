@@ -16,7 +16,7 @@
 <body>
 
 <main class="main">
-    
+
 </main>
 
 <g:render template="ad"/>
