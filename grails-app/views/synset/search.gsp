@@ -45,11 +45,7 @@
                     </div>
                 </div>
                 <div class="main-content-col">
-                    <div class="main-content-section matches-banner">
-                        <div class="page-matches-banner">
-                            banner here
-                        </div>
-                    </div>
+                    <g:render template="ad"/>
                     <div class="main-content-section">
                         <g:render template="wiktionary"/>
                     </div>
