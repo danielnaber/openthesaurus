@@ -70,8 +70,10 @@
     <body>
 
         <div class="body">
-        
-            <hr />
+
+            <main class="main">
+                <div class="container">
+                    <section class="main-content content-page">
         
             <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()]}"/></h1>
     
@@ -276,6 +278,9 @@
                 </div>
             </g:form>
             
-        </div>
+                </section>
+            </div>
+        </main>
+
     </body>
 </html>

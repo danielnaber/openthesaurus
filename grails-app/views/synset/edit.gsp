@@ -74,7 +74,10 @@
     </head>
     <body>
 
-        <hr />
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
+
 
         <h1 style="margin-bottom:12px"><g:message code='edit.headline' args="${[synset.toShortString()]}"/></h1>
 
@@ -118,7 +121,7 @@
             
             <div class='rightColumn value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
-                <ul style="margin-top:0">
+                <ul style="margin-top:0; list-style: none">
                     <g:set var="previousLanguage" value=""/>
                     <g:each var='t' in='${synset?.sortedTerms()}'>
                         <li class="checkboxList">
@@ -255,7 +258,7 @@
                         <g:if test="${synset.categoryLinks.size() == 0 && !editable}">
                             <span class="noMatches"><g:message code="edit.not.set"/></span>
                         </g:if>
-                        <ul style="margin-top:0px">
+                        <ul style="margin-top:0px;list-style: none">
                             <g:if test="${synset.categoryLinks.size() > 0}">
                               <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
                                   <li class="checkboxList">
@@ -416,7 +419,7 @@
 
               <table>
                   <tr>
-                      <th><g:message code='edit.changelog.date'/></th>
+                      <th style="width:130px"><g:message code='edit.changelog.date'/></th>
                       <th style="min-width: 55px"><g:message code='changelist.column.user'/></th>
                       <th><g:message code='edit.changelog.change'/></th>
                   </tr>
@@ -472,5 +475,9 @@
 
         <g:render template="/ads/edit_bottom"/>
 
+        </section>
+        </div>
+    </main>
+    
     </body>
 </html>

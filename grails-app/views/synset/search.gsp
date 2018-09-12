@@ -51,29 +51,7 @@
                         </div>
                     </div>
                     <div class="main-content-section">
-                        <div class="main-content-section-heading">
-                            <g:message code="result.wiktionary.headline"/>
-                        </div>
-                        <div class="main-content-section-block">
-                            <div class="main-content-section-block-heading">
-                                Bedeutungen:
-                            </div>
-                            1. TODO Prüfung einer Eigenschaft oder Fähigkeit (in schriftlicher, mündlicher oder sonstiger Form)
-                        </div>
-                        <div class="main-content-section-block">
-                            <div class="main-content-section-block-heading">
-                                Synonyme:
-                            </div>
-                            1. Erprobung, Feldversuch, Prüfung, Versuch
-                        </div>
-                        <div class="main-content-section-note">
-                            <div class="main-content-section-note-item">
-                                Quelle: Wiktionary-Seite zu 'Test' [Autoren]
-                            </div>
-                            <div class="main-content-section-note-item">
-                                Lizenz: Creative Commons Attribution-ShareAlike
-                            </div>
-                        </div>
+                        <g:render template="wiktionary"/>
                     </div>
                     <div class="main-content-section">
                         <g:render template="wikipedia"/>

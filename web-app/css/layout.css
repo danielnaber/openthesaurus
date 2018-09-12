@@ -293,3 +293,10 @@ p, li {
 .main-content-section-note-item a {
   color: #aab1b7;
 }
+
+.wiktionaryItem {
+  color: #999999;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 4px;
+}
