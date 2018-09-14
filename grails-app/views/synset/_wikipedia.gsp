@@ -20,14 +20,14 @@
             </g:else>
             <% i++; %>
         </g:each>
+        <div class="main-content-section-note">
+            <div class="main-content-section-note-item">
+                <g:message code="result.wikipedia.license"
+                           args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle,wikipediaTitle.encodeAsURL()]}"/>
+            </div>
+        </div>
     </g:if>
     <g:else>
         <span class="noMatches"><g:message code="result.no.matches"/></span>
     </g:else>
-</div>
-<div class="main-content-section-note">
-    <div class="main-content-section-note-item">
-        <g:message code="result.wikipedia.license"
-                   args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle,wikipediaTitle.encodeAsURL()]}"/>
-    </div>
 </div>
