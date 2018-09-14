@@ -198,10 +198,6 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     margin-top: 60px;
 }
 
-#searchResultArea {
-    min-height: 300px;
-}
-
 .newsYear {
     font-size: 18px;
     font-weight: bold;
@@ -220,6 +216,9 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     margin: 0 auto;  /* centers the div, http://stackoverflow.com/questions/16758102/ */
     top: 330px;
     z-index: 100;
+}
+
+.searchResultPopup .main-content {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
