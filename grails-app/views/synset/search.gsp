@@ -46,7 +46,7 @@
             </div>
             <div class="main-content-col">
                 <g:render template="ad"/>
-                <div class="main-content-section">
+                <div class="main-content-section wiktionary">
                     <g:render template="wiktionary"/>
                 </div>
                 <div class="main-content-section">
