@@ -69,7 +69,7 @@
                             </tr>
                             <g:each in="${topUsers}" var="topUser" status="i">
                                 <tr>
-                                    <td class="value"><g:decimal number="${topUser.actions}"/></td>
+                                    <td class="value" style="text-align: right"><g:decimal number="${topUser.actions}"/></td>
                                     <td>
                                         <g:if test="${topUser.displayName}">
                                             <g:link controller="user" action="profile" params="${[uid: topUser.userId]}"><g:render template="/identicon" model="${[user: topUser.userId, count: i]}"/></g:link>
@@ -107,7 +107,7 @@
                             </tr>
                             <g:each in="${allTimeTopUsers}" var="topUser" status="i">
                                 <tr>
-                                    <td class="value"><g:decimal number="${topUser.actions}"/></td>
+                                    <td class="value" style="text-align: right"><g:decimal number="${topUser.actions}"/></td>
                                     <td>
                                         <g:if test="${topUser.displayName}">
                                             <g:link controller="user" action="profile" params="${[uid: topUser.userId]}"><g:render template="/identicon" model="${[user: topUser.userId, count: i+100]}"/></g:link>
