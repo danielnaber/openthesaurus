@@ -80,11 +80,37 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 @media (max-width: 767px) {
     .header {font-size: 10px;}
     .header-inner {height: 50px;}
-    .header-menu {transform: scaleY(0); position: absolute; top: 100%; left: 0; right: 0; padding: 0 15px; z-index: 100;
-        background-color: #0a69d8; transition: transform 0s ease; transform-origin: top;
-        box-shadow: 0 7px 10px 0px rgba(141,155,168, 0.5);
+    .header-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 0 15px;
+        z-index: 100;
+        background-color: #0a69d8;
+        box-shadow: 0 7px 10px 0px rgba(141, 155, 168, 0.5);
     }
-    .menu-open .header-menu {transform: scaleY(1); transition: transform .2s ease;}
+    .header.menu-open .header-menu {
+        display: block;
+    }
+    .header-burger .icon-wrapper {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .header.menu-open .header-burger .icon--closed {
+        display: none;
+    }
+    .header-burger .icon--opened {
+        display: none;
+        font-size: 1.5em;
+    }
+    .header.menu-open .header-burger .icon--opened {
+        display: inline-block;
+    }
     .header-menu-item {display: block; margin: 20px 0;}
     .header-logo {display: block;}
     .header-burger {display: block;}

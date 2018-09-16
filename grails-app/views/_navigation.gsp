@@ -2,7 +2,10 @@
     <div class="container">
         <div class="header-inner">
             <div class="header-burger">
-                <i class="fa fa-bars"></i>
+                <span class="icon-wrapper">
+                    <i class="fa fa-bars icon icon--closed" aria-hidden="true"></i>
+                    <i class="fa fa-angle-left icon icon--opened" aria-hidden="true"></i>
+                </span>
             </div>
             <div class="header-logo">
                 <img src="${createLinkTo(dir:'images',file:'logo-mobile.png')}?2018" alt="OpenThesaurus - Synonyme und Assoziationen">
