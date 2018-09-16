@@ -447,6 +447,10 @@ p, li {
     margin-right: 4px;
 }
 
+.list-of-words .wiktionaryItem:first-child {
+    margin-left: 0;
+}
+
 .tooltip {
     position: absolute;
     color: black;
