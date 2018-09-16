@@ -35,8 +35,6 @@
 
         <g:layoutBody />
 
-        <div id="searchResultArea" class="searchResultPopup" style="display: none"></div>
-
       </div>
 
     </div>
