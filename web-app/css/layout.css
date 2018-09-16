@@ -352,6 +352,11 @@ p, li {
     color: #aab1b7;
 }
 
+.wiktionary,
+.wiktionary.main-content-section {
+    display: block;
+}
+
 .wiktionaryItem {
     color: #999999;
     font-weight: bold;
