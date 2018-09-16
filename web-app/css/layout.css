@@ -195,9 +195,28 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 .footer-menu-item:nth-child(odd) {flex-basis: 60%;}
 .footer-partner {position: relative;}
 .footer-social {display: flex; margin-top: 40px;}
-.footer-social-item {margin-right: 15px; width: 36px; height: 36px; background-color: #1e55a8; border-radius: 50%;
-    text-align: center; line-height: 36px; font-size: 14px; cursor: pointer; transition: color .3s ease, background-color .3s ease;}
-.footer-social-item:hover {background-color: #fff; color: #0b68d8; transition: color 0s ease, background-color 0s ease;}
+.footer-social-item a {
+  display: inline-block;
+  margin-right: 15px;
+  width: 36px;
+  height: 36px;
+  background-color: #1e55a8;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 
+    color .3s ease, 
+    background-color .3s ease;
+}
+.footer-social-item a:hover {
+  background-color: #fff;
+  color: #0b68d8;
+  transition: 
+    color 0s ease, 
+    background-color 0s ease;
+}
 @media (max-width: 767px) {
     .footer {padding: 0 0 40px; font-size: 10px;}
     .footer p {margin: 0 0 15px;}
@@ -207,8 +226,15 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     .footer-menu-item {margin: 0;}
     .footer-social {position: absolute; bottom: 0; height: 40px; margin: 0; background-color: #eef0f3; left: 0; right: 0;
         justify-content: center; align-items: center;}
-    .footer-social-item {background-color: unset; color: #0b68d8;}
-    .footer-social-item:hover {background-color: unset; color: #1e55a8;}
+    .footer-social-item a {
+      background-color: unset;
+      color: #0b68d8;
+    }
+
+    .footer-social-item a:hover {
+      background-color: unset;
+      color: #1e55a8;
+    }
     .footer-menu:before, .footer-partner:before {content: ''; position: absolute; left: -15px; right: -15px; top: 0; height: 1px; background-color: #1e55a8;}
 }
 
