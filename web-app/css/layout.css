@@ -214,6 +214,7 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 
 /* DANIEL'S CHANGES */
 .search-form {
+    position: relative;
     margin-top: 60px;
 }
 
@@ -227,14 +228,21 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 }
 
 .searchResultPopup {
+    display: none;
     position: absolute;
     max-width: 760px;
     min-height: 100px;
     left: 0;
     right: 0;
     margin: 0 auto;  /* centers the div, http://stackoverflow.com/questions/16758102/ */
-    top: 330px;
+    top: 100%;
     z-index: 100;
+}
+
+@media (min-width: 768px) {
+    .searchResultPopup {
+        top: calc(100% + 15px);
+    }
 }
 
 .searchResultPopup .main-content {

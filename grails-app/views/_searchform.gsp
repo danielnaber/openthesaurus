@@ -47,6 +47,8 @@
             </form>
         </div>
 
+        <div id="searchResultArea" class="searchResultPopup"></div>
+
 </div>
 
 <g:if test="${preventSearchFocus != 'true'}">
