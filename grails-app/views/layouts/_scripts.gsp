@@ -113,12 +113,11 @@
     }
 
     function loadSynsetSearch() {
-        document.getElementById('spinner').style.position='absolute';
-        document.getElementById('spinner').style.visibility='visible';
+        document.getElementById('spinner').style.display='block';
     }
 
     function loadedSynsetSearch() {
-        document.getElementById('spinner').style.visibility='hidden';
+        document.getElementById('spinner').style.display='none';
     }
 
     $(document).ready(function() {
