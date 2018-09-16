@@ -57,6 +57,11 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 .button-icon:hover {color: #0a69d8;}
 .uppcase {text-transform: uppercase;}
 .word {}
+.clearfix::after {
+  display: block;
+  content: '';
+  clear: both;
+}
 /*.word-dot {position: relative; padding-right: 16px;}*/
 /*.word-dot:after {content: '\00B7'; position: absolute; right: 6px;}*/
 
