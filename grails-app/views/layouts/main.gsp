@@ -10,6 +10,7 @@
         <meta name="flattr:id" content="62lgqk">
         <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
         <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'main.js')}"></script>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
         <g:layoutHead />
