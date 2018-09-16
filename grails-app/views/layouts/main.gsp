@@ -3,9 +3,8 @@
     <head>
         <title><g:layoutTitle default="OpenThesaurus" /></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2">
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20180423" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css/font-awesome-4.7.0/css', file:  'font-awesome.min.css')}" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir: 'css', file:'layout.css')}?v20180423" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <meta name="flattr:id" content="62lgqk">
