@@ -440,15 +440,25 @@ p, li {
     display: block;
 }
 
-.wiktionaryItem {
-    color: #999999;
-    font-weight: bold;
-    margin-left: 5px;
-    margin-right: 4px;
+.wiktionary-results__block {
+    margin-bottom: 20px;
 }
 
-.list-of-words .wiktionaryItem:first-child {
-    margin-left: 0;
+.words-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.words-list__item {
+    display: inline;
+    margin-right: 5px;
+}
+
+.words-list-item__number {
+    color: #999999;
+    font-weight: bold;
+    margin-right: 4px;
 }
 
 .tooltip {
@@ -461,8 +471,6 @@ p, li {
     min-width: 100px;
     max-width: 300px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .cc_container {
