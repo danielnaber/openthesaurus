@@ -1,7 +1,7 @@
 <%@ page import="com.vionto.vithesaurus.Tag" %>
 <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-ui.min.js')}"></script>
 <script type="text/javascript" src="${createLinkTo(dir:'js',file:'tag-it.min.js')}"></script>
-<link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery-ui.css')}" />
+<link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery-ui.min.css')}" />
 <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'jquery.tagit.css')}" />
 <script type="text/javascript">
 <!--
