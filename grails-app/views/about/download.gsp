@@ -73,7 +73,7 @@
               <a href="https://github.com/danielnaber/openthesaurus">bei github</a>
               heruntergeladen werden:</p>
     
-              <pre style="margin-bottom: 10px" class="api">git clone https://github.com/danielnaber/openthesaurus.git</pre>
+              <div style="margin-bottom: 10px" class="api">git clone https://github.com/danielnaber/openthesaurus.git</div>
     
               <p>Der Sourcecode steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
               Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README.md">README</a>

@@ -6,6 +6,7 @@
   <meta name='keywords' content='${message(code:"homepage.meta.keywords")}' />
   <meta name='description' content='${message(code:"homepage.meta.description")}' />
   <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css/font-awesome-4.7.0/css', file:  'font-awesome.min.css')}" />
+  <link type="text/css" rel="stylesheet" href="${createLinkTo(dir: 'css', file:'bootstrap-grid.min.css')}" />
   <link type="text/css" rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'layout.css')}?v20180423" />
   <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
   <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch')}" />

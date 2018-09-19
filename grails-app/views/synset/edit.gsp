@@ -133,11 +133,12 @@
                             <div id="termId_${t.id}">
 
                                 <g:if test="${editable}">
-                                    <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
-                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                                    <a href="#" onclick="deleteItem('termId', '${t.id}');return false;">
+                                        <i class="fa fa-window-close" style="color: #dc3545;" aria-hidden="true" title="${message(code:'edit.select.to.delete')}"></i>
+                                    </a>
                                 </g:if>
                                 <g:else>
-                                    <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
                                 </g:else>
 
                                 <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
@@ -267,11 +268,12 @@
                                     <div id="catLinkId_${catLink.id}">
 
                                         <g:if test="${editable}">
-                                          <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
-                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
+                                            <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;">
+                                                <i class="fa fa-window-close" style="color: #dc3545;" aria-hidden="true" title="${message(code:'edit.select.to.delete.category')}"></i>
+                                            </a>
                                         </g:if>
                                         <g:else>
-                                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                          <i class="fa fa-window-close" aria-hidden="true"></i>
                                         </g:else>
 
                                         ${catLink.category}
