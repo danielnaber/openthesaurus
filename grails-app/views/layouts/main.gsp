@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="${createLinkTo(dir:'openSearch')}" />
         <meta name="flattr:id" content="62lgqk">
-        <g:render template="/layouts/scripts"/>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.2.4.min.js')}"></script>
         <g:layoutHead />
     </head>
     <body>
@@ -40,10 +40,10 @@
     <g:render template="/analytics"/>
 
     
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.1.1.min.js')}"></script>
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'main.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'js',file:'main.js')}"></script>
     <g:render template="/script" />
+    <g:render template="/layouts/scripts"/>
 
     </body>
 </html>

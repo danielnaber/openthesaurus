@@ -10,9 +10,9 @@
   <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
   <link rel="search" type="application/opensearchdescription+xml" title="${message(code:'opensearch.link.title')}" href="${createLinkTo(dir:'openSearch')}" />
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
+  <script type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.2.4.min.js')}"></script>
   <meta name="flattr:id" content="62lgqk">
   <g:layoutHead />
-  <g:render template="/layouts/scripts"/>
 </head>
 <body>
 
@@ -44,10 +44,10 @@
     
     <g:render template="/analytics"/>
     
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'jquery-2.2.4.min.js')}"></script>
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
-    <script defer type="text/javascript" src="${createLinkTo(dir:'js',file:'main.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'js',file:'cookie-script.js')}"></script>
+    <script type="text/javascript" src="${createLinkTo(dir:'js',file:'main.js')}"></script>
     <g:render template="/script" />
+    <g:render template="/layouts/scripts"/>
 
 </body>
 </html>
