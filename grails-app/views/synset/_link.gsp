@@ -18,11 +18,12 @@
                     <div id="${linkTypeName}_${link.id}">
         
                         <g:if test="${editable}">
-                          <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
-                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                            <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;">
+                                <i class="fa fa-window-close" style="color: #dc3545;" aria-hidden="true" title="${message(code:'edit.select.to.delete.link')}"></i>
+                            </a>
                         </g:if>
                         <g:else>
-                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                          <i class="fa fa-window-close" aria-hidden="true"></i>
                         </g:else>
 
                         <g:link title="${link.targetSynset.toShortStringWithShortLevel(20, true)}" controller='synset' action='edit'
