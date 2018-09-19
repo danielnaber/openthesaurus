@@ -8,7 +8,12 @@
                 </span>
             </div>
             <div class="header-logo">
-                <img src="${createLinkTo(dir:'images',file:'logo-mobile.png')}?2018" alt="OpenThesaurus - Synonyme und Assoziationen">
+                <a href="${createLinkTo(dir:'/',file:'')}">
+                    <img 
+                        src="${createLinkTo(dir:'images',file:'logo-mobile.png')}?2018" 
+                        alt="OpenThesaurus - Synonyme und Assoziationen" 
+                    />
+                </a>
             </div>
             <nav class="header-menu">
                 <g:link class="header-menu-item" controller="wordList"><span><g:message code="homepage.wordlists"/></span></g:link>

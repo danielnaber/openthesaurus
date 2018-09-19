@@ -9,7 +9,7 @@
 
     <main class="main">
         <div class="container">
-            <section class="main-content content-page">
+            <section class="main-content content-page clearfix">
 
                 <h2><g:message code="wordlists.head" /></h2>
 
@@ -44,28 +44,23 @@
 
                     <h2><g:message code="word.list.by.category"/></h2>
 
-                    <table>
-                        <tr>
-                            <td valign="top">
-                                <ul>
-                                    <g:each in="${categories1}" var="category">
-                                        <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
-                                    </g:each>
-                                </ul>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td valign="top">
-                                <ul>
-                                    <g:each in="${categories2}" var="category">
-                                        <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
-                                    </g:each>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col col-12 col-md-6">
+                            <ul>
+                                <g:each in="${categories1}" var="category">
+                                    <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                            </ul>
+                        </div>
+                        <div class="col col-12 col-md-6">
+                            <ul>
+                                <g:each in="${categories2}" var="category">
+                                    <li><g:link controller="term" action="list" params="${[categoryId:category.id]}">${category.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
-                <div style="clear: both"></div>
 
             </section>
         </div>

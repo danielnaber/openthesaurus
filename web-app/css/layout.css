@@ -524,3 +524,7 @@ p, li {
 .cc_container a {
     color: #51c5ff !important;
 }
+
+.api a {
+    word-break: break-all;
+}
