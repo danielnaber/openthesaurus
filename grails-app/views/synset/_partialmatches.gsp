@@ -24,10 +24,10 @@
                         <span class="noMatches"><g:message code='result.matches.partial.nomatch' /></span>
                     </g:if>
                     <g:if test="${partialMatchResult.size() > 8}">
-                        <g:link action="substring" params="${[q: params.q]}"><g:message code="result.substring.more"/></g:link>
+                        <span class="main-content-section-block-link"><g:link action="substring" params="${[q: params.q]}"><g:message code="result.substring.more"/></g:link></span>
                     </g:if>
 
-                    <div class="wordtags">
+                    <div class="wordtags" style="margin-top:10px">
                     <g:each in="${similarTerms}" var="term" status="counter">
                         <g:if test="${counter < 5}">
                             <g:if test="${counter > 0}">
