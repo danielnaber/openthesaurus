@@ -8,7 +8,9 @@
     </head>
     <body>
 
-        <hr/>
+    <main class="main">
+        <div class="container">
+            <section class="main-content content-page">
 
         <h2><g:message code="user.lost.password.headline"/></h2>
 
@@ -57,7 +59,11 @@
                 </table>
             </div>
         </g:form>
-        
+
+            </section>
+        </div>
+    </main>
+    
         <script type="text/javascript">
         <!--
             document.loginform.userId.focus();
