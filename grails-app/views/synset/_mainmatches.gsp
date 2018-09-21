@@ -45,7 +45,7 @@
                     <g:if test="${term.userComment}">
                         <g:set var="commentInfo">
                             <span title="${term.userComment.encodeAsHTML()}" class="commentMarker">
-                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <img src="${createLinkTo(dir:'images', file:'balloon.png')}" />
                             </span>
                         </g:set>
                     </g:if>
@@ -63,7 +63,7 @@
                             <g:set var="antonymInfo">
                                 <span class="antonymMarker" title="${antonymTitle}">
                                     <a href="${termLinkInfo.term2.word.encodeAsURL()}">
-                                        <i class="icon fa fa-bolt" aria-hidden="true"></i>
+                                        <img src="${createLinkTo(dir:'images', file:'lightning.png')}"/>
                                     </a>
                                 </span>
                             </g:set>
