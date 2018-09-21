@@ -527,13 +527,14 @@ p, li {
 
 .tooltip {
     position: absolute;
-    color: black;
-    background-color: #eeeeee;
-    border: 1px solid #aaaaca;
-    font-size: smaller;
-    padding:4px;
+    color: #fff;
+    background-color: #0a69d8;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.7;
+    padding: 15px;
     min-width: 100px;
-    max-width: 300px;
+    max-width: 370px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
