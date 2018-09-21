@@ -226,7 +226,6 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 }
 .wordtags.wordtags-big .wordtag::after {
     content: '\00B7';
-    margin: 0 1ch;
 }
 .wordtags.wordtags-big .wordtag:last-child::after {
     content: none;
