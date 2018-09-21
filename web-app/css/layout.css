@@ -566,3 +566,7 @@ p, li {
 .api a {
     word-break: break-all;
 }
+
+.partial-matches {
+    display: block;
+}
