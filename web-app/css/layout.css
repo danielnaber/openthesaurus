@@ -535,7 +535,7 @@ p, li {
     padding: 15px;
     min-width: 100px;
     max-width: 370px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.175);
 }
 
 .cc_container {
