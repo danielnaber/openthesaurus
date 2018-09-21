@@ -31,7 +31,6 @@
                 </script>
             </div>
         </g:else>
-        </g:else>
         <span style="color:#999999">Anzeige</span>
     </div>
     <hr>
