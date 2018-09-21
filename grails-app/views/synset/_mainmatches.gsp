@@ -74,7 +74,6 @@
                     %>
     
                     <li class="wordtag">
-                        <span class="d">&middot;</span>
                         <g:if 
                             test="${lowercaseQuery == lowercaseTerm 
                                 || lowercaseQuery == lowercaseNormTerm 
