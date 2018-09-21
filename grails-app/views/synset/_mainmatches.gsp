@@ -5,7 +5,7 @@
 
         <g:each in="${synsetList}" status="i" var="synset">
 
-            <div class="main-content-section-block wordtags wordtags-big">
+            <ul class="main-content-section-block wordtags wordtags-big">
                 <g:set var="counter" value="${0}"/>
                 <g:each in="${synset?.sortedTerms()}" var="term">
                     <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
@@ -34,13 +34,6 @@
                         %>
                     </g:if>
     
-                    <g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
-                        <g:set var="delim" />
-                    </g:if>
-                    <g:else>
-                        <g:set var="delim"><span class="d">&nbsp;&middot;&nbsp;</span></g:set>
-                    </g:else>
-    
                     <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
                     <g:set var="lowercaseNormTerm" value="${term.normalizedWord?.toLowerCase()}"/>
                     <g:set var="lowercaseNormTerm2" value="${term.normalizedWord2?.toLowerCase()}"/>
@@ -50,7 +43,11 @@
     
                     <g:set var="commentInfo" value=""/>
                     <g:if test="${term.userComment}">
-                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img style="margin-left: 4px" src="${createLinkTo(dir:'images', file:'balloon.png')}"></span></g:set>
+                        <g:set var="commentInfo">
+                            <span title="${term.userComment.encodeAsHTML()}" class="commentMarker">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                            </span>
+                        </g:set>
                     </g:if>
                     <%
                         long antonymTime = System.currentTimeMillis();
@@ -63,28 +60,56 @@
                         <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
                             <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute"
                                                                  args="${[termLinkInfo.term2.word, termLinkInfo.term2.synset.toShortStringWithShortLevel(20, true)]}"/></g:set>
-                            <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><a href="${termLinkInfo.term2.word.encodeAsURL()}"><img src="${createLinkTo(dir:'images', file:'lightning.png')}"/></a></span></g:set>
+                            <g:set var="antonymInfo">
+                                <span class="antonymMarker" title="${antonymTitle}">
+                                    <a href="${termLinkInfo.term2.word.encodeAsURL()}">
+                                        <i class="icon fa fa-bolt" aria-hidden="true"></i>
+                                    </a>
+                                </span>
+                            </g:set>
                         </g:if>
                     </g:if>
                     <%
                         long antonymTotalTime = System.currentTimeMillis() - antonymTime;
                     %>
     
-                    <span>
-                        <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
-                                lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
-                            <span class="word word-dot word-match">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
+                    <li class="wordtag">
+                        <span class="d">&middot;</span>
+                        <g:if 
+                            test="${lowercaseQuery == lowercaseTerm 
+                                || lowercaseQuery == lowercaseNormTerm 
+                                || lowercaseQuery2 == lowercaseTerm 
+                                || lowercaseQuery2 == lowercaseNormTerm 
+                                || lowercaseQuery == lowercaseNormTerm2}"
+                        >
+                            <g:render template="audio" model="${[term:term]}"/>
+                            <span 
+                                class="word word-dot word-match"
+                            >
+                                ${displayTerm}
+                            </span>
+                            ${commentInfo}
+                            ${antonymInfo}
                         </g:if>
                         <g:else>
-                            <span class="word word-dot"><g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                            >${displayTerm}</g:link>${commentInfo}${antonymInfo}<!--<g:render template="audio" model="${[term:term]}"/>--></span>${delim}
+                            <span class="word word-dot">
+                                <g:link 
+                                    action="search" 
+                                    params="${['q': StringTools.slashEscape(term.toString())]}"
+                                >
+                                    ${displayTerm}
+                                </g:link>
+                                ${commentInfo}
+                                ${antonymInfo}
+                                <!-- <g:render template="audio" model="${[term:term]}"/> -->
+                            </span>
                         </g:else>
-                    </span>
+                    </li>
     
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>
     
-            </div>
+            </ul>
             
             <g:set var="categoryStrings" value="${[]}"/>
             <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">

@@ -211,8 +211,25 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 .main-content-section-block {display: flex; flex-wrap: wrap; align-items: center; width: 100%; margin: 0 0 25px; line-height: 25px;}
 .main-content-section-block:last-child {margin: 0;}
 .main-content-section-block.nowrap {flex-wrap: nowrap;}
-.main-content-section-block.wordtags {color: #8d9ba8;}
-.main-content-section-block.wordtags.wordtags-big {font-size: 16px;}
+.wordtags {
+    color: #8d9ba8;
+}
+.wordtags.wordtags-big {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px;
+    display: block;
+    font-size: 16px;
+}
+.antonymMarker a {
+    color: inherit;
+}
+.antonymMarker a:hover {
+    color: #0a69d8;
+}
+.antonymMarker .icon {
+    font-size: 1.125em;
+}
 .main-content-section-block.wordtags .word-dot:after {color: #0a69d8;}
 .main-content-section-block-heading {flex-basis: 100%; text-transform: uppercase; font-weight: 600; margin-bottom: 7px;}
 .main-content-section-block-line {display: flex; flex-wrap: wrap; font-weight: 300;}
