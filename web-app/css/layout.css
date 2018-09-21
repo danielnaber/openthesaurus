@@ -221,6 +221,15 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     display: block;
     font-size: 16px;
 }
+.wordtags.wordtags-big .wordtag {
+    display: inline;
+}
+.wordtags.wordtags-big .wordtag::after {
+    content: '\00B7';
+}
+.wordtags.wordtags-big .wordtag:last-child::after {
+    content: none;
+}
 .antonymMarker a {
     color: inherit;
 }
