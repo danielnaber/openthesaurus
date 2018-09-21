@@ -97,9 +97,53 @@
                 oder wenn sich die Gesetze für Cookies oder Datenschutz ändern. Wir oder unsere Partner können den Inhalt der
                 Aussagen und der Cookies, die ohne vorherige Warnung angegeben werden, jederzeit ändern. Bitte kehren Sie zu
                 dieser Seite zurück, um die neueste Version zu prüfen.</p>
-                
-                
-                <h2>Werbung</h2>
+
+
+                <h2>Werbung über AdSense</h2>
+
+                <p>Wir haben auf dieser Internetseite Google AdSense integriert. Google AdSense ist ein Online-Dienst, über den eine Vermittlung
+                    von Werbung auf Drittseiten ermöglicht wird. Google AdSense beruht auf einem Algorithmus, welcher die auf Drittseiten
+                    angezeigten Werbeanzeigen passend zu den Inhalten der jeweiligen Drittseite auswählt.
+                    Es gestattet ein interessenbezogenes Targeting des Internetnutzers, das durch Generierung von individuellen
+                    Benutzerprofilen umgesetzt wird.
+
+                <p>Die Google-AdSense-Komponente wird von der Alphabet Inc., 1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351, USA, betrieben.
+
+                <p>Der Zweck der Google-AdSense-Komponente ist die Einbindung von Werbeanzeigen.
+                    Google-AdSense setzt Cookies (s.o.) auf dem System des Nutzers.
+                    Mit dem Setzen der Cookies wird der Alphabet Inc. eine Analyse der Benutzung unserer Internetseite ermöglicht.
+                    Durch jeden Aufruf einer der Seiten dieser Internetseite, auf welcher eine Google-AdSense-Komponente integriert wurde,
+                    wird der Internetbrowser auf dem System der betroffenen Person automatisch durch die jeweilige Google-AdSense-Komponente
+                    veranlasst, Daten zum Zwecke der Online-Werbung und der Abrechnung von Provisionen an die Alphabet Inc. zu übermitteln.
+                    Im Rahmen dieses technischen Verfahrens erhält die Alphabet Inc. Kenntnis über personenbezogene Daten,
+                    wie der IP-Adresse der betroffenen Person. Diese dienen der Alphabet Inc. unter anderem dazu, die Herkunft
+                    der Besucher und Klicks nachzuvollziehen und in der Folge Provisionsabrechnungen zu ermöglichen.
+
+                <p>Die betroffene Person kann das Setzen von Cookies, wie oben bereits erwähnt,
+                    jederzeit mittels einer entsprechenden Einstellung des genutzten Browsers verhindern
+                    und damit das Setzen von Cookies dauerhaft verhindern. Eine solche Einstellung des
+                    genutzten Browsers würde auch verhindern, dass die Alphabet Inc. ein Cookie auf dem System der
+                    betroffenen Person setzt. Zudem kann ein von der Alphabet Inc. bereits gesetzter Cookie
+                    jederzeit über den Browser gelöscht werden.
+
+                <p>Google AdSense verwendet zudem sogenannte Zählpixel.
+                    Ein Zählpixel ist eine kleine Grafik, die in Internetseiten eingebettet wird, um eine Logdatei-Aufzeichnung
+                    und eine Logdatei-Analyse zu ermöglichen. Dadurch kann eine statistische Auswertung durchgeführt werden.
+                    Anhand des eingebetteten Zählpixels kann die Alphabet Inc. erkennen, ob und wann eine Internetseite
+                    von einer betroffenen Person geöffnet wurde und welche Links von der betroffenen Person angeklickt wurden.
+                    Zählpixel dienen auch dazu, das Verhalten der Besucher auf einer Internetseite auszuwerten.
+
+                <p>Über Google AdSense werden personenbezogene Daten und Informationen - was auch die IP-Adresse umfasst
+                    und zur Erfassung und Abrechnung der angezeigten Werbeanzeigen notwendig ist - an die Alphabet Inc.
+                    in die USA übertragen. Diese personenbezogenen Daten werden in den
+                    USA gespeichert und verarbeitet. Die Alphabet Inc. gibt diese über das technische
+                    Verfahren erhobenen personenbezogenen Daten unter Umständen an Dritte weiter.
+
+                <p>Mehr Informationen über Google-AdSense finden Sie unter diesem Link:
+                    <a href="https://www.google.de/intl/de/adsense/start/">https://www.google.de/intl/de/adsense/start/</a>
+
+
+                <h2>Werbung über YieldLove</h2>
 
                 <p>openthesaurus.de enthält nutzungsbasierte Online-Werbung von Drittanbietern. Diese wird über unseren Werbevermarkter Yieldlove GmbH,
                 Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“) ausgespielt. Um die Werbeauslieferung zu optimieren, werden von Yieldlove 
