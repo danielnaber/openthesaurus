@@ -27,7 +27,7 @@
                     <g:render template="mainmatches"/>
 
                 </div>
-                <div class="main-content-section">
+                <div class="main-content-section partial-matches">
                     <g:render template="partialmatches"/>
                 </div>
                 <div class="main-content-section">
