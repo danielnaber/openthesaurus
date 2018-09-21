@@ -27,7 +27,7 @@
                     <g:render template="mainmatches"/>
 
                 </div>
-                <div class="main-content-section">
+                <div class="main-content-section partial-matches">
                     <g:render template="partialmatches"/>
                 </div>
                 <div class="main-content-section">
@@ -35,12 +35,14 @@
                         <g:message code="result.matches.no.like"/>
                     </div>
                     <div class="main-content-section-block nowrap">
-                        <button type="button" class="button button-icon button-addsynonym">
-                            <i class="fa fa-plus-circle"></i>
-                        </button>
+                        <g:link controller="synset" action="create" params="${[term: params.q]}">
+                            <button type="button" class="button button-icon button-addsynonym">
+                                <i class="fa fa-plus-circle"></i>
+                            </button>
+                        </g:link>
                         <span>
-                                <g:message code="result.create.another.synset" args="${[params.q]}"/>
-                            </span>
+                            <g:link controller="synset" action="create" params="${[term: params.q]}"><g:message code="result.create.another.synset" args="${[params.q]}"/></g:link>
+                        </span>
                     </div>
                 </div>
             </div>
