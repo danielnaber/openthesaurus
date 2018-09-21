@@ -83,6 +83,18 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     align-items: center;
 }
 
+.form-group--horizontal .label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .form-group--horizontal .label {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+}
+
 .form-group:last-child {
     margin-bottom: 0;
 }
@@ -638,7 +650,13 @@ p, li {
 
 /* Login block */
 .login {
-    max-width: 600px;
+    max-width: 450px;
+}
+
+@media (min-width: 768px) {
+    .login {
+        max-width: 600px;
+    }
 }
 
 .login__title {

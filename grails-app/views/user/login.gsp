@@ -39,14 +39,14 @@
                             name="returnUrl" 
                             value="${params.returnUrl?.encodeAsHTML()}" 
                         />
-                        <div class="form-group">
+                        <div class="form-group form-group--horizontal">
                             <div class="row">
-                                <div class="col col-2">
-                                    <label for='userId'>
+                                <div class="col col-12 col-md-2">
+                                    <label for='userId' class="label">
                                         <g:message code="user.login.form.username" />
                                     </label>
                                 </div>
-                                <div class="col col-10">
+                                <div class="col col-12 col-md-10">
                                     <%-- not using type="email" because of user 'admin'... --%>
                                     <input
                                         class="form-control"
@@ -63,14 +63,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group--horizontal">
                             <div class="row">
-                                <div class="col col-2">
-                                    <label for='password'>
+                                <div class="col col-12 col-md-2">
+                                    <label for='password' class="label">
                                         <g:message code="user.login.form.password" />
                                     </label>
                                 </div>
-                                <div class="col col-10">
+                                <div class="col col-12 col-md-10">
                                     <input 
                                         class="form-control"
                                         size="30" 
@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-text">
                             <div class="row">
-                                <div class="col offset-2 col-10">
+                                <div class="col col-12 offset-md-2 col-md-10">
                                     <div style="margin-top: 5px">
                                         <g:message code="user.login.forgot.password" />
                                     </div>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-text">
                             <div class="row">
-                                <div class="col offset-2 col-10">
+                                <div class="col col-12 offset-md-2 col-md-10">
                                     <input 
                                         type="checkbox" 
                                         name='logincookie' 
@@ -108,7 +108,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col offset-2 col-10">
+                                <div class="col col-12 offset-md-2 col-md-10">
                                     <button 
                                         class="login submitButton button button--primary" 
                                         type="submit"
