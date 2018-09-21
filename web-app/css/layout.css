@@ -230,15 +230,6 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 .wordtags.wordtags-big .wordtag:last-child::after {
     content: none;
 }
-.antonymMarker a {
-    color: inherit;
-}
-.antonymMarker a:hover {
-    color: #0a69d8;
-}
-.antonymMarker .icon {
-    font-size: 1.125em;
-}
 .main-content-section-block.wordtags .word-dot:after {color: #0a69d8;}
 .main-content-section-block-heading {flex-basis: 100%; text-transform: uppercase; font-weight: 600; margin-bottom: 7px;}
 .main-content-section-block-line {display: flex; flex-wrap: wrap; font-weight: 300;}
