@@ -34,7 +34,12 @@
                         </g:else>
                     </div>
                     <g:if test="${grailsApplication.config.thesaurus.readOnly != 'true'}">
-                        <g:form action="login" method="post" name="loginform" class="form-block__form">
+                        <g:form 
+                            action="login" 
+                            method="post" 
+                            name="loginform" 
+                            class="form-block__form"
+                        >
                             <input 
                                 type="hidden" 
                                 name="returnUrl" 

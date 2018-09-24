@@ -9,49 +9,51 @@
     <body>
         <main class="main">
             <div class="container">
-                <section class="main-content content-page">
-                    <h2><g:message code="user.lost.password.headline"/></h2>
-                    <g:if test="${flash.message}">
-                        <div class="message">${flash.message}</div>
-                    </g:if>
-                    <g:hasErrors bean="${user}">
-                        <div class="error">
-                            <g:renderErrors bean="${user}" as="list" />
+                <section class="main-content content-page form-block">
+                    <div class="form-block__header">
+                        <h1 class="form-block__title">
+                            <g:message code="user.lost.password.headline"/>
+                        </h1>
+                        <g:if test="${flash.message}">
+                            <div class="message form-block__description">${flash.message}</div>
+                        </g:if>
+                        <div class="form-block__description">
+                            <g:message code="user.lost.password.intro" />
                         </div>
-                    </g:hasErrors>
-                    <g:form action="requestPasswordReset" method="post" name="loginform">
-                        <div class="dialog">
-                            <table>
-                                <tbody>
-
-                                    <tr class='prop'>
-                                        <td valign='top' class='name' colspan="2">
-                                            <g:message code="user.lost.password.intro"/>
-                                        </td>
-                                    </tr>
-
-                                    <tr class='prop'>
-                                        <td valign='top' class='name'>
-                                            <label for='userId'><g:message code="user.login.form.username"/></label>
-                                        </td>
-                                        <td valign='top' class='value'>
-                                            <input autofocus="" size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
-                                                id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" spellcheck="false" required />
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <div class="buttons">
-                                                <input class="login submitButton" type="submit" value="${message(code:'user.lost.password.form.submit')}"/>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                        <g:hasErrors bean="${user}">
+                            <div class="error form-block__errors">
+                                <g:renderErrors bean="${user}" as="list" />
+                            </div>
+                        </g:hasErrors>
+                    </div>
+                    <g:form 
+                        action="requestPasswordReset" 
+                        method="post" 
+                        name="loginform" 
+                        class="form-block__form"
+                    >
+                        <div class="form-group">
+                            <label for='userId' class="form-group__label">
+                                <g:message code="user.login.form.username"/>
+                            </label>
+                            <input 
+                                class="form-control"
+                                autofocus="" 
+                                size="40" 
+                                type="email" 
+                                placeholder="${message(code:'user.register.email.placeholder')}"
+                                id='userId' 
+                                name='userId' 
+                                value="${params.userId?.encodeAsHTML()}" 
+                                spellcheck="false" 
+                                required 
+                            />
+                        </div>
+                        <div class="form-group">
+                            <button
+                                class="button button--primary"
+                                type="submit"
+                            >${message(code:'user.lost.password.form.submit')}</button>
                         </div>
                     </g:form>
                 </section>

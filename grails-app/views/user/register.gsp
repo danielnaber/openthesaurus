@@ -30,7 +30,12 @@
                         </div>
                     </g:hasErrors>
                 
-                    <g:form action="doRegister" method="post" name="loginform" class="form-block__form">
+                    <g:form 
+                        action="doRegister" 
+                        method="post" 
+                        name="loginform" 
+                        class="form-block__form"
+                    >
                         <div class="form-group">
                             <label for='userId' class="form-group__label">
                                 <g:message code="user.login.form.username" />
@@ -117,8 +122,8 @@
                             </label>
                         </div>
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
-                            <div class="form-group form-group--horizontal">
-                                <label for='captcha'>
+                            <div class="form-group">
+                                <label for='captcha' class="form-group__label">
                                     <g:message code="user.register.form.captcha"/>
                                 </label>
                                 <div>
