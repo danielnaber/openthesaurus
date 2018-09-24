@@ -61,6 +61,52 @@
         </g:if>
     </g:else>
 
+    <g:if test="${substringSynsetList.size() == 0}">
+        <div class="main-content-section">
+            <g:if test="${params.q.trim().length() < minLengthForSubstringQuery}">
+                <g:message code="result.ajax.too.short" args="${[minLengthForSubstringQuery]}"/>
+            </g:if>
+            <g:else>
+                <g:message code="result.ajax.no.substring.matches.for" args="${[params.q]}"/>
+            </g:else>
+        </div>
+    </g:if>
+    <g:else>
+        <%
+        Pattern pattern = Pattern.compile("(" + Pattern.quote(params.q.encodeAsHTML()) + ")", Pattern.CASE_INSENSITIVE);
+        %>
+        <g:each in="${substringSynsetList}" status="i" var="synset">
+            <div class="main-content-section">
+                <g:if test="${i < 5}">
+                    <div style="margin-bottom:10px">
+                        <g:set var="firstVal" value="${true}"/>
+                        <g:each in="${synset?.terms?.sort()}" var="term">
+                            <g:set var="match" value='${term.toString()?.toLowerCase()}'/>
+                            <g:if test="${!firstVal}">
+                                <span class="d">&middot;</span>
+                            </g:if>
+                            <%
+                            Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
+                            String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
+                            %>
+                            <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                                ${matchingTerm}
+                                <g:render template="metaInfo" model="${[term:term]}"/>
+                            </g:link>
+                            <g:set var="firstVal" value="${false}"/>
+                        </g:each>
+                    </div>
+                </g:if>
+            </div>
+        </g:each>
+        <g:if test="${substringSynsetList.size() > 5}">
+            <div class="main-content-section">
+                <span class="metaInfo"><g:message code="result.ajax.more.substring.matches" /></span>
+                &nbsp;<g:link controller="synset" action="substring" params="${[q: params.q]}"><g:message code="result.ajax.show.all.exact.matches" /></g:link>
+            </div>
+        </g:if>
+    </g:else>
+    
     <div class="main-content-section nowrap">
         <g:link controller="synset" action="create" params="[term : params.q]">
             <button type="button" class="button button-icon button-addsynonym">
