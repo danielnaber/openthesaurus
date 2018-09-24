@@ -112,8 +112,8 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     height: calc(2.25rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
+    color: #536677;
     line-height: 1.5;
-    color: #495057;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -121,6 +121,10 @@ a, button {transition: color .3s ease, border-color .3s ease;}
     transition: 
         border-color .15s ease-in-out,
         box-shadow .15s ease-in-out;
+}
+
+.form-control::placeholder {
+    color: rgba(83, 102, 119, 0.7);
 }
 
 .form-text {
@@ -143,7 +147,7 @@ a, button {transition: color .3s ease, border-color .3s ease;}
 
 .form-group .form-group__label {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 @media (min-width: 768px) {
