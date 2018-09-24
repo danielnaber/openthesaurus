@@ -8,120 +8,138 @@
     </head>
     <body>
 
-    <main class="main">
-        <div class="container">
-            <section class="main-content content-page">
+        <main class="main">
+            <div class="container">
+                <section class="main-content content-page form-block">
+                    <div class="form-block__header">
+                        <h1 class="form-block__title">
+                            <g:message code="user.register.headline" />
+                        </h1>
+                        <div class="form-block__description">
+                            <g:message code="user.register.intro"/>
+                        </div>
+                    </div>
 
-        <h2><g:message code="user.register.headline"/></h2>
+                    <g:if test="${flash.message}">
+                        <div class="message form-block__message">${flash.message}</div>
+                    </g:if>
 
-        <p><g:message code="user.register.intro"/></p>
-
-        <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-        </g:if>
-
-        <g:hasErrors bean="${user}">
-          <div class="error">
-              <g:renderErrors bean="${user}" />
-          </div>
-        </g:hasErrors>
-    
-        <g:form action="doRegister" method="post" name="loginform">
-            <div class="dialog">
-                <table>
-                    <tbody>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='userId'><g:message code="user.login.form.username"/></label>
-                            </td>
-                            <td valign='top' class='value'>
-                                <input autofocus="" size="30" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
-                                       id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required />
-                                <br />
-                                <span class="metaInfo"><g:message code="user.register.email.description"/></span>
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='visibleName'><g:message code="user.register.display.name"/></label>
-                            </td>
-                            <td valign='top' class='value'>
-                                <input size="30" type="text" placeholder="${message(code:'user.register.display.name.placeholder')}"
-                                       id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}" required />
-                                <br />
-                                <span class="metaInfo"><g:message code="user.register.display.name.description"/></span>
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='password1'><g:message code="user.login.form.password"/></label>
-                            </td>
-                            <td valign='top' class='value'>
-                                <input size="30" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}" required />
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='password2'><g:message code="user.register.form.password.repeat"/></label>
-                            </td>
-                            <td valign='top' class='value'>
-                                <input size="30" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}" required />
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                            </td>
-                            <td valign='top' class='value'>
-                                <table>
-                                    <tr>
-                                        <td valign="top"><g:checkBox name="acceptLicense" checked="${params.acceptLicense == 'on'}" required="true" /></td>
-                                        <td valign="top"><label for="acceptLicense"><g:message code="user.register.form.accept.license1"/></label></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                            </td>
-                            <td valign='top' class='value'>
-                                <table>
-                                    <tr>
-                                        <td valign="top"><g:checkBox name="acceptPrivacyPolicy" checked="${params.acceptLicense == 'on'}" required="true" /></td>
-                                        <td valign="top"><label for="acceptPrivacyPolicy"><g:message code="user.register.form.accept.license2"/></label></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-
+                    <g:hasErrors bean="${user}">
+                        <div class="error form-block__errors">
+                            <g:renderErrors bean="${user}" />
+                        </div>
+                    </g:hasErrors>
+                
+                    <g:form action="doRegister" method="post" name="loginform" class="form-block__form">
+                        <div class="form-group">
+                            <label for='userId' class="form-group__label">
+                                <g:message code="user.login.form.username" />
+                            </label>
+                            <input 
+                                class="form-control"
+                                autofocus="" 
+                                size="30" 
+                                type="email" 
+                                placeholder="${message(code:'user.register.email.placeholder')}"
+                                id='userId' 
+                                name='userId' 
+                                value="${params.userId?.encodeAsHTML()}" 
+                                required 
+                            />
+                            <div class="metaInfo form-text">
+                                <g:message code="user.register.email.description"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for='visibleName' class="form-group__label">
+                                <g:message code="user.register.display.name" />
+                            </label>
+                            <input 
+                                class="form-control"
+                                size="30" 
+                                type="text" 
+                                placeholder="${message(code:'user.register.display.name.placeholder')}"
+                                id='visibleName' 
+                                name='visibleName' 
+                                value="${params.visibleName?.encodeAsHTML()}" 
+                                required 
+                            />
+                            <div class="metaInfo form-text">
+                                <g:message code="user.register.display.name.description"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for='password1' class="form-group__label">
+                                <g:message code="user.login.form.password"/>
+                            </label>
+                            <input 
+                                class="form-control"
+                                size="30" 
+                                type="password" 
+                                id='password1' 
+                                name='password1' 
+                                value="${params.password1?.encodeAsHTML()}" 
+                                required 
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for='password2' class="form-group__label">
+                                <g:message code="user.register.form.password.repeat" />
+                            </label>
+                            <input
+                                class="form-control"
+                                size="30" 
+                                type="password" 
+                                id='password2' 
+                                name='password2' 
+                                value="${params.password2?.encodeAsHTML()}" 
+                                required 
+                            />
+                        </div>
+                        <div class="form-group form-group--text">
+                            <g:checkBox 
+                                name="acceptLicense" 
+                                checked="${params.acceptLicense == 'on'}" 
+                                required="true" 
+                            />
+                            <label for="acceptLicense">
+                                <g:message code="user.register.form.accept.license1" />
+                            </label>
+                        </div>
+                        <div class="form-group form-group--text">
+                            <g:checkBox 
+                                name="acceptPrivacyPolicy" 
+                                checked="${params.acceptLicense == 'on'}" 
+                                required="true" 
+                            />
+                            <label for="acceptPrivacyPolicy">
+                                <g:message code="user.register.form.accept.license2" />
+                            </label>
+                        </div>
                         <g:if test="${ThesaurusConfigurationEntry.findByKey('captcha.question')}">
-                            <tr class='prop'>
-                                <td valign='top' class='name' colspan="2">
-                                    <label for='captcha'><b><g:message code="user.register.form.captcha"/></b></label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>${ThesaurusConfigurationEntry.findByKey('captcha.question').value}</td>
-                                <td valign='top' class='value'>
-                                    <input type="text" id="captcha" name="cap" size="5" value="${params.cap?.encodeAsHTML()}" required /></td>
-                            </tr>
-                        </g:if>
-
-
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="buttons">
-                                    <input class="login submitButton" type="submit" value="${message(code:'user.register.form.submit')}"/>
+                            <div class="form-group form-group--horizontal">
+                                <label for='captcha'>
+                                    <g:message code="user.register.form.captcha"/>
+                                </label>
+                                <div>
+                                    ${ThesaurusConfigurationEntry.findByKey('captcha.question').value}
+                                    <input 
+                                        type="text" 
+                                        id="captcha" 
+                                        name="cap" 
+                                        size="5" 
+                                        value="${params.cap?.encodeAsHTML()}" 
+                                        required 
+                                    />
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </g:if>
+                        <div class="form-group">
+                            <button
+                                class="button button--primary"
+                                type="submit"
+                            >${message(code:'user.register.form.submit')}</button>
+                        </div>
 
                         <%--
                         <g:if test="${message(code:'user.register.form.captcha.question')}">
@@ -135,21 +153,14 @@
                             </tr>
                         </g:if>
                         --%>
+                    </g:form>
 
-                    </tbody>
-                </table>
+                </section>
             </div>
-        </g:form>
-
-            </section>
-        </div>
-    </main>
+        </main>
     
         <script type="text/javascript">
-        <!--
             document.loginform.userId.focus();
-        // -->
         </script>
-        
     </body>
 </html>

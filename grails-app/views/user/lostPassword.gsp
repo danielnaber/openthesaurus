@@ -7,68 +7,58 @@
         <title><g:message code="user.lost.password.title"/></title>         
     </head>
     <body>
+        <main class="main">
+            <div class="container">
+                <section class="main-content content-page">
+                    <h2><g:message code="user.lost.password.headline"/></h2>
+                    <g:if test="${flash.message}">
+                        <div class="message">${flash.message}</div>
+                    </g:if>
+                    <g:hasErrors bean="${user}">
+                        <div class="error">
+                            <g:renderErrors bean="${user}" as="list" />
+                        </div>
+                    </g:hasErrors>
+                    <g:form action="requestPasswordReset" method="post" name="loginform">
+                        <div class="dialog">
+                            <table>
+                                <tbody>
 
-    <main class="main">
-        <div class="container">
-            <section class="main-content content-page">
+                                    <tr class='prop'>
+                                        <td valign='top' class='name' colspan="2">
+                                            <g:message code="user.lost.password.intro"/>
+                                        </td>
+                                    </tr>
 
-        <h2><g:message code="user.lost.password.headline"/></h2>
+                                    <tr class='prop'>
+                                        <td valign='top' class='name'>
+                                            <label for='userId'><g:message code="user.login.form.username"/></label>
+                                        </td>
+                                        <td valign='top' class='value'>
+                                            <input autofocus="" size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                                id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" spellcheck="false" required />
+                                        </td>
+                                    </tr>
 
-        <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-        </g:if>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <div class="buttons">
+                                                <input class="login submitButton" type="submit" value="${message(code:'user.lost.password.form.submit')}"/>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-        <g:hasErrors bean="${user}">
-            <div class="error">
-                <g:renderErrors bean="${user}" as="list" />
+                                </tbody>
+                            </table>
+                        </div>
+                    </g:form>
+                </section>
             </div>
-        </g:hasErrors>
-
-        <g:form action="requestPasswordReset" method="post" name="loginform">
-            <div class="dialog">
-                <table>
-                    <tbody>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name' colspan="2">
-                                <g:message code="user.lost.password.intro"/>
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <label for='userId'><g:message code="user.login.form.username"/></label>
-                            </td>
-                            <td valign='top' class='value'>
-                                <input autofocus="" size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
-                                       id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" spellcheck="false" required />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="buttons">
-                                    <input class="login submitButton" type="submit" value="${message(code:'user.lost.password.form.submit')}"/>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </g:form>
-
-            </section>
-        </div>
-    </main>
-    
+        </main>
         <script type="text/javascript">
-        <!--
             document.loginform.userId.focus();
-        // -->
         </script>
-        
     </body>
 </html>
