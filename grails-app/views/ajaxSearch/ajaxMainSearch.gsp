@@ -15,7 +15,7 @@
                 <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()]}"/>
                 <g:if test="${mostSimilarTerm}">
                     <g:set var="simTerm" value="${mostSimilarTerm.term}"/>
-                    - meinten Sie <g:link url="${createLinkTo(dir:'synonyme')}/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
+                    - meinten Sie&nbsp;<g:link url="${createLinkTo(dir:'synonyme')}/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
                 </g:if>
             </div>
         </div>
