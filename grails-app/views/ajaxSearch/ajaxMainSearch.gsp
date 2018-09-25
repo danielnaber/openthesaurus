@@ -56,8 +56,10 @@
             </div>
         </g:each>
         <g:if test="${synsetList.size() > 10}">
-            <span class="metaInfo"><g:message code="result.ajax.more.exact.matches" /></span>
-            <g:link controller="synset" action="search" params="${[q: params.q]}"><g:message code="result.ajax.show.all.exact.matches" /></g:link>
+            <div class="main-content-section">
+                <span class="metaInfo"><g:message code="result.ajax.more.exact.matches" /></span>
+                &nbsp;<g:link controller="synset" action="search" params="${[q: params.q]}"><g:message code="result.ajax.show.all.exact.matches" /></g:link>
+            </div>
         </g:if>
     </g:else>
 
