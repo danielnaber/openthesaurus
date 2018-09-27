@@ -79,7 +79,7 @@
     
                 <h3>Widerspruch:</h3>
     
-                <iframe frameborder="no" width="600px" height="200px" src="//openthesaurus.stats.mysnip-hosting.de/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
+                <iframe frameborder="no" width="100%" height="200px" src="//openthesaurus.stats.mysnip-hosting.de/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
 
                 <h2>Auskunft</h2>
 

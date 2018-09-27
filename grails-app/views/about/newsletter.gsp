@@ -22,7 +22,7 @@
                         <tr>
                             <td><g:message code="user.login.form.username"/></td>
                             <td><input autofocus placeholder="${message(code:'user.register.email.placeholder')}"
-                                       id="text2567502" name="email" value="" type="text" size="30"/></td>
+                                       id="text2567502" name="email" value="" type="text" size="25"/></td>
                         </tr>
                         <tr>
                             <td></td>
