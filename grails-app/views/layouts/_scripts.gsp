@@ -39,6 +39,7 @@
                 case Event.KEY_RIGHT:
                 case Event.KEY_LEFT:
                 case Event.KEY_TAB:
+                case 9:     // Tab
                 case 16:   // Shift
                 case 17:   // Ctrl
                 case 18:   // Alt
