@@ -194,7 +194,7 @@ h1 {
   margin: 0 auto;
   margin-bottom: 50px;
   text-align: left;
-  width: 780px;
+  width: 880px;
 }
 
 h2 {
@@ -667,13 +667,13 @@ strong {
 }
 
 .resultColumn {
-    width: 370px;
+    width: 420px;
     float: left;
     margin-bottom: 15px;
 }
 
 .footerColumn {
-    width: 320px;
+    width: 370px;
     float: left;
     margin-bottom: 50px;
 }
