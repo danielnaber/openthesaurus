@@ -62,6 +62,12 @@ a:link, a:visited {
     font-weight: bold;
 }
 
+a:hover {
+    text-decoration: none;
+    color: #00437e;
+    font-weight: bold;
+}
+
 h1 {
   font-weight: bold;
   font-size: 20px;
