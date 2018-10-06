@@ -186,9 +186,11 @@
                     </div>
                 </g:if>
 
-                <g:link action="edit" id="${synset.id}">
-                    <span class="changeLink"><g:message code="result.edit"/></span>
-                </g:link>
+                <g:if test="${session.user}">
+                    <g:link action="edit" id="${synset.id}">
+                        <span class="changeLink"><g:message code="result.edit"/></span>
+                    </g:link>
+                </g:if>
             </div>
 
         </div>
