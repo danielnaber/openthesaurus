@@ -15,40 +15,6 @@ body {
   padding: 80px 0 20px 0;
   background-color: #F7F7F7;
   margin-bottom: 10px;
-  /*
-  commented out because it sometimes leads to fuzzyness in Firefox:
-  -moz-transform: skewY(-1.5deg);
-  -moz-transform-origin: 0 0;
-  -webkit-transform: skewY(-1.5deg);
-  -webkit-transform-origin: 0 0;
-  */
-  /* commented out because it broke the layout (main content was skewed)
-  -ms-transform: skewY(-1.5deg);
-  -ms-transform-origin: 0 0;
-  */
-  /* commented out because of fuzzy rendering in Opera
-  -o-transform: skewY(-1.5deg);
-  -o-transform-origin: 0 0;
-  */
-}
-
-
-#body > #content {
-  /*
-  see above:
-  -moz-transform: skewY(1.5deg);
-  -moz-transform-origin: 0 0;
-  -webkit-transform: skewY(1.5deg);
-  -webkit-transform-origin: 0 0;
-  */
-  /* see above
-  -ms-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  */
-  /* see above
-  -o-transform: skewY(1.5deg);
-  -o-transform-origin: 0 0;
-  */
 }
 
 #navigation {
@@ -544,7 +510,7 @@ strong {
 }
 
 .noTopMargin {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .submitButton {
@@ -608,7 +574,7 @@ strong {
 }
 
 .partnerSites {
-    margin-top: 0px;
+    margin-top: 0;
     color: white;
     font-weight: bold;
     font-size: 16px;
@@ -667,9 +633,9 @@ strong {
     position: absolute;
     padding: 10px;
     display: block;
-    -webkit-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
     background-color: white;
     width: 90%;
     max-width: 760px;
@@ -803,9 +769,9 @@ strong {
   padding: 6px;
   min-width: 100px;
   max-width: 300px;
-  -webkit-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
-  box-shadow: 0px 0px 8px 3px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+  box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
 }
 
 .cc_container {
