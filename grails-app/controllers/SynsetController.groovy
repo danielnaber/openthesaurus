@@ -220,22 +220,39 @@ class SynsetController extends BaseController {
           // end of parts that's specific to the German OpenThesaurus
 
           def view = params.newSearch ? "searchNew" : "search"
-          render(view:view, model: [
-               partialMatchResult : partialMatchResult,
-               wikipediaResult : wikipediaResult,
-               wiktionaryResult : wiktionaryResult,
-               similarTerms : similarTerms,
-               synsetList : searchResult.synsetList,
-               totalMatches: searchResult.totalMatches,
-               completeResult: searchResult.completeResult,
-               baseforms: baseforms,
-               descriptionText : metaTagDescriptionText,
-               runTime : totalTime,
-               remoteWordLookup: remoteWordLookup,
-               remoteGenderLookup: remoteGenderLookup,
-               remoteMistakeLookup: remoteMistakeLookup
-            ]
-          )
+          if (view == "searchNew") {
+              render(view:view, model: [
+                      partialMatchResult : partialMatchResult,
+                      wikipediaResult : wikipediaResult,
+                      wiktionaryResult : wiktionaryResult,
+                      similarTerms : similarTerms,
+                      synsetList : searchResult.synsetList,
+                      totalMatches: searchResult.totalMatches,
+                      completeResult: searchResult.completeResult,
+                      baseforms: baseforms,
+                      descriptionText : metaTagDescriptionText,
+                      runTime : totalTime,
+                      remoteWordLookup: remoteWordLookup,
+                      remoteGenderLookup: remoteGenderLookup,
+                      remoteMistakeLookup: remoteMistakeLookup
+              ], contentType:"text/html", encoding:"UTF-8")
+          } else {
+              [
+                      partialMatchResult : partialMatchResult,
+                      wikipediaResult : wikipediaResult,
+                      wiktionaryResult : wiktionaryResult,
+                      similarTerms : similarTerms,
+                      synsetList : searchResult.synsetList,
+                      totalMatches: searchResult.totalMatches,
+                      completeResult: searchResult.completeResult,
+                      baseforms: baseforms,
+                      descriptionText : metaTagDescriptionText,
+                      runTime : totalTime,
+                      remoteWordLookup: remoteWordLookup,
+                      remoteGenderLookup: remoteGenderLookup,
+                      remoteMistakeLookup: remoteMistakeLookup
+              ]
+          }
 
         } finally {
           DbUtils.closeQuietly(conn)
