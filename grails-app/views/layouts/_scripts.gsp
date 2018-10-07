@@ -60,7 +60,7 @@
     var lastUpdateTimeStamp = 0;
     var isRealResultPage = true;
     //var resultPagePrefix = "/openthesaurus";   // local testing
-    var resultPagePrefix = "/";
+    var resultPagePrefix = "";
 
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
 
