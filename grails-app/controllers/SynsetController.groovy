@@ -250,7 +250,8 @@ class SynsetController extends BaseController {
                       runTime : totalTime,
                       remoteWordLookup: remoteWordLookup,
                       remoteGenderLookup: remoteGenderLookup,
-                      remoteMistakeLookup: remoteMistakeLookup
+                      remoteMistakeLookup: remoteMistakeLookup,
+                      withAd: true
               ]
           }
 

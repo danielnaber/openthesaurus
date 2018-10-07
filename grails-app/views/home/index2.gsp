@@ -18,10 +18,14 @@
     <div class="message">${flash.message}</div>
 </g:if>
 
-<div id="defaultSpace">
-    <g:render template="/home/ads"/>
+<div style="min-height:250px; margin:0 auto">
+    <div style="float: right; width: 300px; margin-right: 70px" id="moreSpace">
+        <div style="position: fixed; width: 200px; height: 250px;">
+            <g:render template="/synset/newad"/>
+        </div>
+    </div>
+    <div id="searchSpace"></div>
 </div>
-<div id="searchSpace"></div>
 
 </body>
 </html>

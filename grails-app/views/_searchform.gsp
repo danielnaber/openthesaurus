@@ -40,7 +40,7 @@
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
     </g:if>
     <g:else>
-      <!--<br><a style="font-weight: normal" href="${createLinkTo(dir:'home', file:'index2')}">Neue Suche testen</a>-->
+      <br><a style="font-weight: normal" href="${createLinkTo(dir:'home', file:'index2')}">Neue Suche testen</a>
     </g:else>
 
       <!--
@@ -57,8 +57,16 @@
 
 <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
   <div style="text-align: center">
-    Diese neue Suche öffnet beim Tippen kein Popup mit einer Vorschau, sondern<br>
-    direkt das Suchergebnis. Schreibt uns, wie Euch diese Suche gefällt! (<a href="/">alte Suche</a>)
+    Diese neue Suche öffnet beim Tippen kein Pop-up mit einer Vorschau, sondern<br>
+    direkt das Suchergebnis.
+    <script type="text/javascript">
+        <!--
+        var firstPart = "<g:message code="footer.email.beforeAt"/>";
+        var lastPart = "<g:message code="footer.email.afterAt"/>";
+        document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>Schreibt uns,<" + "/a>");
+        // -->
+    </script>
+    wie Euch diese Suche gefällt! (<a href="/">alte Suche</a>)
   </div>
 </g:if>
 

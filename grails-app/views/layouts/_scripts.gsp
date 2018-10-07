@@ -61,6 +61,7 @@
     var isRealResultPage = true;
     //var resultPagePrefix = "/openthesaurus";   // local testing
     var resultPagePrefix = "";
+    var firstSearch = true;
 
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
 
@@ -91,21 +92,26 @@
                 var timeStamp = new Date().getTime();
                 loadSynsetSearch();
                 runningRequests++;
-                var stateObj = { q: searchString };
+                var stateObj = {q: searchString};
                 new jQuery.ajax(
                     '${createLinkTo(dir:"synset/newSearch",file:"")}',
                     {
                         method: 'get',
                         asynchronous: true,
-                        data:{
-                            q: searchString
+                        data: {
+                            q: searchString,
+                            withAd: false
                         }
                     }
-                ).done(function(msg){
+                ).done(function (msg) {
                         if (timeStamp < lastUpdateTimeStamp) {
                             //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
                         } else {
+                            //console.log("DONE: " + firstSearch);
                             $('#searchSpace').html(msg);
+                            if (firstSearch) {
+                                //$('#moreSpace').html(". . . . my ad test .. .. ");
+                            }
                             lastUpdateTimeStamp = timeStamp;
                         }
                         if (changeHistory) {
@@ -122,18 +128,21 @@
                             isRealResultPage = false;
                         }
                     }
-                ).fail(function(jqXHR, textStatus, errorThrown) {
+                ).fail(function (jqXHR, textStatus, errorThrown) {
                         $('#searchSpace').html(jqXHR.responseText);
                         if (changeHistory) {
                             history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
                         }
                     }
-                ).always(function(e) {
+                ).always(function (e) {
                     if (runningRequests > 0) {
                         runningRequests--;
                     }
                     if (runningRequests <= 0) {
                         loadedSynsetSearch();
+                    }
+                    if (firstSearch) {
+                        firstSearch = false;
                     }
                 });
             }
