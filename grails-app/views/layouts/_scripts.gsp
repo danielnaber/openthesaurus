@@ -33,13 +33,12 @@
         }
         if (hasTransformEnabled) {
             switch (event.keyCode) {
-                case Event.KEY_RETURN:
-                case Event.KEY_UP:
-                case Event.KEY_DOWN:
-                case Event.KEY_RIGHT:
-                case Event.KEY_LEFT:
-                case Event.KEY_TAB:
-                case 9:     // Tab
+                case 13:   // Return
+                case 37:   // cursor left
+                case 38:   // cursor up
+                case 39:   // cursor right
+                case 40:   // cursor down
+                case 9:    // Tab
                 case 16:   // Shift
                 case 17:   // Ctrl
                 case 18:   // Alt
@@ -59,24 +58,107 @@
 
     var runningRequests = 0;
     var lastUpdateTimeStamp = 0;
+    var isRealResultPage = true;
+    //var resultPagePrefix = "/openthesaurus";   // local testing
+    var resultPagePrefix = "/";
 
-    function onSynsetSearchValueChange() {
-        clearInterval(onChangeInterval);
-        var searchString = document.searchform.q.value;
-        currentValue = searchString;
-        if (searchString === '' || searchString.length < minChars) {
-            var searchResultAreaDiv = $('#searchResultArea');
-            searchResultAreaDiv.hide();
-            $('#body').css({backgroundColor: '#F7F7F7'});
-            searchResultAreaDiv.html("");
-        } else {
-            $('#searchResultArea').show();
-            $('#body').css({backgroundColor: '#e6e6e6'});
-            cursorPosition = -1;
-            var timeStamp = new Date().getTime();
-            loadSynsetSearch();
-            runningRequests++;
-            new jQuery.ajax(
+    <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
+
+        if (window.history && window.history.pushState) {
+            window.onpopstate = function(event) {
+                if (event.state && event.state.q) {
+                    onSynsetSearchValueChangeInternal(event.state.q, false);
+                } else {
+                    onSynsetSearchValueChangeInternal("", false);
+                }
+            };
+        }
+
+        function onSynsetSearchValueChange() {
+            onSynsetSearchValueChangeInternal(document.searchform.q.value, true);
+        }
+        
+        function onSynsetSearchValueChangeInternal(searchString, changeHistory) {
+            clearInterval(onChangeInterval);
+            currentValue = searchString;
+            if (searchString === '' || searchString.length < minChars) {
+                $('#defaultSpace').show();
+                $('#searchSpace').hide();
+            } else {
+                $('#defaultSpace').hide();
+                $('#searchSpace').show();
+                cursorPosition = -1;
+                var timeStamp = new Date().getTime();
+                loadSynsetSearch();
+                runningRequests++;
+                var stateObj = { q: searchString };
+                new jQuery.ajax(
+                    '${createLinkTo(dir:"synset/newSearch",file:"")}',
+                    {
+                        method: 'get',
+                        asynchronous: true,
+                        data:{
+                            q: searchString
+                        }
+                    }
+                ).done(function(msg){
+                        if (timeStamp < lastUpdateTimeStamp) {
+                            //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                        } else {
+                            $('#searchSpace').html(msg);
+                            lastUpdateTimeStamp = timeStamp;
+                        }
+                        if (changeHistory) {
+                            if (isRealResultPage) {
+                                // 'back' button will go back to this state
+                                history.pushState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                            } else {
+                                history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                            }
+                        }
+                        if (msg.indexOf("--REALMATCHES--") !== -1) {
+                            isRealResultPage = true;
+                        } else {
+                            isRealResultPage = false;
+                        }
+                    }
+                ).fail(function(jqXHR, textStatus, errorThrown) {
+                        $('#searchSpace').html(jqXHR.responseText);
+                        if (changeHistory) {
+                            history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                        }
+                    }
+                ).always(function(e) {
+                    if (runningRequests > 0) {
+                        runningRequests--;
+                    }
+                    if (runningRequests <= 0) {
+                        loadedSynsetSearch();
+                    }
+                });
+            }
+        }
+
+    </g:if>
+    <g:else>
+
+        function onSynsetSearchValueChange() {
+            clearInterval(onChangeInterval);
+            var searchString = document.searchform.q.value;
+            currentValue = searchString;
+            if (searchString === '' || searchString.length < minChars) {
+                var searchResultAreaDiv = $('#searchResultArea');
+                searchResultAreaDiv.hide();
+                $('#body').css({backgroundColor: '#F7F7F7'});
+                searchResultAreaDiv.html("");
+            } else {
+                $('#searchResultArea').show();
+                $('#body').css({backgroundColor: '#e6e6e6'});
+                cursorPosition = -1;
+                var timeStamp = new Date().getTime();
+                loadSynsetSearch();
+                runningRequests++;
+                new jQuery.ajax(
                     '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
                     {
                         method: 'get',
@@ -85,30 +167,32 @@
                             q: searchString
                         }
                     }
-            ).done(function(msg){
-                if (timeStamp < lastUpdateTimeStamp) {
-                    //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
-                } else {
-                    $('#searchResultArea').html(msg);
-                    lastUpdateTimeStamp = timeStamp;
-                }
+                ).done(function(msg){
+                        if (timeStamp < lastUpdateTimeStamp) {
+                            //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                        } else {
+                            $('#searchResultArea').html(msg);
+                            lastUpdateTimeStamp = timeStamp;
+                        }
+                    }
+                ).fail(function(jqXHR, textStatus, errorThrown){
+                        $('#searchResultArea').html(jqXHR.responseText);
+                    }
+                ).always(function(e){
+                    if (runningRequests > 0) {
+                        runningRequests--;
+                    }
+                    if (runningRequests <= 0) {
+                        loadedSynsetSearch();
+                    }
+                });
             }
-            ).fail(function(jqXHR, textStatus, errorThrown){
-                $('#searchResultArea').html(jqXHR.responseText);
-            }
-            ).always(function(e){
-                if (runningRequests > 0) {
-                    runningRequests--;
-                }
-                if (runningRequests <= 0) {
-                    loadedSynsetSearch();
-                }
-            });
         }
-    }
+
+    </g:else>
 
     function loadSynsetSearch() {
-        document.getElementById('spinner').style.position='absolute';
+        document.getElementById('spinner').style.position='relative';
         document.getElementById('spinner').style.visibility='visible';
     }
 

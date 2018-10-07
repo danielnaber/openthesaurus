@@ -2,6 +2,7 @@
 <g:if test="${totalMatches > 0}">
 
     <g:each in="${synsetList}" status="i" var="synset">
+        <!--REALMATCHES-->
 
         <div style="margin-bottom: 10px;margin-top:16px">
 
