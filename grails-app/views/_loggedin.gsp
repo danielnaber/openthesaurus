@@ -1,4 +1,4 @@
-<div style="margin-top:23px">
+<div class="loggedInInfo">
 <g:if test="${session.user}">
     <g:link controller="user" action="edit"><g:message code="user.edit.link"/></g:link>
     <span class="d">&middot;</span>

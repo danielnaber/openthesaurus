@@ -17,7 +17,7 @@
     </head>
     <body>
 
-    <hr style="margin-top:7px;margin-bottom:0"/>
+    <hr style="margin-top:7px;margin-bottom:0" class="desktopOnly"/>
 
     <div class="resultColumn" style="margin-right:37px">
         <g:render template="mainmatches"/>

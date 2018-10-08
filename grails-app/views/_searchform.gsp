@@ -40,7 +40,9 @@
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
     </g:if>
     <g:else>
-      <br><a style="font-weight: normal" href="/home/index2">Neue Suche testen</a>
+      <div class="desktopOnly">
+        <a style="font-weight: normal" href="/home/index2">Neue Suche testen</a>
+      </div>
     </g:else>
 
       <!--

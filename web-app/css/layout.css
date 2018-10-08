@@ -695,7 +695,14 @@ strong {
     margin-bottom: 20px;
 }
 
+.loggedInInfo {
+    margin-top: 23px;
+}
+
 @media (max-width: 800px) {
+    .desktopOnly {
+      display: none;
+    }
     #search {
         width: 100%;
     }
@@ -707,6 +714,7 @@ strong {
         /*background-color: #ffff00;  for debugging */
     }
     .logo {
+        margin-top: 0;
         margin-bottom: 0;
         display: none !important;
     }
@@ -721,7 +729,10 @@ strong {
         padding-right: 38px;
     }
     .searchResultPopup {
-        top: 150px;
+        top: 120px;
+        font-size: 15px;
+        padding: 5px;
+        width: 95%;
     }
     .resultColumn {
         width: 100%;
@@ -729,7 +740,7 @@ strong {
         margin-bottom: 15px;
     }
     #body {
-        padding: 50px 0 20px 0;
+        padding: 35px 0 20px 0;
         background-color: #F7F7F7;
         margin-bottom: 10px;
     }
@@ -738,10 +749,13 @@ strong {
     }
     #search .mobileClaim {
         /*text-transform: uppercase;*/
-        font-size: 16px;
+        font-size: 14px;
     }
     .rightColumn {
         width: 320px;
+    }
+    .loggedInInfo {
+        margin-top: 0px;
     }
 }
 
