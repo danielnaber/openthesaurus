@@ -703,12 +703,22 @@ strong {
     display: none;
 }
 
+#spinner {
+  visibility: hidden;
+  position: absolute;
+  left: 295px;
+  top: 8px;
+}
+
 @media (max-width: 800px) {
     .desktopOnly {
         display: none;
     }
     .mobileOnly {
         display: inline;
+    }
+    #spinner {
+        left: 178px;
     }
     #search {
         width: 100%;
@@ -729,7 +739,7 @@ strong {
         text-align: left;
     }
     #search-field {
-        width: 250px !important;
+        width: 200px !important;
     }
     #search input[type='text'] {
         margin-left: 5px;

@@ -19,10 +19,10 @@
   <p class="claim"><g:message code="homepage.claim"/></p>
   <p class="mobileClaim"><a href="${createLinkTo(dir:'/',file:'')}"><g:message code="homepage.claim.mobile"/></a></p>
 
-  <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
+  <form style="position: relative" action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
     <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
-    <span id="spinner" style="visibility:hidden;position:relative;margin-right:5px;top:13px">
+    <span id="spinner">
       <img src="${createLinkTo(dir:'images',file:'spinner-big.gif')}" width="32" height="32" alt="Loading" />
     </span>
 

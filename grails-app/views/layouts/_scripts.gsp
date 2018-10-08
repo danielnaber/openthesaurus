@@ -201,7 +201,7 @@
     </g:else>
 
     function loadSynsetSearch() {
-        document.getElementById('spinner').style.position='relative';
+        document.getElementById('spinner').style.position='absolute';
         document.getElementById('spinner').style.visibility='visible';
     }
 
