@@ -40,7 +40,7 @@
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
     </g:if>
     <g:else>
-      <br><a style="font-weight: normal" href="${createLinkTo(dir:'home', file:'index2')}">Neue Suche testen</a>
+      <br><a style="font-weight: normal" href="/home/index2">Neue Suche testen</a>
     </g:else>
 
       <!--
