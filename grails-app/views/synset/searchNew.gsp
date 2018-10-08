@@ -59,7 +59,9 @@
             </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
 
-        <div style="height:280px"></div>
+        <g:if test="${!session.user}">
+            <div style="height:280px"></div>
+        </g:if>
                 
         <g:render template="wiktionary"/>
 
