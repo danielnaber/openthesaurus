@@ -3,10 +3,10 @@
         <table style="width:100%">
             <tr>
                 <td>
+                    <!--<span class="mobileOnly"><g:link controller="home">openthesaurus.de</g:link>&nbsp;&nbsp;&nbsp;</span>-->
                     <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
-                    &nbsp;&nbsp;&nbsp;<g:link controller="tag" action="list"><g:message code="homepage.tags"/></g:link>
-                    <!--&nbsp;&nbsp;&nbsp;<a href="/jforum/forums/show/1.page"><g:message code="homepage.forum"/></a>-->
-                    &nbsp;&nbsp;&nbsp;<g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link>
+                    <span class="desktopOnly">&nbsp;&nbsp;&nbsp;<g:link controller="tag" action="list"><g:message code="homepage.tags"/></g:link></span>
+                    <span class="desktopOnly">&nbsp;&nbsp;&nbsp;<g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link></span>
                     &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
                 </td>
                 <td style="text-align: right">

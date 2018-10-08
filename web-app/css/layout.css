@@ -699,9 +699,16 @@ strong {
     margin-top: 23px;
 }
 
+.mobileOnly {
+    display: none;
+}
+
 @media (max-width: 800px) {
     .desktopOnly {
-      display: none;
+        display: none;
+    }
+    .mobileOnly {
+        display: inline;
     }
     #search {
         width: 100%;
@@ -740,6 +747,7 @@ strong {
         margin-bottom: 15px;
     }
     #body {
+        /* TODO: padding difference between Chrome and Safari */
         padding: 35px 0 20px 0;
         background-color: #F7F7F7;
         margin-bottom: 10px;
@@ -748,7 +756,6 @@ strong {
         display: none !important;
     }
     #search .mobileClaim {
-        /*text-transform: uppercase;*/
         font-size: 14px;
     }
     .rightColumn {
