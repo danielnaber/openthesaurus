@@ -33,9 +33,11 @@
 
         <hr style="margin-top:20px" />
 
-        <h2><g:message code='result.matches.no.like' /></h2>
+        <div class="desktopOnly">
+            <h2><g:message code='result.matches.no.like' /></h2>
 
-        <g:render template="addterm" model="${[term:cleanTerm]}" />
+            <g:render template="addterm" model="${[term:cleanTerm]}" />
+        </div>
 
         <g:render template="forumlink" />
     </div>
