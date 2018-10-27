@@ -5,7 +5,7 @@
         <meta name="layout" content="main" />
         <title><g:message code="changelist.title"/></title>
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="${createLinkTo(dir:'feed')}" />
+        <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="/feed" />
         <script type="text/javascript" src="${createLinkTo(dir:'js',file:'blockies.js')}"></script>
     </head>
     <body>
@@ -123,7 +123,7 @@
           </g:form>
 
           <br/>
-          <a href="${createLinkTo(dir:'feed')}"><g:message code="changelist.feed"/></a>
+          <a href="/feed"><g:message code="changelist.feed"/></a>
 
     </body>
 </html>

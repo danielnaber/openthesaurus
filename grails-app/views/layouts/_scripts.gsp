@@ -76,7 +76,7 @@
             loadSynsetSearch();
             runningRequests++;
             new jQuery.ajax(
-                    '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
+                    '/ajaxSearch/ajaxMainSearch',
                     {
                         method: 'get',
                         asynchronous: true,

@@ -17,10 +17,13 @@
  */ 
 package com.vionto.vithesaurus
 
+import grails.persistence.Entity
+
 /**
  * A cookie-based long-term session that survives Tomcat restarts
  * and Tomcat's short session timeout.
  */
+@Entity
 class DurationSession {
 
   String sessionId

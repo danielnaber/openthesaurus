@@ -11,15 +11,15 @@
         alt="${message(code:'logo.alt.text')}" width="341" height="93" /></div>
   </g:if>
   <g:else>
-    <div class="logo"><a href="${createLinkTo(dir:'/',file:'')}"><img
+    <div class="logo"><a href="/"><img
         src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
         alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
   </g:else>
 
   <p class="claim"><g:message code="homepage.claim"/></p>
-  <p class="mobileClaim"><a href="${createLinkTo(dir:'/',file:'')}"><g:message code="homepage.claim.mobile"/></a></p>
+  <p class="mobileClaim"><a href="/"><g:message code="homepage.claim.mobile"/></a></p>
 
-  <form action="${createLinkTo(dir:'synonyme')}" onsubmit="window.location='${createLinkTo(dir:'synonyme')}/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
+  <form action="/synonyme" onsubmit="window.location='/synonyme/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
     <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
     <span id="spinner" style="visibility:hidden;position:absolute;left:227px;top:99px">

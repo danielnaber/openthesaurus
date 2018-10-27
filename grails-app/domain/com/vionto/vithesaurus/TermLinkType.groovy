@@ -15,13 +15,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import grails.persistence.Entity;
 
 /**
  * A type of Link between Terms, e.g. "antonym", ...
  * 
  * Also see LinkType for links between Synsets.
  */
+@Entity
 class TermLinkType {
   
     /** E.g. "antonym" */

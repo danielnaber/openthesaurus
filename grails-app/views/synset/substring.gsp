@@ -1,4 +1,4 @@
-<%@page import="vithesaurus.MemoryDatabaseCreationService; com.vionto.vithesaurus.*" %>
+<%@page import="openthesaurus.MemoryDatabaseCreationService; com.vionto.vithesaurus.*" %>
 <%@page import="com.vionto.vithesaurus.tools.*" %>
 <html>
     <head>
@@ -19,7 +19,7 @@
           <ul>
               <g:each in="${matches}" status="i" var="term">
                   <li>
-                      <g:if test="${term.highlightTerm.length() >= MemoryDatabaseCreationService.FIELD_LENGTH}">
+                      <g:if test="${term.highlightTerm.length() >= openthesaurus.MemoryDatabaseCreationService.FIELD_LENGTH}">
                           <!-- linking won't work as we need the full string for that but memory table has limited length -->
                           ${term.highlightTerm}...
                       </g:if>

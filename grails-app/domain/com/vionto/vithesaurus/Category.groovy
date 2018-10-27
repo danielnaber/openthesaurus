@@ -17,11 +17,13 @@
  */ 
 package com.vionto.vithesaurus
 
-import com.vionto.vithesaurus.tools.StringTools;
+import com.vionto.vithesaurus.tools.StringTools
+import grails.persistence.Entity;
 
 /**
  * The category that synsets are associated with.
  */
+@Entity
 class Category implements Comparable, Cloneable {
 
     /** User-visible name */

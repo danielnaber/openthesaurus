@@ -15,11 +15,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import grails.persistence.Entity;
 
 /**
  * Changes caused by user, e.g. the creation of a synset.
  */
+@Entity
 class UserEvent {
 
     Date creationDate
@@ -31,6 +34,8 @@ class UserEvent {
     List propertyDiffs
     String oldValue     // value of old object's toDetailedValue()
     String newValue     // value of new object's toDetailedValue()
+
+    static transients = ['propertyDiffs']
 
     static belongsTo = [synset:Synset]
 

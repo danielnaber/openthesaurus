@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006"  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <!--The version of your extension. NOT the one of OpenOffice.org...
+        It will also be used to automatically check if there are updates for this
+        extension available. Newer versions should have higher values.
+    -->
+    <version value="__DATE__" />
+
+    <!--A unique identifier for your extension.
+        In order to avoid name clashes with other extensions it should probably hold
+        your company name or your full name along with the name of the extension in a form like
+            MyFirstName.MyLastName.DictionayName
+        or  www.MyWebpage.net.DictionayName
+        Or  you may use the project name of your submitted extension to start with...
+        For the very same reason they should NOT start with 'org.openoffice'.
+        When choosing the identifier keep in mind that others may provide a dictionary for that
+        very same language as well and even then your identifier still needs to be unique!
+    -->
+    <identifier value="de.openthesaurus" />
+
+    <!--Dictionaries should work with all platforms...-->
+    <platform value="all" />
+    
+    <!--A minimal OpenOffice.org version the extension requires to be used with.
+        For dictionary extensions that will be 'OpenOffice.org 3.0'
+    -->
+    <dependencies>
+        <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0" />
+    </dependencies>
+    
+    <!--A name for the extension to be used in the UI.
+        For dictionaries it should show the locales supported
+        and the purpose spell checking and/or hyphenation and/or thesaurus.
+        The display name can be localized and there should be at least one
+        entry for each language it implements and one default English entry.
+        The default entry is the one listed first.
+    -->
+    <display-name>
+        <name lang="en">German thesaurus</name>
+        <name lang="de">Deutscher Thesaurus</name>
+    </display-name>
+
+	<publisher>
+		<name xlink:href="http://www.openthesaurus.de" lang="de">openthesaurus.de</name>
+		<name xlink:href="http://www.openthesaurus.de" lang="en">openthesaurus.de</name>
+	</publisher>
+      
+</description>

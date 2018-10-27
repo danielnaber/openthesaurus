@@ -42,7 +42,7 @@
           <div class="iconLink">
               <table>
                   <tr>
-                      <td><a href="http://twitter.com/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-twitter.png')}" width="30" height="30" alt="Twitter-Icon"/></a></td>
+                      <td><a href="http://twitter.com/openthesaurus"><asset:image src="icon-twitter.png" width="30" height="30" alt="Twitter-Icon"/></a></td>
                       <td>&nbsp;</td>
                       <td><g:message code="footer.twitter"/></td>
                   </tr>

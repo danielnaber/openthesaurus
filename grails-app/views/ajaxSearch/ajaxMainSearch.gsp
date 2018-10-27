@@ -12,7 +12,7 @@
             <g:message code="result.ajax.no.exact.matches.for" args="${[params.q.toString()]}"/>
             <g:if test="${mostSimilarTerm}">
                 <g:set var="simTerm" value="${mostSimilarTerm.term}"/>
-                - meinten Sie <g:link url="${createLinkTo(dir:'synonyme')}/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
+                - meinten Sie <g:link url="/synonyme/${simTerm.encodeAsURL()}">${simTerm.encodeAsHTML()}</g:link>?
             </g:if>
         </div>
     </g:if>
@@ -42,7 +42,7 @@
                            directMatchingTerm = '<span class="synsetmatchDirect">' + directMatchingTerm + '</span>'
                        }
                        %>
-                       <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().replace('/', '___').encodeAsURL()}">
+                       <g:link url="/synonyme/${term.toString().replace('/', '___').encodeAsURL()}">
                            ${directMatchingTerm}
                            <g:render template="metaInfo" model="${[term:term]}"/>
                        </g:link>
@@ -86,7 +86,7 @@
                             Matcher matcher = pattern.matcher(term.toString().encodeAsHTML());
                             String matchingTerm = matcher.replaceAll("<span class=\"synsetmatchDirect\">\$1</span>");
                         %>
-                        <g:link url="${createLinkTo(dir:'synonyme')}/${term.toString().encodeAsURL()}">
+                        <g:link url="/synonyme/${term.toString().encodeAsURL()}">
                             ${matchingTerm}
                             <g:render template="metaInfo" model="${[term:term]}"/>
                         </g:link>

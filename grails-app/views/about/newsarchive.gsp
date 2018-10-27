@@ -237,7 +237,7 @@
         </tr>
         <tr>
             <td valign="top" align="right" width="90"><span class="newsdate">2009-08-31</span></td>
-            <td valign="top">OpenThesaurus-Daten können jetzt auch <a href="../about/api">über
+            <td valign="top">OpenThesaurus-Daten können jetzt auch <a href="/api">über
                 diese REST-API</a> angefragt werden</td>
         </tr>
         <tr>
@@ -323,7 +323,7 @@
             <td valign="top" align="right" width="90"><span class="newsdate">2005-04-18</span></td>
             <td valign="top">Der Thesaurus für OpenOffice.org 2.0 beinhaltet ab jetzt auch Oberbegriffe.
                 Außerdem sei noch auf die Seite <a
-                href="../about/index">Hintergrundinformationen</a> hingewiesen, auf der sich
+                href="/index">Hintergrundinformationen</a> hingewiesen, auf der sich
                 zwei Papers über OpenThesaurus befinden.</td>
         </tr>
         

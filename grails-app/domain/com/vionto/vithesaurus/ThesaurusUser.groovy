@@ -15,11 +15,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-package com.vionto.vithesaurus;
+package com.vionto.vithesaurus
+
+import grails.persistence.Entity;
 
 /**
  * A user of this system.
  */
+@Entity
 class ThesaurusUser {
 
     String userId       // currently this is the email address
@@ -40,20 +43,20 @@ class ThesaurusUser {
     final static ADMIN_PERM = "admin"
     
     static constraints = {
-        userId(length:6..100, unique:true)
-        password(length:5..50)
+        userId(size:5..100, unique:true)
+        password(size:5..50)
         permission(inList:[USER_PERM, ADMIN_PERM])
         realName(nullable:true)
         lastLoginDate(nullable:true)
         confirmationDate(nullable:true)
         confirmationCode(nullable:true)
-        publicIntro(nullable:true, length:0..1000)
-        url(nullable:true, length:0..1000)
+        publicIntro(nullable:true, size:0..1000)
+        url(nullable:true, size:0..1000)
         salt(nullable:true)  // null for old users
     }
 
     ThesaurusUser() {
-        this.creationDate = new Date()
+        creationDate = new Date()
         blocked = false
         acceptsMessages = true
     }

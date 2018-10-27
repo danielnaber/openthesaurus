@@ -18,14 +18,18 @@
 package com.vionto.vithesaurus
 
 import com.vionto.vithesaurus.tools.StringTools
+import grails.core.GrailsApplication
+import grails.persistence.Entity
+import grails.util.Holders
 import org.hibernate.ObjectNotFoundException;
 
 /**
  * A term - terms are what synsets are made of.
  */
+@Entity
 class Term implements Comparable, Cloneable {
 
-    def grailsApplication
+    def grailsApplication = Holders.grailsApplication
 
     Synset synset           // synset to which this term belongs
     String word
@@ -214,7 +218,7 @@ class Term implements Comparable, Cloneable {
             throw new RuntimeException(msg)
         }
         // additionally, log to logging system:
-        log.info(event)
+        log.info(event.toString())
     }
 
     /**
