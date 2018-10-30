@@ -136,8 +136,7 @@ class SynsetController extends BaseController {
           if (apiRequest) {
             response.setHeader("Access-Control-Allow-Origin", "*")
             try {
-                // TODO(KS): re-enable flood check
-//              sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
+              sleepTimeInfo = requestLimiterService.preventRequestFlooding(request)
             } catch (TooManyRequestsException e) {
               log.info("Too many API requests from ${e.getIpAddress()}, blocking request " + params + ", user agent: " + request.getHeader("User-Agent"))
               render(status: 429/*too many requests*/, text: "Too many requests from your IP address (${e.getIpAddress()}) - please stop flooding our service. Use http://www.openthesaurus.de/about/download instead.")
