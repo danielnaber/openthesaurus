@@ -15,40 +15,6 @@ body {
   padding: 80px 0 20px 0;
   background-color: #F7F7F7;
   margin-bottom: 10px;
-  /*
-  commented out because it sometimes leads to fuzzyness in Firefox:
-  -moz-transform: skewY(-1.5deg);
-  -moz-transform-origin: 0 0;
-  -webkit-transform: skewY(-1.5deg);
-  -webkit-transform-origin: 0 0;
-  */
-  /* commented out because it broke the layout (main content was skewed)
-  -ms-transform: skewY(-1.5deg);
-  -ms-transform-origin: 0 0;
-  */
-  /* commented out because of fuzzy rendering in Opera
-  -o-transform: skewY(-1.5deg);
-  -o-transform-origin: 0 0;
-  */
-}
-
-
-#body > #content {
-  /*
-  see above:
-  -moz-transform: skewY(1.5deg);
-  -moz-transform-origin: 0 0;
-  -webkit-transform: skewY(1.5deg);
-  -webkit-transform-origin: 0 0;
-  */
-  /* see above
-  -ms-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  */
-  /* see above
-  -o-transform: skewY(1.5deg);
-  -o-transform-origin: 0 0;
-  */
 }
 
 #navigation {
@@ -93,6 +59,12 @@ p {
 a:link, a:visited {
     text-decoration: none;
     color: #0071bd;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #00437e;
     font-weight: bold;
 }
 
@@ -228,7 +200,7 @@ h1 {
   margin: 0 auto;
   margin-bottom: 50px;
   text-align: left;
-  width: 780px;
+  width: 880px;
 }
 
 h2 {
@@ -544,7 +516,7 @@ strong {
 }
 
 .noTopMargin {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .submitButton {
@@ -608,7 +580,7 @@ strong {
 }
 
 .partnerSites {
-    margin-top: 0px;
+    margin-top: 0;
     color: white;
     font-weight: bold;
     font-size: 16px;
@@ -665,10 +637,11 @@ strong {
 
 .searchResultPopup {
     position: absolute;
-    outline: 3px solid white;
     padding: 10px;
     display: block;
-    border: solid 2px #aaaaaa;
+    -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
     background-color: white;
     width: 90%;
     max-width: 760px;
@@ -680,6 +653,18 @@ strong {
     z-index: 100;
 }
 
+#popupCloseButton:hover {
+  opacity: 0.5;
+  float: right;
+  margin-left: 10px;
+}
+
+#popupCloseButton {
+  opacity: 0.25;
+  float: right;
+  margin-left: 10px;
+}
+
 .searchResultPopup hr {
     color: #ffffff;
     background-color: #ffffff;
@@ -688,13 +673,13 @@ strong {
 }
 
 .resultColumn {
-    width: 370px;
+    width: 420px;
     float: left;
     margin-bottom: 15px;
 }
 
 .footerColumn {
-    width: 320px;
+    width: 370px;
     float: left;
     margin-bottom: 50px;
 }
@@ -710,7 +695,31 @@ strong {
     margin-bottom: 20px;
 }
 
+.loggedInInfo {
+    margin-top: 23px;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+#spinner {
+  visibility: hidden;
+  position: absolute;
+  left: 295px;
+  top: 8px;
+}
+
 @media (max-width: 800px) {
+    .desktopOnly {
+        display: none;
+    }
+    .mobileOnly {
+        display: inline;
+    }
+    #spinner {
+        left: 178px;
+    }
     #search {
         width: 100%;
     }
@@ -722,6 +731,7 @@ strong {
         /*background-color: #ffff00;  for debugging */
     }
     .logo {
+        margin-top: 0;
         margin-bottom: 0;
         display: none !important;
     }
@@ -729,14 +739,17 @@ strong {
         text-align: left;
     }
     #search-field {
-        width: 250px !important;
+        width: 200px !important;
     }
     #search input[type='text'] {
         margin-left: 5px;
         padding-right: 38px;
     }
     .searchResultPopup {
-        top: 150px;
+        top: 120px;
+        font-size: 15px;
+        padding: 5px;
+        width: 95%;
     }
     .resultColumn {
         width: 100%;
@@ -744,7 +757,8 @@ strong {
         margin-bottom: 15px;
     }
     #body {
-        padding: 50px 0 20px 0;
+        /* TODO: padding difference between Chrome and Safari */
+        padding: 35px 0 20px 0;
         background-color: #F7F7F7;
         margin-bottom: 10px;
     }
@@ -752,11 +766,13 @@ strong {
         display: none !important;
     }
     #search .mobileClaim {
-        /*text-transform: uppercase;*/
-        font-size: 16px;
+        font-size: 14px;
     }
     .rightColumn {
         width: 320px;
+    }
+    .loggedInInfo {
+        margin-top: 0px;
     }
 }
 
@@ -784,16 +800,15 @@ strong {
 }
 
 .tooltip {
-  position:absolute;
-  background-color:#eeeeee;
-  border: 1px solid #aaaaca;
+  position: absolute;
+  background-color: white;
   font-size: smaller;
-  padding:4px;
+  padding: 6px;
   min-width: 100px;
   max-width: 300px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+  box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
 }
 
 .cc_container {
@@ -810,4 +825,8 @@ strong {
 
 .cc_container a {
   color: #51c5ff !important;
+}
+
+.socialMediaIcon:hover {
+  filter: brightness(1.2);
 }

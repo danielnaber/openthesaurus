@@ -1,23 +1,4 @@
 <%@page import="com.vionto.vithesaurus.*" %>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-   		<meta name="layout" content="main" />
-        <title><g:message code='result.matches.for.title' args="${[params.q]}"/></title>
-
-        <g:if test="${descriptionText}">
-          <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
-        </g:if>
-        <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-        <script>
-            var googletag = googletag || {};
-            googletag.cmd = googletag.cmd || [];
-        </script>
-
-    </head>
-    <body>
-
-    <hr style="margin-top:7px;margin-bottom:0" class="desktopOnly"/>
 
     <div class="resultColumn" style="margin-right:37px">
         <g:render template="mainmatches"/>
@@ -78,16 +59,10 @@
             </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
 
-        <g:render template="/synset/ad"/>
-                
-        <g:if test="${params.ad == '1'}">
-            <div style="margin-top:20px; text-align: center">
-                <a rel="nofollow" href="https://languagetool.org"><img align="top" src="${resource(dir:'images/ads',file:'ad180x150.png')}" alt="ad space"/></a>
-                <br><span style="color:#999999">Anzeige</span>
-                <hr style="margin-top:20px" />
-            </div>
+        <g:if test="${!session.user}">
+            <div style="height:280px"></div>
         </g:if>
-
+                
         <g:render template="wiktionary"/>
 
         <hr style="margin-top:20px" />
@@ -104,6 +79,3 @@
     </div>
     
     <div style="clear: both"></div>
-    
-    </body>
-</html>

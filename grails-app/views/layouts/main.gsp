@@ -3,7 +3,7 @@
     <head>
         <title><g:layoutTitle default="OpenThesaurus" /></title>
         <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-min.css')}" />
-        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}?v20180523" />
+        <link type="text/css" rel="stylesheet" href="${createLinkTo(dir:'css',file:'layout.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="/openSearch" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

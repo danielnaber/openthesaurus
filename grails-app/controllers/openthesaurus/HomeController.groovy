@@ -20,10 +20,8 @@ package openthesaurus
 
 class HomeController {
     
-    def index() {
-        def lnk = resource(dir:'images',file:message(code:'logo'))
-        log.debug("link created: $lnk")
-        null
-    }
-    
+    def index() {}
+
+    def index2() {}
+
 }

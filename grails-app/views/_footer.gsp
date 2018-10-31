@@ -28,7 +28,7 @@
                               <!--
                               var firstPart = "<g:message code="footer.email.beforeAt"/>";
                               var lastPart = "<g:message code="footer.email.afterAt"/>";
-                              document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"30\" height=\"30\" alt=\"Contact-Icon\"/><" + "/a>");
+                              document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img class=\"socialMediaIcon\" src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"36\" height=\"36\" alt=\"Contact-Icon\"/><" + "/a>");
                               // -->
                           </script>
                       </td>
@@ -42,7 +42,7 @@
           <div class="iconLink">
               <table>
                   <tr>
-                      <td><a href="http://twitter.com/openthesaurus"><asset:image src="icon-twitter.png" width="30" height="30" alt="Twitter-Icon"/></a></td>
+                      <td><a href="http://twitter.com/openthesaurus"><asset:image class="socialMediaIcon" src="icon-twitter.png" width="36" height="36" alt="Twitter-Icon"/></a></td>
                       <td>&nbsp;</td>
                       <td><g:message code="footer.twitter"/></td>
                   </tr>
@@ -51,7 +51,7 @@
           <div class="iconLink">
               <table>
                   <tr>
-                      <td><a href="https://github.com/danielnaber/openthesaurus"><img src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="30" height="30" alt="Github-Icon"/></a></td>
+                      <td><a href="https://github.com/danielnaber/openthesaurus"><img class="socialMediaIcon" src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="36" height="36" alt="Github-Icon"/></a></td>
                       <td>&nbsp;</td>
                       <td><g:message code="footer.github"/></td>
                   </tr>

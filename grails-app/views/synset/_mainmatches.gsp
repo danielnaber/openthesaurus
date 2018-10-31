@@ -2,6 +2,7 @@
 <g:if test="${totalMatches > 0}">
 
     <g:each in="${synsetList}" status="i" var="synset">
+        <!--REALMATCHES-->
 
         <div style="margin-bottom: 10px;margin-top:16px">
 
@@ -186,9 +187,9 @@
                     </div>
                 </g:if>
 
-                <g:link action="edit" id="${synset.id}">
-                    <span class="changeLink"><g:message code="result.edit"/></span>
-                </g:link>
+                    <g:link action="edit" id="${synset.id}">
+                        <span class="changeLink"><g:message code="result.edit"/></span>
+                    </g:link>
             </div>
 
         </div>
