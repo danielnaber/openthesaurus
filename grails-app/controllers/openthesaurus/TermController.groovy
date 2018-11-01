@@ -25,9 +25,6 @@ import com.vionto.vithesaurus.tools.IpTools
 
 class TermController extends BaseController {
     
-    def beforeInterceptor = [action: this.&auth,
-                             except: ['edit', 'list', 'antonyms']]
-
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 

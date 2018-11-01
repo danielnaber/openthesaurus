@@ -32,8 +32,6 @@ import java.util.regex.Matcher
  */
 class ImportController extends BaseController {
     
-    def beforeInterceptor = [action: this.&adminAuth]
- 
     private final String SUPER_NAME = "Oberbegriff"
     private final String SUPER_NAME_REVERSE = "Unterbegriff"
     private final String SUPER_VERB = "ist ein Oberbegriff von"

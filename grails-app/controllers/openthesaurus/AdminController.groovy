@@ -23,9 +23,7 @@ import com.vionto.vithesaurus.tools.StringTools
 import org.apache.commons.codec.digest.DigestUtils
 
 class AdminController extends BaseController {
-    
-    def beforeInterceptor = [action: this.&adminAuth]
-    
+
     def index() {
         final int resultLimit = 10
         def latestUsers = ThesaurusUser.withCriteria {

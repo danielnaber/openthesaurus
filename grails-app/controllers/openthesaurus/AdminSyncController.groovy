@@ -28,8 +28,6 @@ import grails.gorm.DetachedCriteria
  */
 class AdminSyncController extends BaseController {
     
-    def beforeInterceptor = [action: this.&adminAuth]
-    
     def index() {
         File f = new File("/tmp/formulierung-mit-stil.de/tabkeywords.txt")
         int headWordUnknown = 0  // a headword from the dictionary is not known at all

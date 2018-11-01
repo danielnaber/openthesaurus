@@ -37,11 +37,6 @@ class UserController extends BaseController {
     private static int MAX_MAILS_PER_DAY_PER_USER = 25
     private static int MAX_MAILS_PER_HOUR_TOTAL = 50
 
-    def beforeInterceptor = [action: this.&auth, 
-                             except: ['login', 'register', 'doRegister', 'confirmRegistration',
-                                      'lostPassword', 'requestPasswordReset', 'confirmPasswordReset',
-                                      'resetPassword', 'profile']]
-
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', doRegister:'POST',
                                  confirmPasswordReset: 'GET', requestPasswordReset:'POST']
     
@@ -359,7 +354,7 @@ class UserController extends BaseController {
                 // *before* he arrives at the forum page:
                 log.info("redirect [1] for user ${user} to ${params.returnUrl}")
                 redirect(action:'redirect', params:[url: params.returnUrl])
-            } else if (redirectParams?.controller && redirectParams?.action && redirectParams?.action != "login") {
+            } else if (redirectParams?.controller && redirectParams?.action != "login") {
                 log.info("redirect [2] for user ${user} to controller/action/params: ${redirectParams?.controller}, ${redirectParams?.action}, ${params:redirectParams}")
                 redirect(controller:redirectParams?.controller,
                         action: redirectParams?.action, params:redirectParams)

@@ -40,10 +40,6 @@ class SynsetController extends BaseController {
     def wordListService
     def baseformService
 
-    def beforeInterceptor = [action: this.&auth,
-                             except: ['index', 'list', 'search', 'newSearch', 'oldSearch', 'edit', 'statistics',
-                                      'createMemoryDatabase', 'refreshRemoteWordLists', 'variation', 'substring', 'listBySize']]
-
     // the delete, save and update actions only accept POST requests
     static def allowedMethods = [delete:'POST', save:'POST', update:'POST', addSynonym:'POST']
     

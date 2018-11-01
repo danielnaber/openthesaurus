@@ -29,8 +29,6 @@ import com.vionto.vithesaurus.tools.IpTools
 
 class MergeController extends BaseController {
     
-    def beforeInterceptor = [action: this.&auth]
-
     static def allowedMethods = [doMerge:'POST']
 
     def index() {

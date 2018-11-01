@@ -8,8 +8,6 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class TagController extends BaseController {
 
-    def beforeInterceptor = [action: this.&adminAuth, except: ['index', 'list']]
-
     def dataSource       // will be injected
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

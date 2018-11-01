@@ -28,8 +28,6 @@ import java.sql.Statement
  */
 class CheckController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth]
-
     def dataSource       // will be injected
 
     /**

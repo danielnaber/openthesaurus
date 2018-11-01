@@ -23,8 +23,6 @@ import java.sql.Connection
 
 class SuggestController extends BaseController {
     
-    def beforeInterceptor = [action: this.&auth]
-
     def dataSource       // will be injected
     def searchService
     

@@ -34,8 +34,6 @@ import org.apache.commons.io.FileUtils
  */
 class ExportOxtController extends BaseController {
 
-  def beforeInterceptor = [action: this.&localHostAuth]
-
   def dataSource       // will be injected
   def sessionFactory   // will be injected
   def searchService

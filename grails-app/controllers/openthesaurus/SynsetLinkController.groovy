@@ -23,8 +23,6 @@ import com.vionto.vithesaurus.*
             
 class SynsetLinkController extends BaseController {
     
-    def beforeInterceptor = [action: this.&adminAuth]
-
     def index() { redirect(action:'list',params:params) }
 
     // the delete, save and update actions only accept POST requests

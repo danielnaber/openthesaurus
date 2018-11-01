@@ -32,8 +32,6 @@ import java.sql.Statement
  */
 class ExportTextController extends BaseController {
 
-  def beforeInterceptor = [action: this.&localHostAuth]
-    
   def dataSource       // will be injected
   def sessionFactory   // will be injected
   
