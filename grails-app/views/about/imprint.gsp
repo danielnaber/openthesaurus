@@ -376,7 +376,7 @@
                 <p>Wenn Sie die von yieldlove zur Verfügung gestellten Werbebannerdaten korrigieren, aktualisieren oder löschen 
                 möchten oder wenn Sie die personenbezogenen Daten, die Sie yieldlove über das Kontaktformular auf yieldloves Homepage 
                 zur Verfügung gestellt haben, korrigieren, aktualisieren oder löschen möchten, können Sie yieldlove kontaktieren per
-                E-Mail an privacy@yieldlove.com.
+                E-Mail an datenschutzbeauftragter@stroeer.de.
 
                 <p>Yieldlove nimmt an den Selbstregulierungs-Programmen der European Digital Advertising Alliance (EDAA) teil und hält sich
                 an die EDAA-Prinzipien für Online Behavioral Advertising. Die EDAA fungiert hauptsächlich als zentrale Lizenzierungsstelle 
@@ -386,7 +386,7 @@
                 Klicken Sie hier, um mehr über die EDAA zu erfahren.
                 
                 <p>Wenn Sie Fragen und / oder Kommentare haben oder eine Beschwerde im Bereich Werbung einreichen möchten,
-                kontaktieren Sie uns oder yieldlove per E-Mail unter privacy@yieldlove.com.
+                kontaktieren Sie uns oder yieldlove per E-Mail unter datenschutzbeauftragter@stroeer.de.
                 
             </g:if>
             <g:else>
