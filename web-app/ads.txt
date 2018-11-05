@@ -60,3 +60,4 @@ google.com, pub-3414496606998809, DIRECT, f08c47fec0942fa0
 appnexus.com, 7944, RESELLER
 districtm.io, 101161, DIRECT
 openx.com, 540364076, RESELLER, 6a698e2ec38604c6
+google.com, pub-8091481208694875, RESELLER, f08c47fec0942fa0
