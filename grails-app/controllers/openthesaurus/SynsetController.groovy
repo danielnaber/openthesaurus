@@ -21,8 +21,6 @@ package openthesaurus
 
 import com.vionto.vithesaurus.*
 import groovy.sql.Sql
-import org.springframework.beans.factory.annotation.Autowire
-import org.springframework.beans.factory.annotation.Autowired
 
 import java.sql.Connection
 
@@ -554,7 +552,7 @@ class SynsetController extends BaseController {
      * Create the in-memory database of all terms for fast substring search
      */
     def createMemoryDatabase() {
-      if (!isLocalHost(request)) {
+      if (!IpTools.isLocalHost(request)) {
         throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
       log.info("Creating in-memory database, request by " + IpTools.getRealIpAddress(request))
@@ -567,7 +565,7 @@ class SynsetController extends BaseController {
      * Get lists from korrekturen.de - specific to openthesaurus.de.
      */
     def refreshRemoteWordLists() {
-      if (!isLocalHost(request)) {
+      if (!IpTools.isLocalHost(request)) {
         throw new Exception("Access denied from " + IpTools.getRealIpAddress(request))
       }
       wordListService.refreshWordList()

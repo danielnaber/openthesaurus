@@ -38,16 +38,11 @@ class AuthService {
     /**
      * Allows access only for requests coming from 127.0.0.1
      */
-    def localHostAuth(request) {
-        if (isLocalHost(request)) {
+    def localHostAuth(HttpServletRequest request) {
+        if (IpTools.isLocalHost(request)) {
             return true
         }
         log.info("Access denied to no-access area for host " + IpTools.getRealIpAddress(request) + ", " + request.getRequestURI())
         return false
-    }
-
-    protected boolean isLocalHost(HttpServletRequest request) {
-        String ip = IpTools.getRealIpAddress(request)
-        return ip == "127.0.0.1" || ip == "0:0:0:0:0:0:0:1" || ip == "::1"
     }
 }

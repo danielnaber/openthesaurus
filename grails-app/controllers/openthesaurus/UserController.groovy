@@ -26,6 +26,8 @@ import javax.servlet.http.Cookie
 import uk.co.smartkey.jforumsecuresso.SecurityTools
 
 class UserController extends BaseController {
+
+    def authService
     
     public static final String LOGIN_COOKIE_NAME = "loginCookie"
 
@@ -498,7 +500,7 @@ class UserController extends BaseController {
     }
     
     def list() {
-        if (!isAdmin()) {
+        if (!authService.isAdmin(session)) {
             render "Access denied"
             return
         }
@@ -507,7 +509,7 @@ class UserController extends BaseController {
     }
 
     def delete() {
-        if (!isAdmin()) {
+        if (!authService.isAdmin(session)) {
             render "Access denied"
             return
         }
@@ -562,7 +564,7 @@ class UserController extends BaseController {
     }
 
     def create() {
-        if (!isAdmin()) {
+        if (!authService.isAdmin(session)) {
             render "Access denied"
             return
         }
@@ -572,7 +574,7 @@ class UserController extends BaseController {
     }
 
     def saveBlockState() {
-        if (!isAdmin()) {
+        if (!authService.isAdmin(session)) {
             render "Access denied"
             return
         }

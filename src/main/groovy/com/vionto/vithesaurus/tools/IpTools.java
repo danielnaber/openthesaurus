@@ -52,4 +52,14 @@ public class IpTools {
         return request.getRemoteAddr();
     }
 
+    /**
+     * Query's if the user's IP is the local host.
+     * @return true if user's IP is the local host
+     */
+    public static boolean isLocalHost(final HttpServletRequest request) {
+        String ip = getRealIpAddress(request);
+        return ip.equals("127.0.0.1") || ip.equals("0:0:0:0:0:0:0:1") || ip.equals("::1");
+    }
+
+
 }
