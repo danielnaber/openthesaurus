@@ -522,7 +522,7 @@ class SynsetController extends BaseController {
             if (substringTerms && substringTerms.size() > 0) {
                 List substringTermsList = []
                 for (substringTerm in substringTerms) {
-                    substringtermsList << [term:substringTerm.term]
+                    substringTermsList << [term:substringTerm.term]
                 }
                 substringterms substringTermsList
             }
