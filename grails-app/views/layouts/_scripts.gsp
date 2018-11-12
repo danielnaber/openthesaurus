@@ -269,7 +269,7 @@
         dismiss: "Okay",
         learnMore: "Datenschutzerklärung",
         link: '/about/imprint',
-        theme: 'dark-bottom'
+        theme: "${assetPath(src: 'dark-bottom.css')}"
     };
     <!-- Ende Cookie Plugin -->
 
