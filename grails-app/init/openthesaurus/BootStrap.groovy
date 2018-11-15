@@ -32,6 +32,16 @@ class BootStrap {
            new Language("German", "de").save()
        }
 
+       // create synset link types
+       if (!LinkType.findByLinkName("Oberbegriff")) {
+         log.info("Creating link type 'Oberbegriff'")
+         new LinkType(linkName: 'Oberbegriff', verbName: 'Unterbegriff', otherDirectionLinkName: 'ist ein Oberbegriff von').save()
+       }
+       if (!LinkType.findByLinkName("Assoziation")) {
+         log.info("Creating link type 'Assoziation'")
+         new LinkType(linkName: 'Assoziation', verbName: 'Assoziation', otherDirectionLinkName: 'assoziiert').save()
+       }
+
        //
        // the following items have been added for OpenThesaurus: 
        //
