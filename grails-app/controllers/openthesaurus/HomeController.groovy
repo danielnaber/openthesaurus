@@ -19,9 +19,8 @@
 package openthesaurus
 
 class HomeController {
-    
+
     def index() {}
 
     def index2() {}
-
 }
