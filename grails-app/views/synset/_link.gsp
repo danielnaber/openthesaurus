@@ -66,7 +66,7 @@
             <g:set var="linkType" value="${LinkType.findByLinkName(linkTypeName)}"/>
             <g:if test="${linkType}">
                 <div id="addSynset-${linkTypeName}" style="display:none;margin-top:5px">
-                    <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, '${linkTypeName}', 'synset/ajaxSearch');" autocomplete="off"/>
+                    <g:textField name="q${linkTypeName}" value="" onkeypress="return doNotSubmitOnReturn(event);" onkeyup="return doSynsetSearchOnKeyUp(event, '${linkTypeName}', '/synset/ajaxSearch');" autocomplete="off"/>
                     <input type="hidden" name="linkType${linkTypeName}.id" value="${linkType.id}">
     
                     <span id="addSynsetProgress${linkTypeName}" style="visibility:hidden;position:absolute">

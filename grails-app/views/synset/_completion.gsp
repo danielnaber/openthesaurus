@@ -68,7 +68,7 @@ function onValueChange(ajaxUrl) {
         cursorPosition = -1;
         loadSearch(linkType);
         new jQuery.ajax(
-          '${createLinkTo(dir:"' + ajaxUrl + '",file:"")}',
+          ajaxUrl,
           {
            data: {
             q: searchString,
