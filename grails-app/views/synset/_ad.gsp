@@ -12,16 +12,10 @@
         </g:if>
     </g:if>
     <div style="margin-top:20px; text-align: center">
-        <g:if test="${Math.random() < 0 && !googleBlock}">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Ergebnisseite -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:250px"
-                 data-ad-client="ca-pub-3414496606998809"
-                 data-ad-slot="2169876034"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <g:if test="${mso}">
+            <!--MSO-ad-->
+            <div id="openthesaurus_medium_rectangle_1"></div>
+            <!--/MSO-->
         </g:if>
         <g:else>
             <!-- Yieldlove AdTag - openthesaurus.de - responsive -->

@@ -61,3 +61,9 @@ appnexus.com, 7944, RESELLER
 districtm.io, 101161, DIRECT
 openx.com, 540364076, RESELLER, 6a698e2ec38604c6
 google.com, pub-8091481208694875, RESELLER, f08c47fec0942fa0
+openx.com, 540267737, DIRECT, 6a698e2ec38604c6
+indexexchange.com, 187734, RESELLER
+appnexus.com, 9861, DIRECT
+yieldlab.net, 6374319, RESELLER, yieldlab.net, 227224, RESELLER
+pubmatic.com, 157581, DIRECT, 5d62403b186f2ace
+pubmatic.com, 2468, RESELLER, 5d62403b186f2ace
