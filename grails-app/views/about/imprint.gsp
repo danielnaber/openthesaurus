@@ -141,14 +141,20 @@
                 <a href="https://www.google.de/intl/de/adsense/start/">https://www.google.de/intl/de/adsense/start/</a>
                 
                 
-                <h2>Werbung über YieldLove</h2>
+                <h2>Werbung über Publishung Partner</h2>
 
-                <p>openthesaurus.de enthält nutzungsbasierte Online-Werbung von Drittanbietern. Diese wird über unseren Werbevermarkter Yieldlove GmbH,
-                Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“) ausgespielt. Um die Werbeauslieferung zu optimieren, werden von Yieldlove 
-                und deren Partnern Cookies eingesetzt.
+                <p>openthesaurus.de enthält nutzungsbasierte Online-Werbung von Drittanbietern. Diese wird über folgende Werbevermarkter
+                    ausgespielt:
+                    <ul>
+                        <li>Yieldlove GmbH, Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“)</li>
+                        <li>MSO Digital GmbH & Co. KG, Erich-Maria-Remarque-Ring 14, 49074 Osnabrück</li>
+                    </ul>
+                            
+                <p>Um die Werbeauslieferung zu optimieren, werden von unseren Werbevermarktern und deren Partnern Cookies eingesetzt.</p>
 
-                <p>Informationen dazu, wie Yieldlove Daten verarbeitet und welche Daten betroffen sind, erhalten Sie auch in der Privacy 
-                Policy von Yieldlove: <a href="http://www.yieldlove.com/privacy">www.yieldlove.com/privacy</a>.
+                <p>Informationen dazu, wie Yieldlove und MSO Digital Daten verarbeitet und welche Daten betroffen sind, erhalten Sie auch in der Privacy 
+                Policy von Yieldlove: <a href="http://www.yieldlove.com/privacy">www.yieldlove.com/privacy</a> und
+                MSO Digital: <a href="https://www.mso-digital.de/datenschutz/">www.mso-digital.de/datenschutz/</a>.
 
                 <h3>COOKIES</h3>
 
@@ -175,48 +181,48 @@
                 daher evtl. keine Berücksichtigung mehr und muss von Ihnen erneut erhoben werden.
 
 
-                <p>Was für Cookies verwendet yieldlove?
+                <p>Was für Cookies verwenden unsere Werbevermarkter?
 
                 <p><b>Analyse-Cookies</b><br>
-                yieldlove verwendet Analyse-Cookies, um das Nutzungsverhalten (z. B. geklickte Werbebanner, besuchte Unterseiten, gestellte
+                Unsere Werbevermarkter verwenden Analyse-Cookies, um das Nutzungsverhalten (z. B. geklickte Werbebanner, besuchte Unterseiten, gestellte
                  Suchanfragen) ihrer Nutzer aufzeichnen und in statistischer Form auswerten zu können.
 
                 <p><b>Werbe-Cookies</b><br>
-                yieldlove verwendet auch Cookies zu werblichen Zwecken. Die mit Hilfe dieser Cookies erstellten Profile zum Nutzungsverhalten
-                 (z. B. geklickte Werbebanner, besuchte Unterseiten, gestellte Suchanfragen) werden von yieldlove verwendet, um Ihnen
+                Unsere Werbevermarkter verwendeen auch Cookies zu werblichen Zwecken. Die mit Hilfe dieser Cookies erstellten Profile zum Nutzungsverhalten
+                 (z. B. geklickte Werbebanner, besuchte Unterseiten, gestellte Suchanfragen) werden verwendet, um Ihnen
                   Werbung bzw. Angebote anzuzeigen, die auf Ihre Interessen zugeschnitten sind ("interessenbasierte Werbung").
 
                 <p><b>Werbe-Cookies Dritter</b><br>
-                yieldlove erlaubt auch anderen Unternehmen, Daten unserer Nutzer mithilfe von Werbe-Cookies zu erheben. Dies
-                ermöglicht yieldlove und Dritten, den Nutzern unseres Online-Angebots interessenbasierte Werbung anzuzeigen,
+                Unsere Werbevermarkter erlauben auch anderen Unternehmen, Daten unserer Nutzer mithilfe von Werbe-Cookies zu erheben. Dies
+                ermöglicht ihnen und Dritten, den Nutzern unseres Online-Angebots interessenbasierte Werbung anzuzeigen,
                 die auf einer Analyse ihres Nutzungsverhaltens (z. B. geklickte Werbebanner, besuchte Unterseiten, gestellte 
                 Suchanfragen) insgesamt und nicht beschränkt auf unser Online-Angebot, basiert.
 
-                <p>Yieldlove liefert im Auftrag seiner Kunden Werbebanner aus. Alle yieldlive-Banner verwenden Cookies. yieldlove platziert
+                <p>Unsere Werbevermarkter liefern im Auftrag ihrer Kunden Werbebanner aus. Alle diese Banner verwenden Cookies. Unsere Werbevermarkter platzieren
                 diese Banner mit Hilfe von Drittanbietern auf Websites Dritter, wie zum Beispiel einer Nachrichtenseite oder openthesaurus.de.
 
-                <p>Zu Diagnosezwecken, Fehlersuche und Aufdeckung von betrügerischem Verhalten sammelt yieldlove in einigen Anzeigeneinheiten 
+                <p>Zu Diagnosezwecken, Fehlersuche und Aufdeckung von betrügerischem Verhalten sammeln unsere Werbevermarkter in einigen Anzeigeneinheiten 
                 Benutzerinformationen mittels Cookies, die eine Lebensdauer von 6 Monaten haben. Die erfassten Benutzerinformationen 
                 umfassen Benutzeragent, Gerät, HTTP-Referrer und die IP. Diese Daten werden nicht länger als 7 Tage aufbewahrt.
 
-                <p>Yieldlove unternimmt angemessene Schritte, um alle Informationen, die yieldlove verarbeitet, vor Missbrauch, Verlust, 
-                unberechtigtem Zugriff, Änderung oder Benachrichtigung zu schützen. yieldlove ergreift physische, elektronische und 
-                verfahrenstechnische Sicherheitsmaßnahmen, um die von yieldlove verarbeiteten Daten zu schützen. Dadurch beschränkt
-                yieldlove den Zugriff auf diese Informationen auf autorisierte Mitarbeiter.
+                <p>Unsere Werbevermarkter unternehmen angemessene Schritte, um alle Informationen, die sie verarbeiten, vor Missbrauch, Verlust, 
+                unberechtigtem Zugriff, Änderung oder Benachrichtigung zu schützen. Sie ergreifen physische, elektronische und 
+                verfahrenstechnische Sicherheitsmaßnahmen, um die von ihnen verarbeiteten Daten zu schützen. Dadurch beschränken
+                sie den Zugriff auf diese Informationen auf autorisierte Mitarbeiter.
 
-                <p>Für die Cookies, die yieldloves Drittanbieter zu Werbezwecken platzieren, verweist yieldlove auf die Disclaimer, die sie 
-                zu dem Thema auf ihren eigenen Websites zur Verfügung gestellt haben. Beachten Sie, dass yieldlove sich nur auf diese 
-                Haftungsausschlüsse beziehen kann, da sie sich regelmäßig ändern und Yieldlove keinen Einfluss darauf hat.
+                <p>Für die Cookies, die die Drittanbieter unserer Werbevermarkter zu Werbezwecken platzieren, verweisen sie auf die Disclaimer, die sie 
+                zu dem Thema auf ihren eigenen Websites zur Verfügung gestellt haben. Beachten Sie, dass unsere Werbevermarkter sich nur auf diese 
+                Haftungsausschlüsse beziehen können, da sie sich regelmäßig ändern und unsere Werbevermarkter keinen Einfluss darauf haben.
                 
                 
                 <h3>DRITTANBIETER UND OPT-OUT</h3>
 
                 <p>Eine zentrale Widerspruchsmöglichkeit für verschiedene Drittanbieter insbesondere US-amerikanischer Anbieter
                 ist auch unter folgendem Link erreichbar: <a href="https://optout.networkadvertising.org">optout.networkadvertising.org</a>
-                Sie können aber auch einen separaten Opt-out für jedes einzelne Unternehmen vornehmen mit dem yieldlove zusammenarbeiten.
+                Sie können aber auch einen separaten Opt-out für jedes einzelne Unternehmen vornehmen mit dem unsere Werbevermarkter zusammenarbeiten.
 
                 <p>Für die Datenerhebung zur Auslieferung von nutzungsbasierter Online-Werbung zuständig sind folgende
-                Unternehmen im Auftrag der Yieldlove GmbH:
+                Unternehmen im Auftrag unserer Werbevermarkter:
                 
                 
                 <p><b>4w Marketplace</b>
@@ -355,30 +361,30 @@
                 
                 <h3>SONSTIGE / UNVORHERSEHBARE COOKIES</h3>
 
-                <p>Aufgrund der Funktionsweise von Internet und Websites ist es möglich, dass yieldlove nicht immer auf die Cookies achtet, die 
-                durch yieldloves Banner von Drittanbietern platziert werden. Dies ist insbesondere dann der Fall, wenn yieldloves Banner 
+                <p>Aufgrund der Funktionsweise von Internet und Websites ist es möglich, dass unsere Werbevermarkter nicht immer auf die Cookies achten, die 
+                durch ihre Banner von Drittanbietern platziert werden. Dies ist insbesondere dann der Fall, wenn die Banner unserer Werbevermarkter 
                 eingebettete Elemente wie Texte, Dokumente, Bilder oder Filmclips enthalten, die von einer anderen Partei gespeichert, 
-                aber auf oder in yieldloves Banner angezeigt werden.
+                aber auf oder in den Bannern unsere Werbevermarkter angezeigt werden.
 
                 <p>Sollten Sie auf dieser Website Cookies finden, die in diese Kategorie fallen, die oben nicht erwähnt sind, 
-                teilen Sie uns oder yieldlove dies bitte umgehend mit oder kontaktieren Sie direkt diesen Drittanbieter und fragen Sie, welche Cookies 
+                teilen Sie uns dies bitte umgehend mit oder kontaktieren Sie direkt diesen Drittanbieter und fragen Sie, welche Cookies 
                 platziert wurden, was der Grund dafür war, wie lange der Cookie bestehen bleibt und auf welche Weise Ihre Privatsphäre 
                 geschützt wird.
                 
                 
                 <h3>IHRE RECHTE IN BEZUG AUF IHRE DATEN</h3>
 
-                <p>Yieldlove betrachtet die Daten der Werbebanner nicht als personenbezogene Daten gemäß geltendem Recht. Ebenso 
-                sammelt oder verarbeitet yieldlove keine sensiblen persönlichen Daten wie Daten über Rasse oder ethnische Herkunft,
+                <p>Unsere Werbevermarkter betrachteen die Daten der Werbebanner nicht als personenbezogene Daten gemäß geltendem Recht. Ebenso 
+                sammeln oder verarbeiten unsere Werbevermarkter keine sensiblen persönlichen Daten wie Daten über Rasse oder ethnische Herkunft,
                 politische Meinungen, religiöse oder philosophische Überzeugungen, Gewerkschaftsmitgliedschaft, Gesundheit oder 
-                Sexualleben. Darüber hinaus sammelt yieldlove wissentlich auch keine Daten von Kindern unter 12 Jahren.
+                Sexualleben. Darüber hinaus sammeln unsere Werbevermarkterwissentlich auch keine Daten von Kindern unter 12 Jahren.
 
-                <p>Wenn Sie die von yieldlove zur Verfügung gestellten Werbebannerdaten korrigieren, aktualisieren oder löschen 
-                möchten oder wenn Sie die personenbezogenen Daten, die Sie yieldlove über das Kontaktformular auf yieldloves Homepage 
+                <p>Wenn Sie die von unseren Werbevermarktern zur Verfügung gestellten Werbebannerdaten korrigieren, aktualisieren oder löschen 
+                möchten oder wenn Sie die personenbezogenen Daten, die Sie unseren Werbevermarktern über das Kontaktformular auf deren Homepage 
                 zur Verfügung gestellt haben, korrigieren, aktualisieren oder löschen möchten, können Sie yieldlove kontaktieren per
-                E-Mail an datenschutzbeauftragter@stroeer.de.
+                E-Mail an datenschutzbeauftragter@stroeer.de bzw. MSO Digital per E-Mail an kontakt@mso-digital.de.
 
-                <p>Yieldlove nimmt an den Selbstregulierungs-Programmen der European Digital Advertising Alliance (EDAA) teil und hält sich
+                <p>Unsere Werbevermarkter nehmen an den Selbstregulierungs-Programmen der European Digital Advertising Alliance (EDAA) teil und halten sich
                 an die EDAA-Prinzipien für Online Behavioral Advertising. Die EDAA fungiert hauptsächlich als zentrale Lizenzierungsstelle 
                 für das OBA-Symbol und bietet den Verbrauchern technische Möglichkeiten, Transparenz und Kontrolle über OBA über die 
                 Online-Plattform für Verbraucherwahl von youronlinechoices.eu auszuüben. Die EDAA wird von Organisationen auf EU-Ebene
@@ -386,7 +392,7 @@
                 Klicken Sie hier, um mehr über die EDAA zu erfahren.
                 
                 <p>Wenn Sie Fragen und / oder Kommentare haben oder eine Beschwerde im Bereich Werbung einreichen möchten,
-                kontaktieren Sie uns oder yieldlove per E-Mail unter datenschutzbeauftragter@stroeer.de.
+                kontaktieren Sie uns, yieldlove (datenschutzbeauftragter@stroeer.de) oder MSO Digital (kontakt@mso-digital.de).
                 
             </g:if>
             <g:else>
