@@ -108,7 +108,7 @@ class FeedController extends BaseController {
            [title: entry, pubDate: it.creationDate, description: content, link: link]
        }
 
-       response.setContentType("application/xml")
+       response.setContentType("application/xml; charset=utf-8")
        [events: events, formatter: pubDateFormatter]
    }
 }
