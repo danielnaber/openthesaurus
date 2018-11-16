@@ -17,6 +17,9 @@
  */
 package com.vionto.vithesaurus
 
+import grails.persistence.Entity
+
+@Entity
 class Audio {
     
     String word

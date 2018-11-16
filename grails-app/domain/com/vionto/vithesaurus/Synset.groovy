@@ -17,12 +17,14 @@
  */ 
 package com.vionto.vithesaurus
 
+import grails.persistence.Entity
 import org.apache.commons.lang.StringUtils;
 
 /**
  * A set of terms and other meta information. This makes
  * up a meaning / concept.
  */
+@Entity
 class Synset implements Cloneable {
 
     boolean isVisible
@@ -342,7 +344,7 @@ class Synset implements Cloneable {
         if (logInfo == null) {
             throw new NullPointerException("loginfo may not be null")
         }
-        if (extendedValidate(extendedValidateVar) && save()) {
+        if (extendedValidate(extendedValidateVar) && save(flush: true)) {
             // log to database:
             UserSynsetEvent event = new UserSynsetEvent(this, logInfo)
               if (!(event.validate() && event.save())) {

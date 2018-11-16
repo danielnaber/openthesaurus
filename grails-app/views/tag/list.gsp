@@ -31,7 +31,7 @@
                     <g:set var="count" value="${item.value}"/>
 					<g:if test="${showTag && count > 0}">
 						<g:set var="tag" value="${item.key}"/>
-						<g:set var="titleAttr" value="${tag.isInternal() ? message(code:'tag.internal.tooltip') : message(code:'')}"/>
+						<g:set var="titleAttr" value="${tag.isInternal() ? message(code:'tag.internal.tooltip') : "" }"/>
 						<g:if test="${params.tag == tag.name}">
 							<span class="tag selectedTag" title="${titleAttr}"
 									style="background-color: ${tag.getBackgroundColor()}">${tag.name.encodeAsHTML().replace(' ', '&nbsp;')}&nbsp;(${count})</span>

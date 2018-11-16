@@ -40,8 +40,8 @@
             <div style="float:left">
                 <g:set var="categories" value="${Category.withCriteria { eq('isDisabled', false) }.sort()}"/>
                 <g:set var="categoriesLen" value="${categories.size()}"/>
-                <g:set var="categories1" value="${categories.subList(0, (int)categoriesLen/2)}"/>
-                <g:set var="categories2" value="${categories.subList((int)categoriesLen/2, categoriesLen)}"/>
+                <g:set var="categories1" value="${categories.subList(0, (categoriesLen/2).intValue())}"/>
+                <g:set var="categories2" value="${categories.subList((categoriesLen/2).intValue(), categoriesLen)}"/>
                 
                 <h2><g:message code="word.list.by.category"/></h2>
                 

@@ -17,6 +17,9 @@
  */
 package com.vionto.vithesaurus
 
+import grails.persistence.Entity
+
+@Entity
 class Tag implements Comparable<Tag> {
 
     String name
@@ -47,7 +50,7 @@ class Tag implements Comparable<Tag> {
 
     /** Whether this is an internal tag that's only to be displayed to logged-in users. */
     boolean isInternal() {
-        return name.startsWith(":")
+        return name?.startsWith(":")
     }
     
     boolean isVisible() {
@@ -61,7 +64,7 @@ class Tag implements Comparable<Tag> {
 
     @Override
     public String toString() {
-        return name;
+        return name
     }
 
     @Override

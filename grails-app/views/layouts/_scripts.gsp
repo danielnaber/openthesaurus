@@ -85,7 +85,7 @@
         function onSynsetSearchValueChange() {
             onSynsetSearchValueChangeInternal(document.searchform.q.value, true);
         }
-        
+
         function onSynsetSearchValueChangeInternal(searchString, changeHistory) {
             clearInterval(onChangeInterval);
             currentValue = searchString;
@@ -101,7 +101,7 @@
                 runningRequests++;
                 var stateObj = {q: searchString};
                 new jQuery.ajax(
-                    '${createLinkTo(dir:"synset/newSearch",file:"")}',
+                    '/synset/newSearch',
                     {
                         method: 'get',
                         asynchronous: true,
@@ -175,7 +175,7 @@
                 loadSynsetSearch();
                 runningRequests++;
                 new jQuery.ajax(
-                    '${createLinkTo(dir:"ajaxSearch/ajaxMainSearch",file:"")}',
+                    '/ajaxSearch/ajaxMainSearch',
                     {
                         method: 'get',
                         asynchronous: true,
@@ -269,7 +269,7 @@
         dismiss: "Okay",
         learnMore: "Datenschutzerklärung",
         link: '/about/imprint',
-        theme: 'dark-bottom'
+        theme: "${assetPath(src: 'dark-bottom.css')}"
     };
     <!-- Ende Cookie Plugin -->
 

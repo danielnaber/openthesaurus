@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="/">Home</a></span>
             <span class="menuButton"><g:link class="list" action="list">TermLinkType List</g:link></span>
         </div>
         <div class="body">
