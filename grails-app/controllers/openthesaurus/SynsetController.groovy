@@ -117,7 +117,7 @@ class SynsetController extends BaseController {
           return
         }
         
-        params.q = StringTools.slashUnescape(params.q)
+        params.q = URLDecoder.decode(StringTools.slashUnescape(params.q), "UTF-8")
 
         Connection conn = null
         try {
