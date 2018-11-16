@@ -18,9 +18,18 @@
 
 package openthesaurus
 
+import java.nio.file.Files
+import java.util.stream.Collectors
+
 class HomeController {
 
     def index() {}
 
     def index2() {}
+
+    def adstxt() {
+        def resource = this.class.classLoader.getResource('ads.txt')
+        def lines = Files.lines(new File(resource.file).toPath()).collect(Collectors.toList())
+        render(text: String.join("\n", lines), contentType: "text/plain", encoding: "UTF-8")
+    }
 }

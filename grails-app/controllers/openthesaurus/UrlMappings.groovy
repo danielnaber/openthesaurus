@@ -7,6 +7,7 @@ class UrlMappings {
       "500"(view:"/errors/serverError")
 
       "/"(controller:'home', action:'index')
+      "/ads.txt"(controller:'home', action:'adstxt')
       "/direct"(controller:'redirect', action:'homepage') 
       "/home/directSearch"(controller:'redirect', action:'homepage') 
       "/home/"(controller:'redirect', action:'homepage') 
