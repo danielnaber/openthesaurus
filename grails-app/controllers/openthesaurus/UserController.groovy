@@ -393,6 +393,7 @@ class UserController extends BaseController {
               flash.message = message(code:'user.invalid.login')
             }
           }
+          render(view: "login")
         }
     }
 
