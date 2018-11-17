@@ -2,19 +2,19 @@
 #dnaber, 2011-08-14
 
 DATE=`date +"%Y-%m-%d"`
-#DATE=2011-08-24
+#DATE=2018-xx-yy
 OUT=/tmp/statusmail.txt
 LOG=/tmp/openthesaurus-log.txt
 
 rm $OUT
 rm $LOG
 
-tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep "$DATE" >$LOG
+tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep --text "$DATE" >$LOG
 
 echo "From " >>$OUT
-grep -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
+grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
 echo "To " >>$OUT
-grep -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
 
 echo "" >>$OUT
 echo -n "Web Searches:           " >>$OUT
@@ -34,8 +34,6 @@ grep -c "`date +"%Y/%m/%d"`" /var/log/nginx/error.log >>$OUT
 
 echo -n "error.log entries (w/o access): " >>$OUT
 grep -v "access forbidden by rule," /var/log/nginx/error.log | grep -c "`date +"%Y/%m/%d"`" >>$OUT
-
-echo "#1"
 
 echo "" >>$OUT
 
