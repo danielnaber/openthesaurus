@@ -12,9 +12,9 @@ rm $LOG
 tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep "$DATE" >$LOG
 
 echo "From " >>$OUT
-grep -h "^\[$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
+grep -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
 echo "To " >>$OUT
-grep -h "^\[$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+grep -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
 
 echo "" >>$OUT
 echo -n "Web Searches:           " >>$OUT
@@ -27,26 +27,25 @@ echo -n "API Searches (JSON):    " >>$OUT
 grep -c "Search(ms):jso" $LOG >>$OUT
 
 echo -n "Blocked API requests:   " >>$OUT
-grep -c "Too many requests from" $LOG >>$OUT
-
-echo -n "Blocked by mod_evasive: " >>$OUT
-grep "client denied by server configuration" /var/log/apache2/openthesaurus_ssl_error.log | grep -c "evasive" >>$OUT
-
-echo -n "Unable to cr. worker t: " >>$OUT
-grep -c "unable to create worker thread" /var/log/apache2/error.log >>$OUT
+grep -c "Too many API requests from" $LOG >>$OUT
 
 echo -n "error.log entries:      " >>$OUT
-grep -c "`date +"%b %d"`" /var/log/apache2/error.log >>$OUT
+grep -c "`date +"%Y/%m/%d"`" /var/log/nginx/error.log >>$OUT
+
+echo -n "error.log entries (w/o access): " >>$OUT
+grep -v "access forbidden by rule," /var/log/nginx/error.log | grep -c "`date +"%Y/%m/%d"`" >>$OUT
+
+echo "#1"
 
 echo "" >>$OUT
 
 echo "Top 5 limit abusers:" >>$OUT
-grep "Too many " $LOG | cut -c 47-89 | sort | uniq -c | sort -r -n | head -n 5 >>$OUT
+grep "Too many " $LOG | cut -c 95-110 | sort | uniq -c | sort -r -n | head -n 5 >>$OUT
 
 echo "" >>$OUT
 
 echo -n "Errors:                       " >>$OUT
-grep -c "ERR" $LOG >>$OUT
+grep -v "Full Stack Trace" $LOG | grep -c "ERR" >>$OUT
 
 echo -n "Warnings (w/o empty queries): " >>$OUT
 grep "WARN" $LOG | grep -c -v "No query specified for search" >>$OUT
@@ -117,13 +116,13 @@ echo "Top client-side errors: " >>$OUT
 grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
 
 echo "" >>$OUT
-echo "Errors (max. 100):" >>$OUT
-grep "ERROR" $LOG | head -n 100 >>$OUT
+echo "Errors (max. 25):" >>$OUT
+grep -v "Full Stack Trace" $LOG | grep " ERROR " | head -n 25 >>$OUT
 
-echo "" >>$OUT
-echo "Apache Errors (max. 30):" >>$OUT
-echo "Total Apache errors: `wc -l apache_errors.log`" >>$OUT
-tail -n 30 apache_errors.log >>$OUT
+#echo "" >>$OUT
+#echo "Apache Errors (max. 25):" >>$OUT
+#echo "Total Apache errors: `wc -l apache_errors.log`" >>$OUT
+#tail -n 25 apache_errors.log >>$OUT
 
 PART1=feedback
 head -n 1000 $OUT | mail -a "From: $PART1@openthesaurus.de" -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" $PART1@openthesaurus.de
