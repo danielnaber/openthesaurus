@@ -208,7 +208,7 @@ class SynsetController extends BaseController {
           def baseforms = []
           if (searchResult.totalMatches > 0) {
             metaTagDescriptionText = getMetaTagDescription(searchResult)
-          } else {
+          } else if (params.q.trim().length() < 70) {  // avoid de.danielnaber.jwordsplitter.InputTooLongException
             baseforms = baseformService.getBaseForms(conn, params.q.trim())
           }
 
