@@ -11,8 +11,22 @@ servlet container (e.g. [Apache Tomcat](http://tomcat.apache.org)) and is
 typically used with MySQL as a stand-alone database (other databases may
 work but have not been tested).
 
+## Building
+
+If you want to build OpenThesaurus on your own you will need
+[Grails](http://www.grails.org) 3.3.1.
+
+For development, your database needs to be configured in
+`grails-app/conf/application.yml`. Use `grails run-app`
+to directly start the web-application in development mode. It is
+then available at `http://localhost:8080/`.
+
+Use `grails war` to build a web application which can be deployed to a Java
+servlet container like Tomcat.
 
 ## Setup for users who install the `.war` file
+
+**Note: this section hasn't been updated for some time, we suggest building as documented above**
 
 The `openthesaurus.war` file needs to be deployed to your servlet container.
 Please refer to the container's documentation on how to do that.
@@ -77,20 +91,6 @@ Please refer to the container's documentation on how to do that.
 7. The default administration account is `admin` with the password `admin` - make
    sure this is changed after your first login. If you are logged in as admin, the
    OpenThesaurus homepage will show a link to the administration page.
-
-
-## Building
-
-If you want to build OpenThesaurus on your own you will need
-[Grails](http://www.grails.org) 2.3.11.
-
-For development, your database needs to be configured in
-`grails-app/conf/datasource-dev.properties`. Use `grails run-app`
-to directly start the web-application in development mode. It is
-then available at `http://localhost:8080/openthesaurus`.
-
-Use `grails war` to build a web application which can be deployed to a Java
-servlet container like Tomcat.
 
 
 ## Data Import
