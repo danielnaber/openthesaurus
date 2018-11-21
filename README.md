@@ -1,6 +1,6 @@
 # OpenThesaurus
 
-OpenThesaurus, a web-based thesaurus management tool (formerly called vithesaurus)
+OpenThesaurus, a web-based thesaurus management tool
 
 Copyright (C) 2009 vionto GmbH, Berlin  
 Copyright (C) 2011-2018 Daniel Naber, www.danielnaber.de
@@ -10,6 +10,9 @@ thesauri and ontologies. It requires a Java application server or
 servlet container (e.g. [Apache Tomcat](http://tomcat.apache.org)) and is
 typically used with MySQL as a stand-alone database (other databases may
 work but have not been tested).
+
+See https://github.com/OpenTaal/opentaal-openthesaurus/blob/master/README.md
+for more detailed installation instructions.
 
 ## Building
 
