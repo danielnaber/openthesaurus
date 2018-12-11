@@ -67,3 +67,8 @@ appnexus.com, 9861, DIRECT
 yieldlab.net, 6374319, RESELLER, yieldlab.net, 227224, RESELLER
 pubmatic.com, 157581, DIRECT, 5d62403b186f2ace
 pubmatic.com, 2468, RESELLER, 5d62403b186f2ace
+appnexus.com, 1314, RESELLER
+lkqd.net, 504, RESELLER, 59c49fa9598a0117
+spotx.tv, 228454, RESELLER, 7842df1d2fe2db34
+spotxchange.com, 228454, RESELLER, 7842df1d2fe2db34
+triplelift.com, 6006, DIRECT
