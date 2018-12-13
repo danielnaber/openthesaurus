@@ -22,7 +22,7 @@ class OpenSearchController extends BaseController {
 
     def index() {
         response.setHeader("Content-Type","application/opensearchdescription+xml; charset=UTF-8")
-        []
+        [ foo: 'bar' ]   // workaround: without values, result is empty?!
     }
 
 }
