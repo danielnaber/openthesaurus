@@ -93,7 +93,7 @@ class FeedController extends BaseController {
                entry = username + ": " + titleStr + ": " + changeDesc
                //actually <guid> must be unique but I cannot set this it seems, so let's make
                //the link unique, as this is used as guid:
-               link = "${grailsApplication.config.thesaurus.serverURL}/synset/edit/${it.synset.id}#${it.id}"
+               link = "${grailsApplication.config.thesaurus.serverURL}/synonyme/edit/${it.synset.id}#${it.id}"
                content = desc + diffs.get(it)
                        .replaceAll("class='add'>", "style='font-weight:bold;color:green'> ")
                        .replaceAll("class='del'>", "style='font-weight:bold;color:red;text-decoration: line-through'> ")
