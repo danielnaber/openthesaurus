@@ -703,7 +703,7 @@ class SynsetController extends BaseController {
     
     def update() {
         def synset = Synset.get(params.id)
-        def origSynset = synset.clone()
+        def origSynset = new Synset(synset)
 
         if (synset) {
             try {

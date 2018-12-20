@@ -48,6 +48,18 @@ class Synset implements Cloneable {
         isVisible = true
     }
 
+    // Use only as a workaround for https://github.com/danielnaber/openthesaurus/issues/63!
+    Synset(Synset toCopy) {
+        terms = new HashSet()
+        for (t in toCopy.terms) {
+            addTerm(t.clone())
+        }
+        this.synsetLinks = toCopy.synsetLinks
+        this.categoryLinks = toCopy.categoryLinks
+        this.originalId = toCopy.originalId
+        this.isVisible = toCopy.isVisible
+    }
+
     /**
      * Add the given term to this synset.
      * @throws IllegalArgumentException if a term with the same word
