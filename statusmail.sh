@@ -2,7 +2,7 @@
 #dnaber, 2011-08-14
 
 DATE=`date +"%Y-%m-%d"`
-#DATE=2018-xx-yy
+#DATE="2018-xx-yy"
 OUT=/tmp/statusmail.txt
 LOG=/tmp/openthesaurus-log.txt
 
@@ -12,9 +12,11 @@ rm $LOG
 tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep --text "$DATE" >$LOG
 
 echo "From " >>$OUT
-grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
+#grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
+grep --text -h "^$DATE" $LOG | head -n 1 >>$OUT
 echo "To " >>$OUT
-grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+#grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
+grep --text -h "^$DATE" $LOG | tail -n 1 >>$OUT
 
 echo "" >>$OUT
 echo -n "Web Searches:           " >>$OUT
@@ -29,11 +31,15 @@ grep -c "Search(ms):jso" $LOG >>$OUT
 echo -n "Blocked API requests:   " >>$OUT
 grep -c "Too many API requests from" $LOG >>$OUT
 
+echo -n "Pool exhausted:         " >>$OUT
+grep -c "PoolExhaustedException" $LOG >>$OUT
+
 echo -n "error.log entries:      " >>$OUT
 grep -c "`date +"%Y/%m/%d"`" /var/log/nginx/error.log >>$OUT
 
 echo -n "error.log entries (w/o access): " >>$OUT
 grep -v "access forbidden by rule," /var/log/nginx/error.log | grep -c "`date +"%Y/%m/%d"`" >>$OUT
+
 
 echo "" >>$OUT
 
@@ -114,6 +120,8 @@ echo "Top client-side errors: " >>$OUT
 grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
 
 echo "" >>$OUT
+echo -n "Total errors: " >>$OUT
+grep -v "Full Stack Trace" $LOG | grep " ERROR " | wc -l >>$OUT
 echo "Errors (max. 25):" >>$OUT
 grep -v "Full Stack Trace" $LOG | grep " ERROR " | head -n 25 >>$OUT
 
