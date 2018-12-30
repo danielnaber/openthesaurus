@@ -29,15 +29,25 @@
             abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
             unterstützt. Nicht unterstützt wird die Wikipedia/Wiktionary-Suche.</p>
 
-            <p><strong>Hinweis: Die Nutzung der API ist kostenlos, aber wir erwarten einen Link auf
-            www.openthesaurus.de (ohne <tt>nofollow</tt>-Attribut). Sollten die Daten nur im Hintergrund benutzt
-            werden (z.B. zur Erweiterung einer Suchanfrage o.ä.) reicht auch ein Hinweis im Impressum. Ansonsten
-            sollte der Link für die Nutzer gut sichtbar auf der Seite angezeigt werden, auf der auch die Daten
-            zum Einsatz kommen.</strong></p>
-
-            <p>Wer die API über reines Testen hinaus benutzt, sollte sich bitte vorher bei
-                <i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
-                um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</p>
+            <p><strong>Hinweis: Die Nutzung der API ist kostenlos, aber es gelten folgende Bedingungen:</strong></p>
+                <ol style="margin-left:30px;">
+                    <li>Wir erwarten einen Link auf
+                        www.openthesaurus.de (ohne <tt>nofollow</tt>-Attribut). Sollten die Daten nur im Hintergrund benutzt
+                        werden (z.B. zur Erweiterung einer Suchanfrage o.ä.) reicht auch ein Hinweis im Impressum. Ansonsten
+                        sollte der Link für die Nutzer gut sichtbar auf der Seite angezeigt werden, auf der auch die Daten
+                        zum Einsatz kommen.</li>
+                    <li>Jede Anfrage muss im <tt>User-Agent</tt>-Header eine Kontaktmöglichkeit (z.&nbsp;B. Homepage oder E-Mail)
+                        enthalten, damit wir bei Problemen wissen, mit wem wir Kontakt aufnehmen können.</li>
+                    <li>Anfrage-Limitierung: Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung.
+                        <!--Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
+                        Erhöhung des Limits bitten. -->Zusätzlich zur direkten Abfrage stehen weiterhin
+                        <g:link action="download">Downloads</g:link> der Datenbank zur Verfügung. Statt Massenabfragen
+                        über die API sollte dieser Download genutzt werden.
+                    </li>
+                    <li>Wer plant, die API dauerhaft zu benutzen, sollte sich bitte vorher bei
+                        <i>feedback <span>at</span> openthesaurus.de</i> melden. Nur so können wir rechtzeitig alle Nutzer kontaktieren,
+                        um zum Beispiel über mögliche Änderungen am Ausgabeformat zu informieren.</li>
+                </ol>
 
             <h2><a name="json">Suchanfrage für JSON</a></h2>
 
@@ -112,14 +122,6 @@
 
             <p>Umlaute werden bei der Suche wie ihre nicht-Umlaute behandelt, so findet <span class="bsp">tur</span>
                 auch den Eintrag zu <span class="bsp">Tür</span> und umgekehrt.</p>
-
-            <h2><a name="limits">Anfrage-Limitierung</a></h2>
-
-            <p>Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung.
-            Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
-            Erhöhung des Limits bitten. Zusätzlich zur direkten Abfrage stehen weiterhin
-            <g:link action="download">Downloads</g:link> der Datenbank zur Verfügung. Statt Massenabfragen
-            über die API sollte dieser Download genutzt werden.</p>
 
         </g:if>
         <g:else>
