@@ -830,3 +830,7 @@ strong {
 .socialMediaIcon:hover {
   filter: brightness(1.2);
 }
+
+ol li {
+    margin-bottom: 5px;
+}
