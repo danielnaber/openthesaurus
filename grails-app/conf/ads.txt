@@ -72,3 +72,4 @@ lkqd.net, 504, RESELLER, 59c49fa9598a0117
 spotx.tv, 228454, RESELLER, 7842df1d2fe2db34
 spotxchange.com, 228454, RESELLER, 7842df1d2fe2db34
 triplelift.com, 6006, DIRECT
+rubiconproject.com, 19998, RESELLER, 0bfd66d529a55807
