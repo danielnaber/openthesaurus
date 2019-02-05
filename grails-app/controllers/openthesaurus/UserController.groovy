@@ -60,43 +60,6 @@ class UserController extends BaseController {
       [user:user, visibleName:visibleName]
     }
     
-    def prepareMessage() {
-        ThesaurusUser receiver = ThesaurusUser.get(params.uid)
-        if (!receiver) {
-            throw new Exception("No user for id '${params.uid.encodeAsHTML()}'")
-        }
-        [receiver: receiver]
-    }
-
-    def sendMessage() {
-        ThesaurusUser sender = session.user
-        ThesaurusUser receiver = ThesaurusUser.get(params.receiverId)
-        if (!receiver) {
-            throw new Exception("No user for id '${params.receiverId.encodeAsHTML()}'")
-        }
-        if (!receiver.acceptsMessages) {
-            throw new Exception("User id '${params.receiverId.encodeAsHTML()}' doesn't accept private messages")
-        }
-        validateSending(sender)
-        def pMessage = new PersonalMessage(sender.userId, receiver.userId)
-        boolean saved = pMessage.save(flush: true)
-        if (!saved) {
-            throw new Exception("Could not save message meta data: " + pMessage.errors)
-        }
-        log.info("Sending private email from ${sender} to ${receiver}, ${params.message.length()} bytes")
-        sendMail {
-            from sender.userId
-            to receiver.userId
-            if (params.cc) {
-                cc sender.userId
-            }
-            subject message(code:'user.message.subject.prefix') + " " + params.subject
-            body message(code:'user.message.message.prefix') + params.message
-        }
-        flash.message = message(code:'user.prepare.message.sent')
-        redirect(action: 'profile', params: [uid: receiver.id])
-    }
-
     private void validateSending(ThesaurusUser sender) {
         if (params.message.length() > MAX_MAIL_SIZE) {
             throw new Exception("Message too large: ${params.message.length()} > ${MAX_MAIL_SIZE} characters")
