@@ -67,7 +67,7 @@
 
             <p>Der <strong>Sourcecode der Website</strong> befindet sich <a href="https://github.com/danielnaber/openthesaurus">bei github</a>,
               er steht unter der <a href="https://www.gnu.org/licenses/agpl.html">GNU AGPL</a>.
-              Auf diesem Server (www.openthesaurus.de) läuft Version <g:meta name="app.version"/>.
+              Auf diesem Server (www.openthesaurus.de) läuft Version ${grailsApplication.metadata.getApplicationVersion()}.
               Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README.md">README</a>
               und <a href="https://www.openthesaurus.de/jforum/posts/list/71.page">im Forum</a> beschrieben.
             </p>
