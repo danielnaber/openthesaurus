@@ -145,15 +145,13 @@ class UserController extends BaseController {
           }
         }
         String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmRegistration?userId=${user.id}&code=${user.confirmationCode}"
-        String bccMail = message(code:'footer.email.beforeAt') + "@" + message(code:'footer.email.afterAt')
-        sendMail {
-          from message(code:'user.register.email.from')
-          to params.userId
-          bcc bccMail
-          subject message(code:'user.register.email.subject')     
-          body message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text') 
-        }
-        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}, BCC to ${bccMail}")
+        String from = message(code:'user.register.email.from')
+        String to = params.userId
+        String subject = message(code:'user.register.email.subject')
+        String body = message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text')
+        int responseCode = MailSender.sendMail(grailsApplication.config.thesaurus.mailjetId, grailsApplication.config.thesaurus.mailjetApiKey,
+                to, subject, body, from)
+        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}, responseCode: " + responseCode)
       } else {
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
@@ -404,13 +402,13 @@ class UserController extends BaseController {
           throw new Exception("Could not save user: " + user.errors)
         }
         String activationLink = grailsApplication.config.thesaurus.serverURL + "/user/confirmPasswordReset?userId=${user.id}&code=${user.confirmationCode}"
-        sendMail {    
-          from message(code:'user.register.email.from')
-          to params.userId
-          subject message(code:'user.lost.password.email.subject')
-          body message(code:'user.lost.password.email.body', args:[params.userId, activationLink], encodeAs: 'Text') 
-        }
-        log.info("Sent password reset mail to ${params.userId}, code ${user.confirmationCode}")
+        String from = message(code:'user.register.email.from')
+        String to = params.userId
+        String subject = message(code:'user.lost.password.email.subject')
+        String body = message(code:'user.lost.password.email.body', args:[params.userId, activationLink], encodeAs: 'Text')
+        int responseCode = MailSender.sendMail(grailsApplication.config.thesaurus.mailjetId, grailsApplication.config.thesaurus.mailjetApiKey,
+                to, subject, body, from)
+        log.info("Sent password reset mail to ${params.userId}, code ${user.confirmationCode}, responseCode: " + responseCode)
         [email: params.userId]
     }
     
