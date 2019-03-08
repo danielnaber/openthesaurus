@@ -33,7 +33,7 @@
             <h3>Firefox</h3>
 
             <ul>
-                <li><a href="https://addons.mozilla.org/de/firefox/search/?q=thesaurus&type=search">Hier nach "OpenThesaurus" suchen</a> und auf der Ergebnisseite "Zu Firefox hinzufügen" klicken</li>
+                <li><a href="https://addons.mozilla.org/de/firefox/search/?q=openthesaurus&type=search">Hier nach "OpenThesaurus" suchen</a> und auf der Ergebnisseite "Zu Firefox hinzufügen" klicken</li>
                 <li>Im Firefox unter Einstellungen → Suche → Ein-Klick-Suchmaschinen das "Schlüsselwort" für
                 OpenThesaurus zum Beispiel auf <tt>ot</tt> setzen, fertig! Mit "ot fahrrad" kann jetzt bei OpenThesaurus nach "fahrrad" gesucht werden.</li>
             </ul>
