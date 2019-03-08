@@ -262,7 +262,13 @@ class ExportOxtController extends BaseController {
     zos.close()
     fos.close()
     // this is a publicly visible file so make the new version visible atomically:
-    zipFile.renameTo(new File(finalName))
+    boolean renamed = zipFile.renameTo(new File(finalName))
+    if (!renamed) {
+      log.warn("Renaming ${zipFile} to ${finalName} failed")
+    } else {
+      new File(finalName).setReadable(true, false)
+    }
+    
   }
 
 }
