@@ -115,7 +115,13 @@ class ExportTextController extends BaseController {
         }
       }
       tmpZipFile.renameTo(finalFile)
-      
+      boolean renamed = tmpZipFile.renameTo(finalFile)
+      if (!renamed) {
+          log.warn("Renaming ${tmpZipFile} to ${finalFile} failed")
+      } else {
+          finalFile.setReadable(true, false)
+      }
+
       String msg = "Text export finished (count: ${count})"
       render msg
       log.info(msg)
