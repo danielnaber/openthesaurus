@@ -114,7 +114,6 @@ class ExportTextController extends BaseController {
           throw new Exception("Could not delete: " + finalFile)
         }
       }
-      tmpZipFile.renameTo(finalFile)
       boolean renamed = tmpZipFile.renameTo(finalFile)
       if (!renamed) {
           log.warn("Renaming ${tmpZipFile} to ${finalFile} failed")
