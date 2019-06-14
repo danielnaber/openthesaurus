@@ -61,8 +61,7 @@
                 
                 <h2>Web-Analytics</h2>
     
-                <p>Unserer Website verwendet Piwik/Matomo, gehostet bei <a href="http://www.mysnip-solutions.de/impressum.html">mysnip</a>
-                (MySnip Solutions - Thomas Seifert, Kreutzigerstr. 4a, 10247 Berlin). Dabei handelt es sich um einen sogenannten Webanalysedienst. Piwik verwendet sog. “Cookies”, das sind Textdateien,
+                <p>Unsere Website verwendet Piwik/Matomo. Dabei handelt es sich um einen sogenannten Webanalysedienst. Piwik verwendet sog. “Cookies”, das sind Textdateien,
                 die auf Ihrem Computer gespeichert werden und die unsererseits eine Analyse der Benutzung der Webseite ermöglichen. Zu diesem Zweck werden
                 die durch den Cookie erzeugten Nutzungsinformationen (einschließlich Ihrer gekürzten IP-Adresse) an unseren Server übertragen und
                 zu Nutzungsanalysezwecken gespeichert, was der Webseitenoptimierung unsererseits dient. Ihre IP-Adresse wird bei diesem Vorgang umgehend anonymisiert,
@@ -77,7 +76,7 @@
     
                 <h3>Widerspruch:</h3>
     
-                <iframe frameborder="no" width="600px" height="200px" src="//openthesaurus.stats.mysnip-hosting.de/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
+                <iframe frameborder="no" width="600px" height="200px" src="https://analytics.languagetoolplus.com/matomo/index.php?module=CoreAdminHome&action=optOut&language=de"></iframe>
 
                 <h2>Auskunft</h2>
 
