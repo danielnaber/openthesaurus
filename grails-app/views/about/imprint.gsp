@@ -358,11 +358,6 @@
                 <br>Datenschutzbestimmungen: <a href="https://www.inmobi.com/privacy-policy">https://www.inmobi.com/privacy-policy</a>
                 <br>Opt-out: <a href="https://www.inmobi.com/page/opt-out/">https://www.inmobi.com/page/opt-out/</a>
                 
-                <p><b>SmartAdserver</b>
-                <p>SmartAdserver ( smartadserver.com) setzt Technologien ein, um Ihnen für Sie relevante Werbeanzeigen zu präsentieren. Anbieter von SmartAdserver ist SmartAdserver mit Sitz in Paris – 66 Rue de la Chaussée d'Antin, 75009 Paris, France. Wenn Sie nicht wollen, dass weiterhin anonymisierte Daten von SmartAdserver gesammelt werden, klicken Sie bitte unten auf den Opt-out-Link. Dieses Opt-out-Cookie löscht die bisher gespeicherten Informationen und verhindert ein weiteres Erfassen von Informationen.
-                <br>Datenschutzbestimmungen: <a href="https://smartadserver.com/end-user-privacy-policy/">https://smartadserver.com/end-user-privacy-policy/</a>
-                <br>Opt-out: <a href="http://www.smartadserver.com/diffx/gdprOptoutAll">http://www.smartadserver.com/diffx/gdprOptoutAll</a>
-                
                 <h3>SONSTIGE / UNVORHERSEHBARE COOKIES</h3>
 
                 <p>Aufgrund der Funktionsweise von Internet und Websites ist es möglich, dass unsere Werbevermarkter nicht immer auf die Cookies achten, die 
