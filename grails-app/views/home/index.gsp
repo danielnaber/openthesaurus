@@ -9,7 +9,7 @@
         var yieldlove_site_id = "openthesaurus.de_startseite";
     </script>
     <script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_startseite'></script>
-    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+    <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
     <script>
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];

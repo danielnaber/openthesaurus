@@ -4,7 +4,7 @@
 <head>
     <title><g:message code="homepage.title"/></title>
     <meta name="layout" content="homepage" />
-    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+    <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
     <script>
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
