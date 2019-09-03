@@ -127,6 +127,7 @@ class SynsetController extends BaseController {
           boolean allApiRequest = params.mode == "all"
           boolean partialApiRequest = params.substring == "true"
           boolean startsWithApiRequest = params.startswith == "true"
+          boolean baseformApiRequest = params.baseform == "true"
 
           List partialMatchResult = []
           List startsWithResult = []
@@ -198,14 +199,17 @@ class SynsetController extends BaseController {
           log.info("Search(ms):${qType} ${searchResult.totalMatches}matches ${totalTime}ms db:${dbTime}${sleepTimeInfo} sim:${similarTime}"
                + " substr:${partialMatchTime} wikt:${wiktionaryTime} wiki:${wikipediaTime}"
                + " q:${params.q}")
-            
+
+          def baseforms = []
           if (apiRequest) {
-            renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult)
+            if (baseformApiRequest || allApiRequest) {
+              baseforms = baseformService.getBaseForms(conn, params.q.trim())
+            }
+            renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult, Arrays.asList(baseforms))
             return
           }
 
           String metaTagDescriptionText = null
-          def baseforms = []
           if (searchResult.totalMatches > 0) {
             metaTagDescriptionText = getMetaTagDescription(searchResult)
           } else if (params.q.trim().length() < 70) {  // avoid de.danielnaber.jwordsplitter.InputTooLongException
@@ -288,7 +292,7 @@ class SynsetController extends BaseController {
       return qType
   }
 
-    private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult) {
+    private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult, List baseformResult) {
         if (params.format == "application/json") {
             if (params.callback) {
                 String validCallbackPattern = '^[a-zA-Z0-9_.-]+$'
@@ -312,7 +316,7 @@ class SynsetController extends BaseController {
                 String urlContent = new URL(url).text
                 render(text: "${params.callback}(${urlContent})", encoding: "utf-8")
             } else {
-                renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult)
+                renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult, baseformResult)
             }
         } else {
             renderApiResponseAsXml(searchResult, similarTerms, partialMatchResult, startsWithResult)
@@ -433,7 +437,7 @@ class SynsetController extends BaseController {
     }
 
     // NOTE: keep in sync with XML!
-    private void renderApiResponseAsJson(def searchResult, List similarTerms, List substringTerms, List startsWithTerms) {
+    private void renderApiResponseAsJson(def searchResult, List similarTerms, List substringTerms, List startsWithTerms, List baseformResult) {
         // see http://jira.codehaus.org/browse/GRAILSPLUGINS-709 for a required
         // workaround with feed plugin 1.4 and Grails 1.1
 
@@ -534,6 +538,10 @@ class SynsetController extends BaseController {
                     startsWithTermsList << [term:startsWithTerm.term]
                 }
                 startswithterms startsWithTermsList
+            }
+
+            if (baseformResult && baseformResult.size() > 0) {
+                baseforms baseformResult
             }
 
         }
