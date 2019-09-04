@@ -41,11 +41,11 @@
 				<g:each in="${tagInstanceList}" status="i" var="tag">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>
-                            <g:link action="edit" id="${tag.id}"><span class="tag" style="background-color: ${tag.backgroundColor}">${tag.name}</span></g:link>
+                            <g:link action="edit" id="${tag.id}"><span class="tag" style="background-color: ${tag.backgroundColor}">${tag.name.encodeAsHTML()}</span></g:link>
 						</td>
 						<td>
                             <g:if test="${tag.shortName}">
-                                <span class="tag" style="background-color: ${tag.backgroundColor}">${tag.shortName}</span>
+                                <span class="tag" style="background-color: ${tag.backgroundColor}">${tag.shortName.encodeAsHTML()}</span>
                             </g:if>
 						</td>
                         <td><g:link controller="tag" params="${[tag: tag.name]}">List</g:link></td>
