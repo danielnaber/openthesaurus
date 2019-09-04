@@ -17,10 +17,10 @@
                     <g:each in="${allTags}" var="tag" status="i">
                         <g:if test="${tag.isVisible()}">
                             <g:if test="${i < allTags.size()-1}">
-                                "${tag.name}",
+                                "${tag.name.encodeAsHTML()}",
                             </g:if>
                             <g:else>
-                                "${tag.name}"
+                                "${tag.name.encodeAsHTML()}"
                             </g:else>
                         </g:if>
                     </g:each>
