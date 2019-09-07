@@ -19,6 +19,11 @@
                             .replaceAll("&lt;sub&gt;", "<sub>")
                             .replaceAll("&lt;/sub&gt;", "</sub>")
 
+                            .replaceAll("&lt;ref&gt;.*?&lt;/ref&gt;", "")
+                            .replaceAll("\\{\\{K\\|(.*?)\\}\\}", "[\$1]")
+                            .replaceAll("\\{\\{QS Bedeutungen\\|(.*?)\\}\\}", "")
+                            .replaceAll("&lt;nowiki&gt;.*?&lt;/nowiki&gt;", "")
+
                             .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
 						    .replaceAll(myMarker + "(.*?)" + myMarker, "<span class='wiktionaryItem'>\$1.</span>")
