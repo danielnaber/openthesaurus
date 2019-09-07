@@ -209,7 +209,7 @@
                                             <td style="vertical-align: top"><g:message code="edit.term.term"/>:</td>
                                             <td style="vertical-align: top">
                                                 <input onkeypress="return avoidSubmitOnReturn(event);"
-                                                       class="termInput" spellcheck="true" name="word_${i}" value="${params['word_'+i]}" />&nbsp;
+                                                       class="termInput" spellcheck="true" name="word_${i}" value="${params['word_'+i].encodeAsHTML()}" />&nbsp;
                                                 <g:if test="${Language.findAllByIsDisabled(false)?.size() == 1}">
                                                     <g:hiddenField name="language.id_${i}" value="${Language.findByIsDisabled(false).id}"/>
                                                 </g:if>
