@@ -54,7 +54,7 @@
             <p>Mit der folgenden HTTP-Anfrage via GET können alle Synonymgruppen,
             die das Wort <span class="bsp">test</span> beinhalten, abgefragt werden:</p>
 
-            <pre class="api"><a href="/synonyme/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}/synonyme/<br/>search?q=<strong>test</strong>&amp;format=application/json</a></pre>
+            <div class="api"><a href="/synonyme/search?q=test&amp;format=application/json">${grailsApplication.config.thesaurus.serverURL}/synonyme/&#8203;search?q=<strong>test</strong>&amp;format=application/json</a></div>
 
             <p>Kommt im Suchwort ein Sonderzeichen vor, muss es mit UTF-8 URL-kodiert werden (z.B. wird <tt>hören</tt> zu <tt>h%C3%B6ren</tt>).</p>
 
@@ -64,7 +64,7 @@
             <p>Statt <span class="apioption">application/json</span> kann <span class="apioption">text/xml</span>
                 angegeben werden, um das Ergebnis im XML-Format zu erhalten.</p>
 
-            <pre class="api"><a href="/synonyme/search?q=test&amp;format=text/xml">${grailsApplication.config.thesaurus.serverURL}/synonyme/<br/>search?q=<strong>test</strong>&amp;format=text/xml</a></pre>
+            <div class="api"><a href="/synonyme/search?q=test&amp;format=text/xml">${grailsApplication.config.thesaurus.serverURL}/synonyme/&#8203;search?q=<strong>test</strong>&amp;format=text/xml</a></div>
 
             <!--
             <h2><a name="jsonp">Suchanfrage für JSONP</a></h2>
@@ -81,7 +81,7 @@
                 <li><span class="apioption">similar=true</span>: Hiermit werden bei jeder Antwort auch bis zu fünf
                 ähnlich geschriebene Wörter zurückgegeben. Dies ist nützlich, um dem User einen Vorschlag im Falle eines möglichen
                 Tippfehlers machen zu können. Beispielanfrage:
-                    <pre class="api"><a href="/synonyme/search?q=Umstant&amp;format=application/json&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}/synonyme/<br/>search?q=<strong>Umstant</strong>&amp;format=application/json&amp;similar=true</a></pre>
+                    <div class="api"><a href="/synonyme/search?q=Umstant&amp;format=application/json&amp;similar=true">${grailsApplication.config.thesaurus.serverURL}/synonyme/&#8203;search?q=<strong>Umstant</strong>&amp;format=application/json&amp;similar=true</a></div>
                     In der Antwort gibt <tt>distance</tt> den Levenshtein-Abstand zum Suchwort an (Wörter in Klammern werden dabei ignoriert).
                 Die Wörter sind bereits nach diesem Abstand sortiert. Es werden nur Wörter vorgeschlagen, die auch
                 in OpenThesaurus vorhanden sind.
@@ -89,7 +89,7 @@
 
                 <li><span class="apioption">substring=true</span>: Hiermit werden bei jeder Antwort auch bis zu zehn Wörter
                 zurückgegeben, die den Suchbegriff nur als Teilwort beinhalten. Beispielanfrage:
-                    <pre class="api"><a href="/synonyme/search?q=Hand&amp;format=application/json&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}/synonyme/<br/>search?q=<strong>Hand</strong>&amp;format=application/json&amp;substring=true</a></pre>
+                    <div class="api"><a href="/synonyme/search?q=Hand&amp;format=application/json&amp;substring=true">${grailsApplication.config.thesaurus.serverURL}/synonyme/&#8203;search?q=<strong>Hand</strong>&amp;format=application/json&amp;substring=true</a></div>
                 </li>
 
                 <li><span class="apioption">substringFromResults</span>: Gibt an, ab welchem Eintrag die Teilwort-Treffer

@@ -407,12 +407,13 @@ li.checkboxList {
 }
 
 /* API page */
-pre.api {
+div.api {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 4px;
   background-color: #eeeeee;
   border: 1px solid #dddddd;
+  font-family: monospace;
 }
 
 .apioption {
