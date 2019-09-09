@@ -110,6 +110,9 @@
                 <li><span class="apioption">subsynsets=true</span>: Gibt an, dass zu jeder Synonymgruppe ihre
                 (optionalen) Unterbegriffe mitgeliefert werden.</li>
 
+                <li><span class="apioption">baseform=true</span>: Gibt die Grundform zum Suchwort an, falls es sich nicht
+                    schon um eine Grundform handelt. Beispiel: "Krankenhäuser" liefert "Krankenhaus" (nur JSON).</li>
+
                 <!--
                 <li><span class="apioption">mode=all</span>: Aktiviert alle zusätzlichen Abfragen. Bisher sind das <tt>similar=true</tt>,
                     <tt>substring=true</tt>, <tt>supersynsets=true</tt> und <tt>subsynsets=true</tt>. Dieser Modus
