@@ -14,7 +14,7 @@ class BaseformService {
         baseformFinder = new BaseformFinder()
     }
 
-    Set<String> getBaseForms(Connection conn, String query) {
+    List<String> getBaseForms(Connection conn, String query) {
         try {
             return baseformFinder.getBaseForms(conn, query)
         } catch (MySQLSyntaxErrorException e) {

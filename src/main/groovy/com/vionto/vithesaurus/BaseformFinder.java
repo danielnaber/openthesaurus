@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Finds a German word's baseform. Also supports compounds words. 
@@ -43,7 +45,7 @@ public class BaseformFinder {
         this.splitter.setStrictMode(true);
     }
 
-    public Set<String> getBaseForms(Connection connection, String term) throws SQLException {
+    public List<String> getBaseForms(Connection connection, String term) throws SQLException {
         final List<String> parts = new ArrayList<String>(splitter.splitWord(term));
         final String searchTerm;
         if (parts.size() > 0) {
@@ -51,27 +53,32 @@ public class BaseformFinder {
         } else {
             searchTerm = term;
         }
-        final Set<String> baseForms = new HashSet<String>();
         final String sql = "SELECT baseform FROM word_mapping WHERE fullform = ?";
         final PreparedStatement statement = connection.prepareStatement(sql);
+        List<String> dbBaseforms = new ArrayList();
         try {
             statement.setString(1, searchTerm);
             final ResultSet resultSet = statement.executeQuery();
             try {
                 while (resultSet.next()) {
-                    final String baseform;
-                    if (parts.size() > 1) {
-                        baseform = joinAllButLast(parts, resultSet.getString("baseform"));
-                    } else {
-                        baseform = resultSet.getString("baseform");
-                    }
-                    baseForms.add(baseform);
+                    dbBaseforms.add(resultSet.getString("baseform"));
                 }
             } finally {
                 resultSet.close();
             }
         } finally {
             statement.close();
+        }
+        Collections.sort(dbBaseforms);  // e.g. "kindergärten" => "Kindergärten"
+        final List<String> baseForms = new ArrayList<String>();
+        for (String dbBaseform : dbBaseforms) {
+            final String baseform;
+            if (parts.size() > 1) {
+                baseform = joinAllButLast(parts, dbBaseform);
+            } else {
+                baseform = dbBaseform;
+            }
+            baseForms.add(baseform);
         }
         return baseForms;
     }

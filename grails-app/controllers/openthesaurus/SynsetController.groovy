@@ -205,7 +205,7 @@ class SynsetController extends BaseController {
             if (baseformApiRequest || allApiRequest) {
               baseforms = baseformService.getBaseForms(conn, params.q.trim())
             }
-            renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult, Arrays.asList(baseforms))
+            renderApiResult(searchResult, similarTerms, partialMatchResult, startsWithResult, baseforms)
             return
           }
 

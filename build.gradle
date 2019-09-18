@@ -61,6 +61,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     compile "de.danielnaber:jwordsplitter:4.4"
+    //compile "org.languagetool:language-de:4.6"
     compile "org.incava:java-diff:1.1.2"
     compile "org.apache.commons:commons-lang3:3.1"
     compile "org.apache.commons:commons-compress:1.17"
