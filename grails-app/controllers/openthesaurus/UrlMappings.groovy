@@ -8,6 +8,7 @@ class UrlMappings {
 
       "/"(controller:'home', action:'index')
       "/ads.txt"(controller:'home', action:'adstxt')
+      "/googleTODO.html"(controller:'home', action:'google')
       "/direct"(controller:'redirect', action:'homepage') 
       "/home/directSearch"(controller:'redirect', action:'homepage') 
       "/home/"(controller:'redirect', action:'homepage') 
