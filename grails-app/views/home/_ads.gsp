@@ -1,4 +1,4 @@
-<g:if test="${!session.user}">
+<g:if test="${!session.user && withAd}">
     <div style="margin-top:60px; text-align: center">
         <g:if test="${mso}">
             <!--MSO-ad-->

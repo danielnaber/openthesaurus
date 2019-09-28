@@ -8,16 +8,18 @@
         <g:if test="${descriptionText}">
           <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
         </g:if>
-        <!-- yieldlove -->
-        <script type='text/javascript'>
+        <g:if test="${withAd}">
+            <!-- yieldlove -->
+            <script type='text/javascript'>
             var yieldlove_site_id = "openthesaurus.de_artikelseite";
-        </script><script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_artikelseite'></script>
-        <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
-        <script>
+            </script><script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_artikelseite'></script>
+            <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+            <script>
             var googletag = googletag || {};
             googletag.cmd = googletag.cmd || [];
-        </script>
-        <!-- yieldlove end -->
+            </script>
+            <!-- yieldlove end -->
+        </g:if>
     </head>
     <body>
 

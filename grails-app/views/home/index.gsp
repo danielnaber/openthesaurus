@@ -4,17 +4,19 @@
 <head>
     <title><g:message code="homepage.title"/></title>
     <meta name="layout" content="homepage" />
-    <!-- yieldlove -->
-    <script type='text/javascript'>
+    <g:if test="${withAd}">
+        <!-- yieldlove -->
+        <script type='text/javascript'>
         var yieldlove_site_id = "openthesaurus.de_startseite";
-    </script>
-    <script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_startseite'></script>
-    <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
-    <script>
+        </script>
+        <script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_startseite'></script>
+        <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+        <script>
         var googletag = googletag || {};
         googletag.cmd = googletag.cmd || [];
-    </script>
-    <!-- yieldlove end -->
+        </script>
+        <!-- yieldlove end -->
+    </g:if>
 </head>
 <body>
 
