@@ -43,6 +43,10 @@ class UserController extends BaseController {
                                  confirmPasswordReset: 'GET', requestPasswordReset:'POST']
     
     static final int MIN_PASSWORD_LENGTH = 4
+    
+    static final List<LoginAttempt> recentLoginAttempts = new ArrayList()
+    static final int KEEP_LOGIN_ATTEMPTS_FOR_SEC = 60
+    static final int MAX_LOGIN_ATTEMPTS = 3
 
     def index() {
         redirect(action:'list',params:params)
@@ -282,6 +286,11 @@ class UserController extends BaseController {
             // user created before per-user salts where introduced
             salt = DEFAULT_SALT
           }
+          if (user && loginLimitReached(user)) {
+            log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): user has too many login attempts")
+            flash.message = message(code:'user.too.many.logins')
+            return
+          }
           if (user && user.password != md5sum(params.password, salt)) {
             user = null
           }
@@ -355,6 +364,35 @@ class UserController extends BaseController {
             }
           }
           render(view: "login")
+        }
+    }
+
+    boolean loginLimitReached(ThesaurusUser user) {
+        cleanRecentLoginList()
+        int recentAttempts = 0
+        for (LoginAttempt attempt : recentLoginAttempts) {
+            if (attempt.id == user.id) {
+                recentAttempts++
+            }
+        }
+        recentLoginAttempts.add(new LoginAttempt(id: user.id, date: new Date()))
+        log.info("recent login attempts for ${user.id}/${user.userId}: " + recentAttempts + " (limit: ${MAX_LOGIN_ATTEMPTS})")
+        if (recentAttempts > MAX_LOGIN_ATTEMPTS) {
+            return true
+        }
+        return false
+    }
+
+    void cleanRecentLoginList() {
+        def it = recentLoginAttempts.iterator()
+        Date now = new Date()
+        while (it.hasNext()) {
+            LoginAttempt attempt = it.next()
+            long ageInSeconds = (now.getTime() - attempt.date.getTime()) / 1000
+            if (ageInSeconds > KEEP_LOGIN_ATTEMPTS_FOR_SEC) {
+                print "Removing from recent logins: " + attempt
+                it.remove()
+            }
         }
     }
 
@@ -588,5 +626,9 @@ class UserController extends BaseController {
       }
     }
     
+    class LoginAttempt {
+        long id
+        Date date
+    }
 }
  
