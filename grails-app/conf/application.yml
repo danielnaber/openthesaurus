@@ -6,10 +6,10 @@ grails:
 ---
 grails:
     mail:
-        host: "smtp.gmail.com"
+        host: "smtprelaypool.ispgateway.de"
         port: 465
-        username: ""
-        password: ""
+        username: "register@openthesaurus.de"
+        password: "fixme"
         props:
             mail.smtp.auth: "true"
             mail.smtp.socketFactory.port: "465"
@@ -109,16 +109,40 @@ hibernate:
         use_query_cache: false
 dataSource:
     pooled: true
-    jmxExport: true
+    #jmxExport: true
     driverClassName: org.mariadb.jdbc.Driver
-    username: vionto
-    password: vionto
+    hibernate.dialect: xxx
+    hibernateDialect: xxx
+    username: root
+    password: root
+    properties:
+        #jmxEnabled: true
+        driverClassName: org.mariadb.jdbc.Driver
+        #maxActive: 80 -- bis 2019-01-21
+        #maxActive: 150 -- bis 2019-01-29(?)
+        maxActive: 250
+        minIdle: 5
+        maxIdle: 25
+        maxWait: 5000
+        maxAge: 600000
+        timeBetweenEvictionRunsMillis: 5000
+        minEvictableIdleTimeMillis: 60000
+        validationQuery: SELECT 1
+        validationQueryTimeout: 3
+        validationInterval: 15000
+        testOnBorrow: true
+        testWhileIdle: true
+        testOnReturn: false
+        jdbcInterceptors: ConnectionState
+        defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:mariadb://127.0.0.1:3306/viontoDevDb
+            dbCreate: update
+            url: jdbc:mariadb://127.0.0.1:3306/openthesaurus
+            username: root
+            password: root
     test:
         dataSource:
             dbCreate: update
@@ -126,22 +150,7 @@ environments:
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-            properties:
-                jmxEnabled: true
-                initialSize: 5
-                maxActive: 50
-                minIdle: 5
-                maxIdle: 25
-                maxWait: 10000
-                maxAge: 600000
-                timeBetweenEvictionRunsMillis: 5000
-                minEvictableIdleTimeMillis: 60000
-                validationQuery: SELECT 1
-                validationQueryTimeout: 3
-                validationInterval: 15000
-                testOnBorrow: true
-                testWhileIdle: true
-                testOnReturn: false
-                jdbcInterceptors: ConnectionState
-                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+            url: jdbc:mariadb://127.0.0.1:3306/openthesaurus?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+            username: openthesaurus
+            # Hetzner server:
+            password: fixme
