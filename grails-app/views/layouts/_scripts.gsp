@@ -263,7 +263,7 @@
         lastErrorLogToServer = new Date();
     };
 
-    <!-- Start Cookie Plugin -->
+    <!-- Start Cookie Plugin
     window.cookieconsent_options = {
         message: "Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können und für Werbung.",
         dismiss: "Okay",
@@ -271,7 +271,7 @@
         link: '/about/imprint',
         theme: "${assetPath(src: 'dark-bottom.css')}"
     };
-    <!-- Ende Cookie Plugin -->
+    Ende Cookie Plugin -->
 
 // -->
 </script>
