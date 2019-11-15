@@ -37,6 +37,7 @@
       <input ${autofocus} ${directSearchAttributes} style="outline: none" onclick="selectSearchField()" onblur="leaveSearchField()" accesskey="s" type="text" id="search-field" name="q" placeholder="${message(code:'homepage.search.default.term')}" /><input style="border-width:0px" type="image" title="${message(code:'homepage.search.button.title')}" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
     </g:else>
 
+<!--
     <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
     </g:if>
     <g:else>
@@ -44,12 +45,11 @@
         <a style="font-weight: normal" href="/home/index2">Neue Suche testen</a>
       </div>
     </g:else>
-
-      <!--
-      <div style="background-color: #1e7dff; text-align: center; margin-left: 75px; padding: 3px;">
-          <a style="color: white" href="/about/vertrieb">Praktikum/Nebenjob: Wir suchen eine/n Mitarbeiter/in Vertrieb &amp; Marketing!</a>
-      </div>
-      -->
+-->
+    
+    <div style="background-color: #1e7dff; text-align: center; margin-left: 78px; padding: 5px;">
+      <a style="color: white" href="https://languagetool.org/job/sea">Job: SEA-Manager (m/w/d)</a>
+    </div>
 
   </form>
 
