@@ -47,7 +47,7 @@
     </g:else>
 -->
     
-    <div style="background-color: #1e7dff; text-align: center; margin-left: 78px; padding: 5px;">
+    <div style="background-color: #046CCB; text-align: center; margin-left: 78px; padding: 5px;">
       <a style="color: white" href="https://languagetool.org/job/sea">Job: SEA-Manager (m/w/d)</a>
     </div>
 
@@ -82,6 +82,30 @@
           document.searchform.q.focus();
           document.searchform.q.select();
         }
+        var observer = new MutationObserver(function(mutations) {
+          for (x = 0; x < mutations.length; x++) {
+            if (!mutations[x].addedNodes) {
+              return;
+            }
+            try {
+                var cmpwarning = document.querySelectorAll('[class*="sp_choice"]')[1];
+                cmpwarning.addEventListener('click', () => {
+                    console.log("cmp click event");
+                    // CMP popup would steal the focus, so set it again:
+                    setTimeout(() => document.searchform.q.focus(), 50);
+                  }
+                );
+                console.log("observer disconnect");
+                observer.disconnect();
+                break;
+            } catch(e) {
+              //console.log("cmpwarning event handler not set:", e);
+            } 
+          }
+        })
+        observer.observe(document.body, {
+            childList: true, subtree: true, attributes: false, characterData: false
+        });
     });
     // -->
     </script>
