@@ -93,6 +93,9 @@
                     console.log("cmp click event");
                     // CMP popup would steal the focus, so set it again:
                     setTimeout(() => document.searchform.q.focus(), 50);
+                    if (typeof(_paq) !== 'undefined') {  // Matomo tracking
+                        _paq.push(['trackEvent', "CmpClickEvent"]);
+                    }
                   }
                 );
                 console.log("observer disconnect");
