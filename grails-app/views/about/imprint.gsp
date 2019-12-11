@@ -96,64 +96,18 @@
                 dieser Seite zurück, um die neueste Version zu prüfen.</p>
                 
                 
-                <h2>Werbung über AdSense</h2>
-
-                <p>Wir haben auf dieser Internetseite Google AdSense integriert. Google AdSense ist ein Online-Dienst, über den eine Vermittlung
-                    von Werbung auf Drittseiten ermöglicht wird. Google AdSense beruht auf einem Algorithmus, welcher die auf Drittseiten 
-                    angezeigten Werbeanzeigen passend zu den Inhalten der jeweiligen Drittseite auswählt.
-                    Es gestattet ein interessenbezogenes Targeting des Internetnutzers, das durch Generierung von individuellen 
-                    Benutzerprofilen umgesetzt wird.
-
-                <p>Die Google-AdSense-Komponente wird von der Alphabet Inc., 1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351, USA, betrieben.
-
-                <p>Der Zweck der Google-AdSense-Komponente ist die Einbindung von Werbeanzeigen.
-                Google-AdSense setzt Cookies (s.o.) auf dem System des Nutzers.
-                Mit dem Setzen der Cookies wird der Alphabet Inc. eine Analyse der Benutzung unserer Internetseite ermöglicht.
-                Durch jeden Aufruf einer der Seiten dieser Internetseite, auf welcher eine Google-AdSense-Komponente integriert wurde,
-                wird der Internetbrowser auf dem System der betroffenen Person automatisch durch die jeweilige Google-AdSense-Komponente
-                veranlasst, Daten zum Zwecke der Online-Werbung und der Abrechnung von Provisionen an die Alphabet Inc. zu übermitteln.
-                Im Rahmen dieses technischen Verfahrens erhält die Alphabet Inc. Kenntnis über personenbezogene Daten,
-                wie der IP-Adresse der betroffenen Person. Diese dienen der Alphabet Inc. unter anderem dazu, die Herkunft 
-                der Besucher und Klicks nachzuvollziehen und in der Folge Provisionsabrechnungen zu ermöglichen.
-
-                <p>Die betroffene Person kann das Setzen von Cookies, wie oben bereits erwähnt,
-                jederzeit mittels einer entsprechenden Einstellung des genutzten Browsers verhindern
-                und damit dem Setzen von Cookies dauerhaft widersprechen. Eine solche Einstellung des 
-                genutzten Browsers würde auch verhindern, dass die Alphabet Inc. ein Cookie auf dem System der
-                betroffenen Person setzt. Zudem kann ein von der Alphabet Inc. bereits gesetzter Cookie
-                jederzeit über den Browser gelöscht werden.
-
-                <p>Google AdSense verwendet zudem sogenannte Zählpixel. 
-                Ein Zählpixel ist eine kleine Grafik, die in Internetseiten eingebettet wird, um eine Logdatei-Aufzeichnung 
-                und eine Logdatei-Analyse zu ermöglichen. Dadurch kann eine statistische Auswertung durchgeführt werden. 
-                Anhand des eingebetteten Zählpixels kann die Alphabet Inc. erkennen, ob und wann eine Internetseite 
-                von einer betroffenen Person geöffnet wurde und welche Links von der betroffenen Person angeklickt wurden.
-                Zählpixel dienen auch dazu, das Verhalten der Besucher auf einer Internetseite auszuwerten.
-
-                <p>Über Google AdSense werden personenbezogene Daten und Informationen - was auch die IP-Adresse umfasst 
-                und zur Erfassung und Abrechnung der angezeigten Werbeanzeigen notwendig ist - an die Alphabet Inc.
-                in die USA übertragen. Diese personenbezogenen Daten werden in den
-                USA gespeichert und verarbeitet. Die Alphabet Inc. gibt diese über das technische
-                Verfahren erhobenen personenbezogenen Daten unter Umständen an Dritte weiter.
-
-                <p>Mehr Informationen über Google-AdSense finden Sie unter diesem Link: 
-                <a href="https://www.google.de/intl/de/adsense/start/">https://www.google.de/intl/de/adsense/start/</a>
-                
-                
-                <h2>Werbung über Publishung Partner</h2>
+                <h2>Werbung über Publishing Partner</h2>
 
                 <p>openthesaurus.de enthält nutzungsbasierte Online-Werbung von Drittanbietern. Diese wird über folgende Werbevermarkter
                     ausgespielt:
                     <ul>
                         <li>Yieldlove GmbH, Neuer Pferdemarkt 1, 20359 Hamburg („Yieldlove“)</li>
-                        <li>MSO Digital GmbH & Co. KG, Erich-Maria-Remarque-Ring 14, 49074 Osnabrück</li>
                     </ul>
                             
                 <p>Um die Werbeauslieferung zu optimieren, werden von unseren Werbevermarktern und deren Partnern Cookies eingesetzt.</p>
 
-                <p>Informationen dazu, wie Yieldlove und MSO Digital Daten verarbeitet und welche Daten betroffen sind, erhalten Sie auch in der Privacy 
-                Policy von Yieldlove: <a href="http://www.yieldlove.com/privacy">www.yieldlove.com/privacy</a> und
-                MSO Digital: <a href="https://www.mso-digital.de/datenschutz/">www.mso-digital.de/datenschutz/</a>.
+                <p>Informationen dazu, wie Yieldlove Daten verarbeitet und welche Daten betroffen sind, erhalten Sie auch in der Privacy 
+                Policy von Yieldlove: <a href="http://www.yieldlove.com/privacy">www.yieldlove.com/privacy</a>.
 
                 <h3>COOKIES</h3>
 
@@ -381,7 +335,7 @@
                 <p>Wenn Sie die von unseren Werbevermarktern zur Verfügung gestellten Werbebannerdaten korrigieren, aktualisieren oder löschen 
                 möchten oder wenn Sie die personenbezogenen Daten, die Sie unseren Werbevermarktern über das Kontaktformular auf deren Homepage 
                 zur Verfügung gestellt haben, korrigieren, aktualisieren oder löschen möchten, können Sie yieldlove kontaktieren per
-                E-Mail an datenschutzbeauftragter@stroeer.de bzw. MSO Digital per E-Mail an kontakt@mso-digital.de.
+                E-Mail an datenschutzbeauftragter@stroeer.de.
 
                 <p>Unsere Werbevermarkter nehmen an den Selbstregulierungs-Programmen der European Digital Advertising Alliance (EDAA) teil und halten sich
                 an die EDAA-Prinzipien für Online Behavioral Advertising. Die EDAA fungiert hauptsächlich als zentrale Lizenzierungsstelle 
@@ -391,7 +345,7 @@
                 Klicken Sie hier, um mehr über die EDAA zu erfahren.
                 
                 <p>Wenn Sie Fragen und / oder Kommentare haben oder eine Beschwerde im Bereich Werbung einreichen möchten,
-                kontaktieren Sie uns, yieldlove (datenschutzbeauftragter@stroeer.de) oder MSO Digital (kontakt@mso-digital.de).
+                kontaktieren Sie uns bzw. yieldlove (datenschutzbeauftragter@stroeer.de).
                 
             </g:if>
             <g:else>
