@@ -24,6 +24,7 @@
                             .replaceAll("\\{\\{QS Bedeutungen\\|(.*?)\\}\\}", "")
                             .replaceAll("&lt;nowiki&gt;.*?&lt;/nowiki&gt;", "")
 
+                            .replaceAll("&amp;ndash;", "-")
                             .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
 						    .replaceAll(myMarker + "(.*?)" + myMarker, "<span class='wiktionaryItem'>\$1.</span>")
