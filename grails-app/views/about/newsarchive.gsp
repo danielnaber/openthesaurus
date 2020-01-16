@@ -17,6 +17,18 @@
         <table border="0" cellpadding="5" cellspacing="0" class="newArchiveTable">
             
         <tr class="newsYearDelimiter">
+            <td>2019</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td valign="top" align="right" width="90"><span class="newsdate">2019-09-01</span></td>
+            <td valign="top">
+                Erweiterung der <g:link controller="about" action="api">API</g:link> um den
+                <tt>baseform</tt>-Parameter.
+            </td>
+        </tr>
+
+        <tr class="newsYearDelimiter">
             <td>2017</td>
             <td></td>
         </tr>
