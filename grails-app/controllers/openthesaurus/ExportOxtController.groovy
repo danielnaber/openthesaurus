@@ -89,22 +89,21 @@ class ExportOxtController extends BaseController {
       }
 
       List sortedWords = []
-      Map wordToOrigWord = new HashMap()
 
       while (rs.next()) {
         String word = rs.getString("word")
         word = word.replaceAll("\\(.*?\\)", "").trim()
-        sortedWords.add(word)
-        wordToOrigWord.put(word, rs.getString("word"))
+        sortedWords.add(new Word(normWord:word, word:rs.getString("word")))
       }
 
       Collections.sort(sortedWords, [
-              compare: {String o1, String o2 -> o1.compareToIgnoreCase(o2)}
+              compare: {Word o1, Word o2 -> o1.word.compareToIgnoreCase(o2.word)}
       ] as Comparator)   // sorts like Unix "sort" with LC_ALL=C
 
-      for (word in sortedWords) {
+      for (wordObj in sortedWords) {
         long t = System.currentTimeMillis()
-        String origWord = wordToOrigWord.get(word)
+        String word = wordObj.normWord
+        String origWord = wordObj.word
         if (!origWord) {
           throw new Exception("'${word}' not found in map")
         }
@@ -271,4 +270,8 @@ class ExportOxtController extends BaseController {
     
   }
 
+    class Word {
+      String word
+      String normWord
+    }
 }
