@@ -7,7 +7,7 @@
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="/openSearch" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="flattr:id" content="62lgqk">
-        <nera name="addon:video" content="${createLinkTo(dir:'images/addon',file:'addon.mp4')}">
+        <meta name="addon:video" content="${createLinkTo(dir:'images/addon',file:'addon.mp4')}">
         <asset:javascript src="application"/>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>

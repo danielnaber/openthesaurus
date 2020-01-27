@@ -10,5 +10,6 @@
 *= require reset-min
 *= require layout
 *= require jquery-ui.min
+*= require addon
 *= require_self
 */

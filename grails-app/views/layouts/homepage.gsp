@@ -10,6 +10,7 @@
   <link rel="alternate" type="application/rss+xml" title="<g:message code='rss.title'/>" href="/feed" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="flattr:id" content="62lgqk">
+  <meta name="addon:video" content="${createLinkTo(dir:'images/addon',file:'addon.mp4')}">
   <asset:javascript src="application"/>
   <g:render template="/script"/>
   <g:layoutHead />
