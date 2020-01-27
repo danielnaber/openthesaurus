@@ -9,7 +9,7 @@
                     <span class="desktopOnly">&nbsp;&nbsp;&nbsp;<g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link></span>
                     &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
                 </td>
-                <td style="text-align: right">
+                <td style="text-align: right" id="right-navibar">
                     <g:if test="${session.user}">
                         <g:if test="${session.user.userId.toString() == 'admin'}">
                             <g:link controller="admin" action="index"><span class="adminOnly"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></g:link>

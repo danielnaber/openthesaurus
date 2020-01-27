@@ -1,0 +1,159 @@
+.addon-link {
+    border-right: 1px solid #fff;
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    padding-right: 12px;
+    margin-right: 12px;
+    cursor: pointer;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 16px auto;
+}
+
+.addon-link--chrome {
+    background-image: url(../images/addon/chrome.svg);
+}
+
+.addon-link--opera {
+    background-image: url(../images/addon/opera.svg);
+}
+
+.addon-link--edge {
+    background-image: url(../images/addon/edge.svg);
+}
+
+.addon-link--firefox {
+    background-image: url(../images/addon/firefox.svg);
+}
+
+.addon-layer__shadow {
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    white-space: nowrap;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.addon-layer__shadow:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.addon-layer {
+    white-space: normal;
+    background: white;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: 640px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.addon-layer__header {
+    background: #eee;
+    padding: 36px 40px 24px 40px;
+    margin-bottom: 30px;
+}
+
+.addon-layer__video {
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.09);
+}
+
+.addon-layer__close {
+    position: absolute;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    top: 0;
+    right: 0;
+    background: url(../images/addon/close-big@2x.png) no-repeat center center;
+    background-size: 20px 20px;
+}
+
+.addon-layer__headline1 {
+    text-align: center;
+    white-space: nowrap;
+    margin-bottom: 44px;
+}
+
+.addon-layer__logo-ot {
+    background: url(../images/openthesaurus-logo.png) no-repeat right center;
+    background-size: 100% auto;
+    width: 161px;
+    height: 44px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.addon-layer__logo-seperator {
+    line-height: 44px;
+    margin: 0 20px;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 32px;
+    color: #727272;
+}
+
+.addon-layer__logo-lt {
+    width: 161px;
+    height: 44px;
+    display: inline-block;
+    background: url(../images/addon/lt-logo.png) no-repeat left center;
+    background-size: auto 100%;
+    vertical-align: middle;
+}
+
+.addon-layer__headline2 {
+    width: 380px;
+    font-size: 16px;
+    line-height: 24px;;
+    font-weight: bold;
+    color: #3871bd;
+    margin: 0 auto 18px;
+}
+
+.addon-layer__text {
+    width: 460px;
+    color: #3871bd;
+    font-weight: normal;
+    margin: 0 auto 24px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #727272;
+}
+
+.addon-layer__button {
+    padding: 0 18px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto 30px;
+    cursor: pointer;
+    color: #fff !important;
+    border-radius: 6px;
+    line-height: 34px;
+    text-decoration: none;
+    background: #3871bd;
+}
+
+.addon-layer__button:hover {
+    background: #20549a;
+}
