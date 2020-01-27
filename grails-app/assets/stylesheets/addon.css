@@ -1,16 +1,33 @@
+[data-lt-installed=true] .addon-link {
+    display: none;
+}
+
 .addon-link {
     border-right: 1px solid #fff;
     font-weight: bold;
     color: #fff !important;
     display: inline-block;
-    padding-right: 12px;
-    margin-right: 12px;
+    padding-right: 14px;
+    margin-right: 14px;
     cursor: pointer;
     padding-left: 22px;
     background-repeat: no-repeat;
     background-position: left center;
     background-size: auto 100%;
     line-height: 16px;
+    position: relative;
+}
+
+.addon-link::before {
+    content: "NEU";
+    position: absolute;
+    left: -43px;
+    background: #da9008;
+    font-size: 11px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-weight: normal;
+    top: -1px;
 }
 
 .addon-link--chrome {
