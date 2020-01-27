@@ -17,7 +17,7 @@ $(function() {
         var logo1 = $("<div />", { "class": "addon-layer__logo-ot" }).appendTo(headline1);
         var seperator = $("<div />", { "class": "addon-layer__logo-seperator", text: "+" }).appendTo(headline1);
         var logo2 = $("<div />", { "class": "addon-layer__logo-lt" }).appendTo(headline1);
-        var video = $("<video />", { "class": "addon-layer__video", muted: "muted", loop: true, autoplay: true, width: 480, src: $("meta[name='addon:video']").attr("content") }).appendTo(header);
+        var video = $("<video />", { "class": "addon-layer__video", muted: "muted", loop: true, autoplay: true, width: 480, src: 'https://languagetoolplus.com/videos/addon.mp4' }).appendTo(header);
         var headline2 = $("<div />", { "class": "addon-layer__headline2", text: "Professioneller schreiben mit OpenThesaurus und LanguageTool" }).appendTo(layer);
         var text = $("<div />", { "class": "addon-layer__text", html: "Mit diesem kostenlosen Plugin können Sie nicht nur überall im Web (z.&nbsp;B. in Gmail, WordPress oder Google Docs) Synonyme abrufen, sondern bekommen auch intelligente Vorschläge zur Verbesserung der <strong>Grammatik und Zeichensetzung</strong> Ihrer Texte." }).appendTo(layer);
         var button = $("<a />", { "class": "addon-layer__button", text: "Kostenlos installieren", href: url, target: "_blank" }).appendTo(layer).click(function() {
