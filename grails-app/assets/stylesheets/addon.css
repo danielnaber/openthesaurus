@@ -1,7 +1,7 @@
 .addon-link {
     border-right: 1px solid #fff;
     font-weight: bold;
-    color: #fff;
+    color: #fff !important;
     display: inline-block;
     padding-right: 12px;
     margin-right: 12px;
@@ -9,7 +9,8 @@
     padding-left: 22px;
     background-repeat: no-repeat;
     background-position: left center;
-    background-size: 16px auto;
+    background-size: auto 100%;
+    line-height: 16px;
 }
 
 .addon-link--chrome {
@@ -39,6 +40,8 @@
     white-space: nowrap;
     overflow-y: auto;
     text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .addon-layer__shadow:before {
@@ -62,8 +65,8 @@
 
 .addon-layer__header {
     background: #eee;
-    padding: 36px 40px 24px 40px;
-    margin-bottom: 30px;
+    padding: 32px 40px 24px 40px;
+    margin-bottom: 20px;
 }
 
 .addon-layer__video {
@@ -80,8 +83,8 @@
     cursor: pointer;
     width: 32px;
     height: 32px;
-    top: 0;
-    right: 0;
+    top: 4px;
+    right: 4px;
     background: url(../images/addon/close-big@2x.png) no-repeat center center;
     background-size: 20px 20px;
 }
@@ -89,7 +92,7 @@
 .addon-layer__headline1 {
     text-align: center;
     white-space: nowrap;
-    margin-bottom: 44px;
+    margin-bottom: 40px;
 }
 
 .addon-layer__logo-ot {
@@ -112,11 +115,11 @@
 }
 
 .addon-layer__logo-lt {
-    width: 172px;
+    width: 160px;
     height: 44px;
     display: inline-block;
     background: url(../images/addon/lt-logo.png) no-repeat left center;
-    background-size: 100% auto;
+    background-size: auto 33px;
     vertical-align: middle;
 }
 
@@ -156,4 +159,9 @@
 
 .addon-layer__button:hover {
     background: #20549a;
+}
+
+.disable-scrolling body,
+.disable-scrolling {
+    overflow: hidden;
 }
