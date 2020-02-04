@@ -1,5 +1,5 @@
 $(function() {
-    if (!location.search.match(/lt-test/)) {
+    if (!navigator.userAgent.match(/Chrome|Chromium\//)) {
         return;
     }
 
@@ -32,9 +32,11 @@ $(function() {
         });
     }
 
+    var href = "https://languagetoolplus.com/webextension/store?ref=ot&utm_source=openthesaurus&utm_medium=referral"
+
     function createChromeLink() {
         return $("<a />", {
-            href: "https://languagetoolplus.com/webextension/store?ref=ot",
+            href: href,
             target: "_blank",
             "class": "addon-link addon-link--chrome",
             text: "Chrome Extension installieren"
@@ -43,7 +45,7 @@ $(function() {
 
     function createFirefoxLink() {
         return $("<a />", {
-            href: "https://languagetoolplus.com/webextension/store?ref=ot",
+            href: href,
             target: "_blank",
             "class": "addon-link addon-link--firefox",
             text: "Firefox Add-on installieren"
@@ -52,7 +54,7 @@ $(function() {
 
     function createEdgeLink() {
         return $("<a />", {
-            href: "https://languagetoolplus.com/webextension/store?ref=ot",
+            href: href,
             target: "_blank",
             "class": "addon-link addon-link--edge",
             text: "Edge Add-on installieren"
@@ -61,7 +63,7 @@ $(function() {
 
     function createOperaLink() {
         return $("<a />", {
-            href: "https://languagetoolplus.com/webextension/store?ref=ot",
+            href: href,
             target: "_blank",
             "class": "addon-link addon-link--opera",
             text: "Opera Add-on installieren"
