@@ -21,7 +21,7 @@
 .addon-link::before {
     content: "NEU";
     position: absolute;
-    right: -38px;
+    left: 97%;
     background: #da9008;
     font-size: 11px;
     padding: 1px 4px;
