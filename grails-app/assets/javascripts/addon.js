@@ -1,8 +1,4 @@
 $(function() {
-    if (!navigator.userAgent.match(/Chrome|Chromium\//)) {
-        return;
-    }
-
     function openLayer(url) {
         $("html").addClass("disable-scrolling");
 
