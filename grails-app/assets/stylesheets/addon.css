@@ -3,25 +3,25 @@
 }
 
 .addon-link {
-    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
     font-weight: bold;
     color: #fff !important;
     display: inline-block;
     padding-right: 14px;
-    margin-right: 14px;
     cursor: pointer;
-    padding-left: 22px;
+    padding-left: 37px;
     background-repeat: no-repeat;
-    background-position: left center;
+    background-position: 14px center;
     background-size: auto 100%;
     line-height: 16px;
     position: relative;
+    margin-left: 12px;
 }
 
 .addon-link::before {
     content: "NEU";
     position: absolute;
-    left: -43px;
+    right: -38px;
     background: #da9008;
     font-size: 11px;
     padding: 1px 4px;
