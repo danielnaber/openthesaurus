@@ -122,7 +122,6 @@ class AdminController extends BaseController {
                 if (doUpdate) {
                     log.info("Setting normalizedWord '${term.normalizedWord}' to '${normalizedWord}'")
                     term.normalizedWord = normalizedWord
-                    term.save(failOnError: true)
                 }
             }
             String normalizedWord2 = StringTools.normalize2(term.word)
@@ -135,7 +134,6 @@ class AdminController extends BaseController {
                 if (doUpdate) {
                     log.info("Setting normalizedWord2 '${term.normalizedWord2}' to '${normalizedWord2}'")
                     term.normalizedWord2 = normalizedWord2
-                    term.save(failOnError: true)
                 }
             }
             count++
