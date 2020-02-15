@@ -69,6 +69,7 @@ public class StringTools {
   private static String cleanWord(String word) {
     // this way we can find "nörgeln" when the user searches for "noergeln" (e.g. because they have no German keyboard):
     return word.replaceAll("[.!?,]", "")
+               .replace("'", "").replace("’", "")
                .replace("Ä", "Ae").replace("ä", "ae")
                .replace("Ü", "Ue").replace("ü", "ue")
                .replace("Ö", "Oe").replace("ö", "oe")
