@@ -1,5 +1,4 @@
 <%@ page import="com.vionto.vithesaurus.Tag" %>
-<asset:javascript src="application"/>
 <asset:stylesheet src="application"/>
 <asset:stylesheet src="jquery.tagit.css" />
 <script type="text/javascript">
