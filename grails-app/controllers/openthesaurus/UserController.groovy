@@ -23,7 +23,6 @@ import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.IpTools
 import java.security.MessageDigest
 import javax.servlet.http.Cookie
-import uk.co.smartkey.jforumsecuresso.SecurityTools
 
 class UserController extends BaseController {
 
@@ -418,7 +417,6 @@ class UserController extends BaseController {
         session.controllerName = null
         session.actionName = null
         cleanCookie(response, LOGIN_COOKIE_NAME)
-        cleanCookie(response, SecurityTools.FORUM_COOKIE_NAME)
         flash.message = message(code:'user.logged.out')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
     }
