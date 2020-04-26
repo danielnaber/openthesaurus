@@ -119,7 +119,7 @@
             <ul>
                 <li><a href="http://www.danielnaber.de/publications/gldv-openthesaurus.pdf">OpenThesaurus: ein
                 offenes deutsches Wortnetz (PDF, 536&nbsp;KB)</a></li>
-                <li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>
+                <!--<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>-->
             </ul>
 
             <g:render template="/ads/about_bottom"/>
