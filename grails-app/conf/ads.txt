@@ -96,3 +96,5 @@ Media.net, 8CU29524B, Direct
 openx.com, 539961788, RESELLER, 6a698e2ec38604c6
 improvedigital.com, 1391, RESELLER
 facebook.com, 796635377204452, RESELLER, c3e20eee3f780d68
+improvedigital.com, 1673, RESELLER
+tech.convergd.com, 43, RESELLER
