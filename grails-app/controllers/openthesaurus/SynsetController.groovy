@@ -255,7 +255,7 @@ class SynsetController extends BaseController {
                 remoteGenderLookup: remoteGenderLookup,
                 remoteMistakeLookup: remoteMistakeLookup,
                 withAd: true,
-                mso: Math.random() < 0.5
+                mso: false
               ]
           }
 

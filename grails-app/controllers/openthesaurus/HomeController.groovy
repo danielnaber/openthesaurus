@@ -24,7 +24,7 @@ import java.util.stream.Collectors
 class HomeController {
 
     def index() {
-        [mso: Math.random() < 0.5, withAd: true]
+        [mso: false, withAd: true]
     }
 
     def index2() {}
