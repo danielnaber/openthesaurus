@@ -17,24 +17,46 @@
  */
 package com.vionto.vithesaurus
 
+import com.vionto.vithesaurus.tools.StringTools
+
 /**
  * Compare so that synsets whose relevant term has no language level set is preferred.
  */
 class WordLevelComparator implements Comparator {
 
     String query
+    String normQuery
 
     WordLevelComparator(String query) {
         this.query = query
+        this.normQuery = StringTools.normalize(query)
     }
 
     @Override
     int compare(Object o1, Object o2) {
         Synset syn1 = (Synset) o1
         Synset syn2 = (Synset) o2
-        int syn1Prio = hasLevelForQuery(syn1.terms) ? 1 : 0
-        int syn2Prio = hasLevelForQuery(syn2.terms) ? 1 : 0
+        int syn1Prio = 0
+        int syn2Prio = 0
+        if (query != normQuery) {
+            // Better sorting if query is exactly the term from the synet, can improve ordering if user clicks
+            // on a word which has a normalized form, thus searching e.g. a term with parenthesis. The
+            // exact match then comes first:
+            syn1Prio = hasExactMatch(syn1.terms) ? 0 : 1
+            syn2Prio = hasExactMatch(syn2.terms) ? 0 : 1
+        }
+        syn1Prio += hasLevelForQuery(syn1.terms) ? 1 : 0
+        syn2Prio += hasLevelForQuery(syn2.terms) ? 1 : 0
         return syn1Prio - syn2Prio
+    }
+
+    boolean hasExactMatch(def terms) {
+        for (Term term : terms) {
+            if (term.word.equalsIgnoreCase(query)) {
+                return true
+            }
+        }
+        return false
     }
 
     boolean hasLevelForQuery(def terms) {
