@@ -259,7 +259,7 @@
             return;
         }
         var message = "Error in " + url + " on line " + line + ": " + msg;
-        $.post("/about/logMessage", { "msg": message });
+        //$.post("/about/logMessage", { "msg": message });
         lastErrorLogToServer = new Date();
     };
 
