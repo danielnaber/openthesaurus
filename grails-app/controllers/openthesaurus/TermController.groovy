@@ -86,7 +86,7 @@ class TermController extends BaseController {
             }
 
             // validation okay, now change the real term:
-            term.word = params.word
+            term.word = params.word.trim()
             term.userComment = params.userComment
             if (params['level.id'] && params['level.id'] != 'null') {
                 term.level = TermLevel.get(params['level.id'])
