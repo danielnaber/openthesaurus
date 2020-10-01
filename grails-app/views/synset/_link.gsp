@@ -9,12 +9,22 @@
     <g:set var="nymCount" value="${0}"/>
     
     <ul style="margin-top:0">
-    
+
+        <%
+            Set<String> deleteIds = new HashSet<>();
+        %>
         <g:each var='link' in='${synsetLinks}'>
            <g:if test="${link.linkType.toString() == linkTypeName}">
            
                 <li class="checkboxList">
                     <input type="hidden" id="delete_${linkTypeName}_${link.id}" name="delete_${linkTypeName}_${link.id}" value=""/>
+                    <%
+                        String id = "delete_${linkTypeName}_${link.id}";
+                        if (deleteIds.contains(id)) {
+                            continue;
+                        }
+                        deleteIds.add(id);
+                    %>
                     <div id="${linkTypeName}_${link.id}">
         
                         <g:if test="${editable}">
