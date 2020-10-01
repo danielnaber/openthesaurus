@@ -786,7 +786,6 @@ class SynsetController extends BaseController {
       }
       for (deleteID in deleteTermIds) {
           Term delTerm = Term.get(deleteID)
-          synset.removeTerm(delTerm)
           List<TermLink> termLinks1 = TermLink.findAllByTerm(delTerm)
           for (termLink in termLinks1) {
               delTerm.deleteTermLink(termLink)
@@ -795,6 +794,7 @@ class SynsetController extends BaseController {
           for (termLink in termLinks2) {
               termLink.targetTerm.deleteTermLink(termLink)
           }
+          synset.removeTerm(delTerm)
       }
   }
 
