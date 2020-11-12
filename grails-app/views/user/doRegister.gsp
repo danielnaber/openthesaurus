@@ -17,6 +17,7 @@
 
           <p><g:message code="user.register.check.email" args="${[email]}"/></p>
 
+          <!--
           <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
               
               <p>Optional können Sie sich hier auch direkt für unseren Newsletter anmelden. Sie
@@ -29,6 +30,7 @@
               </form>
               
           </g:if>
+          -->
 
     </body>
 </html>
