@@ -11,6 +11,17 @@
                 font-size: 14px;
             }
         </style>
+        <!-- yieldlove -->
+        <script>
+            window.yieldlove_cmp = window.yieldlove_cmp || {};
+            window.yieldlove_cmp.config = {
+                targetingParams: {
+                    isPrivacyPolicyPage: true
+                }
+            }
+        </script>
+        <script type="text/javascript" src="https://cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_artikelseite"></script>
+        <!-- /yieldlove -->
     </head>
     <body>
 
@@ -26,8 +37,18 @@
                 
                 <p>Die Verarbeitung personenbezogener Daten auf dieser Website erfolgt im Einklang mit
                 der europäischen Datenschutz-Grundverordnung (DSGVO) und dem Bundesdatenschutzgesetz (BDSG) (2018).</p>
-                
-                <p>Die Nutzung unserer Website erfolgt standardmäßig anonym. 
+
+                <h2>Verwaltung von Genehmigungen</h2>
+
+                <h3>Einwilligungsmanagement</h3>
+
+                <p>Wir nehmen am IAB Europe Transparency & Consent Framework teil und erfüllen dessen Spezifikationen und Richtlinien. Dafür setzen wir die Consent-Management-Plattform (CMP) der Sourcepoint Technologie Inc., 228 Park Ave S #87903, New York 10003-1502, USA als Auftragsverarbeiter ein. Im Rahmen des IAB Europe Transparency & Consent Frameworks hat Sourcepoint die Identifikationsnummer 6. Die CMP von Sourcepoint ermöglicht es Ihnen uns eine datenschutzkonforme Einwilligung in die Verarbeitung Ihrer Daten zu erteilen sowie diese jederzeit zu widerrufen. Auch können Sie der Datenverarbeitung widersprechen, die auf unserem berechtigten Interesse beruht.
+                <p>Eine Übersicht Ihrer Einstellungsmöglichkeiten, den Zwecken und eingebundenen Dritten finden sie hier: <a href="#" style="cursor: pointer;" onclick="window.yieldlove_cmp.loadPrivacyManager()">Privacy Manager</a>
+                <p>Weitere Informationen zum Datenschutz und der CMP finden Sie auf der Webseite von Sourcepoint: <a href="https://www.sourcepoint.com/privacy-policy">https://www.sourcepoint.com/privacy-policy</a>
+
+                <h2>Allgemeines</h2>
+
+                <p>Die Nutzung unserer Website erfolgt standardmäßig anonym.
                 Unser Webserver ist so konfiguriert, dass IP-Adressen so gekürzt werden, dass sie nicht mehr 
                 zur Identifikation benutzt werden (z.&thinsp;B. wird 192.168.0.0 gespeichert statt 192.168.2.3).
                 Um uns gegen Missbrauch unseres Dienstes zu schützen, können im Ausnahmefall IP-Adressen

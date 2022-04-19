@@ -46,9 +46,11 @@
       </div>
     </g:else>
 -->
-    
+
     <div style="background-color: #046CCB; text-align: center; margin-left: 78px; padding: 5px;">
-      <a style="color: white" href="https://languagetool.org/job/sea">Job: SEA-Manager (m/w/d)</a>
+	<a style="color: white" href="https://languagetool.org/de/careers">Jobs bei OpenThesaurus</a>
+	<!--<a style="color: white" href="https://languagetool.org/de/careers/windows_developer">Windows-Entwickler/in gesucht</a>-->
+	<!-- <a style="color: white" href="https://languagetool.org/de/careers/language_manager_de">Sprachtalent gesucht</a>-->
     </div>
 
   </form>
@@ -103,7 +105,7 @@
                 break;
             } catch(e) {
               //console.log("cmpwarning event handler not set:", e);
-            } 
+            }
           }
         })
         observer.observe(document.body, {
