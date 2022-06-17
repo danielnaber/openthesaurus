@@ -6,21 +6,16 @@
     <meta name="layout" content="homepage" />
     <g:if test="${withAd}">
         <!-- yieldlove -->
-        <script type='text/javascript'>
-        var yieldlove_site_id = "openthesaurus.de_startseite";
-        </script>
-        <script type='text/javascript' src='//cdn-a.yieldlove.com/yieldlove-bidder.js?openthesaurus.de_${params.test ? "test" : "startseite"}'></script>
-        <script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
-        <script>
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        <g:if test="${params.test}">
-            googletag.cmd.push(function() {
-                googletag.pubads().disableInitialLoad();
-                googletag.enableServices();
-              });
-        </g:if>
-        </script>
+	<script async='async' src='//cdn-a.yieldlove.com/v2/yieldlove.js?openthesaurus.de'></script>
+	<script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+	<script>
+	  var googletag = googletag || {};
+	  googletag.cmd = googletag.cmd || [];
+	  googletag.cmd.push(function() {
+	    googletag.pubads().disableInitialLoad();
+	    googletag.enableServices();
+	  });
+	</script>
         <!-- yieldlove end -->
     </g:if>
 </head>

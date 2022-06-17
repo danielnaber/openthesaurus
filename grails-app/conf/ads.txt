@@ -230,3 +230,5 @@ showheroes.com, 5277, DIRECT
 smartadserver.com, 2161, DIRECT   
 yieldlab.net, 6378054, DIRECT
 google.com, pub-1274416353693598, RESELLER, f08c47fec0942fa0
+vlyby.com, 5kbFmqQtdsNUcduBEHJCqa, DIRECT
+criteo.com, B-058707, DIRECT, 9fac4a4a87c2a44f
