@@ -56,8 +56,8 @@
                 Die Fälle in denen wir trotzdem personenbezogene Daten von Ihnen speichern, sind im Folgenden
                 beschrieben.</p>
                 
-                <p><b>Haben Sie uns eine Einwilligung zur Nutzung Ihrer Daten gegeben, z.&thinsp;B. durch Abonnieren
-                des Newsletters, können Sie diese jederzeit wie im Folgenden beschrieben widerrufen.</b></p>
+                <p><b>Haben Sie uns eine Einwilligung zur Nutzung Ihrer Daten gegeben,
+                können Sie diese jederzeit wie im Folgenden beschrieben widerrufen.</b></p>
 
                 <h2>Anmeldung</h2>
 
@@ -73,18 +73,6 @@
                 <p>Nehmen Sie Änderungen an den Daten von OpenThesaurus vor, so wird dies öffentlich sichtbar mit
                 Ihrem Nutzernamen (aber nicht Ihrer E-Mail) dokumentiert. Damit verbessern wir die Nachvollziehbarkeit
                 von Änderungen und steigern langfristig die Datenqualität.</p>
-                
-                <h2>Newsletter</h2>
-
-                <p>Wenn Sie unseren Newsletter abonnieren, wird Ihre E-Mail-Adresse bis zu Ihrer Abmeldung
-                bei unserem Dienstleister <a href="https://www.cleverreach.com">CleverReach</a> 
-                (CleverReach GmbH & Co. KG, Muehlenstr. 43, 26180 Rastede) gespeichert.
-                Um sich abzumelden und damit Ihre Daten zu löschen, melden Sie sich über den in jedem
-                Newsletter vorhandenen Abmelde-Link ab, oder schreiben Sie uns an
-                <g:render template="/email" model="${['message': 'diese E-Mail-Adresse']}"/>.
-                
-                <p>Hier finden Sie
-                <a href="https://www.cleverreach.com/de/datenschutz/">die Datenschutzerklärung von Cleverreach</a>.
                 
                 <h2>Web-Analytics</h2>
     

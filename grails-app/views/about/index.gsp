@@ -77,7 +77,6 @@
             <h2>Änderungen und News zu OpenThesaurus</h2>
 
             <ul>
-                <li><a href="newsletter">OpenThesaurus Newsletter</a></li>
                 <li><a href="newsarchive">News-Archiv</a></li>
                 <li><a href="../feed">RSS-Feed aller Aktualisierungen an den Daten</a></li>
             </ul>

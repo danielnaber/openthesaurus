@@ -14,7 +14,6 @@
           <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
           <!--<li><g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link></li>-->
           <li><g:link controller="statistics"><g:message code="statistics"/></g:link></li>
-          <!--<li><g:link controller="about" action="newsletter"><g:message code="homepage.mailing_list"/></g:link></li>-->
           <li><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
           <li><a href="https://languagetool.org">Rechtschreibprüfung</a></li>
       </ul>

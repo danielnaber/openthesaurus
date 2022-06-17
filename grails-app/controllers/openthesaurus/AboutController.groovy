@@ -68,9 +68,6 @@ class AboutController extends BaseController {
     def newsarchive() {
     }
 
-    def newsletter() {
-    }
-
     def werbung() {
     }
 

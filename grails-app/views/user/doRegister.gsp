@@ -17,20 +17,5 @@
 
           <p><g:message code="user.register.check.email" args="${[email]}"/></p>
 
-          <!--
-          <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
-              
-              <p>Optional können Sie sich hier auch direkt für unseren Newsletter anmelden. Sie
-              erhalten dann eine zweite E-Mail mit einem weiteren Aktivierungs-Link.
-              Der Newsletter informiert mehrmals pro Jahr über Neuigkeiten auf openthesaurus.de:</p>
-
-              <form action="https://eu1.cleverreach.com/f/46260-126218/wcs/" method="post" target="_blank">
-                  <input id="text2567502" name="email" value="${params.userId.encodeAsHTML()}" type="text" size="30" />
-                  <button type="submit">Newsletter abonnieren</button>
-              </form>
-              
-          </g:if>
-          -->
-
     </body>
 </html>
