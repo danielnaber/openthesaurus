@@ -258,11 +258,7 @@
                 <a href="http://sourceforge.net/projects/vithesaurus">vithesaurus</a>, was uns
                 die zukünftige Pflege und Weiterentwicklung deutlich erleichtert.</td>
         </tr>
-        <tr>
-            <td valign="top" align="right" width="90"><span class="newsdate">2009-07-23</span></td>
-            <td valign="top">OpenThesaurus <a href="http://twitter.com/openthesaurus">schreibt jetzt auch auf Twitter</a></td>
-        </tr>
-        
+
         <tr><td>&nbsp;</td></tr>
         <tr class="newsYearDelimiter">
             <td>2008</td>
