@@ -42,15 +42,6 @@
           <div class="iconLink">
               <table>
                   <tr>
-                      <td><a href="http://twitter.com/openthesaurus"><asset:image class="socialMediaIcon" src="icon-twitter.png" width="36" height="36" alt="Twitter-Icon"/></a></td>
-                      <td>&nbsp;</td>
-                      <td><g:message code="footer.twitter"/></td>
-                  </tr>
-              </table>
-          </div>
-          <div class="iconLink">
-              <table>
-                  <tr>
                       <td><a href="https://github.com/danielnaber/openthesaurus"><img class="socialMediaIcon" src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="36" height="36" alt="Github-Icon"/></a></td>
                       <td>&nbsp;</td>
                       <td><g:message code="footer.github"/></td>
