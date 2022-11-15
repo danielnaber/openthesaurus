@@ -18,7 +18,7 @@ $(function() {
         var logo1 = $("<div />", { "class": "addon-layer__logo-ot" }).appendTo(headline1);
         var seperator = $("<div />", { "class": "addon-layer__logo-seperator", text: "+" }).appendTo(headline1);
         var logo2 = $("<a />", { "class": "addon-layer__logo-lt", href: "https://languagetool.org/?pk_campaign=openthesaurus-layer-logo", target: "_blank", title: "LanguageTool - Grammatik- und Rechtschreibprüfung" }).appendTo(headline1);
-        var video = $("<video />", { "class": "addon-layer__video", muted: "muted", loop: true, autoplay: true, width: 420, src: 'https://languagetoolplus.com/videos/addon.mp4' }).appendTo(header);
+        var video = $("<video />", { "class": "addon-layer__video", muted: "muted", loop: true, autoplay: true, width: 420, src: '/assets/addon/addon.mp4' }).appendTo(header);
         var headline2 = $("<div />", { "class": "addon-layer__headline2", text: "Professioneller schreiben mit OpenThesaurus und LanguageTool" }).appendTo(layer);
         var text = $("<div />", { "class": "addon-layer__text", html: "Mit diesem kostenlosen Plugin können Sie nicht nur überall im Web (z.&nbsp;B. in Gmail, WordPress oder Google Docs) Synonyme abrufen, sondern bekommen auch intelligente Vorschläge zur Verbesserung der <strong>Grammatik und Zeichensetzung</strong> Ihrer Texte." }).appendTo(layer);
         var button = $("<a />", { "class": "addon-layer__button", text: "Kostenlos installieren", href: url, target: "_blank" }).appendTo(layer).click(function() {
