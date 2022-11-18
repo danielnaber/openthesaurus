@@ -1,16 +1,21 @@
 #!/bin/sh
 #dnaber, 2011-08-14
 
+MJ_APIKEY_PUBLIC=
+MJ_APIKEY_PRIVATE=
+EMAIL=
+
 DATE=`date +"%Y-%m-%d"`
-#DATE="2018-xx-yy"
+#DATE="2018-12-28"
 OUT=/tmp/statusmail.txt
 LOG=/tmp/openthesaurus-log.txt
 
 rm $OUT
 rm $LOG
 
-tail -n 250000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep --text "$DATE" >$LOG
+tail -n 2000000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep --text "$DATE" >$LOG
 
+echo "openthesaurus@hetzner" >>$OUT
 echo "From " >>$OUT
 #grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
 grep --text -h "^$DATE" $LOG | head -n 1 >>$OUT
@@ -113,11 +118,11 @@ echo "" >>$OUT
 echo -n "Client-side errors: " >>$OUT
 grep -c "client message:" $LOG >>$OUT
 echo "Client-side errors (max. 20):" >>$OUT
-grep "client message:" $LOG | head -n 20 >>$OUT
+grep "client message:" $LOG | grep -v "Cannot read property 'length' of undefined" | head -n 20 >>$OUT
 
 echo "" >>$OUT
 echo "Top client-side errors: " >>$OUT
-grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
+grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | grep -v "Cannot read property 'length' of undefined" | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
 
 echo "" >>$OUT
 echo -n "Total errors: " >>$OUT
@@ -131,4 +136,16 @@ grep -v "Full Stack Trace" $LOG | grep " ERROR " | head -n 25 >>$OUT
 #tail -n 25 apache_errors.log >>$OUT
 
 PART1=feedback
-head -n 1000 $OUT | mail -a "From: $PART1@openthesaurus.de" -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" $PART1@openthesaurus.de
+#head -n 1000 $OUT | mail -a "From: $PART1@openthesaurus.de" -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" $PART1@openthesaurus.de
+
+MAIL_TEXT=`cat $OUT | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'`
+JSON="{\"Messages\":[{\"From\": {\"Email\": \"$EMAIL\"}, \"To\": [{\"Email\": \"$EMAIL\"} ],\"Subject\": \"OpenThesaurus Status Mail\", \"TextPart\": ${MAIL_TEXT}}]}"
+
+curl -s \
+    -X POST \
+    --user "$MJ_APIKEY_PUBLIC:$MJ_APIKEY_PRIVATE" \
+    https://api.mailjet.com/v3.1/send \
+    -H "Content-Type: application/json" \
+    -d "${JSON}"
+
+
