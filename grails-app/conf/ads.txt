@@ -241,3 +241,24 @@ smartadserver.com, 2416-OB, RESELLER, 060d053dcf45cbf3
 vi.ai, 733838073486731, DIRECT
 xandr.com, 10736, RESELLER
 yieldlab.net, 6248161, RESELLER
+33across.com, 0010b00002MptHCAAZ, RESELLER, bbea06d9c4d2853c   
+adform.com, 1889, RESELLER, 9f5210a2f0999e32   
+adtechfactory.com, 22041303183, RESELLER   
+advertising.com, 29034, RESELLER   
+adyoulike.com, 83d15ef72d387a1e60e5a1399a2b0c03, RESELLER   
+aol.com, 58578, RESELLER, e1a5b5b6e3255540   
+improvedigital.com, 1680, RESELLER   
+indexexchange.com, 191730, RESELLER   
+pubmatic.com, 157743, RESELLER, 5d62403b186f2ace   
+pubmatic.com, 158858, RESELLER, 5d62403b186f2ace   
+rubiconproject.com, 15994, RESELLER, 0bfd66d529a55807   
+rubiconproject.com, 17280, RESELLER, 0bfd66d529a55807   
+rubiconproject.com, 22370, RESELLER, 0bfd66d529a55807   
+seedtag.com, 60800c282bc9b70600ccaa20, RESELLER   
+smartadserver.com, 1408, RESELLER   
+smartadserver.com, 3050, RESELLER   
+spotx.tv, 249286, RESELLER, 7842df1d2fe2db34   
+spotxchange.com, 249286, RESELLER, 7842df1d2fe2db34   
+xandr.com, 4009, RESELLER   
+yahoo.com, 58578, RESELLER, e1a5b5b6e3255540   
+yieldlab.net, 14311674, RESELLER   
