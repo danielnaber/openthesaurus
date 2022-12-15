@@ -262,3 +262,5 @@ spotxchange.com, 249286, RESELLER, 7842df1d2fe2db34
 xandr.com, 4009, RESELLER   
 yahoo.com, 58578, RESELLER, e1a5b5b6e3255540   
 yieldlab.net, 14311674, RESELLER   
+richaudience.com, IO3tdpPVAW, DIRECT
+themediagrid.com, BSI8ZK, DIRECT, 35d5010d7789b49d
