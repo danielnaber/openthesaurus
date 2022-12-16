@@ -9,18 +9,6 @@
           <meta name="description" content="${message(code:'result.matches.for.description', args:[descriptionText.encodeAsHTML()])}"/>
         </g:if>
         <g:if test="${withAd}">
-            <!-- yieldlove -->
-		<script async='async' src='//cdn-a.yieldlove.com/v2/yieldlove.js?openthesaurus.de'></script>
-		<script async='async' src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
-		<script>
-		  var googletag = googletag || {};
-		  googletag.cmd = googletag.cmd || [];
-		  googletag.cmd.push(function() {
-		    googletag.pubads().disableInitialLoad();
-		    googletag.enableServices();
-		  });
-		</script>
-            <!-- yieldlove end -->
         </g:if>
     </head>
     <body>

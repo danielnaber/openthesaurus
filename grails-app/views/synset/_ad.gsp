@@ -12,33 +12,7 @@
         </g:if>
     </g:if>
     <div style="margin-top:20px; text-align: center">
-        <g:if test="${mso}">
-            <!--MSO-ad-->
-            <div id="openthesaurus_medium_rectangle_1"></div>
-            <!--/MSO-->
-        </g:if>
-        <g:else>
-            <!-- Yieldlove AdTag - openthesaurus.de - responsive -->
-			<div id='div-gpt-ad-1407836137790-0'>
-			  <script type='text/javascript'>
-				if (window.innerWidth >= 801) {
-				  googletag.cmd.push(function() {
-					googletag.defineSlot('/53015287,22719358241/openthesaurus.de_d_336x280_1', [[336, 280], [300, 250]], 'div-gpt-ad-1407836137790-0').addService(googletag.pubads());
-					googletag.display('div-gpt-ad-1407836137790-0');
-				  });
-				}
-
-			if (window.innerWidth < 801) {
-				  googletag.cmd.push(function() {
-					googletag.defineSlot('/53015287,22719358241/openthesaurus.de_m_300x250_2', [300, 250], 'div-gpt-ad-1407836137790-0').addService(googletag.pubads());
-					googletag.display('div-gpt-ad-1407836137790-0');
-				  });
-				}
-			  </script>
-			</div>
-			<!-- Ende Yieldlove AdTag -->
-        </g:else>
-        <span style="color:#999999">Anzeige</span>
+        <!--<span style="color:#999999">Anzeige</span>-->
     </div>
     <hr>
 </g:if>

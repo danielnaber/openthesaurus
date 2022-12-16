@@ -47,11 +47,11 @@
     </g:else>
 -->
 
+    <!--
     <div style="background-color: #046CCB; text-align: center; margin-left: 78px; padding: 5px;">
-	<a style="color: white" href="https://languagetooler.workwise.io/">Jobs bei OpenThesaurus</a>
-	<!--<a style="color: white" href="https://languagetool.org/de/careers/windows_developer">Windows-Entwickler/in gesucht</a>-->
-	<!-- <a style="color: white" href="https://languagetool.org/de/careers/language_manager_de">Sprachtalent gesucht</a>-->
+	 <a style="color: white" href="https://languagetooler.workwise.io/">Jobs bei OpenThesaurus</a>
     </div>
+    -->
 
   </form>
 
