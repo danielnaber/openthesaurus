@@ -16,7 +16,7 @@
 
             <p>OpenThesaurus ist ein deutschsprachiges Wörterbuch für Synonyme und Assoziationen.
             Man kann damit Wörter mit gleicher oder ähnlicher Bedeutung nachschlagen. Zum Beispiel liefert
-            die <a href="../synset/search?q=falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
+            die <a href="/synonyme/falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
             verkehrt</span> als Synonyme.</p>
 
             <p>Jeder kann bei OpenThesaurus mitmachen und Fehler korrigieren
