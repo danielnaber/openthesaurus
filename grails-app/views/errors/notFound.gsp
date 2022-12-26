@@ -13,7 +13,7 @@
           <div class="message">${flash.message}</div>
         </g:if>
         
-        <g:form name="searchform" class="mainpage" action="search" controller="synset" method="get">
+        <form name="searchform" class="mainpage" action="/synonyme" method="get">
 
             <input name="q" value="${params?.q?.encodeAsHTML()}" />&nbsp;
 
@@ -24,7 +24,7 @@
 
             <a href="/"><g:message code="notfound.homepage.link"/></a>
 
-        </g:form>
+        </form>
       </div>
 
       <script type="text/javascript">
