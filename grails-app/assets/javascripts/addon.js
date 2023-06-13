@@ -28,7 +28,7 @@ $(function() {
         });
     }
 
-    var href = "https://languagetoolplus.com/webextension/store?ref=ot&utm_source=openthesaurus&utm_medium=referral&utm_campaign=openthesaurus-toplink"
+    var href = "https://languagetool.org/webextension/store?ref=ot&utm_source=openthesaurus&utm_medium=referral&utm_campaign=openthesaurus-toplink"
 
     function createChromeLink() {
         return $("<a />", {
