@@ -241,7 +241,13 @@ class SynsetController extends BaseController {
                   ], contentType:"text/html", encoding:"UTF-8")
           }
           else {
-              [ partialMatchResult : partialMatchResult,
+              boolean noResult =
+                      searchResult.totalMatches == 0 &&
+                      wikipediaResult.size() == 0 &&
+                      wiktionaryResult.size() == 0 &&
+                      partialMatchResult.size() == 0
+              //println "result for " + params.q + ": " + (!noResult)
+              render(view:view, model: [ partialMatchResult : partialMatchResult,
                 wikipediaResult : wikipediaResult,
                 wiktionaryResult : wiktionaryResult,
                 similarTerms : similarTerms,
@@ -256,7 +262,7 @@ class SynsetController extends BaseController {
                 remoteMistakeLookup: remoteMistakeLookup,
                 withAd: true,
                 mso: false
-              ]
+              ], contentType:"text/html", encoding:"UTF-8", status: noResult ? 404: 200)
           }
 
         } finally {
