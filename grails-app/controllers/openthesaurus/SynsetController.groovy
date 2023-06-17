@@ -247,22 +247,41 @@ class SynsetController extends BaseController {
                       wiktionaryResult.size() == 0 &&
                       partialMatchResult.size() == 0
               //println "result for " + params.q + ": " + (!noResult)
-              render(view:view, model: [ partialMatchResult : partialMatchResult,
-                wikipediaResult : wikipediaResult,
-                wiktionaryResult : wiktionaryResult,
-                similarTerms : similarTerms,
-                synsetList : searchResult.synsetList,
-                totalMatches: searchResult.totalMatches,
-                completeResult: searchResult.completeResult,
-                baseforms: baseforms,
-                descriptionText : metaTagDescriptionText,
-                runTime : totalTime,
-                remoteWordLookup: remoteWordLookup,
-                remoteGenderLookup: remoteGenderLookup,
-                remoteMistakeLookup: remoteMistakeLookup,
-                withAd: true,
-                mso: false
-              ], contentType:"text/html", encoding:"UTF-8", status: noResult ? 404: 200)
+              if (params.ajaxSearch == 1) {
+                  [ partialMatchResult : partialMatchResult,
+                                             wikipediaResult : wikipediaResult,
+                                             wiktionaryResult : wiktionaryResult,
+                                             similarTerms : similarTerms,
+                                             synsetList : searchResult.synsetList,
+                                             totalMatches: searchResult.totalMatches,
+                                             completeResult: searchResult.completeResult,
+                                             baseforms: baseforms,
+                                             descriptionText : metaTagDescriptionText,
+                                             runTime : totalTime,
+                                             remoteWordLookup: remoteWordLookup,
+                                             remoteGenderLookup: remoteGenderLookup,
+                                             remoteMistakeLookup: remoteMistakeLookup,
+                                             withAd: true,
+                                             mso: false
+                  ]
+              } else {
+                  render(view:view, model: [ partialMatchResult : partialMatchResult,
+                                             wikipediaResult : wikipediaResult,
+                                             wiktionaryResult : wiktionaryResult,
+                                             similarTerms : similarTerms,
+                                             synsetList : searchResult.synsetList,
+                                             totalMatches: searchResult.totalMatches,
+                                             completeResult: searchResult.completeResult,
+                                             baseforms: baseforms,
+                                             descriptionText : metaTagDescriptionText,
+                                             runTime : totalTime,
+                                             remoteWordLookup: remoteWordLookup,
+                                             remoteGenderLookup: remoteGenderLookup,
+                                             remoteMistakeLookup: remoteMistakeLookup,
+                                             withAd: true,
+                                             mso: false
+                  ], contentType:"text/html", encoding:"UTF-8", status: noResult ? 404 : 200)
+              }
           }
 
         } finally {
