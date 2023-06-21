@@ -12,6 +12,8 @@
         </g:if>
     </g:if>
     <div style="margin-top:20px; text-align: center">
+        <a href="https://gfdw.eu/"><img src="/assets/external/gfdw-banner1.png"
+            alt="Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft" /></a>
         <!--<span style="color:#999999">Anzeige</span>-->
     </div>
     <hr>
