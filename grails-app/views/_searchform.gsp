@@ -84,30 +84,6 @@
           document.searchform.q.focus();
           document.searchform.q.select();
         }
-        var observer = new MutationObserver(function(mutations) {
-          for (x = 0; x < mutations.length; x++) {
-            if (!mutations[x].addedNodes) {
-              return;
-            }
-            try {
-                var cmpwarning = document.querySelectorAll('[class*="sp_choice"]')[1];
-                cmpwarning.addEventListener('click', () => {
-                    console.log("cmp click event");
-                    // CMP popup would steal the focus, so set it again:
-                    setTimeout(() => document.searchform.q.focus(), 50);
-                  }
-                );
-                console.log("observer disconnect");
-                observer.disconnect();
-                break;
-            } catch(e) {
-              //console.log("cmpwarning event handler not set:", e);
-            }
-          }
-        })
-        observer.observe(document.body, {
-            childList: true, subtree: true, attributes: false, characterData: false
-        });
     });
     // -->
     </script>
