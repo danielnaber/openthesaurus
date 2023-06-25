@@ -19,13 +19,6 @@
     }
 
     function doSearchOnKeyUp(event) {
-        if (document.cookie !== undefined && document.cookie.indexOf("searchedPerDay=1") === -1) {
-            document.cookie = "searchedPerDay=1;max-age=86400";
-            if (typeof(_paq) !== 'undefined') {  // Matomo tracking
-                _paq.push(['trackEvent', "ManualSearchOnceADay"]);
-                //console.log("manual search tracking");
-            }
-        }
         // also see layout.css - if the transform is not applied (it's not in Opera because
         // it makes fonts fuzzy) we cannot use the popup as it will be misplaced, covering the
         // query box:
