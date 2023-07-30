@@ -798,6 +798,10 @@ strong {
   #mobileAd {
     margin-bottom: -12px;
   }
+  #mobileAd img {
+    max-width: 98%;
+    height: auto;
+  }
 }
 
 .tooltip {
