@@ -34,7 +34,7 @@
     }
     %>
     <div style="margin-top:20px; text-align: center">
-        <a href="${link}"><img src="/assets/external/${imgMobile}" alt="${altText}" /></a>
+        <a href="${link}"><img style="max-width: 100%; height: auto;" src="/assets/external/${imgMobile}" alt="${altText}" /></a>
         <!--<span style="color:#999999">Anzeige</span>-->
     </div>
     <hr>
