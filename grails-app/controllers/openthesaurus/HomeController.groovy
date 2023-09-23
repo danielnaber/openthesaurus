@@ -29,11 +29,11 @@ class HomeController {
 
     def index2() {}
 
-    def adstxt() {
+    /*def adstxt() {
         def resource = this.class.classLoader.getResource('ads.txt')
         def lines = Files.lines(new File(resource.file).toPath()).collect(Collectors.toList())
         render(text: String.join("\n", lines), contentType: "text/plain", encoding: "UTF-8")
-    }
+    }*/
 
     def google() {
         def resource = this.class.classLoader.getResource('googleTODO.html')
