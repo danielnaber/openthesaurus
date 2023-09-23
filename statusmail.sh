@@ -13,15 +13,16 @@ LOG=/tmp/openthesaurus-log.txt
 rm $OUT
 rm $LOG
 
-tail -n 2000000 /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | grep --text "$DATE" >$LOG
+tail -n 250000 /var/log/tomcat9/catalina.out | grep --text "$DATE" >$LOG
 
-echo "openthesaurus@hetzner" >>$OUT
+#echo "openthesaurus@hetzner" >>$OUT
 echo "From " >>$OUT
+uname -a >>$OUT
 #grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | head -n1 >>$OUT
-grep --text -h "^$DATE" $LOG | head -n 1 >>$OUT
-echo "To " >>$OUT
+#grep --text -h "^$DATE" $LOG | head -n 1 >>$OUT
+#echo "To " >>$OUT
 #grep --text -h "^$DATE" /home/openthesaurus/tomcat/logs/catalina.out.bak2 /home/openthesaurus/tomcat/logs/catalina.out.bak /home/openthesaurus/tomcat/logs/catalina.out | tail -n 1 >>$OUT
-grep --text -h "^$DATE" $LOG | tail -n 1 >>$OUT
+#grep --text -h "^$DATE" $LOG | tail -n 1 >>$OUT
 
 echo "" >>$OUT
 echo -n "Web Searches:           " >>$OUT
@@ -43,7 +44,7 @@ echo -n "error.log entries:      " >>$OUT
 grep -c "`date +"%Y/%m/%d"`" /var/log/nginx/error.log >>$OUT
 
 echo -n "error.log entries (w/o access): " >>$OUT
-grep -v "access forbidden by rule," /var/log/nginx/error.log | grep -c "`date +"%Y/%m/%d"`" >>$OUT
+grep -v "access forbidden by rule," /var/log/nginx/error.log | grep -v "server: www.glasatelier-naber.de," | grep -c "`date +"%Y/%m/%d"`" >>$OUT
 
 
 echo "" >>$OUT
@@ -122,7 +123,7 @@ grep "client message:" $LOG | grep -v "Cannot read property 'length' of undefine
 
 echo "" >>$OUT
 echo "Top client-side errors: " >>$OUT
-grep "client message:" tomcat/logs/catalina.out | sed 's/.*client message: //' | grep -v "Cannot read property 'length' of undefined" | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
+grep "client message:" /var/log/tomcat9/catalina.out | sed 's/.*client message: //' | grep -v "Cannot read property 'length' of undefined" | sed 's/ - .*//' | sort | uniq -c | sort -r -n | head -n 10 >> $OUT
 
 echo "" >>$OUT
 echo -n "Total errors: " >>$OUT
@@ -138,7 +139,7 @@ grep -v "Full Stack Trace" $LOG | grep " ERROR " | head -n 25 >>$OUT
 PART1=feedback
 #head -n 1000 $OUT | mail -a "From: $PART1@openthesaurus.de" -a 'Content-Type: text/plain; charset=utf-8' -s "OpenThesaurus Status Mail" $PART1@openthesaurus.de
 
-MAIL_TEXT=`cat $OUT | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'`
+MAIL_TEXT=`cat $OUT | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))'`
 JSON="{\"Messages\":[{\"From\": {\"Email\": \"$EMAIL\"}, \"To\": [{\"Email\": \"$EMAIL\"} ],\"Subject\": \"OpenThesaurus Status Mail\", \"TextPart\": ${MAIL_TEXT}}]}"
 
 curl -s \
