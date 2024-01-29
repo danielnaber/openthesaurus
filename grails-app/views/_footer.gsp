@@ -10,6 +10,8 @@
       <ul style="float: left; margin-right: 60px">
           <li><g:link controller="search" action="index"><g:message code="powersearch.headline"/></g:link></li>
           <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
+          <li><g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link></li>
+          <li><g:link controller="tag" action="list"><g:message code="homepage.tags"/></g:link></li>
           <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
           <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
           <!--<li><g:link controller="about" action="newsarchive"><g:message code="homepage.news_archive"/></g:link></li>-->
