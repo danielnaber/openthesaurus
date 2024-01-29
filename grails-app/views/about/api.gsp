@@ -39,8 +39,7 @@
                     <li>Jede Anfrage muss im <tt>User-Agent</tt>-Header eine Kontaktmöglichkeit (z.&nbsp;B. Homepage oder E-Mail)
                         enthalten, damit wir bei Problemen wissen, mit wem wir Kontakt aufnehmen können.</li>
                     <li>Anfrage-Limitierung: Bei mehr als 60 Anfragen pro Minute von der gleichen IP-Adresse folgt eine Fehlermeldung.
-                        <!--Wer mehr Anfragen stellen möchte, kann <g:link action="imprint">uns kontaktieren</g:link> und um eine
-                        Erhöhung des Limits bitten. -->Zusätzlich zur direkten Abfrage stehen weiterhin
+                        Zusätzlich zur direkten Abfrage stehen weiterhin
                         <g:link action="download">Downloads</g:link> der Datenbank zur Verfügung. Statt Massenabfragen
                         über die API sollte dieser Download genutzt werden.
                     </li>
@@ -65,15 +64,6 @@
                 angegeben werden, um das Ergebnis im XML-Format zu erhalten.</p>
 
             <div class="api"><a href="/synonyme/search?q=test&amp;format=text/xml">${grailsApplication.config.thesaurus.serverURL}/synonyme/search?q=<strong>test</strong>&amp;format=text/xml</a></div>
-
-            <!--
-            <h2><a name="jsonp">Suchanfrage für JSONP</a></h2>
-
-            <p>Mit der Übergabe einer Callback-Methode kann der JSON-Code als Parameter einer Funktion übergeben werden.
-            <g:link action="jsonpExample">Eine Beispiel-Seite</g:link>.</p>
-
-            <pre class="api"><a href="${createLinkTo(dir:'synonyme')}/search?q=test&amp;format=application/json&amp;callback=myCallback">${grailsApplication.config.thesaurus.serverURL}/synonyme/<br/>search?q=<strong>test</strong>&amp;format=application/json&amp;callback=myCallback</a></pre>
-            -->
 
             <h2><a name="optionen">Optionen</a></h2>
 
