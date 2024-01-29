@@ -53,6 +53,17 @@
     </div>
     -->
 
+    <%--
+    <g:if test="${request.forwardURI == "/"}">
+        <br>
+        Beispiele:
+            <a href="synonyme/schön">schön</a>
+            &middot; <a href="synonyme/wichtig">wichtig</a>
+            &middot; <a href="synonyme/Herausforderung">Herausforderung</a>
+            &middot; <a href="synonyme/auch">auch</a>
+    </g:if>
+    --%>
+
   </form>
 
   </div>
