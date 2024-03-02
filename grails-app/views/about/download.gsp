@@ -69,15 +69,11 @@
     
             <h2>Download der Software</h2>
     
-            <p>Der Sourcecode der <a href="http://www.grails.org">Grails</a>-basierten Website kann bei
-              <a href="https://github.com/danielnaber/openthesaurus">bei github</a>
-              heruntergeladen werden:</p>
-    
-              <pre style="margin-bottom: 10px" class="api">git clone https://github.com/danielnaber/openthesaurus.git</pre>
-    
-              <p>Der Sourcecode steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
+            <p>Der Sourcecode dieser Website kann bei
+              <a href="https://github.com/danielnaber/openthesaurus">bei GitHub</a>
+              heruntergeladen werden. Er steht unter der <a href="http://www.gnu.org/licenses/agpl.html">Affero General Public License (AGPL)</a>.
               Die Installation ist in einem <a href="https://github.com/danielnaber/openthesaurus/blob/master/README.md">README</a>
-              und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">hier im Forum</a> beschrieben.</p>
+              und <a href="http://www.openthesaurus.de/jforum/posts/list/71.page">hier im Archiv des Forums</a> beschrieben.</p>
 
         </g:if>
         <g:else>
