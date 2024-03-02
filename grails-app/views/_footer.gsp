@@ -41,6 +41,7 @@
                   </tr>
               </table>
           </div>
+          <!--
           <div class="iconLink">
               <table>
                   <tr>
@@ -50,6 +51,7 @@
                   </tr>
               </table>
           </div>
+          -->
 
       </div>
 
