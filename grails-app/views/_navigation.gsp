@@ -6,7 +6,7 @@
                     <!--<span class="mobileOnly"><g:link controller="home">openthesaurus.de</g:link>&nbsp;&nbsp;&nbsp;</span>-->
                     <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
                     &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
-                    &nbsp;&nbsp;&nbsp;<a href="https://languagetool.org">Rechtschreibprüfung</a>
+                    &nbsp;&nbsp;&nbsp;<a href="https://languagetool.org/de">Rechtschreibprüfung</a>
                 </td>
                 <td style="text-align: right" id="right-navibar">
                     <g:if test="${session.user}">
