@@ -35,7 +35,7 @@ class AdminController extends BaseController {
     
     // clean old, inactive users, i.e. delete their accounts:
     def cleanUsers() {
-        def pageSize = 100
+        def pageSize = 500
         def c = ThesaurusUser.createCriteria()
         Date registrationDate = new Date()
         registrationDate.year = 120  // starts at 1900
@@ -46,7 +46,10 @@ class AdminController extends BaseController {
         render("Last Login Date before: " + loginDate + "<br>")
         def result = c.list {
             lt("creationDate", registrationDate)
-            lt("lastLoginDate", loginDate)
+            or {
+                lt("lastLoginDate", loginDate)
+                isNull("lastLoginDate")
+            }
             eq("blocked", false)
         }
         render(result.size() + " total matches, showing up to " + pageSize + ":<br>")
