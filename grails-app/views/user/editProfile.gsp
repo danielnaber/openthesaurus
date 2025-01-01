@@ -61,15 +61,6 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <g:message code="user.edit.accepting.messages"/>
-                                </td>
-                                <td valign='top' class='value'>
-                                    <label><g:checkBox value="${user.acceptsMessages}" name="acceptsMessages" /><span class="metaInfo">&nbsp;<g:message code="user.change.profile.message.hint"/></span></label>
-                                </td>
-                            </tr>
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
                                     <g:message code="user.change.profile.description"/>
                                 </td>
                                 <td valign='top' class='value'>
