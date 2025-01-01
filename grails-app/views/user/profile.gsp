@@ -54,17 +54,6 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
-                                <g:message code="user.change.profile.website"/>
-                            </td>
-                            <td valign='top' class='value'>
-                                <g:if test="${user.url}">
-                                    <a href="${user.url.encodeAsHTML()}" rel="nofollow">${user.url.encodeAsHTML()}</a>
-                                </g:if>
-                            </td>
-                        </tr>
-
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
                                 <g:message code="user.change.profile.description"/>
                             </td>
                             <td valign='top' class='value'>

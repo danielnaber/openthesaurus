@@ -70,15 +70,6 @@
 
                             <tr class='prop'>
                                 <td valign='top' class='name'>
-                                    <g:message code="user.change.profile.website"/>
-                                </td>
-                                <td valign='top' class='value'>
-                                    <input type="text" name="url" value="${user.url.encodeAsHTML()}"/>
-                                </td>
-                            </tr>
-
-                            <tr class='prop'>
-                                <td valign='top' class='name'>
                                     <g:message code="user.change.profile.description"/>
                                 </td>
                                 <td valign='top' class='value'>
