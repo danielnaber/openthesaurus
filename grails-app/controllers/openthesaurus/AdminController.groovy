@@ -33,6 +33,52 @@ class AdminController extends BaseController {
         [latestUsers: latestUsers, resultLimit: resultLimit]
     }
     
+    // clean old, inactive users, i.e. delete their accounts:
+    def cleanUsers() {
+        def pageSize = 100
+        def c = ThesaurusUser.createCriteria()
+        Date registrationDate = new Date()
+        registrationDate.year = 120  // starts at 1900
+        Date loginDate = new Date()
+        loginDate.year = 120  // starts at 1900
+        render("Showing old users with no activity ever:<br>")
+        render("Registration Date before: " + registrationDate + "<br>")
+        render("Last Login Date before: " + loginDate + "<br>")
+        def result = c.list {
+            lt("creationDate", registrationDate)
+            lt("lastLoginDate", loginDate)
+            eq("blocked", false)
+        }
+        render(result.size() + " total matches, showing up to " + pageSize + ":<br>")
+        int count = 0
+        for (user in result) {
+            def c2 = UserEvent.createCriteria()
+            def userEvents = c2.list {
+                eq("byUser", user)
+            }
+            def c3 = UserSynsetEvent.createCriteria()
+            def userSynsetEvents = c3.list {
+                eq("byUser", user)
+            }
+            if (userEvents.size() == 0 && userSynsetEvents.size() == 0) {
+                render(userEvents.size() + " " + userSynsetEvents.size() + " " + user.creationDate.toString() + " " + user.lastLoginDate.toString() + " " + user.userId + "<br>")
+                if (request.method == 'POST') {
+                    log.info("Deleting old user in admin/cleanUsers(): " + user.userId)
+                    user.delete()
+                    render "&nbsp;&nbsp;&nbsp;" + user.userId + ": user deleted!<br>"
+                }
+                count++
+                if (count >= pageSize) {
+                    break
+                }
+            }
+        }
+        if (request.method != 'POST') {
+            render "<form method='post'><input type='submit' value='Delete shown users'></form>"
+        }
+        return ""
+    }
+
     def prepareAudioImport() {
     }
 
