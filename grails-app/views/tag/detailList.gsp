@@ -1,5 +1,6 @@
 
 <%@ page import="com.vionto.vithesaurus.Tag" %>
+<%@ page import="com.vionto.vithesaurus.Term" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +32,6 @@
 						<g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}" />
 						<g:sortableColumn property="shortName" title="${message(code: 'tag.shortName.label', default: 'Short Name')}" />
                         <th></th>
-						<g:sortableColumn property="color" title="${message(code: 'tag.color.label', default: 'Color')}" />
 						<g:sortableColumn property="created" title="${message(code: 'tag.color.label', default: 'Created')}" />
 						<g:sortableColumn property="createdBy" title="${message(code: 'tag.color.label', default: 'Created By')}" />
 						<g:sortableColumn property="isVisible" title="${message(code: 'tag.color.label', default: 'isVisible')}" />
@@ -48,8 +48,19 @@
                                 <span class="tag" style="background-color: ${tag.backgroundColor}">${tag.shortName.encodeAsHTML()}</span>
                             </g:if>
 						</td>
-                        <td><g:link controller="tag" params="${[tag: tag.name]}">List</g:link></td>
-						<td>${fieldValue(bean: tag, field: "color")}</td>
+						<td>
+							<%
+							def count = Term.createCriteria().count {
+								tags {
+									eq('id', tag.id)
+								}
+								synset {
+									eq('isVisible', true)
+								}
+							}
+							%>
+							<g:link controller="tag" params="${[tag: tag.name]}">${count}</g:link>
+						</td>
 						<td><g:formatDate format="yyyy-MM-dd HH:mm" date="${tag.created}"/></td>
 						<td>${fieldValue(bean: tag, field: "createdBy")}</td>
 						<td>${tag.isVisible()}</td>
