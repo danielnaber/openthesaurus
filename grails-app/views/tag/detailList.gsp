@@ -6,6 +6,11 @@
 	<head>
 		<meta name="layout" content="main">
 		<title>List all Tags</title>
+		<style>
+			.odd {
+				background-color: #eee;
+			}
+		</style>
 	</head>
 	<body>
 	<div class="body">
@@ -31,10 +36,10 @@
 					<tr>
 						<g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}" />
 						<g:sortableColumn property="shortName" title="${message(code: 'tag.shortName.label', default: 'Short Name')}" />
-                        <th></th>
+                        <th>Usages</th>
 						<g:sortableColumn property="created" title="${message(code: 'tag.color.label', default: 'Created')}" />
 						<g:sortableColumn property="createdBy" title="${message(code: 'tag.color.label', default: 'Created By')}" />
-						<g:sortableColumn property="isVisible" title="${message(code: 'tag.color.label', default: 'isVisible')}" />
+						<th>Visible</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,7 +68,7 @@
 						</td>
 						<td><g:formatDate format="yyyy-MM-dd HH:mm" date="${tag.created}"/></td>
 						<td>${fieldValue(bean: tag, field: "createdBy")}</td>
-						<td>${tag.isVisible()}</td>
+						<td>${tag.isVisible() ? '✅' : '❌'}</td>
 					</tr>
 				</g:each>
 				</tbody>

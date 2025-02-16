@@ -17,7 +17,7 @@
         <p>
         Manage:
         <g:link action="prepareAudioImport">Import Audio</g:link> |
-        <g:link controller="tag" action="detailList">Tags</g:link> |
+        <g:link controller="tag" action="detailList" params="${[max:20]}">Tags</g:link> |
         <g:link action="tagging">Tagging</g:link> |
         <g:link action="listUnusedTags">Unused Tags</g:link> |
         <g:link controller="test">Simple self-test</g:link> |
