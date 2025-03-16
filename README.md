@@ -3,7 +3,7 @@
 OpenThesaurus (www.openthesaurus.de), a web-based thesaurus management tool
 
 Copyright (C) 2009 vionto GmbH, Berlin  
-Copyright (C) 2011-2022 Daniel Naber, www.danielnaber.de
+Copyright (C) 2011-2025 Daniel Naber, www.danielnaber.de
 
 OpenThesaurus is a web-based tool for the development and maintenance of
 thesauri and ontologies. It requires a Java application server or
