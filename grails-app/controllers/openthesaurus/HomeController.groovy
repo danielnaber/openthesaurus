@@ -24,7 +24,7 @@ import java.util.stream.Collectors
 class HomeController {
 
     def index() {
-        [mso: false, withAd: true]
+        [withAd: true]
     }
 
     def index2() {}

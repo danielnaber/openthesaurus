@@ -10,22 +10,9 @@
         <asset:javascript src="application"/>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
-        <g:if test="${mso}">
-            <!--MSO1-->
-            <g:render template="/layouts/scripts_mso"/>
-            <!--/MSO-->
-        </g:if>
         <g:layoutHead />
     </head>
     <body>
-
-    <g:if test="${mso}">
-        <!--MSO2-->
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZMBZTG"
-                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-    </g:if>
 
     <div id="searchResultArea" class="searchResultPopup" style="display: none">
     </div>

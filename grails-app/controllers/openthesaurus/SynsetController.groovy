@@ -261,8 +261,7 @@ class SynsetController extends BaseController {
                                              remoteWordLookup: remoteWordLookup,
                                              remoteGenderLookup: remoteGenderLookup,
                                              remoteMistakeLookup: remoteMistakeLookup,
-                                             withAd: true,
-                                             mso: false
+                                             withAd: true
                   ]
               } else {
                   render(view:view, model: [ partialMatchResult : partialMatchResult,
@@ -278,8 +277,7 @@ class SynsetController extends BaseController {
                                              remoteWordLookup: remoteWordLookup,
                                              remoteGenderLookup: remoteGenderLookup,
                                              remoteMistakeLookup: remoteMistakeLookup,
-                                             withAd: true,
-                                             mso: false
+                                             withAd: true
                   ], contentType:"text/html", encoding:"UTF-8", status: noResult ? 404 : 200)
               }
           }
