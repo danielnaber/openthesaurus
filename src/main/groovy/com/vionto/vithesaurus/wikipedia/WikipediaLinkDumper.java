@@ -178,7 +178,7 @@ public class WikipediaLinkDumper {
       return str.replace("'", "''").replace("\\", "");
     }
 
-    private static String removeFourByteUtf8Chars(String input) {
+    private String removeFourByteUtf8Chars(String input) {
       StringBuilder result = new StringBuilder();
       input.codePoints()
            .filter(cp -> !Character.isSupplementaryCodePoint(cp))  // keep only BMP chars
