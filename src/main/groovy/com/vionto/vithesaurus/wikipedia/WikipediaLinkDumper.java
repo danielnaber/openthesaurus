@@ -44,14 +44,14 @@ import org.xml.sax.helpers.DefaultHandler;
  * 
  * How to use this (starting from the openthesaurus directory):
  * -Change to the "java" directory
- *  cd src/java
+ *  cd src/main/groovy
  * -unpack the Wikipedia XML dump here:
  *  bunzip XXwiki-YYYYMMDD-pages-meta-current.xml.bz2
  * -Only if you made changes to this source code: compile the link 
  *  extraction Java program (requires the Java Development Kit):
- *  javac com/vionto/vithesaurus/WikipediaLinkDumper.java
+ *  javac com/vionto/vithesaurus/wikipedia/WikipediaLinkDumper.java
  * -Call the program:
- *  java -cp . com.vionto.vithesaurus.WikipediaLinkDumper <wiki.xml> >result.sql
+ *  java -cp . com.vionto.vithesaurus.wikipedia.WikipediaLinkDumper <wiki.xml> >result.sql
  * -Import the result into the OpenThesaurus database:
  *  mysql thesaurus <result.sql 
  * 
@@ -66,6 +66,9 @@ public class WikipediaLinkDumper {
     final WikipediaPageHandler handler = new WikipediaPageHandler();
     final SAXParserFactory factory = SAXParserFactory.newInstance();
     final SAXParser saxParser = factory.newSAXParser();
+    saxParser.getXMLReader().setProperty("jdk.xml.maxGeneralEntitySizeLimit", 0);
+    saxParser.getXMLReader().setProperty("jdk.xml.totalEntitySizeLimit", 0);
+    saxParser.getXMLReader().setProperty("jdk.xml.entityExpansionLimit", 0);
     saxParser.getXMLReader().setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
         false);  
     System.out.println("SET NAMES utf8;");
@@ -133,6 +136,9 @@ public class WikipediaLinkDumper {
     public void endElement(String namespaceURI, String sName, String qName) {
       if (qName.equals("title")) {
         pageCount++;
+        if (pageCount % 1000 == 0) {
+          System.err.println("Processed " + pageCount + " pages");
+        }
         // test:
         //if (pageCount > 100)
         //  System.exit(1);
@@ -140,6 +146,26 @@ public class WikipediaLinkDumper {
         final String escapedTitle = escape(title.toString().trim());
         final List<String> links = extractLinks(text.toString());
         for (String link : links) {
+          if (escapedTitle.length() > 100) {
+            System.err.println("Title too long: " + escapedTitle + " - ignoring");
+            continue;
+          }
+          if (escape(link).length() > 100) {
+            System.err.println("Link too long: " + escape(link) + " - ignoring");
+            continue;
+          }
+          String tmp = removeFourByteUtf8Chars(link);
+          if (tmp.length() != link.length()) {
+            // avoid MySQL errors like this:
+            // "ERROR 1366 (22007) at line 313149: Incorrect string value: '\xF0\x90\xA4\x8D' for column openthesaurus.wikipedia.link at row 1"
+            System.err.println("Removed 4-byte UTF-8 chars from link: " + link + " - ingoring line");
+            continue;
+          }
+          tmp = removeFourByteUtf8Chars(escapedTitle);
+          if (tmp.length() != escapedTitle.length()) {
+            System.err.println("Removed 4-byte UTF-8 chars from escapedTitle: " + escapedTitle + " - ingoring line");
+            continue;
+          }
           System.out.println("INSERT INTO wikipedia (title, link) VALUES ('" + escapedTitle + "', '" + escape(link) + "');");
         }
         text = new StringBuilder();
@@ -150,6 +176,14 @@ public class WikipediaLinkDumper {
     
     private String escape(String str) {
       return str.replace("'", "''").replace("\\", "");
+    }
+
+    private static String removeFourByteUtf8Chars(String input) {
+      StringBuilder result = new StringBuilder();
+      input.codePoints()
+           .filter(cp -> !Character.isSupplementaryCodePoint(cp))  // keep only BMP chars
+           .forEach(cp -> result.appendCodePoint(cp));
+      return result.toString();
     }
 
     @Override
