@@ -28,16 +28,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.commons.lang.StringUtils;
 import org.xml.sax.SAXException;
 
 /**
  * Loads synonyms from a Wiktionary XML dump and builds an SQL dump (for MySQL).
  * Contains some filtering that's specific to German.
  * 
- * Get the XML dump from http://download.wikimedia.org/dewiktionary/latest/,
- * the filename is something like "XXwiktionary-YYYYMMDD-pages-articles.xml.bz2",
- * whereas XX is the language code (de, en, fr, etc).
+ * Get the XML dump from https://dumps.wikimedia.org/dewiktionary/latest/dewiktionary-latest-pages-articles.xml.bz2.
  * 
  * @author Daniel Naber
  */
@@ -104,9 +101,9 @@ public class WiktionarySynonymDumper {
           } else {
             String cleanedText = clean(text.toString());
             List<String> meaningsList = getSection(cleanedText, MEANINGS_PREFIX);
-            String meanings = StringUtils.join(meaningsList, " ");
+            String meanings = String.join(" ", meaningsList);
             List<String> synonymsList = getSection(cleanedText, SYNONYMS_PREFIX);
-            String synonyms = StringUtils.join(synonymsList, " ");
+            String synonyms = String.join(" ", synonymsList);
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
             /*if (title.toString().equals("Wasser")) {
