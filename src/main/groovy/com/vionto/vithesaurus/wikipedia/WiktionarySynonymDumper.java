@@ -112,16 +112,6 @@ public class WiktionarySynonymDumper {
             }
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
-            /*if (title.toString().equals("Wasser")) {
-              for (int i = 0; i < meanings.length(); i++) {
-                if ((int)meanings.charAt(i) > 255) {
-                  System.err.println(meanings.charAt(i) + " - " + (int)meanings.charAt(i) + " <=====");
-                } else {
-                  System.err.println(meanings.charAt(i) + " - " + (int)meanings.charAt(i));
-                }
-              }
-              System.exit(1);
-            }*/
             exported++;
           }
         }
