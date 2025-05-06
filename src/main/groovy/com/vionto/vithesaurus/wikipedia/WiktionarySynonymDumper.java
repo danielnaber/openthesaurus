@@ -102,8 +102,14 @@ public class WiktionarySynonymDumper {
             String cleanedText = clean(text.toString());
             List<String> meaningsList = getSection(cleanedText, MEANINGS_PREFIX);
             String meanings = String.join(" ", meaningsList);
+            if (meanings.contains("<ref")) {
+              meanings = cleanRefs(meanings);
+            }
             List<String> synonymsList = getSection(cleanedText, SYNONYMS_PREFIX);
             String synonyms = String.join(" ", synonymsList);
+            if (synonyms.contains("<ref")) {
+              synonyms = cleanRefs(synonyms);
+            }
             System.out.printf("INSERT INTO wiktionary (headword, meanings, synonyms) VALUES ('%s', '%s', '%s');\n",
                 escape(title.toString()), escape(meanings), escape(synonyms));
             /*if (title.toString().equals("Wasser")) {
@@ -123,6 +129,13 @@ public class WiktionarySynonymDumper {
         title = new StringBuilder();
       }
       position = UNDEF;
+    }
+
+    private String cleanRefs(String s) {
+      s = s.replaceAll("(?s)<ref name\\s*=\\s*\"[^\"]*?\"\\s*/>", " ");
+      s = s.replaceAll("(?s)<ref name\\s*=\\s*\"[^\"]*?\">.*?</ref>", " ");
+      s = s.replaceAll("(?s)<ref>.*?</ref>", " ");
+      return s;
     }
     
     private List<String> getSection(String text, String prefix) {
