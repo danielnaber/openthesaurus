@@ -12,3 +12,8 @@ build/
 stacktrace.log
 target/
 devDb.*
+grails-app/assets/images/external
+bak/
+start.sh
+re-deploy2023.sh
+re-deploy-backup2023.sh
