@@ -73,5 +73,10 @@ class RandomController extends BaseController {
           result words: randomWords
       }
     }
-    
+
+    def word() {
+        def randomWords = randomWordService.getRandomWords(1)
+        redirect(controller: "synset", action: "search", params: [q: randomWords[0]])
+    }
+
 }
