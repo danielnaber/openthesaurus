@@ -62,17 +62,6 @@
                             </tr>
 
                             <tr class='prop'>
-                                <td valign='top' class='name'>
-                                    <g:message code="user.change.profile.description"/>
-                                </td>
-                                <td valign='top' class='name'>
-                                    <g:if test="${user.publicIntro}">
-                                        ${user.publicIntro.encodeAsHTML()}
-                                    </g:if>
-                                </td>
-                            </tr>
-
-                            <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
                                     <g:link action="editProfile"><g:message code="user.edit.profile"/></g:link>
                                 </td>

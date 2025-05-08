@@ -52,17 +52,6 @@
                             </td>
                         </tr>
 
-                        <tr class='prop'>
-                            <td valign='top' class='name'>
-                                <g:message code="user.change.profile.description"/>
-                            </td>
-                            <td valign='top' class='value'>
-                                <g:if test="${user.publicIntro}">
-                                    ${user.publicIntro.encodeAsHTML()}
-                                </g:if>
-                            </td>
-                        </tr>
-
                         <g:if test="${session.user && session.user.id == Long.parseLong(params.uid)}">
                             <tr class='prop'>
                                 <td valign='top' class='name' colspan="2">
