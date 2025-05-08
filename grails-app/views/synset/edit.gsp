@@ -412,7 +412,7 @@
             <div class="colspanlist">
 
               <br />
-              <h2><a name="history"><g:message code='edit.latest.changes' args="${[eventListCount]}"/></a></h2>
+              <h2><a name="history" style="pointer-events: none;"><g:message code='edit.latest.changes' args="${[eventListCount]}"/></a></h2>
 
               <table>
                   <tr>

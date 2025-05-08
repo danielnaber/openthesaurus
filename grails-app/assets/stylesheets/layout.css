@@ -62,7 +62,7 @@ a:link, a:visited {
     font-weight: bold;
 }
 
-a:hover:not([name]) {
+a:hover {
     text-decoration: none;
     color: #00437e;
     font-weight: bold;

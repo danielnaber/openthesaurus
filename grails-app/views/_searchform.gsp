@@ -91,7 +91,7 @@
     <!--
     $( document ).ready(function() {
         var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
-        if (!touchOS) {
+        if (!touchOS && window.location.hash !== "#history") {
           document.searchform.q.focus();
           document.searchform.q.select();
         }
