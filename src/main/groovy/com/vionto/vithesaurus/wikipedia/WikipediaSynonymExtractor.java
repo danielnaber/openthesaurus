@@ -17,8 +17,6 @@
  */
 package com.vionto.vithesaurus.wikipedia;
 
-import org.apache.commons.lang.StringUtils;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -50,7 +48,10 @@ public class WikipediaSynonymExtractor {
     }
     
     private void parse(File file) throws XMLStreamException, IOException, SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/vithesaurus?user=root&password=");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/openthesaurus?user=root&password=");
+        System.setProperty("jdk.xml.maxGeneralEntitySizeLimit", "0");
+        System.setProperty("jdk.xml.totalEntitySizeLimit", "0");
+        System.setProperty("jdk.xml.entityExpansionLimit", "0");
         XMLInputFactory factory = XMLInputFactory.newInstance();
         FileInputStream fis = new FileInputStream(file);
         XMLStreamReader parser = factory.createXMLStreamReader(fis);
@@ -126,17 +127,20 @@ public class WikipediaSynonymExtractor {
                 System.out.println("[<a href=\"http://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=" +
                         URLEncoder.encode(synonyms.get(0), "utf-8")
                         + "\">W</a>] <a href=\"http://www.openthesaurus.de/synset/create?term=" +
-                        URLEncoder.encode(StringUtils.join(synonyms, "\n"), "utf-8") + "\">"
-                        + StringUtils.join(synonyms, ", ") + "</a><br/>");
+                        URLEncoder.encode(String.join("\n", synonyms), "utf-8") + "\">"
+                        + String.join(", ", synonyms) + "</a><br/>");
             } else if (!foundAll) {
                 //System.out.println("DID NOT find all synonyms: " + synonyms);
             }
         }
     }
 
-
     public static void main(String[] args) throws XMLStreamException, IOException, SQLException {
         WikipediaSynonymExtractor extractor = new WikipediaSynonymExtractor();
-        extractor.parse(new File("/media/data/data/corpus/wikipedia/dewiki-20100815-pages-articles.xml"));
+        if (args.length != 1) {
+            System.out.println("Usage: java -jar WikipediaSynonymExtractor.jar <file>");
+            System.exit(1);
+        }
+        extractor.parse(new File(args[0]));
     }
 }
