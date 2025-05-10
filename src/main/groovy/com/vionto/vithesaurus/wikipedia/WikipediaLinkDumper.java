@@ -166,6 +166,10 @@ public class WikipediaLinkDumper {
             System.err.println("Removed 4-byte UTF-8 chars from escapedTitle: " + escapedTitle + " - ingoring line");
             continue;
           }
+          String linkText = link;
+          if (link.length() > 1) {
+            link = Character.toUpperCase(link.charAt(0)) + link.substring(1);
+          }
           System.out.println("INSERT INTO wikipedia (title, link) VALUES ('" + escapedTitle + "', '" + escape(link) + "');");
         }
         text = new StringBuilder();
