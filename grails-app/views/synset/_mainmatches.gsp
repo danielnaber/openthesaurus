@@ -23,6 +23,7 @@
             </g:if>
 
             <div class="result">
+                <div class="mainResult">
                 <g:set var="counter" value="${0}"/>
                 <g:each in="${synset?.sortedTerms()}" var="term">
                     <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
@@ -101,6 +102,7 @@
 
                     <g:set var="counter" value="${counter + 1}"/>
                 </g:each>
+                </div>
 
                 <g:set var="superSynsets" value="${[]}"/>
                 <g:each in="${synset.synsetLinks}" var="synsetLink">

@@ -726,10 +726,17 @@ strong {
     }
     #content,
     #foot {
-        margin-left: 3px;
-        margin-right: 3px;
+        margin-left: 10px;
+        margin-right: 10px;
         width: 98%;
         /*background-color: #ffff00;  for debugging */
+    }
+    .result {
+      font-size: 20px;
+      line-height: 120%;
+    }
+    .mainResult {
+      margin-bottom: 5px;
     }
     .logo {
         margin-top: 0;
@@ -775,15 +782,33 @@ strong {
     .loggedInInfo {
         margin-top: 0px;
     }
-}
-
-@media (min-width: 801px) {
-    #search .mobileClaim {
-        display: none !important;
+    .superordinateHead {
+      font-size: 16px;
+    }
+    .superordinateTerms a {
+      font-size: 16px;
+    }
+    .superordinateTerms {
+      font-size: 16px;
+    }
+    .categoryHead {
+      font-size: 16px;
+    }
+    .categoryTerm a {
+      font-size: 16px;
+    }
+    .categoryTerm {
+      font-size: 16px;
+    }    
+    .associationList li {
+      font-size: 16px;
     }
 }
 
 @media (min-width: 801px) {
+    #search .mobileClaim {
+      display: none !important;
+    }
     #desktopAd {
       margin-bottom: -12px;
     }
