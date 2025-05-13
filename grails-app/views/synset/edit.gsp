@@ -379,7 +379,6 @@
                                         params="${linkParams}"><img align="top" src="${createLinkTo(dir:'images',file:'forum-bubble.png')}" alt="Forum-Icon" /> <g:message code="edit.login.to.improve"/></g:link>
                             </g:if>
                             <br/>
-                            <g:render template="forumlink" />
                         </div>
                         <div style="clear: both"></div>
 

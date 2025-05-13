@@ -18,7 +18,6 @@
 
         <g:render template="addterm" model="${[term:cleanTerm]}" />
 
-        <g:render template="forumlink" />
     </div>
 
     <div class="resultColumn">
