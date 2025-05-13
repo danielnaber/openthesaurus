@@ -103,9 +103,6 @@ h1 {
   font-weight: normal;
 }
 
-.category {
-}
-
 .categoryHead {
   text-transform: uppercase;
   font-weight: bold;
@@ -398,8 +395,6 @@ li.checkboxList {
   font-weight: bold;
   margin-top: 25px;
   margin-bottom: 10px;
-}
-.faqitem .answer {
 }
 .faqitem .answer ul {
   margin-top: 5px;
