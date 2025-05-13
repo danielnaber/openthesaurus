@@ -34,7 +34,7 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input autofocus="" size="30" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                <input autofocus="" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
                                        id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required />
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.email.description"/></span>
@@ -46,7 +46,7 @@
                                 <label for='visibleName'><g:message code="user.register.display.name"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="text" placeholder="${message(code:'user.register.display.name.placeholder')}"
+                                <input type="text" placeholder="${message(code:'user.register.display.name.placeholder')}"
                                        id='visibleName' name='visibleName' value="${params.visibleName?.encodeAsHTML()}" required />
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.display.name.description"/></span>
@@ -58,7 +58,7 @@
                                 <label for='password1'><g:message code="user.login.form.password"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}" required />
+                                <input type="password" id='password1' name='password1' value="${params.password1?.encodeAsHTML()}" required />
                             </td>
                         </tr>
 
@@ -67,7 +67,7 @@
                                 <label for='password2'><g:message code="user.register.form.password.repeat"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input size="30" type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}" required />
+                                <input type="password" id='password2' name='password2' value="${params.password2?.encodeAsHTML()}" required />
                             </td>
                         </tr>
 
