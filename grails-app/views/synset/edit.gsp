@@ -69,6 +69,16 @@
              }
           }
 
+          function toggleDeleteButton() {
+            var divId = 'mainSaveButton';
+            if (document.getElementById(divId).disabled) {
+              document.getElementById(divId).disabled = false;
+            } else {
+              document.getElementById(divId).disabled = 'disabled';
+            }
+            toggleId('deleteButton');
+          }
+
         // -->
         </script>
     </head>
@@ -333,7 +343,7 @@
                             <div class="rightColumn">
                                 <div class="buttons">
                                     <g:if test="${synset.isVisible}">
-                                        <a href="javascript:toggleId('deleteButton')">${message(code:'edit.delete.button')}</a>
+                                        <a href="javascript:toggleDeleteButton()">${message(code:'edit.delete.button')}</a>
                                         <div id="deleteButton" style="display:${showOnlyDeleteButton ? 'block' : 'none'};margin-top:12px">
                                             <g:actionSubmit style="background-color: #ff9790" action="hide" class="hide submitButton" value="${message(code:'edit.delete.now.button')}" />
                                         </div>
@@ -361,7 +371,7 @@
                               <div class="rightColumn">
                                     <g:if test="${!showOnlyDeleteButton && synset?.isVisible}">
                                         <div class="buttons">
-                                            <g:actionSubmit action="update" class="save submitButton" value="${message(code:'edit.submit')}" />
+                                            <g:actionSubmit id="mainSaveButton" action="update" class="save submitButton" value="${message(code:'edit.submit')}" />
                                         </div>
                                     </g:if>
                               </div>
