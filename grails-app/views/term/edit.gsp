@@ -106,7 +106,7 @@
                                     <h2 class="noTopMargin"><g:message code="edit.term.term"/></h2>
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'word','errors')}'>
-                                    <input style="width:300px" ${disabled} type="text" id='word' name='word' spellcheck="true" value="${fieldValue(bean:term,field:'word')}"/>
+                                    <input style="max-width:300px" ${disabled} type="text" id='word' name='word' spellcheck="true" value="${fieldValue(bean:term,field:'word')}"/>
                                 </td>
                             </tr> 
 
@@ -149,7 +149,7 @@
                                 <td valign='top' class='name'>
                                     <h2 class="noTopMargin"><g:message code="edit.term.tags"/></h2>
                                 </td>
-                                <td valign='top' class='value' style="width:400px">
+                                <td valign='top' class='value' style="max-width:380px">
                                     <input class="tags" name="tags" type="text" value="${tagStr.encodeAsHTML()}"/>
                                 </td>
                             </tr>
@@ -233,7 +233,7 @@
                                 </td>
                                 <td valign='top' class='value ${hasErrors(bean:term,field:'userComment','errors')}'>
                                     <g:if test="${editable}">
-                                        <g:textArea maxlength="400" style="width:300px" rows="5" cols="40" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
+                                        <g:textArea maxlength="400" style="width:100%" rows="5" id='userComment' name='userComment' spellcheck="true" value="${term.userComment}"/>
                                         <p class="metaInfo"><g:message code="edit.term.remaining" /> <span id="userCommentCharCounter"></span></p>
                                     </g:if>
                                     <g:else>
@@ -254,7 +254,7 @@
                                         <g:message code="edit.comment.for.change.detail"/>
                                     </td>
                                     <td valign='top' class='value ${hasErrors(bean:term,field:'changeComment','errors')}'>
-                                        <textarea rows="2" cols="50" maxlength="400" id='changeComment' name='changeComment' spellcheck="true"></textarea>
+                                        <textarea style="width:100%" rows="2" maxlength="400" id='changeComment' name='changeComment' spellcheck="true"></textarea>
                                     </td>
                                 </tr>
                             </g:if>
