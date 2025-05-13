@@ -389,6 +389,10 @@ li.checkboxList {
   margin-left: -17px;
 }
 
+li.noBulletItemList {
+  list-style: none;
+}
+
 /* FAQ */
 .faqitem .question {
   font-size: 14px;

@@ -118,27 +118,27 @@
             
             <div class='rightColumn value ${hasErrors(bean:synset,field:'terms','errors')}'>
 
-                <ul style="margin-top:0">
+                <table>
                     <g:set var="previousLanguage" value=""/>
                     <g:each var='t' in='${synset?.sortedTerms()}'>
-                        <li class="checkboxList">
-                            <g:if test="${previousLanguage != '' && t.language != previousLanguage}">
-                                <br/>
-                            </g:if>
+                        <tr style="vertical-align:top">
+                        <td>
                             <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
+                            <g:if test="${editable}">
+                                <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
+                                        align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                            </g:if>
+                            <g:else>
+                                <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                            </g:else>
+                        </td>
+                        <td>
+                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
+                                [<g:message code='edit.edit.term'/>]</g:link>
+                        </td>
+                        <td>
 
                             <div id="termId_${t.id}">
-
-                                <g:if test="${editable}">
-                                    <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
-                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
-                                </g:if>
-                                <g:else>
-                                    <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
-                                </g:else>
-
-                                <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                    [<g:message code='edit.edit.term'/>]</g:link>
 
                                 <strong>${t.toString()?.encodeAsHTML()}</strong>
 
@@ -191,11 +191,12 @@
                                     </g:each>
                                 </div>
                             </g:if>
-
-                        </li>
+                        </td>
+                        </tr>
                     </g:each>
+                </table>
 
-                    <li class="checkboxList" style="margin-top:10px">
+                    <li class="noBulletItemList" style="margin-top:10px">
                         <g:if test="${editable}">
                             <div id="newTermLink">
                                 <a href="#" onclick="showNewTerm();return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code='edit.add.terms'/></a>
@@ -240,7 +241,6 @@
                             </div>
                         </g:if>
                     </li>
-                </ul>
 
             </div>
 
@@ -255,11 +255,11 @@
                         <g:if test="${synset.categoryLinks.size() == 0 && !editable}">
                             <span class="noMatches"><g:message code="edit.not.set"/></span>
                         </g:if>
-                        <ul style="margin-top:0px">
+                        <table style="margin-top:0px">
                             <g:if test="${synset.categoryLinks.size() > 0}">
                               <g:each var='catLink' in='${synset.categoryLinks.sort()}'>
-                                  <li class="checkboxList">
-
+                                  <tr>
+                                    <td>
                                     <input type="hidden" id="delete_catLinkId_${catLink.id}" name="delete_catLinkId_${catLink.id}" value=""/>
                                     <div id="catLinkId_${catLink.id}">
 
@@ -274,12 +274,13 @@
                                         ${catLink.category}
                                         <g:link controller="term" action="list" params="${[categoryId:catLink.category.id]}"><g:message code="edit.show.category.terms"/></g:link>
                                     </div>
-                                  </li>
-                              </g:each>
-                          
+                                    </td>
+                                  </tr>
+                              </g:each>                          
                             </g:if>
+                        </table>
 
-                              <li class="checkboxList" ${synset.categoryLinks.size() > 0 ? 'style="margin-top:10px"' : ''}>
+                              <li class="noBulletItemList" ${synset.categoryLinks.size() > 0 ? 'style="margin-top:10px"' : ''}>
                                 <g:if test="${editable}">
                                      <%-- Change or add new category --%>
                                      <div id="newCategoryLink">
@@ -301,8 +302,6 @@
                                      </div>
                                  </g:if>
                               </li>
-
-                        </ul>
 
                         </div>
 

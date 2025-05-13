@@ -8,15 +8,16 @@
 
     <g:set var="nymCount" value="${0}"/>
     
-    <ul style="margin-top:0">
+    <table>
 
         <%
             Set<String> deleteIds = new HashSet<>();
         %>
         <g:each var='link' in='${synsetLinks}'>
            <g:if test="${link.linkType.toString() == linkTypeName}">
+            <tr style="vertical-align: top">
            
-                <li class="checkboxList">
+                <td>
                     <input type="hidden" id="delete_${linkTypeName}_${link.id}" name="delete_${linkTypeName}_${link.id}" value=""/>
                     <%
                         String id = "delete_${linkTypeName}_${link.id}";
@@ -24,36 +25,39 @@
                             continue;
                         }
                         deleteIds.add(id);
-                    %>
-                    <div id="${linkTypeName}_${link.id}">
-        
-                        <g:if test="${editable}">
-                          <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
+                    %>        
+                    <g:if test="${editable}">
+                        <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
                             align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                         </g:if>
-                        <g:else>
-                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
-                        </g:else>
+                    <g:else>
+                        <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                    </g:else>
+                </td>
 
+                <td>
+                    <div id="${linkTypeName}_${link.id}">
                         <g:link title="${link.targetSynset.toShortStringWithShortLevel(20, true)}" controller='synset' action='edit'
                             id='${link.targetSynset.id}'>${link.targetSynset.toShortStringWithShortLevel(3, true).encodeAsHTML()}</g:link>
-                            
                     </div>
-                </li>
-    
+                </td>
+                            
                 <%
                 displayedSynsets.add(link.targetSynset.id)
                 nymCount++
                 %>
+            </tr>
            </g:if>
         </g:each>
-        
+
+    </table>
+
         <g:if test="${nymCount == 0 && (linkTypeName == 'Unterbegriff' || !editable)}">
              <li class="checkboxList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
         </g:if>        
 
         <g:if test="${editable && showAddLink}">
-        <li class="checkboxList">
+        <li class="noBulletItemList">
             <div id="addSynsetLink-${linkTypeName}" ${nymCount > 0 ? 'style="margin-top:10px"' : ''}>
                 <a href="#" onclick="showNewSynsetLink('${linkTypeName}');return false;"><img align="top" src="${createLinkTo(dir:'images',file:'plus.png')}" alt="Plus"/>&nbsp;<g:message code="edit.add.link" args="${[linkTypeName]}"/></a>
                 <g:if test="${linkTypeName == 'Oberbegriff'}">
@@ -92,8 +96,6 @@
             </g:else>
          </li>
         </g:if>
-    
-    </ul>
-    
+        
     </div>
     <div style="clear: both"></div>
