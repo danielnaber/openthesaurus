@@ -746,12 +746,8 @@ strong {
     #search form {
         text-align: left;
     }
-    #search-field {
-        width: 200px !important;
-    }
     #search input[type='text'] {
         margin-left: 5px;
-        padding-right: 38px;
     }
     .searchResultPopup {
         top: 120px;
