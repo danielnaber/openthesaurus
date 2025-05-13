@@ -8,7 +8,7 @@
         imgDesktop = "gfdw-banner2.png";
         imgMobile = "gfdw-banner1.png";
         altText = "Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft";
-        link = "https://gfdw.eu";
+        link = "https://www.gfdw.eu/de?utm_source=openthesaurus&utm_medium=banner&utm_campaign=random_banner";
     } else if (rnd == 1) {
         imgDesktop = "es_banner_V01_a.png";
         imgMobile = "es_banner_V02_a.png";
