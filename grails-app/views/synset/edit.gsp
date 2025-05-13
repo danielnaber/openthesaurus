@@ -432,7 +432,7 @@
                               <g:link controller="user" action="profile" params="${[uid:event.byUser.id]}">
                                   <g:render template="/identicon" model="${[user: event.byUser, count: i]}"/>
                                   <g:if test="${event.byUser.realName}">
-                                      ${event.byUser.realName.encodeAsHTML()}
+                                      <span style="hyphens: auto">${event.byUser.realName.encodeAsHTML()}</span>
                                   </g:if>
                                   <g:else>
                                       <span class="anonUserId">#${event.byUser.id}</span>
