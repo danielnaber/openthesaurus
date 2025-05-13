@@ -95,7 +95,9 @@
                           <td>${diffs.get(userEvent)
                                   .replaceAll("&lt;br/&gt;", "<br/>")
                                   .replaceAll("&lt;b&gt;", "<b>")
-                                  .replaceAll("&lt;/b&gt;", "</b>")}
+                                  .replaceAll("&lt;/b&gt;", "</b>")
+                                  .replace("|", " | ")  /* make text breakable (for mobile) */
+                                  }
                               <g:if test="${userEvent.changeDesc}">
                                   <br/>
                                   <g:message code='edit.changelog.comment'/> ${userEvent.changeDesc?.toString().encodeAsHTML()}
