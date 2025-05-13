@@ -157,7 +157,7 @@
                             </div>
 
                             <g:if test="${t.userComment}">
-                                <div style="margin-left: 22px">
+                                <div>
                                     <span class="termMetaInfo">${StringTools.wikipediaUrlsToLinks(t.userComment.encodeAsHTML())}</span>
                                 </div>
                             </g:if>
@@ -166,7 +166,7 @@
 
                             <g:set var="termLinkInfos" value="${t.termLinkInfos().sort()}"/>
                             <g:if test="${termLinkInfos.size() > 0}">
-                                <div style="margin-left: 21px">
+                                <div>
                                     <g:set var="prevLinkName" value=""/>
                                     <g:each var='termLinkInfo' in='${termLinkInfos}'>
                                         <g:if test="${termLinkInfo.getLinkName() == 'Antonym' && termLinkInfo.getLinkName() == prevLinkName}">

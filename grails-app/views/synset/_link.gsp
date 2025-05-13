@@ -53,7 +53,7 @@
     </table>
 
         <g:if test="${nymCount == 0 && (linkTypeName == 'Unterbegriff' || !editable)}">
-             <li class="checkboxList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
+             <li class="noBulletItemList"><span class="noMatches"><g:message code="edit.not.set"/></span></li>
         </g:if>        
 
         <g:if test="${editable && showAddLink}">
