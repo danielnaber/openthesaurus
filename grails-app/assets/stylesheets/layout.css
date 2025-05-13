@@ -415,6 +415,14 @@ div.api {
   font-family: monospace;
 }
 
+div.api a {
+  font-weight: normal;
+}
+
+h2.api a {
+  pointer-events: none;
+}
+
 .apioption {
     font-family: monospace;
     font-weight: bold;
