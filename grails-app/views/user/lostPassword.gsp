@@ -38,7 +38,7 @@
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input autofocus="" size="40" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                <input autofocus="" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
                                        id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" spellcheck="false" required />
                             </td>
                         </tr>
