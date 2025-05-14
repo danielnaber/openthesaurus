@@ -261,6 +261,7 @@
                 left = $(window).scrollLeft() + 10; // Add some padding
             }
             $(this).next().css('left', left);
+            $(this).next().css('top', elementOffset.top + 25);  // move down a bit so tooltip doesn't hide icon
             openTooltip = $(this);
             return false;
         });
