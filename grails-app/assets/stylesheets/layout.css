@@ -864,6 +864,20 @@ strong {
   .associationList li {
     font-size: 16px;
   }
+
+  #desktopAd {
+    display: none !important;
+  }
+
+  #mobileAd {
+    margin-bottom: -12px;
+  }
+
+  #mobileAd img {
+    max-width: 98%;
+    height: auto;
+  }
+
 }
 
 @media (min-width: 801px) {
@@ -877,21 +891,6 @@ strong {
 
   #mobileAd {
     display: none !important;
-  }
-}
-
-@media (max-width: 801px) {
-  #desktopAd {
-    display: none !important;
-  }
-
-  #mobileAd {
-    margin-bottom: -12px;
-  }
-
-  #mobileAd img {
-    max-width: 98%;
-    height: auto;
   }
 }
 
