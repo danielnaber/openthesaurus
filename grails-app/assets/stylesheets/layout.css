@@ -647,6 +647,10 @@ strong {
   cursor: pointer;
 }
 
+.antonymMarker:hover {
+  filter: brightness(80%);
+}
+
 .commentMarker {
   margin-left: 2px;
   padding-left: 3px;
@@ -654,6 +658,10 @@ strong {
   position: relative;
   top: 3px;
   cursor: pointer;
+}
+
+.commentMarker:hover {
+  filter: brightness(80%);
 }
 
 .searchResultPopup {
