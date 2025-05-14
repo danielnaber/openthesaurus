@@ -42,8 +42,6 @@ p {
   margin-bottom: 10px;
 }
 
-/* */
-
 .tag {
   color: white;
   padding: 2px 4px 2px 4px;
@@ -191,8 +189,6 @@ h1 {
   margin-left: -44px;
   margin-bottom: 4px;
 }
-
-/* */
 
 #content,
 #foot {
@@ -745,6 +741,28 @@ strong {
   text-align: center;
 }
 
+.tooltip {
+  position: absolute;
+  background-color: white;
+  padding: 6px;
+  min-width: 100px;
+  max-width: 300px;
+  z-index: 9999;
+  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+}
+
+.socialMediaIcon:hover {
+  filter: brightness(1.2);
+}
+
+ol li {
+  margin-bottom: 5px;
+}
+
+/* === MOBILE ============================================================================ */
+
 @media (max-width: 800px) {
   body {
     font-size: 16px;
@@ -816,7 +834,6 @@ strong {
   }
 
   #body {
-    /* TODO: padding difference between Chrome and Safari */
     padding: 35px 0 20px 0;
     background-color: #F7F7F7;
     margin-bottom: 10px;
@@ -882,6 +899,8 @@ strong {
 
 }
 
+/* === DESKTOP ============================================================================ */
+
 @media (min-width: 801px) {
   #search .mobileClaim {
     display: none !important;
@@ -894,24 +913,4 @@ strong {
   #mobileAd {
     display: none !important;
   }
-}
-
-.tooltip {
-  position: absolute;
-  background-color: white;
-  padding: 6px;
-  min-width: 100px;
-  max-width: 300px;
-  z-index: 9999;
-  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-}
-
-.socialMediaIcon:hover {
-  filter: brightness(1.2);
-}
-
-ol li {
-  margin-bottom: 5px;
 }
