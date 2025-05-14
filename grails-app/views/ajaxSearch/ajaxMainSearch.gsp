@@ -4,7 +4,7 @@
 
     <g:if test="${params.home != 'true'}">
         <div id="popupCloseButton"><a href="#" onclick="closePopup();return false;"><img
-                src="${createLinkTo(dir:'images',file:'close.png')}" width="14" height="14" alt="${message(code:'popup.alt.attribute')}" title="${message(code:'popup.title.attribute')}"></a></div>
+                src="${createLinkTo(dir:'images',file:'close24.png')}" width="18" height="18" alt="${message(code:'popup.alt.attribute')}" title="${message(code:'popup.title.attribute')}"></a></div>
     </g:if>
 
     <g:if test="${synsetList.size() == 0}">

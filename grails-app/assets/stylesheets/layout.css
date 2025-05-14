@@ -775,7 +775,7 @@ strong {
     .searchResultPopup {
         top: 120px;
         font-size: 18px;
-        padding: 5px;
+        padding: 10px;
         width: 95%;
     }
     .resultColumn {
