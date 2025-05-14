@@ -6,7 +6,6 @@
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:message(code:'favicon.name'))}" />
         <link rel="search" type="application/opensearchdescription+xml" title="OpenThesaurus" href="/openSearch" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="flattr:id" content="62lgqk">
         <asset:javascript src="application"/>
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
