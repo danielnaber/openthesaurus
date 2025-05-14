@@ -212,14 +212,41 @@
     $(document).ready(function() {
 
         var markers = $('.antonymMarker, .commentMarker');
+        var openTooltip;
         markers.each(function(){
             $(this).data('title', $(this).attr('title'));
             $(this).removeAttr('title');
         });
 
-        markers.mouseover(function() {
-            markers.next('.tooltip').remove();
-            if($(this).data('title') != ""){
+        // when user clicks somewhere else, remove the tooltip:
+        $(document).click(function(e) {
+            if (openTooltip && !$(e.target).is('.tooltip') && !$(e.target).is('.antonymMarker') && !$(e.target).is('.commentMarker')) {
+                openTooltip.next('.tooltip').remove();
+                openTooltip = null;
+            }
+        });
+
+        // also remove the tooltip when user presses ESC:
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {  // Escape key
+                if (openTooltip) {
+                    openTooltip.next('.tooltip').remove();
+                    openTooltip = null;
+                }
+            }
+        });
+
+        markers.click(function() {
+            if (openTooltip && openTooltip.is($(this))) {
+                // If the same marker is clicked again, remove the tooltip
+                $(this).next('.tooltip').remove();
+                openTooltip = null;
+                return false;
+            }
+            if (openTooltip) {
+                openTooltip.next('.tooltip').remove();
+            }
+            if ($(this).data('title') != "") {
                 $(this).after('<span class="tooltip">' + $(this).data('title') + '</span>');
             }
             var width = $(document).width();
@@ -228,19 +255,10 @@
                 left = width - 200;
             }
             var top = $(this).position().top + 18;
-            $(this).next().css('left',left);
-            $(this).next().css('top',top);
-        });
-
-        markers.click(function(){
-            $(this).mouseover();
-            $(this).next().animate({opacity: 0.9},{duration: 4000, complete: function(){
-                $(this).fadeOut(500);
-            }});
-        });
-
-        markers.mouseout(function(){
-            $(this).next('.tooltip').remove();
+            $(this).next().css('left', left);
+            $(this).next().css('top', top);
+            openTooltip = $(this);
+            return false;
         });
 
     });

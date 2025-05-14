@@ -651,6 +651,7 @@ strong {
   padding-right: 3px;
   position: relative;
   top: 3px;
+  cursor: pointer;
 }
 
 .commentMarker {
@@ -659,6 +660,7 @@ strong {
   padding-right: 3px;
   position: relative;
   top: 3px;
+  cursor: pointer;
 }
 
 .searchResultPopup {
@@ -897,7 +899,6 @@ strong {
 .tooltip {
   position: absolute;
   background-color: white;
-  font-size: smaller;
   padding: 6px;
   min-width: 100px;
   max-width: 300px;
