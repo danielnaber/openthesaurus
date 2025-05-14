@@ -12,18 +12,9 @@
 
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
-            <h2>Webservice/API-Zugriff</h2>
+            <h1>Webservice/API-Zugriff</h1>
 
-            <ul>
-                <li><a href="#allgemeines">Allgemeines</a></li>
-                <li><a href="#json">Suchanfrage für JSON</a></li>
-                <li><a href="#xml">Suchanfrage für XML</a></li>
-                <li><a href="#optionen">Optionen</a></li>
-                <li><a href="#probleme">Bekannte Probleme</a></li>
-                <li><a href="#limits">Anfrage-Limitierung</a></li>
-            </ul>
-
-            <h2><a name="allgemeines">Allgemeines</a></h2>
+            <h2 class="api"><a name="allgemeines">Allgemeines</a></h2>
 
             <p>Viele Daten dieser Website können direkt über eine HTTP-Schnittstelle
             abgefragt werden. Bisher wird die Suche nach Wörtern, Teilwörtern und nach ähnlich geschriebenen Wörtern
