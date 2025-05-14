@@ -249,14 +249,18 @@
             if ($(this).data('title') != "") {
                 $(this).after('<span class="tooltip">' + $(this).data('title') + '</span>');
             }
-            var width = $(document).width();
-            var left = $(this).position().left + $(this).width() + 4;
-            if (left + 200 > width) {
-                left = width - 200;
+            var viewportWidth = $(window).width();
+            var tooltipWidth = 310; // Approximate width of the tooltip
+            var elementOffset = $(this).offset();
+            var left = elementOffset.left + $(this).width() + 4;
+            // Adjust left position if tooltip overflows viewport:
+            if (left + tooltipWidth > viewportWidth + $(window).scrollLeft()) {
+                left = viewportWidth + $(window).scrollLeft() - tooltipWidth - 5; // Add some padding
             }
-            var top = $(this).position().top + 18;
+            if (left < $(window).scrollLeft()) {
+                left = $(window).scrollLeft() + 10; // Add some padding
+            }
             $(this).next().css('left', left);
-            $(this).next().css('top', top);
             openTooltip = $(this);
             return false;
         });
