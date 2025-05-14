@@ -794,8 +794,12 @@ ol li {
     /*background-color: #ffff00;  for debugging */
   }
 
+  h2 {
+    font-weight: bold;
+  }
+  
   .result {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 120%;
   }
 
@@ -854,31 +858,31 @@ ol li {
   }
 
   .superordinateHead {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .superordinateTerms a {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .superordinateTerms {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .categoryHead {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .categoryTerm a {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .categoryTerm {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .associationList li {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   #desktopAd {
