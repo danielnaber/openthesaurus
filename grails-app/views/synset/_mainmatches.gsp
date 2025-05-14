@@ -68,7 +68,7 @@
 
                     <g:set var="commentInfo" value=""/>
                     <g:if test="${term.userComment}">
-                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon.png')}"></span></g:set>
+                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon16.png')}"></span></g:set>
                     </g:if>
                     <%
                         long antonymTime = System.currentTimeMillis();
@@ -81,7 +81,7 @@
                         <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
                             <g:set var="antonymTitle"><g:message code="edit.antonym.title.attribute"
                                                                  args="${[termLinkInfo.term2.word, termLinkInfo.term2.synset.toShortStringWithShortLevel(20, true)]}"/></g:set>
-                            <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><a href="${termLinkInfo.term2.word.encodeAsURL()}"><img src="${createLinkTo(dir:'images', file:'lightning.png')}"/></a></span></g:set>
+                            <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><a href="${termLinkInfo.term2.word.encodeAsURL()}"><img src="${createLinkTo(dir:'images', file:'lightning16.png')}"/></a></span></g:set>
                         </g:if>
                     </g:if>
                     <%
