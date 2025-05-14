@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   background-color: #0362B9;
   background-image: url(../images/foot-bg.jpg);
   background-repeat: repeat-x;
@@ -38,7 +39,7 @@ body {
 }
 
 p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* */
@@ -56,16 +57,17 @@ p {
   border-style: solid;
 }
 
-a:link, a:visited {
-    text-decoration: none;
-    color: #0071bd;
-    font-weight: bold;
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #0071bd;
+  font-weight: bold;
 }
 
 a:hover {
-    text-decoration: none;
-    color: #00437e;
-    font-weight: bold;
+  text-decoration: none;
+  color: #00437e;
+  font-weight: bold;
 }
 
 h1 {
@@ -79,9 +81,9 @@ h1 {
 }
 
 .associations {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: normal;
 }
 
 .superordinateHead {
@@ -221,7 +223,7 @@ h3 {
 
 .tagit {
   margin-left: 0 !important;
-  margin-top: 0 !important;;
+  margin-top: 0 !important;
 }
 
 #body ul li {
@@ -319,7 +321,8 @@ h3 {
   border: 1px solid #96b7d6;
 }
 
-.error, .errors {
+.error,
+.errors {
   background: #ff9696 url(../images/skin/exclamation.png) no-repeat 10px 12px;
   padding: 10px 10px 10px 30px;
   margin-top: 10px;
@@ -379,6 +382,7 @@ h3 {
   color: #949494;
   margin-top: 10px;
 }
+
 .copyrightInfo a {
   color: #949494;
   font-weight: normal;
@@ -400,6 +404,7 @@ li.noBulletItemList {
   margin-top: 25px;
   margin-bottom: 10px;
 }
+
 .faqitem .answer ul {
   margin-top: 5px;
   margin-bottom: 10px;
@@ -424,9 +429,10 @@ h2.api a {
 }
 
 .apioption {
-    font-family: monospace;
-    font-weight: bold;
+  font-family: monospace;
+  font-weight: bold;
 }
+
 .apioptions li {
   margin-top: 10px;
 }
@@ -436,6 +442,7 @@ h2.api a {
   font-weight: bold;
   color: #666666;
 }
+
 .newsYearDelimiter {
   background-color: #eeeeee;
   font-weight: bold;
@@ -451,22 +458,27 @@ h2.api a {
   text-decoration: line-through;
   background: #ff9292;
 }
+
 .add {
   background: #2df1aa;
 }
 
 /* list of changes */
-.colspanlist table td,th {
+.colspanlist table td,
+th {
   padding: 3px 10px 3px 2px;
 }
+
 .colspanlist th {
   background: #dddddd;
   font-weight: bold;
 }
+
 .del {
   text-decoration: line-through;
   background: #ff9292;
 }
+
 .add {
   background: #2df1aa;
 }
@@ -479,6 +491,7 @@ h2.api a {
   overflow: hidden;
   padding: 10px 3px;
 }
+
 .paginateButtons a {
   background: #eee;
   color: #666;
@@ -486,6 +499,7 @@ h2.api a {
   padding: 2px 6px;
   border: 1px solid #dddddd;
 }
+
 .paginateButtons span {
   margin-right: 3px;
   padding: 2px 6px;
@@ -524,145 +538,146 @@ strong {
 }
 
 .noTopMargin {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .submitButton {
-    padding: 3px;
+  padding: 3px;
 }
 
 .metaInfo {
-    color: #888888;
+  color: #888888;
 }
 
 .termMetaInfo {
-    color: #888888;
+  color: #888888;
 }
 
 /* user input: */
 .inp {
-    font-weight: bold;
-    color: #888888;
+  font-weight: bold;
+  color: #888888;
 }
 
 .noAjaxMatches {
-    margin: 5px;
+  margin: 5px;
 }
 
 /* statistics page: */
 .statistics .prop {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .statistics .prop2 {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .statistics .value {
-    text-align: right;
+  text-align: right;
 }
 
 .statName {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .statsTable td {
-    padding: 8px;
+  padding: 8px;
 }
 
 .anonUserId {
-    color: #777777;
+  color: #777777;
 }
 
 .adminOnly {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .hint {
-    background: #ffca6a;
-    padding: 10px 20px 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #e0a437;
-    font-weight: bold;
+  background: #ffca6a;
+  padding: 10px 20px 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0a437;
+  font-weight: bold;
 }
 
 .partnerSites {
-    margin-top: 0;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
+  margin-top: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .associationList {
-    color: #707070;
-    font-weight: normal;
+  color: #707070;
+  font-weight: normal;
 }
 
 #body .associations ul {
-    margin-top: 0;
-    margin-bottom: 5px;
-    margin-left: 25px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: 25px;
 }
 
 #body .superordinate ul {
-    margin-top: 0;
-    margin-bottom: 5px;
-    margin-left: 25px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: 25px;
 }
 
 .associationList li {
-    font-size: 12px;
-    list-style: square;
+  font-size: 12px;
+  list-style: square;
 }
 
 .associationList li a {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .associationList li .moreLessLink {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .associationList a {
-    color: #707070;
+  color: #707070;
 }
 
 .invisibleSynset {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 .antonymMarker {
-    margin-left: 2px;
-    padding-right: 3px;
-    position: relative;
-    top: 3px;
+  margin-left: 2px;
+  padding-right: 3px;
+  position: relative;
+  top: 3px;
 }
 
 .commentMarker {
-    margin-left: 2px;
-    padding-left: 3px;
-    padding-right: 3px;
-    position: relative;
-    top: 3px;
+  margin-left: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  position: relative;
+  top: 3px;
 }
 
 .searchResultPopup {
-    position: absolute;
-    padding: 10px;
-    display: block;
-    -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
-    box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
-    background-color: white;
-    width: 90%;
-    max-width: 760px;
-    min-height: 100px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;  /* centers the div, http://stackoverflow.com/questions/16758102/ */
-    top: 230px;
-    z-index: 100;
+  position: absolute;
+  padding: 10px;
+  display: block;
+  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  width: 90%;
+  max-width: 760px;
+  min-height: 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  /* centers the div, http://stackoverflow.com/questions/16758102/ */
+  top: 230px;
+  z-index: 100;
 }
 
 #popupCloseButton:hover {
@@ -678,41 +693,42 @@ strong {
 }
 
 .searchResultPopup hr {
-    color: #ffffff;
-    background-color: #ffffff;
-    border-top: solid 1px #cccccc;
-    border-bottom: solid 1px #ffffff;
+  color: #ffffff;
+  background-color: #ffffff;
+  border-top: solid 1px #cccccc;
+  border-bottom: solid 1px #ffffff;
 }
 
 .resultColumn {
-    width: 420px;
-    float: left;
-    margin-bottom: 15px;
+  width: 420px;
+  float: left;
+  margin-bottom: 15px;
 }
 
 .footerColumn {
-    width: 370px;
-    float: left;
-    margin-bottom: 50px;
+  width: 370px;
+  float: left;
+  margin-bottom: 50px;
 }
 
 /* detail page: */
 .leftColumn {
-    float: left;
-    width: 120px;
+  float: left;
+  width: 120px;
 }
+
 .rightColumn {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .loggedInInfo {
-    margin-top: 23px;
+  margin-top: 23px;
 }
 
 .mobileOnly {
-    display: none;
+  display: none;
 }
 
 #spinner {
@@ -728,121 +744,151 @@ strong {
 }
 
 @media (max-width: 800px) {
-    body {
-      font-size: 16px;
-    }
-    #mainAd {
-      margin-top: 0px;
-      text-align: center;
-    }
-    .desktopOnly {
-        display: none;
-    }
-    .mobileOnly {
-        display: inline;
-    }
-    #spinner {
-        left: 178px;
-    }
-    #search {
-        width: 100%;
-    }
-    #content,
-    #foot {
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 98%;
-        /*background-color: #ffff00;  for debugging */
-    }
-    .result {
-      font-size: 20px;
-      line-height: 120%;
-    }
-    .mainResult {
-      margin-bottom: 5px;
-    }
-    .logo {
-        margin-top: 0;
-        margin-bottom: 0;
-        display: none !important;
-    }
-    #search form {
-        text-align: left;
-    }
-    #search input[type='text'] {
-        margin-left: 5px;
-    }
-    .searchResultPopup {
-        top: 120px;
-        font-size: 18px;
-        padding: 10px;
-        width: 95%;
-    }
-    .resultColumn {
-        width: 100%;
-        float: left;
-        margin-bottom: 0px;
-    }
-    #body {
-        /* TODO: padding difference between Chrome and Safari */
-        padding: 35px 0 20px 0;
-        background-color: #F7F7F7;
-        margin-bottom: 10px;
-        padding-right: 20px;
-    }
-    #search .claim {
-        display: none !important;
-    }
-    #search .mobileClaim {
-        font-size: 14px;
-    }
-    .rightColumn {
-        width: 320px;
-    }
-    .loggedInInfo {
-        margin-top: 0px;
-    }
-    .superordinateHead {
-      font-size: 16px;
-    }
-    .superordinateTerms a {
-      font-size: 16px;
-    }
-    .superordinateTerms {
-      font-size: 16px;
-    }
-    .categoryHead {
-      font-size: 16px;
-    }
-    .categoryTerm a {
-      font-size: 16px;
-    }
-    .categoryTerm {
-      font-size: 16px;
-    }    
-    .associationList li {
-      font-size: 16px;
-    }
+  body {
+    font-size: 16px;
+  }
+
+  #mainAd {
+    margin-top: 0px;
+    text-align: center;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
+
+  .mobileOnly {
+    display: inline;
+  }
+
+  #spinner {
+    left: 178px;
+  }
+
+  #search {
+    width: 100%;
+  }
+
+  #content,
+  #foot {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 98%;
+    /*background-color: #ffff00;  for debugging */
+  }
+
+  .result {
+    font-size: 20px;
+    line-height: 120%;
+  }
+
+  .mainResult {
+    margin-bottom: 5px;
+  }
+
+  .logo {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: none !important;
+  }
+
+  #search form {
+    text-align: left;
+  }
+
+  #search input[type='text'] {
+    margin-left: 5px;
+  }
+
+  .searchResultPopup {
+    top: 120px;
+    font-size: 18px;
+    padding: 10px;
+    width: 95%;
+  }
+
+  .resultColumn {
+    width: 100%;
+    float: left;
+    margin-bottom: 0px;
+  }
+
+  #body {
+    /* TODO: padding difference between Chrome and Safari */
+    padding: 35px 0 20px 0;
+    background-color: #F7F7F7;
+    margin-bottom: 10px;
+    padding-right: 20px;
+  }
+
+  #search .claim {
+    display: none !important;
+  }
+
+  #search .mobileClaim {
+    font-size: 14px;
+  }
+
+  .rightColumn {
+    width: 320px;
+  }
+
+  .loggedInInfo {
+    margin-top: 0px;
+  }
+
+  .superordinateHead {
+    font-size: 16px;
+  }
+
+  .superordinateTerms a {
+    font-size: 16px;
+  }
+
+  .superordinateTerms {
+    font-size: 16px;
+  }
+
+  .categoryHead {
+    font-size: 16px;
+  }
+
+  .categoryTerm a {
+    font-size: 16px;
+  }
+
+  .categoryTerm {
+    font-size: 16px;
+  }
+
+  .associationList li {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 801px) {
-    #search .mobileClaim {
-      display: none !important;
-    }
-    #desktopAd {
-      margin-bottom: -12px;
-    }
-    #mobileAd {
-      display: none !important;
-    }
+  #search .mobileClaim {
+    display: none !important;
+  }
+
+  #desktopAd {
+    margin-bottom: -12px;
+  }
+
+  #mobileAd {
+    display: none !important;
+  }
 }
+
 @media (max-width: 801px) {
   #desktopAd {
     display: none !important;
   }
+
   #mobileAd {
     margin-bottom: -12px;
   }
+
   #mobileAd img {
     max-width: 98%;
     height: auto;
@@ -857,9 +903,9 @@ strong {
   min-width: 100px;
   max-width: 300px;
   z-index: 9999;
-  -webkit-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
-  box-shadow: 0 0 8px 3px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
 }
 
 .socialMediaIcon:hover {
@@ -867,5 +913,5 @@ strong {
 }
 
 ol li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
