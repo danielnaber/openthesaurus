@@ -10,7 +10,7 @@
         <g:render template="/script"/>
         <g:render template="/layouts/scripts"/>
         <g:layoutHead />
-        <script defer data-domain="openthesaurus.de" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+        <script defer data-domain="openthesaurus.de" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
     </head>
     <body>
 
