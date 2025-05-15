@@ -11,6 +11,7 @@
         <g:render template="/layouts/scripts"/>
         <g:layoutHead />
         <script defer data-domain="openthesaurus.de" src="https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js"></script>
+        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     </head>
     <body>
 

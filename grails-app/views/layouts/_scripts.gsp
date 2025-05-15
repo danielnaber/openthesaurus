@@ -263,6 +263,7 @@
             $(this).next().css('left', left);
             $(this).next().css('top', elementOffset.top + 25);  // move down a bit so tooltip doesn't hide icon
             openTooltip = $(this);
+            plausible('comment icon clicked');
             return false;
         });
 
