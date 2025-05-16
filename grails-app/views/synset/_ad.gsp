@@ -3,7 +3,7 @@
     String imgMobile = "";
     String altText = "";
     int rnd = new Random().nextInt(3);
-    if (rnd == 0) {
+    if (rnd == 0 || params?.ad == "gfdw") {
         imgMobile = "gfdw1.png";
         altText = "Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft";
         link = "https://www.gfdw.eu/de?utm_source=openthesaurus&utm_medium=banner&utm_campaign=random_banner";
