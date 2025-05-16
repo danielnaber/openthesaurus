@@ -23,11 +23,9 @@
     %>
     <div style="margin-top:60px; text-align: center" id="desktopAd">
         <a href="${link}"><img src="/assets/external/${imgDesktop}" alt="${altText}" /></a>
-        <!--<br><span style="color:#999999">Anzeige</span>-->
     </div>
     <div style="margin-top:60px; text-align: center" id="mobileAd">
         <a href="${link}"><img src="/assets/external/${imgMobile}" alt="${altText}" /></a>
-        <!--<br><span style="color:#999999">Anzeige</span>-->
     </div>
     <div style="height:60px">&nbsp;</div>
 </g:if>

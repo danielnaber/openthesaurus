@@ -17,9 +17,8 @@
         link = "https://effektiv-spenden.org";
     }
     %>
-    <div id="mainAd">
+    <div id="mainBn">
         <a href="${link}"><img style="max-width: 100%; height: auto;" src="/assets/external/${imgMobile}" alt="${altText}" /></a>
-        <!--<span style="color:#999999">Anzeige</span>-->
     </div>
     <hr>
 </g:if>
