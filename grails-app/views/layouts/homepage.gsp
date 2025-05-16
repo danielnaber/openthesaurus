@@ -45,8 +45,6 @@
     </div>
     
     <g:render template="/footer" model="${[homepage:false]}"/>
-    
-    <g:render template="/analytics"/>
-    
+        
     </body>
 </html>
