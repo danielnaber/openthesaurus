@@ -236,6 +236,19 @@
             }
         });
 
+        var hoverStart = 0;
+        markers.mouseover(function() {
+            hoverStart = new Date().getTime();
+        });
+        markers.mouseout(function() {
+            var hoverTime = new Date().getTime() - hoverStart;
+            plausible('comment icon hovered any time');
+            if (hoverTime >= 100) {
+                plausible('comment icon hovered at least 100ms');
+                //console.log("hoverTime", hoverTime);
+            }
+        });
+
         markers.click(function() {
             if (openTooltip && openTooltip.is($(this))) {
                 // If the same marker is clicked again, remove the tooltip
