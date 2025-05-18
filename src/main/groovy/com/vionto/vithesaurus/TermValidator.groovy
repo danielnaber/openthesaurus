@@ -22,10 +22,6 @@ class TermValidator {
     Term term
     String word
 
-    /**
-     * The constructor of the class.
-     * @param The term to be validated extended.
-     */
     public TermValidator(Term t) {
         this.term = t
         this.word = t.word
@@ -35,19 +31,11 @@ class TermValidator {
      * Extended Validation for a term, throws exception in case of problems
      */
     public void extendedValidate() {
-        assert (word.length() >= 1)
-        if (term) {
-            validateWordForm()
+        if (word.length() == 0) {
+            throw new IllegalArgumentException("Word cannot be empty")
         }
         validateBrackets()
         validateTermRegex()
-    }
-
-    /**
-     * Checks the correct word form of a term.
-     * @throws IllegalArgumentException
-     */
-    private void validateWordForm() {
     }
 
     /**
