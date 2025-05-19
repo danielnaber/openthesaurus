@@ -251,7 +251,7 @@
             }
         });
 
-        var hoverStart = 0;
+        /*var hoverStart = 0;
         markers.mouseover(function() {
             hoverStart = new Date().getTime();
         });
@@ -262,7 +262,7 @@
                 plausible('comment icon hovered at least 100ms');
                 //console.log("hoverTime", hoverTime);
             }
-        });
+        });*/
 
         markers.click(function() {
             if (openTooltip && openTooltip.is($(this))) {
