@@ -778,6 +778,14 @@ strong {
   filter: brightness(5);
 }
 
+.searchSubmitButton {
+  border-width: 0;
+}
+
+.searchSubmitButton:hover {
+  filter: brightness(1.2);
+}
+
 ol li {
   margin-bottom: 5px;
 }
