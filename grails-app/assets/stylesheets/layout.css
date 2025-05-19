@@ -370,6 +370,18 @@ h3 {
   font-weight: bold;
 }
 
+.wiktionaryCategory {
+  color: #888888;
+  font-weight: bold;
+}
+
+#wiktionaryLicense {
+  display: none;  
+}
+#wikipediaLicense {
+  display: none;  
+}
+
 .copyrightInfo {
   font-size: 12px;
   color: #949494;

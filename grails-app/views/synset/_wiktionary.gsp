@@ -28,6 +28,8 @@
                             .replaceAll("^:", "")
                             .replaceAll("&lt;/?small&gt;", "")
 						    .replaceAll(myMarker + "(.*?)" + myMarker, "<span class='wiktionaryItem'>\$1.</span>")
+
+							.replaceAll("\\[(.*?)\\]", "<span class='wiktionaryCategory'>[\$1]</span>")
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
@@ -65,7 +67,10 @@
                                 </p>
 							<g:if test="${wiktionaryResult.size() > 0 && ! (emptyMeanings && emptySynonyms)}">
 								<div class="copyrightInfo">
-									<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord,wiktionaryWord.encodeAsURL()]}"/>
+									<a href="javascript:toggle('wiktionaryLicense')"><g:message code="result.wikipedia.license.link" /></a>
+									<div id="wiktionaryLicense">
+										<g:message code="result.wiktionary.license" args="${[wiktionaryWord.encodeAsURL(),wiktionaryWord,wiktionaryWord.encodeAsURL()]}"/>
+									</div>
 								</div>
 							</g:if>
 						</g:else>

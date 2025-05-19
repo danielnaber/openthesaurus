@@ -200,6 +200,14 @@
 
     </g:else>
 
+    function toggle(divName) {
+        if (document.getElementById(divName).style.display == 'block') {
+            document.getElementById(divName).style.display = 'none';
+        } else {
+            document.getElementById(divName).style.display = 'block';
+        }
+    }
+
     function loadSynsetSearch() {
         document.getElementById('spinner').style.position='absolute';
         document.getElementById('spinner').style.visibility='visible';

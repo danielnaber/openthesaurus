@@ -20,8 +20,11 @@
 
 						<g:if test="${wikipediaResult.size() > 0}">
 							<div class="copyrightInfo">
-								<g:message code="result.wikipedia.license" 
-									args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle,wikipediaTitle.encodeAsURL()]}"/>
+                                <a href="javascript:toggle('wikipediaLicense')"><g:message code="result.wikipedia.license.link" /></a>
+                                <div id="wikipediaLicense">
+								    <g:message code="result.wikipedia.license" 
+								    	args="${[wikipediaTitle.replaceAll(' ', '_').encodeAsURL(),wikipediaTitle,wikipediaTitle.encodeAsURL()]}"/>
+                                </div>
 							</div>
 						</g:if>
 					</g:if>
