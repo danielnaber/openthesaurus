@@ -48,12 +48,6 @@
     </g:else>
 -->
 
-    <!--
-    <div style="background-color: #046CCB; text-align: center; margin-left: 78px; padding: 5px;">
-	 <a style="color: white" href="https://languagetooler.workwise.io/">Jobs bei OpenThesaurus</a>
-    </div>
-    -->
-
     <%--
     <g:if test="${request.forwardURI == "/"}">
         <br>
