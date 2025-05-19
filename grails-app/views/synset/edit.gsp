@@ -136,7 +136,7 @@
                             <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
                             <g:if test="${editable}">
                                 <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
-                                        align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                                    class="editIcon" align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                             </g:if>
                             <g:else>
                                 <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
@@ -144,7 +144,7 @@
                         </td>
                         <td>
                             <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                <img align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
+                                <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
                         </td>
                         <td>
 
@@ -275,7 +275,7 @@
 
                                         <g:if test="${editable}">
                                           <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
-                                            align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
+                                            class="editIcon" align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
                                         </g:if>
                                         <g:else>
                                           <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>

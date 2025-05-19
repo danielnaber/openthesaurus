@@ -774,6 +774,10 @@ strong {
   filter: brightness(1.2);
 }
 
+.editIcon:hover {
+  background-color: #dddddd;
+}
+
 .brightIcon {
   filter: brightness(5);
 }

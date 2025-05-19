@@ -28,7 +28,7 @@
                     %>        
                     <g:if test="${editable}">
                         <a href="#" onclick="deleteItem('${linkTypeName}', '${link.id}');return false;"><img
-                            align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                            class="editIcon" align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                         </g:if>
                     <g:else>
                         <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
