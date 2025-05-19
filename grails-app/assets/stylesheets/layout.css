@@ -774,6 +774,10 @@ strong {
   filter: brightness(1.2);
 }
 
+.brightIcon {
+  filter: brightness(5);
+}
+
 ol li {
   margin-bottom: 5px;
 }

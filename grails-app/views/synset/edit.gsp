@@ -136,15 +136,15 @@
                             <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
                             <g:if test="${editable}">
                                 <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
-                                        align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                                        align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
                             </g:if>
                             <g:else>
-                                <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
                             </g:else>
                         </td>
                         <td>
                             <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                [<g:message code='edit.edit.term'/>]</g:link>
+                                <img align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
                         </td>
                         <td>
 
