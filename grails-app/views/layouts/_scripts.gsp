@@ -163,7 +163,11 @@
             } else {
                 try {
                     if (!$('#searchResultArea').is(':visible')) {
-                        plausible('popup opened');
+                        if (window.location.pathname === '/') {
+                            plausible('popup opened on homepage');
+                        } else {
+                            plausible('popup opened on result page');
+                        }
                     }
                 } catch (e) {
                     // ignore, it's tracking only
