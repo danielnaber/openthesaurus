@@ -17,3 +17,4 @@ start.sh
 re-deploy2023.sh
 re-deploy-backup2023.sh
 src/main/groovy/com/vionto/vithesaurus/wikipedia/*.class
+grails-app/assets/images/addon/addon.mp4
