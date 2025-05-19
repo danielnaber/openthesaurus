@@ -164,13 +164,13 @@
                                 <span title="${message(code:'edit.find.all.meanings', args: [StringTools.normalizeParenthesis(t.word)])}"><g:link
                                         class="termMetaInfo otherMeaningSearchLink" action="search" params="[q : StringTools.normalizeParenthesis(t.word)]">[${termCount}]</g:link></span>
 
-                            </div>
+                                <g:if test="${t.userComment}">
+                                    <div>
+                                        <span class="termMetaInfo">${StringTools.wikipediaUrlsToLinks(t.userComment.encodeAsHTML())}</span>
+                                    </div>
+                                </g:if>
 
-                            <g:if test="${t.userComment}">
-                                <div>
-                                    <span class="termMetaInfo">${StringTools.wikipediaUrlsToLinks(t.userComment.encodeAsHTML())}</span>
-                                </div>
-                            </g:if>
+                            </div>
 
                             <g:set var="previousLanguage" value="${t.language}"/>
 
