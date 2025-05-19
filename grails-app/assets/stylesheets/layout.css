@@ -878,7 +878,8 @@ ol li {
   }
 
   #search .mobileClaim {
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: 16px;
   }
 
   .rightColumn {
