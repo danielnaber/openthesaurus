@@ -275,10 +275,10 @@
 
                                         <g:if test="${editable}">
                                           <a href="#" onclick="deleteItem('catLinkId', '${catLink.id}');return false;"><img 
-                                            align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
+                                            align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.category')}"/></a>
                                         </g:if>
                                         <g:else>
-                                          <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                          <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
                                         </g:else>
 
                                         ${catLink.category}

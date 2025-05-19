@@ -191,10 +191,10 @@
                                         <g:if test="${editable}">
                                             <input type="hidden" id="deleteExistingTermLink_Antonym_${termLinkInfo.id}" name="deleteExistingTermLink_Antonym_${termLinkInfo.id}" value=""/>
                                             <a href="#" onclick="deleteItem('Antonym', '${termLinkInfo.id}');return false;"><img
-                                                    align="top" src="${resource(dir:'images',file:'delete2.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
+                                                    align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete.link')}"/></a>
                                         </g:if>
                                         <g:else>
-                                            <img align="top" src="${resource(dir:'images',file:'delete2_inactive.png')}" alt="delete icon"/>
+                                            <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
                                         </g:else>
                                         <g:link controller="term" action="edit"
                                                 id="${termLinkInfo.getTerm2().id}">${termLinkInfo.getTerm2()}</g:link>
