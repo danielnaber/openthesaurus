@@ -57,9 +57,7 @@
         </g:form>
         
         <script type="text/javascript">
-        <!--
             document.loginform.userId.focus();
-        // -->
         </script>
         
     </body>

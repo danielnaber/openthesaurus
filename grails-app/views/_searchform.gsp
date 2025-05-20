@@ -51,7 +51,6 @@
 
 <g:if test="${preventSearchFocus != 'true'}">
     <script type="text/javascript">
-    <!--
     $( document ).ready(function() {
         var touchOS = ('ontouchstart' in document.documentElement) ? true : false;
         if (!touchOS && window.location.hash !== "#history") {
@@ -59,6 +58,5 @@
           document.searchform.q.select();
         }
     });
-    // -->
     </script>
 </g:if>

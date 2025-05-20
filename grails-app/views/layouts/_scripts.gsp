@@ -143,20 +143,23 @@
     }
 
     function toggle(divName) {
-        if (document.getElementById(divName).style.display == 'block') {
-            document.getElementById(divName).style.display = 'none';
+        var $div = $('#' + divName);
+        if ($div.css('display') === 'block') {
+            $div.css('display', 'none');
         } else {
-            document.getElementById(divName).style.display = 'block';
+            $div.css('display', 'block');
         }
     }
 
     function loadSynsetSearch() {
-        document.getElementById('spinner').style.position='absolute';
-        document.getElementById('spinner').style.visibility='visible';
+        $('#spinner').css({
+            position: 'absolute',
+            visibility: 'visible'
+        });
     }
 
     function loadedSynsetSearch() {
-        document.getElementById('spinner').style.visibility='hidden';
+        $('#spinner').css('visibility', 'hidden');
     }
 
     function setUpHandlers() {
