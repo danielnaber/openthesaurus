@@ -15,7 +15,10 @@
         var isWebkit = bodyDiv.css('-webkit-transform');
         var isMs = false;  // not yet enabled, layout problems with the skew
         var hasTransformEnabled = isMozilla || isWebkit || isMs;
-        if ((event.keyCode == 45/*Insert*/ || event.keyCode == 65/*A*/ || event.keyCode == 67/*C*/) && event.ctrlKey) {
+        if ((event.keyCode == 45/*Insert*/ ||
+             event.keyCode == 65/*A*/ ||
+             event.keyCode == 67/*C*/
+            ) && event.ctrlKey) {
             // opening the popup makes no sense for these key combinations
             return;
         }
@@ -34,6 +37,7 @@
                 case 35:   // End
                 case 36:   // Pos1
                 case 116:  // F5
+                case 122:  // F12
                     return;
             }
             clearInterval(onChangeInterval);
@@ -67,7 +71,10 @@
     function onSynsetSearchValueChangeInternal(searchString, changeHistory) {
         clearInterval(onChangeInterval);
         currentValue = searchString;
-        if (searchString === '' || searchString.length < minChars) {
+        if (searchString.length < minChars) {
+            return;
+        }
+        if (searchString === '') {
             $('#defaultSpace').show();
             $('#searchSpace').hide();
         } else {
