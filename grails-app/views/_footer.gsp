@@ -27,11 +27,9 @@
                   <tr>
                       <td>
                           <script type="text/javascript">
-                              <!--
                               var firstPart = "<g:message code="footer.email.beforeAt"/>";
                               var lastPart = "<g:message code="footer.email.afterAt"/>";
                               document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'><img class=\"socialMediaIcon\" src=\"${createLinkTo(dir:'images',file:'icon-mail.png')}\" width=\"36\" height=\"36\" alt=\"Contact-Icon\"/><" + "/a>");
-                              // -->
                           </script>
                       </td>
                       <td>&nbsp;</td>
@@ -41,30 +39,9 @@
                   </tr>
               </table>
           </div>
-          <!--
-          <div class="iconLink">
-              <table>
-                  <tr>
-                      <td><a href="https://github.com/danielnaber/openthesaurus"><img class="socialMediaIcon" src="${createLinkTo(dir:'images',file:'icon-github.png')}" width="36" height="36" alt="Github-Icon"/></a></td>
-                      <td>&nbsp;</td>
-                      <td><g:message code="footer.github"/></td>
-                  </tr>
-              </table>
-          </div>
-          -->
 
       </div>
 
   </div>
     
-  <div class="footerColumn">
-
-      <g:render template="/ads/footer"/>
-
-      <!--<img style="width:100%;height:2px;margin-bottom:20px" src="${createLinkTo(dir:'images',file:'hr.png')}" alt="Separator"/>-->
-
-      <g:render template="/ads/footer2"/>
-      
-  </div>
-
 </div>
