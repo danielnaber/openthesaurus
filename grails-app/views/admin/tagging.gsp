@@ -7,8 +7,6 @@
 </head>
 <body>
 
-<hr/>
-
 <h2>Tag Words</h2>
 
 <g:if test="${flash.message}">

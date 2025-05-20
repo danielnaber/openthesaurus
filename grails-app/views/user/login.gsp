@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <hr/>
-
         <h2><g:message code="user.login.headline"/></h2>
 
         <g:if test="${flash.message}">

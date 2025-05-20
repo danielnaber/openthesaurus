@@ -24,8 +24,12 @@
         <g:render template="/searchform" model="${[homepage: false]}"/>
 
         <g:render template="/loggedin"/>
-        
-        <g:layoutBody />
+
+        <hr style="margin-bottom:16px"/>
+
+        <div id="searchSpace">
+          <g:layoutBody />
+        </div>
 
       </div>
 

@@ -8,8 +8,6 @@
     </head>
     <body>
 
-          <hr />
-
           <h2><g:message code="substring.headline" args="${[totalMatches, params.q]}"/></h2>
 
           <g:if test="${flash.message}">

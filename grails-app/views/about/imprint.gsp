@@ -8,8 +8,6 @@
     </head>
     <body>
 
-            <hr />
-
             <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
                     
                 <h2><g:message code="imprint.title" /></h2>

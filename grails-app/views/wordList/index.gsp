@@ -7,8 +7,6 @@
     </head>
     <body>
 
-            <hr />
-
             <h2><g:message code="wordlists.head" /></h2>
 
             <div style="float:left;margin-right: 35px">

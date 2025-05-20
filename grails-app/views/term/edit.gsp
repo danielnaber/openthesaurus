@@ -15,7 +15,6 @@
             </g:else>
         </g:each>
         <script type="text/javascript">
-        <!--
 
             $( document ).ready(function() {
                 updateRemainingChars();
@@ -64,14 +63,11 @@
 
             <g:render template="/synset/completion"/>
 
-        // -->
         </script>
     </head>
     <body>
 
         <div class="body">
-        
-            <hr />
         
             <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()]}"/></h1>
     

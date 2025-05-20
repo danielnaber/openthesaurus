@@ -9,8 +9,6 @@
     </head>
     <body>
 
-        <hr />
-
           <h1 style="margin-left: 4px"><g:message code="statistics.headline" /></h1>
     
 

@@ -13,7 +13,6 @@
         </div>
         <div class="body">
 
-            <hr/>
             <h2>TermLevel List</h2>
 
             <g:if test="${flash.message}">

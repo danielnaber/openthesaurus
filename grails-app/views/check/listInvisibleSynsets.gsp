@@ -9,8 +9,6 @@
 
         <div class="body">
             
-            <hr/>
-        
             <h2>Check for invisible concepts (${totalMatches} matches)</h2>
 
             <div class="warning">Please note that this page displays invisible concepts that

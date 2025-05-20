@@ -6,8 +6,6 @@
 </head>
 <body>
 
-<hr/>
-
 <h2>Audio Import</h2>
 
 <g:form action="importAudio" method="post" onsubmit="return confirm('Really import this, deleting ALL existing audio data?')">

@@ -6,8 +6,6 @@
     </head>
     <body>
 
-        <hr/>
-          
         <h2>Admin Page</h2>
 
         <g:if test="${flash.message}">

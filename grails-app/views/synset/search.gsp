@@ -13,8 +13,6 @@
     </head>
     <body>
 
-    <hr style="margin-top:7px;margin-bottom:16px" class="desktopOnly"/>
-
     <div id="searchSpace">
 
         <div class="resultColumn" style="margin-right:37px">

@@ -28,6 +28,3 @@
         <a href="${link}"><img src="/assets/external/${imgMobile}" alt="${altText}" /></a>
     </div>
 </g:if>
-<g:else>
-    <div style="height:100px">&nbsp;</div>
-</g:else>

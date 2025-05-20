@@ -7,8 +7,6 @@
     </head>
     <body>
 
-        <hr />
-
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
             <h2>JSON/JSONP Beispiel</h2>

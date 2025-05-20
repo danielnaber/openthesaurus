@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <hr />
-
         <h2><g:message code="user.register.headline"/></h2>
 
         <p><g:message code="user.register.intro"/></p>

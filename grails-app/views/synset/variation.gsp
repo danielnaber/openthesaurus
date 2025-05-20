@@ -6,8 +6,6 @@
         <title>${title}</title>
     </head>
     <body>
-
-          <hr />
     
           <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 

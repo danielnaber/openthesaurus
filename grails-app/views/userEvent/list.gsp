@@ -10,8 +10,6 @@
     </head>
     <body>
 
-        <hr />
-
           <h2><g:message code="changelist.headline"/></h2>
 
           <g:if test="${flash.message}">

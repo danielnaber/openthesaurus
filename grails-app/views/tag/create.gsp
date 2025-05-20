@@ -11,8 +11,6 @@
 			<span class="menuButton"><g:link class="create" action="detailList">All tags</g:link></span>
 		</div>
 
-		<hr/>
-
 		<h2>Create Tag</h2>
 
 		<div id="create-tag" class="content scaffold-create" role="main">

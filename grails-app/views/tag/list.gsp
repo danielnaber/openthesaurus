@@ -9,8 +9,6 @@
 	<body>
 	<div class="body">
 
-		<hr/>
-
 		<p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
 		<h2><g:message code="tag.headline"/></h2>
