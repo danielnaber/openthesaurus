@@ -27,8 +27,6 @@ class HomeController {
         [withAd: true]
     }
 
-    def index2() {}
-
     /*def adstxt() {
         def resource = this.class.classLoader.getResource('ads.txt')
         def lines = Files.lines(new File(resource.file).toPath()).collect(Collectors.toList())

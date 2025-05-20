@@ -27,7 +27,6 @@
     <div style="margin-top:60px; text-align: center" id="mobileAd">
         <a href="${link}"><img src="/assets/external/${imgMobile}" alt="${altText}" /></a>
     </div>
-    <div style="height:60px">&nbsp;</div>
 </g:if>
 <g:else>
     <div style="height:100px">&nbsp;</div>

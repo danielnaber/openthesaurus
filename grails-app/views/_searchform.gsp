@@ -5,16 +5,9 @@
   <%-- move the logo/search block a bit to the left, looks like as if it is better centered: --%>
   <div style="margin-right: 30px;">
     
-  <g:if test="${homepage}">
-    <div class="logo"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></div>
-  </g:if>
-  <g:else>
-    <div class="logo"><a href="/"><img
-        src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
-        alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
-  </g:else>
+  <div class="logo"><a href="/"><img
+      src="${createLinkTo(dir:'images',file:message(code:'logo'))}"
+      alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
 
   <p class="claim"><g:message code="homepage.claim"/></p>
   <p class="mobileClaim"><a href="/"><g:message code="homepage.claim.mobile"/></a></p>
@@ -38,16 +31,6 @@
     </g:else>
     /><input class="searchSubmitButton" type="image" title="${message(code:'homepage.search.button.title')}" src="${createLinkTo(dir:'images',file:'search-submit.png')}" />
 
-<!--
-    <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
-    </g:if>
-    <g:else>
-      <div class="desktopOnly">
-        <a style="font-weight: normal" href="/home/index2">Neue Suche testen</a>
-      </div>
-    </g:else>
--->
-
     <%--
     <g:if test="${request.forwardURI == "/"}">
         <br>
@@ -64,21 +47,6 @@
   </div>
     
 </div>
-
-<g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
-  <div style="text-align: center">
-    Diese neue Suche öffnet beim Tippen kein Pop-up mit einer Vorschau, sondern<br>
-    direkt das Suchergebnis.
-    <script type="text/javascript">
-        <!--
-        var firstPart = "<g:message code="footer.email.beforeAt"/>";
-        var lastPart = "<g:message code="footer.email.afterAt"/>";
-        document.write("<a href='mail" + "to:" + firstPart + "@" + lastPart + "'>Schreibt uns,<" + "/a>");
-        // -->
-    </script>
-    wie Euch diese Suche gefällt! (<a href="/">alte Suche</a>)
-  </div>
-</g:if>
 
 
 <g:if test="${preventSearchFocus != 'true'}">

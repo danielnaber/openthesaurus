@@ -4,20 +4,20 @@
 <head>
     <title><g:message code="homepage.title"/></title>
     <meta name="layout" content="homepage" />
-    <g:if test="${withAd}">
-    </g:if>
 </head>
 <body>
 
-<hr/>
+<hr style="margin-bottom:16px"/>
 
 <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
 </g:if>
 
-<g:if test="${!params.test}">
+<div style="min-height:250px; margin:0 auto">
     <g:render template="/home/ads"/>
-</g:if>
+    <div id="searchSpace"></div>
+</div>
+
 
 </body>
 </html>

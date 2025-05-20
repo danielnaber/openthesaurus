@@ -4,7 +4,7 @@
     <g:each in="${synsetList}" status="i" var="synset">
         <!--REALMATCHES-->
 
-        <div style="margin-bottom: 10px;margin-top:16px">
+        <div style="margin-bottom: 10px">
 
             <g:set var="categoryStrings" value="${[]}"/>
             <g:if test="${synset.categoryLinks && synset.categoryLinks.size() > 0}">

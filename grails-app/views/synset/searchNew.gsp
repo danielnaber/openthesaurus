@@ -14,9 +14,11 @@
 
         <hr style="margin-top:20px" />
 
-        <h2><g:message code='result.matches.no.like' /></h2>
+        <div class="desktopOnly">
+            <h2><g:message code='result.matches.no.like' /></h2>
 
-        <g:render template="addterm" model="${[term:cleanTerm]}" />
+            <g:render template="addterm" model="${[term:cleanTerm]}" />
+        </div>
 
     </div>
 
@@ -58,9 +60,7 @@
             </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
 
-        <g:if test="${!session.user}">
-            <div style="height:280px"></div>
-        </g:if>
+        <g:render template="/synset/ad"/>
                 
         <g:render template="wiktionary"/>
 
@@ -73,6 +73,7 @@
         <hr style="margin-top:20px" />
 
         <g:render template="/external_links" model="${[q:params.q]}"/>
+
     </div>
     
     <div style="clear: both"></div>

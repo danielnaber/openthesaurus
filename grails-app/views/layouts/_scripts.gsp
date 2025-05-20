@@ -1,22 +1,10 @@
 <script type="text/javascript">
-    <!--
+
     var onChangeInterval = null;
     var deferRequestMillis = 200;
     var minChars = 2;
     var currentValue = null;
-
-    $(document).keyup(function(e) {
-        if (e.keyCode == 27) {  // Escape key
-            closePopup();
-        }
-    });
-
-    function closePopup() {
-        var searchResultAreaDiv = $('#searchResultArea');
-        searchResultAreaDiv.hide();
-        $('#body').css({backgroundColor: '#F7F7F7'});
-        searchResultAreaDiv.html("");
-    }
+    var openTooltip;
 
     function doSearchOnKeyUp(event) {
         // also see layout.css - if the transform is not applied (it's not in Opera because
@@ -59,157 +47,93 @@
     var runningRequests = 0;
     var lastUpdateTimeStamp = 0;
     var isRealResultPage = true;
-    //var resultPagePrefix = "/openthesaurus";   // local testing
     var resultPagePrefix = "";
     var firstSearch = true;
 
-    <g:if test="${request.forwardURI.toLowerCase().endsWith('/index2')}">
-
-        if (window.history && window.history.pushState) {
-            window.onpopstate = function(event) {
-                if (event.state && event.state.q) {
-                    onSynsetSearchValueChangeInternal(event.state.q, false);
-                } else {
-                    onSynsetSearchValueChangeInternal("", false);
-                }
-            };
-        }
-
-        function onSynsetSearchValueChange() {
-            onSynsetSearchValueChangeInternal(document.searchform.q.value, true);
-        }
-
-        function onSynsetSearchValueChangeInternal(searchString, changeHistory) {
-            clearInterval(onChangeInterval);
-            currentValue = searchString;
-            if (searchString === '' || searchString.length < minChars) {
-                $('#defaultSpace').show();
-                $('#searchSpace').hide();
+    if (window.history && window.history.pushState) {
+        window.onpopstate = function(event) {
+            if (event.state && event.state.q) {
+                onSynsetSearchValueChangeInternal(event.state.q, false);
             } else {
-                $('#defaultSpace').hide();
-                $('#searchSpace').show();
-                cursorPosition = -1;
-                var timeStamp = new Date().getTime();
-                loadSynsetSearch();
-                runningRequests++;
-                var stateObj = {q: searchString};
-                new jQuery.ajax(
-                    '/synset/newSearch',
-                    {
-                        method: 'get',
-                        asynchronous: true,
-                        data: {
-                            q: searchString,
-                            withAd: false
-                        }
+                onSynsetSearchValueChangeInternal("", false);
+            }
+        };
+    }
+
+    function onSynsetSearchValueChange() {
+        onSynsetSearchValueChangeInternal(document.searchform.q.value, true);
+    }
+
+    function onSynsetSearchValueChangeInternal(searchString, changeHistory) {
+        clearInterval(onChangeInterval);
+        currentValue = searchString;
+        if (searchString === '' || searchString.length < minChars) {
+            $('#defaultSpace').show();
+            $('#searchSpace').hide();
+        } else {
+            $('#defaultSpace').hide();
+            $('#searchSpace').show();
+            cursorPosition = -1;
+            var timeStamp = new Date().getTime();
+            loadSynsetSearch();
+            runningRequests++;
+            var stateObj = {q: searchString};
+            new jQuery.ajax(
+                '/synset/newSearch',
+                {
+                    method: 'get',
+                    asynchronous: true,
+                    data: {
+                        q: searchString,
+                        withAd: false
                     }
-                ).done(function (msg) {
-                        if (timeStamp < lastUpdateTimeStamp) {
-                            //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
-                        } else {
-                            //console.log("DONE: " + firstSearch);
-                            $('#searchSpace').html(msg);
-                            if (firstSearch) {
-                                //$('#moreSpace').html(". . . . my ad test .. .. ");
-                            }
-                            lastUpdateTimeStamp = timeStamp;
-                        }
-                        if (changeHistory) {
-                            if (isRealResultPage) {
-                                // 'back' button will go back to this state
-                                history.pushState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
-                            } else {
-                                history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                }
+            ).done(function (msg) {
+                    if (timeStamp < lastUpdateTimeStamp) {
+                        //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
+                    } else {
+                        $('#searchSpace').html(msg);
+                        setUpHandlers();
+                        if (firstSearch) {
+                            if ($('#desktopAd')) {
+                                $('#desktopAd').css('display', 'none');
                             }
                         }
-                        if (msg.indexOf("--REALMATCHES--") !== -1) {
-                            isRealResultPage = true;
-                        } else {
-                            isRealResultPage = false;
-                        }
+                        lastUpdateTimeStamp = timeStamp;
                     }
-                ).fail(function (jqXHR, textStatus, errorThrown) {
-                        $('#searchSpace').html(jqXHR.responseText);
-                        if (changeHistory) {
+                    if (changeHistory) {
+                        if (isRealResultPage) {
+                            // 'back' button will go back to this state
+                            history.pushState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                        } else {
                             history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
                         }
                     }
-                ).always(function (e) {
-                    if (runningRequests > 0) {
-                        runningRequests--;
+                    if (msg.indexOf("--REALMATCHES--") !== -1) {
+                        isRealResultPage = true;
+                    } else {
+                        isRealResultPage = false;
                     }
-                    if (runningRequests <= 0) {
-                        loadedSynsetSearch();
-                    }
-                    if (firstSearch) {
-                        firstSearch = false;
-                    }
-                });
-            }
-        }
-
-    </g:if>
-    <g:else>
-
-        function onSynsetSearchValueChange() {
-            clearInterval(onChangeInterval);
-            var searchString = document.searchform.q.value;
-            currentValue = searchString;
-            if (searchString === '' || searchString.length < minChars) {
-                var searchResultAreaDiv = $('#searchResultArea');
-                searchResultAreaDiv.hide();
-                $('#body').css({backgroundColor: '#F7F7F7'});
-                searchResultAreaDiv.html("");
-            } else {
-                try {
-                    if (!$('#searchResultArea').is(':visible')) {
-                        if (window.location.pathname === '/') {
-                            plausible('popup opened on homepage');
-                        } else {
-                            plausible('popup opened on result page');
-                        }
-                    }
-                } catch (e) {
-                    // ignore, it's tracking only
                 }
-                $('#searchResultArea').show();
-                $('#body').css({backgroundColor: '#e6e6e6'});
-                cursorPosition = -1;
-                var timeStamp = new Date().getTime();
-                loadSynsetSearch();
-                runningRequests++;
-                new jQuery.ajax(
-                    '/ajaxSearch/ajaxMainSearch',
-                    {
-                        method: 'get',
-                        asynchronous: true,
-                        data:{
-                            q: searchString
-                        }
+            ).fail(function (jqXHR, textStatus, errorThrown) {
+                    $('#searchSpace').html(jqXHR.responseText);
+                    if (changeHistory) {
+                        history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
                     }
-                ).done(function(msg){
-                        if (timeStamp < lastUpdateTimeStamp) {
-                            //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
-                        } else {
-                            $('#searchResultArea').html(msg);
-                            lastUpdateTimeStamp = timeStamp;
-                        }
-                    }
-                ).fail(function(jqXHR, textStatus, errorThrown){
-                        $('#searchResultArea').html(jqXHR.responseText);
-                    }
-                ).always(function(e){
-                    if (runningRequests > 0) {
-                        runningRequests--;
-                    }
-                    if (runningRequests <= 0) {
-                        loadedSynsetSearch();
-                    }
-                });
-            }
+                }
+            ).always(function (e) {
+                if (runningRequests > 0) {
+                    runningRequests--;
+                }
+                if (runningRequests <= 0) {
+                    loadedSynsetSearch();
+                }
+                if (firstSearch) {
+                    firstSearch = false;
+                }
+            });
         }
-
-    </g:else>
+    }
 
     function toggle(divName) {
         if (document.getElementById(divName).style.display == 'block') {
@@ -228,31 +152,11 @@
         document.getElementById('spinner').style.visibility='hidden';
     }
 
-    $(document).ready(function() {
-
+    function setUpHandlers() {
         var markers = $('.antonymMarker, .commentMarker');
-        var openTooltip;
         markers.each(function(){
             $(this).data('title', $(this).attr('title'));
             $(this).removeAttr('title');
-        });
-
-        // when user clicks somewhere else, remove the tooltip:
-        $(document).click(function(e) {
-            if (openTooltip && !$(e.target).is('.tooltip') && !$(e.target).is('.antonymMarker') && !$(e.target).is('.commentMarker')) {
-                openTooltip.next('.tooltip').remove();
-                openTooltip = null;
-            }
-        });
-
-        // also remove the tooltip when user presses ESC:
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) {  // Escape key
-                if (openTooltip) {
-                    openTooltip.next('.tooltip').remove();
-                    openTooltip = null;
-                }
-            }
         });
 
         /*var hoverStart = 0;
@@ -298,19 +202,30 @@
             plausible('comment icon clicked');
             return false;
         });
+    }
+
+    $(document).ready(function() {
+
+        setUpHandlers();
+
+        // when user clicks somewhere else, remove the tooltip:
+        $(document).click(function(e) {
+            if (openTooltip && !$(e.target).is('.tooltip') && !$(e.target).is('.antonymMarker') && !$(e.target).is('.commentMarker')) {
+                openTooltip.next('.tooltip').remove();
+                openTooltip = null;
+            }
+        });
+
+        // also remove the tooltip when user presses ESC:
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {  // Escape key
+                if (openTooltip) {
+                    openTooltip.next('.tooltip').remove();
+                    openTooltip = null;
+                }
+            }
+        });
 
     });
 
-    var lastErrorLogToServer = null;
-    window.onerror = function (msg, url, line) {
-        // don't report more than once a minute:
-        if (lastErrorLogToServer && new Date() - lastErrorLogToServer < 1000 * 60) {
-            return;
-        }
-        var message = "Error in " + url + " on line " + line + ": " + msg;
-        //$.post("/about/logMessage", { "msg": message });
-        lastErrorLogToServer = new Date();
-    };
-
-// -->
 </script>
