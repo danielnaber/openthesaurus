@@ -65,9 +65,6 @@ class AboutController extends BaseController {
     def newsarchive() {
     }
 
-    def werbung() {
-    }
-
     def logMessage() {
         log.info("client message: " + params.msg + " - " + request.getHeader("User-Agent"))
         render("OK")
