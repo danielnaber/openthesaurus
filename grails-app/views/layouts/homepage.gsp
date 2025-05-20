@@ -25,15 +25,7 @@
         <div id="content">
     
             <g:render template="/searchform" model="${[homepage: true]}"/>
-    
-            <g:if test="${session.user}">
-                <noscript>
-                    <div class="nojs">
-                        <g:message code='no.javascript.warning'/>
-                    </div>
-                </noscript>
-            </g:if>
-    
+        
             <g:render template="/loggedin"/>
     
             <g:layoutBody />
