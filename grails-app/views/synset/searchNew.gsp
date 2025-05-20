@@ -55,9 +55,6 @@
                 <hr style="margin-top:20px" />
                 </div>
             </g:if>
-            <g:else>
-                <g:render template="/ads/resultpage_results2"/>
-            </g:else>
         <%-- end of part that's specific to German OpenThesaurus --%>
 
         <g:render template="/synset/ad"/>
@@ -67,8 +64,6 @@
         <hr style="margin-top:20px" />
 
         <g:render template="wikipedia"/>
-
-        <g:render template="/ads/resultpage_results"/>
 
         <hr style="margin-top:20px" />
 

@@ -109,8 +109,6 @@
                 </div>
             </div>
     
-            <g:render template="/ads/faq_bottom"/>
-
     </g:if>
     <g:else>
         

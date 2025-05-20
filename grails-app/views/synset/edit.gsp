@@ -478,7 +478,5 @@
             </div> <!-- end: invisibleSynset -->
         </g:if>
 
-        <g:render template="/ads/edit_bottom"/>
-
     </body>
 </html>

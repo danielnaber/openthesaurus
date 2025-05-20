@@ -395,8 +395,6 @@
         </tr>
         </table>
         
-        <g:render template="/ads/newsarchive_bottom"/>
-
     </g:if>
     <g:else>
 

@@ -93,8 +93,6 @@
                 <g:set var="editable" value="${true}"/>
             </g:else>
 
-            <div style="float:right"><g:render template="/ads/termedit_right"/></div>
-			 
             <g:form controller="term" method="post" name="editForm">
                 <input type="hidden" name="id" value="${id}" />
                 <div class="dialog">

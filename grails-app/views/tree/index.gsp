@@ -49,11 +49,8 @@
                   </ul>
 
               </td>
-              <td><g:render template="/ads/tree_right"/></td>
           </tr>
           </table>
-
-          <g:render template="/ads/tree_bottom"/>
 
     </body>
 </html>

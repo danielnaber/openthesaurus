@@ -134,7 +134,5 @@
 
           <div style="clear: both"></div>
 
-    <g:render template="/ads/statistics_bottom"/>
-        
     </body>
 </html>
