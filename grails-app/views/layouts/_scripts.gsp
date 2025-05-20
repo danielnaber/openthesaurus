@@ -161,7 +161,7 @@
                 $('#body').css({backgroundColor: '#F7F7F7'});
                 searchResultAreaDiv.html("");
             } else {
-                try {
+                /*try {
                     if (!$('#searchResultArea').is(':visible')) {
                         if (window.location.pathname === '/') {
                             plausible('popup opened on homepage');
@@ -171,7 +171,7 @@
                     }
                 } catch (e) {
                     // ignore, it's tracking only
-                }
+                }*/
                 $('#searchResultArea').show();
                 $('#body').css({backgroundColor: '#e6e6e6'});
                 cursorPosition = -1;
