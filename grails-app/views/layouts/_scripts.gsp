@@ -51,7 +51,6 @@
     var runningRequests = 0;
     var lastUpdateTimeStamp = 0;
     var isRealResultPage = true;
-    var resultPagePrefix = "";
     var firstSearch = true;
 
     if (window.history && window.history.pushState) {
@@ -99,22 +98,23 @@
                     if (timeStamp < lastUpdateTimeStamp) {
                         //console.warn("Ignoring outdated update: " + timeStamp + " < " + lastUpdateTimeStamp);
                     } else {
-                        $('#searchSpace').html(msg);
-                        setUpHandlers();
                         if (firstSearch) {
+                            sessionStorage.setItem("lastNonSPA", window.location.href);
                             if ($('#desktopAd')) {
                                 $('#desktopAd').css('display', 'none');
                             }
                         }
-                        lastUpdateTimeStamp = timeStamp;
-                    }
-                    if (changeHistory) {
-                        if (isRealResultPage) {
-                            // 'back' button will go back to this state
-                            history.pushState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
-                        } else {
-                            history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                        $('#searchSpace').html(msg);
+                        if (changeHistory) {
+                            if (isRealResultPage) {
+                                // 'back' button will go back to this state
+                                history.pushState(stateObj, "", "/synonyme/" + searchString);
+                            } else {
+                                history.replaceState(stateObj, "", "/synonyme/" + searchString);
+                            }
                         }
+                        setUpHandlers();
+                        lastUpdateTimeStamp = timeStamp;
                     }
                     if (msg.indexOf("--REALMATCHES--") !== -1) {
                         isRealResultPage = true;
@@ -125,7 +125,7 @@
             ).fail(function (jqXHR, textStatus, errorThrown) {
                     $('#searchSpace').html(jqXHR.responseText);
                     if (changeHistory) {
-                        history.replaceState(stateObj, "", resultPagePrefix + "/synonyme/" + searchString);
+                        history.replaceState(stateObj, "", "/synonyme/" + searchString);
                     }
                 }
             ).always(function (e) {
@@ -141,6 +141,16 @@
             });
         }
     }
+
+    // Handle forward/back buttons:
+    window.addEventListener("popstate", (event) => {
+        if (!event.state) {
+            const lastNonSPA = sessionStorage.getItem("lastNonSPA");
+            if (lastNonSPA) {
+                window.location.href = lastNonSPA;
+            }
+        }
+    });
 
     function toggle(divName) {
         var $div = $('#' + divName);
