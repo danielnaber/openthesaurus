@@ -15,9 +15,6 @@
     </head>
     <body>
 
-    <div id="searchResultArea" class="searchResultPopup" style="display: none">
-    </div>
-
     <g:render template="/navigation"/>
 
     <div id="body">

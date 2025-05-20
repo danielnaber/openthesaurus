@@ -676,44 +676,6 @@ strong {
   filter: brightness(80%);
 }
 
-.searchResultPopup {
-  position: absolute;
-  padding: 10px;
-  display: block;
-  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  background-color: white;
-  width: 90%;
-  max-width: 760px;
-  min-height: 100px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  /* centers the div, http://stackoverflow.com/questions/16758102/ */
-  top: 230px;
-  z-index: 100;
-}
-
-#popupCloseButton:hover {
-  opacity: 0.5;
-  float: right;
-  margin-left: 10px;
-}
-
-#popupCloseButton {
-  opacity: 0.25;
-  float: right;
-  margin-left: 10px;
-}
-
-.searchResultPopup hr {
-  color: #ffffff;
-  background-color: #ffffff;
-  border-top: solid 1px #cccccc;
-  border-bottom: solid 1px #ffffff;
-}
-
 .resultColumn {
   width: 420px;
   float: left;
@@ -851,13 +813,6 @@ ol li {
 
   #search input[type='text'] {
     margin-left: 5px;
-  }
-
-  .searchResultPopup {
-    top: 120px;
-    font-size: 18px;
-    padding: 10px;
-    width: 95%;
   }
 
   .resultColumn {
