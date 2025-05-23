@@ -24,83 +24,83 @@
 
             <div class="result">
                 <div class="mainResult">
-                <g:set var="counter" value="${0}"/>
-                <g:each in="${synset?.sortedTerms()}" var="term">
-                    <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
-                    <g:set var="infos" value="${[]}"/>
-                    <g:if test="${term.level}">
-                        <%
-                        infos.add("<span title='${term.level.levelName}'>" + term.level?.shortLevelName.encodeAsHTML() + "</span>");
-                        %>
-                    </g:if>
-                    <g:if test="${term.tags}">
-                        <g:each in="${term.tags.sort()}" var="tag">
+                    <g:set var="counter" value="${0}"/>
+                    <g:each in="${synset?.sortedTerms()}" var="term">
+                        <g:set var="displayTerm" value="${term.toString().encodeAsHTML()}"/>
+                        <g:set var="infos" value="${[]}"/>
+                        <g:if test="${term.level}">
                             <%
-                            if (!tag.isInternal() || session.user) {
-                                String title = tag.name;
-                                if (tag.isInternal()) {
-                                    title = message(code:'tag.internal.tooltip');
-                                }
-                                infos.add("<span title='${title}'>${tag.shortName ? tag.shortName : tag.name}</span>");
-                            }
+                            infos.add("<span title='${term.level.levelName}'>" + term.level?.shortLevelName.encodeAsHTML() + "</span>");
                             %>
-                        </g:each>
-                    </g:if>
-                    <g:if test="${infos.size() > 0}">
-                        <%
-                        displayTerm = "${displayTerm} <span class='wordLevel'>(${infos.join(', ')})</span>";
-                        %>
-                    </g:if>
-
-                    <g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
-                        <g:set var="delim" />
-                    </g:if>
-                    <g:else>
-                        <g:set var="delim"><span class="d">&middot;</span></g:set>
-                    </g:else>
-
-                    <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
-                    <g:set var="lowercaseNormTerm" value="${term.normalizedWord?.toLowerCase()}"/>
-                    <g:set var="lowercaseNormTerm2" value="${term.normalizedWord2?.toLowerCase()}"/>
-                    <g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
-                    <%-- keep in sync with SearchService.groovy: --%>
-                    <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
-
-                    <g:set var="commentInfo" value=""/>
-                    <g:if test="${term.userComment}">
-                        <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon16.png')}"></span></g:set>
-                    </g:if>
-                    <%
-                        long antonymTime = System.currentTimeMillis();
-                    %>
-                    <g:set var="antonymInfo" value=""/>
-                    <g:set var="antonymTitle" value=""/>
-                    <g:set var="termLinkInfos" value="${term.termLinkInfos()}"/>
-                    <g:if test="${termLinkInfos.size() > 0}">
-                        <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
-                        <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
-                            <g:set var="antonymTitle"><g:message code="edit.term.antonym"/>: <a href='/synonyme/edit/${termLinkInfo.term2.synset.id}'>${termLinkInfo.term2.word}</a></g:set>
-                            <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><img src="${createLinkTo(dir:'images', file:'lightning16.png')}"/></span></g:set>
                         </g:if>
-                    </g:if>
-                    <%
-                        long antonymTotalTime = System.currentTimeMillis() - antonymTime;
-                    %>
-                    <!-- time for antonyms: ${antonymTotalTime}ms -->
+                        <g:if test="${term.tags}">
+                            <g:each in="${term.tags.sort()}" var="tag">
+                                <%
+                                if (!tag.isInternal() || session.user) {
+                                    String title = tag.name;
+                                    if (tag.isInternal()) {
+                                        title = message(code:'tag.internal.tooltip');
+                                    }
+                                    infos.add("<span title='${title}'>${tag.shortName ? tag.shortName : tag.name}</span>");
+                                }
+                                %>
+                            </g:each>
+                        </g:if>
+                        <g:if test="${infos.size() > 0}">
+                            <%
+                            displayTerm = "${displayTerm} <span class='wordLevel'>(${infos.join(', ')})</span>";
+                            %>
+                        </g:if>
 
-                    <span>
-                        <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
-                                lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
-                            <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
+                        <g:if test="${counter == synset?.sortedTerms()?.size() - 1}">
+                            <g:set var="delim" />
                         </g:if>
                         <g:else>
-                            <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
-                            >${displayTerm}</g:link>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
+                            <g:set var="delim"><span class="d">&middot;</span></g:set>
                         </g:else>
-                    </span>
 
-                    <g:set var="counter" value="${counter + 1}"/>
-                </g:each>
+                        <g:set var="lowercaseTerm" value="${term.toString().toLowerCase()}"/>
+                        <g:set var="lowercaseNormTerm" value="${term.normalizedWord?.toLowerCase()}"/>
+                        <g:set var="lowercaseNormTerm2" value="${term.normalizedWord2?.toLowerCase()}"/>
+                        <g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
+                        <%-- keep in sync with SearchService.groovy: --%>
+                        <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
+
+                        <g:set var="commentInfo" value=""/>
+                        <g:if test="${term.userComment}">
+                            <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon16.png')}"></span></g:set>
+                        </g:if>
+                        <%
+                            long antonymTime = System.currentTimeMillis();
+                        %>
+                        <g:set var="antonymInfo" value=""/>
+                        <g:set var="antonymTitle" value=""/>
+                        <g:set var="termLinkInfos" value="${term.termLinkInfos()}"/>
+                        <g:if test="${termLinkInfos.size() > 0}">
+                            <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
+                            <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
+                                <g:set var="antonymTitle"><g:message code="edit.term.antonym"/>: <a href='/synonyme/edit/${termLinkInfo.term2.synset.id}'>${termLinkInfo.term2.word}</a></g:set>
+                                <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><img src="${createLinkTo(dir:'images', file:'lightning16.png')}"/></span></g:set>
+                            </g:if>
+                        </g:if>
+                        <%
+                            long antonymTotalTime = System.currentTimeMillis() - antonymTime;
+                        %>
+                        <!-- time for antonyms: ${antonymTotalTime}ms -->
+
+                        <span>
+                            <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
+                                    lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
+                                <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
+                            </g:if>
+                            <g:else>
+                                <g:link action="search" params="${['q': StringTools.slashEscape(term.toString())]}"
+                                >${displayTerm}</g:link>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
+                            </g:else>
+                        </span>
+
+                        <g:set var="counter" value="${counter + 1}"/>
+                    </g:each>
                 </div>
 
                 <g:set var="superSynsets" value="${[]}"/>
