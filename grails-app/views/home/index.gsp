@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<hr style="margin-bottom:16px"/>
+<hr style="margin-bottom:16px" class="desktopOnly"/>
 
 <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>

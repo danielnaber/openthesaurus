@@ -25,7 +25,7 @@
 
         <g:render template="/loggedin"/>
 
-        <hr style="margin-bottom:16px"/>
+        <hr style="margin-bottom:16px" class="desktopOnly"/>
 
         <div id="searchSpace">
           <g:layoutBody />

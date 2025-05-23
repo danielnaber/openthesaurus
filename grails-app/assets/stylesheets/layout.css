@@ -836,13 +836,14 @@ ol li {
   }
 
   #search input[type='text'] {
-    margin-left: 5px;
+    margin-left: 0;
+    margin-bottom: 3px;
   }
 
   .resultColumn {
     width: 100%;
     float: left;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   #body {
