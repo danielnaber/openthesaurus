@@ -761,6 +761,7 @@ ol li {
 @media (max-width: 800px) {
   body {
     font-size: 16px;
+    hyphens: auto;
   }
 
   #mainBn {
