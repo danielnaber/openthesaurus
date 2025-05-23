@@ -14,8 +14,9 @@
 </g:if>
 
 <div style="min-height:250px; margin:0 auto">
-    <g:render template="/home/ads"/>
-    <div id="searchSpace"></div>
+    <div id="searchSpace">
+        <g:render template="/home/ads"/>
+    </div>
 </div>
 
 

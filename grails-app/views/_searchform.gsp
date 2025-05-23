@@ -10,7 +10,6 @@
       alt="${message(code:'logo.alt.text')}" width="341" height="93" /></a></div>
 
   <p class="claim"><g:message code="homepage.claim"/></p>
-  <p class="mobileClaim"><a href="/"><g:message code="homepage.claim.mobile"/></a></p>
 
   <form style="position: relative" action="/synonyme" onsubmit="window.location='/synonyme/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
 
