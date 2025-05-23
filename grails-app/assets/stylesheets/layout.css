@@ -764,6 +764,10 @@ ol li {
     hyphens: auto;
   }
 
+  #navigation {
+    display: none;
+  }
+
   #mainBn {
     margin-top: 0px;
     text-align: center;
@@ -823,7 +827,7 @@ ol li {
   }
 
   #body {
-    padding: 35px 0 20px 0;
+    padding: 1px 0 20px 0;
     background-color: #F7F7F7;
     margin-bottom: 10px;
     padding-right: 20px;
