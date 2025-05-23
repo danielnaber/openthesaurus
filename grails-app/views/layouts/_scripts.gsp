@@ -79,7 +79,6 @@
         } else {
             $('#defaultSpace').hide();
             $('#searchSpace').show();
-            cursorPosition = -1;
             var timeStamp = new Date().getTime();
             loadSynsetSearch();
             runningRequests++;
@@ -100,7 +99,7 @@
                     } else {
                         if (firstSearch) {
                             sessionStorage.setItem("lastNonSPA", window.location.href);
-                            if ($('#desktopAd')) {
+                            if ($('#desktopAd').length > 0) {
                                 $('#desktopAd').css('display', 'none');
                             }
                         }
@@ -145,9 +144,13 @@
     // Handle forward/back buttons:
     window.addEventListener("popstate", (event) => {
         if (!event.state) {
-            const lastNonSPA = sessionStorage.getItem("lastNonSPA");
-            if (lastNonSPA) {
-                window.location.href = lastNonSPA;
+            try {
+                const lastNonSPA = sessionStorage.getItem("lastNonSPA");
+                if (lastNonSPA) {
+                    window.location.href = lastNonSPA;
+                }
+            } catch (e) {
+                // Storage not available
             }
         }
     });
