@@ -60,6 +60,16 @@
             } else {
                 onSynsetSearchValueChangeInternal("", false);
             }
+            if (!event.state) {
+                try {
+                    const lastNonSPA = sessionStorage.getItem("lastNonSPA");
+                    if (lastNonSPA) {
+                        window.location.href = lastNonSPA;
+                    }
+                } catch (e) {
+                    // Storage not available
+                }
+            }
         };
     }
 
@@ -140,20 +150,6 @@
             });
         }
     }
-
-    // Handle forward/back buttons:
-    window.addEventListener("popstate", (event) => {
-        if (!event.state) {
-            try {
-                const lastNonSPA = sessionStorage.getItem("lastNonSPA");
-                if (lastNonSPA) {
-                    window.location.href = lastNonSPA;
-                }
-            } catch (e) {
-                // Storage not available
-            }
-        }
-    });
 
     function toggle(divName) {
         var $div = $('#' + divName);
