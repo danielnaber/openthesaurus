@@ -81,6 +81,12 @@ h1 {
   font-weight: normal;
 }
 
+.superSubAssocLink {
+  font-weight: normal !important;
+  color: #707070 !important;
+  font-size: 14px;
+}
+
 .superordinateHead {
   text-transform: uppercase;
   font-weight: bold;
@@ -813,11 +819,10 @@ ol li {
   
   .result {
     font-size: 22px;
-    line-height: 120%;
   }
 
   .mainResult {
-    margin-bottom: 5px;
+    margin-bottom: -2px;
   }
 
   .logo {

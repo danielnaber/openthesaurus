@@ -161,6 +161,11 @@
         }
     }
 
+    function toggleAndTrack(divName, trackName) {
+        toggle(divName);
+        plausible(trackName);
+    }
+
     function loadSynsetSearch() {
         $('#spinner').css({
             position: 'absolute',
