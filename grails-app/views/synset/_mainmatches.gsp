@@ -101,6 +101,11 @@
 
                         <g:set var="counter" value="${counter + 1}"/>
                     </g:each>
+
+                    <g:link action="edit" id="${synset.id}">
+                        <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon" title="${message(code:'result.edit')}"/>
+                    </g:link>
+
                 </div>
 
                 <g:set var="superSynsets" value="${[]}"/>
@@ -187,10 +192,6 @@
                         </g:if>
                     </div>
                 </g:if>
-
-                <g:link action="edit" id="${synset.id}">
-                    <span class="changeLink"><g:message code="result.edit"/></span>
-                </g:link>
             </div>
 
         </div>

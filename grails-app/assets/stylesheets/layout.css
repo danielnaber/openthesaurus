@@ -736,6 +736,17 @@ strong {
   filter: brightness(1.2);
 }
 
+.mainResult .editIcon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(5);
+}
+
+.mainResult .editIcon:hover {
+  background-color: #dddddd;
+  filter: brightness(1);
+}
+
 .editIcon:hover {
   background-color: #dddddd;
 }
