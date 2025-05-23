@@ -114,6 +114,7 @@
                             }
                         }
                         $('#searchSpace').html(msg);
+                        document.title = searchString + " - Synonyme bei OpenThesaurus";
                         if (changeHistory) {
                             if (isRealResultPage) {
                                 // 'back' button will go back to this state
