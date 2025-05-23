@@ -117,32 +117,77 @@
                     </g:if>
                 </g:each>
 
+                <g:set var="subSynsets" value="${[]}"/>
+                <g:set var="moreSubSynsets" value="${[]}"/>
+                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                    <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.sub.synsets.db.name')}">
+                        <g:if test="${subSynsets.size() < 3}">
+                            <%
+                                subSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:if>
+                        <g:else>
+                            <%
+                                moreSubSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:else>
+                    </g:if>
+                </g:each>
+
+                <g:set var="associationSynsets" value="${[]}"/>
+                <g:set var="moreAssociationSynsets" value="${[]}"/>
+                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                    <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.association.db.name')}">
+                        <g:if test="${associationSynsets.size() < 3}">
+                            <%
+                                associationSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:if>
+                        <g:else>
+                            <%
+                                moreAssociationSynsets.add(synsetLink.targetSynset)
+                            %>
+                        </g:else>
+                    </g:if>
+                </g:each>
+
+                <%
+                List otherTypes = []
+                List otherTypeIds = []
+                if (superSynsets.size() > 0) {
+                    otherTypes.add(message(code:'edit.link.super.synsets'))
+                    otherTypeIds.add("superordinates")
+                }
+                if (subSynsets.size() > 0) {
+                    otherTypes.add(message(code:'edit.link.sub.synsets'))
+                    otherTypeIds.add("subordinates")
+                }
+                if (associationSynsets.size() > 0) {
+                    otherTypes.add(message(code:'edit.link.associations'))
+                    otherTypeIds.add("associations")
+                }
+                %>
+                <g:if test="${otherTypes.size() == 1}">
+                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]} anzeigen</a>
+                </g:if>
+                <g:if test="${otherTypes.size() == 2}">
+                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]} &amp; ${otherTypes[1]} anzeigen</a>
+                </g:if>
+                <g:if test="${otherTypes.size() == 3}">
+                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]}, ${otherTypes[1]} &amp; ${otherTypes[2]} anzeigen</a>
+                </g:if>
+
                 <div id="superSubAssocDiv${synset.id}" style="display: none">
+
                     <g:if test="${superSynsets}">
                         <div class="superordinate" id="superordinates">
                             <span class="superordinateHead"><g:message code="edit.link.super.synsets"/></span>
-                            <span class="superordinateTerms">
-                                <g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span', showSynsetDelimiter: true]}"/>
-                            </span>
+                            <ul class="associationList">
+                                <li><g:render template="linkMatches" model="${[links:superSynsets, itemPrefix: 'span', itemSuffix: '/span', showSynsetDelimiter: true]}"/></li>
+                            </ul>
                         </div>
                     </g:if>
 
-                    <g:set var="subSynsets" value="${[]}"/>
-                    <g:set var="moreSubSynsets" value="${[]}"/>
-                    <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
-                        <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.sub.synsets.db.name')}">
-                            <g:if test="${subSynsets.size() < 3}">
-                                <%
-                                    subSynsets.add(synsetLink.targetSynset)
-                                %>
-                            </g:if>
-                            <g:else>
-                                <%
-                                    moreSubSynsets.add(synsetLink.targetSynset)
-                                %>
-                            </g:else>
-                        </g:if>
-                    </g:each>
                     <g:if test="${subSynsets}">
                         <div class="superordinate" id="subordinates">
                             <span class="superordinateHead"><g:message code="edit.link.sub.synsets"/></span>
@@ -161,22 +206,6 @@
                         </div>
                     </g:if>
 
-                    <g:set var="associationSynsets" value="${[]}"/>
-                    <g:set var="moreAssociationSynsets" value="${[]}"/>
-                    <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
-                        <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.association.db.name')}">
-                            <g:if test="${associationSynsets.size() < 3}">
-                                <%
-                                    associationSynsets.add(synsetLink.targetSynset)
-                                %>
-                            </g:if>
-                            <g:else>
-                                <%
-                                    moreAssociationSynsets.add(synsetLink.targetSynset)
-                                %>
-                            </g:else>
-                        </g:if>
-                    </g:each>
                     <g:if test="${associationSynsets}">
                         <div class="associations" id="associations">
                             <span class="superordinateHead"><g:message code="edit.link.associations"/></span>
@@ -194,32 +223,9 @@
                             </g:if>
                         </div>
                     </g:if>
+
                 </div>
-                <%
-                List otherTypes = []
-                List otherTypeIds = []
-                if (associationSynsets.size() > 0) {
-                    otherTypes.add(message(code:'edit.link.associations'))
-                    otherTypeIds.add("associations")
-                }
-                if (superSynsets.size() > 0) {
-                    otherTypes.add(message(code:'edit.link.super.synsets'))
-                    otherTypeIds.add("superordinates")
-                }
-                if (subSynsets.size() > 0) {
-                    otherTypes.add(message(code:'edit.link.sub.synsets'))
-                    otherTypeIds.add("subordinates")
-                }
-                %>
-                <g:if test="${otherTypes.size() == 1}">
-                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]} anzeigen</a>
-                </g:if>
-                <g:if test="${otherTypes.size() == 2}">
-                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]} &amp; ${otherTypes[1]} anzeigen</a>
-                </g:if>
-                <g:if test="${otherTypes.size() == 3}">
-                    <a class="superSubAssocLink" href="javascript:toggleAndTrack('superSubAssocDiv${synset.id}', 'superSubAssocLink clicked')">${otherTypes[0]}, ${otherTypes[1]} &amp; ${otherTypes[2]} anzeigen</a>
-                </g:if>
+
             </div>
 
         </div>
