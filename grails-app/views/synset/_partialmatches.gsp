@@ -22,6 +22,8 @@
                     </g:if>
                     </p>
 
+                    <h2 style="margin-top:0px"><g:message code='result.matches.similar' /></h2>
+
                     <p class="similarMatches" style="margin-top:10px">
                     <g:each in="${similarTerms}" var="term" status="counter">
                         <g:if test="${counter < 5}">
