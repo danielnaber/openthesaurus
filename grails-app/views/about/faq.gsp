@@ -58,9 +58,9 @@
                 </div>
                 <div class="answer">
                 OpenThesaurus funktioniert mit
-                    <a href="http://www.libreoffice.org">LibreOffice</a> /
-                    <a href="http://www.openoffice.org">OpenOffice.org</a> und
-                    <a href="http://www.papyrus.de">Papyrus</a> und wird dort bereits mitgeliefert.
+                    <a href="http://www.libreoffice.org">LibreOffice</a> und
+                    <a href="http://www.openoffice.org">OpenOffice.org</a>
+                    und wird dort bereits mitgeliefert.
                 </div>
             </div>
     
