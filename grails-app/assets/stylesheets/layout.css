@@ -738,6 +738,20 @@ strong {
   hyphens: auto;
 }
 
+.tooltipCloseIcon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  float: right;
+  margin-left: 8px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.tooltipCloseIcon:hover {
+  opacity: 1;
+}
+
 .socialMediaIcon:hover {
   filter: brightness(1.2);
 }

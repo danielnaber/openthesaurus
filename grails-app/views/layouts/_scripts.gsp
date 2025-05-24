@@ -210,7 +210,7 @@
             if ($(this).data('title') != "") {
                 var text = $(this).data('title');
                 text = text.replaceAll(/\b(https?:\/\/[^/]+\.wikipedia\.org\/[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|])/g, '<a href="$1">Wikipedia</a>'); // see StringTools.URL_PATTERN
-                $(this).after('<span class="tooltip">' + text  + '</span>');
+                $(this).after('<span class="tooltip"><img class="tooltipCloseIcon" src="${createLinkTo(dir:'images', file:'close24.png')}">' + text  + '</span>');
             }
             var viewportWidth = $(window).width();
             var tooltipWidth = 310; // Approximate width of the tooltip
