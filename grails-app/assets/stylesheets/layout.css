@@ -725,6 +725,9 @@ strong {
   margin-top: 0;
   text-align: center;
 }
+#mainBn img {
+  border: 1px solid #eee;
+}
 
 .tooltip {
   position: absolute;
@@ -905,6 +908,7 @@ ol li {
   #mobileAd img {
     max-width: 98%;
     height: auto;
+    border: 1px solid #ddd;
   }
 
 }
@@ -914,6 +918,9 @@ ol li {
 @media (min-width: 801px) {
   #desktopAd {
     margin-bottom: -12px;
+  }
+  #desktopAd img {
+    border: 1px solid #eee;
   }
 
   #mobileAd {
