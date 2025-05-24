@@ -270,7 +270,6 @@ class SynsetController extends BaseController {
                                             withAd: true
                 ]
               }
-          }
 
         } finally {
           DbUtils.closeQuietly(conn)
