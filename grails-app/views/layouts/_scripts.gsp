@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
     var onChangeInterval = null;
-    var deferRequestMillis = 200;
+    var deferRequestMillis = 300;
     var minChars = 2;
     var currentValue = null;
     var openTooltip;
