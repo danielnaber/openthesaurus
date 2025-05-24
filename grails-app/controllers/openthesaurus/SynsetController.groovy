@@ -116,15 +116,7 @@ class SynsetController extends BaseController {
           return
         }
         
-        try {
-          params.q = URLDecoder.decode(StringTools.slashUnescape(params.q), "UTF-8")
-        } catch (IllegalArgumentException e) {
-          log.error("Error decoding query: " + params.q + " from user agent " + request.getHeader("User-Agent"), e)
-          response.status = 500
-          render message(code:e.toString())
-          return
-        }
-        
+        params.q = StringTools.slashUnescape(params.q)        
         Connection conn = null
         try {
           conn = dataSource.getConnection()
