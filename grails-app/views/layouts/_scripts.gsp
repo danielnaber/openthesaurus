@@ -208,7 +208,9 @@
                 openTooltip.next('.tooltip').remove();
             }
             if ($(this).data('title') != "") {
-                $(this).after('<span class="tooltip">' + $(this).data('title') + '</span>');
+                var text = $(this).data('title');
+                text = text.replaceAll(/\b(https?:\/\/[^/]+\.wikipedia\.org\/[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|])/g, '<a href="$1">Wikipedia</a>'); // see StringTools.URL_PATTERN
+                $(this).after('<span class="tooltip">' + text  + '</span>');
             }
             var viewportWidth = $(window).width();
             var tooltipWidth = 310; // Approximate width of the tooltip
