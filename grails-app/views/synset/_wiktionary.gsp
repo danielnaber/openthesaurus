@@ -44,22 +44,26 @@
 							String meanings = wiktionaryResult.get(1).encodeAsHTML();
 							meanings = clean(meanings);
 							%>
-								<p><b><g:message code="result.wiktionary.meanings"/></b><br/>
+								<p>
 									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
+										<b><g:message code="result.wiktionary.meanings"/></b>
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptyMeanings" value="${true}"/>
 									</g:if>
 									<g:else>
+										<b><g:message code="result.wiktionary.meanings"/></b><br/>
 										${meanings}
 									</g:else>
                                 </p>
 
-								<p style="margin-top:10px"><b><g:message code="result.wiktionary.synonyms"/></b><br/>
+								<p style="margin-top:10px">
 									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
+										<b><g:message code="result.wiktionary.synonyms"/></b>
 										<span class="light"><g:message code="result.none"/></span>
 										<g:set var="emptySynonyms" value="${true}"/>
 									</g:if>
 									<g:else>
+										<b><g:message code="result.wiktionary.synonyms"/></b><br/>
 										<%
 										String synonyms = wiktionaryResult.get(2).encodeAsHTML();
 										synonyms = clean(synonyms);
