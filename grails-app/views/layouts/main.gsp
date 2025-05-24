@@ -15,9 +15,6 @@
     </head>
     <body>
 
-    <div id="searchResultArea" class="searchResultPopup" style="display: none">
-    </div>
-
     <g:render template="/navigation"/>
 
     <div id="body">
@@ -26,17 +23,13 @@
 
         <g:render template="/searchform" model="${[homepage: false]}"/>
 
-        <g:if test="${session.user}">
-          <noscript>
-              <div class="nojs">
-                 <g:message code='no.javascript.warning'/>
-              </div>
-          </noscript>
-        </g:if>
-
         <g:render template="/loggedin"/>
-        
-        <g:layoutBody />
+
+        <hr style="margin-bottom:16px" class="desktopOnly"/>
+
+        <div id="searchSpace">
+          <g:layoutBody />
+        </div>
 
       </div>
 

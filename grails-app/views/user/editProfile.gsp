@@ -10,8 +10,6 @@
 
         <div class="body">
 
-            <hr/>
-
             <h2><g:message code="user.change.profile.headline"/></h2>
 
             <g:if test="${flash.message}">

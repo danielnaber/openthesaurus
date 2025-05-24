@@ -6,16 +6,10 @@
         <title>${title}</title>
     </head>
     <body>
-
-          <hr />
     
           <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
           <h2>${headline}</h2>
-
-          <div style="float:right;margin-left:20px">
-              <g:render template="/ads/variation_right"/>
-          </div>
 
           <p>${intro}</p>
 

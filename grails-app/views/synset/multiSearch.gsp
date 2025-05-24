@@ -12,8 +12,6 @@
     </head>
     <body>
 
-        <hr />
-
         <h2><g:message code="create.search.headline" args="${[cleanTermList.join(simpleDelim)]}"/></h2>
 
         <g:if test="${flash.message}">

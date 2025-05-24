@@ -3,11 +3,15 @@
         <table style="width:100%">
             <tr>
                 <td>
-                    <!--<span class="mobileOnly"><g:link controller="home">openthesaurus.de</g:link>&nbsp;&nbsp;&nbsp;</span>-->
-                    <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
-                    &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
+                    <span class="mobileOnly">
+                        <g:link controller="home">openthesaurus.de</g:link>
+                    </span>
+                    <span class="desktopOnly">
+                        <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
+                        &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
+                    </span>
                 </td>
-                <td style="text-align: right" id="right-navibar">
+                <td class="desktopOnly" style="text-align: right" id="right-navibar">
                     <g:if test="${session.user}">
                         <g:if test="${session.user.userId.toString() == 'admin'}">
                             <g:link controller="admin" action="index"><span class="adminOnly"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></g:link>

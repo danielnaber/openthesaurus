@@ -7,7 +7,6 @@
         <title>Edit ThesaurusConfigurationEntry</title>
     </head>
     <body>
-        <hr/>
         <div class="nav">
             <span class="menuButton"><g:link controller="admin">Admin</g:link></span> &middot;
             <span class="menuButton"><g:link class="list" action="list">ThesaurusConfigurationEntry List</g:link></span> &middot;

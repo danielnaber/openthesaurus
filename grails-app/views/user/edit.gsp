@@ -10,8 +10,6 @@
 
         <div class="body">
 
-            <hr/>
-
             <div style="float: left; margin-right: 10px">
                 <g:render template="/identicon" model="${[user: user, count: 0]}"/>
             </div>

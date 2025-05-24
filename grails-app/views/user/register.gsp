@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <hr />
-
         <h2><g:message code="user.register.headline"/></h2>
 
         <p><g:message code="user.register.intro"/></p>
@@ -140,9 +138,7 @@
         </g:form>
         
         <script type="text/javascript">
-        <!--
             document.loginform.userId.focus();
-        // -->
         </script>
         
     </body>

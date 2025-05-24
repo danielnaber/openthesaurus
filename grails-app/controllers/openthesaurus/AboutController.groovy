@@ -35,9 +35,6 @@ class AboutController extends BaseController {
     def index() {
     }
 
-    def jsonpExample() {
-    }
-
     def fakeError = {
         throw new Exception("This is a fake error.")
     }
@@ -66,9 +63,6 @@ class AboutController extends BaseController {
     }
 
     def newsarchive() {
-    }
-
-    def werbung() {
     }
 
     def logMessage() {

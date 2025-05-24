@@ -10,7 +10,6 @@
           <meta name="robots" content="noindex" />
         </g:if>
         <script type="text/javascript">
-        <!--
 
           function deleteItem(id, termId) {
             var hiddenFieldName = 'delete_' + id + '_' + termId;
@@ -79,12 +78,9 @@
             toggleId('deleteButton');
           }
 
-        // -->
         </script>
     </head>
     <body>
-
-        <hr />
 
         <h1 style="margin-bottom:12px"><g:message code='edit.headline' args="${[synset.toShortString()]}"/></h1>
 
@@ -477,8 +473,6 @@
         <g:if test="${!synset?.isVisible}">
             </div> <!-- end: invisibleSynset -->
         </g:if>
-
-        <g:render template="/ads/edit_bottom"/>
 
     </body>
 </html>

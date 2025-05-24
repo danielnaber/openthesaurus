@@ -7,8 +7,6 @@
     </head>
     <body>
 
-          <hr/>
-    
           <h2><g:message code="user.request.password.reset.headline"/></h2>
 
           <g:if test="${flash.message}">

@@ -30,12 +30,6 @@
 </head>
 <body>
 
-<hr/>
-
-<noscript class="warning">
-    <g:message code="powersearch.noscript"/>
-</noscript>
-
   <h2><g:message code="powersearch.headline" /></h2>
 
   <div style="float:left;margin-right: 35px">

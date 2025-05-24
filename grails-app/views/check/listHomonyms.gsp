@@ -10,8 +10,6 @@
 
         <div class="body">
             
-            <hr/>
-
             <g:if test="${params['section.id'] != '0'}">
                 <h2>Check Homonyms (${homonyms.size()} matches)</h2>
             </g:if>

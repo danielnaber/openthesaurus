@@ -15,7 +15,6 @@
             </g:else>
         </g:each>
         <script type="text/javascript">
-        <!--
 
             $( document ).ready(function() {
                 updateRemainingChars();
@@ -64,14 +63,11 @@
 
             <g:render template="/synset/completion"/>
 
-        // -->
         </script>
     </head>
     <body>
 
         <div class="body">
-        
-            <hr />
         
             <h1 style="margin-bottom:12px"><g:message code="edit.term.headline" args="${[term.toString()]}"/></h1>
     
@@ -93,8 +89,6 @@
                 <g:set var="editable" value="${true}"/>
             </g:else>
 
-            <div style="float:right"><g:render template="/ads/termedit_right"/></div>
-			 
             <g:form controller="term" method="post" name="editForm">
                 <input type="hidden" name="id" value="${id}" />
                 <div class="dialog">

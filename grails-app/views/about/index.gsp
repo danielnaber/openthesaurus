@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <hr/>
-
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
             <h2>Über OpenThesaurus</h2>
@@ -117,8 +115,6 @@
                 offenes deutsches Wortnetz (PDF, 536&nbsp;KB)</a></li>
                 <!--<li><a href="../download/openthesaurus.pdf">OpenThesaurus: Building a Thesaurus with a Web Community (PDF, 266&nbsp;KB)</a></li>-->
             </ul>
-
-            <g:render template="/ads/about_bottom"/>
 
         </g:if>
         <g:else>

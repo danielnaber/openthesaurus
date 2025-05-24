@@ -244,7 +244,8 @@ class SynsetController extends BaseController {
                   runTime : totalTime,
                   remoteWordLookup: remoteWordLookup,
                   remoteGenderLookup: remoteGenderLookup,
-                  remoteMistakeLookup: remoteMistakeLookup
+                  remoteMistakeLookup: remoteMistakeLookup,
+                  withAd: params.withAd
                   ], contentType:"text/html", encoding:"UTF-8")
           }
           else {

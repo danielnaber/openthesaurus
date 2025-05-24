@@ -12,8 +12,6 @@
         </div>
         <div class="body">
 
-            <hr/>
-
             <h2>Category List</h2>
 
             <g:if test="${flash.message}">

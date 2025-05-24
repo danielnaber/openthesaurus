@@ -2,7 +2,8 @@
     <%
     String imgMobile = "";
     String altText = "";
-    int rnd = new Random().nextInt(3);
+    int mins = System.currentTimeMillis() / 60000;  // don't change ad on every keypress
+    int rnd = mins % 3;
     if (rnd == 0 || params?.ad == "gfdw") {
         imgMobile = "gfdw1.png";
         altText = "Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft";

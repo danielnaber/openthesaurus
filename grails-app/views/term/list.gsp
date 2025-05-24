@@ -7,8 +7,6 @@
     </head>
     <body>
 
-        <hr/>
-
         <h2><g:message code="a_to_z.headline" /></h2>
 
         <g:if test="${flash.message}">

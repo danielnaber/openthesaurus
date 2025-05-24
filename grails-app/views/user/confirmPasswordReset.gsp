@@ -7,8 +7,6 @@
     </head>
     <body>
 
-        <hr/>
-
         <h2><g:message code="user.confirm.password.reset.headline"/></h2>
 
         <g:if test="${flash.message}">
@@ -75,9 +73,7 @@
         </g:form>
 
         <script type="text/javascript">
-        <!--
             document.loginform.userId.focus();
-        // -->
         </script>
         
     </body>

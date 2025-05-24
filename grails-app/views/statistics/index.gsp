@@ -9,8 +9,6 @@
     </head>
     <body>
 
-        <hr />
-
           <h1 style="margin-left: 4px"><g:message code="statistics.headline" /></h1>
     
 
@@ -134,7 +132,5 @@
 
           <div style="clear: both"></div>
 
-    <g:render template="/ads/statistics_bottom"/>
-        
     </body>
 </html>

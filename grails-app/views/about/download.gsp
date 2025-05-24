@@ -9,8 +9,6 @@
     </head>
     <body>
 
-        <hr />
-
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
     
             <h2>Download der Daten</h2>

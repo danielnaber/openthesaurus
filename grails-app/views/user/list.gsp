@@ -8,8 +8,6 @@
     <body>
         <div class="body">
 
-            <hr/>
-
             <h2>User List (${ThesaurusUser.count()})</h2>
 
             <g:if test="${flash.message}">

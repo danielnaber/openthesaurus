@@ -7,8 +7,6 @@
     </head>
     <body>
 
-        <hr />
-
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
             
             <h2><g:message code="faq.title" /></h2>
@@ -109,8 +107,6 @@
                 </div>
             </div>
     
-            <g:render template="/ads/faq_bottom"/>
-
     </g:if>
     <g:else>
         

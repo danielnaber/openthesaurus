@@ -28,9 +28,7 @@
       </div>
 
       <script type="text/javascript">
-      <!--
           document.searchform.q.focus();
-      // -->
       </script>
 
     </body>

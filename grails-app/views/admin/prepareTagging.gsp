@@ -7,8 +7,6 @@
 </head>
 <body>
 
-<hr/>
-
 <h2>Tag ${terms.size()} Words</h2>
 
 Tag these words with: <span class="tag" style="background-color: ${newTag.getBackgroundColor()}">${newTag.name.encodeAsHTML()}</span>

@@ -2,7 +2,6 @@
 <asset:stylesheet src="application"/>
 <asset:stylesheet src="jquery.tagit.css" />
 <script type="text/javascript">
-<!--
     $(document).ready(function() {
         $(".tags").tagit(
             {
@@ -30,5 +29,4 @@
             }
         );
     });
-//-->
 </script>

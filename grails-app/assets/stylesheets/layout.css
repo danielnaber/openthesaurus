@@ -81,6 +81,12 @@ h1 {
   font-weight: normal;
 }
 
+.superSubAssocLink {
+  font-weight: normal !important;
+  color: #707070 !important;
+  font-size: 14px;
+}
+
 .superordinateHead {
   text-transform: uppercase;
   font-weight: bold;
@@ -676,44 +682,6 @@ strong {
   filter: brightness(80%);
 }
 
-.searchResultPopup {
-  position: absolute;
-  padding: 10px;
-  display: block;
-  -webkit-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.3);
-  background-color: white;
-  width: 90%;
-  max-width: 760px;
-  min-height: 100px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  /* centers the div, http://stackoverflow.com/questions/16758102/ */
-  top: 230px;
-  z-index: 100;
-}
-
-#popupCloseButton:hover {
-  opacity: 0.5;
-  float: right;
-  margin-left: 10px;
-}
-
-#popupCloseButton {
-  opacity: 0.25;
-  float: right;
-  margin-left: 10px;
-}
-
-.searchResultPopup hr {
-  color: #ffffff;
-  background-color: #ffffff;
-  border-top: solid 1px #cccccc;
-  border-bottom: solid 1px #ffffff;
-}
-
 .resultColumn {
   width: 420px;
   float: left;
@@ -754,7 +722,7 @@ strong {
 }
 
 #mainBn {
-  margin-top: 20px;
+  margin-top: 0;
   text-align: center;
 }
 
@@ -772,6 +740,17 @@ strong {
 
 .socialMediaIcon:hover {
   filter: brightness(1.2);
+}
+
+.mainResult .editIcon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(5);
+}
+
+.mainResult .editIcon:hover {
+  background-color: #dddddd;
+  filter: brightness(1);
 }
 
 .editIcon:hover {
@@ -799,6 +778,14 @@ ol li {
 @media (max-width: 800px) {
   body {
     font-size: 16px;
+    hyphens: auto;
+  }
+
+  #navigation #navibar {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 
   #mainBn {
@@ -832,11 +819,10 @@ ol li {
   
   .result {
     font-size: 22px;
-    line-height: 120%;
   }
 
   .mainResult {
-    margin-bottom: 5px;
+    margin-bottom: -2px;
   }
 
   .logo {
@@ -850,24 +836,18 @@ ol li {
   }
 
   #search input[type='text'] {
-    margin-left: 5px;
-  }
-
-  .searchResultPopup {
-    top: 120px;
-    font-size: 18px;
-    padding: 10px;
-    width: 95%;
+    margin-left: 0;
+    margin-bottom: 3px;
   }
 
   .resultColumn {
     width: 100%;
     float: left;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   #body {
-    padding: 35px 0 20px 0;
+    padding: 32px 0 20px 0;
     background-color: #F7F7F7;
     margin-bottom: 10px;
     padding-right: 20px;
@@ -875,11 +855,6 @@ ol li {
 
   #search .claim {
     display: none !important;
-  }
-
-  #search .mobileClaim {
-    margin-top: 6px;
-    font-size: 16px;
   }
 
   .rightColumn {
@@ -936,10 +911,6 @@ ol li {
 /* === DESKTOP ============================================================================ */
 
 @media (min-width: 801px) {
-  #search .mobileClaim {
-    display: none !important;
-  }
-
   #desktopAd {
     margin-bottom: -12px;
   }

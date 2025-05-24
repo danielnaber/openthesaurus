@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <hr />
-
         <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
             <h1>Webservice/API-Zugriff</h1>

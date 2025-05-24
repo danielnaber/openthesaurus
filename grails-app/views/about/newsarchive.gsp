@@ -8,8 +8,6 @@
     </head>
     <body>
 
-    <hr />
-
     <g:if test="${grailsApplication.config.thesaurus.serverId == 'de'}">
 
         <h2><g:message code="news.archive.headline" /></h2>
@@ -395,8 +393,6 @@
         </tr>
         </table>
         
-        <g:render template="/ads/newsarchive_bottom"/>
-
     </g:if>
     <g:else>
 

@@ -12,8 +12,6 @@
     </head>
     <body>
 
-          <hr />
-
           <p><g:link controller="wordList"><g:message code="word.list.backlink" /></g:link></p>
 
           <h2><g:message code="tree.headline" /></h2>
@@ -49,11 +47,8 @@
                   </ul>
 
               </td>
-              <td><g:render template="/ads/tree_right"/></td>
           </tr>
           </table>
-
-          <g:render template="/ads/tree_bottom"/>
 
     </body>
 </html>

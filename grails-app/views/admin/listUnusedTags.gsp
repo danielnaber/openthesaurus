@@ -9,8 +9,6 @@
 	<body>
 	<div class="body">
 
-		<hr/>
-
 		<h2>Unused Tags</h2>
 
 		<div id="list-tag" class="content scaffold-list" role="main">

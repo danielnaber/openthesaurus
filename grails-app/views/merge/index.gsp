@@ -7,8 +7,6 @@
     </head>
     <body>
 
-        <hr />
-
         <h1 style="margin-bottom:12px"><g:message code='edit.merge.headline'/></h1>
     
         <g:if test="${warning}">
