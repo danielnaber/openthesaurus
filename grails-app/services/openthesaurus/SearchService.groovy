@@ -267,7 +267,10 @@ class SearchService {
             String lowercaseLookupTerm = lookupTerm.toLowerCase()
             dist = StringUtils.getLevenshteinDistance(lowercaseLookupTerm, lowercaseQuery, MAX_SIMILARITY_DISTANCE)
             if (dist >= 0 && dist <= MAX_SIMILARITY_DISTANCE) {
-                matches.add(new SimilarMatch(term: resultSet.getString("word"), dist: dist))
+                // this works on the normalized form 'lookup'/'lookup2' which remove e.g. parentheses,
+                // so we add a penalty for more user-friendly sorting:
+                int penalty = 1 
+                matches.add(new SimilarMatch(term: resultSet.getString("word"), dist: dist+penalty))
             }
         }
     }
