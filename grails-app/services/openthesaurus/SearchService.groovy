@@ -154,9 +154,15 @@ class SearchService {
       ps.setString(1, query)
       resultSet = ps.executeQuery()
       if (resultSet.next()) {
-        matches.add(resultSet.getString("headword"))
-        matches.add(resultSet.getString("meanings"))
-        matches.add(resultSet.getString("synonyms"))
+        String headword = resultSet.getString("headword")
+        String meanings = resultSet.getString("meanings")
+        String synonyms = resultSet.getString("synonyms")
+        if (headword && (meanings || synonyms)) {
+          // headword set but neither meanings nor synonyms can happen for word forms like "Güterslohs"
+          matches.add(headword)
+          matches.add(meanings)
+          matches.add(synonyms)
+        }
       }
     } finally {
       DbUtils.closeQuietly(resultSet)
