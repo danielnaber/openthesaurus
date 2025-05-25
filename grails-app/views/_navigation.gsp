@@ -6,10 +6,6 @@
                     <span class="mobileOnly">
                         <g:link controller="home">openthesaurus.de</g:link>
                     </span>
-                    <span class="desktopOnly">
-                        <g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link>
-                        &nbsp;&nbsp;&nbsp;<g:link controller="about"><g:message code="homepage.about"/></g:link>
-                    </span>
                 </td>
                 <td class="desktopOnly" style="text-align: right" id="right-navibar">
                     <g:if test="${session.user}">
