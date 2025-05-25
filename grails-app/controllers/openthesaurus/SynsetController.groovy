@@ -94,6 +94,7 @@ class SynsetController extends BaseController {
      * via Ajax.
      */
     def ajaxSearch() {
+        params.ajaxSearch = true
         search()
     }
 
@@ -256,7 +257,8 @@ class SynsetController extends BaseController {
                       wikipediaResult.size() == 0 &&
                       wiktionaryResult.size() == 0 &&
                       partialMatchResult.size() == 0
-              render(view: "search", model: [ partialMatchResult : partialMatchResult,
+              String view = params.ajaxSearch ? "ajaxSearch" : "search"
+              render(view: view, model: [ partialMatchResult : partialMatchResult,
                                             wikipediaResult : wikipediaResult,
                                             wiktionaryResult : wiktionaryResult,
                                             similarTerms : similarTerms,
