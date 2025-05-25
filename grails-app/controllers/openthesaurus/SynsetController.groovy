@@ -256,8 +256,7 @@ class SynsetController extends BaseController {
                       wikipediaResult.size() == 0 &&
                       wiktionaryResult.size() == 0 &&
                       partialMatchResult.size() == 0
-              //println "result for " + params.q + ": " + (!noResult)
-                [ partialMatchResult : partialMatchResult,
+              render(view: "search", model: [ partialMatchResult : partialMatchResult,
                                             wikipediaResult : wikipediaResult,
                                             wiktionaryResult : wiktionaryResult,
                                             similarTerms : similarTerms,
@@ -271,7 +270,7 @@ class SynsetController extends BaseController {
                                             remoteGenderLookup: remoteGenderLookup,
                                             remoteMistakeLookup: remoteMistakeLookup,
                                             withAd: true
-                ]
+                ], contentType:"text/html", encoding:"UTF-8", status: noResult ? 404 : 200)
               }
 
         } finally {
