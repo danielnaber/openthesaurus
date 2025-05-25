@@ -15,7 +15,7 @@
                             <% i++; %>
                         </g:each>
                         <g:if test="${wikipediaResult.size() == 0}">
-                            <li><span class="light"><g:message code="result.no.wikipedia.matches"/></span></li>
+                            <li><span class="noMatches"><g:message code="result.no.wikipedia.matches"/></span></li>
                         </g:if>
 
 						<g:if test="${wikipediaResult.size() > 0}">

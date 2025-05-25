@@ -36,7 +36,7 @@
 						  };
 						%>
 						<g:if test="${wiktionaryResult.size() == 0}">
-    						<span class="light"><g:message code="result.no.wiktionary.matches"/></span>
+    						<span class="noMatches"><g:message code="result.no.wiktionary.matches"/></span>
 						</g:if>
 						<g:else>
 							<%
@@ -47,7 +47,7 @@
 								<p>
 									<g:if test="${wiktionaryResult.get(1).trim().equals('')}">
 										<b><g:message code="result.wiktionary.meanings"/></b>
-										<span class="light"><g:message code="result.none"/></span>
+										<span class="noMatches"><g:message code="result.none"/></span>
 										<g:set var="emptyMeanings" value="${true}"/>
 									</g:if>
 									<g:else>
@@ -59,7 +59,7 @@
 								<p style="margin-top:10px">
 									<g:if test="${wiktionaryResult.get(2).trim().equals('')}">
 										<b><g:message code="result.wiktionary.synonyms"/></b>
-										<span class="light"><g:message code="result.none"/></span>
+										<span class="noMatches"><g:message code="result.none"/></span>
 										<g:set var="emptySynonyms" value="${true}"/>
 									</g:if>
 									<g:else>
