@@ -12,13 +12,13 @@
 
         <g:render template="partialmatches"/>
 
-        <hr style="margin-top:20px" />
-
-        <div class="desktopOnly">
-            <h2><g:message code='result.matches.no.like' /></h2>
-
-            <g:render template="addterm" model="${[term:cleanTerm]}" />
-        </div>
+        <g:if test="${session.user}">
+            <hr style="margin-top:20px" />
+            <div class="desktopOnly">
+                <h2><g:message code='result.matches.no.like' /></h2>
+                <g:render template="addterm" model="${[term:cleanTerm]}" />
+            </div>
+        </g:if>
 
     </div>
 
