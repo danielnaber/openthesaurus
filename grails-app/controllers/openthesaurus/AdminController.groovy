@@ -38,9 +38,9 @@ class AdminController extends BaseController {
         def pageSize = 500
         def c = ThesaurusUser.createCriteria()
         Date registrationDate = new Date()
-        registrationDate.year = registrationDate.year - 5
+        registrationDate.year = registrationDate.year - 3
         Date loginDate = new Date()
-        loginDate.year = loginDate.year - 5
+        loginDate.year = loginDate.year - 3
         render("Showing old users with no activity ever:<br>")
         render("Registration Date before: " + registrationDate + "<br>")
         render("Last Login Date before: " + loginDate + "<br>")
