@@ -1,1 +1,0 @@
-<g:render template="searchinternal"/>

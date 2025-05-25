@@ -220,9 +220,8 @@ class SynsetController extends BaseController {
           WordListLookup remoteMistakeLookup = wordListService.remoteCommonMistakeUrlAndMetaInfo(params.q)
           // end of parts that's specific to the German OpenThesaurus
 
-          def view = params.newSearch ? "searchNew" : "search"
-          if (view == "searchNew") {
-              render(view:view, model: [
+          if (params.newSearch) {
+              render(view:"_searchinternal", model: [
                   partialMatchResult : partialMatchResult,
                   wikipediaResult : wikipediaResult,
                   wiktionaryResult : wiktionaryResult,
