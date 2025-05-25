@@ -67,10 +67,6 @@ class RedirectController extends BaseController {
        permanentRedirect("about/index", response)
    }
 
-   def newsarchive() {
-       permanentRedirect("about/newsarchive", response)
-   }
-
    def statistics() {
        permanentRedirect("synset/statistics", response)
    }

@@ -442,22 +442,6 @@ h2.api a {
   margin-top: 10px;
 }
 
-/* news archive */
-.newsdate {
-  font-weight: bold;
-  color: #666666;
-}
-
-.newsYearDelimiter {
-  background-color: #eeeeee;
-  font-weight: bold;
-  text-align: right;
-}
-
-.newArchiveTable td {
-  padding: 5px;
-}
-
 /* Diffs in UserEvent view: */
 .del {
   text-decoration: line-through;

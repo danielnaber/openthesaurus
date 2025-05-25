@@ -62,9 +62,6 @@ class AboutController extends BaseController {
     def imprint() {
     }
 
-    def newsarchive() {
-    }
-
     def logMessage() {
         log.info("client message: " + params.msg + " - " + request.getHeader("User-Agent"))
         render("OK")

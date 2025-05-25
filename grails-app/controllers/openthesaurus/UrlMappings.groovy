@@ -53,7 +53,6 @@ class UrlMappings {
       "/background.php"(controller:'redirect', action:'gotoAbout')
       "/faq.php"(controller:'redirect', action:'faq')
       "/background.php"(controller:'redirect', action:'background')
-      "/news_archive.php"(controller:'redirect', action:'newsarchive')
       "/statistics.php"(controller:'redirect', action:'statistics')
       "/top_users.php"(controller:'redirect', action:'statistics')
       "/a-z.php"(controller:'redirect', action:'az')
