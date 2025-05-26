@@ -717,12 +717,7 @@ strong {
 }
 
 .mainResult .editIcon:hover {
-  background-color: #dddddd;
-  filter: brightness(1);
-}
-
-.editIcon:hover {
-  background-color: #dddddd;
+  filter: brightness(3);
 }
 
 .brightIcon {
