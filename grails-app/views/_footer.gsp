@@ -25,12 +25,7 @@
         <li style="margin-bottom:18px"><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
 
         <g:if test="${session.user}">
-            <g:if test="${session.user.userId.toString() == 'admin'}">
-                <li><g:link controller="admin" action="index"><span class="adminOnly"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></g:link></li>
-            </g:if>
-            <g:else>
-                <li><span style="color:white"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></li>
-            </g:else>
+            <li><span style="color:white"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></li>
             <li><g:link controller="user" action="logout">Logout</g:link></li>
         </g:if>
         <g:else>
