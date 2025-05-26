@@ -10,19 +10,19 @@
 
       <ul style="float: left; margin-right: 40px">
           <li><g:link controller="search" action="index"><g:message code="powersearch.headline"/></g:link></li>
-          <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
           <li><g:link controller="about" action="api"><g:message code="homepage.api.short"/></g:link></li>
+          <li><g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link></li>
           <li><g:link controller="tag" action="list"><g:message code="homepage.tags"/></g:link></li>
           <li><g:link controller="about" action="download"><g:message code="homepage.download"/></g:link></li>
           <li><g:link controller="userEvent" action="list"><g:message code="changelog"/></g:link></li>
           <li><g:link controller="statistics"><g:message code="statistics"/></g:link></li>
-          <li><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
           <li><a href="https://languagetool.org/de">Rechtschreibprüfung</a></li>
       </ul>
 
       <ul>
-        <li><g:link controller="wordList"><g:message code="homepage.wordlists"/></g:link></li>
-        <li style="margin-bottom:18px"><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
+        <li><g:link controller="about"><g:message code="homepage.about"/></g:link></li>
+        <li><g:link controller="about" action="faq"><g:message code="homepage.faq"/></g:link></li>
+        <li style="margin-bottom:18px"><g:link controller="about" action="imprint"><g:message code="homepage.imprint"/></g:link></li>
 
         <g:if test="${session.user}">
             <li><span style="color:white"><g:message code="user.successful.login" args="${[session.user.userId]}"/></span></li>
