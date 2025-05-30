@@ -208,11 +208,20 @@ public class WikipediaLinkDumper {
         if (pos == -1) {
           break;
         }
-        final int endPos = wikiText.indexOf("]]", pos+1);
+        int endPos = wikiText.indexOf("]]", pos+1);
         if (endPos == -1) {
           break;
         }
         String linkText = wikiText.substring(pos+2, endPos);
+        if (linkText.contains("[[")) {
+          // skip cases like this where a text with more links follows inside "[[..]]"":
+          // [[Datei:Regenbogenflagge in Freiburg 11.jpg|mini|Studierendenvertretung in [[Freiburg im Breisgau]] mit [[Regenbogenflagge]]]]
+          endPos = wikiText.indexOf("]]", endPos+2);
+          if (endPos == -1) {
+            break;
+          }
+          linkText = wikiText.substring(pos+2, endPos);
+        }
         pos = endPos;
         String[] parts = linkText.split("\\|");
         if (parts.length == 2) {
@@ -222,7 +231,7 @@ public class WikipediaLinkDumper {
         if (numMatcher.matches()) {   // filter numbers (e.g. years like "1972")
           continue;
         }
-        if (linkText.startsWith("Bild:") || linkText.startsWith("Kategorie:") || linkText.startsWith("Image:")) {
+        if (linkText.startsWith("Bild:") || linkText.startsWith("Kategorie:") || linkText.startsWith("Image:") || linkText.startsWith("Datei:")) {
           continue;
         }
         if (linkText.startsWith("#")) {    // often not useful
