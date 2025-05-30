@@ -11,7 +11,7 @@
 
   <p class="claim"><g:message code="homepage.claim"/></p>
 
-  <form style="position: relative" action="/synonyme" onsubmit="window.location='/synonyme/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));return false;" name="searchform">
+  <form style="position: relative" action="/synonyme" onsubmit="doSubmit()" name="searchform">
 
     <g:set var="directSearchAttributes" value='onkeyup=\"return doSearchOnKeyUp(event);\" autocomplete=\"off\"'/>
     <span id="spinner">

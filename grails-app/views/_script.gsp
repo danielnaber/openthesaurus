@@ -10,4 +10,13 @@
   function leaveSearchField() {
       isFocused = false;
   }
+  function doSubmit() {
+    window.location = '/synonyme/' + encodeURIComponent(document.searchform.q.value.replace('/', '___'));
+    try {
+        plausible('search form submitted');
+    } catch (e) {
+        // plausible not available
+    }
+    return false;
+  }
 </script>
