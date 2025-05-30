@@ -92,7 +92,7 @@
                         <span>
                             <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
                                     lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2 ||
-                                    lowercaseQueryNorm == lowercaseNormTerm}">
+                                    lowercaseQueryNorm == lowercaseNormTerm || lowercaseQueryNorm == lowercaseNormTerm2}">
                                 <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
                             </g:if>
                             <g:else>
