@@ -65,6 +65,7 @@
                         <g:set var="lowercaseQuery" value="${params.q.toLowerCase()}"/>
                         <%-- keep in sync with SearchService.groovy: --%>
                         <g:set var="lowercaseQuery2" value="${lowercaseQuery.replaceAll('^(sich|etwas) ', '')}"/>
+                        <g:set var="lowercaseQueryNorm" value="${StringTools.normalize(lowercaseQuery)}"/>
 
                         <g:set var="commentInfo" value=""/>
                         <g:if test="${term.userComment}">
@@ -90,7 +91,8 @@
 
                         <span>
                             <g:if test="${lowercaseQuery == lowercaseTerm || lowercaseQuery == lowercaseNormTerm ||
-                                    lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2}">
+                                    lowercaseQuery2 == lowercaseTerm || lowercaseQuery2 == lowercaseNormTerm || lowercaseQuery == lowercaseNormTerm2 ||
+                                    lowercaseQueryNorm == lowercaseNormTerm}">
                                 <span class="synsetmatch">${displayTerm}</span>${commentInfo}${antonymInfo}<g:render template="audio" model="${[term:term]}"/>${delim}
                             </g:if>
                             <g:else>
