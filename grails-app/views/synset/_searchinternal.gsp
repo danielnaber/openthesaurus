@@ -57,8 +57,6 @@
             </g:if>
         <%-- end of part that's specific to German OpenThesaurus --%>
 
-        <g:render template="/synset/ad"/>
-                
         <g:render template="wiktionary"/>
 
         <hr style="margin-top:20px" />
@@ -66,6 +64,8 @@
         <g:render template="wikipedia"/>
 
         <hr style="margin-top:20px" />
+
+        <g:render template="/synset/ad"/>
 
         <g:render template="/external_links" model="${[q:params.q]}"/>
 
