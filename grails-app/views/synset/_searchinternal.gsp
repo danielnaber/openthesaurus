@@ -61,11 +61,12 @@
 
         <hr style="margin-top:20px" />
 
+        <g:render template="/synset/ad"/>
+
         <g:render template="wikipedia"/>
 
         <hr style="margin-top:20px" />
 
-        <g:render template="/synset/ad"/>
 
         <g:render template="/external_links" model="${[q:params.q]}"/>
 
