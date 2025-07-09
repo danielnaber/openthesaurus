@@ -1,4 +1,4 @@
-					<h2><g:message code="result.wiktionary.headline"/></h2>
+					<h2 style="margin-top:0"><g:message code="result.wiktionary.headline"/></h2>
 					<g:if test="${wiktionaryResult}">
 						<%
 						final String myMarker = "__ot__";
