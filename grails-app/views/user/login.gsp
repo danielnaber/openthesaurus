@@ -5,6 +5,9 @@
         <meta name="layout" content="main" />
         <g:set var="preventSearchFocus" value="true" scope="request" />
         <title><g:message code="user.login.title"/></title>         
+        <g:if test="${params.q}">
+            <meta name="robots" content="noindex">
+        </g:if>
     </head>
     <body>
 
