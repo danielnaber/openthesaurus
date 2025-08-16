@@ -38,9 +38,9 @@ class AdminController extends BaseController {
         def pageSize = 500
         def c = ThesaurusUser.createCriteria()
         Date registrationDate = new Date()
-        registrationDate.year = registrationDate.year - 3
+        registrationDate.year = registrationDate.year - 1
         Date loginDate = new Date()
-        loginDate.year = loginDate.year - 3
+        loginDate.year = loginDate.year - 1
         render("Showing old users with no activity ever:<br>")
         render("Registration Date before: " + registrationDate + "<br>")
         render("Last Login Date before: " + loginDate + "<br>")
@@ -52,7 +52,7 @@ class AdminController extends BaseController {
             }
             eq("blocked", false)
         }
-        render(result.size() + " total matches, showing up to " + pageSize + ":<br>")
+        render(result.size() + " total matches (incl. active users), showing up to " + pageSize + ":<br>")
         int count = 0
         for (user in result) {
             def c2 = UserEvent.createCriteria()
@@ -77,7 +77,7 @@ class AdminController extends BaseController {
             }
         }
         if (request.method != 'POST') {
-            render "<form method='post'><input type='submit' value='Delete shown users'></form>"
+            render "<form method='post'><input type='submit' value='Delete shown users (" + count + ")'></form>"
         }
         return ""
     }
