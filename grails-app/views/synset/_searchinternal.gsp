@@ -59,7 +59,7 @@
 
         <g:render template="wiktionary"/>
 
-        <hr style="margin-top:20px" />
+        <hr style="margin-top:20px;margin-bottom:10px" />
 
         <g:render template="/synset/ad"/>
 
