@@ -3,12 +3,13 @@
         |
     </g:if>
     <${itemPrefix} title="${item.toShortStringWithShortLevel(20, true).encodeAsHTML()}">
-        <g:each in="${item.sortedTerms()}" var="term" status="termCount">
+        <g:set var="sortedTerms" value="${item.sortedTerms()}"/>
+        <g:each in="${sortedTerms}" var="term" status="termCount">
             <g:if test="${termCount < 3}">
                 <g:if test="${termCount > 0}">
                     &middot;
                 </g:if>
-                <g:if test="${termCount == 2 && item.sortedTerms().size() >= 3}">
+                <g:if test="${termCount == 2 && sortedTerms.size() >= 3}">
                     <g:set var="ellipse" value="&hellip;" />
                 </g:if>
                 <g:else>
