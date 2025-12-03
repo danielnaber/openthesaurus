@@ -122,7 +122,8 @@
 
                 <g:set var="subSynsets" value="${[]}"/>
                 <g:set var="moreSubSynsets" value="${[]}"/>
-                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                <g:set var="sortedSynsetLinks" value="${synset.sortedSynsetLinks()}"/>
+                <g:each in="${sortedSynsetLinks}" var="synsetLink">
                     <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.sub.synsets.db.name')}">
                         <g:if test="${subSynsets.size() < 3}">
                             <%
@@ -139,7 +140,7 @@
 
                 <g:set var="associationSynsets" value="${[]}"/>
                 <g:set var="moreAssociationSynsets" value="${[]}"/>
-                <g:each in="${synset.sortedSynsetLinks()}" var="synsetLink">
+                <g:each in="${sortedSynsetLinks}" var="synsetLink">
                     <g:if test="${synsetLink.linkType.linkName == message(code:'edit.link.association.db.name')}">
                         <g:if test="${associationSynsets.size() < 3}">
                             <%
