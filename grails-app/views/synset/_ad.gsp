@@ -37,21 +37,7 @@
         imgMobile = "help-schraeg.png";
         altText = "help - Deine App zur Begleitung bei chronischen Schmerzen";
         link = "https://www.help-app.de/?utm_source=openthesaurus&utm_medium=banner&utm_campaign=random_banner_1";
-        //imgMobile = "empty.png";
-        //imgMobile = "help-schraeg.png";
-        //altText = "";
-        //link = "https://www.help-app.de/?utm_source=openthesaurus&utm_medium=banner&utm_campaign=empty_banner";
     }
-    /*
-    } else if (rnd == 1) {
-        imgMobile = "es_banner_V02_a.png";
-        altText = "effektiv-spenden.org - bei uns geht deine Spende an Hilfsorganisationen mit der größten Wirkung";
-        link = "https://effektiv-spenden.org";
-    } else if (rnd == 2) {
-        imgMobile = "es_banner_V02_b.png";
-        altText = "effektiv-spenden.org - Deutschlands wirksamste Spendenplattform";
-        link = "https://effektiv-spenden.org";
-    }*/
     %>
     <div id="mainBn">
         <a href="${link}"><img style="max-width: 100%; height: auto;" src="/assets/external/${imgMobile}" alt="${altText}" /></a>
