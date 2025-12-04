@@ -5,10 +5,29 @@
     String altText = "";
     int rnd = new Random().nextInt(3);
     if (rnd == 0) {
-        imgDesktop = "gfdw2.png";
-        imgMobile = "gfdw1.png";
         altText = "Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft";
-        link = "https://www.gfdw.eu/de?utm_source=openthesaurus&utm_medium=banner&utm_campaign=random_banner";
+        int rnd2 = new Random().nextInt(5);
+        if (rnd2 == 0) {
+            imgMobile = "OT6-der-etf.png";
+            imgDesktop = "OT1-der-etf.png";
+            link = "https://www.gfdw.eu?utm_source=openthesaurus&utm_medium=banner&utm_campaign=brand&utm_term=OT1-der-etf";
+        } else if (rnd2 == 1) {
+            imgMobile = "OT7-du-setzt-auf-etfs.png";
+            imgDesktop = "OT2-du-setzt-auf-etfs.png";
+            link = "https://www.gfdw.eu/?utm_source=openthesaurus&utm_medium=banner&utm_campaign=question&utm_term=OT2-du-setzt-auf-etfs";
+        } else if (rnd2 == 2) {
+            imgMobile = "OT8-etf-sparen.png";
+            imgDesktop = "OT3-etf-sparen.png";
+            link = "https://www.gfdw.eu/spende-schenken?utm_source=openthesaurus&utm_medium=banner&utm_campaign=gift&utm_term=OT4-schenke-was-bleibt";
+        } else if (rnd2 == 3) {
+            imgMobile = "OT9-schenke-was-bleibt.png";
+            imgDesktop = "OT4-schenke-was-bleibt.png";
+            link = "https://www.gfdw.eu/spende-schenken?utm_source=openthesaurus&utm_medium=banner&utm_campaign=gift&utm_term=OT5-schenke-was-waechst";
+        } else if (rnd2 == 4) {
+            imgMobile = "OT10-schenke-was-waechst.png";
+            imgDesktop = "OT5-schenke-was-waechst.png";
+            link = "https://www.gfdw.eu/spende-schenken?utm_source=openthesaurus&utm_medium=banner&utm_campaign=gift&utm_term=OT5-schenke-was-waechst";
+        }
     } else if (rnd == 1) {
         imgDesktop = "es_banner_V01_a.png";
         imgMobile = "es_banner_V02_a.png";
