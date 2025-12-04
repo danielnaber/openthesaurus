@@ -1,5 +1,6 @@
+
 <%@page import="com.vionto.vithesaurus.Audio" %>
-<%
+<%--
     List<Audio> audios = Audio.findAllByWord(term.toString())
     if (audios.size() > 0 && session.user) {
         %>
@@ -10,4 +11,4 @@
         <!-- TODO: error handling see https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video -->
         <%
     }
-%>
+--%>
