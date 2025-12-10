@@ -27,9 +27,11 @@
 
         <hr style="margin-bottom:16px" class="desktopOnly"/>
 
-        <div id="searchSpace">
-          <g:layoutBody />
-        </div>
+        <main>
+          <div id="searchSpace">
+            <g:layoutBody />
+          </div>
+        </main>
 
       </div>
 

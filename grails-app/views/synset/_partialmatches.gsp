@@ -20,7 +20,7 @@
                     <g:if test="${partialMatchResult.size() > 8}">
                         &nbsp;
                         <span style="white-space: nowrap;">
-                            <g:link action="substring" params="${[q: params.q]}"><img src="${createLinkTo(dir:'images',file:'arrow-blue.png')}" />&nbsp;<g:message code="result.substring.more"/></g:link>
+                            <g:link action="substring" params="${[q: params.q]}"><img src="${createLinkTo(dir:'images',file:'arrow-blue.png')}" alt="Pfeil" />&nbsp;<g:message code="result.substring.more"/></g:link>
                         </span>
                     </g:if>
                     </p>

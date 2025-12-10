@@ -70,7 +70,7 @@
 
                         <g:set var="commentInfo" value=""/>
                         <g:if test="${term.userComment}">
-                            <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon16.png')}"></span></g:set>
+                            <g:set var="commentInfo"><span title="${term.userComment.encodeAsHTML()}" class="commentMarker"><img src="${createLinkTo(dir:'images', file:'balloon16.png')}" alt="Sprechblasen-Symbol"></span></g:set>
                         </g:if>
                         <%
                             long antonymTime = System.currentTimeMillis();
@@ -82,7 +82,7 @@
                             <g:set var="termLinkInfo" value="${term.termLinkInfos().get(0)}"/>
                             <g:if test="${termLinkInfo.linkName == message(code:'edit.link.antonym.db.name')}">
                                 <g:set var="antonymTitle"><g:message code="edit.term.antonym"/>: <a href='/synonyme/edit/${termLinkInfo.term2.synset.id}'>${termLinkInfo.term2.word}</a></g:set>
-                                <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><img src="${createLinkTo(dir:'images', file:'lightning16.png')}"/></span></g:set>
+                                <g:set var="antonymInfo"><span class="antonymMarker" title="${antonymTitle}"><img src="${createLinkTo(dir:'images', file:'lightning16.png')}" alt="Blitz-Symbol"/></span></g:set>
                             </g:if>
                         </g:if>
                         <%
@@ -106,7 +106,7 @@
                     </g:each>
 
                     <g:link action="edit" id="${synset.id}">
-                        <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon" title="${message(code:'result.edit')}"/>
+                        <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="Stift-Symbol" title="${message(code:'result.edit')}"/>
                     </g:link>
 
                 </div>
