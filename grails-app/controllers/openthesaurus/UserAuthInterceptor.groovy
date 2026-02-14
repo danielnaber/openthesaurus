@@ -36,7 +36,7 @@ class UserAuthInterceptor implements TagLibraryInvoker {
         }
         if (session.user.blocked) {
             flash.message = message(code:'user.please.login')
-            log.warn("Denying access to blocked user ($user)")
+            log.warn("Denying access to blocked user (${session.user})")
             return false
         }
 
