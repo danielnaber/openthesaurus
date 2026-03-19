@@ -129,18 +129,22 @@
                     <g:each var='t' in='${synset?.sortedTerms()}'>
                         <tr style="vertical-align:top">
                         <td>
-                            <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
-                            <g:if test="${editable}">
-                                <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
-                                    class="editIcon" align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                            <g:if test="${session.user}">
+                                <input type="hidden" id="delete_termId_${t.id}" name="delete_${t.id}" value=""/>
+                                <g:if test="${editable}">
+                                    <a href="#" onclick="deleteItem('termId', '${t.id}');return false;"><img
+                                        class="editIcon" align="top" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon" title="${message(code:'edit.select.to.delete')}"/></a>
+                                </g:if>
+                                <g:else>
+                                    <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
+                                </g:else>
                             </g:if>
-                            <g:else>
-                                <img align="top" class="brightIcon" src="${resource(dir:'images',file:'delete.png')}" alt="delete icon"/>
-                            </g:else>
                         </td>
                         <td>
-                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
+                            <g:if test="${session.user}">
+                                <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
+                                    <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
+                            </g:if>
                         </td>
                         <td>
 
@@ -376,6 +380,7 @@
 
                         <div class="leftColumn">&nbsp;</div>
             
+                        <!--
                         <div class="rightColumn">
                             <g:set var="linkParams" value="${[controllerName: 'synset',
                                     actionName: 'edit', origId: params.id]}" />
@@ -385,6 +390,7 @@
                             </g:if>
                             <br/>
                         </div>
+                        -->
                         <div style="clear: both"></div>
 
             </div>

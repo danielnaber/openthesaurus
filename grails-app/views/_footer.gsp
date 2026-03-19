@@ -42,7 +42,7 @@
                     <g:set var="linkParams" value="${[controllerName: webRequest.getControllerName(),
                             actionName:webRequest.getActionName()]}" />
                 </g:else>
-                <li><g:link controller="user" action="login" class="lightlink" params="${linkParams}"><g:message code="footer.login"/></g:link></li>
+                <!--<li><g:link controller="user" action="login" class="lightlink" params="${linkParams}"><g:message code="footer.login"/></g:link></li>-->
             </g:else>
         </ul>
 

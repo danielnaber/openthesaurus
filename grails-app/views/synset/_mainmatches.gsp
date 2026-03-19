@@ -106,7 +106,7 @@
                     </g:each>
 
                     <g:link action="edit" id="${synset.id}">
-                        <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="Stift-Symbol" title="${message(code:'result.edit')}"/>
+                        <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="Stift-Symbol" title="${message(code:'result.details')}"/>
                     </g:link>
 
                 </div>

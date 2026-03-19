@@ -17,12 +17,10 @@
             die <a href="/synonyme/falsch">Suche nach <span class="bsp">falsch</span></a> unter anderem <span class="bsp">inkorrekt, unrichtig,
             verkehrt</span> als Synonyme.</p>
 
-            <p>Jeder kann bei OpenThesaurus mitmachen und Fehler korrigieren
-            oder neue Synonyme einfügen. Die Suchfunktion zeigt alle Bedeutungen,
+            <p>Die Suchfunktion zeigt alle Bedeutungen,
             in denen ein Wort vorkommt (z.B. <span class="bsp">roh</span> -&gt; <span class="bsp">roh, ungekocht</span>
-            und einen anderen Eintrag für <span class="bsp">roh, rau, grob, unsanft</span>). Bei
-            den einzelnen Bedeutungen  lassen sich dann unpassende Wörter löschen
-            und neue hinzufügen. Details dazu finden sich in der <a href="faq">FAQ</a>.</p>
+            und einen anderen Eintrag für <span class="bsp">roh, rau, grob, unsanft</span>).
+            Mehr Details finden sich in der <a href="faq">FAQ</a>.</p>
 
 
             <a name="searchEngine"></a>
