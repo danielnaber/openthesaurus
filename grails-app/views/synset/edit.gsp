@@ -141,10 +141,8 @@
                             </g:if>
                         </td>
                         <td>
-                            <g:if test="${session.user}">
-                                <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
-                                    <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
-                            </g:if>
+                            <g:link class="termMetaInfo otherMeaningSearchLink" controller='term' action='edit' id='${t.id}'>
+                                <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="edit icon"/></g:link>
                         </td>
                         <td>
 
