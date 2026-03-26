@@ -99,6 +99,20 @@ class UserController extends BaseController {
       def user = new ThesaurusUser(params.userId, hashedPassword, salt, ThesaurusUser.USER_PERM)
       user.realName = params.visibleName
       checkCaptcha(params, user)
+      if (grailsApplication.config.thesaurus.registerCode) {
+        if (!params.code) {
+          log.warn("Registration: user entered no code")
+          user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.code'))
+          render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+          return
+        }
+        if (params.code != grailsApplication.config.thesaurus.registerCode) {
+          log.warn("Registration: user entered invalid code: '${params.code}'")
+          user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.code'))
+          render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
+          return
+        }
+      }
       if (!params.userId || params.userId.trim().isEmpty() || !params.userId.contains("@")) {
         log.warn("Registration: user entered invalid email address: '${params.userId}'")
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.missing.email'))

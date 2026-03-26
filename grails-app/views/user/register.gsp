@@ -29,10 +29,19 @@
 
                         <tr class='prop'>
                             <td valign='top' class='name'>
+                                <label for='userId'><g:message code="user.login.form.code"/></label>
+                            </td>
+                            <td valign='top' class='value'>
+                                <input autofocus id='code' name='code' required />
+                            </td>
+                        </tr>
+
+                        <tr class='prop'>
+                            <td valign='top' class='name'>
                                 <label for='userId'><g:message code="user.login.form.username"/></label>
                             </td>
                             <td valign='top' class='value'>
-                                <input autofocus="" type="email" placeholder="${message(code:'user.register.email.placeholder')}"
+                                <input type="email" placeholder="${message(code:'user.register.email.placeholder')}"
                                        id='userId' name='userId' value="${params.userId?.encodeAsHTML()}" required />
                                 <br />
                                 <span class="metaInfo"><g:message code="user.register.email.description"/></span>
