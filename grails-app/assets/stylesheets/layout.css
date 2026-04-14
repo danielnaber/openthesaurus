@@ -246,6 +246,7 @@ h3 {
   font-size: 16px;
   vertical-align: bottom;
   margin-bottom: 30px;
+  hyphens: none;
 }
 
 #foot hr {
