@@ -85,7 +85,7 @@ class AdminController extends BaseController {
     def prepareAudioImport() {
     }
 
-    def importAudio() {
+    /*def importAudio() {
         int count = 0
         Scanner sc = new Scanner(new File(params.path))
         Audio.executeUpdate('delete from Audio')
@@ -117,7 +117,7 @@ class AdminController extends BaseController {
         }
         flash.message = "Imported ${count} terms"
         redirect(action: 'index')
-    }
+    }*/
 
     def listUnusedTags() {
         def list = Tag.findAll()
