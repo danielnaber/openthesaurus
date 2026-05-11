@@ -44,7 +44,7 @@ class ThesaurusUser {
     
     static constraints = {
         userId(size:5..100, unique:true)
-        password(size:5..50)
+        password(size:5..60)
         permission(inList:[USER_PERM, ADMIN_PERM])
         realName(nullable:true)
         lastLoginDate(nullable:true)

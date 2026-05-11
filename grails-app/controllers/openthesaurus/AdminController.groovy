@@ -21,6 +21,7 @@ package openthesaurus
 import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.StringTools
 import org.apache.commons.codec.digest.DigestUtils
+import org.mindrot.jbcrypt.BCrypt
 
 class AdminController extends BaseController {
 
@@ -33,6 +34,87 @@ class AdminController extends BaseController {
         [latestUsers: latestUsers, resultLimit: resultLimit]
     }
     
+    /**
+     * One-time migration: wraps every user's existing MD5 hash inside bcrypt.
+     * MUST be called exactly once. Idempotent — skips users whose password
+     * already starts with "$2a$" (i.e., already migrated).
+     * Call via POST from admin panel, then remove this action.
+     */
+    def migratePasswordsToBcrypt() {
+        if (request.method != 'POST') {
+            render """
+                <h2>Migrate all passwords from MD5 to bcrypt</h2>
+                <p>This wraps each user's existing MD5 hash inside bcrypt(cost=12).</p>
+                <p><strong>Back up the database first.</strong> This cannot be undone.</p>
+                <form method='POST'>
+                    <input type='submit' value='Run migration'
+                           onclick="return confirm('Are you sure? Did you back up the database?')"/>
+                </form>
+            """
+            return
+        }
+ 
+        int migrated = 0
+        int skipped = 0
+        int failed = 0
+        List<String> errors = []
+ 
+        List<ThesaurusUser> allUsers = ThesaurusUser.list()
+ 
+        for (ThesaurusUser user : allUsers) {
+            // Skip already-migrated users (idempotent)
+            if (user.password?.startsWith('$2a$') || user.password?.startsWith('$2b$')) {
+                skipped++
+                continue
+            }
+ 
+            // Skip placeholder/expired passwords
+            if (user.password == null || user.password == '__expired__') {
+                skipped++
+                continue
+            }
+ 
+            try {
+                // Wrap the existing MD5 hash in bcrypt.
+                // The salt field is preserved — the login flow uses it to know
+                // this user needs md5(input, salt) before bcrypt comparison.
+                String bcryptHash = BCrypt.hashpw(user.password, BCrypt.gensalt(12))
+                user.password = bcryptHash
+                boolean saved = user.save(flush: true)
+                if (!saved) {
+                    failed++
+                    errors.add("${user.userId}: validation failed — ${user.errors}")
+                } else {
+                    migrated++
+                }
+            } catch (Exception e) {
+                failed++
+                errors.add("${user.userId}: ${e.message}")
+            }
+ 
+            if ((migrated + skipped + failed) % 50 == 0) {
+                log.info("Migration progress: ${migrated} migrated, ${skipped} skipped, ${failed} failed")
+            }
+        }
+ 
+        log.info("Password migration complete: ${migrated} migrated, ${skipped} skipped, ${failed} failed")
+ 
+        StringBuilder report = new StringBuilder()
+        report.append("<h2>Migration complete</h2>")
+        report.append("<p><strong>Migrated:</strong> ${migrated}</p>")
+        report.append("<p><strong>Skipped (already migrated / expired):</strong> ${skipped}</p>")
+        report.append("<p><strong>Failed:</strong> ${failed}</p>")
+        if (errors) {
+            report.append("<h3>Errors:</h3><ul>")
+            for (String err : errors) {
+                report.append("<li>${err.encodeAsHTML()}</li>")
+            }
+            report.append("</ul>")
+        }
+        report.append("<p><em>Remove this action from AdminController now.</em></p>")
+        render report.toString()
+    }
+
     // clean old, inactive users, i.e. delete their accounts:
     def cleanUsers() {
         def pageSize = 500

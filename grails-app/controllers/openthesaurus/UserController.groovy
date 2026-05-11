@@ -23,6 +23,7 @@ import com.vionto.vithesaurus.*
 import com.vionto.vithesaurus.tools.IpTools
 import java.security.MessageDigest
 import javax.servlet.http.Cookie
+import org.mindrot.jbcrypt.BCrypt
 
 class UserController extends BaseController {
 
@@ -94,9 +95,8 @@ class UserController extends BaseController {
     }
     
     def doRegister() {
-      String salt = getRandomSalt()
-      String hashedPassword = md5sum(params.password1, salt)
-      def user = new ThesaurusUser(params.userId, hashedPassword, salt, ThesaurusUser.USER_PERM)
+      String hashedPassword = BCrypt.hashpw(params.password1, BCrypt.gensalt(12))
+      def user = new ThesaurusUser(params.userId, hashedPassword, null, ThesaurusUser.USER_PERM)
       user.realName = params.visibleName
       checkCaptcha(params, user)
       if (grailsApplication.config.thesaurus.registerCode) {
@@ -295,17 +295,13 @@ class UserController extends BaseController {
         } else {
           ThesaurusUser user = ThesaurusUser.findByUserId(params.userId)
           String salt = user?.salt
-          if (salt == null) {
-            // user created before per-user salts where introduced
-            salt = DEFAULT_SALT
-          }
           if (user && loginLimitReached(user)) {
             log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): user has too many login attempts")
             flash.message = message(code:'user.too.many.logins')
             return
           }
-          if (user && user.password != md5sum(params.password, salt)) {
-            user = null
+          if (user && !checkPassword(params.password, user.password, salt)) {
+              user = null
           }
           if (user) {
             if (user.blocked) {
@@ -491,12 +487,14 @@ class UserController extends BaseController {
     }
 
     private void savePassword(ThesaurusUser user, String password) {
-        String salt = getRandomSalt()
-        user.password = md5sum(password, salt)
-        user.salt = salt
+        // New passwords use pure bcrypt — no MD5 layer.
+        // Setting salt to null signals the login flow to skip the MD5 step.
+        String bcryptHash = BCrypt.hashpw(password, BCrypt.gensalt(12))
+        user.password = bcryptHash
+        user.salt = null
         boolean saved = user.validate() && user.save()
         if (!saved) {
-          throw new Exception("Could not save new password: ${user.errors}")
+            throw new Exception("Could not save new password: ${user.errors}")
         }
     }
 
@@ -636,6 +634,41 @@ class UserController extends BaseController {
       if (!dSession.save()) {
         throw new Exception("could not save duration session: ${dSession.errors}")
       }
+    }
+
+    /**
+     * Verify a candidate password against the stored hash.
+     * Supports three states:
+     *   1. bcrypt hash + salt present  → migrated user: bcrypt(md5(input, salt))
+     *   2. bcrypt hash + salt is null  → modern user:   bcrypt(input)
+     *   3. plain hex hash              → legacy (unmigrated): md5(input, salt)
+     */
+    private static boolean checkPassword(String candidatePassword, String storedHash, String salt) {
+        if (storedHash == null || storedHash == '__expired__') {
+            return false
+        }
+        if (storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$')) {
+            // Bcrypt hash
+            if (salt != null) {
+                //log.info("Checking password with bcrypt(md5(candidate, salt)) for migrated user (salt: ${salt})")
+                // Migrated user: the stored hash is bcrypt(old_md5_hash).
+                // Reproduce the MD5 step, then check against bcrypt.
+                String md5Candidate = md5sum(candidatePassword, salt)
+                return BCrypt.checkpw(md5Candidate, storedHash)
+            } else {
+                //log.info("Checking password with bcrypt(candidate) for modern user (no salt)")
+                // Modern user: password was set after migration.
+                // Stored hash is bcrypt(plaintext).
+                return BCrypt.checkpw(candidatePassword, storedHash)
+            }
+        } else {
+            // Legacy MD5 — should not exist after migration, but safe fallback.
+            //log.info("Checking password with legacy MD5(candidate, salt) for unmigrated user (salt: ${salt})")
+            if (salt == null) {
+                salt = DEFAULT_SALT
+            }
+            return storedHash == md5sum(candidatePassword, salt)
+        }
     }
     
     class LoginAttempt {
