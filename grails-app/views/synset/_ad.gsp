@@ -3,8 +3,8 @@
     String imgMobile = "";
     String altText = "";
     String currentUrl = request.forwardURI ? request.forwardURI : "";
-    //int rnd = Math.abs(currentUrl.hashCode()) % 4;
-    int rnd = Math.abs(currentUrl.hashCode()) % 2;
+    int rnd = Math.abs(currentUrl.hashCode()) % 4;
+    //int rnd = Math.abs(currentUrl.hashCode()) % 2;
     if (rnd == 0 || params?.ad == "gfdw") {
         altText = "Geld für die Welt e.V. beteiligt Menschen in Armut an den Gewinnen der Weltwirtschaft";
         int rnd2 = Math.abs(("foo" + currentUrl).hashCode()) % 5;
