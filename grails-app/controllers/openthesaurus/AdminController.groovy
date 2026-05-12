@@ -83,6 +83,45 @@ class AdminController extends BaseController {
         return ""
     }
 
+    // expire old, inactive users, i.e. block (but don't delete) their accounts:
+    def expireUsers() {
+        def pageSize = 500
+        def c = ThesaurusUser.createCriteria()
+        Date loginDate = new Date()
+        loginDate.year = loginDate.year - 4
+        render("Showing old users with no recent login:<br>")
+        render("Last Login Date before: " + loginDate + "<br>")
+        def result = c.list {
+            or {
+                lt("lastLoginDate", loginDate)
+                isNull("lastLoginDate")
+            }
+            eq("blocked", false)
+            not {
+                eq("password", "__expired__")
+            }
+        }
+        render(result.size() + " total matches, showing up to " + pageSize + ":<br>")
+        int count = 0
+        for (user in result) {
+            render(user.lastLoginDate.toString() + " " + user.creationDate.toString() + " " + user.userId + "<br>")
+            if (request.method == 'POST') {
+                log.info("Expiring old user in admin/expireUsers(): " + user.userId)
+                user.password = "__expired__"
+                user.save()
+                render "&nbsp;&nbsp;&nbsp;" + user.userId + ": user expired!<br>"
+            }
+            count++
+            if (count >= pageSize) {
+                break
+            }
+        }
+        if (request.method != 'POST') {
+            render "<form method='post'><input type='submit' value='Expire shown users (" + count + ")'></form>"
+        }
+        return ""
+    }
+
     def prepareAudioImport() {
     }
 

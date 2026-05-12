@@ -21,6 +21,7 @@
         <g:link controller="test">Simple self-test</g:link> |
         <g:link controller="user" action="list">Users</g:link> |
         <g:link controller="admin" action="cleanUsers">Old user cleanup</g:link> |
+        <g:link controller="admin" action="expireUsers">Old user expire</g:link> |
         <g:link controller="language" action="list">Languages</g:link> |
         <g:link controller="category" action="list">Categories</g:link> |
         <g:link controller="termLevel" action="list">Term Level</g:link> |
