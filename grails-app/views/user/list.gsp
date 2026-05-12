@@ -31,7 +31,15 @@
                     <tbody>
                     <g:each in="${userList}" status="i" var="user">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td valign="top"><g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName?.encodeAsHTML()}</g:link></td>
+                            <td valign="top">
+                                <g:if test="${user.password == '__expired__'}">
+                                    <span style="text-decoration: line-through">
+                                </g:if>
+                                <g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName?.encodeAsHTML()}</g:link>
+                                <g:if test="${user.password == '__expired__'}">
+                                    </span>
+                                </g:if>
+                            </td>
                             <td valign="top"><a href="mailto:${user.userId?.toString()?.encodeAsURL()}">${user.userId?.toString()?.encodeAsHTML()}</a></td>
                             <td valign="top">${user.permission?.toString()?.encodeAsHTML()}</td>
                             <td valign="top"><g:formatDate format="yyyy-MM-dd HH:mm" date="${user.creationDate}"/></td>
