@@ -48,6 +48,7 @@
         <g:link controller="admin" action="checkNormalizedTermIntegrity">Normalized term integrity</g:link>
         </p>
 
+        <%--
 		<h2 style="margin-top:25px">Latest ${resultLimit} User subscription of ${ThesaurusUser.count()} users</h2>
 
         <div class="colspanlist">
@@ -82,6 +83,9 @@
           </tr>
           </table>
         </div>
+        --%>
+
+        <g:link controller="user" action="list" params="${[sort: 'creationDate', order: 'desc', max: 20]}">Show users</g:link>
 		
     </body>
 </html>
