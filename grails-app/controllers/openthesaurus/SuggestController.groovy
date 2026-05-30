@@ -30,6 +30,9 @@ class SuggestController extends BaseController {
 
     def findPotentiallyMissingSynonyms() {
         String text = params.text
+        if (text.length() > 5000) {
+            text = text.substring(0, 5000)
+        }        
         log.info("Checking ${text.length()} chars of text for unknown words")
         Connection conn = dataSource.getConnection()
         String[] terms = text.split("[\\s+\\.,;\"':„“?()«»]")
