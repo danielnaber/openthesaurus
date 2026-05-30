@@ -24,6 +24,8 @@ import com.vionto.vithesaurus.tools.IpTools
 import java.security.MessageDigest
 import javax.servlet.http.Cookie
 import org.mindrot.jbcrypt.BCrypt
+import java.security.SecureRandom
+import java.nio.charset.StandardCharsets
 
 class UserController extends BaseController {
 
@@ -239,14 +241,11 @@ class UserController extends BaseController {
     }
     
     private String getRandomCode() {
-      StringBuilder code = new StringBuilder()
-      for (int i = 0; i < 1; i++) {
-        String partialCode = Math.random() + ""
-        code.append(partialCode.replace(".", ""))
-      }
-      return code.toString()
+        byte[] bytes = new byte[32]
+        new SecureRandom().nextBytes(bytes)
+        return Base64.urlEncoder.withoutPadding().encodeToString(bytes)
     }
-    
+
     // called when clicking on the link in the email
     def confirmRegistration() {
       if (!params.userId || !params.code) {
@@ -512,7 +511,7 @@ class UserController extends BaseController {
           log.warn("Empty/null confirmation code in database for user '${params.userId}' doesn't allow password reset")
           throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
         }
-        if (user.confirmationCode != params.code) {
+        if (!MessageDigest.isEqual(user.confirmationCode.getBytes(StandardCharsets.UTF_8), params.code.getBytes(StandardCharsets.UTF_8))) {
           log.warn("Invalid code '${params.code}' for user '${params.userId}', expected ${user.confirmationCode}")
           throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
         }
