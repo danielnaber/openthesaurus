@@ -170,7 +170,7 @@ class UserController extends BaseController {
         String body = message(code:'user.register.email.body', args:[activationLink], encodeAs: 'Text')
         int responseCode = MailSender.sendMail(grailsApplication.config.thesaurus.mailjetId, grailsApplication.config.thesaurus.mailjetApiKey,
                 to, subject, body, from)
-        log.info("Sent registration mail to ${params.userId}, code ${user.confirmationCode}, responseCode: " + responseCode)
+        log.info("Sent registration mail to ${params.userId}, responseCode: " + responseCode)
       } else {
         user.errors.reject('thesaurus.error', [].toArray(), message(code:'user.register.user.exists'))
         render(view:'register', model:[user:user], contentType:"text/html", encoding:"UTF-8")
@@ -449,7 +449,7 @@ class UserController extends BaseController {
         String body = message(code:'user.lost.password.email.body', args:[params.userId, activationLink], encodeAs: 'Text')
         int responseCode = MailSender.sendMail(grailsApplication.config.thesaurus.mailjetId, grailsApplication.config.thesaurus.mailjetApiKey,
                 to, subject, body, from)
-        log.info("Sent password reset mail to ${params.userId}, code ${user.confirmationCode}, responseCode: " + responseCode)
+        log.info("Sent password reset mail to ${params.userId}, responseCode: " + responseCode)
         [email: params.userId]
     }
     
@@ -509,11 +509,11 @@ class UserController extends BaseController {
     private checkPasswordResetConfirmation(ThesaurusUser user) {
         if (!user.confirmationCode || user.confirmationCode == "") {
           log.warn("Empty/null confirmation code in database for user '${params.userId}' doesn't allow password reset")
-          throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
+          throw new Exception("Invalid code for user '${params.userId}'")
         }
         if (!MessageDigest.isEqual(user.confirmationCode.getBytes(StandardCharsets.UTF_8), params.code.getBytes(StandardCharsets.UTF_8))) {
           log.warn("Invalid code '${params.code}' for user '${params.userId}', expected ${user.confirmationCode}")
-          throw new Exception("Invalid code '${params.code}' for user '${params.userId}'")
+          throw new Exception("Invalid code for user '${params.userId}'")
         }
     }
     
