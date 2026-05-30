@@ -638,6 +638,7 @@ class UserController extends BaseController {
       Cookie loginCookie = new Cookie(LOGIN_COOKIE_NAME, session.id)
       loginCookie.setMaxAge(LOGIN_COOKIE_AGE)
       loginCookie.setPath("/")
+      loginCookie.setHttpOnly(true)
       response.addCookie(loginCookie)
       DurationSession dSession = new DurationSession(sessionId:session.id, user:user, insertDate:new Date())
       if (!dSession.save()) {
