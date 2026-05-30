@@ -327,15 +327,7 @@ class UserController extends BaseController {
             if (redirectParams?.origId) {
                 redirectParams.id = redirectParams.origId
             }
-            // TODO: there must be a better way for this "redirect after 
-            // login" problem (maybe "originalRequestParameters"?)
-            boolean forumRedirect = params.returnUrl && isOurOwnUrl(params.returnUrl)
-            if (forumRedirect) {
-                // no direct redirect because the cookies need to be set first in the user's browser
-                // *before* he arrives at the forum page:
-                log.info("redirect [1] for user ${user} to ${params.returnUrl}")
-                redirect(action:'redirect', params:[url: params.returnUrl])
-            } else if (redirectParams?.controller && redirectParams?.action != "login") {
+            if (redirectParams?.controller && redirectParams?.action != "login") {
                 log.info("redirect [2] for user ${user} to controller/action/params: ${redirectParams?.controller}, ${redirectParams?.action}, ${params:redirectParams}")
                 redirect(controller:redirectParams?.controller,
                         action: redirectParams?.action, params:redirectParams)
@@ -405,19 +397,6 @@ class UserController extends BaseController {
         }
     }
 
-    boolean isOurOwnUrl(String url) {
-        return (url.startsWith("http://www.openthesaurus.de") || url.startsWith("https://www.openthesaurus.de"))
-    }
-
-    def redirect() {
-        if (isOurOwnUrl(params.url)) {
-            redirect(url: params.url)
-        } else {
-            log.warn("Someone tried to redirect to url '${params.url}', which is not allowed. Showing error message.")
-            render "Error: invalid redirect URL"
-        }
-    }
-    
     /**
      * Logout by setting the session values to null, then redirect to homepage.
      */
@@ -483,6 +462,7 @@ class UserController extends BaseController {
         }
         log.info("Setting user password for '${user.userId}'")
         savePassword(user, params.password1)
+        user.confirmationCode = null
         [user: user]
     }
 
