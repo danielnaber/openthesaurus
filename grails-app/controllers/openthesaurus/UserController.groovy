@@ -402,12 +402,29 @@ class UserController extends BaseController {
      */
     def logout() {
         log.info("logout of user ${session.user}")
+        revokeDurationSession(request)   // must run before cleanCookie()
         session.user = null
         session.controllerName = null
         session.actionName = null
         cleanCookie(response, LOGIN_COOKIE_NAME)
         flash.message = message(code:'user.logged.out')
         redirect(url:grailsApplication.config.thesaurus.serverURL)     // go to homepage
+    }
+
+    private void revokeDurationSession(def request) {
+        Cookie[] cookies = request.getCookies()
+        if (cookies == null) return
+        for (cookie in cookies) {
+            if (cookie.getName() == LOGIN_COOKIE_NAME) {
+                // findAll, not find: defensive in case of duplicates.
+                def sessions = DurationSession.findAllBySessionId(cookie.getValue())
+                for (dSession in sessions) {
+                    log.info("Revoking DurationSession id=${dSession.id} for user=${dSession.user?.userId}")
+                    dSession.delete(flush: true)
+                }
+                return
+            }
+        }
     }
     
     def lostPassword() {}
@@ -475,6 +492,18 @@ class UserController extends BaseController {
         boolean saved = user.validate() && user.save()
         if (!saved) {
             throw new Exception("Could not save new password: ${user.errors}")
+        }
+        revokeAllDurationSessions(user)
+    }
+
+    private void revokeAllDurationSessions(ThesaurusUser user) {
+        def sessions = DurationSession.findAllByUser(user)
+        for (dSession in sessions) {
+            dSession.delete()
+        }
+        if (sessions) {
+            DurationSession.withSession { it.flush() }
+            log.info("Revoked ${sessions.size()} DurationSession(s) for user=${user.userId}")
         }
     }
 
