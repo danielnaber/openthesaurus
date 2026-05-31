@@ -311,26 +311,7 @@ class SynsetController extends BaseController {
     private void renderApiResult(SearchResult searchResult, ArrayList similarTerms, List partialMatchResult, List startsWithResult, List baseformResult) {
         if (params.format == "application/json") {
             if (params.callback) {
-                String validCallbackPattern = '^[a-zA-Z0-9_.-]+$'
-                if (!params.callback.matches(validCallbackPattern)) {
-                    throw new Exception("Invalid callback parameter: only characters [a-zA-Z0-9_.-] are allowed")
-                }
-                // JSONP: Get the actual JSON content via HTTP and add the callback - all other ways to make
-                // this work failed or were equally ugly:
-                def paramsList = []
-                for (param in params.keySet()) {
-                    if (param != "callback") {
-                        paramsList.add(param + "=" + URLEncoder.encode(params[param], "utf-8"))
-                    }
-                }
-                paramsList.add("internalHttpPassword=" + grailsApplication.config.thesaurus.internalHttpPassword)
-                paramsList.add("sourceIp=" + IpTools.getRealIpAddress(request))
-                def paramsString = StringUtils.join(paramsList, "&")
-                def serverUrl = new URL(grailsApplication.config.thesaurus.serverURL)
-                def server = serverUrl.protocol + "://" + serverUrl.host + ":" + serverUrl.port
-                String url = server + "/synonyme/search?" + paramsString
-                String urlContent = new URL(url).text
-                render(text: "${params.callback}(${urlContent})", encoding: "utf-8")
+                render(status: 404, text: "JSONP is not supported anymore, please use CORS instead. See https://www.openthesaurus.de/about/api")
             } else {
                 renderApiResponseAsJson(searchResult, similarTerms, partialMatchResult, startsWithResult, baseformResult)
             }
