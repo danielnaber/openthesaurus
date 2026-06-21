@@ -85,7 +85,7 @@
         </div>
         --%>
 
-        <g:link controller="user" action="list" params="${[sort: 'creationDate', order: 'desc', max: 20]}">Show users</g:link>
+        <g:link controller="user" action="list" params="${[sort: 'creationDate', order: 'desc', max: 20]}">Show users (${userCount} total, ${activeUserCount} non-blocked/expired)</g:link>
 		
     </body>
 </html>

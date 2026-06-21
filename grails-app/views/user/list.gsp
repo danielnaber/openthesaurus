@@ -32,11 +32,11 @@
                     <g:each in="${userList}" status="i" var="user">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                             <td valign="top">
-                                <g:if test="${user.password == '__expired__'}">
+                                <g:if test="${user.password == '__expired__' || user.blocked}">
                                     <span style="text-decoration: line-through">
                                 </g:if>
                                 <g:link controller="user" action="profile" params="${[uid:user.id]}">${user.realName?.encodeAsHTML()}</g:link>
-                                <g:if test="${user.password == '__expired__'}">
+                                <g:if test="${user.password == '__expired__' || user.blocked}">
                                     </span>
                                 </g:if>
                             </td>

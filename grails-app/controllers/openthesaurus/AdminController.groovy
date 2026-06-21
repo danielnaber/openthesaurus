@@ -27,11 +27,12 @@ class AdminController extends BaseController {
 
     def index() {
         final int resultLimit = 10
-        def latestUsers = ThesaurusUser.withCriteria {
-          order("creationDate", "desc")
-          maxResults(resultLimit)
+        def userCount = ThesaurusUser.count()
+        def activeUserCount = ThesaurusUser.createCriteria().count {
+            eq("blocked", false)
+            ne("password", "__expired__")
         }
-        [latestUsers: latestUsers, resultLimit: resultLimit]
+        [resultLimit: resultLimit, userCount: userCount, activeUserCount: activeUserCount]
     }    
 
     // clean old, inactive users, i.e. delete their accounts:
