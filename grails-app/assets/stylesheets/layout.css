@@ -535,6 +535,10 @@ strong {
   color: #888888;
 }
 
+.commentMatchInfo {
+  margin-top: 4px;
+}
+
 /* user input: */
 .inp {
   font-weight: bold;

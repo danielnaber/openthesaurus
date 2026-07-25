@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "1.3.208"
+version "1.3.209"
 group "openthesaurus"
 
 apply plugin:"eclipse"

@@ -120,6 +120,60 @@ class SearchService {
       return new SearchResult(totalMatches, synsetList, completeResult)
   }
 
+  /**
+   * Fallback search used when {@link #searchSynsets} finds no direct word match:
+   * search the terms' comments instead. Only whole-word matches count, so e.g.
+   * a comment containing "Ameisenbär" is not considered a match for the query "Bär".
+   */
+  def searchSynsetsByComment(String query, int max = -1, int offset = 0) {
+      boolean completeResult = false
+
+      // the ilike() is just a coarse, DB-side pre-filter to keep the candidate set
+      // small - the actual word-boundary check happens below in Groovy, since HQL/SQL
+      // regex support isn't portable across the DBs this app runs on:
+      def candidateTermList = Term.withCriteria {
+          ilike('userComment', "%" + query + "%")
+          synset {
+              eq('isVisible', true)
+              maxResults(UPPER_BOUND)
+          }
+      }
+      java.util.regex.Pattern wordBoundaryPattern = java.util.regex.Pattern.compile(
+              "\\b" + java.util.regex.Pattern.quote(query) + "\\b",
+              java.util.regex.Pattern.CASE_INSENSITIVE | java.util.regex.Pattern.UNICODE_CASE | java.util.regex.Pattern.UNICODE_CHARACTER_CLASS)
+      def termList = candidateTermList.findAll { term ->
+          wordBoundaryPattern.matcher(term.userComment).find()
+      }
+      if (candidateTermList.size() < UPPER_BOUND) {
+          completeResult = true
+      }
+      int totalMatches = termList.size()
+
+      def synsetList = []
+      Set ids = new HashSet()
+      int i = 0
+      for (term in termList) {
+          // avoid duplicates:
+          if (!ids.contains(term.synset.id)) {
+              i++
+              if (i <= offset) {
+                  ids.add(term.synset.id)
+                  continue
+              }
+              synsetList.add(term.synset)
+              ids.add(term.synset.id)
+              if (max > 0 && synsetList.size() >= max) {
+                  break
+              }
+          }
+      }
+      if (synsetList.size() < max && offset == 0) {
+          totalMatches = synsetList.size()
+      }
+      Collections.sort(synsetList, new WordLevelComparator(query))
+      return new SearchResult(totalMatches, synsetList, completeResult)
+  }
+
   List searchWikipedia(String query, Connection conn) {
     String sql = "SELECT link, title FROM wikipedia WHERE title = ?"
     PreparedStatement ps = null

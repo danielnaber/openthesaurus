@@ -1,6 +1,10 @@
 <%@page import="com.vionto.vithesaurus.tools.*" %>
 <g:if test="${totalMatches > 0}">
 
+    <g:if test="${foundViaComment}">
+        <h2><g:message code="result.found.via.comment"/></h2>
+    </g:if>
+
     <g:each in="${synsetList}" status="i" var="synset">
         <!--REALMATCHES-->
 
@@ -104,6 +108,22 @@
 
                         <g:set var="counter" value="${counter + 1}"/>
                     </g:each>
+
+                    <g:if test="${foundViaComment}">
+                        <%
+                            java.util.regex.Pattern commentMatchPattern = java.util.regex.Pattern.compile(
+                                    "\\b" + java.util.regex.Pattern.quote(params.q.trim()) + "\\b",
+                                    java.util.regex.Pattern.CASE_INSENSITIVE | java.util.regex.Pattern.UNICODE_CASE | java.util.regex.Pattern.UNICODE_CHARACTER_CLASS)
+                        %>
+                        <g:each in="${sortedTerms}" var="commentTerm">
+                            <g:if test="${commentTerm.userComment && commentMatchPattern.matcher(commentTerm.userComment).find()}">
+                                <div class="termMetaInfo commentMatchInfo">
+                                    <g:message code="result.found.via.comment.for" args="${[commentTerm.toString().encodeAsHTML()]}"/>:
+                                    ${commentMatchPattern.matcher(commentTerm.userComment.encodeAsHTML()).replaceAll('<span class="synsetmatch">$0</span>')}
+                                </div>
+                            </g:if>
+                        </g:each>
+                    </g:if>
 
                     <g:link action="edit" id="${synset.id}">
                         <img class="editIcon" align="top" src="${resource(dir:'images',file:'edit.png')}" alt="Stift-Symbol" title="${message(code:'result.details')}"/>

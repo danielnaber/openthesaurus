@@ -203,6 +203,15 @@ class SynsetController extends BaseController {
           int maxResults = params.max ? Integer.parseInt(params.max) : -1
           long dbStartTime = System.currentTimeMillis()
           def searchResult = searchService.searchSynsets(params.q.trim(), maxResults, offset)
+          boolean foundViaComment = false
+          if (searchResult.totalMatches == 0) {
+            // no direct word match - fall back to searching the terms' comments:
+            def commentSearchResult = searchService.searchSynsetsByComment(params.q.trim(), maxResults, offset)
+            if (commentSearchResult.totalMatches > 0) {
+              searchResult = commentSearchResult
+              foundViaComment = true
+            }
+          }
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
@@ -242,6 +251,7 @@ class SynsetController extends BaseController {
                   synsetList : searchResult.synsetList,
                   totalMatches: searchResult.totalMatches,
                   completeResult: searchResult.completeResult,
+                  foundViaComment: foundViaComment,
                   baseforms: baseforms,
                   descriptionText : metaTagDescriptionText,
                   runTime : totalTime,
@@ -265,6 +275,7 @@ class SynsetController extends BaseController {
                                             synsetList : searchResult.synsetList,
                                             totalMatches: searchResult.totalMatches,
                                             completeResult: searchResult.completeResult,
+                                            foundViaComment: foundViaComment,
                                             baseforms: baseforms,
                                             descriptionText : metaTagDescriptionText,
                                             runTime : totalTime,
