@@ -18,41 +18,13 @@
 
 package openthesaurus
 
-import java.sql.Connection
-import java.sql.PreparedStatement
-import java.sql.ResultSet
-import com.vionto.vithesaurus.Synset
-
 class RandomController extends BaseController {
-    
-    def dataSource
+
     def randomWordService
-    
+    def randomSynsetService
+
     def synsets() {
-        Connection conn
-        PreparedStatement ps
-        ResultSet resultSet
-        List synsets = []
-        try {
-          conn = dataSource.getConnection()
-          String sql = "SELECT id FROM synset WHERE is_visible = 1 ORDER BY RAND() LIMIT 10"
-          ps = conn.prepareStatement(sql)
-          resultSet = ps.executeQuery()
-          while (resultSet.next()) {
-              synsets.add(Synset.get(resultSet.getInt("id")))
-          }
-        } finally {
-          if (resultSet != null) {
-            resultSet.close()
-          }
-          if (ps != null) {
-            ps.close()
-          }
-          if (conn != null) {
-            conn.close()
-          }
-        }
-        [synsets: synsets]
+        [synsets: randomSynsetService.getRandomSynsets(10)]
     }
     
     def words() {
