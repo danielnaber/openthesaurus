@@ -24,6 +24,9 @@ class RandomController extends BaseController {
     def randomSynsetService
 
     def synsets() {
+        response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        response.setHeader('Pragma', 'no-cache')   // for old HTTP/1.0 caches
+        response.setDateHeader('Expires', 0)       // for old HTTP/1.0 caches
         [synsets: randomSynsetService.getRandomSynsets(10)]
     }
     
