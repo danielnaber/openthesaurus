@@ -43,7 +43,7 @@
         </div>
         
         <br/><br/>
-        <g:link action="synsets" params="${[time:System.currentTimeMillis()]}"><g:message code="random.reload" /></g:link>
+        <g:link action="synsets" rel="nofollow" params="${[time:System.currentTimeMillis()]}"><g:message code="random.reload" /></g:link>
 
     </body>
 </html>
