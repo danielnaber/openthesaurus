@@ -36,6 +36,7 @@ class UrlMappings {
       "/synset/edit/$id"(controller:'redirect', action:'synseteditredirect')
       "/synset/edit"(controller:'redirect', action:'synseteditredirect')
 
+      "/robots.txt"(controller: 'robots', action: 'index')
 
       // the search result page:
       "/overview.php"(controller:'redirect', action:'overview')
