@@ -31,6 +31,7 @@ class RandomController extends BaseController {
             redirect(controller: "random", action: "synsets")
             return
         }
+        Thread.sleep(1000)  // slow down crawlers a bit
         [synsets: randomSynsetService.getRandomSynsets(10)]
     }
     
