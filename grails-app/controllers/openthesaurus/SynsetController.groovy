@@ -204,14 +204,14 @@ class SynsetController extends BaseController {
           long dbStartTime = System.currentTimeMillis()
           def searchResult = searchService.searchSynsets(params.q.trim(), maxResults, offset)
           boolean foundViaComment = false
-          if (searchResult.totalMatches == 0) {
+          /*if (searchResult.totalMatches == 0) {
             // no direct word match - fall back to searching the terms' comments:
             def commentSearchResult = searchService.searchSynsetsByComment(params.q.trim(), maxResults, offset)
             if (commentSearchResult.totalMatches > 0) {
               searchResult = commentSearchResult
               foundViaComment = true
             }
-          }
+          }*/
           long dbTime = System.currentTimeMillis() - dbStartTime
           long totalTime = System.currentTimeMillis() - startTime
           
