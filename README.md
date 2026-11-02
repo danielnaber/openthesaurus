@@ -1,6 +1,11 @@
+
+# NOTE: Not maintained anymore
+
+This code is not maintained anymore. It's also not the code that is used on www.openthesaurus.de.
+
 # OpenThesaurus
 
-OpenThesaurus (www.openthesaurus.de), a web-based thesaurus management tool
+OpenThesaurus, a web-based thesaurus management tool
 
 Copyright (C) 2009 vionto GmbH, Berlin  
 Copyright (C) 2011-2025 Daniel Naber, www.danielnaber.de
